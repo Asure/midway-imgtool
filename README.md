@@ -18,3 +18,10 @@ Copy IT.EXE and IT.HLP into C:\BIN. This is the default directory where IT check
 # useage
 
 Press l to load a .img file. press h for help. I updated the hlp file quite a bit.
+
+# Notes
+
+There's  learning curve and understanding curve.. 
+The IMG files are later build into IRW data for roms using the LOD files.
+This generates a bunch if IMGPAL*.ASM and IMGTBL*.ASM along with .tbl and .glo files.
+If you change an IMG file 'early' in the rom, ALL gfx roms and your whole game project needs to be rebuilt.
