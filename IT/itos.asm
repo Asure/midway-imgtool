@@ -11,7 +11,9 @@
 ;**************************************************************
 	option	casemap:none
 	.386P
-	.model	flat,syscall,os_os2
+;	.model	flat,syscall,os_os2		am:cause syntax error
+	.model	flat,syscall
+
 
 	include	wmpstruc.inc
 	include	it.inc
