@@ -1,41 +1,39 @@
-                        IMAGE TOOL HELP (2.042)
+IMAGE TOOL HELP (2.042, Updated readme 14-12-2023 By Alex Meijer)
 
- Escape - Aborts a function "Forget it" or exits program
- Return - Accepts a function "OK"
-
+ Escape - Aborts a function           Enter - Accepts a function
  F1 - Toggles between img mode and world builder
+ h - Shows this help file             f - Redraws screen
 
- h - Shows this help file
+ l / s - Shows IMG load/save menu     m - clear marked
+ ALT + l/s - LBM load/save menu       M - set all marked
+ CTR + l/s - TGA load/save menu       Space - mark image
 
- f - Redraws screen
+ CTR + B - BUILD a TGA from all marked images. 
 
- D - Halves image view size            F11 - Decreases image view size
- d - Doubles image view size           F12 - Increases image view size
+ D - Halves image view size           F11 - Decreases image view size
+ d - Doubles image view size          F12 - Increases image view size
 
- Tab - Swaps image lists               Space - Toggles image mark
+ Tab - Swaps image lists              Space - Toggles image mark
 
- F7/8 - Add or subtract line from image top
- Shift - Quarters sensitivity of scrolling gadgets
- t - Show true palette colors          T - Toggles display of anipts
- 2 - Prints 2nd img ani at 1st's 2nd   p - Swaps draw priority of lists
- i - Sets ID from position in 2nd list
- '// - Moves up/down in pal list
+ t - Show true palette colors         T - Toggles display of anipts
+ 2 - Prints 2nd img ani at 1st's 2nd  p - Swaps draw priority of lists
+ i - Sets ID from position in 2nd list  '// - Moves up/down in pal list
  "/? - Moves a page up/down in pal list
 
-Cursor keys:
+Image list movement
 
- Up/Dn - Moves up/down in image list
- Page Up/Dn - Moves a page up/down
- L/R - Moves to last/next marked image
+ Up/Dn - Moves up/down in image list    Page Up/Dn - Moves a page up/down
+ L/R - Moves to last/next marked image	Space - Mark image in list (*).
 
- Alt Up/Dn/Left/Rgt - Moves animation point X/Y
- Ctrl Up/Dn/Left/Rgt - Moves selected anipt X/Y
+ Alt U/D/L/R - Moves anipt X/Y     Ctrl U/D/L/R - Moves selected anipt X/Y
  Ctrl Home/End - Moves selected anipts Z
+ a - toggle anipt mode 1/2/3
 
  Ctrl Del - Clears 2nd anipt XYZ of selected image
  Ctrl Y - Clears 2nd anipt Y or makes -200 if 0
  Ctrl Z - Clears 2nd anipt Z
+ CTRL P - Point table change?
 
  Alt c - Clears extra data of all images
- a - Toggles anipts that Ctrl U/D/L/R/H/E affects
-
+ F7/8 - Add or subtract line from image top
+ Shift - Quarters sensitivity of scrolling gadgets
