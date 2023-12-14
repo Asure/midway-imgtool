@@ -1,0 +1,41 @@
+                        IMAGE TOOL HELP (2.042)
+
+ Escape - Aborts a function "Forget it" or exits program
+ Return - Accepts a function "OK"
+
+ F1 - Toggles between img mode and world builder
+
+ h - Shows this help file
+
+ f - Redraws screen
+
+ D - Halves image view size            F11 - Decreases image view size
+ d - Doubles image view size           F12 - Increases image view size
+
+ Tab - Swaps image lists               Space - Toggles image mark
+
+ F7/8 - Add or subtract line from image top
+ Shift - Quarters sensitivity of scrolling gadgets
+ t - Show true palette colors          T - Toggles display of anipts
+ 2 - Prints 2nd img ani at 1st's 2nd   p - Swaps draw priority of lists
+ i - Sets ID from position in 2nd list
+ '// - Moves up/down in pal list
+ "/? - Moves a page up/down in pal list
+
+Cursor keys:
+
+ Up/Dn - Moves up/down in image list
+ Page Up/Dn - Moves a page up/down
+ L/R - Moves to last/next marked image
+
+ Alt Up/Dn/Left/Rgt - Moves animation point X/Y
+ Ctrl Up/Dn/Left/Rgt - Moves selected anipt X/Y
+ Ctrl Home/End - Moves selected anipts Z
+
+ Ctrl Del - Clears 2nd anipt XYZ of selected image
+ Ctrl Y - Clears 2nd anipt Y or makes -200 if 0
+ Ctrl Z - Clears 2nd anipt Z
+
+ Alt c - Clears extra data of all images
+ a - Toggles anipts that Ctrl U/D/L/R/H/E affects
+

@@ -1,0 +1,41 @@
+.SUFFIXES : .EXE .ASM .OBJ .C
+
+all : it.exe
+
+inst:
+	copy it.exe \bin
+	copy it.hlp \bin
+
+NAME=it
+
+#LIB=/i=c:\dsp\tools\32lib
+#USRLIB=c:\dsp\tools\32lib
+#USRBIN=c:\dsp\bin
+TMPDIR=d:\\
+CC=c:\watcom\bin\wcc386p
+MASM=c:\ca\bin\ml
+CFLAGS=/4r /zp1 /7 /d2 /zq
+#CFLAGS=/4r /omaxet /zp1 /7 /d2 /zq
+CFILES=it.obj
+AFLAGS=/Zi /VM /Zp1
+AFILES=itos.obj itimg.obj it3d.obj ittex.obj
+#AFILES=itos.obj itimg.obj it3d.obj ittex.obj itg.obj
+
+itos.asm: it.inc wmpstruc.inc
+itimg.asm: it.inc wmpstruc.inc
+it3d.asm: it.inc it3d.inc wmpstruc.inc
+ittex.asm: it.inc it3d.inc
+itg.asm: it.inc
+
+$(AFILES): $*.asm
+	$(MASM) /c $(AFLAGS) $?
+
+$(CFILES): $*.c
+	$(CC) $? $(CFLAGS)
+
+$(NAME).exe: $(CFILES) $(AFILES) $(NAME).lnk
+	wlink @$(NAME).lnk
+
+
+#EOF
+

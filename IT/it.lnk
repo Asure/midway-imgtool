@@ -1,0 +1,16 @@
+system dos4g
+ debug all
+ libpath %WATCOM%\lib386
+ libpath %WATCOM%\lib386\dos
+ op stub=wstub.exe
+ option stack=100k
+ name it
+ debug all
+ file it.obj
+ file itos.obj
+ file itimg.obj
+ file it3d.obj
+ file ittex.obj
+# file itg.obj
+
+
