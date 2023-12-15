@@ -632,6 +632,8 @@ key_t	equ	$			;Routines for main key presses
 	WD	'/',plst_kdn		;
 	WD	'"',plst_kpup		;
 	WD	'?',plst_kpdn		;
+	WD	'*',plst_merge		; Merge selected pals
+	WD	0052h,plst_rename	; shift+r - Rename selected pals
 	WD	']',ilst_setpal		; Set pal
 	WD	'[',ilst_setpalmrkd	; Set pal for marked imgs
 	WD	';',ilst_leastsqmrkd 	; Do a least square size reduction on selected img

@@ -1,4 +1,4 @@
-IMAGE TOOL HELP (2.042, Updated readme 14-12-2023 By Alex Meijer)
+IMAGE TOOL HELP (2.042, Updated 15-12-2023 By Alex Meijer)
 
 Escape - Aborts a function           Enter - Accepts a function
 F1 - Toggles between img mode and world builder
@@ -21,18 +21,20 @@ t - Show true palette colors         T - Toggles display of anipts
 
 '// - Moves up/down in pal list      "/? - Moves page up/down in pal list
 ] - Set pal for current image        [ - Set pal for all marked images
+* - Merge marked PALs                Shift + r - Rename pal
 
-Image list movement
+Image list
 
-Up/Dn - Moves up/down in image list    Page Up/Dn - Moves a page up/down
-L/R - Moves to last/next marked image	Space - Mark image in list (*).
+Up/Dn - Move up/down in img list     Page Up/Dn - Moves a page up/down
+L/R - Move to last/next marked img   Space - Mark image in list (*).
+Alt U/D/L/R - Moves anipt X/Y        Ctrl U/D/L/R - Moves selected anipt X/Y
+Ctrl Home/End - Move selected anipts Z  a - toggle anipt mode 1/2/3
 ALT Page Up/Dn - Moves image in image list up/down.
-Alt U/D/L/R - Moves anipt X/Y     Ctrl U/D/L/R - Moves selected anipt X/Y
-Ctrl Home/End - Moves selected anipts Z  a - toggle anipt mode 1/2/3
 
 Ctrl Del - Clears 2nd anipt XYZ of selected image
 Ctrl Y - Clears 2nd anipt Y or makes -200 if 0
 Ctrl Z - Clears 2nd anipt Z       CTRL P - Point table change?
+Ctrl R - Rename image
 
 Alt c - Clears extra data of all images F7/8 - Add / Sub line from img top
 Shift - Quarters sensitivity of scrolling gadgets
