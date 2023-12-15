@@ -1,0 +1,6 @@
+When editing IMG image collections:
+
+- Image order in the list is important.
+- Your LOD file should follow that order as well.
+
+TGA Images should be non-rle compressed. In GIMP disable RLE and origin: bottom left seems to work.

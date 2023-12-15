@@ -632,6 +632,9 @@ key_t	equ	$			;Routines for main key presses
 	WD	'/',plst_kdn		;
 	WD	'"',plst_kpup		;
 	WD	'?',plst_kpdn		;
+	WD	']',ilst_setpal		; Set pal
+	WD	'[',ilst_setpalmrkd	; Set pal for marked imgs
+	WD	';',ilst_leastsqmrkd 	; Do a least square size reduction on selected img
 	if	SLGAME
 	WD	2900h,g_run		;Alt `
 	endif
