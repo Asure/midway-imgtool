@@ -3,6 +3,8 @@ IMGTOOL for editing and creating IMG container files used by various Midway game
 
 ![imgtool image](https://raw.githubusercontent.com/Asure/midway-imgtool/main/main.png)
 
+Note: For the menu to appear you need to be on the absolute top of the screen and right-click.
+
 # Dosbox users: 
 
 You MUST use dosbox with ET4000 support, and the bios bin file.
