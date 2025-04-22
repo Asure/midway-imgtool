@@ -30,3 +30,19 @@ There's  learning curve and understanding curve..
 The IMG files are later build into IRW data for roms using the LOD files and load2.exe.
 This generates a bunch if IMGPAL*.ASM and IMGTBL*.ASM along with .tbl and .glo files.
 If you change an IMG file 'early' in the rom, ALL gfx roms and your whole game project needs to be rebuilt.
+
+# Anipts
+
+Todo
+
+# Hitboxes
+
+Two rows of buttons. You must be in default zoom view.
+The ON/Off buttons toggle the display of hitboxes.
+Top row is for setting the hitboxes, x=1-5. Top row DEL deletes the selected hitbox number.
+
+Bottom DEL deletes primary hitbox (usually #1) and then allows you to redraw it.
+If both sets are on, you can DEL everything and then redraw 5 hitboxes.
+
+X DEL On
+DEL On Copy
