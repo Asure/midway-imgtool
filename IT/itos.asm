@@ -59,8 +59,8 @@
 
 DATE	textequ	<">,@Date,<">
 
-progname_s	db	"Image Tool 2.042 on ",DATE," by SL",10,13,"$"
-progname2_s	db	"IMAGE TOOL 2.042",0
+progname_s	db	"Image Tool 2.043 on ",DATE," by SL",10,13,"$"
+progname2_s	db	"IMAGE TOOL 2.043",0
 copyr_s		db	"COPYRIGHT 1994 WILLIAMS ELECTRONICS GAMES, INC.",0
 nomouse_s	db	"You need a mouse and driver!$"
 ;nomem_s	db	"Not enough memory!$"

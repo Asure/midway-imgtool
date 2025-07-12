@@ -336,6 +336,7 @@ mi7_s	db	"BUILD TGA (C-b)",0
 pal_s	db	"Pal",0
 pal_mi	MENUI	{ pal1_s,plst_rename }
 	MENUI	{ pal2_s,plst_merge }
+	MENUI	{ pal6_s,plst_delete }
 	MENUI	{ pal3_s,plst_duplicate }
 	MENUI	{ pal4_s,plst_histogram }
 	MENUI	{ pal5_s,plst_delunusedcols }
@@ -345,6 +346,7 @@ pal2_s	db	"MERGE",0
 pal3_s	db	"DUPLICATE",0
 pal4_s	db	"SHOW HISTOGRAM",0
 pal5_s	db	"DEL UNUSED COLS",0
+pal6_s	db	"DELETE",0
 @@:
 	MENU	{ @F, 7*8, mrk_s, mrk_mi, 20*8 }
 mrk_s	db	"Marks",0
@@ -3108,6 +3110,25 @@ draw:
 	jmp	main_draw
 
  SUBEND
+
+;********************************
+;* Delete selected PAL
+
+ SUBRP	plst_delete
+
+	CLR	al
+	mov	esi,offset rusure_s
+	call	msgbox_open
+	jnz	draw			;Canceled?
+
+	mov	eax,plselected
+	call	pal_del
+	call	palblk_init
+draw:
+	jmp	main_draw
+
+ SUBEND
+
 
 
 ;********************************
