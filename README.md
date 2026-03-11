@@ -24,6 +24,11 @@ Copy DOS4GW.EXE, IT.EXE and IT.HLP into C:\BIN. This is the default directory wh
 Press l to load a .img file. press h for help. I updated the hlp file quite a bit.
 Right-click the top row of pixels for main menu options.
 
+# Old IMG container conversion (11-3-2026)
+
+Use the provided img_convert.py to convert IMG containers of older games, like TROG, Narc, Smash TV or Total Carnage.
+The resulting file will be compatible with the current version of IT.EXE. Maybe i'll add it into the main IT program some day.
+
 # Notes
 
 There's  learning curve and understanding curve.. 
