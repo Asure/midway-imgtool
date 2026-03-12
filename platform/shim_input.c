@@ -55,9 +55,10 @@ static WORD sdl_to_dos_key(SDL_Keysym ks)
     SDL_Keymod  mod   = ks.mod;
     int         shift = (mod & KMOD_SHIFT) != 0;
     int         ctrl  = (mod & KMOD_CTRL)  != 0;
+    int         alt   = (mod & KMOD_ALT)   != 0;
 
     /* ASCII printable range */
-    if (sym >= SDLK_SPACE && sym <= SDLK_z && !ctrl) {
+    if (sym >= SDLK_SPACE && sym <= SDLK_z && !ctrl && !alt) {
         BYTE ascii = (BYTE)sym;
         BYTE scan  = 0;
         /* DOS scan codes for printable keys */
@@ -105,16 +106,16 @@ static WORD sdl_to_dos_key(SDL_Keysym ks)
     case SDLK_ESCAPE:    return (WORD)(0x0100 | 0x1B); /* Esc   */
     case SDLK_BACKSPACE: return (WORD)(0x0E00 | 0x08); /* BS    */
     case SDLK_TAB:       return (WORD)(0x0F00 | 0x09); /* Tab   */
-    case SDLK_DELETE:    return 0x5300;  /* Del */
+    case SDLK_DELETE:    return ctrl ? 0x9300 : 0x5300;  /* Ctrl+Del / Del */
     case SDLK_INSERT:    return 0x5200;  /* Ins */
-    case SDLK_HOME:      return 0x4700;  /* Home */
-    case SDLK_END:       return 0x4F00;  /* End  */
-    case SDLK_PAGEUP:    return 0x4900;  /* PgUp */
-    case SDLK_PAGEDOWN:  return 0x5100;  /* PgDn */
-    case SDLK_UP:        return 0x4800;  /* ↑    */
-    case SDLK_DOWN:      return 0x5000;  /* ↓    */
-    case SDLK_LEFT:      return 0x4B00;  /* ←    */
-    case SDLK_RIGHT:     return 0x4D00;  /* →    */
+    case SDLK_HOME:      return ctrl ? 0x7700 : 0x4700;  /* Ctrl+Home / Home */
+    case SDLK_END:       return ctrl ? 0x7500 : 0x4F00;  /* Ctrl+End  / End  */
+    case SDLK_PAGEUP:    return alt ? 0x9900 : 0x4900;  /* Alt+PgUp / PgUp */
+    case SDLK_PAGEDOWN:  return alt ? 0xA100 : 0x5100;  /* Alt+PgDn / PgDn */
+    case SDLK_UP:        return ctrl ? 0x8D00 : (alt ? 0x9800 : 0x4800);
+    case SDLK_DOWN:      return ctrl ? 0x9100 : (alt ? 0xA000 : 0x5000);
+    case SDLK_LEFT:      return ctrl ? 0x7300 : (alt ? 0x9B00 : 0x4B00);
+    case SDLK_RIGHT:     return ctrl ? 0x7400 : (alt ? 0x9D00 : 0x4D00);
     case SDLK_F1:        return 0x3B00;
     case SDLK_F2:        return 0x3C00;
     case SDLK_F3:        return 0x3D00;
@@ -125,6 +126,8 @@ static WORD sdl_to_dos_key(SDL_Keysym ks)
     case SDLK_F8:        return 0x4200;
     case SDLK_F9:        return 0x4300;
     case SDLK_F10:       return 0x4400;
+    case SDLK_F11:       return 0x8500;
+    case SDLK_F12:       return 0x8600;
     default: break;
     }
 
@@ -140,6 +143,19 @@ static WORD sdl_to_dos_key(SDL_Keysym ks)
         BYTE ascii = (BYTE)(sym - SDLK_a + 1);   /* ctrl+A=1 .. ctrl+Z=26 */
         return (WORD)((scan << 8) | ascii);
     }
+
+    /* alt+letter: DOS format AH=scan, AL=0 */
+    if (alt && sym >= SDLK_a && sym <= SDLK_z) {
+        static const BYTE alpha_scan[26] = {
+            0x1E, 0x30, 0x2E, 0x20, 0x12, 0x21, 0x22, 0x23,
+            0x17, 0x24, 0x25, 0x26, 0x32, 0x31, 0x18, 0x19,
+            0x10, 0x13, 0x1F, 0x14, 0x16, 0x2F, 0x11, 0x2D,
+            0x15, 0x2C
+        };
+        return (WORD)(alpha_scan[sym - SDLK_a] << 8);
+    }
+    /* alt+backtick */
+    if (alt && sym == SDLK_BACKQUOTE) return 0x2900;
 
     return 0;
 }
@@ -280,7 +296,11 @@ DWORD shim_get_shift_state(void)
     pump_events();
     const Uint8 *ks = SDL_GetKeyboardState(NULL);
     DWORD result = 0;
-    if (ks[SDL_SCANCODE_LSHIFT]) result |= 1;
-    if (ks[SDL_SCANCODE_RSHIFT]) result |= 2;
+    if (ks[SDL_SCANCODE_RSHIFT])  result |= 1;   /* bit 0 = Right Shift  (BIOS 0x417) */
+    if (ks[SDL_SCANCODE_LSHIFT])  result |= 2;   /* bit 1 = Left Shift                */
+    if (ks[SDL_SCANCODE_LCTRL] ||
+        ks[SDL_SCANCODE_RCTRL])   result |= 4;   /* bit 2 = Ctrl                      */
+    if (ks[SDL_SCANCODE_LALT]  ||
+        ks[SDL_SCANCODE_RALT])    result |= 8;   /* bit 3 = Alt                       */
     return result;
 }

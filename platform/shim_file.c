@@ -26,12 +26,14 @@ char exe_dir[MAX_PATH] = "";
 /* ---- file handle table (max 16 open files) ---- */
 #define MAX_HANDLES 16
 static FILE *s_handles[MAX_HANDLES];
+static char  s_tmpfiles[MAX_HANDLES][MAX_PATH]; /* temp paths for converted old-IMG files */
 static int   s_handles_init = 0;
 
 static void handles_init(void)
 {
     if (!s_handles_init) {
-        memset(s_handles, 0, sizeof(s_handles));
+        memset(s_handles,  0, sizeof(s_handles));
+        memset(s_tmpfiles, 0, sizeof(s_tmpfiles));
         s_handles_init = 1;
     }
 }
@@ -59,7 +61,13 @@ static FILE *handle_get(WORD h)
 static void handle_free(WORD h)
 {
     handles_init();
-    if (h < MAX_HANDLES) s_handles[h] = NULL;
+    if (h < MAX_HANDLES) {
+        s_handles[h] = NULL;
+        if (s_tmpfiles[h][0]) {
+            DeleteFileA(s_tmpfiles[h]);
+            s_tmpfiles[h][0] = '\0';
+        }
+    }
 }
 
 /* ---- path remapping ----
@@ -75,6 +83,127 @@ static void path_remap(const char *src, char *dst, int dstsz)
     dst[dstsz-1] = '\0';
 }
 
+/* ---- old-format IMG conversion ------------------------------------------- */
+/*
+ * Pre-WimpV5 IMG containers use a 42-byte IMAGE record and have TEMP != 0xABCD.
+ * We detect them on open and transparently convert to the 50-byte new format
+ * so the tool can load them without a separate offline conversion step.
+ *
+ * Layout (old):  [LIB_HDR(28)] [blob data] [OLD_IMAGE×N(42)] [PALETTE×P(26)]
+ * Layout (new):  [LIB_HDR(28)] [blob data] [NEW_IMAGE×N(50)] [PALETTE×P(26)]
+ */
+
+#pragma pack(push, 1)
+typedef struct {
+    WORD  IMGCNT, PALCNT;
+    DWORD OSET;
+    WORD  VERSION, SEQCNT, SCRCNT, DAMCNT, TEMP;
+    BYTE  BUFSCR[4];
+    WORD  spare1, spare2, spare3;
+} OLD_LIB_HDR;  /* 28 bytes */
+
+typedef struct {
+    char   name[16];
+    short  xoff, yoff;
+    WORD   xsize, ysize;
+    signed char palind;
+    BYTE   flags;
+    DWORD  oset, data;
+    short  lib, pword1, pword2, frame;
+    BYTE   pbyte1;
+} OLD_IMAGE;    /* 42 bytes */
+
+typedef struct {
+    char  N_s[16];
+    WORD  FLAGS, ANIX, ANIY, W, H, PALNUM;
+    DWORD OSET, DATA;
+    WORD  LIB, ANIX2, ANIY2, ANIZ2, FRM, PTTBLNUM, OPALS;
+} NEW_IMAGE;    /* 50 bytes */
+#pragma pack(pop)
+
+/* Returns a FILE* pointing to converted data, or NULL if not old format.
+   On success, writes the temp-file path into tmppath_out[MAX_PATH]. */
+static FILE *try_convert_old_img(FILE *f, char *tmppath_out)
+{
+    OLD_LIB_HDR hdr;
+    rewind(f);
+    if (fread(&hdr, sizeof(hdr), 1, f) != 1)   return NULL;
+    if (hdr.TEMP    == 0xABCD)                  return NULL; /* already new */
+    if (hdr.VERSION >= 0x500)                   return NULL; /* unknown new */
+    if (hdr.IMGCNT  == 0)                       return NULL; /* nothing to do */
+
+    /* Read whole file */
+    fseek(f, 0, SEEK_END);
+    long fsize = ftell(f);
+    rewind(f);
+    BYTE *inbuf = (BYTE *)malloc((size_t)fsize);
+    if (!inbuf) return NULL;
+    if ((long)fread(inbuf, 1, (size_t)fsize, f) != fsize) { free(inbuf); return NULL; }
+
+    /* Validate table extents */
+    long imgs_start = (long)hdr.OSET;
+    long imgs_end   = imgs_start + hdr.IMGCNT * (long)sizeof(OLD_IMAGE);
+    long pals_end   = imgs_end   + hdr.PALCNT * 26L;
+    if (imgs_start < (long)sizeof(OLD_LIB_HDR) || pals_end > fsize) {
+        free(inbuf); return NULL;
+    }
+
+    /* Build converted buffer */
+    long blob_sz  = imgs_start - (long)sizeof(OLD_LIB_HDR);
+    long new_imgs = hdr.IMGCNT * (long)sizeof(NEW_IMAGE);
+    long pal_sz   = hdr.PALCNT * 26L;
+    long outsz    = (long)sizeof(OLD_LIB_HDR) + blob_sz + new_imgs + pal_sz;
+    BYTE *out = (BYTE *)malloc((size_t)outsz);
+    if (!out) { free(inbuf); return NULL; }
+
+    /* Modified header */
+    OLD_LIB_HDR nhdr = hdr;
+    nhdr.VERSION = 0x0634;
+    nhdr.TEMP    = 0xABCD;
+    nhdr.SEQCNT  = 0;
+    nhdr.SCRCNT  = 0;
+    BYTE *p = out;
+    memcpy(p, &nhdr, sizeof(nhdr));             p += sizeof(nhdr);
+    memcpy(p, inbuf + sizeof(nhdr), (size_t)blob_sz); p += blob_sz;
+
+    /* Convert each IMAGE record */
+    for (int i = 0; i < hdr.IMGCNT; i++) {
+        OLD_IMAGE *o = (OLD_IMAGE *)(inbuf + imgs_start + i * (long)sizeof(OLD_IMAGE));
+        NEW_IMAGE  n;
+        memcpy(n.N_s, o->name, 16);
+        n.FLAGS    = (WORD)(o->flags & ~0x12u);  /* clear LOADED + DOWN */
+        n.ANIX     = (WORD)o->xoff;
+        n.ANIY     = (WORD)o->yoff;
+        n.W        = o->xsize;
+        n.H        = o->ysize;
+        n.PALNUM   = (WORD)(BYTE)o->palind;
+        n.OSET     = o->oset;
+        n.DATA     = o->data;
+        n.LIB      = (WORD)o->lib;
+        n.ANIX2    = (WORD)o->pword1;
+        n.ANIY2    = (WORD)o->pword2;
+        n.ANIZ2    = 0;
+        n.FRM      = (WORD)o->frame;
+        n.PTTBLNUM = 0xFFFF;
+        n.OPALS    = 0xFFFF;
+        memcpy(p, &n, sizeof(n)); p += sizeof(n);
+    }
+    memcpy(p, inbuf + imgs_end, (size_t)pal_sz);
+    free(inbuf);
+
+    /* Write to a temp file (auto-deleted when handle is closed) */
+    char tmpdir[MAX_PATH];
+    GetTempPathA(MAX_PATH, tmpdir);
+    GetTempFileNameA(tmpdir, "itl", 0, tmppath_out);
+
+    FILE *tmp = fopen(tmppath_out, "w+b");
+    if (!tmp) { free(out); tmppath_out[0] = '\0'; return NULL; }
+    fwrite(out, 1, (size_t)outsz, tmp);
+    free(out);
+    rewind(tmp);
+    return tmp;
+}
+
 /* ---- impl functions ---- */
 
 void shim_i21_openr_impl(void)
@@ -87,8 +216,14 @@ void shim_i21_openr_impl(void)
         shim_eax   = 0x0002;  /* file not found */
         return;
     }
+    /* Transparently upgrade old-format IMG containers */
+    char tmppath[MAX_PATH] = "";
+    FILE *converted = try_convert_old_img(f, tmppath);
+    if (converted) { fclose(f); f = converted; }
+
     WORD h = handle_alloc(f);
     if (h == 0xFFFF) { fclose(f); shim_carry = 1; shim_eax = 0x0004; return; }
+    if (tmppath[0]) memcpy(s_tmpfiles[h], tmppath, MAX_PATH);
     shim_eax   = h;
     shim_carry = 0;
 }
