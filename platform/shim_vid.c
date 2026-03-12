@@ -2,10 +2,6 @@
  * platform/shim_vid.c
  * VGA Mode X shadow buffer + SDL2 rendering (renderer path)
  *************************************************************/
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
-#endif
-#include <windows.h>
 #include <string.h>
 #include <SDL.h>
 #include "shim_vid.h"

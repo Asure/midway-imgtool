@@ -3,10 +3,7 @@
  * SDL2 keyboard / mouse relay
  *************************************************************/
 #pragma once
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
-#endif
-#include <windows.h>
+#include "compat.h"
 
 #ifdef __cplusplus
 extern "C" {

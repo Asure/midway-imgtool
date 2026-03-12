@@ -20,10 +20,8 @@
 #include	<sys/types.h>
 #include	<sys/stat.h>
 #include	<signal.h>
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
-#endif
-#include	<windows.h>
+#include	"compat.h"
+#include	<SDL.h>
 #include	"shim_vid.h"
 #include	"shim_file.h"
 
@@ -65,10 +63,23 @@ int	main(int argc,char *argv[])
 	/* Populate exe_dir so shim_file.c can remap "c:\bin\" paths */
 	{
 		char full[MAX_PATH];
+#ifdef _WIN32
 		if (GetModuleFileNameA(NULL, full, sizeof(full))) {
 			char *slash = strrchr(full, '\\');
 			if (slash) { *slash = '\0'; strncpy(exe_dir, full, MAX_PATH-1); }
 		}
+#else
+		ssize_t len = readlink("/proc/self/exe", full, sizeof(full) - 1);
+		if (len < 0 && argc > 0) {  /* fallback: use argv[0] */
+			strncpy(full, argv[0], sizeof(full) - 1);
+			len = (ssize_t)strlen(full);
+		}
+		if (len > 0) {
+			full[len] = '\0';
+			char *slash = strrchr(full, '/');
+			if (slash) { *slash = '\0'; strncpy(exe_dir, full, MAX_PATH-1); }
+		}
+#endif
 	}
 
 
@@ -101,6 +112,7 @@ int	main(int argc,char *argv[])
 	c_p = 0;
 	if (argc > 1) c_p = argv[1];
 
+#ifdef _WIN32
 	{
 		LPEXCEPTION_POINTERS g_ep = NULL;
 		__try {
@@ -140,6 +152,9 @@ int	main(int argc,char *argv[])
 			}
 		}
 	}
+#else  /* Linux -------------------------------------------------------- */
+	osmain(c_p);
+#endif
 
 
 

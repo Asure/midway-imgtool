@@ -3,10 +3,7 @@
  * VGA Mode X (planar 640x400) shadow buffer + SDL2 rendering
  *************************************************************/
 #pragma once
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
-#endif
-#include <windows.h>
+#include "compat.h"
 #include <SDL.h>
 
 #ifdef __cplusplus

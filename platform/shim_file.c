@@ -2,14 +2,19 @@
  * platform/shim_file.c
  * DOS INT 21h file / directory / find shims
  *************************************************************/
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
-#endif
-#include <windows.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <direct.h>   /* _getcwd, _chdir, _chdrive, _getdrive */
+#ifdef _WIN32
+#  include <direct.h>   /* _getcwd, _chdir, _chdrive, _getdrive */
+#else
+#  include <dirent.h>
+#  include <fnmatch.h>
+#  include <sys/stat.h>
+#  ifndef FNM_CASEFOLD
+#    define FNM_CASEFOLD 0   /* fallback: case-sensitive on non-GNU */
+#  endif
+#endif
 #include "shim_file.h"
 
 /* ---- relay globals (defined here, extern'd by other shims) ---- */
@@ -64,7 +69,7 @@ static void handle_free(WORD h)
     if (h < MAX_HANDLES) {
         s_handles[h] = NULL;
         if (s_tmpfiles[h][0]) {
-            DeleteFileA(s_tmpfiles[h]);
+            remove(s_tmpfiles[h]);   /* remove() is standard C, works everywhere */
             s_tmpfiles[h][0] = '\0';
         }
     }
@@ -76,7 +81,7 @@ static void path_remap(const char *src, char *dst, int dstsz)
 {
     const char *bin = "c:\\bin\\";
     if (_strnicmp(src, bin, strlen(bin)) == 0 && exe_dir[0]) {
-        _snprintf(dst, dstsz, "%s\\%s", exe_dir, src + strlen(bin));
+        _snprintf(dst, dstsz, "%s" PATH_SEP "%s", exe_dir, src + strlen(bin));
     } else {
         strncpy(dst, src, dstsz);
     }
@@ -192,11 +197,23 @@ static FILE *try_convert_old_img(FILE *f, char *tmppath_out)
     free(inbuf);
 
     /* Write to a temp file (auto-deleted when handle is closed) */
-    char tmpdir[MAX_PATH];
-    GetTempPathA(MAX_PATH, tmpdir);
-    GetTempFileNameA(tmpdir, "itl", 0, tmppath_out);
-
-    FILE *tmp = fopen(tmppath_out, "w+b");
+    FILE *tmp;
+#ifdef _WIN32
+    {
+        char tmpdir[MAX_PATH];
+        GetTempPathA(MAX_PATH, tmpdir);
+        GetTempFileNameA(tmpdir, "itl", 0, tmppath_out);
+        tmp = fopen(tmppath_out, "w+b");
+    }
+#else
+    {
+        const char *tmpdir = getenv("TMPDIR");
+        if (!tmpdir || !*tmpdir) tmpdir = "/tmp";
+        _snprintf(tmppath_out, MAX_PATH, "%s/itlXXXXXX", tmpdir);
+        int fd = mkstemp(tmppath_out);
+        tmp = (fd >= 0) ? fdopen(fd, "w+b") : NULL;
+    }
+#endif
     if (!tmp) { free(out); tmppath_out[0] = '\0'; return NULL; }
     fwrite(out, 1, (size_t)outsz, tmp);
     free(out);
@@ -305,15 +322,21 @@ void shim_i21_setfpe_impl(void) { seek_common(SEEK_END); }
 
 void shim_i21_getdrv_impl(void)
 {
-    shim_eax   = (DWORD)(_getdrive() - 1);  /* _getdrive: 1=A → return 0=A */
+#ifdef _WIN32
+    shim_eax = (DWORD)(_getdrive() - 1);  /* _getdrive: 1=A → return 0=A */
+#else
+    shim_eax = 2;  /* pretend 'C:' (drive 2) */
+#endif
     shim_carry = 0;
 }
 
 void shim_i21_setdrv_impl(void)
 {
+#ifdef _WIN32
     int drv = (int)(shim_edx & 0xFF);  /* DL = drive (0=A, 1=B ...) */
     _chdrive(drv + 1);                 /* _chdrive: 1=A */
-    shim_eax   = 26;                   /* pretend 26 drives available */
+#endif
+    shim_eax   = 26;   /* pretend 26 drives available */
     shim_carry = 0;
 }
 
@@ -327,18 +350,19 @@ void shim_i21_getcwd_impl(void)
 {
     char buf[MAX_PATH];
     char *dest = (char *)(UINT_PTR)shim_esi;
-    if (!GetCurrentDirectoryA(sizeof(buf), buf)) {
-        shim_carry = 1;
-        return;
-    }
-    /* Strip "X:\" prefix so we return only the path component */
+#ifdef _WIN32
+    if (!GetCurrentDirectoryA(sizeof(buf), buf)) { shim_carry = 1; return; }
+    /* Strip "X:\" prefix */
     char *p = buf;
     if (p[1] == ':' && p[2] == '\\') p += 3;
-    /* Remove trailing backslash */
-    {
-        int len = (int)strlen(p);
-        if (len > 0 && p[len-1] == '\\') p[len-1] = '\0';
-    }
+    { int len = (int)strlen(p); if (len > 0 && p[len-1] == '\\') p[len-1] = '\0'; }
+#else
+    if (!getcwd(buf, sizeof(buf))) { shim_carry = 1; return; }
+    /* Strip leading '/' so the asm tool sees a relative-looking path */
+    char *p = buf;
+    if (*p == '/') p++;
+    { int len = (int)strlen(p); if (len > 0 && p[len-1] == '/') p[len-1] = '\0'; }
+#endif
     strcpy(dest, p);
     shim_carry = 0;
 }
@@ -360,70 +384,127 @@ void shim_i21_delete_impl(void)
 
 /* ---- find first / next ---- */
 /* The asm code accesses dta[21] (attribute) and dta[30..] (filename).
-   We write to the asm 'dta' symbol directly. */
-/* asm symbol is 'dta' (no underscore); C 'extern BYTE _dta[]' would look for '__dta'.
-   Redirect via linker alternatename so __dta → dta. */
-#pragma comment(linker, "/alternatename:__dta=dta")
-extern BYTE _dta[];    /* defined in itos.asm as BSS dta,256 */
+   We write to the asm 'dta' symbol directly.
+   MASM (.model flat,syscall) exports 'dta' with no underscore.
+   Windows/MSVC: C 'extern _dta[]' → linker symbol '__dta';
+     /alternatename redirects it to the asm 'dta'.
+   Linux/GCC + jwasm (ELF): asm exports 'dta', C 'extern dta[]' matches
+     directly (GCC adds no underscore prefix). */
+#ifdef _WIN32
+#  pragma comment(linker, "/alternatename:__dta=dta")
+   extern BYTE _dta[];
+#  define dta _dta
+#else
+   extern BYTE dta[];
+#endif
 
-static HANDLE s_find_handle = INVALID_HANDLE_VALUE;
-
-static void fill_dta_from_fd(const WIN32_FIND_DATAA *fd)
+/* Write filename + attribute into the DOS DTA buffer */
+static void fill_dta(const char *name, BYTE attr)
 {
-    /* attribute byte */
-    _dta[21] = (BYTE)(fd->dwFileAttributes & 0xFF);
-    /* 8.3 filename: use cAlternateFileName if available */
-    const char *name = fd->cAlternateFileName[0]
-                       ? fd->cAlternateFileName
-                       : fd->cFileName;
-    strncpy((char *)&_dta[30], name, 12);
-    _dta[30+12] = '\0';
-    /* Uppercase for consistency with original DOS tool */
+    dta[21] = attr;
+    strncpy((char *)&dta[30], name, 12);
+    dta[30+12] = '\0';
+    /* Uppercase — consistent with original DOS tool */
     {
         int i;
-        for (i = 30; i < 30+12 && _dta[i]; i++)
-            if (_dta[i] >= 'a' && _dta[i] <= 'z') _dta[i] -= 32;
+        for (i = 30; i < 30+12 && dta[i]; i++)
+            if (dta[i] >= 'a' && dta[i] <= 'z') dta[i] -= 32;
     }
 }
+
+#ifdef _WIN32
+
+static HANDLE s_find_handle = INVALID_HANDLE_VALUE;
 
 void shim_i21_findfile_impl(void)
 {
     const char *pattern = (const char *)(UINT_PTR)shim_edx;
     WIN32_FIND_DATAA fd;
-
     if (s_find_handle != INVALID_HANDLE_VALUE) {
         FindClose(s_find_handle);
         s_find_handle = INVALID_HANDLE_VALUE;
     }
-
     s_find_handle = FindFirstFileA(pattern, &fd);
     if (s_find_handle == INVALID_HANDLE_VALUE) {
-        shim_carry = 1;
-        shim_eax   = 0x0012;  /* no more files */
-        return;
+        shim_carry = 1; shim_eax = 0x0012; return;
     }
-    fill_dta_from_fd(&fd);
-    shim_carry = 0;
-    shim_eax   = 0;
+    const char *name = fd.cAlternateFileName[0] ? fd.cAlternateFileName : fd.cFileName;
+    fill_dta(name, (BYTE)(fd.dwFileAttributes & 0xFF));
+    shim_carry = 0; shim_eax = 0;
 }
 
 void shim_i21_findnext_impl(void)
 {
     WIN32_FIND_DATAA fd;
     if (s_find_handle == INVALID_HANDLE_VALUE) {
-        shim_carry = 1; shim_eax = 0x0012;
-        return;
+        shim_carry = 1; shim_eax = 0x0012; return;
     }
     if (!FindNextFileA(s_find_handle, &fd)) {
         FindClose(s_find_handle);
         s_find_handle = INVALID_HANDLE_VALUE;
-        shim_carry = 1; shim_eax = 0x0012;
-        return;
+        shim_carry = 1; shim_eax = 0x0012; return;
     }
-    fill_dta_from_fd(&fd);
-    shim_carry = 0;
-    shim_eax   = 0;
+    const char *name = fd.cAlternateFileName[0] ? fd.cAlternateFileName : fd.cFileName;
+    fill_dta(name, (BYTE)(fd.dwFileAttributes & 0xFF));
+    shim_carry = 0; shim_eax = 0;
 }
+
+#else /* Linux -------------------------------------------------------- */
+
+static DIR  *s_find_dir = NULL;
+static char  s_find_pat[64];     /* filename glob, e.g. "*.IMG" */
+
+void shim_i21_findfile_impl(void)
+{
+    const char *pattern = (const char *)(UINT_PTR)shim_edx;
+
+    if (s_find_dir) { closedir(s_find_dir); s_find_dir = NULL; }
+
+    /* Split "dir/pattern" or "dir\pattern" into directory + glob */
+    char dirpath[MAX_PATH];
+    const char *sep = strrchr(pattern, '/');
+    if (!sep) sep = strrchr(pattern, '\\');
+    if (sep) {
+        size_t dlen = (size_t)(sep - pattern);
+        if (dlen >= MAX_PATH) dlen = MAX_PATH - 1;
+        memcpy(dirpath, pattern, dlen);
+        dirpath[dlen] = '\0';
+        strncpy(s_find_pat, sep + 1, sizeof(s_find_pat) - 1);
+    } else {
+        strcpy(dirpath, ".");
+        strncpy(s_find_pat, pattern, sizeof(s_find_pat) - 1);
+    }
+    s_find_pat[sizeof(s_find_pat) - 1] = '\0';
+
+    s_find_dir = opendir(dirpath);
+    if (!s_find_dir) { shim_carry = 1; shim_eax = 0x0012; return; }
+
+    struct dirent *ent;
+    while ((ent = readdir(s_find_dir)) != NULL) {
+        if (fnmatch(s_find_pat, ent->d_name, FNM_CASEFOLD) == 0) {
+            fill_dta(ent->d_name, 0x20 /* archive */);
+            shim_carry = 0; shim_eax = 0; return;
+        }
+    }
+    closedir(s_find_dir); s_find_dir = NULL;
+    shim_carry = 1; shim_eax = 0x0012;
+}
+
+void shim_i21_findnext_impl(void)
+{
+    if (!s_find_dir) { shim_carry = 1; shim_eax = 0x0012; return; }
+    struct dirent *ent;
+    while ((ent = readdir(s_find_dir)) != NULL) {
+        if (fnmatch(s_find_pat, ent->d_name, FNM_CASEFOLD) == 0) {
+            fill_dta(ent->d_name, 0x20);
+            shim_carry = 0; shim_eax = 0; return;
+        }
+    }
+    closedir(s_find_dir); s_find_dir = NULL;
+    shim_carry = 1; shim_eax = 0x0012;
+}
+
+#endif /* !_WIN32 */
 
 /* ---- message box error ---- */
 

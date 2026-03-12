@@ -2,10 +2,6 @@
  * platform/shim_input.c
  * SDL2 keyboard / mouse shim
  *************************************************************/
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
-#endif
-#include <windows.h>
 #include <SDL.h>
 #include "shim_input.h"
 
