@@ -69,6 +69,9 @@ SLGAME	equ	0
 	externdef	vid_setvmode:near
 	externdef	waiton_keyormouse:near
 	externdef	host_dumpslavemem:near
+	externdef	_shim_iwin_clr:near
+	externdef	_shim_key_check:near
+	externdef	_shim_get_shift_state:near
 
 	if	SLGAME
 	externdef	g_run:near
@@ -100,8 +103,8 @@ SLGAME	equ	0
 	externdef	rusure_s:byte
 	externdef	fileerr:byte
 
-	externdef	pal_t:
-	externdef	palmap_t:
+	externdef	pal_t:word
+	externdef	palmap_t:byte
 	externdef	palbrmult:byte
 	externdef	palbgmult:byte
 	externdef	palbbmult:byte
@@ -111,6 +114,11 @@ SLGAME	equ	0
 	externdef	palblastuc:byte
 
 	externdef	drawclipy:word
+
+	;-- Platform shim data symbols (Windows/SDL2 port) --
+	externdef	_vga_base_p:dword
+	externdef	_g_plane_ptrs:dword
+	externdef	_shim_zf:dword
 
 	externdef	mousex:word
 	externdef	mousey:word
@@ -376,7 +384,7 @@ p2_s	db	"WRITE ANILST",0
 	align	4
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 ILSTID		equ	000h
 IWINID		equ	100h
@@ -1043,7 +1051,7 @@ vok:
 	mov	damcnt,eax
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Set file offset to sequences
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Set file offset to sequences
 
 	mov	edx,lib_hdr.OSET
 
@@ -1066,7 +1074,7 @@ vok:
 	jc	x				;Error?
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Scan sequences
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Scan sequences
 
 	mov	scrseqbytes,0
 
@@ -1101,7 +1109,7 @@ seqlp:	push	ecx
 	loop	seqlp
 noseqs:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Scan scripts
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Scan scripts
 
 	movsx	ecx,lib_hdr.SCRCNT
 	TST	ecx
@@ -1134,7 +1142,7 @@ scrlp:	push	ecx
 	loop	scrlp
 noscrs:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Get mem and read seq&scr
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Get mem and read seq&scr
 
 	movsx	eax,lib_hdr.SEQCNT
 	mov	seqcnt,eax
@@ -1173,7 +1181,7 @@ zss:
 	jc	x				;Error?
 noss:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Save offset to point tables
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Save offset to point tables
 
 
 	CLR	edx
@@ -1185,7 +1193,7 @@ noss:
 	mov	ptoset,edx
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Read images and data
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Read images and data
 
 	mov	eax,palcnt
 	mov	palno,eax
@@ -1196,7 +1204,7 @@ noss:
 	movzx	eax,lib_hdr.IMGCNT
 	mov	cnt,eax
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Read img header
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Read img header
 
 imglp:
 
@@ -1266,7 +1274,7 @@ imglp:
 	call	strcpy
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Read img data
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Read img data
 
 	mov	edx,imagetmp.OSET
 	mov	ecx,edx
@@ -1290,7 +1298,7 @@ imglp:
 	jc	x				;Error?
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Read point table
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Read point table
 
 	mov	[esi].IMG.PTTBL_p,0
 
@@ -1325,7 +1333,7 @@ nopttbl:
 
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Read palettes and data
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Read palettes and data
 
 	movzx	ecx,lib_hdr.PALCNT
 	sub	ecx,NUMDEFPAL			;-defaults
@@ -1334,7 +1342,7 @@ nopttbl:
 	ja	x				;Too many?
 	mov	cnt,ecx
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Read pal header
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Read pal header
 
 pallp:
 	mov	edx,paloset
@@ -1370,7 +1378,7 @@ pallp:
 	call	strcpy
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Read pal data
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Read pal data
 
 
 	mov	edx,palettetmp.OSET
@@ -1398,7 +1406,7 @@ pallp:
 
 nopals:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 	cmp	lib_hdr.VERSION,IMGVER
@@ -1409,7 +1417,7 @@ nopals:
 	call	msgbox_open
 @@:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 	CLR	eax
@@ -1486,7 +1494,7 @@ xx:
 	jc	error
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Write pal data
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Write pal data
 
 
 	lea	esi,pal_p
@@ -1511,7 +1519,7 @@ paldnxt:
 	jnz	paldlp
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Write img data
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Write img data
 
 
 	lea	esi,img_p
@@ -1540,7 +1548,7 @@ imgnxt:
 	jnz	imglp
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	CLR	edx
 	CLR	ecx
@@ -1550,7 +1558,7 @@ imgnxt:
 	mov	WPTR lib_hdr.OSET+2,dx
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Write img headers
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Write img headers
 
 	mov	tl1,0				;Pttbl #
 
@@ -1615,7 +1623,7 @@ wihnxt:
 	jnz	wihlp
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Write pal headers
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Write pal headers
 
 	lea	esi,pal_p
 	jmp	palhnxt
@@ -1651,7 +1659,7 @@ palhnxt:
 	jnz	palhlp
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Write scripts/seqs
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Write scripts/seqs
 
 	mov	ecx,scrseqbytes
 	TST	ecx
@@ -1662,7 +1670,7 @@ palhnxt:
 	jc	error
 noss:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Write point table
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Write point table
 
 	lea	esi,img_p
 	jmp	wptnxt
@@ -1681,7 +1689,7 @@ wptnxt:
 	jnz	wptlp
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Write final lib header
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Write final lib header
 
 
 	CLR	edx				;To start
@@ -1695,7 +1703,7 @@ wptnxt:
 	jc	error				;Error?
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	mov	fileerr,0			;OK!
 
@@ -1845,7 +1853,7 @@ next:
 						;>Write last byte
 	mov	ecx,1
 	mov	edx,offset buf
-	INT21	40h
+	I21WRITE				;shim write (BX=handle,ECX=count,EDX=buf)
 	jc	error				;Error?
 
 close:
@@ -2083,7 +2091,7 @@ sel:
 	jmp	x
 
 n0:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Move all marked imgs anipt #1
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Move all marked imgs anipt #1
 
 	cmp	al,30h
 	jne	n30
@@ -2134,7 +2142,7 @@ amdone:
 	jmp	ilst_prt
 
 n30:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	mov	ebx,eax
 
@@ -2182,7 +2190,7 @@ anigad:
 	jmp	x
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 flaggad:
 	mov	edi,[esi].IMG.PTTBL_p
@@ -2543,9 +2551,10 @@ nomrk:
 
 	mov	ebx,-1
 ikup::
-	mov	ax,ds:[41ah]
-	cmp	ax,ds:[41ch]
-	jne	x			;Other key in buffer?
+	;-- Replaced: DOS BIOS keyboard buffer check --
+	call	_shim_key_check
+	cmp	_shim_zf,0
+	je	x			;Other key in buffer?
 
 	mov	eax,ilselected
 	add	eax,ebx
@@ -2575,9 +2584,10 @@ x:	ret
 
 	mov	ebx,1
 ikdn::
-	mov	ax,ds:[41ah]
-	cmp	ax,ds:[41ch]
-	jne	x			;Other key in buffer?
+	;-- Replaced: DOS BIOS keyboard buffer check (ds:[41Ah]/ds:[41Ch] unmapped on Windows) --
+	call	_shim_key_check		;pump SDL events, set _shim_zf (0=key waiting)
+	cmp	_shim_zf,0
+	je	x			;Other key in buffer? skip scroll (same logic as original)
 
 	mov	eax,ilselected
 	add	eax,ebx
@@ -2609,7 +2619,7 @@ x:	ret
 	jz	x			;!Found?
 	mov	esi,eax			;ESI=*IMG struc
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 					;>Alt cursor keys
 	cmp	dh,98h			;>Up
@@ -2628,7 +2638,7 @@ x:	ret
 	jne	@F
 	dec	[esi].IMG.ANIX
 @@:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					;>Ctrl cursor keys
 
 	cmp	cboxon,0
@@ -2641,7 +2651,11 @@ x:	ret
 
 	lea	edi,[edi].PTTBL.CBOX
 
-	test	BPTR ds:[417h],3	;Shift keys
+	;-- Replaced: BIOS shift status (ds:[417h]) â†’ SDL keyboard state --
+	push	edx			; preserve DH (key scan) â€” __cdecl clobbers EDX
+	call	_shim_get_shift_state	;EAX = bit0=LShift bit1=RShift
+	pop	edx
+	test	eax,3			;Shift keys
 	jz	@F			;None?
 	add	edi,PTCBOX.W-PTCBOX.X	;Do WH instead
 @@:
@@ -2713,7 +2727,7 @@ clft:	test	al,1
 	sub	[edi].PTTBL.X,cx
 @@:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 chome:					;>C-Home
 	mov	cx,1
 	cmp	dh,77h
@@ -2768,7 +2782,7 @@ apmok:	mov	aniptmode,al
 	jmp	ilst_prtaniptmode
 
 @@:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	cmp	dh,4bh			;>Previous marked
 	jne	@F
@@ -2777,7 +2791,7 @@ apmok:	mov	aniptmode,al
 	dec	ecx
 	jmp	domrk
 @@:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	cmp	dh,4dh			;>Next marked
 	jne	@F
@@ -2812,7 +2826,7 @@ mrk:
 	jmp	ilst_select
 @@:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 ;	mov	cx,1
 ;	cmp	dh,41h			;>F7 (Height+1)
@@ -3328,7 +3342,7 @@ lp:	mov	eax,cnt
 	jz	lp
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Do least square on box
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Do least square on box
 
 	mov	edi,eax
 
@@ -3534,7 +3548,7 @@ cylp:
 
 	jmp	lp
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 merr:
 	call	msg_memerr
@@ -3613,7 +3627,7 @@ lp:	mov	eax,cnt
 	jz	lp
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Process image
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Process image
 
 	mov	edi,eax
 
@@ -3712,7 +3726,7 @@ pixnxt:
 	jge	pixlp
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Delete flagged pixels
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Delete flagged pixels
 
 	mov	ebx,esi
 	mov	edx,[edi].IMG.DATA_p
@@ -3735,7 +3749,7 @@ dellp:
 	jg	dellp
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Find lonely pixels
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Find lonely pixels
 
 
 	movzx	eax,[edi].IMG.W
@@ -3805,7 +3819,7 @@ lpixnxt:
 	jge	lpixlp
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Delete flagged pixels
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Delete flagged pixels
 
 	mov	ebx,esi
 	mov	edx,[edi].IMG.DATA_p
@@ -3828,7 +3842,7 @@ del2lp:
 	jg	del2lp
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 	mov	eax,esi
@@ -3837,7 +3851,7 @@ del2lp:
 
 	jmp	lp
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 merr:
 	call	msg_memerr
@@ -3883,7 +3897,7 @@ lp:	mov	eax,cnt
 	jz	lp
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Process image
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Process image
 
 	mov	edi,eax
 
@@ -3915,7 +3929,7 @@ xnxt:
 
 	jmp	lp
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 draw:
@@ -4024,7 +4038,7 @@ sortend:
 	je	draw			;None?
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Get mem block
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Get mem block
 
 	mov	eax,(LMAX+1)*4+LMAX*256+FSZ
 	call	mem_alloc
@@ -4051,7 +4065,7 @@ sortend:
 	mov	aff_p,eax
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Build TGA and face info
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Build TGA and face info
 
 
 	mov	esi,srt_p
@@ -4193,7 +4207,7 @@ icpylp:
 
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Count used lines
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Count used lines
 
 	mov	esi,dst_p
 	CLR	eax
@@ -4207,7 +4221,7 @@ icpylp:
 	mov	lcnt,eax
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Display
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Display
 
 
 	mov	esi,dsti_p
@@ -4225,10 +4239,9 @@ lpx:	push	ecx
 	shr	edi,2			;/4
 ;	add	di,tw4			;+Y
 	and	cl,3
-	mov	ax,100h+SC_MAPMASK
-	shl	ah,cl			;Set bit for bit plane
-	mov	dx,SC_INDEX
-	out	dx,ax
+	;-- Replaced: SC_MAPMASK â†’ shadow plane ptr in ebx --
+	movzx	ebx,cl
+	mov	ebx,[_g_plane_ptrs + ebx*4]
 
 	mov	ecx,400			;H
 	mov	edx,256
@@ -4237,7 +4250,7 @@ lpy:
 	mov	al,[esi]
 ;	TST	al
 ;	jz	zero
-	mov	0a0000h[edi],al
+	mov	[ebx+edi],al
 zero:	add	esi,edx
 	add	edi,SCRWB
 	dec	ecx
@@ -4261,7 +4274,7 @@ zero:	add	esi,edx
 	call	waiton_keyormouse
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Open filereq
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Open filereq
 
 	mov	BPTR fnametmp_s,0
 
@@ -4317,7 +4330,7 @@ zero:	add	esi,edx
 	I21WRITE
 	jc	error
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 						;>Write palette
 	movzx	ecx,[edi].PAL.NUMC
 	shl	ecx,1
@@ -4326,7 +4339,7 @@ zero:	add	esi,edx
 	jc	error				;Error?
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 						;>Write pixels
 	mov	ecx,lcnt
 	mov	edx,256
@@ -4346,7 +4359,7 @@ pixlp:
 	loop	pixlp
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	mov	fileerr,0			;Clr error flag
 
@@ -4363,7 +4376,7 @@ error2:
 @@:
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Write ANF file
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Write ANF file
 
 
 	mov	al,'.'				;ANF extension
@@ -4420,7 +4433,7 @@ afwlp:
 	jmp	afwlp
 afwend:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	mov	fileerr,0			;Clr error flag
 
@@ -4436,14 +4449,14 @@ aerr2:
 
 @@:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 nospc:
 	mov	eax,dst_p
 	call	mem_free
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 draw:
@@ -4631,7 +4644,7 @@ chkform:
 fok:
 	mov	tw1,0
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 chunklp:
 	CLR	ecx				;Check file boundary
@@ -4660,7 +4673,7 @@ chunklp:
 	rol	eax,16
 	rol	ax,8
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 
@@ -4671,7 +4684,7 @@ chunklp:
 	jmp	chkform
 noform:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	cmp	tl1,'DHMB'
 	jne	nobmhd				;!BMHD?
@@ -4695,7 +4708,7 @@ noform:
 
 nobmhd:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	cmp	tl1,'PAMC'
 	jne	nocmap				;!CMAP?
@@ -4769,7 +4782,7 @@ pallp:
 	jmp	chunklp
 nocmap:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	cmp	tl1,'YDOB'
 	jne	nobody				;!BODY?
@@ -4908,7 +4921,7 @@ bdone:
 	jmp	eof
 nobody:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Skip unknown chunk
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Skip unknown chunk
 
 	mov	edx,eax
 	shr	eax,16
@@ -4919,7 +4932,7 @@ nobody:
 	jmp	chunklp
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 eof:
 	cmp	tw1,7
@@ -5109,7 +5122,7 @@ x:
 	I21WRITE
 	jc	error
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 						;>Write palette
 	mov	edi,offset pal_t
 	mov	ecx,256
@@ -5141,7 +5154,7 @@ pallp:
 	add	edi,2
 	loop	pallp
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	mov	ecx,4				;>Write BODY
 	mov	edx,offset body_s
@@ -5204,7 +5217,7 @@ pixlp:
 	jc	error
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	mov	fileerr,0			;Clr error flag
 
@@ -5301,7 +5314,7 @@ lp:
 	jne	error				;Bad pal type?
 @@:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	call	img_alloc
 	jz	error
@@ -5347,7 +5360,7 @@ lp:
 	mov	BPTR [edi],0
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				;>Read palette
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				;>Read palette
 
 
 	movzx	ecx,tga_hdr.CMLEN
@@ -5415,7 +5428,7 @@ pallp:
 	mov	WPTR [edi],'P'
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				;>Read pixels
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				;>Read pixels
 
 
 	movzx	ecx,tga_hdr.H
@@ -5449,7 +5462,7 @@ pixlp:
 
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 	mov	fileerr,0			;Clr error flag
@@ -5560,7 +5573,7 @@ x:
 	I21WRITE
 	jc	error
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 						;>Write palette
 	movzx	ecx,[edi].PAL.NUMC
 	shl	ecx,1
@@ -5569,7 +5582,7 @@ x:
 	jc	error				;Error?
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 						;>Write pixels
 	movzx	ecx,[esi].IMG.H
 	movzx	edx,[esi].IMG.W
@@ -5594,7 +5607,7 @@ pixlp:
 	loop	pixlp
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	mov	fileerr,0			;Clr error flag
 
@@ -5631,7 +5644,7 @@ x:
 	local	cnt:dword,\
 		aninum:dword
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Open filereq
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Open filereq
 
 	mov	DPTR fpath_s,'\:d'
 	mov	WPTR fnametmp_s,'x'
@@ -5643,7 +5656,7 @@ x:
 	call	filereq_open
 	jnz	draw
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	mov	fileerr,1
 
@@ -5703,7 +5716,7 @@ ilp:
 	jmp	ilp
 iend:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	mov	fileerr,0			;Clr error flag
 
@@ -5719,7 +5732,7 @@ error2:
 
 @@:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 draw:
@@ -5813,7 +5826,7 @@ nxt:	mov	esi,[esi]
 	jmp	x
 
 n0:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	cmp	al,10h
 	jne	n10
@@ -5821,7 +5834,7 @@ n0:
 
 	jmp	x
 n10:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 ;	cmp	al,20h
 ;	jne	n20
@@ -5964,7 +5977,7 @@ fnd:
 	mov	[esi].PTBOX.H,bl
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Get work buffer
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Get work buffer
 
 
 	movzx	eax,[edi].IMG.W
@@ -5990,7 +6003,7 @@ fnd:
 	jg	@B
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Clr pixels in work buf of prev def boxes
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Clr pixels in work buf of prev def boxes
 
 	mov	pt_p,esi
 	push	esi
@@ -6042,7 +6055,7 @@ cboxnxt:
 	pop	esi
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Do least square on box
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Do least square on box
 
 
 lxlp:					;>Check left edge
@@ -6151,7 +6164,7 @@ abort:
 
 @@:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 	mov	eax,[edi].IMG.TEMP	;Work buf
@@ -6285,7 +6298,7 @@ x:
 	jmp	x
 
 n0:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	cmp	al,20h
 	jne	n20
@@ -6295,7 +6308,7 @@ n0:
 	jmp	x
 
 n20:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	call	cbox_copytomrkd
 
@@ -6428,7 +6441,7 @@ hvpt:
 
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 	CLR	eax
@@ -6591,7 +6604,7 @@ gadup:
 	jmp	x
 
 n0:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	cmp	al,8
 	jne	n8
@@ -6602,7 +6615,7 @@ n0:
 	mov	edi,offset iwincx
 	jmp	scrl
 n8:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	mov	eax,offset iwin_showscale
 	mov	cx,64
@@ -6732,24 +6745,8 @@ x:	ret
 ;* Clear img window
 
  SUBRP	iwin_clr
-
-	mov	ax,0f00h+SC_MAPMASK	;>Clr iwin
-	mov	dx,SC_INDEX
-	out	dx,ax
-
-	cld
-
-	CLR	eax
-	mov	edi,0a0000h
-	mov	edx,200
-clrlp:
-	mov	ecx,320/4/4
-	rep	stosd
-
-	add	edi,320/4		;Next Y
-	dec	edx
-	jg	clrlp
-
+	;-- Replaced: all-plane clear of 320x200 image window â†’ C shim --
+	call	_shim_iwin_clr
 	ret
 
  SUBEND
@@ -6871,6 +6868,7 @@ x:
 	call	img_find
 	jz	noimg			;None?
 	mov	ebx,eax
+	mov	tl1,ebx			; save IMG* â€” draw loop clobbers EBX with plane ptr
 
 	add	cx,iwincx
 	add	dx,iwincy
@@ -6941,7 +6939,7 @@ sethgt:	mov	tw2,cx			;Save height
 	jle	done			;All right clipped?
 @@:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 lpx:	push	ecx
 
@@ -6951,10 +6949,9 @@ lpx:	push	ecx
 	shr	edi,2			;/4
 	add	di,tw4			;+Y
 	and	cl,3
-	mov	ax,100h+SC_MAPMASK
-	shl	ah,cl			;Set bit for bit plane
-	mov	dx,SC_INDEX
-	out	dx,ax
+	;-- Replaced: SC_MAPMASK â†’ shadow plane ptr in ebx --
+	movzx	ebx,cl
+	mov	ebx,[_g_plane_ptrs + ebx*4]
 
 	movzx	ecx,tw2			;Height
 	mov	edx,imgdataw
@@ -6963,7 +6960,7 @@ lpy:
 	mov	al,[esi]
 	TST	al
 	jz	zero
-	mov	0a0000h[edi],al
+	mov	[ebx+edi],al
 zero:	add	esi,edx
 	add	edi,SCRWB
 	dec	ecx
@@ -6977,8 +6974,9 @@ zero:	add	esi,edx
 	jg	lpx
 
 done:
+	mov	ebx,tl1			; restore IMG* (EBX was clobbered by plane ptr in draw loop)
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	cmp	iwinanipton,0
 	je	noap
@@ -7035,7 +7033,7 @@ ynorm:	add	cx,iwincx
 ;@@:
 
 noap:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	mov	esi,[ebx].IMG.PTTBL_p	;>Draw multi part & collision boxes
 	TST	esi
@@ -7197,7 +7195,7 @@ cboxnxt:
 
 nocbox:
 noboxes:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 noimg:
@@ -7330,10 +7328,10 @@ lpx:	push	ecx
 	shr	edi,2			;/4
 	add	di,tw4			;+Y
 	and	cl,3
-	mov	ax,100h+SC_MAPMASK
-	shl	ah,cl			;Set bit for bit plane
-	mov	dx,SC_INDEX
-	out	dx,ax
+	;-- Replaced: SC_MAPMASK â†’ shadow plane ptr cached in _vga_base_p --
+	movzx	eax,cl
+	mov	eax,[_g_plane_ptrs + eax*4]
+	mov	[_vga_base_p],eax
 
 	push	ebx
 	mov	cx,tw3			;H
@@ -7351,7 +7349,10 @@ sylp:
 	mov	al,[esi]		;>Scale down
 	TST	al
 	jz	szero
-	mov	0a0000h[edi],al
+	push	edx
+	mov	edx,[_vga_base_p]
+	mov	[edx+edi],al
+	pop	edx
 szero:	add	di,SCRWB		;Next Y
 
 	mov	al,bh
@@ -7372,7 +7373,10 @@ lylp:
 
 lylp2:	TST	al
 	jz	lzero
-	mov	0a0000h[edi],al
+	push	edx
+	mov	edx,[_vga_base_p]
+	mov	[edx+edi],al
+	pop	edx
 lzero:	add	di,SCRWB
 
 	add	bl,BPTR iwinscly	;<100h
@@ -7398,7 +7402,7 @@ skipx:
 
 scldone:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	pop	ecx
 
@@ -7472,7 +7476,7 @@ scldone:
 	call	crossh_draw
 @@:
 noap:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 	mov	cx,iwinrx		;Draw reference mark
@@ -7657,9 +7661,10 @@ x:
 
 	mov	ebx,-1
 pkup::
-	mov	ax,ds:[41ah]
-	cmp	ax,ds:[41ch]
-	jne	x			;Other key in buffer?
+	;-- Replaced: DOS BIOS keyboard buffer check --
+	call	_shim_key_check
+	cmp	_shim_zf,0
+	je	x			;Other key in buffer?
 
 	mov	eax,plselected
 	add	eax,ebx
@@ -7689,9 +7694,10 @@ x:	ret
 
 	mov	ebx,1
 pkdn::
-	mov	ax,ds:[41ah]
-	cmp	ax,ds:[41ch]
-	jne	x			;Other key in buffer?
+	;-- Replaced: DOS BIOS keyboard buffer check --
+	call	_shim_key_check
+	cmp	_shim_zf,0
+	je	x			;Other key in buffer?
 
 	mov	eax,plselected
 	add	eax,ebx
@@ -7754,7 +7760,7 @@ sel:
 	jmp	x
 
 n0:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Move all marked imgs anipt 1
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Move all marked imgs anipt 1
 
 	cmp	al,40h
 	jne	n40
@@ -7763,7 +7769,7 @@ n0:
 	jmp	x
 
 n40:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 
@@ -7872,7 +7878,7 @@ x:
 	add	ecx,ecx				;*2
 	call	mem_copy
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	CLR	cl				;>Convert format of palmap
 	mov	esi,offset palmap_t
@@ -7886,7 +7892,7 @@ x:
 	jnz	@B
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				;>Remap pixels
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				;>Remap pixels
 
 
 	lea	esi,img_p
@@ -8194,7 +8200,7 @@ mlp:
 	movzx	edx,[edi].PAL.NUMC
 	call	pal_makemergemap
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	PUSHM	esi,edi
 
@@ -8234,7 +8240,7 @@ mpnxt:
 	jmp	mlp
 
 mend:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Delete merged pals
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Delete merged pals
 
 	CLR	eax
 	dec	eax
@@ -8269,7 +8275,7 @@ ifixlp:
 
 	jmp	delsmlp
 dend:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 	call	main_draw
@@ -8424,7 +8430,7 @@ PHSTH	equ	256+54
 	mov	esi,eax				;ESI=*PAL struc
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Clr hist buf
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Clr hist buf
 
 	CLR	eax
 	lea	ebx,hbuf_t
@@ -8435,7 +8441,7 @@ clp:
 	loop	clp
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Count color usage
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Count color usage
 
 	CLR	eax
 	mov	icnt,eax
@@ -8468,7 +8474,7 @@ cntnxt:
 	jnz	cntlp
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Find max count
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Find max count
 
 	CLR	edx
 	lea	ebx,hbuf_t+4			;Skip 1st
@@ -8488,7 +8494,7 @@ maxlp:
 @@:
 	mov	hmax,edx
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Print imgcnt and max
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Print imgcnt and max
 
 	push	esi
 
@@ -8512,7 +8518,7 @@ maxlp:
 
 	pop	esi
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Draw graph
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Draw graph
 
 	mov	eax,PHSTX+24
 	mov	linex2,eax
@@ -8556,7 +8562,7 @@ dlp:
 	loop	dlp
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 	call	waiton_keyormouse
@@ -8584,7 +8590,7 @@ err:
 	mov	esi,eax				;ESI=*PAL struc
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Clr hist buf
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Clr hist buf
 
 	CLR	eax
 	lea	ebx,hbuf_t
@@ -8595,7 +8601,7 @@ clp:
 	loop	clp
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Count color usage
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Count color usage
 
 	CLR	eax
 	mov	icnt,eax
@@ -8628,7 +8634,7 @@ cntnxt:
 	jnz	cntlp
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Set new color count
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Set new color count
 
 	lea	ebx,hbuf_t+4
 	mov	ecx,255
@@ -8644,7 +8650,7 @@ cnlp:
 	loop	cnlp
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Pack used colors
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Pack used colors
 
 
 	movzx	ecx,[esi].PAL.NUMC
@@ -8690,7 +8696,7 @@ dnxt:
 
 	pop	esi
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	call	plst_savepblk
 

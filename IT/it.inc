@@ -259,17 +259,38 @@ INT21X	macro	F
 	int	21h
 	endm
 
-I21GETDRV	equ	<INT21	19h>
-I21SETDRV	equ	<INT21	0eh>
-I21SETCD	equ	<INT21	3bh>
-I21RENAME	equ	<INT21	56h>
-I21DELETE	equ	<INT21	41h>
-I21OPENR	equ	<INT21X	3d00h>
-I21CREATE	equ	<INT21	3ch>
-I21READ		equ	<INT21	3fh>
-I21WRITE	equ	<INT21	40h>
-I21SETFPS	equ	<INT21X	4200h>
-I21SETFPC	equ	<INT21X	4201h>
-I21SETFPE	equ	<INT21X	4202h>
-I21CLOSE	equ	<INT21	3eh>
+;-- DOS INT 21h file/dir macros replaced by shim thunks (Windows/SDL2 port) --
+I21GETDRV	equ	<call shim_i21_getdrv>
+I21SETDRV	equ	<call shim_i21_setdrv>
+I21SETCD	equ	<call shim_i21_setcd>
+I21RENAME	equ	<call shim_i21_rename>
+I21DELETE	equ	<call shim_i21_delete>
+I21OPENR	equ	<call shim_i21_openr>
+I21CREATE	equ	<call shim_i21_create>
+I21READ		equ	<call shim_i21_read>
+I21WRITE	equ	<call shim_i21_write>
+I21SETFPS	equ	<call shim_i21_setfps>
+I21SETFPC	equ	<call shim_i21_setfpc>
+I21SETFPE	equ	<call shim_i21_setfpe>
+I21CLOSE	equ	<call shim_i21_close>
+
+;-- Externdef for all shim thunks called via I21xxx macros above --
+	.code
+	externdef	shim_i21_getdrv:near
+	externdef	shim_i21_setdrv:near
+	externdef	shim_i21_setcd:near
+	externdef	shim_i21_rename:near
+	externdef	shim_i21_delete:near
+	externdef	shim_i21_openr:near
+	externdef	shim_i21_create:near
+	externdef	shim_i21_read:near
+	externdef	shim_i21_write:near
+	externdef	shim_i21_setfps:near
+	externdef	shim_i21_setfpc:near
+	externdef	shim_i21_setfpe:near
+	externdef	shim_i21_close:near
+	externdef	shim_i21_getcwd:near
+	externdef	shim_i21_findfile:near
+	externdef	shim_i21_findnext:near
+
 

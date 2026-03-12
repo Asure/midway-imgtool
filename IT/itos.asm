@@ -22,7 +22,39 @@
 	.code
 	externdef	imgmode_init:near
 
+	;-- C shim functions (defined in platform/*.c) --
+	externdef	_shim_vid_init:near
+	externdef	_shim_vid_present:near
+	externdef	_shim_vid_shutdown:near
+	externdef	_shim_scr_clr:near
+	externdef	_shim_iwin_clr:near
+	externdef	_shim_gettick:near
+	externdef	_shim_setvgapal18_impl:near
+	externdef	_shim_setvgapal15_impl:near
+	externdef	_shim_mouse_detect:near
+	externdef	_shim_mouse_read:near
+	externdef	_shim_mouse_show:near
+	externdef	_shim_mouse_hide:near
+	externdef	_shim_mouse_scroll_anchor:near
+	externdef	_shim_mouse_read_scroller:near
+	externdef	_shim_key_check:near
+	externdef	_shim_key_get:near
+	externdef	_shim_get_shift_state:near
+	externdef	_shim_msgbox_error:near
+
 	.data
+;---- Windows/SDL2 port relay globals and VGA shim symbols ----
+	externdef	_vga_base_p:dword		;Current write-plane base ptr (DWORD holding pointer)
+	externdef	_g_plane_ptrs:dword		;Array of 4 plane pointers
+	externdef	_shim_carry:dword
+	externdef	_shim_eax:dword
+	externdef	_shim_ebx:dword
+	externdef	_shim_ecx:dword
+	externdef	_shim_edx:dword
+	externdef	_shim_esi:dword
+	externdef	_shim_zf:dword
+	externdef	_shim_keycode:word
+
 ;In it.c
 	externdef	_imgenv_s:byte
 	externdef	_tgaenv_s:byte
@@ -36,8 +68,8 @@
 ;	externdef	fmode:byte
 ;	externdef	fname_s:byte
 ;	externdef	fnametmp_s:byte
-	externdef	lib_hdr:
-	externdef	imghdr_t:
+	externdef	lib_hdr:byte
+	externdef	imghdr_t:byte
 
 	externdef	progname2_s:byte
 	externdef	font_t:byte
@@ -170,6 +202,8 @@ FEMAX	equ	350
 	BSSW	ftotal			;Total # entries (0-MAX)
 	BSSD	fnxtmrkd		;Next entry to search for mark
 	BSS	dta		,256	;DOS DTA
+	.data?
+	public	dta			;exported for shim_file.c
 	BSS4	fptr_t	 ,FEMAX+1	;* to fentry_t
 	BSS	fentry_t ,FEMAX*14	;File data entries
 	BSSB	drvold			;Initial drive #
@@ -373,15 +407,18 @@ CO_s	db	"CO",0
 ;* OS boot point
 ;* EAX = *arg1 or 0
 
- SUBR	osmain_
+;-- Renamed from osmain_ (Watcom) to _osmain (MSVC _cdecl convention) --
+	.code
+	externdef	_osmain:near
+_osmain proc near
+SUBN textequ <_osmain>
 
 	pushad
 	mov	initsp,esp		;Save sp
 
 	mov	edi,eax
 
-	mov	edx,offset progname_s	;Print startup msg
-	INT21	9
+	;-- Removed: startup message (INT21 9) not used on Windows --
 
 
 	TST	edi
@@ -398,9 +435,9 @@ CO_s	db	"CO",0
 
 @@:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if	0
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	push	ds
 	push	cs
@@ -414,9 +451,9 @@ CO_s	db	"CO",0
 	pop	ds
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	endif
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 	I21GETDRV			;Remember drive #
@@ -426,21 +463,21 @@ CO_s	db	"CO",0
 	CLR	dl			;>Get CD string
 	mov	esi,offset fpathold_s+1
 	mov	BPTR [esi-1],'\'
-	INT21	47h
+	call	shim_i21_getcwd		;INT21 47h â†’ shim
 
 	mov	esi,offset fpath_s+3
 	add	bl,'A'
 	mov	[esi-3],bl
 	mov	WPTR [esi-2],'\:'
-	INT21	47h
+	call	shim_i21_getcwd		;INT21 47h â†’ shim
 
 
 
 
 
 
-	CLR	eax			;>Chk for mouse (resets)
-	int	33h
+	call	_shim_mouse_detect	;>Chk for mouse (SDL always present)
+	mov	eax,_shim_eax
 	lea	edx,nomouse_s
 	inc	ax
 	jnz	exiterr			;Error?
@@ -451,7 +488,7 @@ CO_s	db	"CO",0
 	call	mem_init
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 ;Memory debug
 
 ;	mov	ecx,1000
@@ -471,7 +508,7 @@ CO_s	db	"CO",0
 
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 
@@ -487,10 +524,8 @@ CO_s	db	"CO",0
 
 
 
-					;>Save current video mode
-	mov	ah,0fh
-	int	10h
-	mov	vmodeold,al
+					;>Save current video mode (hardcode dummy for Windows port)
+	mov	vmodeold,13h		;INT 10h AH=0Fh replaced â€” dummy 0x13
 
 					;>Save current video state
 ;	mov	ax,1c00h
@@ -564,39 +599,25 @@ CO_s	db	"CO",0
 	call	host_initslave
 	endif
 
-	mov	ax,1bh			;>Save mouse sensitivity
-	int	33h
-	mov	mousehmics,bx
-	mov	mousevmics,cx
-	mov	mousedbl,dx
-
-	mov	ax,1ah			;>Set mouse sensitivity
-	mov	bx,100
-	mov	cx,100
-	mov	dx,100
-	int	33h
+	;-- Mouse sensitivity save/set: NOP for SDL port (INT 33h AX=1Ah/1Bh) --
 
 	call	mouse_reset
 
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 mainlp:
-;	mov	dx,3dah
-;	in	al,dx
-;	and	al,8
-;	jz	mainlp			;Not in VB?
+	call	_shim_vid_present	;-- deplanarize shadow buf + SDL blit + event pump --
 
-
-	mov	ah,11h			;>Chk keyboard buffer
-	int	16h
-	jz	chkmouse		;Empty?
+	call	_shim_key_check		;>Chk keyboard buffer (INT 16h AH=11h replaced)
+	cmp	_shim_zf,1
+	je	chkmouse		;Empty (shim_zf=1 means no key)?
 
 	call	mouse_erase
 
-	mov	ah,10h			;>Get key
-	int	16h
+	call	_shim_key_get		;>Get key (INT 16h AH=10h replaced)
+	mov	ax,word ptr _shim_keycode
 	cmp	al,0e0h
 	jne	noe0			;!101 extended?
 	CLR	al
@@ -646,8 +667,10 @@ keyx:	mov	keycode,0
 
 
 chkmouse:
-	mov	ax,3			;>Read mouse
-	int	33h
+	call	_shim_mouse_read	;>Read mouse (INT 33h AX=3 replaced)
+	mov	ebx,_shim_ebx
+	mov	ecx,_shim_ecx
+	mov	edx,_shim_edx
 	and	bl,3
 	shr	cx,2			;/2
 	shr	dx,2
@@ -683,12 +706,12 @@ mchg:
 	mov	ax,cx
 	mov	bx,0ffh
 	mov	cx,144
-	mov	dx,395
+	mov	dx,392
 	call	prtf6_dec3srj
 	pop	eax
 	mov	bx,0ffh
 	mov	cx,144+24
-	mov	dx,395
+	mov	dx,392
 	call	prtf6_dec3srj
 	pop	ebx
 
@@ -785,7 +808,7 @@ drawmouse::
 	movzx	ax,mouseptrbuf		;>Prt pixel # under tip of mouse
 	mov	bx,0ffh
 	mov	cx,144+24+24
-	mov	dx,395
+	mov	dx,392
 	call	prtf6_dec3srj
 
 	jmp	mainlp
@@ -796,7 +819,7 @@ menui:
 	jmp	drawmouse
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 exit::
 	call	cfg_save
@@ -805,15 +828,10 @@ exit::
 	mov	dl,drvold
 	I21SETDRV
 
-	mov	edx,offset fpathold_s	;>Set CD
-	INT21	3bh
+	mov	edx,offset fpathold_s	;>Set CD back to original
+	call	shim_i21_setcd		;INT21 3bh â†’ shim
 
-
-	mov	ax,1ah			;>Set old mouse sensitivity
-	mov	bx,mousehmics
-	mov	cx,mousevmics
-	mov	dx,mousedbl
-	int	33h
+	;-- Mouse sensitivity restore: NOP for SDL port --
 
 	CLR	edx
 
@@ -821,23 +839,15 @@ exit::
 exiterr:
 	push	edx
 
-	mov	al,vmodeold		;>Restore old vidmode
-	CLR	ah
-	int	10h
+	call	_shim_vid_shutdown	;>Shutdown SDL (replaces INT 10h restore vidmode)
 
-;	mov	ebx,vstatebuf_p		;>Restore original video state
-;	TST	ebx
-;	jz	@F
-;	mov	ax,1c02h
-;	mov	cx,7
-;	int	10h
-;@@:
 	pop	edx
 
 
 	TST	edx
 	jz	@F
-	INT21	9			;>Prt exit msg
+	mov	_shim_edx,edx
+	call	_shim_msgbox_error	;>Show exit error (replaces INT21 9 print)
 @@:
 
 
@@ -872,7 +882,8 @@ exitq:
 
  SUBRP	test_main
 
-	push	DPTR ds:[46ch]
+	call	_shim_gettick		;-- Replaced: ds:[46Ch] BIOS timer tick --
+	push	eax
 
 	test	mousebut,2		;R but
 	jnz	rbut
@@ -921,7 +932,7 @@ rbut:
 
 time:
 	pop	edx
-	mov	eax,ds:[46ch]
+	call	_shim_gettick		;-- Replaced: ds:[46Ch] BIOS timer tick --
 	sub	eax,edx
 
 	mov	bx,0feffh
@@ -1327,20 +1338,14 @@ c_t	db	48,48,48	;RGB
 ;* Trashes all non seg
 
  SUBR	vid_setvgapal18
-
-	mov	dx,DAC_WADDR
-	out	dx,al
-
-	mov	ax,cx		;*3
-	add	cx,cx
-	add	cx,ax
-
-	mov	dx,DAC_DATA
-lp:	lodsb
-	out	dx,al
-
-	loopw	lp
-
+	;-- Replaced: was out 3C8h/3C9h DAC writes; now calls SDL shim --
+	;   AL=1st color #, CX=# colors, ESI=*18-bit RGB triplets
+	movzx	eax,al
+	mov	_shim_eax,eax
+	movzx	ecx,cx
+	mov	_shim_ecx,ecx
+	mov	_shim_esi,esi
+	call	_shim_setvgapal18_impl
 	ret
  SUBEND
 
@@ -1353,29 +1358,14 @@ lp:	lodsb
 ;* Trashes all non seg
 
  SUBRP	vid_setvgapal15
-
-	mov	dx,DAC_WADDR
-	out	dx,al
-
-	mov	dx,DAC_DATA
-lp:
-	mov	al,1[esi]			;Red
-	and	al,1111100b
-	shr	al,1
-	out	dx,al
-
-	mov	ax,[esi]			;Green
-	and	ax,1111100000b
-	shr	ax,5-1
-	out	dx,al
-
-	lodsw					;Blue
-	and	al,1fh
-	add	al,al				;*2
-	out	dx,al
-
-	loopw	lp
-
+	;-- Replaced: was out 3C8h/3C9h DAC writes; now calls SDL shim --
+	;   AL=1st color #, CX=# colors, ESI=*15-bit packed RGB words
+	movzx	eax,al
+	mov	_shim_eax,eax
+	movzx	ecx,cx
+	mov	_shim_ecx,ecx
+	mov	_shim_esi,esi
+	call	_shim_setvgapal15_impl
 	ret
  SUBEND
 
@@ -1392,58 +1382,48 @@ STL24	equ	0
 viddat	db	30 dup (?)
 
  SUBR	vid_setvmode
+	;-- Replaced: entire VGA mode-set sequence â†’ SDL2 init shim --
+	call	_shim_vid_init
+	mov	eax,1			;NZ = success (Z=0)
+	ret
 
-	mov	esi,offset m_t		;>Set vmode
+	;-- DEAD CODE below (original body kept for reference, never executed) --
+	if	0
+
+	mov	esi,offset m_t
 	movzx	eax,vmode
 	TST	eax
-	jz	@F			;No user specifed mode?
+	jz	@F
 	mov	[esi],eax
-
 @@:	cld
-
-lp:	lodsw				;Get mode #
+lp:	lodsw
 	TST	ax
-	jz	x			;End? Z set
-
+	jz	x
 	mov	vmode,ax
-
 	TST	ah
 	jz	norm
-
-	mov	bx,ax			;>Set VESA mode
+	mov	bx,ax
 	mov	ax,4f02h
 	int	10h
 	cmp	ax,4fh
-	jne	lp			;Error?
+	jne	lp
 	jmp	vesa
-;	jmp	vok
-
-
-norm:	CLR	ah			;>Set normal mode
+norm:	CLR	ah
 	int	10h
-
-	mov	ah,0fh			;>Chk new vmode
+	mov	ah,0fh
 	int	10h
 	cmp	al,BPTR vmode
-	jne	lp			;Error?
-
-
-
+	jne	lp
 vesa:
-
 	if	STL24
-
-	mov	dx,CC_INDEX		;>Unlock S3 VGA registers
+	mov	dx,CC_INDEX
 	mov	ax,4838h
 	out	dx,ax
-
-
 	mov	esi,offset viddat
 	mov	bl,30h
 	mov	cx,12
-
-@@:	mov	dx,CC_INDEX		;>Test
-	mov	al,bl		;
+@@:	mov	dx,CC_INDEX
+	mov	al,bl
 	out	dx,al
 	inc	dx
 	in	al,dx
@@ -1451,14 +1431,9 @@ vesa:
 	inc	esi
 	inc	bl
 	loopw	@B
-
-
-	mov	ax,13h			;>Fix
+	mov	ax,13h
 	int	10h
-
-
-
-	mov	dx,CC_INDEX		;>Clr scan line doubling
+	mov	dx,CC_INDEX
 	mov	al,CC_MAXSCAN
 	out	dx,al
 	inc	dx
@@ -1562,6 +1537,8 @@ ok:
 x:
 	ret
 
+	endif			;-- end of if 0 dead code block --
+
  SUBEND
 
 	.data
@@ -1574,48 +1551,8 @@ m_t	dw	2fh,5eh,61h,0
 ;* Trashes all non seg
 
  SUBR	vid_chain4off
-
-	mov	dx,GC_INDEX		;>Clr odd/even mode
-	mov	al,GC_GFXMODE
-	out	dx,al
-	inc	dx
-	in	al,dx
-	and	al,11101111b
-	out	dx,al
-	dec	dx
-
-	mov	al,GC_MISC		;>Clr odd/even in misc
-	out	dx,al
-	inc	dx
-	in	al,dx
-	and	al,11111101b
-	out	dx,al
-
-	mov	dx,SC_INDEX		;>Set linear, Clr odd/even mode
-	mov	al,SC_MEMMODE
-	out	dx,al
-	inc	dx
-	in	al,dx
-	and	al,11110011b
-	or	al,4
-	out	dx,al
-
-	mov	dx,CC_INDEX		;>Clr dword mode
-	mov	al,CC_ULINE
-	out	dx,al
-	inc	dx
-	in	al,dx
-	and	al,10111111b
-	out	dx,al
-	dec	dx
-
-	mov	al,CC_MODECTRL		;>Set byte mode
-	out	dx,al
-	inc	dx
-	in	al,dx
-	or	al,40h
-	out	dx,al
-
+	;-- Replaced: shadow buffer is always Mode X, NOP --
+	mov	eax,1
 	ret
  SUBEND
 
@@ -1916,7 +1853,7 @@ draw:	call	palblk_draw
 	jmp	x
 
 g2:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	cmp	al,20h			;>Reload palette
 	jne	g30
@@ -1925,7 +1862,7 @@ g2:
 	jmp	x
 
 g30:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	cmp	al,21h			;>Save palette
 	jne	g40
@@ -1934,7 +1871,7 @@ g30:
 	jmp	x
 
 g40:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	cmp	al,30h			;>Sort by brightness
 	jne	g50
@@ -1943,7 +1880,7 @@ g40:
 	jmp	svga
 
 g50:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	cmp	al,38h			;>Sort into R,G,B
 	jne	g60
@@ -1955,7 +1892,7 @@ svga:	call	palblk_setvgapal
 	jmp	x
 
 g60:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	cmp	al,40h			;>Adjust range by RGB
 	jb	g70
@@ -1967,7 +1904,7 @@ g60:
 	jmp	svga
 
 g70:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	cmp	al,50h			;>Adjust sort RGB multipliers
 	jb	g80
@@ -1993,7 +1930,7 @@ g70:
 	jmp	x
 
 g80:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	cmp	al,60h			;>Adjust sort RGB multipliers
 	jne	g90
@@ -2679,7 +2616,7 @@ Y=5
 
 
 	mov	edx,offset helpfile_s		;>Open read only
-	INT21X	3d00h
+	I21OPENR				;shim: open file â†’ EAX=handle (CF=error)
 	jc	xx
 
 	mov	ebx,eax				;EBX=File handle
@@ -2690,7 +2627,7 @@ Y=5
 
 	mov	ecx,80*50			;# bytes
 	mov	edx,offset buf
-	INT21	3fh				;Read
+	I21READ					;shim: read file (BX=handle,ECX=count,EDX=buf) â†’ EAX=bytes
 	jc	x				;Error?
 
 
@@ -2709,7 +2646,7 @@ lp:						;>Prt info
 scan:	mov	al,[edi]			;>Copy a line
 	inc	edi
 	TST	al
-	jz	pause				;End?
+	jz	pauselp				;End?
 	cmp	al,0dh
 	je	endl				;End of line?
 	mov	[esi],al
@@ -2730,7 +2667,7 @@ endl:	mov	BPTR [esi],0
 	jmp	lp
 
 
-pause:
+pauselp:
 	call	waiton_keyormouse
 
 
@@ -2740,7 +2677,7 @@ x:
 
 
 	pop	ebx				;>Close file
-	INT21	3eh
+	I21CLOSE				;shim: close file (BX=handle)
 
 xx:
 	call	main_draw
@@ -2983,7 +2920,7 @@ nofn:
 
 	call	gadstr_close
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	TST	al				;>OK
 	jnz	n0
@@ -3007,7 +2944,7 @@ nofn:
 
 n0:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	cmp	al,1				;>Forget it
 	jne	n1
@@ -3021,7 +2958,7 @@ n0:
 	ret
 n1:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Delete files
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Delete files
 
 	cmp	al,2
 	jne	n2
@@ -3043,7 +2980,7 @@ dlp:
 	jmp	reload
 n2:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	cmp	al,18h				;>File names window
 	jne	gad5
@@ -3060,7 +2997,7 @@ n2:
 	call	gad_draw
 	jmp	x
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 gad5:	cmp	al,20h				;>Parent
 	jne	gad6
@@ -3087,13 +3024,13 @@ reload:
 	call	gad_drawall
 	jmp	x
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 gad6:	cmp	al,28h				;>Path or match name
 	jne	gad7
 	jmp	reload
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 gad7:	cmp	al,30h				;>Up
 	jne	gad8
@@ -3105,7 +3042,7 @@ gad7:	cmp	al,30h				;>Up
 	call	dir_prt
 	jmp	x
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 gad8:	cmp	al,31h				;>Dn
 	jne	n31
@@ -3122,7 +3059,7 @@ gad8:	cmp	al,31h				;>Dn
 	jmp	x
 n31:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Select all
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Select all
 
 	cmp	al,38h
 	jne	n38
@@ -3142,7 +3079,7 @@ selalp:
 	jmp	x
 n38:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Drive select
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Drive select
 
 	cmp	al,80h
 	jne	n80
@@ -3155,7 +3092,7 @@ n38:
 n80:
 
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 x:
 	ret
@@ -3240,10 +3177,7 @@ x:
 	dec	eax
 	mov	fnxtmrkd,eax			;-1
 
-						;>Set DTA
-	mov	ah,1ah
-	mov	edx,offset dta
-	int	21h
+						;>Set DTA (NOP - shim uses WIN32 FindFirstFileA internally)
 
 	CLR	eax
 	mov	DPTR [fptr_t],eax
@@ -3268,10 +3202,10 @@ nodrv:
 	jc	x				;Error?
 
 
-	mov	ah,4eh				;>Find 1st dir
+	;-- Replaced: INT 21h 4Eh Find 1st dir â†’ shim --
 	mov	cx,10h				;Dir bit
 	mov	edx,offset dirmatch_s
-	int	21h
+	call	shim_i21_findfile
 	mov	edx,offset fentry_t
 	jc	nodir				;No match?
 
@@ -3298,17 +3232,17 @@ dcmplp:	inc	esi
 
 dset:	call	dir_insert
 
-dnext:	mov	ah,4fh				;>Find next
-	int	21h
+dnext:	;-- Replaced: INT 21h 4Fh Find next dir â†’ shim --
+	call	shim_i21_findnext
 	jnc	dsclp
 
 
 nodir:
 	push	edx
-	mov	ah,4eh				;>Find 1st file
+	;-- Replaced: INT 21h 4Eh Find 1st file â†’ shim --
 	CLR	ecx				;Only files
 	mov	edx,fmatch_gad.TXT_p
-	int	21h
+	call	shim_i21_findfile
 	pop	edx
 	jc	nofile				;No match?
 
@@ -3333,8 +3267,8 @@ cmplp:	inc	esi
 
 set:	call	dir_insert
 
-	mov	ah,4fh				;>Find next
-	int	21h
+	;-- Replaced: INT 21h 4Fh Find next file â†’ shim --
+	call	shim_i21_findnext
 	jnc	sclp
 
 
@@ -3780,7 +3714,7 @@ ebox_gadf\
 
 	call	gadstr_close
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	TST	al				;>OK
 	jnz	n0
@@ -3792,7 +3726,7 @@ doneok:
 
 n0:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	cmp	al,1				;>Forget it
 	jne	n1
@@ -3806,13 +3740,13 @@ n0:
 	ret
 n1:
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ				>Delete files
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½				>Delete files
 
 ;	cmp	al,2
 ;	jne	n2
 ;
 ;n2:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 	cmp	eboxgadcode_p,0
 	je	@F
@@ -3830,38 +3764,38 @@ x:
 ;* Trashes none
 
  SUBRP	waiton_keyormouse
-
+	;-- Replaced: INT 33h/16h â†’ SDL2 shim --
 	pushad
 
-mlp:	mov	ax,3				;>Read mouse
-	int	33h
+	;>Drain any buttons already held
+mlp:	call	_shim_mouse_read
+	mov	ebx,_shim_ebx
 	and	bl,3
-	jnz	mlp				;Button down?
+	jnz	mlp
 
-klp:	mov	ah,11h				;>Empty keyboard buffer
-	int	16h
-	jz	wt				;Empty?
-	mov	ah,10h				;>Get key
-	int	16h
+	;>Drain any keys already in queue
+klp:	call	_shim_key_check
+	cmp	_shim_zf,1
+	je	wt			;Empty?
+	call	_shim_key_get
 	jmp	klp
 
-
-wt:	mov	ax,3				;>Read mouse
-	int	33h
+	;>Wait for a key or mouse button
+wt:	call	_shim_mouse_read
+	mov	ebx,_shim_ebx
 	and	bl,3
-	jnz	xlp				;Button down?
+	jnz	xlp			;Button down?
 
-	mov	ah,11h				;>Chk for key
-	int	16h
-	jz	wt				;Empty?
-	mov	ah,10h				;>Get key
-	int	16h
+	call	_shim_key_check
+	cmp	_shim_zf,1
+	je	wt			;No key yet?
+	call	_shim_key_get		;Consume it
 
-
-xlp:	mov	ax,3				;>Read mouse
-	int	33h
+	;>Wait for button release
+xlp:	call	_shim_mouse_read
+	mov	ebx,_shim_ebx
 	and	bl,3
-	jnz	xlp				;Button down?
+	jnz	xlp
 
 	popad
 	ret
@@ -4734,12 +4668,11 @@ lp:	push	ecx
 	add	di,ax			;+Y
 	mov	cl,bh
 	and	cl,3
-	mov	ax,100h+SC_MAPMASK
-	shl	ah,cl			;Set bit for bit plane
-	out	dx,ax
-
+	;-- Replaced: SC_MAPMASK â†’ shadow plane ptr --
+	movzx	edx,cl
+	mov	edx,[_g_plane_ptrs + edx*4]
 	mov	al,BPTR prtcolors	;Get color
-	mov	0a0000h[edi],al
+	mov	[edx+edi],al
 nxt:
 	pop	eax
 	pop	ecx
@@ -4819,12 +4752,11 @@ lp:
 	add	edi,eax			;+Y
 	mov	cl,bh
 	and	cl,3
-	mov	ax,100h+SC_MAPMASK
-	shl	ah,cl			;Set bit for bit plane
-	out	dx,ax
-
+	;-- Replaced: SC_MAPMASK â†’ shadow plane ptr --
+	movzx	edx,cl
+	mov	edx,[_g_plane_ptrs + edx*4]
 	mov	al,BPTR prtcolors	;Get color
-	mov	0a0000h[edi],al
+	mov	[edx+edi],al
 
 	pop	eax
 
@@ -4846,27 +4778,7 @@ lp:
 ;* Trashes none
 
  SUBR	mouse_reset
-
-	pushad
-
-	mov	ax,7			;Set X range
-	CLR	ecx
-	mov	dx,632*4
-	int	33h
-
-	mov	ax,8			;Set Y range
-	CLR	ecx
-	mov	dx,399*4
-	int	33h
-
-	mov	ax,4			;Move mouse
-	mov	cx,mousex
-	mov	dx,mousey
-	shl	cx,2
-	shl	dx,2
-	int	33h
-
-	popad
+	;-- Replaced: INT 33h range/move NOP'd (SDL handles all mouse positioning) --
 	ret
 
  SUBEND
@@ -4891,23 +4803,18 @@ lpx:	push	ecx
 	add	di,ax			;+Y
 	mov	cl,bl
 	and	cl,3
-	mov	ax,100h+SC_MAPMASK
-	shl	ah,cl			;Set bit for bit plane
-	mov	dx,SC_INDEX
-	out	dx,ax
-	mov	al,GC_MAPSEL
-	mov	ah,cl
-	mov	dx,GC_INDEX
-	out	dx,ax
+	;-- Replaced: SC_MAPMASK + GC_MAPSEL â†’ shadow plane ptr --
+	movzx	edx,cl
+	mov	edx,[_g_plane_ptrs + edx*4]
 
 	mov	cx,8			;Y cnt
 lpy:
-	mov	al,0a0000h[edi]
+	mov	al,[edx+edi]
 	mov	[esi],al
 	mov	al,(8*8)[esi]
 	TST	al
 	jz	nowrt			;Don't write if 0
-	mov	0a0000h[edi],al
+	mov	[edx+edi],al
 nowrt:	add	esi,8
 	add	di,SCRWB
 	loopw	lpy
@@ -4957,14 +4864,13 @@ lpx:	push	ecx
 	add	di,ax			;+Y
 	mov	cl,bl
 	and	cl,3
-	mov	ax,100h+SC_MAPMASK
-	shl	ah,cl			;Set bit for bit plane
-	mov	dx,SC_INDEX
-	out	dx,ax
+	;-- Replaced: SC_MAPMASK â†’ shadow plane ptr --
+	movzx	edx,cl
+	mov	edx,[_g_plane_ptrs + edx*4]
 
 	mov	ecx,8			;Y cnt
 lpy:	mov	al,[esi]
-	mov	0a0000h[edi],al
+	mov	[edx+edi],al
 	add	esi,8
 	add	di,SCRWB
 	loop	lpy
@@ -5167,7 +5073,13 @@ RNG=32000
 
 	mov	mscrollcode_p,eax
 					;Check shift keys
-	test	BPTR ds:[417h],3
+	;-- Replaced: BIOS 0:417h shift-key byte â†’ SDL shim --
+	push	ecx			; preserve â€” __cdecl clobbers ECX/EDX
+	push	edx
+	call	_shim_get_shift_state	;returns EAX: bit0=LShift, bit1=RShift
+	pop	edx
+	pop	ecx
+	test	al,3
 	jz	noshft			;None?
 	TST	cx
 	jz	@F
@@ -5186,17 +5098,8 @@ noshft:
 	mov	mscrollxm,ecx
 	mov	mscrollym,edx
 
-	mov	ax,7			;Set X range
-	CLR	ecx
-	mov	dx,RNG
-	int	33h
-	mov	ax,8			;Set Y range
-	int	33h
-
-	mov	ax,4			;Move mouse
-	mov	cx,RNG/2
-	mov	dx,cx
-	int	33h
+	;-- Replaced: INT 33h 7/8/4 range+move â†’ capture SDL drag anchor --
+	call	_shim_mouse_scroll_anchor	; record current mouse pos as origin
 
 	mov	ax,[edi]
 	mov	mscrollx,ax
@@ -5230,9 +5133,11 @@ mv:
 strt:	push	edi
 	call	[mscrollcode_p]		;Pass none
 	pop	edi
-nomv:
-	mov	ax,3			;>Read mouse
-	int	33h
+nomv:	;-- Replaced: INT 33h 3 Read mouse â†’ anchor-relative scroller shim --
+	call	_shim_mouse_read_scroller	; ecx=(dx*4)+16000, edx=(dy*4)+16000
+	mov	ebx,_shim_ebx
+	mov	ecx,_shim_ecx			; cx = (cur_x-anchor)*4 + 16000
+	mov	edx,_shim_edx			; dx = (cur_y-anchor)*4 + 16000
 	and	bl,1
 	jnz	lp			;But 1 down?
 
@@ -5466,7 +5371,7 @@ x:
 	mov	ecx,gadcurx
 	add	ebx,ecx
 
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Cursor left
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Cursor left
 
 	cmp	ax,4b00h
 	jne	@F
@@ -5476,7 +5381,7 @@ x:
 	mov	gadcurx,ecx
 	jmp	sprt
 @@:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Cursor rgt
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Cursor rgt
 
 	cmp	ax,4d00h
 	jne	@F
@@ -5491,7 +5396,7 @@ x:
 
 	jmp	sprt
 @@:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Backspace
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Backspace
 
 	cmp	ax,8
 	jne	@F
@@ -5508,7 +5413,7 @@ bksplp:	mov	al,[ebx]		;Move all back
 
 	jmp	sprt
 @@:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>INS
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>INS
 
 	cmp	ax,5200h
 	jne	@F
@@ -5516,7 +5421,7 @@ bksplp:	mov	al,[ebx]		;Move all back
 	not	gadovwon		;Toggle
 	jmp	sprt
 @@:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>DEL
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>DEL
 
 	cmp	ax,5300h
 	jne	@F
@@ -5533,7 +5438,7 @@ delnxt:
 
 	jmp	sprt
 @@:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Home
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Home
 
 	cmp	ax,4700h
 	jne	@F
@@ -5542,7 +5447,7 @@ delnxt:
 	mov	gadcurx,eax
 	jmp	sprt
 @@:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>End
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>End
 
 	cmp	ax,4f00h
 	jne	@F
@@ -5558,7 +5463,7 @@ elp:
 	jmp	elp
 
 @@:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Tab
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Tab
 
 	cmp	ax,9
 	jne	@F
@@ -5566,7 +5471,7 @@ elp:
 	mov	BPTR [ebx],0
 	jmp	sprt
 @@:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Up arrow
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Up arrow
 
 	cmp	ax,4800h
 	jne	@F
@@ -5585,7 +5490,7 @@ elp:
 
 	jmp	kend
 @@:
-;ÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ			>Regular keys
+;ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½			>Regular keys
 
 	cmp	ax,' '
 	jb	x
@@ -5601,15 +5506,15 @@ inslp:
 	je	@F			;Insert mode?
 	TST	ah
 	jnz	chkmax
-	jmp	xend
+	jmp	xend_lbl
 @@:
 	cmp	ecx,gadcurxmax
-	jae	xend			;At end?
+	jae	xend_lbl		;At end?
 	inc	ecx
 	mov	al,ah
 	TST	ah
 	jnz	inslp
-xend:
+xend_lbl:
 	mov	BPTR [ebx],0
 chkmax:
 	mov	ecx,gadcurx
@@ -5919,24 +5824,9 @@ x:
 ;* Clear screen memory
 
  SUBRP	scr_clr
-
-	pushad
-
-	cld
-
-	mov	ax,0f00h+SC_MAPMASK
-	mov	dx,SC_INDEX
-	out	dx,ax
-
-	CLR	eax
-	mov	edi,0a0000h		;Vid mem
-	mov	ecx,640*400/4/4
-	rep	stosd
-
-	popad
-
+	;-- Replaced: memset all 4 shadow planes via shim --
+	call	_shim_scr_clr
 	ret
-
 
  SUBEND
 
@@ -6071,25 +5961,23 @@ lpx:	push	ecx
 	add	di,bp			;+Y offset
 	mov	cl,bl
 	and	cl,3
-	jnz	do1			;Not on long boundary?
+	jmp	do1			;-- fast path disabled for shadow buffer --
 
 	cmp	DPTR [esp],4
 	jl	do1			;Too few?
 
-	mov	ax,0f00h+SC_MAPMASK	;>Do 4 lines
+	mov	ax,0f00h+SC_MAPMASK	;>Do 4 lines (DEAD CODE - fast path disabled)
 	add	bx,3
 	sub	DPTR [esp],3
 	jmp	setup
-do1:
-	mov	ax,100h+SC_MAPMASK
-	shl	ah,cl			;Set bit for bit plane
-setup:	mov	dx,SC_INDEX
-	out	dx,ax
-
+do1:	;-- Replaced: SC_MAPMASK â†’ shadow plane ptr --
+	movzx	edx,cl
+	mov	edx,[_g_plane_ptrs + edx*4]
+setup:
 	mov	cx,6[esi]		;Y size
 	mov	al,8[esi]		;Color
 lpy:
-	mov	0a0000h[edi],al
+	mov	[edx+edi],al
 	add	di,SCRWB
 	dec	cx
 	jg	lpy
@@ -6459,28 +6347,26 @@ lpx:	push	ecx
 	shr	edi,2			;/4
 	add	di,bp			;+Y offset
 	and	cl,3
-	jnz	do1			;Not on long boundary?
+	jmp	do1			;-- fast path disabled for shadow buffer --
 
 	cmp	WPTR [esp],4
 	jl	do1			;Too few?
 
-	mov	ax,0f00h+SC_MAPMASK	;>Do 4 lines
+	mov	ax,0f00h+SC_MAPMASK	;>Do 4 lines (DEAD CODE - fast path disabled)
 	add	prtx,3
 	sub	WPTR [esp],3
 	jmp	setup
-do1:
-	mov	ax,100h+SC_MAPMASK
-	shl	ah,cl			;Set bit for bit plane
-setup:	mov	dx,SC_INDEX		;Cache?
-	out	dx,ax
-
+do1:	;-- Replaced: SC_MAPMASK â†’ shadow plane ptr --
+	movzx	edx,cl
+	mov	edx,[_g_plane_ptrs + edx*4]
+setup:
 	mov	ax,prtcolors
 	mov	cx,8			;Y cnt
 lpy:
 	push	ebx
 	push	edi
-lpc:	mov	0a0000h[edi],ah
-	mov	0a0001h[edi],ah
+lpc:	mov	[edx+edi],ah
+	mov	[edx+edi+1],ah
 	add	di,2
 	dec	bx
 	jg	lpc
@@ -6589,33 +6475,34 @@ lpx:	push	ecx
 	shr	edi,2			;/4
 	add	di,bp			;+Y offset
 	and	cl,3
-	mov	ax,100h+SC_MAPMASK
-	shl	ah,cl			;Set bit for bit plane
-	mov	dx,SC_INDEX
-	out	dx,ax
+	;-- Replaced: SC_MAPMASK â†’ shadow plane ptr in ebp (bp = Y offset saved/restored) --
+	movzx	eax,cl
+	mov	eax,[_g_plane_ptrs + eax*4]	;plane ptr
 
 	mov	bx,prtcolors
 	mov	cx,8			;Y cnt
-	pop	edx
+	pop	edx			;restore 880h font mask
+	push	ebp			;save Y row offset
+	mov	ebp,eax			;ebp = plane ptr
 lpy:
 	mov	al,bl			;>Copy column
-	test	[esi],dl			;Test bit
+	test	[esi],dl		;Test bit
 	jnz	fgc
 	mov	al,bh
 fgc:
 	mov	ah,bl			;>Copy column
-	test	[esi],dh			;Test bit
+	test	[esi],dh		;Test bit
 	jnz	fgc2
 	mov	ah,bh
 fgc2:
-	mov	0a0000h[edi],ax
+	mov	[ebp+edi],ax
 
 	inc	esi
 	add	di,SCRWB
 	dec	cx
 	jg	lpy
 
-
+	pop	ebp			;restore Y row offset
 	sub	esi,8			;Top Y
 	inc	prtx			;Next X
 	shr	dx,1			;Next bit
@@ -7817,27 +7704,28 @@ lpx:	push	ecx
 	shr	edi,2			;/4
 	add	di,bp			;+Y offset
 	and	cl,3
-	mov	ax,100h+SC_MAPMASK
-	shl	ah,cl			;Set bit for bit plane
-	mov	dx,SC_INDEX
-	out	dx,ax
+	;-- Replaced: SC_MAPMASK â†’ shadow plane ptr in ebp (bp = Y offset saved/restored) --
+	movzx	eax,cl
+	mov	eax,[_g_plane_ptrs + eax*4]	;plane ptr
 
 	mov	bx,prtcolors
 	mov	cx,6			;Y cnt
-	pop	edx
+	pop	edx			;restore font bit mask
+	push	ebp			;save Y row offset
+	mov	ebp,eax			;ebp = plane ptr
 lpy:
 	mov	ax,bx			;>Copy column
-	test	[esi],dl			;Test bit
+	test	[esi],dl		;Test bit
 	jnz	fgc
 	mov	al,ah
-fgc:	mov	0a0000h[edi],al
+fgc:	mov	[ebp+edi],al
 
 	inc	esi
 	add	di,SCRWB
 	dec	cx
 	jg	lpy
 
-
+	pop	ebp			;restore Y row offset
 	sub	esi,6			;Top Y
 	inc	prtx			;Next X
 	shr	dl,1			;Next bit
