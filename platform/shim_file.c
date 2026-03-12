@@ -219,8 +219,15 @@ void shim_i21_openr_impl(void)
     /* Transparently upgrade old-format IMG containers */
     char tmppath[MAX_PATH] = "";
     FILE *converted = try_convert_old_img(f, tmppath);
-    if (converted) { fclose(f); f = converted; }
-    else rewind(f);  /* detection reads 28 bytes; reset for asm sequential read */
+    if (converted) {
+        fclose(f); f = converted;
+        /* Notify user, matching the style of "Bogus file version!" */
+        char msg[MAX_PATH + 64];
+        const char *fname = strrchr(remapped, '\\');
+        fname = fname ? fname + 1 : remapped;
+        _snprintf(msg, sizeof(msg), "Ancient format IMG converted:\n%s", fname);
+        MessageBoxA(NULL, msg, "imgtool", MB_OK | MB_ICONINFORMATION);
+    } else rewind(f);  /* detection reads 28 bytes; reset for asm sequential read */
 
     WORD h = handle_alloc(f);
     if (h == 0xFFFF) { fclose(f); shim_carry = 1; shim_eax = 0x0004; return; }
