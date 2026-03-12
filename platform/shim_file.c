@@ -109,8 +109,8 @@ typedef struct {
     signed char palind;
     BYTE   flags;
     DWORD  oset, data;
-    short  lib, pword1, pword2, frame;
-    BYTE   pbyte1;
+    short  lib, pword1, pword2;
+    BYTE   frame, pbyte1;
 } OLD_IMAGE;    /* 42 bytes */
 
 typedef struct {
@@ -220,6 +220,7 @@ void shim_i21_openr_impl(void)
     char tmppath[MAX_PATH] = "";
     FILE *converted = try_convert_old_img(f, tmppath);
     if (converted) { fclose(f); f = converted; }
+    else rewind(f);  /* detection reads 28 bytes; reset for asm sequential read */
 
     WORD h = handle_alloc(f);
     if (h == 0xFFFF) { fclose(f); shim_carry = 1; shim_eax = 0x0004; return; }
