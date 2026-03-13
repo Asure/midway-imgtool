@@ -560,8 +560,49 @@ void shim_i21_findnext_impl(void)
 
 #else /* Linux -------------------------------------------------------- */
 
-static DIR  *s_find_dir = NULL;
-static char  s_find_pat[64];     /* filename glob, e.g. "*.IMG" */
+static DIR  *s_find_dir     = NULL;
+static char  s_find_pat[64];          /* filename glob, e.g. "*.IMG" */
+static char  s_find_dirpath[MAX_PATH];/* directory being searched */
+static BYTE  s_find_attr    = 0;      /* attribute mask from ECX at FindFirst */
+
+/* Return non-zero if 'name' inside s_find_dirpath is a directory */
+static int find_entry_is_dir(const char *name)
+{
+    char full[MAX_PATH];
+    struct stat st;
+    if (s_find_dirpath[0])
+        _snprintf(full, sizeof(full), "%s/%s", s_find_dirpath, name);
+    else
+        strncpy(full, name, sizeof(full) - 1);
+    full[sizeof(full) - 1] = '\0';
+    return (stat(full, &st) == 0 && S_ISDIR(st.st_mode));
+}
+
+/* Advance readdir until a matching entry is found; fills DTA and returns 1,
+   or returns 0 when the directory is exhausted. */
+static int find_next_match(void)
+{
+    struct dirent *ent;
+    while ((ent = readdir(s_find_dir)) != NULL) {
+        /* Always skip "." */
+        if (strcmp(ent->d_name, ".") == 0) continue;
+
+        if (find_entry_is_dir(ent->d_name)) {
+            /* Include directories only when the attr mask has bit 4 set */
+            if (s_find_attr & 0x10) {
+                fill_dta(ent->d_name, 0x10 /* directory */);
+                return 1;
+            }
+        } else {
+            /* Regular file — must match the glob pattern */
+            if (fnmatch(s_find_pat, ent->d_name, FNM_CASEFOLD) == 0) {
+                fill_dta(ent->d_name, 0x20 /* archive */);
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
 
 __attribute__((force_align_arg_pointer))
 void shim_i21_findfile_impl(void)
@@ -576,30 +617,24 @@ void shim_i21_findfile_impl(void)
     pattern = conv;
 
     /* Split "dir/pattern" into directory + glob */
-    char dirpath[MAX_PATH];
     const char *sep = strrchr(pattern, '/');
     if (sep) {
         size_t dlen = (size_t)(sep - pattern);
         if (dlen >= MAX_PATH) dlen = MAX_PATH - 1;
-        memcpy(dirpath, pattern, dlen);
-        dirpath[dlen] = '\0';
+        memcpy(s_find_dirpath, pattern, dlen);
+        s_find_dirpath[dlen] = '\0';
         strncpy(s_find_pat, sep + 1, sizeof(s_find_pat) - 1);
     } else {
-        strcpy(dirpath, ".");
+        s_find_dirpath[0] = '\0';
         strncpy(s_find_pat, pattern, sizeof(s_find_pat) - 1);
     }
     s_find_pat[sizeof(s_find_pat) - 1] = '\0';
+    s_find_attr = (BYTE)(shim_ecx & 0xFF);
 
-    s_find_dir = opendir(dirpath);
+    s_find_dir = opendir(s_find_dirpath[0] ? s_find_dirpath : ".");
     if (!s_find_dir) { shim_carry = 1; shim_eax = 0x0012; return; }
 
-    struct dirent *ent;
-    while ((ent = readdir(s_find_dir)) != NULL) {
-        if (fnmatch(s_find_pat, ent->d_name, FNM_CASEFOLD) == 0) {
-            fill_dta(ent->d_name, 0x20 /* archive */);
-            shim_carry = 0; shim_eax = 0; return;
-        }
-    }
+    if (find_next_match()) { shim_carry = 0; shim_eax = 0; return; }
     closedir(s_find_dir); s_find_dir = NULL;
     shim_carry = 1; shim_eax = 0x0012;
 }
@@ -608,13 +643,7 @@ __attribute__((force_align_arg_pointer))
 void shim_i21_findnext_impl(void)
 {
     if (!s_find_dir) { shim_carry = 1; shim_eax = 0x0012; return; }
-    struct dirent *ent;
-    while ((ent = readdir(s_find_dir)) != NULL) {
-        if (fnmatch(s_find_pat, ent->d_name, FNM_CASEFOLD) == 0) {
-            fill_dta(ent->d_name, 0x20);
-            shim_carry = 0; shim_eax = 0; return;
-        }
-    }
+    if (find_next_match()) { shim_carry = 0; shim_eax = 0; return; }
     closedir(s_find_dir); s_find_dir = NULL;
     shim_carry = 1; shim_eax = 0x0012;
 }

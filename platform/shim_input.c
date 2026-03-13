@@ -17,6 +17,15 @@ extern DWORD shim_edx;
 DWORD shim_zf      = 1;   /* 1 = no key */
 WORD  shim_keycode = 0;
 
+/* ---- software key-repeat ----
+   SDL2 on Linux/WSLg does not reliably deliver SDL_KEYDOWN repeat events
+   (depends on the compositor).  We implement our own repeat in pump_events. */
+#define KEY_REPEAT_DELAY_MS  400   /* pause before first repeat */
+#define KEY_REPEAT_RATE_MS    50   /* interval between repeats  */
+static SDL_Keycode s_held_sym    = SDLK_UNKNOWN;
+static WORD        s_held_code   = 0;
+static Uint32      s_repeat_next = 0;
+
 /* ---- internal key queue ---- */
 #define KEYQ_SIZE 64
 static WORD  s_keyq[KEYQ_SIZE];
@@ -169,10 +178,22 @@ static void pump_events(void)
             ExitProcess(0);
             break;
         case SDL_KEYDOWN: {
+            if (e.key.repeat) break;   /* handled by our own repeat logic below */
             WORD code = sdl_to_dos_key(e.key.keysym);
-            if (code) keyq_push(code);
+            if (code) {
+                keyq_push(code);
+                s_held_sym    = e.key.keysym.sym;
+                s_held_code   = code;
+                s_repeat_next = SDL_GetTicks() + KEY_REPEAT_DELAY_MS;
+            }
             break;
         }
+        case SDL_KEYUP:
+            if (e.key.keysym.sym == s_held_sym) {
+                s_held_sym  = SDLK_UNKNOWN;
+                s_held_code = 0;
+            }
+            break;
         case SDL_MOUSEMOTION: {
             /* Window: 1280x810, VGA content at (0,10,1280,800) — 2x scale, 10px menu strip */
             int cx = e.motion.x / 2;
@@ -193,6 +214,15 @@ static void pump_events(void)
         }
         default:
             break;
+        }
+    }
+
+    /* Software key-repeat: fire if the held key's timer has elapsed */
+    if (s_held_code) {
+        Uint32 now = SDL_GetTicks();
+        if (now >= s_repeat_next) {
+            keyq_push(s_held_code);
+            s_repeat_next = now + KEY_REPEAT_RATE_MS;
         }
     }
 }
