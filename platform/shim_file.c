@@ -2,9 +2,11 @@
  * platform/shim_file.c
  * DOS INT 21h file / directory / find shims
  *************************************************************/
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <errno.h>
 #ifdef _WIN32
 #  include <direct.h>   /* _getcwd, _chdir, _chdrive, _getdrive */
 #else
@@ -27,6 +29,41 @@ DWORD shim_carry = 0;
 
 /* ---- exe directory ---- */
 char exe_dir[MAX_PATH] = "";
+
+#ifndef _WIN32
+/* Startup working directory — used as the Linux stand-in for "C:\" */
+static char s_startup_cwd[MAX_PATH] = "";
+
+static const char *startup_cwd(void)
+{
+    if (!s_startup_cwd[0])
+        getcwd(s_startup_cwd, sizeof(s_startup_cwd));
+    return s_startup_cwd;
+}
+
+/* fpath_s is the asm path-display buffer (64 bytes).
+   We write back a DOS-style "C:\..." path after every successful setcd
+   so the on-screen path widget shows the real current directory. */
+extern char fpath_s[64];   /* defined in itos.asm via BSSX */
+
+static void update_fpath_s(void)
+{
+    char cwd[MAX_PATH];
+    if (!getcwd(cwd, sizeof(cwd))) return;
+    /* Build "C:\rest\with\backslashes" into fpath_s (63 chars max) */
+    char buf[64];
+    buf[0] = 'C'; buf[1] = ':'; buf[2] = '\\';
+    int i = 3;
+    const char *p = cwd;
+    if (*p == '/') p++;   /* strip leading / */
+    while (*p && i < 62) {
+        buf[i++] = (*p == '/') ? '\\' : *p;
+        p++;
+    }
+    buf[i] = '\0';
+    memcpy(fpath_s, buf, (size_t)(i + 1));
+}
+#endif
 
 /* ---- file handle table (max 16 open files) ---- */
 #define MAX_HANDLES 16
@@ -76,9 +113,46 @@ static void handle_free(WORD h)
 }
 
 /* ---- path remapping ----
-   "c:\bin\it.hlp" and "c:\bin\it.cfg" → <exe_dir>\it.hlp / it.cfg */
+   On Linux: strip drive letter (C:), convert \ → /, remap c:\bin\ → exe_dir */
 static void path_remap(const char *src, char *dst, int dstsz)
 {
+#ifndef _WIN32
+    const char *bin = "c:\\bin\\";
+    if (exe_dir[0] && _strnicmp(src, bin, strlen(bin)) == 0) {
+        /* c:\bin\foo → <exe_dir>/foo (converting any \ in foo too) */
+        const char *rest = src + strlen(bin);
+        int i = 0;
+        _snprintf(dst, dstsz, "%s/", exe_dir);
+        i = (int)strlen(dst);
+        while (*rest && i < dstsz - 1)
+            dst[i++] = (*rest++ == '\\') ? '/' : rest[-1];
+        dst[i] = '\0';
+    } else {
+        /* General DOS path: strip X: drive letter, convert \ → / */
+        const char *p = src;
+        char drive = 0;
+        if (p[0] && p[1] == ':') { drive = (char)(p[0] | 0x20); p += 2; }
+        /* Bare drive root "X:\" or "X:" → map drive letter to Linux dir */
+        if (p[0] == '\0' || (p[0] == '\\' && p[1] == '\0')) {
+            const char *root;
+            if (drive == 'd') {
+                root = getenv("HOME");
+                if (!root || !*root) root = startup_cwd();
+            } else if (drive == 'a') {
+                root = "/";
+            } else {
+                root = startup_cwd();  /* C: and everything else → startup CWD */
+            }
+            strncpy(dst, root, dstsz - 1);
+            dst[dstsz - 1] = '\0';
+            return;
+        }
+        int i = 0;
+        while (*p && i < dstsz - 1)
+            dst[i++] = (*p++ == '\\') ? '/' : p[-1];
+        dst[i] = '\0';
+    }
+#else
     const char *bin = "c:\\bin\\";
     if (_strnicmp(src, bin, strlen(bin)) == 0 && exe_dir[0]) {
         _snprintf(dst, dstsz, "%s" PATH_SEP "%s", exe_dir, src + strlen(bin));
@@ -86,6 +160,7 @@ static void path_remap(const char *src, char *dst, int dstsz)
         strncpy(dst, src, dstsz);
     }
     dst[dstsz-1] = '\0';
+#endif
 }
 
 /* ---- old-format IMG conversion ------------------------------------------- */
@@ -223,6 +298,7 @@ static FILE *try_convert_old_img(FILE *f, char *tmppath_out)
 
 /* ---- impl functions ---- */
 
+__attribute__((force_align_arg_pointer))
 void shim_i21_openr_impl(void)
 {
     char remapped[MAX_PATH];
@@ -253,6 +329,7 @@ void shim_i21_openr_impl(void)
     shim_carry = 0;
 }
 
+__attribute__((force_align_arg_pointer))
 void shim_i21_close_impl(void)
 {
     WORD h = (WORD)(shim_ebx & 0xFFFF);
@@ -263,6 +340,7 @@ void shim_i21_close_impl(void)
     shim_carry = 0;
 }
 
+__attribute__((force_align_arg_pointer))
 void shim_i21_read_impl(void)
 {
     WORD h   = (WORD)(shim_ebx & 0xFFFF);
@@ -275,6 +353,7 @@ void shim_i21_read_impl(void)
     shim_carry = ferror(f) ? 1 : 0;
 }
 
+__attribute__((force_align_arg_pointer))
 void shim_i21_write_impl(void)
 {
     WORD h   = (WORD)(shim_ebx & 0xFFFF);
@@ -287,6 +366,7 @@ void shim_i21_write_impl(void)
     shim_carry = (n < cnt) ? 1 : 0;
 }
 
+__attribute__((force_align_arg_pointer))
 void shim_i21_create_impl(void)
 {
     char remapped[MAX_PATH];
@@ -316,10 +396,14 @@ static void seek_common(int whence)
     shim_carry = 0;
 }
 
+__attribute__((force_align_arg_pointer))
 void shim_i21_setfps_impl(void) { seek_common(SEEK_SET); }
+__attribute__((force_align_arg_pointer))
 void shim_i21_setfpc_impl(void) { seek_common(SEEK_CUR); }
+__attribute__((force_align_arg_pointer))
 void shim_i21_setfpe_impl(void) { seek_common(SEEK_END); }
 
+__attribute__((force_align_arg_pointer))
 void shim_i21_getdrv_impl(void)
 {
 #ifdef _WIN32
@@ -330,6 +414,7 @@ void shim_i21_getdrv_impl(void)
     shim_carry = 0;
 }
 
+__attribute__((force_align_arg_pointer))
 void shim_i21_setdrv_impl(void)
 {
 #ifdef _WIN32
@@ -340,12 +425,18 @@ void shim_i21_setdrv_impl(void)
     shim_carry = 0;
 }
 
+__attribute__((force_align_arg_pointer))
 void shim_i21_setcd_impl(void)
 {
-    const char *path = (const char *)(UINT_PTR)shim_edx;
+    char path[MAX_PATH];
+    path_remap((const char *)(UINT_PTR)shim_edx, path, sizeof(path));
     shim_carry = (_chdir(path) == 0) ? 0 : 1;
+#ifndef _WIN32
+    if (!shim_carry) update_fpath_s();
+#endif
 }
 
+__attribute__((force_align_arg_pointer))
 void shim_i21_getcwd_impl(void)
 {
     char buf[MAX_PATH];
@@ -358,27 +449,41 @@ void shim_i21_getcwd_impl(void)
     { int len = (int)strlen(p); if (len > 0 && p[len-1] == '\\') p[len-1] = '\0'; }
 #else
     if (!getcwd(buf, sizeof(buf))) { shim_carry = 1; return; }
-    /* Strip leading '/' so the asm tool sees a relative-looking path */
+    /* Strip leading '/' so the asm tool sees a relative-looking path,
+       then convert remaining '/' to '\' so DOS path ops (e.g. the ".."
+       button scanning for '\') work correctly. */
     char *p = buf;
     if (*p == '/') p++;
-    { int len = (int)strlen(p); if (len > 0 && p[len-1] == '/') p[len-1] = '\0'; }
+    { int i; for (i = 0; p[i]; i++) if (p[i] == '/') p[i] = '\\'; }
+    { int len = (int)strlen(p); if (len > 0 && p[len-1] == '\\') p[len-1] = '\0'; }
 #endif
     strcpy(dest, p);
     shim_carry = 0;
 }
 
+__attribute__((force_align_arg_pointer))
 void shim_i21_rename_impl(void)
 {
-    const char *oldpath = (const char *)(UINT_PTR)shim_edx;
-    const char *newpath = (const char *)(UINT_PTR)shim_esi;
-    shim_carry = (rename(oldpath, newpath) == 0) ? 0 : 1;
-    shim_eax   = shim_carry ? 5 : 0;
+    char old2[MAX_PATH], new2[MAX_PATH];
+    path_remap((const char *)(UINT_PTR)shim_edx, old2, sizeof(old2));
+    path_remap((const char *)(UINT_PTR)shim_esi, new2, sizeof(new2));
+    shim_carry = (rename(old2, new2) == 0) ? 0 : 1;
+    if (shim_carry) {
+        /* Map errno to DOS error codes the asm expects */
+        if      (errno == ENOENT) shim_eax = 2;  /* file not found */
+        else if (errno == ENOTDIR || errno == ENOTEMPTY) shim_eax = 3;  /* path not found */
+        else                      shim_eax = 5;  /* access denied */
+    } else {
+        shim_eax = 0;
+    }
 }
 
+__attribute__((force_align_arg_pointer))
 void shim_i21_delete_impl(void)
 {
-    const char *path = (const char *)(UINT_PTR)shim_edx;
-    shim_carry = (remove(path) == 0) ? 0 : 1;
+    char path2[MAX_PATH];
+    path_remap((const char *)(UINT_PTR)shim_edx, path2, sizeof(path2));
+    shim_carry = (remove(path2) == 0) ? 0 : 1;
     shim_eax   = shim_carry ? 2 : 0;
 }
 
@@ -404,18 +509,21 @@ static void fill_dta(const char *name, BYTE attr)
     dta[21] = attr;
     strncpy((char *)&dta[30], name, 12);
     dta[30+12] = '\0';
-    /* Uppercase — consistent with original DOS tool */
+#ifdef _WIN32
+    /* Uppercase — consistent with original DOS tool on case-insensitive FS */
     {
         int i;
         for (i = 30; i < 30+12 && dta[i]; i++)
             if (dta[i] >= 'a' && dta[i] <= 'z') dta[i] -= 32;
     }
+#endif
 }
 
 #ifdef _WIN32
 
 static HANDLE s_find_handle = INVALID_HANDLE_VALUE;
 
+__attribute__((force_align_arg_pointer))
 void shim_i21_findfile_impl(void)
 {
     const char *pattern = (const char *)(UINT_PTR)shim_edx;
@@ -433,6 +541,7 @@ void shim_i21_findfile_impl(void)
     shim_carry = 0; shim_eax = 0;
 }
 
+__attribute__((force_align_arg_pointer))
 void shim_i21_findnext_impl(void)
 {
     WIN32_FIND_DATAA fd;
@@ -454,16 +563,21 @@ void shim_i21_findnext_impl(void)
 static DIR  *s_find_dir = NULL;
 static char  s_find_pat[64];     /* filename glob, e.g. "*.IMG" */
 
+__attribute__((force_align_arg_pointer))
 void shim_i21_findfile_impl(void)
 {
     const char *pattern = (const char *)(UINT_PTR)shim_edx;
 
     if (s_find_dir) { closedir(s_find_dir); s_find_dir = NULL; }
 
-    /* Split "dir/pattern" or "dir\pattern" into directory + glob */
+    /* Convert DOS path separators before splitting */
+    char conv[MAX_PATH];
+    path_remap(pattern, conv, sizeof(conv));
+    pattern = conv;
+
+    /* Split "dir/pattern" into directory + glob */
     char dirpath[MAX_PATH];
     const char *sep = strrchr(pattern, '/');
-    if (!sep) sep = strrchr(pattern, '\\');
     if (sep) {
         size_t dlen = (size_t)(sep - pattern);
         if (dlen >= MAX_PATH) dlen = MAX_PATH - 1;
@@ -490,6 +604,7 @@ void shim_i21_findfile_impl(void)
     shim_carry = 1; shim_eax = 0x0012;
 }
 
+__attribute__((force_align_arg_pointer))
 void shim_i21_findnext_impl(void)
 {
     if (!s_find_dir) { shim_carry = 1; shim_eax = 0x0012; return; }
@@ -508,6 +623,7 @@ void shim_i21_findnext_impl(void)
 
 /* ---- message box error ---- */
 
+__attribute__((force_align_arg_pointer))
 void shim_msgbox_error(void)
 {
     /* EDX points to a DOS '$'-terminated string */
@@ -523,3 +639,5 @@ void shim_msgbox_error(void)
         MessageBoxA(NULL, buf, "Image Tool Error", MB_OK | MB_ICONERROR);
     }
 }
+
+

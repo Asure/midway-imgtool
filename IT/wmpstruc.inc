@@ -95,7 +95,7 @@ FRAMEP	typedef	ptr FRAME
 ANIM_SEQ	struct	2
 num_frames	sword	?		;number of frames in seq
 frame		FRAMEP	16 dup (?)	;16 frames in seq
-name		sbyte	INAMELEN+1 dup (?)
+seq_name	sbyte	INAMELEN+1 dup (?)	; 'name' is reserved in JWasm
 spare2		sword	?		;so seq can be marked
 spare1		sword	?
 ANIM_SEQ	ends

@@ -2,6 +2,7 @@
  * platform/shim_input.c
  * SDL2 keyboard / mouse shim
  *************************************************************/
+
 #include <SDL.h>
 #include "shim_input.h"
 
@@ -207,6 +208,7 @@ static void pump_events(void)
 static int s_scroll_anchor_x = 0;
 static int s_scroll_anchor_y = 0;
 
+__attribute__((force_align_arg_pointer))
 void shim_mouse_scroll_anchor(void)
 {
     int raw_x, raw_y;
@@ -216,6 +218,7 @@ void shim_mouse_scroll_anchor(void)
     SDL_GetRelativeMouseState(NULL, NULL);
 }
 
+__attribute__((force_align_arg_pointer))
 void shim_mouse_read_scroller(void)
 {
     int mx, my;
@@ -233,11 +236,13 @@ void shim_mouse_read_scroller(void)
 
 /* ---- public functions ---- */
 
+__attribute__((force_align_arg_pointer))
 void shim_mouse_detect(void)
 {
     shim_eax = 0xFFFF;  /* mouse always present */
 }
 
+__attribute__((force_align_arg_pointer))
 void shim_mouse_read(void)
 {
     pump_events();
@@ -259,22 +264,26 @@ void shim_mouse_read(void)
     }
 }
 
+__attribute__((force_align_arg_pointer))
 void shim_mouse_show(void)
 {
     SDL_ShowCursor(SDL_ENABLE);
 }
 
+__attribute__((force_align_arg_pointer))
 void shim_mouse_hide(void)
 {
     SDL_ShowCursor(SDL_DISABLE);
 }
 
+__attribute__((force_align_arg_pointer))
 void shim_key_check(void)
 {
     pump_events();
     shim_zf = (s_keyq_count == 0) ? 1 : 0;
 }
 
+__attribute__((force_align_arg_pointer))
 void shim_key_get(void)
 {
     pump_events();
@@ -287,6 +296,7 @@ void shim_key_get(void)
     }
 }
 
+__attribute__((force_align_arg_pointer))
 DWORD shim_get_shift_state(void)
 {
     pump_events();
@@ -300,3 +310,5 @@ DWORD shim_get_shift_state(void)
         ks[SDL_SCANCODE_RALT])    result |= 8;   /* bit 3 = Alt                       */
     return result;
 }
+
+

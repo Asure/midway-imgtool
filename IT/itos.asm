@@ -43,6 +43,7 @@
 	externdef	_shim_msgbox_error:near
 
 	.data
+
 ;---- Windows/SDL2 port relay globals and VGA shim symbols ----
 	externdef	_vga_base_p:dword		;Current write-plane base ptr (DWORD holding pointer)
 	externdef	_g_plane_ptrs:dword		;Array of 4 plane pointers
@@ -89,6 +90,7 @@
 
 	.data
 
+
 DATE	textequ	<">,@Date,<">
 
 progname_s	db	"Image Tool 2.043 on ",DATE," by SL",10,13,"$"
@@ -116,6 +118,7 @@ dirmatch_s	db	"*.*",0
 
 
 	.data?
+
 
 	BSSD	initsp			;Initial stack pointer
 
@@ -253,6 +256,9 @@ FEMAX	equ	350
 
 
 	.data
+
+
+
 	align	4
 
 
@@ -268,70 +274,70 @@ ID2=100h
 ID3=200h
 
 filer_gad\
-	GAD	{ @F, X+184,Y+329, 13*8,11, c12_wh, 0, GADF_DN, ID+0 }
-@@:
-	GAD	{ @F, X+30,Y+329, 13*8,11, c12_wh, forgetit_s, GADF_DN, ID+1 }
-@@:
-	GAD	{ @F, X+400,Y+329, 13*8,11, c12_wh, delete_s, GADF_DN, ID+2 }
-@@:
-	GAD	{ @F, FILERFX,FILERFY, 4*14*8,29*9, 0, 0, GADF_MV+GADF_MVR, ID+18h }
-@@:
-	GAD	{ @F, X+6,Y+276, 20,11, c2_wh, parchars_s, GADF_DN, ID+20h }
+	GAD	{ _ait_0001, X+184,Y+329, 13*8,11, c12_wh, 0, GADF_DN, ID+0 }
+_ait_0001 LABEL DWORD
+	GAD	{ _ait_0002, X+30,Y+329, 13*8,11, c12_wh, forgetit_s, GADF_DN, ID+1 }
+_ait_0002 LABEL DWORD
+	GAD	{ _ait_0003, X+400,Y+329, 13*8,11, c12_wh, delete_s, GADF_DN, ID+2 }
+_ait_0003 LABEL DWORD
+	GAD	{ _ait_0004, FILERFX,FILERFY, 4*14*8,29*9, 0, 0, GADF_MV+GADF_MVR, ID+18h }
+_ait_0004 LABEL DWORD
+	GAD	{ _ait_0005, X+6,Y+276, 20,11, c2_wh, parchars_s, GADF_DN, ID+20h }
 parchars_s	db	"..",0
-@@:
-	GAD	{ @F, X+6,Y+292, 63*8,11, c63_wh, fpath_s, GADF_STR, ID+28h }
-@@:
+_ait_0005 LABEL DWORD
+	GAD	{ _ait_0006, X+6,Y+292, 63*8,11, c63_wh, fpath_s, GADF_STR, ID+28h }
+_ait_0006 LABEL DWORD
 fname_gad\
-	GAD	{ @F, X+14,Y+307, 12*8,11, c12_wh, fnametmp_s, GADF_STR, ID+29h }
-@@:
+	GAD	{ _ait_0007, X+14,Y+307, 12*8,11, c12_wh, fnametmp_s, GADF_STR, ID+29h }
+_ait_0007 LABEL DWORD
 fmatch_gad\
-	GAD	{ @F, X+140,Y+307, 12*8,11, c12_wh, 0, GADF_STR, ID+28h }
-@@:
-	GAD	{ @F, X+4,Y+100, 13,11, c1_wh, cA_s, GADF_DN, ID+38h }
-@@:
-	GAD	{ @F, X+4,Y+150, 13,11, c1_wh, cup_s, GADF_DN, ID+30h }
-@@:
-	GAD	{ @F, X+4,Y+165, 13,11, c1_wh, cdn_s, GADF_DN, ID+31h }
-@@:
-	GAD	{ @F, X+4,Y+210, 13,11, c1_wh, cA_s, GADF_DN, ID+80h }
-@@:
-	GAD	{ @F, X+4,Y+223, 13,11, c1_wh, cB_s, GADF_DN, ID+80h }
-@@:
-	GAD	{ @F, X+4,Y+236, 13,11, c1_wh, cC_s, GADF_DN, ID+80h }
-@@:
-	GAD	{ @F, X+4,Y+249, 13,11, c1_wh, cD_s, GADF_DN, ID+80h }
-@@:
-	GAD	{ @F, X+64,Y+276, 4*8,11, c3_wh, img_s, GADF_DN, ID2 }
+	GAD	{ _ait_0008, X+140,Y+307, 12*8,11, c12_wh, 0, GADF_STR, ID+28h }
+_ait_0008 LABEL DWORD
+	GAD	{ _ait_0009, X+4,Y+100, 13,11, c1_wh, cA_s, GADF_DN, ID+38h }
+_ait_0009 LABEL DWORD
+	GAD	{ _ait_0010, X+4,Y+150, 13,11, c1_wh, cup_s, GADF_DN, ID+30h }
+_ait_0010 LABEL DWORD
+	GAD	{ _ait_0011, X+4,Y+165, 13,11, c1_wh, cdn_s, GADF_DN, ID+31h }
+_ait_0011 LABEL DWORD
+	GAD	{ _ait_0012, X+4,Y+210, 13,11, c1_wh, cA_s, GADF_DN, ID+80h }
+_ait_0012 LABEL DWORD
+	GAD	{ _ait_0013, X+4,Y+223, 13,11, c1_wh, cB_s, GADF_DN, ID+80h }
+_ait_0013 LABEL DWORD
+	GAD	{ _ait_0014, X+4,Y+236, 13,11, c1_wh, cC_s, GADF_DN, ID+80h }
+_ait_0014 LABEL DWORD
+	GAD	{ _ait_0015, X+4,Y+249, 13,11, c1_wh, cD_s, GADF_DN, ID+80h }
+_ait_0015 LABEL DWORD
+	GAD	{ _ait_0016, X+64,Y+276, 4*8,11, c3_wh, img_s, GADF_DN, ID2 }
 img_s	db	"IMG",0
-@@:
-	GAD	{ @F, X+64+5*8,Y+276, 4*8,11, c3_wh, tga_s, GADF_DN, ID2+1 }
+_ait_0016 LABEL DWORD
+	GAD	{ _ait_0017, X+64+5*8,Y+276, 4*8,11, c3_wh, tga_s, GADF_DN, ID2+1 }
 tga_s	db	"TGA",0
-@@:
-	GAD	{ @F, X+64+10*8,Y+276, 6*8,11, c5_wh, mdl_s, GADF_DN, ID2+2 }
+_ait_0017 LABEL DWORD
+	GAD	{ _ait_0018, X+64+10*8,Y+276, 6*8,11, c5_wh, mdl_s, GADF_DN, ID2+2 }
 mdl_s	db	"MODEL",0
-@@:
-	GAD	{ @F, X+64+17*8,Y+276, 5*8,11, c4_wh, usr1_s, GADF_DN, ID2+3 }
+_ait_0018 LABEL DWORD
+	GAD	{ _ait_0019, X+64+17*8,Y+276, 5*8,11, c4_wh, usr1_s, GADF_DN, ID2+3 }
 usr1_s	db	"USR1",0
-@@:
-	GAD	{ @F, X+64+23*8,Y+276, 5*8,11, c4_wh, usr2_s, GADF_DN, ID2+4 }
+_ait_0019 LABEL DWORD
+	GAD	{ _ait_0020, X+64+23*8,Y+276, 5*8,11, c4_wh, usr2_s, GADF_DN, ID2+4 }
 usr2_s	db	"USR2",0
-@@:
-	GAD	{ @F, X+64+29*8,Y+276, 5*8,11, c4_wh, usr3_s, GADF_DN, ID2+5 }
+_ait_0020 LABEL DWORD
+	GAD	{ _ait_0021, X+64+29*8,Y+276, 5*8,11, c4_wh, usr3_s, GADF_DN, ID2+5 }
 usr3_s	db	"USR3",0
-@@:
-	GAD	{ @F, X+140+14*8,Y+307, 2*8,11, c1_wh, ast_s, GADF_DN, ID3 }
+_ait_0021 LABEL DWORD
+	GAD	{ _ait_0022, X+140+14*8,Y+307, 2*8,11, c1_wh, ast_s, GADF_DN, ID3 }
 ast_s	db	"*",0
-@@:
-	GAD	{ @F, X+140+16*8,Y+307, 4*8,11, c3_wh, img_s, GADF_DN, ID3 }
-@@:
-	GAD	{ @F, X+140+20*8,Y+307, 4*8,11, c3_wh, tga_s, GADF_DN, ID3 }
-@@:
-	GAD	{ @F, X+140+24*8,Y+307, 4*8,11, c3_wh, lbm_s, GADF_DN, ID3 }
+_ait_0022 LABEL DWORD
+	GAD	{ _ait_0023, X+140+16*8,Y+307, 4*8,11, c3_wh, img_s, GADF_DN, ID3 }
+_ait_0023 LABEL DWORD
+	GAD	{ _ait_0024, X+140+20*8,Y+307, 4*8,11, c3_wh, tga_s, GADF_DN, ID3 }
+_ait_0024 LABEL DWORD
+	GAD	{ _ait_0025, X+140+24*8,Y+307, 4*8,11, c3_wh, lbm_s, GADF_DN, ID3 }
 lbm_s	db	"LBM",0
-@@:
-	GAD	{ @F, X+140+28*8,Y+307, 4*8,11, c3_wh, vda_s, GADF_DN, ID3 }
+_ait_0025 LABEL DWORD
+	GAD	{ _ait_0026, X+140+28*8,Y+307, 4*8,11, c3_wh, vda_s, GADF_DN, ID3 }
 vda_s	db	"VDA",0
-@@:
+_ait_0026 LABEL DWORD
 	GAD	{ 0, X+140+32*8,Y+307, 4*8,11, c3_wh, geo_s, GADF_DN, ID3 }
 geo_s	db	"GEO",0
 
@@ -361,8 +367,8 @@ Y=MSGBOXY
 ID=0
 
 msgbox_gad\
-	GAD	{ @F, X+220,Y+36, 13*8,11, c12_wh, mbg1_s, GADF_DN, ID }
-@@:
+	GAD	{ _ait_0027, X+220,Y+36, 13*8,11, c12_wh, mbg1_s, GADF_DN, ID }
+_ait_0027 LABEL DWORD
 	GAD	{ 0, X+76,Y+36, 13*8,11, c12_wh, forgetit_s, GADF_DN, ID+1 }
 mbg1_s	db	"OK",0
 
@@ -422,7 +428,7 @@ SUBN textequ <_osmain>
 
 
 	TST	edi
-	jz	@F
+	jz	_ait_0028
 
 	push	edi
 	mov	al,'?'
@@ -433,7 +439,7 @@ SUBN textequ <_osmain>
 	call	stratoi
 	mov	vmode,ax
 
-@@:
+_ait_0028:
 
 ;���������������
 	if	0
@@ -495,7 +501,7 @@ SUBN textequ <_osmain>
 ;memdblp:
 ;	mov	eax,ecx
 ;	call	mem_alloc
-;	jnz	@F			;OK?
+;	jnz	_ait_0029			;OK?
 ;	mov	al,ds:[0ffffffffh]
 ;@@:
 ;	call	mem_free
@@ -725,17 +731,17 @@ nom:
 
 
 	cmp	mousebchg,0
-	jne	@F			;Transition?
+	jne	_ait_0029			;Transition?
 
 	test	bl,3
 	jz	drawmouse		;!Mouse but?
-@@:
+_ait_0029:
 	test	bl,2
-	jz	@F			;!Rgt but?
+	jz	_ait_0030			;!Rgt but?
 
 	cmp	mousey,0
 	je	menui
-@@:
+_ait_0030:
 
 	call	gad_chkmouse
 	TST	esi
@@ -744,34 +750,34 @@ nom:
 	mov	bx,[esi].GAD.FLAGS
 
 	test	mousebchg,1
-	jz	@F			;No lbut change?
+	jz	_ait_0031			;No lbut change?
 	test	mousebut,1
 	jz	chkup			;!Lbut?
 	test	bx,GADF_DN
 	jnz	callgad
-	jmp	@F
+	jmp	_ait_0031
 chkup:
 	test	bx,GADF_UP
 	jnz	callgad
-@@:
+_ait_0031:
 	test	mousebchg,2
-	jz	@F			;No rbut change?
+	jz	_ait_0032			;No rbut change?
 	test	mousebut,2
 	jz	chkupr			;!Rbut?
 	test	bx,GADF_DNR
 	jnz	callgad
-	jmp	@F
+	jmp	_ait_0032
 chkupr:
 	test	bx,GADF_UPR
 	jnz	callgad
-@@:
+_ait_0032:
 
 	test	mousebut,1
-	jz	@F			;!Lbut?
+	jz	_ait_0033			;!Lbut?
 	test	bx,GADF_MV
 	jz	nobut
 	jmp	mvgad
-@@:
+_ait_0033:
 	test	mousebut,2
 	jz	drawmouse		;!Rbut?
 	test	bx,GADF_MVR
@@ -845,10 +851,10 @@ exiterr:
 
 
 	TST	edx
-	jz	@F
+	jz	_ait_0034
 	mov	_shim_edx,edx
 	call	_shim_msgbox_error	;>Show exit error (replaces INT21 9 print)
-@@:
+_ait_0034:
 
 
 ;	mov	bx,imgfileh		;>Close last img file
@@ -860,7 +866,7 @@ exiterr:
 
 ;	mov	ax,imgbufseg		;>Free ibuf mem
 ;	TST	ax
-;	jz	@F
+;	jz	_ait_0035
 ;	mov	es,ax
 ;	INT21	49h
 ;@@:
@@ -892,7 +898,7 @@ exitq:
 ;@@:
 ;	add	al,bl
 ;	add	al,bl
-;	loop	@B
+;	loop	_ait_0034
 
 
 ;	mov	cx,50
@@ -903,32 +909,32 @@ exitq:
 	externdef	_3d_draw:near
 ;	mov	ecx,500
 	mov	ecx,100
-@@:	call	_3d_draw
-	loop	@B
+_ait_0035:	call	_3d_draw
+	loop	_ait_0035
 
 	jmp	time
 
 rbut:
 	mov	ecx,10000000
-@@:
+_ait_0036:
 	add	ax,bx
 	add	ax,bx
-	loop	@B
+	loop	_ait_0036
 
 ;	mov	cx,200
 ;@@:	CLR	eax
 ;	call	ilst_select
-;	loopw	@B
+;	loopw	_ait_0036
 
 ;	call	ilst_select
 ;	mov	cx,200
 ;@@:	CLR	eax
 ;	call	img_prt
-;	loopw	@B
+;	loopw	_ait_0036
 
 ;	mov	cx,30
 ;@@:	call	_3d_drawsync
-;	loopw	@B
+;	loopw	_ait_0036
 
 time:
 	pop	edx
@@ -1064,7 +1070,7 @@ found:
 	mov	edx,[esi]		;Size
 	sub	edx,eax			;-request
 	cmp	edx,16
-	jae	@F			;Remainder big enough to keep?
+	jae	_ait_0037			;Remainder big enough to keep?
 
 	add	edx,eax
 	sub	mpfree,edx		;Sub from total
@@ -1073,7 +1079,7 @@ found:
 	mov	NXT[ebx],edx
 	jmp	x
 
-@@:					;>Grab mem from end of block
+_ait_0037:					;>Grab mem from end of block
 	sub	edx,NXT
 	mov	[esi],edx		;New size
 	mov	NXT[esi+edx],eax	;Save size
@@ -1209,11 +1215,11 @@ memerror_s	db	"Memory error!!! BYE!",0
 
 	CLR	edx
 	jmp	dstrt
-@@:
+_ait_0038:
 	mov	[eax],edx	;Clr doubles
 	add	eax,4
 dstrt:	sub	ecx,4
-	jge	@B
+	jge	_ait_0038
 
 	add	ecx,4
 	jmp	bstrt
@@ -1245,12 +1251,12 @@ bstrt:	dec	ecx
 
 	jmp	dstrt
 
-@@:	mov	edx,[eax]	;Copy doubles
+_ait_0039:	mov	edx,[eax]	;Copy doubles
 	mov	[ebx],edx
 	add	eax,4
 	add	ebx,4
 dstrt:	sub	ecx,4
-	jge	@B
+	jge	_ait_0039
 
 	add	ecx,4
 	jmp	bstrt
@@ -1320,6 +1326,7 @@ x:
 	jmp	vid_setvgapal18
 
 	.data
+
 c_t	db	48,48,48	;RGB
 	db	32,32,32
 	db	20,20,20
@@ -1379,6 +1386,7 @@ c_t	db	48,48,48	;RGB
 STL24	equ	0
 
 	.data?
+
 viddat	db	30 dup (?)
 
  SUBR	vid_setvmode
@@ -1393,9 +1401,9 @@ viddat	db	30 dup (?)
 	mov	esi,offset m_t
 	movzx	eax,vmode
 	TST	eax
-	jz	@F
+	jz	_ait_0040
 	mov	[esi],eax
-@@:	cld
+_ait_0040:	cld
 lp:	lodsw
 	TST	ax
 	jz	x
@@ -1422,7 +1430,7 @@ vesa:
 	mov	esi,offset viddat
 	mov	bl,30h
 	mov	cx,12
-@@:	mov	dx,CC_INDEX
+_ait_0041:	mov	dx,CC_INDEX
 	mov	al,bl
 	out	dx,al
 	inc	dx
@@ -1430,7 +1438,7 @@ vesa:
 	mov	[esi],al
 	inc	esi
 	inc	bl
-	loopw	@B
+	loopw	_ait_0041
 	mov	ax,13h
 	int	10h
 	mov	dx,CC_INDEX
@@ -1510,7 +1518,7 @@ vesa:
 	mov	esi,offset viddat
 	mov	cx,20
 	mov	dx,0
-@@:	push	ecx
+_ait_0042:	push	ecx
 	mov	al,[esi]
 	inc	esi
 	push	esi
@@ -1521,7 +1529,7 @@ vesa:
 	add	dx,8
 	pop	esi
 	pop	ecx
-	loopw	@B
+	loopw	_ait_0042
 
 
 	mov	eax,80000000
@@ -1542,6 +1550,7 @@ x:
  SUBEND
 
 	.data
+
 m_t	dw	2fh,5eh,61h,0
 
 
@@ -1611,9 +1620,9 @@ lp:
 
 	mov	bl,0ffh			;>Prt 1st color marker
 	cmp	bl,bh
-	jne	@F
+	jne	_ait_0043
 	mov	bl,0fch
-@@:	push	ecx
+_ait_0043:	push	ecx
 	push	edx
 	mov	linex2,ecx
 	mov	liney2,edx
@@ -1638,9 +1647,9 @@ not1c:
 
 	mov	bl,0ffh			;>Prt last color marker
 	cmp	bl,bh
-	jne	@F
+	jne	_ait_0044
 	mov	bl,0fch
-@@:	push	ecx
+_ait_0044:	push	ecx
 	push	edx
 	add	ecx,4
 	mov	linex2,ecx
@@ -1684,6 +1693,7 @@ xok:	inc	bh			;Next color
 	ret
 
 	.data
+
 palsq_s	db	1fh,0
 	.code
 
@@ -1834,9 +1844,9 @@ x:
 	add	dx,cx
 
 	cmp	dl,palblastuc
-	jbe	@F
+	jbe	_ait_0045
 	mov	dl,palblastuc
-@@:
+_ait_0045:
 	test	mousebut,2		;R but
 	jnz	setlst
 
@@ -1913,17 +1923,17 @@ g70:
 
 	mov	dl,1
 	test	al,1
-	jz	@F
+	jz	_ait_0046
 	neg	dl
-@@:
+_ait_0046:
 	mov	esi,offset palbrmult
 	cmp	al,54h
-	jb	@F
+	jb	_ait_0047
 	mov	esi,offset palbgmult
-@@:	cmp	al,58h
-	jb	@F
+_ait_0047:	cmp	al,58h
+	jb	_ait_0048
 	mov	esi,offset palbbmult
-@@:
+_ait_0048:
 	add	BPTR [esi],dl
 	call	palblk_drawsortm
 
@@ -1984,9 +1994,9 @@ lp2:
 	and	cx,1fh			;Red
 	imul	cx,palbrmult
 	cmp	ax,cx
-	jae	@F
+	jae	_ait_0049
 	xchg	ax,cx
-@@:
+_ait_0049:
 	mov	temp,cx			;Save smaller
 
 	mov	cx,[esi]
@@ -1994,13 +2004,13 @@ lp2:
 	and	cx,1fh			;Green
 	imul	cx,palbgmult
 	cmp	ax,cx
-	jae	@F
+	jae	_ait_0050
 	xchg	ax,cx
-@@:
+_ait_0050:
 	cmp	cx,temp
-	jae	@F
+	jae	_ait_0051
 	xchg	cx,temp
-@@:	shr	cx,1			;/2
+_ait_0051:	shr	cx,1			;/2
 	add	ax,cx
 	mov	cx,temp
 	shr	cx,2			;/4
@@ -2016,9 +2026,9 @@ lp2:
 	and	cx,1fh			;Red
 	imul	cx,palbrmult
 	cmp	ax,cx
-	jae	@F
+	jae	_ait_0052
 	xchg	ax,cx
-@@:
+_ait_0052:
 	mov	temp,cx			;Save smaller
 
 	mov	cx,[ebx]
@@ -2026,13 +2036,13 @@ lp2:
 	and	cx,1fh			;Green
 	imul	cx,palbgmult
 	cmp	ax,cx
-	jae	@F
+	jae	_ait_0053
 	xchg	ax,cx
-@@:
+_ait_0053:
 	cmp	cx,temp
-	jae	@F
+	jae	_ait_0054
 	xchg	cx,temp
-@@:	shr	cx,1			;/2
+_ait_0054:	shr	cx,1			;/2
 	add	ax,cx
 	mov	cx,temp
 	shr	cx,2			;/4
@@ -2112,27 +2122,27 @@ lp2:
 	and	cx,1fh			;Red
 ;	imul	cx,palbrmult
 	cmp	ax,cx
-	ja	@F
+	ja	_ait_0055
 	mov	temp,1			;Magenta #
-	je	@F
+	je	_ait_0055
 	mov	temp,5
 	mov	ax,cx
-@@:
+_ait_0055:
 	mov	cx,[esi]
 	shr	cx,5
 	and	cx,1fh			;Green
 ;	imul	cx,palbgmult
 	cmp	ax,cx
-	ja	@F
+	ja	_ait_0056
 	jb	grn
 	cmp	temp,1
 	jne	nmag
 	mov	temp,9			;Grey
 nmag:	sub	temp,3
-	jmp	@F
+	jmp	_ait_0056
 grn:	mov	temp,4
 	mov	ax,cx
-@@:
+_ait_0056:
 	mov	dx,ax
 
 	mov	ax,[ebx]
@@ -2145,28 +2155,28 @@ grn:	mov	temp,4
 	and	cx,1fh			;Red
 ;	imul	cx,palbrmult
 	cmp	ax,cx
-	ja	@F
+	ja	_ait_0057
 	mov	temp2,1			;Magenta #
-	je	@F
+	je	_ait_0057
 	mov	temp2,5
 	mov	ax,cx
-@@:
+_ait_0057:
 
 	mov	cx,[ebx]
 	shr	cx,5
 	and	cx,1fh			;Green
 ;	imul	cx,palbgmult
 	cmp	ax,cx
-	ja	@F
+	ja	_ait_0058
 	jb	grn2
 	cmp	temp2,1
 	jne	nmag2
 	mov	temp2,9			;Grey
 nmag2:	sub	temp2,3
-	jmp	@F
+	jmp	_ait_0058
 grn2:	mov	temp2,4
 	mov	ax,cx
-@@:
+_ait_0058:
 
 
 	mov	cx,temp2
@@ -2218,22 +2228,22 @@ x:
 
 	mov	bl,1			;+1
 	test	al,1
-	jz	@F
+	jz	_ait_0059
 	neg	bl			;-1
-@@:
+_ait_0059:
 	test	mousebut,2		;R but
-	jz	@F
+	jz	_ait_0060
 	shl	bl,2			;*4
-@@:
+_ait_0060:
 	mov	cl,10			;R
 	cmp	al,44h
-	jb	@F
+	jb	_ait_0061
 	mov	cl,5			;G
-@@:
+_ait_0061:
 	cmp	al,48h
-	jb	@F
+	jb	_ait_0062
 	CLR	cl			;B
-@@:
+_ait_0062:
 	mov	al,palb1stc
 	dec	al
 
@@ -2248,12 +2258,12 @@ lp:	inc	al
 	and	al,1fh
 	add	al,bl
 	cmp	al,1fh
-	jle	@F			;Max ok?
+	jle	_ait_0063			;Max ok?
 	mov	al,1fh
-@@:	TST	al
-	jge	@F			;Min ok?
+_ait_0063:	TST	al
+	jge	_ait_0064			;Min ok?
 	CLR	al
-@@:
+_ait_0064:
 	mov	dx,[esi]
 	ror	dx,cl
 	and	dx,0ffe0h
@@ -2282,10 +2292,10 @@ lp:	inc	al
 	movzx	eax,palb1stc
 	mov	cl,palblastc
 	test	mousebut,2		;R but
-	jz	@F
+	jz	_ait_0065
 	movzx	eax,palblastc
 	mov	cl,palb1stc
-@@:
+_ait_0065:
 
 	mov	dx,pal_t[eax*2]
 	mov	temp,dx
@@ -2343,12 +2353,12 @@ istrt:
 	CLR	al				;DAC color reg 0
 	mov	cx,252
 	cmp	palblastuc,cl
-	jbe	@F
+	jbe	_ait_0066
 	cmp	palbtruc,0
-	je	@F				;Leave OS colors?
+	je	_ait_0066				;Leave OS colors?
 	mov	cl,palblastuc
 	inc	cx
-@@:
+_ait_0066:
 	mov	esi,offset pal_t
 	call	vid_setvgapal15
 
@@ -2385,10 +2395,10 @@ istrt:
 	mov	cx,256			;# colors
 	mov	esi,offset pal_t
 
-@@:	lodsw
+_ait_0067:	lodsw
 	out	dx,ax			;Send data
 	dec	cx
-	jnz	@B
+	jnz	_ait_0067
 
 	ret
  SUBEND
@@ -2408,23 +2418,25 @@ istrt:
 
 	mov	cx,12
 	cld
-@@:	lodsw
+_ait_0068:	lodsw
 	out	dx,ax
-	loopw	@B
+	loopw	_ait_0068
 
 	mov	eax,0c0000110h
 	call	host_setaddr
 
 	mov	cx,11
-@@:	lodsw
+_ait_0069:	lodsw
 	out	dx,ax
-	loopw	@B
+	loopw	_ait_0069
 
 	ret
  SUBEND
 
 
 	.data
+
+
 gspioinit_t\
 	word	15h		;>C0000000 -- HESYNC
 	word	32h ;HEBLNKINIT	;>C0000010 -- HEBLNK
@@ -2487,6 +2499,7 @@ gspioinit_t\
 ;* Trashes all non seg
 
 	.data
+
 tempt_s	db	"TEMP.TXT",0
 
  SUBRP	host_dumpslavemem
@@ -2800,9 +2813,9 @@ x:
 	mov	al,'.'			;Make ext .~xx or .~ if none
 	lea	edi,t_s
 	call	strsrch
-	jnz	@F			;Found?
+	jnz	_ait_0070			;Found?
 	mov	BPTR [edi+2],0
-@@:
+_ait_0070:
 	mov	WPTR [edi],'~.'
 
 
@@ -2935,9 +2948,9 @@ nofn:
 	mov	fmode,0
 	call	main_draw
 	cmp	fokcode_p,0
-	je	@F
+	je	_ait_0071
 	call	[fokcode_p]
-@@:
+_ait_0071:
 	pop	esi				;Remove ret address
 	CLR	eax				;EAX=0 (CC)
 	ret
@@ -2968,11 +2981,11 @@ n1:
 	call	msgbox_open
 	jnz	x
 
-	jmp	@F
+	jmp	_ait_0072
 dlp:
 	mov	edx,eax
 	I21DELETE
-@@:
+_ait_0072:
 	call	filereq_getnxtmrkd
 	jnz	dlp
 
@@ -3003,17 +3016,17 @@ gad5:	cmp	al,20h				;>Parent
 	jne	gad6
 
 	mov	esi,offset fpath_s-1		;>Find end
-@@:	inc	esi
+_ait_0073:	inc	esi
 	mov	al,[esi]
 	TST	al
-	jnz	@B
+	jnz	_ait_0073
 
-@@:	cmp	esi,offset fpath_s
+_ait_0074:	cmp	esi,offset fpath_s
 	je	at1st
 	dec	esi
 	mov	al,[esi]
 	cmp	al,'\'
-	jne	@B
+	jne	_ait_0074
 at1st:
 	CLR	eax
 	mov	[esi],ax
@@ -3036,9 +3049,9 @@ gad7:	cmp	al,30h				;>Up
 	jne	gad8
 	mov	ax,f1stprt
 	sub	ax,29*4				;Page up
-	jge	@F
+	jge	_ait_0075
 	CLR	eax
-@@:	mov	f1stprt,ax
+_ait_0075:	mov	f1stprt,ax
 	call	dir_prt
 	jmp	x
 
@@ -3052,9 +3065,9 @@ gad8:	cmp	al,31h				;>Dn
 	mov	ax,f1stprt
 	add	ax,29*4
 	cmp	ax,bx
-	jle	@F
+	jle	_ait_0076
 	mov	ax,bx
-@@:	mov	f1stprt,ax
+_ait_0076:	mov	f1stprt,ax
 	call	dir_prt
 	jmp	x
 n31:
@@ -3067,14 +3080,14 @@ n31:
 	CLR	ebx
 selalp:
 	cmp	bx,ftotal
-	jae	@F				;End?
+	jae	_ait_0077				;End?
 
 	mov	eax,fptr_t[ebx*4]
 	inc	ebx
 
 	or	BPTR [eax],80h
 	jmp	selalp
-@@:
+_ait_0077:
 	call	dir_prt
 	jmp	x
 n38:
@@ -3109,21 +3122,21 @@ x:
 
 	lea	edx,_imgenv_s
 	TST	al
-	jz	@F
+	jz	_ait_0078
 	lea	edx,_tgaenv_s
 	dec	al
-	jz	@F
+	jz	_ait_0078
 	lea	edx,_mdlenv_s
 	dec	al
-	jz	@F
+	jz	_ait_0078
 	lea	edx,_usr1env_s
 	dec	al
-	jz	@F
+	jz	_ait_0078
 	lea	edx,_usr2env_s
 	dec	al
-	jz	@F
+	jz	_ait_0078
 	lea	edx,_usr3env_s
-@@:
+_ait_0078:
 	mov	eax,edx
 	cmp	BPTR [eax],0
 	je	x			;Null string?
@@ -3131,9 +3144,9 @@ x:
 	call	strcpy
 
 	cmp	BPTR [edi-1],'\'
-	jne	@F
+	jne	_ait_0079
 	mov	BPTR [edi-1],0		;Fix end
-@@:
+_ait_0079:
 	call	dir_scan
 	call	dir_prt
 	call	gad_drawall
@@ -3190,9 +3203,9 @@ x:
 	jne	nodrv
 	mov	dl,[eax]
 	cmp	dl,'a'
-	jb	@F
+	jb	_ait_0080
 	sub	dl,'a'-'A'
-@@:
+_ait_0080:
 	sub	dl,'A'
 	I21SETDRV
 nodrv:
@@ -3346,13 +3359,13 @@ x:
 prtlp:
 	mov	bx,0fdffh
 	cmp	ax,fselected
-	jne	@F			;!Selected?
+	jne	_ait_0081			;!Selected?
 	mov	bx,0fcfeh
-@@:
+_ait_0081:
 	test	BPTR [esi],80h
-	jz	@F			;!Marked?
+	jz	_ait_0082			;!Marked?
 	mov	bx,0fdfeh
-@@:
+_ait_0082:
 	test	BPTR [esi],10h
 	jz	notdir			;File?
 	mov	bh,0feh
@@ -3424,10 +3437,10 @@ x:
 	mov	fselected,ax
 
 	test	mousebchg,2
-	jnz	@F			;Toggle?
+	jnz	_ait_0083			;Toggle?
 
 	cmp	ax,bx
-	jne	@F			;!Same as before?
+	jne	_ait_0083			;!Same as before?
 
 	test	mousebchg,1
 	jz	x			;No change?
@@ -3438,7 +3451,7 @@ x:
 	mov	cl,2
 	jmp	x
 
-@@:
+_ait_0083:
 	mov	cl,1
 
 	movzx	esi,ax
@@ -3546,9 +3559,9 @@ x:
 
 	mov	msgbox_gad.NEXT_p,0
 	TST	al
-	jnz	@F
+	jnz	_ait_0084
 	mov	msgbox_gad.NEXT_p,offset msgbox_gad+sizeof GAD	;`Forget it!'
-@@:
+_ait_0084:
 	push	esi
 	mov	ax,MSGBOXW
 	mov	bx,50			;H
@@ -3594,9 +3607,9 @@ lp:	lodsb
 	mov	bl,al
 	CLR	eax
 	cmp	bl,13
-	je	@F
+	je	_ait_0085
 	inc	eax
-@@:
+_ait_0085:
 
 ;Fall through
 
@@ -3670,6 +3683,7 @@ lp:	lodsb
  SUBEND
 
 	.data
+
 ebox_gadf\
 	dd	entrybox_gads
 
@@ -3749,9 +3763,9 @@ n1:
 ;���������������
 
 	cmp	eboxgadcode_p,0
-	je	@F
+	je	_ait_0086
 	call	[eboxgadcode_p]
-@@:
+_ait_0086:
 
 x:
 	ret
@@ -4051,10 +4065,10 @@ pos:
 b10000:
 	mov	bx,1000
 	TST	ecx
-	jnz	@F
+	jnz	_ait_0087
 	cmp	ax,bx
 	jb	b1000
-@@:	CLR	edx
+_ait_0087:	CLR	edx
 	div	bx
 	xchg	ax,dx
 	add	dl,'0'
@@ -4064,10 +4078,10 @@ b10000:
 b1000:
 	mov	bx,100
 	TST	ecx
-	jnz	@F
+	jnz	_ait_0088
 	cmp	ax,bx
 	jb	b100
-@@:	CLR	edx
+_ait_0088:	CLR	edx
 	div	bx
 	xchg	ax,dx
 	add	dl,'0'
@@ -4077,10 +4091,10 @@ b1000:
 b100:
 	mov	bx,10
 	TST	ecx
-	jnz	@F
+	jnz	_ait_0089
 	cmp	ax,bx
 	jb	b10
-@@:	CLR	edx
+_ait_0089:	CLR	edx
 	div	bx
 	add	al,'0'
 	mov	[edi],al
@@ -4126,10 +4140,10 @@ pos:
 
 	mov	ebx,10000000
 	TST	ecx
-	jnz	@F
+	jnz	_ait_0090
 	cmp	eax,ebx
 	jb	d8
-@@:	CLR	edx
+_ait_0090:	CLR	edx
 	div	ebx
 	xchg	eax,edx
 	add	dl,'0'
@@ -4139,10 +4153,10 @@ pos:
 d8:
 	mov	ebx,1000000
 	TST	ecx
-	jnz	@F
+	jnz	_ait_0091
 	cmp	eax,ebx
 	jb	d7
-@@:	CLR	edx
+_ait_0091:	CLR	edx
 	div	ebx
 	xchg	eax,edx
 	add	dl,'0'
@@ -4152,10 +4166,10 @@ d8:
 d7:
 	mov	ebx,100000
 	TST	ecx
-	jnz	@F
+	jnz	_ait_0092
 	cmp	eax,ebx
 	jb	d6
-@@:	CLR	edx
+_ait_0092:	CLR	edx
 	div	ebx
 	xchg	eax,edx
 	add	dl,'0'
@@ -4166,10 +4180,10 @@ d6:
 
 	mov	ebx,10000
 	TST	ecx
-	jnz	@F
+	jnz	_ait_0093
 	cmp	eax,ebx
 	jb	d5
-@@:	CLR	edx
+_ait_0093:	CLR	edx
 	div	ebx
 	xchg	eax,edx
 	add	dl,'0'
@@ -4179,10 +4193,10 @@ d6:
 d5:
 	mov	ebx,1000
 	TST	ecx
-	jnz	@F
+	jnz	_ait_0094
 	cmp	eax,ebx
 	jb	d4
-@@:	CLR	edx
+_ait_0094:	CLR	edx
 	div	ebx
 	xchg	eax,edx
 	add	dl,'0'
@@ -4192,10 +4206,10 @@ d5:
 d4:
 	mov	ebx,100
 	TST	ecx
-	jnz	@F
+	jnz	_ait_0095
 	cmp	eax,ebx
 	jb	d3
-@@:	CLR	edx
+_ait_0095:	CLR	edx
 	div	ebx
 	xchg	eax,edx
 	add	dl,'0'
@@ -4205,10 +4219,10 @@ d4:
 d3:
 	mov	ebx,10
 	TST	ecx
-	jnz	@F
+	jnz	_ait_0096
 	cmp	eax,ebx
 	jb	d2
-@@:	CLR	edx
+_ait_0096:	CLR	edx
 	div	ebx
 	add	al,'0'
 	mov	[edi],al
@@ -4254,10 +4268,10 @@ spclp:
 	je	spclp
 
 	cmp	dl,'-'
-	jne	@F		;!Minus?
+	jne	_ait_0097		;!Minus?
 	mov	ecx,edx		;Set flag
 	jmp	spclp
-@@:
+_ait_0097:
 	cmp	dl,'x'
 	je	hex		;Hex indicator?
 	cmp	dl,'X'
@@ -4273,11 +4287,11 @@ uc:
 	cmp	dl,'A'
 	jl	notaf
 	sub	dl,'A'-':'	;Bring down A-F
-	jmp	@F
+	jmp	_ait_0098
 notaf:
 	cmp	dl,'9'
 	ja	set		;: to @ chars?
-@@:
+_ait_0098:
 	sub	dl,'0'
 	jl	set
 	cmp	dl,15
@@ -4621,20 +4635,20 @@ FRAC=8
 
 	sub	ecx,linex2
 	mov	eax,ecx
-	jg	@F			;Pos?
+	jg	_ait_0099			;Pos?
 	neg	ecx
 
-@@:	sub	edx,liney2
+_ait_0099:	sub	edx,liney2
 	mov	edi,edx
-	jg	@F			;Pos?
+	jg	_ait_0100			;Pos?
 	neg	edx
 
-@@:	cmp	ecx,edx
+_ait_0100:	cmp	ecx,edx
 	ja	cbig			;ECX bigger?
 	mov	ecx,edx			;ECX=Pixel count
 cbig:
 	TST	ecx
-	jz	@F
+	jz	_ait_0101
 
 	shl	eax,FRAC
 	cdq
@@ -4646,7 +4660,7 @@ cbig:
 	cdq
 	idiv	ecx
 	mov	lineyfrac,eax
-@@:
+_ait_0101:
 	mov	ebx,linex1
 	mov	eax,liney1
 	shl	ebx,FRAC
@@ -4708,20 +4722,20 @@ FRAC=8
 
 	sub	ecx,linex2
 	mov	eax,ecx
-	jg	@F			;Pos?
+	jg	_ait_0102			;Pos?
 	neg	ecx
 
-@@:	sub	edx,liney2
+_ait_0102:	sub	edx,liney2
 	mov	edi,edx
-	jg	@F			;Pos?
+	jg	_ait_0103			;Pos?
 	neg	edx
 
-@@:	cmp	ecx,edx
+_ait_0103:	cmp	ecx,edx
 	ja	cbig			;ECX bigger?
 	mov	ecx,edx			;ECX=Pixel count
 cbig:
 	TST	ecx
-	jz	@F
+	jz	_ait_0104
 
 	shl	eax,FRAC
 	cdq
@@ -4733,7 +4747,7 @@ cbig:
 	cdq
 	idiv	ecx
 	mov	lineyfrac,eax
-@@:
+_ait_0104:
 	mov	ebx,linex1
 	mov	eax,liney1
 	shl	ebx,FRAC
@@ -4830,6 +4844,8 @@ nowrt:	add	esi,8
 
 
 	.data
+
+
 mouseptrbuf	db	8*8 dup (0)
 mouseptrdata	db	255,0,0,0,0,0,0,0
 		db	254,252,0,0,0,0,0,0
@@ -5082,16 +5098,16 @@ RNG=32000
 	test	al,3
 	jz	noshft			;None?
 	TST	cx
-	jz	@F
+	jz	_ait_0105
 	sar	cx,2			;/4
-	jnz	@F
+	jnz	_ait_0105
 	inc	cx
-@@:	TST	dx
-	jz	@F
+_ait_0105:	TST	dx
+	jz	_ait_0106
 	sar	dx,2
-	jnz	@F
+	jnz	_ait_0106
 	inc	dx
-@@:
+_ait_0106:
 noshft:
 	movsx	ecx,cx
 	movsx	edx,dx
@@ -5127,9 +5143,9 @@ lp:
 mv:
 	mov	[edi],cx
 	cmp	mscrollym,0
-	jz	@F			;Off?
+	jz	_ait_0107			;Off?
 	mov	2[edi],dx
-@@:
+_ait_0107:
 strt:	push	edi
 	call	[mscrollcode_p]		;Pass none
 	pop	edi
@@ -5171,9 +5187,9 @@ ID=0
 	mov	strboxstack_p,esp
 
 	cmp	eax,78
-	jb	@F
+	jb	_ait_0108
 	mov	eax,78
-@@:
+_ait_0108:
 	shl	eax,3			;*8
 	mov	ecx,eax
 	mov	strbox_gad.W,ax
@@ -5208,6 +5224,7 @@ ID=0
  SUBEND
 
 	.data
+
 strbox_gad\
 	GAD	{ 0, 0,Y+5, 0,11, 0, 0, GADF_STR, ID }
 
@@ -5266,17 +5283,17 @@ setcur:
 
 	CLR	edx			;>Keep cursor on a valid char
 	mov	edi,offset gadbuf_s
-@@:	mov	al,[edi]
+_ait_0109:	mov	al,[edi]
 	inc	edx
 	inc	edi
 	TST	al
-	jnz	@B
+	jnz	_ait_0109
 
 	dec	edx
 	cmp	ecx,edx
-	jle	@F			;Not past null?
+	jle	_ait_0110			;Not past null?
 	mov	ecx,edx
-@@:	mov	gadcurx,ecx
+_ait_0110:	mov	gadcurx,ecx
 
 	movzx	ecx,[esi].GAD.W
 	sub	ecx,7
@@ -5374,17 +5391,17 @@ x:
 ;���������������			>Cursor left
 
 	cmp	ax,4b00h
-	jne	@F
+	jne	_ait_0111
 
 	dec	ecx
 	jl	sprt
 	mov	gadcurx,ecx
 	jmp	sprt
-@@:
+_ait_0111:
 ;���������������			>Cursor rgt
 
 	cmp	ax,4d00h
-	jne	@F
+	jne	_ait_0112
 
 	cmp	ecx,gadcurxmax
 	jae	sprt			;Maxed?
@@ -5395,11 +5412,11 @@ x:
 	mov	gadcurx,ecx
 
 	jmp	sprt
-@@:
+_ait_0112:
 ;���������������			>Backspace
 
 	cmp	ax,8
-	jne	@F
+	jne	_ait_0113
 
 	dec	ecx
 	jl	sprt
@@ -5412,19 +5429,19 @@ bksplp:	mov	al,[ebx]		;Move all back
 	jnz	bksplp
 
 	jmp	sprt
-@@:
+_ait_0113:
 ;���������������			>INS
 
 	cmp	ax,5200h
-	jne	@F
+	jne	_ait_0114
 
 	not	gadovwon		;Toggle
 	jmp	sprt
-@@:
+_ait_0114:
 ;���������������			>DEL
 
 	cmp	ax,5300h
-	jne	@F
+	jne	_ait_0115
 
 	mov	al,[ebx]
 	jmp	delnxt
@@ -5437,20 +5454,20 @@ delnxt:
 	jnz	dellp
 
 	jmp	sprt
-@@:
+_ait_0115:
 ;���������������			>Home
 
 	cmp	ax,4700h
-	jne	@F
+	jne	_ait_0116
 
 	CLR	eax
 	mov	gadcurx,eax
 	jmp	sprt
-@@:
+_ait_0116:
 ;���������������			>End
 
 	cmp	ax,4f00h
-	jne	@F
+	jne	_ait_0117
 kend:
 elp:
 	cmp	BPTR [ebx],0
@@ -5462,19 +5479,19 @@ elp:
 	inc	ecx
 	jmp	elp
 
-@@:
+_ait_0117:
 ;���������������			>Tab
 
 	cmp	ax,9
-	jne	@F
+	jne	_ait_0118
 
 	mov	BPTR [ebx],0
 	jmp	sprt
-@@:
+_ait_0118:
 ;���������������			>Up arrow
 
 	cmp	ax,4800h
-	jne	@F
+	jne	_ait_0119
 
 	lea	eax,gadbufo1_s		;Restore from history
 	lea	edi,gadbuf_s
@@ -5489,7 +5506,7 @@ elp:
 	mov	gadcurx,ecx
 
 	jmp	kend
-@@:
+_ait_0119:
 ;���������������			>Regular keys
 
 	cmp	ax,' '
@@ -5503,11 +5520,11 @@ inslp:
 	inc	ebx
 
 	cmp	gadovwon,0
-	je	@F			;Insert mode?
+	je	_ait_0120			;Insert mode?
 	TST	ah
 	jnz	chkmax
 	jmp	xend_lbl
-@@:
+_ait_0120:
 	cmp	ecx,gadcurxmax
 	jae	xend_lbl		;At end?
 	inc	ecx
@@ -5621,11 +5638,11 @@ select:
 	jmp	strt
 
 lp:	cmp	dx,menuinum
-	jne	@F
+	jne	_ait_0121
 
 	call	[esi].MENUI.CODE_p
 	jmp	x
-@@:
+_ait_0121:
 	inc	dx
 	add	esi,sizeof MENUI
 strt:	mov	ax,[esi]
@@ -5657,7 +5674,7 @@ MENUH	equ	8
 mnlp:
 	add	cx,[esi].MENU.W
 	cmp	cx,mousex
-	jg	@F
+	jg	_ait_0122
 
 	inc	ax
 mnstrt:
@@ -5666,7 +5683,7 @@ mnstrt:
 	jnz	mnlp
 
 	mov	ax,-1
-@@:
+_ait_0122:
 
 	cmp	ax,menunum
 	je	strip
@@ -5706,7 +5723,7 @@ lp2:
 	mov	bx,0fefch
 
 	cmp	di,menunum
-	jne	@F			;!Selected?
+	jne	_ait_0123			;!Selected?
 
 	mov	eax,[esi].MENU.MENUI_p
 	mov	menui_p,eax
@@ -5720,7 +5737,7 @@ lp2:
 	dec	ax
 	mov	dx,0
 	call	prt_spc
-@@:
+_ait_0123:
 	mov	esi,[esi].MENU.TITLE_p
 	mov	dx,0
 	call	prt
@@ -5741,20 +5758,20 @@ strip:
 
 	mov	bx,menusx
 	cmp	bx,mousex
-	jg	@F			;Mouse to left?
+	jg	_ait_0124			;Mouse to left?
 	add	bx,menusw
 	cmp	bx,mousex
-	jle	@F			;Mouse to rgt?
+	jle	_ait_0124			;Mouse to rgt?
 
 	mov	bx,mousey
 	sub	bx,MENUH
-	jl	@F			;On header?
+	jl	_ait_0124			;On header?
 	mov	ax,bx
 	mov	bl,13
 	div	bl
 	CLR	ah
 
-@@:	cmp	ax,menuinum
+_ait_0124:	cmp	ax,menuinum
 	je	x
 	mov	menuinum,ax
 
@@ -5773,7 +5790,7 @@ lp:
 	push	eax
 
 	cmp	di,menuinum
-	jne	@F			;!Selected?
+	jne	_ait_0125			;!Selected?
 
 	mov	ax,menusw		;W
 	add	ax,4
@@ -5783,7 +5800,7 @@ lp:
 	call	box_draw
 	jmp	pstr
 
-@@:	mov	ax,menusw		;W
+_ait_0125:	mov	ax,menusw		;W
 	mov	bx,13-4			;H
 	mov	cx,menusx
 	call	box_drawshaded
@@ -5793,9 +5810,9 @@ pstr:
 	push	eax
 	mov	bx,0fdffh
 	cmp	ax,menuinum
-	jne	@F			;!Selected?
+	jne	_ait_0126			;!Selected?
 	mov	bx,0fd00h
-@@:
+_ait_0126:
 	mov	cx,menusx
 	add	cx,6
 	add	dx,3
@@ -5862,7 +5879,7 @@ x:
 	mov	(sizeof BOX*4)[esi].BOX.H,bx
 	mov	(sizeof BOX*5)[esi].BOX.H,bx
 	add	bx,2
-	mov	sizeof BOX[esi].BOX.Y,bx
+	mov	(sizeof BOX)[esi].BOX.Y,bx
 	mov	(sizeof BOX*2)[esi].BOX.H,bx
 	mov	(sizeof BOX*6)[esi].BOX.H,bx
 
@@ -5873,6 +5890,8 @@ x:
 
 
 	.data
+
+
 W=8*16
 H=9
 shade_box\
@@ -5910,6 +5929,8 @@ shade_box\
 
 
 	.data
+
+
 box1\
 	BOX	{0,0, 0,0, 253}
 	word	-1	;End
@@ -6048,10 +6069,10 @@ pos:
 b10000:
 	mov	bx,1000
 	TST	ecx
-	jnz	@F
+	jnz	_ait_0127
 	cmp	ax,bx
 	jb	b1000
-@@:	CLR	edx
+_ait_0127:	CLR	edx
 	div	bx
 	xchg	ax,dx
 	add	dl,'0'
@@ -6061,10 +6082,10 @@ b10000:
 b1000:
 	mov	bx,100
 	TST	ecx
-	jnz	@F
+	jnz	_ait_0128
 	cmp	ax,bx
 	jb	b100
-@@:	CLR	edx
+_ait_0128:	CLR	edx
 	div	bx
 	xchg	ax,dx
 	add	dl,'0'
@@ -6074,10 +6095,10 @@ b1000:
 b100:
 	mov	bx,10
 	TST	ecx
-	jnz	@F
+	jnz	_ait_0129
 	cmp	ax,bx
 	jb	b10
-@@:	CLR	edx
+_ait_0129:	CLR	edx
 	div	bx
 	add	al,'0'
 	mov	[edi],al
@@ -6310,6 +6331,7 @@ llp:
 	ret
 
 	.data
+
 ascii0f_s	db	"0123456789ABCDEF"
 	.code
 
@@ -6413,11 +6435,11 @@ lp:
 
 	mov	esi,eax
 	call	prt
-@@:
+_ait_0130:
 	mov	dl,[eax]
 	inc	eax
 	TST	dl
-	jnz	@B
+	jnz	_ait_0130
 
 strt:
 	mov	cx,[eax]		;X
@@ -6528,6 +6550,8 @@ start:	mov	al,[esi]
 
 
 	.data
+
+
 font_t\
 	db	00000000b	;
 	db	00000000b
@@ -7752,6 +7776,8 @@ start:	movzx	eax,BPTR [esi]
 
 
 	.data
+
+
 font6_t	db	00000000b	;Space
 	db	00000000b
 	db	00000000b

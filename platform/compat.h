@@ -15,6 +15,8 @@
 #    define WIN32_LEAN_AND_MEAN
 #  endif
 #  include <windows.h>
+/* MSVC does not support GCC function attributes — define them away */
+#  define __attribute__(x)
 
 #else /* Linux / Unix ------------------------------------------------- */
 

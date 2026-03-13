@@ -2,6 +2,10 @@
  * platform/shim_vid.c
  * VGA Mode X shadow buffer + SDL2 rendering (renderer path)
  *************************************************************/
+/* All functions here are called from 32-bit x86 asm that does not maintain
+ * the 16-byte stack alignment required by the System V i386 ABI / SSE.
+ * force_align_arg_pointer adds andl $-16, %esp at every function entry. */
+
 #include <string.h>
 #include <SDL.h>
 #include "shim_vid.h"
@@ -34,6 +38,7 @@ static Uint32        s_argb_buf[640*400];  /* ARGB8888 conversion buffer */
 
 /* ---- init / shutdown ---- */
 
+__attribute__((force_align_arg_pointer))
 void shim_vid_init(void)
 {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0) {
@@ -89,6 +94,7 @@ void shim_vid_init(void)
     shim_scr_clr();
 }
 
+__attribute__((force_align_arg_pointer))
 void shim_vid_shutdown(void)
 {
     if (s_texture)  { SDL_DestroyTexture(s_texture);   s_texture  = NULL; }
@@ -99,6 +105,7 @@ void shim_vid_shutdown(void)
 
 /* ---- present: deplanarize + palette expand + upload texture ---- */
 
+__attribute__((force_align_arg_pointer))
 void shim_vid_present(void)
 {
     if (!s_renderer || !s_texture) return;
@@ -141,6 +148,7 @@ void shim_vid_present(void)
    shim_eax (low byte) = 1st DAC color #
    shim_ecx (low word) = # colors
    shim_esi             = pointer to 18-bit (6-bit per channel) RGB triplets */
+__attribute__((force_align_arg_pointer))
 void shim_setvgapal18_impl(void)
 {
     BYTE    first = (BYTE)(shim_eax & 0xFF);
@@ -165,6 +173,7 @@ void shim_setvgapal18_impl(void)
    shim_eax (low byte) = 1st DAC color #
    shim_ecx (low word) = # colors
    shim_esi             = pointer to packed 15-bit RGB words (GGGBBBBB XRRRRRGG) */
+__attribute__((force_align_arg_pointer))
 void shim_setvgapal15_impl(void)
 {
     BYTE    first = (BYTE)(shim_eax & 0xFF);
@@ -191,18 +200,21 @@ void shim_setvgapal15_impl(void)
 
 /* ---- clear screen ---- */
 
+__attribute__((force_align_arg_pointer))
 void shim_scr_clr(void)
 {
     memset(g_vga_plane, 0, sizeof(g_vga_plane));
 }
 
 /* Replaces ds:[46Ch] BIOS 18.2Hz tick counter used in test_main benchmark */
+__attribute__((force_align_arg_pointer))
 DWORD shim_gettick(void)
 {
     return GetTickCount();
 }
 
 /* Clear 320x200 image window: 80 bytes/row (320/4), 200 rows, all 4 planes */
+__attribute__((force_align_arg_pointer))
 void shim_iwin_clr(void)
 {
     int p, y;
@@ -210,3 +222,5 @@ void shim_iwin_clr(void)
         for (y = 0; y < 200; y++)
             memset(&g_vga_plane[p][y * 160], 0, 80);
 }
+
+

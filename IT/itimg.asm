@@ -78,6 +78,7 @@ SLGAME	equ	0
 	endif
 
 	.data
+
 	externdef	menu_p:dword
 	externdef	gadlstmain_p:dword
 	externdef	gadlst_p:dword
@@ -133,6 +134,7 @@ SLGAME	equ	0
 
 	.data
 
+
 ilstfunc_s	db	"Name         AX  AY   A2X A2Y A2Z",0
 a3box_s		db	"A3X A3Y  A3Z  ID",0
 forgetit_s	db	"FORGET IT!",0
@@ -163,6 +165,7 @@ anf_s		db	"ANF "
 
 
 	.data?
+
 
 	BSSB	imgmodeinit		;1=Have been initialized
 
@@ -267,12 +270,15 @@ bmhd		BMHD	{?}
 
 
 	.data
+
+
+
 	align	4
 
 
 
 main_menu\
-	MENU	{ @F, 9*8, main_s, main_mi, 11*8 }
+	MENU	{ _aim_0001, 9*8, main_s, main_mi, 11*8 }
 main_s	db	"Main",0
 main_mi	MENUI	{ m1_s,main_exit_stub }
 	MENUI	{ m2_s,main_clear }
@@ -289,8 +295,8 @@ m4_s	db	"APPEND",0
 m5_s	db	"SAVE (s)",0
 m6_s	db	"HELP (h)",0
 m7_s	db	"RAW SAVE",0
-@@:
-	MENU	{ @F, 10*8, mis_s, mis_mi, 15*8 }
+_aim_0001 LABEL DWORD
+	MENU	{ _aim_0002, 10*8, mis_s, mis_mi, 15*8 }
 mis_s	db	"In/Out",0
 mis_mi	MENUI	{ mis1_s,ilst_loadlbm }
 	MENUI	{ mis2_s,ilst_savelbm }
@@ -303,8 +309,8 @@ mis2_s	db	"SAVE LBM (A-s)",0
 mis2b_s	db	"SAVE MRKD LBM",0
 mis3_s	db	"LOAD TGA (C-l)",0
 mis4_s	db	"SAVE TGA (C-s)",0
-@@:
-	MENU	{ @F, 8*8, i_s, i_mi, 20*8 }
+_aim_0002 LABEL DWORD
+	MENU	{ _aim_0003, 8*8, i_s, i_mi, 20*8 }
 i_s	db	"Image",0
 i_mi	MENUI	{ i1_s,ilst_rename }
 	MENUI	{ i2_s,ilst_delete }
@@ -317,8 +323,8 @@ i2_s	db	"DELETE (C-d)",0
 i3_s	db	"SET PALETTE",0
 i4_s	db	"DUPLICATE",0
 i5_s	db	"ADD/DEL PTTBL (C-p)",0
-@@:
-	MENU	{ @F, 12*8, mi_s, mi_mi, 20*8 }
+_aim_0003 LABEL DWORD
+	MENU	{ _aim_0004, 12*8, mi_s, mi_mi, 20*8 }
 mi_s	db	"Mrkd image",0
 mi_mi	MENUI	{ mi1_s,ilst_renamemrkd }
 	MENUI	{ mi2_s,ilst_deletemrkd }
@@ -339,8 +345,8 @@ mi4c_s	db	"STRIP EDGE RNG",0
 mi5_s	db	"LEAST SQUARE",0
 mi6_s	db	"DITHER REPLACE",0
 mi7_s	db	"BUILD TGA (C-b)",0
-@@:
-	MENU	{ @F, 8*8, pal_s, pal_mi, 20*8 }
+_aim_0004 LABEL DWORD
+	MENU	{ _aim_0005, 8*8, pal_s, pal_mi, 20*8 }
 pal_s	db	"Pal",0
 pal_mi	MENUI	{ pal1_s,plst_rename }
 	MENUI	{ pal2_s,plst_merge }
@@ -355,8 +361,8 @@ pal3_s	db	"DUPLICATE",0
 pal4_s	db	"SHOW HISTOGRAM",0
 pal5_s	db	"DEL UNUSED COLS",0
 pal6_s	db	"DELETE",0
-@@:
-	MENU	{ @F, 7*8, mrk_s, mrk_mi, 20*8 }
+_aim_0005 LABEL DWORD
+	MENU	{ _aim_0006, 7*8, mrk_s, mrk_mi, 20*8 }
 mrk_s	db	"Marks",0
 mrk_mi	MENUI	{ mrk1_s,ilmrk_clrall }
 	MENUI	{ mrk2_s,ilmrk_setall }
@@ -371,7 +377,7 @@ mrk3_s	db	"INVERT ALL IMG",0
 mrk4_s	db	"CLR ALL PAL",0
 mrk5_s	db	"SET ALL PAL",0
 mrk6_s	db	"INVERT ALL PAL",0
-@@:
+_aim_0006 LABEL DWORD
 	MENU	{ 0, 5*8, p_s, p_mi, 15*8 }
 p_s	db	"Prog",0
 p_mi	MENUI	{ p1_s,host_dumpslavemem_stub }
@@ -396,11 +402,11 @@ CBID		equ	500h
 
 main_gad	equ	$
 
-	GAD	{ @F, 0,0, 320,200, 0, 0, GADF_MV+GADF_UP, IWINID }
-@@:
-	GAD	{ @F, 210,200, 13,11, c1_wh, c4arr_s, GADF_DN, IWINID+8 }
-@@:
-	GAD	{ @F, 254,200, 13,11, c1_wh, c4arr_s, GADF_DN, IWINID+10h }
+	GAD	{ _aim_0007, 0,0, 320,200, 0, 0, GADF_MV+GADF_UP, IWINID }
+_aim_0007 LABEL DWORD
+	GAD	{ _aim_0008, 210,200, 13,11, c1_wh, c4arr_s, GADF_DN, IWINID+8 }
+_aim_0008 LABEL DWORD
+	GAD	{ _aim_0009, 254,200, 13,11, c1_wh, c4arr_s, GADF_DN, IWINID+10h }
 
 
 PLSTX	equ	0
@@ -408,97 +414,97 @@ PLSTY	equ	200
 PLSTW	equ	15*8
 PLSTH	equ	110
 PLSTROW	equ	12
-@@:
-	GAD	{ @F, PLSTX,PLSTY, 12*8,PLSTH, plst_wh, 0, GADF_MV+GADF_MVR, PLSTID }
+_aim_0009 LABEL DWORD
+	GAD	{ _aim_0010, PLSTX,PLSTY, 12*8,PLSTH, plst_wh, 0, GADF_MV+GADF_MVR, PLSTID }
 plst_wh	word	PLSTW,PLSTH
 
 ;@@:
-;	GAD	{ @F, PLSTX+PLSTW,PLSTY+50, 13,11, c1_wh, c4arr_s, GADF_DN, PLSTID+20h }
+;	GAD	{ _aim_0010, PLSTX+PLSTW,PLSTY+50, 13,11, c1_wh, c4arr_s, GADF_DN, PLSTID+20h }
 ;@@:
-;	GAD	{ @F, 306,200, 13,11, c1_wh, cM_s, GADF_DN, PLSTID+30h }
+;	GAD	{ _aim_0010, 306,200, 13,11, c1_wh, cM_s, GADF_DN, PLSTID+30h }
 
 PALBX	equ	184
 PALBY	equ	240
 PALBW	equ	8*16
 PALBH	equ	8*16
-@@:
-	GAD	{ @F, PALBX,PALBY, PALBW,PALBH, 0, 0, GADF_MV+GADF_MVR, PALBID }
-@@:
-	GAD	{ @F, PALBX-21,PALBY, 13,11, c1_wh, cL_s, GADF_DN, PALBID+20h }
-@@:
-	GAD	{ @F, PALBX-21,PALBY+15, 13,11, c1_wh, cS_s, GADF_DN, PALBID+21h }
-@@:
-	GAD	{ @F, PALBX-50,PALBY, 13,11, c1_wh, cM_s, GADF_DN+GADF_DNR, PALBID+60h }
-@@:
-	GAD	{ @F, PALBX-50,PALBY+50, 13,11, c1_wh, cup_s, GADF_DN+GADF_DNR, PALBID+40h }
-@@:
-	GAD	{ @F, PALBX-50,PALBY+70, 13,11, c1_wh, cdn_s, GADF_DN+GADF_DNR, PALBID+41h }
-@@:
-	GAD	{ @F, PALBX-34,PALBY+50, 13,11, c1_wh, cup_s, GADF_DN+GADF_DNR, PALBID+44h }
-@@:
-	GAD	{ @F, PALBX-34,PALBY+70, 13,11, c1_wh, cdn_s, GADF_DN+GADF_DNR, PALBID+45h }
-@@:
-	GAD	{ @F, PALBX-18,PALBY+50, 13,11, c1_wh, cup_s, GADF_DN+GADF_DNR, PALBID+48h }
-@@:
-	GAD	{ @F, PALBX-18,PALBY+70, 13,11, c1_wh, cdn_s, GADF_DN+GADF_DNR, PALBID+49h }
-@@:
-	GAD	{ @F, PALBX-52,PALBY+90, 21,11, c2_wh, CO_s, GADF_DN, PALBID+38h }
-@@:
-	GAD	{ @F, PALBX-26,PALBY+90, 21,11, c2_wh, BR_s, GADF_DN, PALBID+30h }
-@@:
-	GAD	{ @F, PALBX-50,PALBY+106, 13,11, c1_wh, cup_s, GADF_DN+GADF_DNR, PALBID+50h }
-@@:
-	GAD	{ @F, PALBX-50,PALBY+126, 13,11, c1_wh, cdn_s, GADF_DN+GADF_DNR, PALBID+51h }
-@@:
-	GAD	{ @F, PALBX-34,PALBY+106, 13,11, c1_wh, cup_s, GADF_DN+GADF_DNR, PALBID+54h }
-@@:
-	GAD	{ @F, PALBX-34,PALBY+126, 13,11, c1_wh, cdn_s, GADF_DN+GADF_DNR, PALBID+55h }
-@@:
-	GAD	{ @F, PALBX-18,PALBY+106, 13,11, c1_wh, cup_s, GADF_DN+GADF_DNR, PALBID+58h }
-@@:
-	GAD	{ @F, PALBX-18,PALBY+126, 13,11, c1_wh, cdn_s, GADF_DN+GADF_DNR, PALBID+59h }
+_aim_0010 LABEL DWORD
+	GAD	{ _aim_0011, PALBX,PALBY, PALBW,PALBH, 0, 0, GADF_MV+GADF_MVR, PALBID }
+_aim_0011 LABEL DWORD
+	GAD	{ _aim_0012, PALBX-21,PALBY, 13,11, c1_wh, cL_s, GADF_DN, PALBID+20h }
+_aim_0012 LABEL DWORD
+	GAD	{ _aim_0013, PALBX-21,PALBY+15, 13,11, c1_wh, cS_s, GADF_DN, PALBID+21h }
+_aim_0013 LABEL DWORD
+	GAD	{ _aim_0014, PALBX-50,PALBY, 13,11, c1_wh, cM_s, GADF_DN+GADF_DNR, PALBID+60h }
+_aim_0014 LABEL DWORD
+	GAD	{ _aim_0015, PALBX-50,PALBY+50, 13,11, c1_wh, cup_s, GADF_DN+GADF_DNR, PALBID+40h }
+_aim_0015 LABEL DWORD
+	GAD	{ _aim_0016, PALBX-50,PALBY+70, 13,11, c1_wh, cdn_s, GADF_DN+GADF_DNR, PALBID+41h }
+_aim_0016 LABEL DWORD
+	GAD	{ _aim_0017, PALBX-34,PALBY+50, 13,11, c1_wh, cup_s, GADF_DN+GADF_DNR, PALBID+44h }
+_aim_0017 LABEL DWORD
+	GAD	{ _aim_0018, PALBX-34,PALBY+70, 13,11, c1_wh, cdn_s, GADF_DN+GADF_DNR, PALBID+45h }
+_aim_0018 LABEL DWORD
+	GAD	{ _aim_0019, PALBX-18,PALBY+50, 13,11, c1_wh, cup_s, GADF_DN+GADF_DNR, PALBID+48h }
+_aim_0019 LABEL DWORD
+	GAD	{ _aim_0020, PALBX-18,PALBY+70, 13,11, c1_wh, cdn_s, GADF_DN+GADF_DNR, PALBID+49h }
+_aim_0020 LABEL DWORD
+	GAD	{ _aim_0021, PALBX-52,PALBY+90, 21,11, c2_wh, CO_s, GADF_DN, PALBID+38h }
+_aim_0021 LABEL DWORD
+	GAD	{ _aim_0022, PALBX-26,PALBY+90, 21,11, c2_wh, BR_s, GADF_DN, PALBID+30h }
+_aim_0022 LABEL DWORD
+	GAD	{ _aim_0023, PALBX-50,PALBY+106, 13,11, c1_wh, cup_s, GADF_DN+GADF_DNR, PALBID+50h }
+_aim_0023 LABEL DWORD
+	GAD	{ _aim_0024, PALBX-50,PALBY+126, 13,11, c1_wh, cdn_s, GADF_DN+GADF_DNR, PALBID+51h }
+_aim_0024 LABEL DWORD
+	GAD	{ _aim_0025, PALBX-34,PALBY+106, 13,11, c1_wh, cup_s, GADF_DN+GADF_DNR, PALBID+54h }
+_aim_0025 LABEL DWORD
+	GAD	{ _aim_0026, PALBX-34,PALBY+126, 13,11, c1_wh, cdn_s, GADF_DN+GADF_DNR, PALBID+55h }
+_aim_0026 LABEL DWORD
+	GAD	{ _aim_0027, PALBX-18,PALBY+106, 13,11, c1_wh, cup_s, GADF_DN+GADF_DNR, PALBID+58h }
+_aim_0027 LABEL DWORD
+	GAD	{ _aim_0028, PALBX-18,PALBY+126, 13,11, c1_wh, cdn_s, GADF_DN+GADF_DNR, PALBID+59h }
 
 ILSTX	equ	320
 ILSTY	equ	223
 ILSTW	equ	316
 ILSTH	equ	173
 ILSTROW	equ	19
-@@:
-	GAD	{ @F, ILSTX,ILSTY, 12*8,ILSTH, ilst_wh, 0, GADF_MV+GADF_MVR, ILSTID }
+_aim_0028 LABEL DWORD
+	GAD	{ _aim_0029, ILSTX,ILSTY, 12*8,ILSTH, ilst_wh, 0, GADF_MV+GADF_MVR, ILSTID }
 ilst_wh	word	ILSTW,ILSTH
 
-@@:
-	GAD	{ @F, 290,200, 13,11, c1_wh, c4arr_s, GADF_DN, ILSTID+20h }
-@@:
-	GAD	{ @F, 306,200, 13,11, c1_wh, cM_s, GADF_DN, ILSTID+30h }
-@@:
-	GAD	{ @F, 290,214, 13,11, c1_wh, c4arr_s, GADF_DN, ILSTID+40h }
+_aim_0029 LABEL DWORD
+	GAD	{ _aim_0030, 290,200, 13,11, c1_wh, c4arr_s, GADF_DN, ILSTID+20h }
+_aim_0030 LABEL DWORD
+	GAD	{ _aim_0031, 306,200, 13,11, c1_wh, cM_s, GADF_DN, ILSTID+30h }
+_aim_0031 LABEL DWORD
+	GAD	{ _aim_0032, 290,214, 13,11, c1_wh, c4arr_s, GADF_DN, ILSTID+40h }
 
 AFBOXX	equ	486
 AFBOXY	equ	110
 
-@@:
-	GAD	{ @F, AFBOXX,AFBOXY, 16*8+4,13, c16_wh, 0, GADF_DN, ILSTID+80h }
+_aim_0032 LABEL DWORD
+	GAD	{ _aim_0033, AFBOXX,AFBOXY, 16*8+4,13, c16_wh, 0, GADF_DN, ILSTID+80h }
 
 ;CBOXX	equ	486
 ;CBOXY	equ	130
 ;
 ;@@:
-;	GAD	{ @F, CBOXX+18,CBOXY+4, 13,11, c1_wh, clrarr_s, GADF_DN, ILSTID+0a0h }
+;	GAD	{ _aim_0033, CBOXX+18,CBOXY+4, 13,11, c1_wh, clrarr_s, GADF_DN, ILSTID+0a0h }
 ;@@:
-;	GAD	{ @F, CBOXX+58,CBOXY+4, 13,11, c1_wh, clrarr_s, GADF_DN, ILSTID+0a2h }
+;	GAD	{ _aim_0033, CBOXX+58,CBOXY+4, 13,11, c1_wh, clrarr_s, GADF_DN, ILSTID+0a2h }
 ;@@:
-;	GAD	{ @F, CBOXX+98,CBOXY+4, 13,11, c1_wh, clrarr_s, GADF_DN, ILSTID+0a4h }
+;	GAD	{ _aim_0033, CBOXX+98,CBOXY+4, 13,11, c1_wh, clrarr_s, GADF_DN, ILSTID+0a4h }
 
 A3BOXX	equ	486
 A3BOXY	equ	170
 
-@@:
-	GAD	{ @F, A3BOXX+34,A3BOXY+4, 13,11, c1_wh, c4arr_s, GADF_DN, ILSTID+50h }
-@@:
-	GAD	{ @F, A3BOXX+88,A3BOXY+4, 13,11, c1_wh, clrarr_s, GADF_DN, ILSTID+52h }
-@@:
-	GAD	{ @F, A3BOXX+122,A3BOXY+4, 13,11, c1_wh, clrarr_s, GADF_DN, ILSTID+54h }
+_aim_0033 LABEL DWORD
+	GAD	{ _aim_0034, A3BOXX+34,A3BOXY+4, 13,11, c1_wh, c4arr_s, GADF_DN, ILSTID+50h }
+_aim_0034 LABEL DWORD
+	GAD	{ _aim_0035, A3BOXX+88,A3BOXY+4, 13,11, c1_wh, clrarr_s, GADF_DN, ILSTID+52h }
+_aim_0035 LABEL DWORD
+	GAD	{ _aim_0036, A3BOXX+122,A3BOXY+4, 13,11, c1_wh, clrarr_s, GADF_DN, ILSTID+54h }
 
 
 MPBBOXX	equ	320
@@ -506,13 +512,13 @@ MPBBOXY	equ	160
 X=MPBBOXX
 Y=MPBBOXY
 
-@@:
-	GAD	{ @F, X,Y, 8*2,11, c1_wh, mpbsel_s, GADF_DN, MPBID }
-@@:
-	GAD	{ @F, X+8*3,Y, 8*4,11, c3_wh, del_s, GADF_DN, MPBID+10h }
-@@:
+_aim_0036 LABEL DWORD
+	GAD	{ _aim_0037, X,Y, 8*2,11, c1_wh, mpbsel_s, GADF_DN, MPBID }
+_aim_0037 LABEL DWORD
+	GAD	{ _aim_0038, X+8*3,Y, 8*4,11, c3_wh, del_s, GADF_DN, MPBID+10h }
+_aim_0038 LABEL DWORD
 mpboo_gad\
-	GAD	{ @F, X+8*8,Y, 8*4,11, c3_wh, mpboff_s, GADF_DN, MPBID+20h }
+	GAD	{ _aim_0039, X+8*8,Y, 8*4,11, c3_wh, mpboff_s, GADF_DN, MPBID+20h }
 mpbsel_s	db	"0",0
 mpboff_s	db	"Off",0
 mpbon_s		db	"On",0
@@ -523,14 +529,14 @@ CBBOXY	equ	175
 X=CBBOXX
 Y=CBBOXY
 
-@@:
-	GAD	{ @F, X,Y, 8*4,11, c3_wh, del_s, GADF_DN, CBID }
-@@:
+_aim_0039 LABEL DWORD
+	GAD	{ _aim_0040, X,Y, 8*4,11, c3_wh, del_s, GADF_DN, CBID }
+_aim_0040 LABEL DWORD
 cboo_gad\
-	GAD	{ @F, X+8*5,Y, 8*4,11, c3_wh, cboff_s, GADF_DN, CBID+20h }
+	GAD	{ _aim_0041, X+8*5,Y, 8*4,11, c3_wh, cboff_s, GADF_DN, CBID+20h }
 cboff_s	db	"Off",0
 cbon_s	db	"On",0
-@@:
+_aim_0041 LABEL DWORD
 	GAD	{ 0, X+8*10,Y, 8*5,11, c4_wh, cbcpy_s, GADF_DN, CBID+30h }
 cbcpy_s	db	"Copy",0
 
@@ -691,7 +697,7 @@ key_t	equ	$			;Routines for main key presses
 	mov	maindraw_p,offset scrn_update
 
 	cmp	imgmodeinit,1
-	je	@F
+	je	_aim_0042
 	mov	imgmodeinit,1
 
 	call	img_clearall
@@ -700,7 +706,7 @@ key_t	equ	$			;Routines for main key presses
 
 	lea	eax,[ebx].CFG.IPN_s
 	cmp	BPTR [eax],0
-	je	@F
+	je	_aim_0042
 	lea	edi,fpath_s
 	call	strcpy
 
@@ -709,14 +715,14 @@ key_t	equ	$			;Routines for main key presses
 	call	strcpy
 
 	cmp	DPTR [edi-3],'GMI'
-	jne	@F				;!.IMG?
+	jne	_aim_0042				;!.IMG?
 
 	lea	edx,fpath_s
 	I21SETCD
 
 	call	img_load
 
-@@:
+_aim_0042:
 
 	mov	ax,cfgstruc.COL0
 	mov	pal_t,ax
@@ -935,15 +941,15 @@ key_t	equ	$			;Routines for main key presses
 
  SUBRP	img_clearall
 
-@@:	CLR	eax
+_aim_0043:	CLR	eax
 	call	img_del
 	cmp	img_p,0
-	jne	@B				;More?
+	jne	_aim_0043				;More?
 
-@@:	CLR	eax
+_aim_0044:	CLR	eax
 	call	pal_del
 	cmp	pal_p,0
-	jne	@B				;More?
+	jne	_aim_0044				;More?
 
 	mov	eax,scrseqmem_p
 	call	mem_free
@@ -1062,10 +1068,10 @@ vok:
 
 	movzx	eax,lib_hdr.PALCNT
 	sub	eax,NUMDEFPAL			;-defaults
-	jle	@F
+	jle	_aim_0045
 	imul	eax,sizeof PALETTE
 	add	edx,eax
-@@:
+_aim_0045:
 	mov	tl1,edx				;Save offset
 
 	mov	ecx,edx
@@ -1085,9 +1091,9 @@ vok:
 seqlp:	push	ecx
 	mov	ecx,sizeof SEQSCR
 	cmp	lib_hdr.VERSION,634h
-	jge	@F				;Far ptr version?
+	jge	_aim_0046				;Far ptr version?
 	sub	ecx,2*16+8			;Near version
-@@:	add	scrseqbytes,ecx
+_aim_0046:	add	scrseqbytes,ecx
 	mov	edx,offset animseq_t
 	I21READ
 	pop	ecx
@@ -1096,9 +1102,9 @@ seqlp:	push	ecx
 	push	ecx
 	mov	eax,sizeof ENTRY
 	cmp	lib_hdr.VERSION,634h
-	jge	@F				;Far ptr version?
+	jge	_aim_0047				;Far ptr version?
 	sub	eax,2				;Near version
-@@:	movzx	ecx,animseq_t.num
+_aim_0047:	movzx	ecx,animseq_t.num
 	imul	ecx,eax
 	add	scrseqbytes,ecx
 	mov	edx,offset ssentry_t
@@ -1118,9 +1124,9 @@ noseqs:
 scrlp:	push	ecx
 	mov	ecx,sizeof SEQSCR
 	cmp	lib_hdr.VERSION,634h
-	jge	@F				;Far ptr version?
+	jge	_aim_0048				;Far ptr version?
 	sub	ecx,2*16+8			;Near version
-@@:	add	scrseqbytes,ecx
+_aim_0048:	add	scrseqbytes,ecx
 	mov	edx,offset animscr_t
 	I21READ
 	pop	ecx
@@ -1129,9 +1135,9 @@ scrlp:	push	ecx
 	push	ecx
 	mov	eax,sizeof ENTRY
 	cmp	lib_hdr.VERSION,634h
-	jge	@F				;Far ptr version?
+	jge	_aim_0049				;Far ptr version?
 	sub	eax,2				;Near version
-@@:	movzx	ecx,animscr_t.num
+_aim_0049:	movzx	ecx,animscr_t.num
 	imul	ecx,eax
 	add	scrseqbytes,ecx
 	mov	edx,offset ssentry_t
@@ -1154,13 +1160,13 @@ noscrs:
 	jne	zss				;Appending images?
 
 	cmp	lib_hdr.VERSION,634h
-	jge	@F				;New enough version?
+	jge	_aim_0050				;New enough version?
 zss:
 	CLR	eax
 	mov	seqcnt,eax			;Delete old small data
 	mov	scrcnt,eax
 	mov	scrseqbytes,eax
-@@:
+_aim_0050:
 	cmp	scrseqbytes,0
 	jle	noss
 
@@ -1230,13 +1236,13 @@ imglp:
 	jne	x
 
 	cmp	lib_hdr.VERSION,634h
-	jge	@F				;Far ptr version?
+	jge	_aim_0051				;Far ptr version?
 	mov	ax,[edi].IMAGE.ANIZ2
 	mov	dx,[edi].IMAGE.FRM
 	mov	[edi].IMAGE.ANIZ2,dx
 	mov	[edi].IMAGE.FRM,ax
 	mov	[edi].IMAGE.OPALS,-1
-@@:
+_aim_0051:
 	mov	ax,[edi].IMAGE.FLAGS
 	mov	[esi].IMG.FLAGS,ax
 
@@ -1247,9 +1253,9 @@ imglp:
 
 	mov	ax,[edi].IMAGE.W
 	cmp	ax,2
-	ja	@F
+	ja	_aim_0052
 	mov	ax,3				;Set 1 or 2 to 3
-@@:	mov	[esi].IMG.W,ax
+_aim_0052:	mov	[esi].IMG.W,ax
 
 	mov	ax,[edi].IMAGE.H
 	mov	[esi].IMG.H,ax
@@ -1410,12 +1416,12 @@ nopals:
 
 
 	cmp	lib_hdr.VERSION,IMGVER
-	jge	@F				;New enough version?
+	jge	_aim_0053				;New enough version?
 
 	mov	al,1
 	mov	esi,offset smlconv_s
 	call	msgbox_open
-@@:
+_aim_0053:
 
 ;���������������
 
@@ -1599,10 +1605,10 @@ wihlp:
 
 	mov	ax,-1
 	cmp	[esi].IMG.PTTBL_p,0
-	je	@F				;No point table?
+	je	_aim_0054				;No point table?
 	mov	eax,tl1				;Get #
 	inc	tl1
-@@:	mov	[edi].IMAGE.PTTBLNUM,ax
+_aim_0054:	mov	[edi].IMAGE.PTTBLNUM,ax
 
 	mov	ax,[esi].IMG.OPALS
 	mov	[edi].IMAGE.OPALS,ax
@@ -1795,7 +1801,7 @@ imglp:
 	mov	ax,rawbits
 	jmp	get1stb
 
-@@:	cmp	ah,1
+_aim_0055:	cmp	ah,1
 	jne	shft
 
 	TST	edx
@@ -1816,12 +1822,12 @@ get1stb:
 	jmp	store
 
 shft:	shr	ax,1
-	jnc	@B
+	jnc	_aim_0055
 
 store:	mov	buf[edi],al
 	inc	edi
 	mov	al,80h
-	jmp	@B
+	jmp	_aim_0055
 
 
 write:	mov	rawbits,ax
@@ -1846,8 +1852,8 @@ next:
 	cmp	al,80h
 	je	close
 
-@@:	shr	al,1
-	jnc	@B
+_aim_0056:	shr	al,1
+	jnc	_aim_0056
 	mov	buf,al
 
 						;>Write last byte
@@ -1970,12 +1976,12 @@ f:
 
 	lea	esi,img_p		;Find previous
 	dec	eax
-	jl	@F			;1st one?
+	jl	_aim_0057			;1st one?
 
 	call	img_find
 	jz	x			;Bad selection?
 	mov	esi,eax
-@@:
+_aim_0057:
 	mov	edi,[esi]
 	TST	edi
 	jz	x
@@ -2032,9 +2038,9 @@ x:
 	mov	[edi].IMG.PTTBL_p,eax
 
 	push	eax
-@@:	mov	BPTR [eax],0		;Clr it
+_aim_0058:	mov	BPTR [eax],0		;Clr it
 	inc	eax
-	loop	@B
+	loop	_aim_0058
 	pop	eax
 
 x:
@@ -2072,21 +2078,21 @@ x:
 	jnz	sel			;Toggle?
 
 	test	mousebchg,2
-	jnz	@F			;Toggle?
+	jnz	_aim_0059			;Toggle?
 
 	cmp	eax,ilselected
 	je	x			;Already selected?
-@@:
+_aim_0059:
 	mov	ebx,eax
 	call	img_find
 	jz	x
 	xor	[eax].IMG.FLAGS,MARKED
 	mov	eax,ebx
-	jmp	@F
+	jmp	_aim_0060
 sel:
 	cmp	eax,ilselected
 	je	x			;Already selected?
-@@:
+_aim_0060:
 	call	ilst_select
 	jmp	x
 
@@ -2102,19 +2108,19 @@ n0:
 	mov	8[edi],eax		;tw5&6
 	mov	cx,-32
 	mov	dx,cx
-	lea	eax,@F
+	lea	eax,_aim_0061
 	call	gad_mousescroller
 	jmp	x
 
-@@:
+_aim_0061:
 	mov	bx,tw1
 	cmp	bx,tw5
-	jne	@F			;Changed?
+	jne	_aim_0062			;Changed?
 	mov	bx,tw2
 	cmp	bx,tw6
-	jne	@F			;Changed?
+	jne	_aim_0062			;Changed?
 	ret
-@@:
+_aim_0062:
 	CLR	ecx
 	dec	ecx
 
@@ -2306,14 +2312,14 @@ x:
 	mov	ebx,ilselected
 	mov	eax,il1stprt
 	cmp	ebx,eax
-	jb	@F			;Off top?
+	jb	_aim_0063			;Off top?
 	sub	ebx,ILSTROW-1
 	cmp	ebx,eax
 	jbe	vis			;!Off bottom?
 	TST	ebx
-	jge	@F
+	jge	_aim_0063
 	CLR	ebx
-@@:	mov	il1stprt,ebx
+_aim_0063:	mov	il1stprt,ebx
 vis:
 
 	mov	ax,ILSTW
@@ -2623,21 +2629,21 @@ x:	ret
 
 					;>Alt cursor keys
 	cmp	dh,98h			;>Up
-	jne	@F
+	jne	_aim_0064
 	inc	[esi].IMG.ANIY
-@@:
+_aim_0064:
 	cmp	dh,0a0h			;>Dn
-	jne	@F
+	jne	_aim_0065
 	dec	[esi].IMG.ANIY
-@@:
+_aim_0065:
 	cmp	dh,9bh			;>Left
-	jne	@F
+	jne	_aim_0066
 	inc	[esi].IMG.ANIX
-@@:
+_aim_0066:
 	cmp	dh,9dh			;>Rgt
-	jne	@F
+	jne	_aim_0067
 	dec	[esi].IMG.ANIX
-@@:
+_aim_0067:
 ;���������������
 					;>Ctrl cursor keys
 
@@ -2656,26 +2662,26 @@ x:	ret
 	call	_shim_get_shift_state	;EAX = bit0=LShift bit1=RShift
 	pop	edx
 	test	eax,3			;Shift keys
-	jz	@F			;None?
+	jz	_aim_0068			;None?
 	add	edi,PTCBOX.W-PTCBOX.X	;Do WH instead
-@@:
+_aim_0068:
 	cmp	dh,8dh			;>C-Up
-	jne	@F
+	jne	_aim_0069
 
 	dec	[edi].PTCBOX.Y
-@@:
+_aim_0069:
 	cmp	dh,91h			;>C-Dn
-	jne	@F
+	jne	_aim_0070
 	inc	[edi].PTCBOX.Y
-@@:
+_aim_0070:
 	cmp	dh,73h			;>C-L
-	jne	@F
+	jne	_aim_0071
 	dec	[edi].PTCBOX.X
-@@:
+_aim_0071:
 	cmp	dh,74h			;>C-R
-	jne	@F
+	jne	_aim_0072
 	inc	[edi].PTCBOX.X
-@@:
+_aim_0072:
 
 	jmp	chome
 
@@ -2685,9 +2691,9 @@ ccur:
 	and	al,3			;Mask off ani3 bit
 	mov	edi,[esi].IMG.PTTBL_p	;Ani3
 	TST	edi
-	jz	@F			;None?
+	jz	_aim_0073			;None?
 	or	al,aniptmode		;Get ani3 bit
-@@:
+_aim_0073:
 	mov	cx,1
 
 	cmp	dh,8dh			;>C-Up
@@ -2697,15 +2703,15 @@ ccur:
 	neg	cx
 
 cup:	test	al,1
-	jz	@F
+	jz	_aim_0074
 	add	[esi].IMG.ANIY,cx
-@@:	test	al,2
-	jz	@F
+_aim_0074:	test	al,2
+	jz	_aim_0075
 	sub	[esi].IMG.ANIY2,cx
-@@:	test	al,4
-	jz	@F
+_aim_0075:	test	al,4
+	jz	_aim_0076
 	sub	[edi].PTTBL.Y,cx
-@@:
+_aim_0076:
 
 ctrllr:
 	mov	cx,1
@@ -2717,15 +2723,15 @@ ctrllr:
 	neg	cx
 
 clft:	test	al,1
-	jz	@F
+	jz	_aim_0077
 	add	[esi].IMG.ANIX,cx
-@@:	test	al,2
-	jz	@F
+_aim_0077:	test	al,2
+	jz	_aim_0078
 	sub	[esi].IMG.ANIX2,cx
-@@:	test	al,4
-	jz	@F
+_aim_0078:	test	al,4
+	jz	_aim_0079
 	sub	[edi].PTTBL.X,cx
-@@:
+_aim_0079:
 
 ;���������������
 chome:					;>C-Home
@@ -2737,42 +2743,42 @@ chome:					;>C-Home
 	neg	cx
 cho:
 	test	al,2
-	jz	@F
+	jz	_aim_0080
 	sub	[esi].IMG.ANIZ2,cx
-@@:	test	al,4
-	jz	@F
+_aim_0080:	test	al,4
+	jz	_aim_0081
 	sub	[edi].PTTBL.Z,cx
-@@:
+_aim_0081:
 notce:
 
 	cmp	dh,93h			;>C-Del
-	jne	@F
+	jne	_aim_0082
 	CLR	eax
 	mov	[esi].IMG.ANIX2,ax
 	mov	[esi].IMG.ANIY2,ax
 	mov	[esi].IMG.ANIZ2,ax
-@@:
+_aim_0082:
 ;nonext:
 
 	cmp	dl,19h			;>Ctrl Y
-	jne	@F
+	jne	_aim_0083
 	CLR	eax
 	cmp	[esi].IMG.ANIY2,0
 	jne	clry			;Clr it?
 	mov	ax,-200
 clry:	mov	[esi].IMG.ANIY2,ax
-@@:
+_aim_0083:
 	cmp	dl,1ah			;>Ctrl Z
-	jne	@F
+	jne	_aim_0084
 	mov	[esi].IMG.ANIZ2,0
-@@:
+_aim_0084:
 	cmp	dl,' '			;>Space
-	jne	@F
+	jne	_aim_0085
 	xor	[esi].IMG.FLAGS,MARKED	;Toggle
-@@:
+_aim_0085:
 
 	cmp	dl,'a'			;>Next anipt mode
-	jne	@F
+	jne	_aim_0086
 	mov	al,aniptmode
 	inc	al
 	and	al,7
@@ -2781,20 +2787,20 @@ clry:	mov	[esi].IMG.ANIY2,ax
 apmok:	mov	aniptmode,al
 	jmp	ilst_prtaniptmode
 
-@@:
+_aim_0086:
 ;���������������
 
 	cmp	dh,4bh			;>Previous marked
-	jne	@F
+	jne	_aim_0087
 
 	CLR	ecx
 	dec	ecx
 	jmp	domrk
-@@:
+_aim_0087:
 ;���������������
 
 	cmp	dh,4dh			;>Next marked
-	jne	@F
+	jne	_aim_0088
 
 	CLR	ecx
 	inc	ecx
@@ -2824,7 +2830,7 @@ mend:
 mrk:
 	mov	eax,ebx
 	jmp	ilst_select
-@@:
+_aim_0088:
 
 ;���������������
 
@@ -2832,7 +2838,7 @@ mrk:
 ;	cmp	dh,41h			;>F7 (Height+1)
 ;	je	chgh
 ;	cmp	dh,42h			;>F8 (Height-1)
-;	jne	@F
+;	jne	_aim_0089
 ;
 ;	mov	cx,-1
 ;chgh:
@@ -2858,7 +2864,7 @@ mrk:
 ;	jmp	ilst_select
 
 
-@@:
+_aim_0089:
 	call	ilst_prt1l
 	call	img_prt
 
@@ -2915,12 +2921,12 @@ x:
 
 	mov	eax,[eax].IMG.PTTBL_p
 	TST	eax
-	jnz	@F
+	jnz	_aim_0090
 
 	mov	eax,ilselected
 	call	img_pttbladd
 	jz	x
-@@:
+_aim_0090:
 	mov	edx,il2selected
 	inc	dx
 	mov	[eax].PTTBL.ID,dx
@@ -2948,9 +2954,9 @@ lp:	CLR	eax
 	TST	edi
 	jz	nopt			;No pttbl?
 	mov	ecx,sizeof PTTBL
-@@:	mov	[edi],al
+_aim_0091:	mov	[edi],al
 	inc	edi
-	loop	@B
+	loop	_aim_0091
 nopt:
 nxt:	mov	esi,[esi]
 	TST	esi
@@ -2982,17 +2988,17 @@ nxt:	mov	esi,[esi]
 
 	mov	al,aniptmode
 	test	al,1
-	jz	@F
+	jz	_aim_0092
 	mov	BPTR 12[esi],'1'
-@@:
+_aim_0092:
 	test	al,2
-	jz	@F
+	jz	_aim_0093
 	mov	BPTR 14[esi],'2'
-@@:
+_aim_0093:
 	test	al,4
-	jz	@F
+	jz	_aim_0094
 	mov	BPTR 16[esi],'3'
-@@:
+_aim_0094:
 	mov	bx,0feffh
 	mov	cx,ILSTX+4
 	mov	dx,ILSTY-20
@@ -3077,26 +3083,26 @@ lp:	inc	ecx
 
 	lea	eax,buf
 	cmp	BPTR buf,'+'
-	jne	@F
+	jne	_aim_0095
 	inc	eax
-@@:
+_aim_0095:
 	lea	edi,[esi].IMG.N_s	;Copy base
 	call	strcpy
 
 	cmp	BPTR buf,'+'
-	jne	@F
+	jne	_aim_0096
 
 	lea	eax,sbuf
 	call	strcpy
 
-@@:
+_aim_0096:
 	cmp	BPTR buf,'+'
-	je	@F
+	je	_aim_0097
 
 	inc	edx			;Add #
 	mov	eax,edx
 	call	stritoa
-@@:
+_aim_0097:
 	jmp	lp
 
 draw:
@@ -3490,10 +3496,10 @@ chg:
 
 	push	eax
 	mov	ebx,eax
-@@:
+_aim_0098:
 	add	eax,edx
 	mov	DPTR [eax-4],0		;Clr last 4 of each line
-	loop	@B
+	loop	_aim_0098
 
 
 	mov	edx,y1
@@ -3505,14 +3511,14 @@ cylp:
 
 	mov	ecx,x2
 	sub	ecx,x1
-@@:
+_aim_0099:
 	mov	al,[esi]		;Copy pixel
 	mov	[ebx],al
 	inc	esi
 	inc	ebx
 
 	dec	ecx
-	jge	@B
+	jge	_aim_0099
 
 	add	ebx,3			;Bump dest
 	and	bl,0fch
@@ -3652,10 +3658,10 @@ lp:	mov	eax,cnt
 	mov	esi,eax			;ESI=*Mem block
 
 	sar	ecx,2			;/4
-@@:	mov	DPTR [eax],0		;Clr block
+_aim_0100:	mov	DPTR [eax],0		;Clr block
 	add	eax,4
 	dec	ecx
-	jg	@B
+	jg	_aim_0100
 
 pixlp:
 	mov	eax,py
@@ -3667,12 +3673,12 @@ pixlp:
 	jz	pixnxt			;Trans pixel?
 	mov	bh,strp1st
 	TST	bh
-	jz	@F			;Do all types?
+	jz	_aim_0101			;Do all types?
 	cmp	bl,bh
 	jb	pixnxt			;Too low?
 	cmp	bl,strplast
 	ja	pixnxt			;Too high?
-@@:
+_aim_0101:
 	lea	ebx,stripo_t
 	CLR	ecx			;ECX=Border pix count
 brdrlp:
@@ -3696,10 +3702,10 @@ brdrlp:
 	add	eax,[edi].IMG.DATA_p
 
 	cmp	BPTR [eax],0
-	jne	@F			;!Transparent?
+	jne	_aim_0102			;!Transparent?
 trns:
 	inc	ecx			;Cnt+1
-@@:
+_aim_0102:
 	inc	ebx
 	jmp	brdrlp
 
@@ -3735,14 +3741,14 @@ pixnxt:
 
 	mov	al,palb1stc
 	cmp	strp1st,0
-	je	@F			;Do all types?
+	je	_aim_0103			;Do all types?
 	CLR	al
-@@:
+_aim_0103:
 dellp:
 	cmp	BPTR [ebx],0
-	je	@F			;!Flagged?
+	je	_aim_0104			;!Flagged?
 	mov	BPTR [edx],al
-@@:
+_aim_0104:
 	inc	ebx
 	inc	edx
 	dec	ecx
@@ -3791,10 +3797,10 @@ lbrdrlp:
 	add	eax,[edi].IMG.DATA_p
 
 	cmp	BPTR [eax],0
-	jne	@F			;!Transparent?
+	jne	_aim_0105			;!Transparent?
 ltrns:
 	inc	ecx			;Cnt+1
-@@:
+_aim_0105:
 	inc	ebx
 	jmp	lbrdrlp
 
@@ -3828,14 +3834,14 @@ lpixnxt:
 
 	mov	al,palb1stc
 	cmp	strp1st,0
-	je	@F			;Do all types?
+	je	_aim_0106			;Do all types?
 	CLR	al
-@@:
+_aim_0106:
 del2lp:
 	cmp	BPTR [ebx],0
-	je	@F			;!Flagged?
+	je	_aim_0107			;!Flagged?
 	mov	BPTR [edx],al
-@@:
+_aim_0107:
 	inc	ebx
 	inc	edx
 	dec	ecx
@@ -3864,6 +3870,7 @@ draw:
  SUBEND
 
 	.data
+
 stripo_t	db	-1,-1, 0,-1, 1,-1
 		db	-1,0,  1,0
 		db	-1,1, 0,1, 1,1
@@ -4003,10 +4010,10 @@ sortlp:
 	ja	sortlp			;Too wide?
 
 	cmp	srt_p,0
-	jne	@F			;!1st?
+	jne	_aim_0108			;!1st?
 	mov	dx,[eax].IMG.PALNUM
 	mov	paln,edx
-@@:
+_aim_0108:
 	mov	4[edi],eax		;Save * img
 	movzx	edx,[eax].IMG.W
 	mov	8[edi],edx		;Save W
@@ -4046,9 +4053,9 @@ sortend:
 	mov	dst_p,eax
 
 	mov	ecx,LMAX		;Set all free
-@@:	mov	DPTR [eax],256
+_aim_0109:	mov	DPTR [eax],256
 	add	eax,4
-	loop	@B
+	loop	_aim_0109
 
 	mov	DPTR [eax],-1		;End
 	add	eax,4
@@ -4056,9 +4063,9 @@ sortend:
 	mov	dsti_p,eax
 
 	mov	ecx,LMAX*256/4		;Clr lines
-@@:	mov	DPTR [eax],0
+_aim_0110:	mov	DPTR [eax],0
 	add	eax,4
-	loop	@B
+	loop	_aim_0110
 
 
 	mov	af_p,eax
@@ -4077,7 +4084,7 @@ bldlp:
 	mov	edi,dst_p		;>Find a set of free lines
 	sub	edi,4
 	mov	lineuse_p,edi
-@@:
+_aim_0111:
 	add	lineuse_p,4
 	mov	edi,lineuse_p
 	mov	ebx,4[esi]		;Get * IMG struc
@@ -4090,21 +4097,21 @@ fndlp:
 	TST	eax
 	jl	nospc			;End of lines?
 	cmp	edx,eax
-	ja	@B			;No room? Restart
+	ja	_aim_0111			;No room? Restart
 
 	cmp	ebx,254
-	jae	@F			;Min is high?
+	jae	_aim_0112			;Min is high?
 	push	ebx
 ;	shl	ebx,1			;*2
 	add	ebx,10
 	cmp	eax,ebx
 	pop	ebx
-	jae	@B			;Current high? Restart
-@@:
+	jae	_aim_0111			;Current high? Restart
+_aim_0112:
 	cmp	eax,ebx
-	jge	@F
+	jge	_aim_0113
 	mov	ebx,eax			;New min
-@@:
+_aim_0113:
 	dec	ecx
 	jg	fndlp
 
@@ -4114,11 +4121,11 @@ fndlp:
 	mov	eax,lineuse_p
 	sub	edi,eax
 	shr	edi,2			;/4
-@@:
+_aim_0114:
 	mov	[eax],ebx
 	add	eax,4
 	dec	edi
-	jg	@B
+	jg	_aim_0114
 
 	add	ebx,edx			;+width
 
@@ -4143,13 +4150,13 @@ fndlp:
 	movzx	edx,[eax].IMG.H
 icpylp:
 	mov	ecx,8[esi]		;Get W
-@@:
+_aim_0115:
 	mov	al,[ebx]
 	mov	[edi],al
 	inc	ebx
 	inc	edi
 	dec	ecx
-	jg	@B
+	jg	_aim_0115
 
 	add	ebx,3			;Round up src
 	and	bl,0fch
@@ -4212,11 +4219,11 @@ icpylp:
 	mov	esi,dst_p
 	CLR	eax
 	dec	eax
-@@:
+_aim_0116:
 	inc	eax
 	cmp	DPTR [esi],256
 	lea	esi,4[esi]
-	jb	@B
+	jb	_aim_0116
 
 	mov	lcnt,eax
 
@@ -4367,13 +4374,13 @@ error:
 	I21CLOSE				;Close file
 
 	cmp	fileerr,0
-	je	@F
+	je	_aim_0117
 error2:
 	mov	al,1
 	mov	esi,offset werror_s
 	call	msgbox_open
 
-@@:
+_aim_0117:
 
 
 ;���������������				>Write ANF file
@@ -4441,13 +4448,13 @@ aerr:
 	I21CLOSE				;Close file
 
 	cmp	fileerr,0
-	je	@F
+	je	_aim_0118
 aerr2:
 	mov	al,1
 	mov	esi,offset werror_s
 	call	msgbox_open
 
-@@:
+_aim_0118:
 
 ;���������������
 
@@ -4476,12 +4483,12 @@ draw:
 	mov	eax,ilselected
 	dec	eax
 	jl	x			;At top or no selection?
-	jz	@F			;2nd one?
+	jz	_aim_0119			;2nd one?
 	dec	eax
 	call	img_find
 	jz	x			;Bad selection?
 	mov	esi,eax
-@@:
+_aim_0119:
 	mov	eax,[esi]		;*Prev
 	TST	eax
 	jz	x
@@ -4511,12 +4518,12 @@ x:
 	mov	eax,ilselected
 	TST	eax
 	jl	x			;No selection?
-	jz	@F			;1st one?
+	jz	_aim_0120			;1st one?
 	dec	eax
 	call	img_find
 	jz	x			;Bad selection?
 	mov	esi,eax
-@@:
+_aim_0120:
 	mov	eax,[esi]		;*Me
 	TST	eax
 	jz	x
@@ -4582,14 +4589,14 @@ x:
 	mov	BPTR fnametmp_s,0
 
 	mov	eax,offset fmatchlbm_s
-	mov	ebx,offset @F
+	mov	ebx,offset _aim_0121
 	mov	esi,offset load_s
 	mov	fmode,3
 	jmp	filereq_open
 
 lp:
 	call	loadlbm
-@@:
+_aim_0121:
 	call	filereq_getnxtmrkd
 	jnz	lp
 
@@ -4653,13 +4660,13 @@ chunklp:
 	jc	error
 
 	test	al,1
-	jz	@F				;Even?
+	jz	_aim_0122				;Even?
 
 	CLR	ecx				;Skip odd byte
 	mov	dx,1
 	I21SETFPC
 	jc	error
-@@:
+_aim_0122:
 
 	mov	ecx,8				;Read chunk & len
 	mov	edx,offset tl1
@@ -4876,10 +4883,10 @@ pcomplp:
 	jmp	pcompnxt
 rlen:
 	neg	al				;Repeat byte
-@@:	mov	[edi],ah
+_aim_0123:	mov	[edi],ah
 	inc	edi
 	dec	al
-	jge	@B
+	jge	_aim_0123
 
 pcompnxt:
 	mov	eax,edi
@@ -4889,7 +4896,7 @@ pcompnxt:
 	and	cl,0feh
 	sub	eax,ecx
 	jl	pcomplp				;More X?
-;	je	@F
+;	je	_aim_0124
 ;	dec	di
 ;@@:
 	add	edi,3				;Round up
@@ -4969,6 +4976,8 @@ x:
 
 
 	.data
+
+
 ifftnosup_s	db	"IFF type not supported yet!",0
 
 
@@ -5249,14 +5258,14 @@ x:
 	mov	BPTR fnametmp_s,0
 
 	mov	eax,offset fmatchtga_s
-	mov	ebx,offset @F
+	mov	ebx,offset _aim_0124
 	mov	esi,offset load_s
 	mov	fmode,3
 	jmp	filereq_open
 
 lp:
 	call	loadtga
-@@:
+_aim_0124:
 	call	filereq_getnxtmrkd
 	jnz	lp
 
@@ -5307,12 +5316,12 @@ lp:
 	jne	error				;!256 color img?
 
 	cmp	tga_hdr.CMBITS,24
-	je	@F				;OK?
+	je	_aim_0125				;OK?
 	cmp	tga_hdr.CMBITS,16
-	je	@F				;OK?
+	je	_aim_0125				;OK?
 	cmp	tga_hdr.CMBITS,15
 	jne	error				;Bad pal type?
-@@:
+_aim_0125:
 
 ;���������������
 
@@ -5377,16 +5386,16 @@ pallp:
 	push	ecx
 	mov	ecx,3
 	cmp	tga_hdr.CMBITS,24
-	je	@F				;OK?
+	je	_aim_0126				;OK?
 	mov	ecx,2
-@@:	mov	edx,offset tl1
+_aim_0126:	mov	edx,offset tl1
 	I21READ
 	pop	ecx
 	jc	error
 
 	mov	ax,WPTR tl1
 	cmp	tga_hdr.CMBITS,24
-	jne	@F				;Word form?
+	jne	_aim_0127				;Word form?
 	CLR	ah
 	shr	al,3				;Blue
 	mov	dl,BPTR tl1+1			;Green
@@ -5398,7 +5407,7 @@ pallp:
 	shl	dx,7
 	or	ax,dx
 
-@@:	mov	[edi],ax
+_aim_0127:	mov	[edi],ax
 	add	edi,2
 
 	loop	pallp
@@ -5434,14 +5443,14 @@ pallp:
 	movzx	ecx,tga_hdr.H
 	CLR	edx
 	test	tga_hdr.DESC,10h
-	jnz	@F				;Going down?
+	jnz	_aim_0128				;Going down?
 	movzx	edx,tga_hdr.W
 	add	dx,3
 	and	dl,0fch
 	dec	ecx
 	imul	edx,ecx
 	inc	ecx
-@@:
+_aim_0128:
 	add	edx,[esi].IMG.DATA_p
 pixlp:
 	push	ecx
@@ -5454,9 +5463,9 @@ pixlp:
 	add	ax,3
 	and	al,0fch
 	test	tga_hdr.DESC,10h
-	jnz	@F				;Going down?
+	jnz	_aim_0129				;Going down?
 	neg	eax
-@@:	add	edx,eax
+_aim_0129:	add	edx,eax
 
 	loop	pixlp
 
@@ -5724,13 +5733,13 @@ error:
 	I21CLOSE				;Close file
 
 	cmp	fileerr,0
-	je	@F
+	je	_aim_0130
 error2:
 	mov	al,1
 	mov	esi,offset werror_s
 	call	msgbox_open
 
-@@:
+_aim_0130:
 
 ;���������������
 
@@ -5742,6 +5751,7 @@ draw:
  SUBEND
 
 	.data
+
 anilst1_s	db	"	.asg	1,N",13,10,0
 anilstw_s	db	"	.word	N,",0
 anilstc_s	db	"	;",0
@@ -5910,70 +5920,70 @@ fnd:
 	mov	eax,bndboxx1
 	mov	ebx,bndboxx2
 	cmp	ebx,eax
-	jge	@F			;EBX bigger?
+	jge	_aim_0131			;EBX bigger?
 	xchg	eax,ebx
-@@:
+_aim_0131:
 	sub	eax,tl1
-	jge	@F			;Above left X?
+	jge	_aim_0132			;Above left X?
 	CLR	eax
-@@:	cmp	eax,imgw
-	jl	@F			;Within width?
+_aim_0132:	cmp	eax,imgw
+	jl	_aim_0133			;Within width?
 	mov	eax,imgw
 	dec	eax
-@@:	cmp	eax,255
-	jle	@F			;Within max?
+_aim_0133:	cmp	eax,255
+	jle	_aim_0134			;Within max?
 	mov	eax,255
-@@:
+_aim_0134:
 	mov	[esi].PTBOX.X,al
 
 	sub	ebx,tl1			;EBX=Width-1
 	cmp	ebx,imgw
-	jl	@F			;Within width?
+	jl	_aim_0135			;Within width?
 	mov	ebx,imgw
 	dec	ebx
-@@:
+_aim_0135:
 	sub	ebx,eax			;Make offset
-	jge	@F
+	jge	_aim_0136
 	CLR	ebx
-@@:	cmp	ebx,255
-	jle	@F			;Within max?
+_aim_0136:	cmp	ebx,255
+	jle	_aim_0137			;Within max?
 	mov	ebx,255
-@@:
+_aim_0137:
 	mov	[esi].PTBOX.W,bl
 
 
 	mov	eax,bndboxy1
 	mov	ebx,bndboxy2
 	cmp	ebx,eax
-	jge	@F			;EBX bigger?
+	jge	_aim_0138			;EBX bigger?
 	xchg	eax,ebx
-@@:
+_aim_0138:
 	sub	eax,tl2
-	jge	@F			;Below top Y?
+	jge	_aim_0139			;Below top Y?
 	CLR	eax
-@@:	cmp	eax,imgh
-	jl	@F			;Within height?
+_aim_0139:	cmp	eax,imgh
+	jl	_aim_0140			;Within height?
 	mov	eax,imgh
 	dec	eax
-@@:	cmp	eax,255
-	jle	@F			;Within max?
+_aim_0140:	cmp	eax,255
+	jle	_aim_0141			;Within max?
 	mov	eax,255
-@@:
+_aim_0141:
 	mov	[esi].PTBOX.Y,al
 
 	sub	ebx,tl2			;EBX=Height-1
 	cmp	ebx,imgh
-	jl	@F			;Within height?
+	jl	_aim_0142			;Within height?
 	mov	ebx,imgh
 	dec	ebx
-@@:
+_aim_0142:
 	sub	ebx,eax			;Make offset
-	jge	@F
+	jge	_aim_0143
 	CLR	ebx
-@@:	cmp	ebx,255
-	jle	@F			;Within max?
+_aim_0143:	cmp	ebx,255
+	jle	_aim_0144			;Within max?
 	mov	ebx,255
-@@:
+_aim_0144:
 	mov	[esi].PTBOX.H,bl
 
 
@@ -5993,14 +6003,14 @@ fnd:
 	jz	x			;No mem?
 	mov	[edi].IMG.TEMP,eax
 	mov	ebx,[edi].IMG.DATA_p
-@@:
+_aim_0145:
 	mov	dl,[ebx]		;Copy img
 	mov	[eax],dl
 	inc	ebx
 	inc	eax
 
 	dec	ecx
-	jg	@B
+	jg	_aim_0145
 
 
 ;���������������			>Clr pixels in work buf of prev def boxes
@@ -6155,14 +6165,14 @@ bxlp:
 bok:
 
 
-	jmp	@F
+	jmp	_aim_0146
 
 
 abort:
 	CLR	eax
 	mov	[esi],eax
 
-@@:
+_aim_0146:
 
 ;���������������
 
@@ -6236,9 +6246,9 @@ lp:
 	mov	eax,mpboxselect
 	inc	eax
 	cmp	eax,PTBOXNUM
-	jb	@F
+	jb	_aim_0147
 	CLR	eax
-@@:	mov	mpboxselect,eax
+_aim_0147:	mov	mpboxselect,eax
 	cmp	eax,ebx
 	je	x			;Wrapped to start?
 
@@ -6268,9 +6278,9 @@ x:
 	lea	eax,mpboff_s
 	not	mpboxon
 	cmp	mpboxon,0
-	je	@F
+	je	_aim_0148
 	lea	eax,mpbon_s
-@@:
+_aim_0148:
 	lea	esi,mpboo_gad
 	mov	[esi].GAD.TXT_p,eax
 
@@ -6365,78 +6375,78 @@ hvpt:
 	mov	eax,bndboxx1
 	mov	ebx,bndboxx2
 	cmp	ebx,eax
-	jge	@F			;EBX bigger?
+	jge	_aim_0149			;EBX bigger?
 	xchg	eax,ebx
-@@:
+_aim_0149:
 	sub	eax,tl1
 	cmp	eax,-128
-	jge	@F			;Within max?
+	jge	_aim_0150			;Within max?
 	mov	eax,-128
 
-;	jge	@F			;Above left X?
+;	jge	_aim_0150			;Above left X?
 ;	CLR	eax
 ;@@:	cmp	eax,imgw
-;	jl	@F			;Within width?
+;	jl	_aim_0150			;Within width?
 ;	mov	eax,imgw
 ;	dec	eax
-@@:	cmp	eax,127
-	jle	@F			;Within max?
+_aim_0150:	cmp	eax,127
+	jle	_aim_0151			;Within max?
 	mov	eax,127
-@@:
+_aim_0151:
 	mov	[esi].PTCBOX.X,al
 
 	sub	ebx,tl1			;EBX=Width-1
 ;	cmp	ebx,imgw
-;	jl	@F			;Within width?
+;	jl	_aim_0152			;Within width?
 ;	mov	ebx,imgw
 ;	dec	ebx
 ;@@:
 	sub	ebx,eax			;Make offset
-	jge	@F
+	jge	_aim_0152
 	CLR	ebx
-@@:	cmp	ebx,255
-	jle	@F			;Within max?
+_aim_0152:	cmp	ebx,255
+	jle	_aim_0153			;Within max?
 	mov	ebx,255
-@@:
+_aim_0153:
 	mov	[esi].PTCBOX.W,bl
 
 
 	mov	eax,bndboxy1
 	mov	ebx,bndboxy2
 	cmp	ebx,eax
-	jge	@F			;EBX bigger?
+	jge	_aim_0154			;EBX bigger?
 	xchg	eax,ebx
-@@:
+_aim_0154:
 	sub	eax,tl2
 	cmp	eax,-128
-	jge	@F			;Within max?
+	jge	_aim_0155			;Within max?
 	mov	eax,-128
 
-;	jge	@F			;Below top Y?
+;	jge	_aim_0155			;Below top Y?
 ;	CLR	eax
 ;@@:	cmp	eax,imgh
-;	jl	@F			;Within height?
+;	jl	_aim_0155			;Within height?
 ;	mov	eax,imgh
 ;	dec	eax
-@@:	cmp	eax,127
-	jle	@F			;Within max?
+_aim_0155:	cmp	eax,127
+	jle	_aim_0156			;Within max?
 	mov	eax,127
-@@:
+_aim_0156:
 	mov	[esi].PTCBOX.Y,al
 
 	sub	ebx,tl2			;EBX=Height-1
 ;	cmp	ebx,imgh
-;	jl	@F			;Within height?
+;	jl	_aim_0157			;Within height?
 ;	mov	ebx,imgh
 ;	dec	ebx
 ;@@:
 	sub	ebx,eax			;Make offset
-	jge	@F
+	jge	_aim_0157
 	CLR	ebx
-@@:	cmp	ebx,255
-	jle	@F			;Within max?
+_aim_0157:	cmp	ebx,255
+	jle	_aim_0158			;Within max?
 	mov	ebx,255
-@@:
+_aim_0158:
 	mov	[esi].PTCBOX.H,bl
 
 
@@ -6494,9 +6504,9 @@ x:
 	lea	eax,cboff_s
 	not	cboxon
 	cmp	cboxon,0
-	je	@F
+	je	_aim_0159
 	lea	eax,cbon_s
-@@:
+_aim_0159:
 	lea	esi,cboo_gad
 	mov	[esi].GAD.TXT_p,eax
 
@@ -6580,11 +6590,11 @@ x:
 	movsx	edx,mousey
 
 	test	mousebchg,1
-	jz	@F			;No change?
+	jz	_aim_0160			;No change?
 
 	mov	bndboxx1,ecx
 	mov	bndboxy1,edx
-@@:
+_aim_0160:
 	mov	bndboxx2,ecx
 	mov	bndboxy2,edx
 
@@ -6594,13 +6604,13 @@ x:
 
 gadup:
 	cmp	mpboxon,0
-	je	@F
+	je	_aim_0161
 	call	mpbox_add
-@@:
+_aim_0161:
 	cmp	cboxon,0
-	je	@F
+	je	_aim_0162
 	call	cbox_add
-@@:
+_aim_0162:
 	jmp	x
 
 n0:
@@ -6643,52 +6653,52 @@ x:
 ;	jz	x			;Not loaded?
 
 	cmp	dl,'T'			;>Toggle display on anipts
-	jne	@F
+	jne	_aim_0163
 
 	not	iwinanipton
-@@:
+_aim_0163:
 
 	cmp	dl,'2'			;>Toggle ani2 link mode
-	jne	@F
+	jne	_aim_0164
 
 	not	ani2link
-@@:
+_aim_0164:
 
 	cmp	dl,'p'			;>Toggle draw priority
-	jne	@F
+	jne	_aim_0165
 
 	not	drawpri
-@@:
+_aim_0165:
 
 	cmp	dl,'r'			;>Drop reference mark
-	jne	@F
+	jne	_aim_0166
 	mov	ax,anipt2x
 	mov	iwinrx,ax
 	mov	ax,anipt2y
 	mov	iwinry,ax
 	jmp	ssc
 
-@@:
+_aim_0166:
 	cmp	dl,'d'			;>Double scale
-	jne	@F
+	jne	_aim_0167
 	shr	iwinsclx,1		;/2
 	shr	iwinscly,1
-@@:
+_aim_0167:
 	cmp	dl,'D'			;>Half scale
-	jne	@F
+	jne	_aim_0168
 	shl	iwinsclx,1		;*2
 	shl	iwinscly,1
-@@:
+_aim_0168:
 	cmp	dh,85h			;>Decrease scale (F11)
-	jne	@F
+	jne	_aim_0169
 	add	iwinsclx,1
 	add	iwinscly,1
-@@:
+_aim_0169:
 	cmp	dh,86h			;>Increase scale (F12)
-	jne	@F
+	jne	_aim_0170
 	sub	iwinsclx,1
 	sub	iwinscly,1
-@@:
+_aim_0170:
 ssc:	call	iwin_showscale
 
 
@@ -6707,12 +6717,12 @@ x:	ret
 
 	mov	ax,iwinsclx	;>Get scale and verify
 	cmp	ax,20h
-	jge	@F
+	jge	_aim_0171
 	mov	ax,20h
-@@:	cmp	ax,800h
-	jbe	@F
+_aim_0171:	cmp	ax,800h
+	jbe	_aim_0172
 	mov	ax,800h
-@@:	mov	iwinsclx,ax
+_aim_0172:	mov	iwinsclx,ax
 
 	mov	bx,0ffh
 	mov	cx,246
@@ -6721,12 +6731,12 @@ x:	ret
 
 	mov	ax,iwinscly	;>Get scale and verify
 	cmp	ax,20h
-	jge	@F
+	jge	_aim_0173
 	mov	ax,20h
-@@:	cmp	ax,800h
-	jbe	@F
+_aim_0173:	cmp	ax,800h
+	jbe	_aim_0174
 	mov	ax,800h
-@@:	mov	iwinscly,ax
+_aim_0174:	mov	iwinscly,ax
 
 	mov	bx,0ffh
 	mov	cx,246
@@ -6779,13 +6789,13 @@ x:	ret
 ;dn:
 
 	cmp	drawpri,0
-	je	@F
+	je	_aim_0175
 
 	mov	eax,ilselected
 	CLR	ecx
 	CLR	edx
 	call	img_draw		;1st list
-@@:
+_aim_0175:
 
 	CLR	ecx
 	CLR	edx
@@ -6794,7 +6804,7 @@ x:	ret
 	jz	nosh
 
 	cmp	ani2link,0
-	je	@F
+	je	_aim_0176
 	mov	cx,[eax].IMG.ANIX
 	mov	dx,[eax].IMG.ANIY
 	neg	ecx
@@ -6803,16 +6813,16 @@ x:	ret
 	add	dx,[eax].IMG.ANIY2
 	movsx	ecx,cx
 	movsx	edx,dx
-@@:
+_aim_0176:
 	mov	eax,[eax].IMG.PTTBL_p
 	TST	eax
 	jz	nosh
 	movsx	ebx,[eax].PTTBL.ID
 	dec	ebx
-	jge	@F
+	jge	_aim_0177
 nosh:
 	mov	ebx,il2selected		;2nd list
-@@:
+_aim_0177:
 	call	ilst_nxtlst
 	mov	eax,ebx
 	call	img_draw
@@ -6821,13 +6831,13 @@ nosh:
 
 
 	cmp	drawpri,0
-	jne	@F
+	jne	_aim_0178
 
 	mov	eax,ilselected
 	CLR	ecx
 	CLR	edx
 	call	img_draw		;1st list
-@@:
+_aim_0178:
 
 x:
 	popad
@@ -6897,12 +6907,12 @@ x:
 	imul	esi,eax			;ESI=*Img data
 	CLR	edx
 	mov	tw4,dx			;Y offset
-	jmp	@F
+	jmp	_aim_0179
 topok:
 	mov	eax,SCRWB
 	imul	eax,edx
 	mov	tw4,ax			;Y offset
-@@:
+_aim_0179:
 	mov	ax,drawclipy
 	sub	ax,dx			;Lines left
 	jle	done			;Completely off bottom?
@@ -6924,20 +6934,20 @@ sethgt:	mov	tw2,cx			;Save height
 
 	mov	eax,prtx
 	TST	eax
-	jge	@F			;No left clip?
+	jge	_aim_0180			;No left clip?
 	add	ecx,eax
 	jle	done			;All left clipped?
 	neg	eax
 	add	esi,eax
 	mov	prtx,0
-@@:
+_aim_0180:
 	mov	eax,prtx
 	add	eax,ecx
 	sub	eax,640
-	jle	@F			;No right clip?
+	jle	_aim_0181			;No right clip?
 	sub	ecx,eax
 	jle	done			;All right clipped?
-@@:
+_aim_0181:
 
 ;���������������
 
@@ -7010,7 +7020,7 @@ ynorm:	add	cx,iwincx
 
 	mov	esi,[ebx].IMG.PTTBL_p	;>Draw anipt3
 	TST	esi
-	jz	@F			;None?
+	jz	_aim_0182			;None?
 
 	push	ebx
 	mov	cx,[esi].PTTBL.X
@@ -7022,11 +7032,11 @@ ynorm:	add	cx,iwincx
 	mov	bl,0fch
 	call	crossh_draw
 	pop	ebx
-@@:
+_aim_0182:
 
 ;	mov	cx,iwinrx		;Draw reference mark
 ;	TST	cx
-;	jl	@F
+;	jl	_aim_0183
 ;	mov	dx,iwinry
 ;	mov	bl,0fdh
 ;	call	crossh_drawsml
@@ -7067,9 +7077,9 @@ boxlp:
 	mov	prtcolors,0feh
 
 	cmp	ecx,mpboxselect
-	jne	@F
+	jne	_aim_0183
 	mov	prtcolors,0ffh		;Yellow
-@@:
+_aim_0183:
 	PUSHM	ecx,edi
 
 	movzx	eax,[esi].PTBOX.X
@@ -7123,7 +7133,7 @@ cboxlp:
 	mov	prtcolors,0ffh
 
 ;	cmp	ecx,cboxselect
-;	jne	@F
+;	jne	_aim_0184
 ;	mov	prtcolors,0ffh		;Yellow
 ;@@:
 	PUSHM	ecx,edi
@@ -7451,7 +7461,7 @@ scldone:
 
 	mov	esi,[ebx].IMG.PTTBL_p	;>Draw anipt3
 	TST	esi
-	jz	@F			;None?
+	jz	_aim_0184			;None?
 
 	movsx	eax,[esi].PTTBL.X
 	shl	eax,8			;*256
@@ -7474,18 +7484,18 @@ scldone:
 
 	mov	bl,0fch
 	call	crossh_draw
-@@:
+_aim_0184:
 noap:
 ;���������������
 
 
 	mov	cx,iwinrx		;Draw reference mark
 	TST	cx
-	jl	@F
+	jl	_aim_0185
 	mov	dx,iwinry
 	mov	bl,0fdh
 	call	crossh_drawsml
-@@:
+_aim_0185:
 
 
 x:
@@ -7610,12 +7620,12 @@ f:
 
 	lea	esi,pal_p		;Find previous
 	dec	eax
-	jl	@F			;1st one?
+	jl	_aim_0186			;1st one?
 
 	call	pal_find
 	jz	x			;Bad selection?
 	mov	esi,eax
-@@:
+_aim_0186:
 	mov	edi,[esi]
 	TST	edi
 	jz	x
@@ -7741,21 +7751,21 @@ x:	ret
 	jnz	sel			;Toggle?
 
 	test	mousebchg,2
-	jnz	@F			;Toggle?
+	jnz	_aim_0187			;Toggle?
 
 	cmp	eax,plselected
 	je	x			;Already selected?
-@@:
+_aim_0187:
 	mov	ebx,eax
 	call	pal_find
 	jz	x
 	xor	[eax].PAL.FLAGS,MARKED
 	mov	eax,ebx
-	jmp	@F
+	jmp	_aim_0188
 sel:
 	cmp	eax,plselected
 	je	x			;Already selected?
-@@:
+_aim_0188:
 	call	plst_select
 	jmp	x
 
@@ -7808,9 +7818,9 @@ x:	popad
 	mov	ecx,255				;>Clr pal_t
 	CLR	eax
 	mov	edi,offset pal_t+2
-@@:	mov	[edi],ax
+_aim_0189:	mov	[edi],ax
 	add	edi,2
-	loop	@B
+	loop	_aim_0189
 
 
 	mov	eax,[esi].PAL.DATA_p
@@ -7828,10 +7838,10 @@ x:	popad
 
 	mov	ebx,offset palmap_t		;>Init map
 	CLR	al
-@@:	mov	[ebx],al
+_aim_0190:	mov	[ebx],al
 	inc	ebx
 	inc	al
-	jnz	@B
+	jnz	_aim_0190
 
 
 	call	palblk_prtinfo
@@ -7883,13 +7893,13 @@ x:
 	CLR	cl				;>Convert format of palmap
 	mov	esi,offset palmap_t
 	CLR	eax
-@@:
+_aim_0191:
 	mov	al,[esi]			;Get pix # in this location
 	inc	esi
 	mov	BPTR pal_t+2[eax],cl		;Use pal_t as buffer
 
 	inc	cl
-	jnz	@B
+	jnz	_aim_0191
 
 
 ;���������������				;>Remap pixels
@@ -7913,10 +7923,10 @@ mplp:
 	CLR	eax
 plp:	mov	al,[edi]
 	TST	al
-	jz	@F				;0 pix?
+	jz	_aim_0192				;0 pix?
 	mov	al,BPTR pal_t+2[eax]		;Get new position
 	mov	[edi],al
-@@:	inc	edi
+_aim_0192:	inc	edi
 	loop	plp
 
 mpnxt:
@@ -7950,14 +7960,14 @@ x:
 	mov	ebx,plselected
 	mov	eax,pl1stprt
 	cmp	ebx,eax
-	jb	@F			;Off top?
+	jb	_aim_0193			;Off top?
 	sub	ebx,PLSTROW-1
 	cmp	ebx,eax
 	jbe	vis			;!Off bottom?
 	TST	ebx
-	jge	@F
+	jge	_aim_0193
 	CLR	ebx
-@@:	mov	pl1stprt,ebx
+_aim_0193:	mov	pl1stprt,ebx
 vis:
 
 	mov	ax,PLSTW
@@ -8224,10 +8234,10 @@ mplp:
 	CLR	eax
 plp:	mov	al,[edi]
 	TST	al
-	jz	@F				;0 pix?
+	jz	_aim_0194				;0 pix?
 	mov	al,BPTR palmrgmap_t[eax]	;Get new position
 	mov	[edi],al
-@@:	inc	edi
+_aim_0194:	inc	edi
 	loop	plp
 
 mpnxt:
@@ -8260,14 +8270,14 @@ delsmlp:
 
 
 	lea	esi,img_p
-	jmp	@F
+	jmp	_aim_0195
 ifixlp:
 	movzx	eax,[esi].IMG.PALNUM
 	cmp	eax,pnum
-	jle	@F
+	jle	_aim_0195
 
 	dec	[esi].IMG.PALNUM
-@@:
+_aim_0195:
 	mov	esi,[esi]
 	TST	esi
 	jnz	ifixlp
@@ -8352,34 +8362,34 @@ dlp:
 	and	al,1fh
 	imul	eax,eax
 	sub	eax,sred
-	jge	@F
+	jge	_aim_0196
 	neg	eax
-@@:	add	edx,eax
+_aim_0196:	add	edx,eax
 
 	movzx	eax,WPTR [edi]
 	shr	eax,5
 	and	eax,1fh
 	imul	eax,eax
 	sub	eax,sgrn
-	jge	@F
+	jge	_aim_0197
 	neg	eax
-@@:	add	edx,eax
+_aim_0197:	add	edx,eax
 
 	movzx	eax,BPTR [edi]
 	and	al,1fh
 	imul	eax,eax
 	sub	eax,sblu
-	jge	@F
+	jge	_aim_0198
 	neg	eax
-@@:	add	edx,eax
+_aim_0198:	add	edx,eax
 
 	cmp	mdelta,edx
-	jle	@F				;Last is closer match?
+	jle	_aim_0199				;Last is closer match?
 	mov	mdelta,edx
 	mov	eax,dlen
 	sub	eax,ecx
 	mov	mnum,eax
-@@:
+_aim_0199:
 
 	add	edi,2
 	loop	dlp
@@ -8482,16 +8492,16 @@ cntnxt:
 maxlp:
 	mov	eax,[ebx]
 	cmp	eax,edx
-	jbe	@F
+	jbe	_aim_0200
 	mov	edx,eax				;New max
-@@:
+_aim_0200:
 	add	ebx,4
 	loop	maxlp
 
 	cmp	edx,1
-	jge	@F
+	jge	_aim_0201
 	mov	edx,1
-@@:
+_aim_0201:
 	mov	hmax,edx
 
 ;���������������				>Print imgcnt and max
@@ -8536,18 +8546,18 @@ dlp:
 	cdq
 	idiv	hmax				;Scale to fit
 	cmp	eax,270
-	jbe	@F
+	jbe	_aim_0202
 	mov	eax,270
-@@:
+_aim_0202:
 	push	ecx
 
 	mov	ecx,linex2
 	mov	edx,liney2
 	sub	edx,eax
 	cmp	DPTR [esi],0
-	jne	@F				;Used?
+	jne	_aim_0203				;Used?
 	add	edx,7				;Show as not used
-@@:
+_aim_0203:
 	call	line_draw
 	inc	linex2
 	inc	ecx
@@ -8643,9 +8653,9 @@ cntnxt:
 cnlp:
 	mov	eax,[ebx]
 	TST	eax
-	jz	@F
+	jz	_aim_0204
 	inc	edx
-@@:
+_aim_0204:
 	add	ebx,4
 	loop	cnlp
 
@@ -8686,12 +8696,12 @@ d2lp:
 
 	POPM	ebx,ecx,esi,edi
 
-	jmp	@F
+	jmp	_aim_0205
 dnxt:
 	add	esi,4
 	add	edi,2
 	inc	ebx
-@@:
+_aim_0205:
 	loop	dlp
 
 	pop	esi
@@ -8785,6 +8795,7 @@ nxt:	mov	esi,[esi]
  SUBEND
 
 	.data
+
 memerr_s	db	"Memory error!",0
 
 
