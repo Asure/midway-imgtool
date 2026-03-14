@@ -8,6 +8,7 @@
 param(
     [string]$SourceDir  = "\\wsl.localhost\Ubuntu\home\alex\midway-imgtool",
     [string]$BuildRoot  = "$env:LOCALAPPDATA\imgtool-build",
+    [string]$SharedDeps = "$env:LOCALAPPDATA\midway-build\deps",
     [string]$Sdl2Ver    = ""          # leave empty to auto-fetch latest SDL2 2.x
 )
 
@@ -17,12 +18,20 @@ $ErrorActionPreference = "Stop"
 # -----------------------------------------------------------------------
 # 1. Locate VS 2022
 # -----------------------------------------------------------------------
-$vcvarsall = "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall.bat"
-if (-not (Test-Path $vcvarsall)) {
-    Write-Error "VS 2022 Community not found at:`n  $vcvarsall"
-    exit 1
-}
-Write-Host "[1/4] Found VS 2022" -ForegroundColor Cyan
+$vsRoots = @(
+    "C:\Program Files\Microsoft Visual Studio\2022\Community",
+    "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools",
+    "C:\Program Files\Microsoft Visual Studio\2022\Professional",
+    "C:\Program Files\Microsoft Visual Studio\2022\Enterprise"
+)
+$vsRoot = $vsRoots | Where-Object { Test-Path "$_\VC\Auxiliary\Build\vcvarsall.bat" } | Select-Object -First 1
+if (-not $vsRoot) { Write-Error "VS 2022 not found"; exit 1 }
+$vcvarsall = "$vsRoot\VC\Auxiliary\Build\vcvarsall.bat"
+$cmakeRel  = "Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe"
+$vsCmake   = ($vsRoots | ForEach-Object { "$_\$cmakeRel" } | Where-Object { Test-Path $_ } | Select-Object -First 1)
+if ($vsCmake) { $vsCmake = Split-Path $vsCmake } else { $vsCmake = "" }
+Write-Host "[1/4] Found VS 2022 at $vsRoot" -ForegroundColor Cyan
+if ($vsCmake) { Write-Host "      cmake: $vsCmake" -ForegroundColor Cyan } else { Write-Host "      cmake not found in VS installs, relying on PATH" -ForegroundColor Yellow }
 
 # -----------------------------------------------------------------------
 # 2. Resolve SDL2 version
@@ -42,28 +51,27 @@ if (-not $Sdl2Ver) {
     Write-Host "[2/4] Using SDL2 $Sdl2Ver" -ForegroundColor Cyan
 }
 
-$depsDir   = "$BuildRoot\deps"
-$sdl2Root  = "$depsDir\SDL2-$Sdl2Ver"
+$sdl2Root  = "$SharedDeps\SDL2-$Sdl2Ver"
 $sdl2Cmake = "$sdl2Root\cmake"
 $buildDir  = "$BuildRoot\build"
 
-New-Item -ItemType Directory -Force -Path $BuildRoot | Out-Null
-New-Item -ItemType Directory -Force -Path $depsDir   | Out-Null
-New-Item -ItemType Directory -Force -Path $buildDir  | Out-Null
+New-Item -ItemType Directory -Force -Path $BuildRoot  | Out-Null
+New-Item -ItemType Directory -Force -Path $SharedDeps | Out-Null
+New-Item -ItemType Directory -Force -Path $buildDir   | Out-Null
 
 # -----------------------------------------------------------------------
-# 3. Download + extract SDL2 VC dev package
+# 3. SDL2 (shared with bddview — stored in midway-build\deps)
 # -----------------------------------------------------------------------
 if (-not (Test-Path $sdl2Root)) {
     $url = "https://github.com/libsdl-org/SDL/releases/download/release-$Sdl2Ver/SDL2-devel-$Sdl2Ver-VC.zip"
-    $zip = "$depsDir\sdl2.zip"
+    $zip = "$SharedDeps\sdl2.zip"
     Write-Host "[3/4] Downloading SDL2-devel-$Sdl2Ver-VC.zip ..." -ForegroundColor Cyan
     (New-Object Net.WebClient).DownloadFile($url, $zip)
     Write-Host "      Extracting..."
-    Expand-Archive -Path $zip -DestinationPath $depsDir -Force
+    Expand-Archive -Path $zip -DestinationPath $SharedDeps -Force
     Remove-Item $zip
 } else {
-    Write-Host "[3/4] SDL2 $Sdl2Ver already present" -ForegroundColor Cyan
+    Write-Host "[3/4] SDL2 $Sdl2Ver already present (shared)" -ForegroundColor Cyan
 }
 
 if (-not (Test-Path $sdl2Cmake)) {
@@ -76,22 +84,18 @@ if (-not (Test-Path $sdl2Cmake)) {
 # -----------------------------------------------------------------------
 Write-Host "[4/4] Configuring and building (x86 Release)..." -ForegroundColor Cyan
 
-$bat = @"
-@echo off
-call "$vcvarsall" x86
-if errorlevel 1 exit /b 1
-
-cmake -B "$buildDir" -G "Visual Studio 17 2022" -A Win32 ^
-    -DSDL2_DIR="$sdl2Cmake" ^
-    "$SourceDir"
-if errorlevel 1 exit /b 1
-
-cmake --build "$buildDir" --config Release
-if errorlevel 1 exit /b 1
-"@
-
+$lines = @(
+    "@echo off",
+    "call `"$vcvarsall`" x86",
+    "if errorlevel 1 exit /b 1",
+    "set PATH=$vsCmake;%PATH%",
+    "cmake -B `"$buildDir`" -G `"Visual Studio 17 2022`" -A Win32 -DSDL2_DIR=`"$sdl2Cmake`" `"$SourceDir`"",
+    "if errorlevel 1 exit /b 1",
+    "cmake --build `"$buildDir`" --config Release",
+    "if errorlevel 1 exit /b 1"
+)
 $batFile = "$env:TEMP\build_imgtool.bat"
-[System.IO.File]::WriteAllText($batFile, $bat, [System.Text.Encoding]::ASCII)
+[System.IO.File]::WriteAllLines($batFile, $lines, [System.Text.Encoding]::ASCII)
 & cmd.exe /c $batFile
 $exitCode = $LASTEXITCODE
 
