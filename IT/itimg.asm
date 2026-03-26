@@ -131,6 +131,7 @@ forgetit_s	db	"FORGET IT!",0
 append_s	db	"APPEND",0
 save_s		db	"SAVE",0
 smlconv_s	db	"Old small model converted to large.",0
+oldconv_s	db	"Old format IMG converted.",0
 bogusfv_s	db	"Bogus file version!",0
 werror_s	db	"Write error, you must resave!",0
 
@@ -176,6 +177,10 @@ anf_s		db	"ANF "
 	BSSD	tl3			;^
 	BSSD	tl4			;^
 	BSSD	tl5			;^
+
+	BSSD	oldimg_tbl_p		;* converted IMAGE table in mempool (0=none)
+	BSSD	oldimg_cur_p		;^ moving read ptr during imglp
+	BSS	oldimgtmp	,42	;Temp: one old-format IMAGE record (42 bytes)
 
 	BSSW	rawbits			;Bit buffer for raw write
 	BSSB	bitshift		;Raw write bit shift
@@ -376,7 +381,7 @@ p2_s	db	"WRITE ANILST",0
 	align	4
 
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 ILSTID		equ	000h
 IWINID		equ	100h
@@ -1003,6 +1008,7 @@ key_t	equ	$			;Routines for main key presses
 
 
 	mov	ilpalloaded,-1
+	mov	oldimg_tbl_p,0			;Reset old-format conversion state
 
 
 
@@ -1018,8 +1024,20 @@ key_t	equ	$			;Routines for main key presses
 	jc	x
 
 	cmp	lib_hdr.TEMP,0abcdh
-	jne	bogus				;Old?
+	je	check_ver			;TEMP ok, check VERSION normally
 
+	cmp	lib_hdr.VERSION,500h		;VERSION >= 500h with bad TEMP = truly bogus
+	jge	bogus
+
+	call	convert_old_img			;Try old pre-WimpV5 conversion
+	jz	bogus				;Failed (bad data or out of memory)
+
+	mov	al,1
+	mov	esi,offset oldconv_s
+	call	msgbox_open
+	jmp	vok
+
+check_ver:
 	mov	ax,lib_hdr.VERSION		;Verify
 	cmp	ax,634h
 	jge	vok				;Large model?
@@ -1043,7 +1061,7 @@ vok:
 	mov	damcnt,eax
 
 
-;ддддддддддддддд				>Set file offset to sequences
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Set file offset to sequences
 
 	mov	edx,lib_hdr.OSET
 
@@ -1066,7 +1084,7 @@ vok:
 	jc	x				;Error?
 
 
-;ддддддддддддддд				>Scan sequences
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Scan sequences
 
 	mov	scrseqbytes,0
 
@@ -1101,7 +1119,7 @@ seqlp:	push	ecx
 	loop	seqlp
 noseqs:
 
-;ддддддддддддддд				>Scan scripts
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Scan scripts
 
 	movsx	ecx,lib_hdr.SCRCNT
 	TST	ecx
@@ -1134,7 +1152,7 @@ scrlp:	push	ecx
 	loop	scrlp
 noscrs:
 
-;ддддддддддддддд				>Get mem and read seq&scr
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Get mem and read seq&scr
 
 	movsx	eax,lib_hdr.SEQCNT
 	mov	seqcnt,eax
@@ -1173,7 +1191,7 @@ zss:
 	jc	x				;Error?
 noss:
 
-;ддддддддддддддд				>Save offset to point tables
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Save offset to point tables
 
 
 	CLR	edx
@@ -1185,7 +1203,7 @@ noss:
 	mov	ptoset,edx
 
 
-;ддддддддддддддд				>Read images and data
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Read images and data
 
 	mov	eax,palcnt
 	mov	palno,eax
@@ -1196,9 +1214,12 @@ noss:
 	movzx	eax,lib_hdr.IMGCNT
 	mov	cnt,eax
 
-;ддддддддддддддд				>Read img header
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Read img header
 
 imglp:
+
+	cmp	oldimg_tbl_p,0			;Old-format converted? Skip file seek
+	jne	imglp_nofileseek
 
 	mov	edx,imgoset
 	add	imgoset,sizeof IMAGE
@@ -1207,12 +1228,15 @@ imglp:
 	I21SETFPS				;Change offset
 	jc	x				;Error?
 
-
+imglp_nofileseek:
 	call	img_alloc
 	jz	x
 	mov	esi,eax
 
 	lea	edi,imagetmp
+
+	cmp	oldimg_tbl_p,0
+	jne	imglp_copymem
 
 	mov	ecx,sizeof IMAGE
 	mov	edx,edi
@@ -1220,6 +1244,18 @@ imglp:
 	jc	x				;Error?
 	cmp	eax,sizeof IMAGE
 	jne	x
+	jmp	imglp_haverec
+
+imglp_copymem:				;Copy record from in-memory converted table
+	push	esi
+	mov	esi,oldimg_cur_p
+	add	oldimg_cur_p,sizeof IMAGE
+	mov	ecx,sizeof IMAGE
+	rep	movsb
+	pop	esi
+	lea	edi,imagetmp			;rep movsb advanced edi; restore
+
+imglp_haverec:
 
 	cmp	lib_hdr.VERSION,634h
 	jge	@F				;Far ptr version?
@@ -1266,7 +1302,7 @@ imglp:
 	call	strcpy
 
 
-;ддддддддддддддд				>Read img data
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Read img data
 
 	mov	edx,imagetmp.OSET
 	mov	ecx,edx
@@ -1290,7 +1326,7 @@ imglp:
 	jc	x				;Error?
 
 
-;ддддддддддддддд				>Read point table
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Read point table
 
 	mov	[esi].IMG.PTTBL_p,0
 
@@ -1325,7 +1361,7 @@ nopttbl:
 
 
 
-;ддддддддддддддд				>Read palettes and data
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Read palettes and data
 
 	movzx	ecx,lib_hdr.PALCNT
 	sub	ecx,NUMDEFPAL			;-defaults
@@ -1334,7 +1370,7 @@ nopttbl:
 	ja	x				;Too many?
 	mov	cnt,ecx
 
-;ддддддддддддддд				>Read pal header
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Read pal header
 
 pallp:
 	mov	edx,paloset
@@ -1370,7 +1406,7 @@ pallp:
 	call	strcpy
 
 
-;ддддддддддддддд				>Read pal data
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Read pal data
 
 
 	mov	edx,palettetmp.OSET
@@ -1398,7 +1434,7 @@ pallp:
 
 nopals:
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 
 	cmp	lib_hdr.VERSION,IMGVER
@@ -1409,7 +1445,7 @@ nopals:
 	call	msgbox_open
 @@:
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 
 	CLR	eax
@@ -1428,6 +1464,137 @@ xx:
 	popad
 	ret
 
+
+ SUBEND
+
+
+;********************************
+;* Convert pre-WimpV5 IMG file to new format in memory
+;* Called from img_load when TEMP != 0xABCD and VERSION < 500h.
+;* imgfileh must already be open and lib_hdr read.
+;* On success: oldimg_tbl_p/oldimg_cur_p set, lib_hdr patched, ZF=0 (EAX != 0)
+;* On failure: ZF=1 (EAX=0)
+;
+;* Old IMAGE record layout (42 bytes, #pragma pack 1):
+;*  +0  name[16]  +16 xoff(sw) +18 yoff(sw) +20 xsize(w) +22 ysize(w)
+;*  +24 palind(sb)+25 flags(b)  +26 oset(dd)  +30 data(dd)
+;*  +34 lib(sw)   +36 pword1(sw)+38 pword2(sw)+40 frame(b) +41 pbyte1(b)
+
+ SUBRP	convert_old_img
+
+	movzx	eax,lib_hdr.IMGCNT
+	TST	eax
+	jz	coi_fail			;0 images?
+
+	imul	eax,sizeof IMAGE		;Allocate new IMAGE table
+	call	mem_alloc
+	jz	coi_fail			;Out of memory
+
+	mov	oldimg_tbl_p,eax
+	mov	edi,eax				;EDI = write ptr into new table
+
+	mov	bx,imgfileh			;BX = file handle
+
+	mov	edx,lib_hdr.OSET		;Seek to old IMAGE table
+	mov	ecx,edx
+	shr	ecx,16
+	I21SETFPS
+	jc	coi_fail
+
+	movzx	eax,lib_hdr.IMGCNT
+	mov	tl3,eax				;Loop counter
+
+coi_lp:
+	mov	ecx,42				;Read one old IMAGE record
+	mov	edx,offset oldimgtmp
+	I21READ
+	jc	coi_fail
+	cmp	eax,42
+	jne	coi_fail
+
+	;--- Zero the new IMAGE slot ---
+	push	edi
+	CLR	eax
+	mov	ecx,sizeof IMAGE
+	rep	stosb
+	pop	edi				;EDI restored to start of new slot
+
+	;--- Copy name (bytes 0-15) ---
+	mov	eax,DPTR [oldimgtmp+0]
+	mov	DPTR [edi+0],eax
+	mov	eax,DPTR [oldimgtmp+4]
+	mov	DPTR [edi+4],eax
+	mov	eax,DPTR [oldimgtmp+8]
+	mov	DPTR [edi+8],eax
+	mov	eax,DPTR [oldimgtmp+12]
+	mov	DPTR [edi+12],eax
+
+	;--- FLAGS = old flags & ~12h  (clear LOADED + DOWN bits) ---
+	movzx	eax,BPTR [oldimgtmp+25]
+	and	al,NOT 12h
+	mov	WPTR [edi].IMAGE.FLAGS,ax
+
+	;--- ANIX = xoff, ANIY = yoff ---
+	mov	ax,WPTR [oldimgtmp+16]
+	mov	[edi].IMAGE.ANIX,ax
+	mov	ax,WPTR [oldimgtmp+18]
+	mov	[edi].IMAGE.ANIY,ax
+
+	;--- W = xsize, H = ysize ---
+	mov	ax,WPTR [oldimgtmp+20]
+	mov	[edi].IMAGE.W,ax
+	mov	ax,WPTR [oldimgtmp+22]
+	mov	[edi].IMAGE.H,ax
+
+	;--- PALNUM = palind (byte, zero-extended) ---
+	movzx	ax,BPTR [oldimgtmp+24]
+	mov	[edi].IMAGE.PALNUM,ax
+
+	;--- OSET = oset, DATA = data ---
+	mov	eax,DPTR [oldimgtmp+26]
+	mov	[edi].IMAGE.OSET,eax
+	mov	eax,DPTR [oldimgtmp+30]
+	mov	[edi].IMAGE.DATA,eax
+
+	;--- LIB = lib ---
+	mov	ax,WPTR [oldimgtmp+34]
+	mov	[edi].IMAGE.LIB,ax
+
+	;--- ANIX2 = pword1, ANIY2 = pword2, ANIZ2 = 0 (already zeroed) ---
+	mov	ax,WPTR [oldimgtmp+36]
+	mov	[edi].IMAGE.ANIX2,ax
+	mov	ax,WPTR [oldimgtmp+38]
+	mov	[edi].IMAGE.ANIY2,ax
+
+	;--- FRM = frame (byte, zero-extended) ---
+	movzx	ax,BPTR [oldimgtmp+40]
+	mov	[edi].IMAGE.FRM,ax
+
+	;--- PTTBLNUM = -1, OPALS = -1 (no point table, no alt palette) ---
+	mov	WPTR [edi].IMAGE.PTTBLNUM,0FFFFh
+	mov	WPTR [edi].IMAGE.OPALS,0FFFFh
+
+	add	edi,sizeof IMAGE		;Advance to next slot
+
+	dec	tl3
+	jg	coi_lp
+
+	;--- Patch lib_hdr to new format ---
+	mov	WPTR lib_hdr.TEMP,0ABCDh
+	mov	WPTR lib_hdr.VERSION,634h
+	mov	WPTR lib_hdr.SEQCNT,0
+	mov	WPTR lib_hdr.SCRCNT,0
+
+	mov	eax,oldimg_tbl_p
+	mov	oldimg_cur_p,eax		;Init read cursor to table start
+
+	TST	eax				;Return ZF=0 (success)
+	ret
+
+coi_fail:
+	CLR	eax
+	TST	eax				;Return ZF=1 (failure)
+	ret
 
  SUBEND
 
@@ -1486,7 +1653,7 @@ xx:
 	jc	error
 
 
-;ддддддддддддддд				>Write pal data
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Write pal data
 
 
 	lea	esi,pal_p
@@ -1511,7 +1678,7 @@ paldnxt:
 	jnz	paldlp
 
 
-;ддддддддддддддд				>Write img data
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Write img data
 
 
 	lea	esi,img_p
@@ -1540,7 +1707,7 @@ imgnxt:
 	jnz	imglp
 
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	CLR	edx
 	CLR	ecx
@@ -1550,7 +1717,7 @@ imgnxt:
 	mov	WPTR lib_hdr.OSET+2,dx
 
 
-;ддддддддддддддд				>Write img headers
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Write img headers
 
 	mov	tl1,0				;Pttbl #
 
@@ -1615,7 +1782,7 @@ wihnxt:
 	jnz	wihlp
 
 
-;ддддддддддддддд				>Write pal headers
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Write pal headers
 
 	lea	esi,pal_p
 	jmp	palhnxt
@@ -1651,7 +1818,7 @@ palhnxt:
 	jnz	palhlp
 
 
-;ддддддддддддддд				>Write scripts/seqs
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Write scripts/seqs
 
 	mov	ecx,scrseqbytes
 	TST	ecx
@@ -1662,7 +1829,7 @@ palhnxt:
 	jc	error
 noss:
 
-;ддддддддддддддд				>Write point table
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Write point table
 
 	lea	esi,img_p
 	jmp	wptnxt
@@ -1681,7 +1848,7 @@ wptnxt:
 	jnz	wptlp
 
 
-;ддддддддддддддд				>Write final lib header
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Write final lib header
 
 
 	CLR	edx				;To start
@@ -1695,7 +1862,7 @@ wptnxt:
 	jc	error				;Error?
 
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	mov	fileerr,0			;OK!
 
@@ -2083,7 +2250,7 @@ sel:
 	jmp	x
 
 n0:
-;ддддддддддддддд			>Move all marked imgs anipt #1
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫			>Move all marked imgs anipt #1
 
 	cmp	al,30h
 	jne	n30
@@ -2134,7 +2301,7 @@ amdone:
 	jmp	ilst_prt
 
 n30:
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	mov	ebx,eax
 
@@ -2182,7 +2349,7 @@ anigad:
 	jmp	x
 
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 flaggad:
 	mov	edi,[esi].IMG.PTTBL_p
@@ -2609,7 +2776,7 @@ x:	ret
 	jz	x			;!Found?
 	mov	esi,eax			;ESI=*IMG struc
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 					;>Alt cursor keys
 	cmp	dh,98h			;>Up
@@ -2628,7 +2795,7 @@ x:	ret
 	jne	@F
 	dec	[esi].IMG.ANIX
 @@:
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 					;>Ctrl cursor keys
 
 	cmp	cboxon,0
@@ -2713,7 +2880,7 @@ clft:	test	al,1
 	sub	[edi].PTTBL.X,cx
 @@:
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 chome:					;>C-Home
 	mov	cx,1
 	cmp	dh,77h
@@ -2768,7 +2935,7 @@ apmok:	mov	aniptmode,al
 	jmp	ilst_prtaniptmode
 
 @@:
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	cmp	dh,4bh			;>Previous marked
 	jne	@F
@@ -2777,7 +2944,7 @@ apmok:	mov	aniptmode,al
 	dec	ecx
 	jmp	domrk
 @@:
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	cmp	dh,4dh			;>Next marked
 	jne	@F
@@ -2812,7 +2979,7 @@ mrk:
 	jmp	ilst_select
 @@:
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 ;	mov	cx,1
 ;	cmp	dh,41h			;>F7 (Height+1)
@@ -3328,7 +3495,7 @@ lp:	mov	eax,cnt
 	jz	lp
 
 
-;ддддддддддддддд			>Do least square on box
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫			>Do least square on box
 
 	mov	edi,eax
 
@@ -3534,7 +3701,7 @@ cylp:
 
 	jmp	lp
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 merr:
 	call	msg_memerr
@@ -3613,7 +3780,7 @@ lp:	mov	eax,cnt
 	jz	lp
 
 
-;ддддддддддддддд			>Process image
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫			>Process image
 
 	mov	edi,eax
 
@@ -3712,7 +3879,7 @@ pixnxt:
 	jge	pixlp
 
 
-;ддддддддддддддд			>Delete flagged pixels
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫			>Delete flagged pixels
 
 	mov	ebx,esi
 	mov	edx,[edi].IMG.DATA_p
@@ -3735,7 +3902,7 @@ dellp:
 	jg	dellp
 
 
-;ддддддддддддддд			>Find lonely pixels
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫			>Find lonely pixels
 
 
 	movzx	eax,[edi].IMG.W
@@ -3805,7 +3972,7 @@ lpixnxt:
 	jge	lpixlp
 
 
-;ддддддддддддддд			>Delete flagged pixels
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫			>Delete flagged pixels
 
 	mov	ebx,esi
 	mov	edx,[edi].IMG.DATA_p
@@ -3828,7 +3995,7 @@ del2lp:
 	jg	del2lp
 
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 
 	mov	eax,esi
@@ -3837,7 +4004,7 @@ del2lp:
 
 	jmp	lp
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 merr:
 	call	msg_memerr
@@ -3883,7 +4050,7 @@ lp:	mov	eax,cnt
 	jz	lp
 
 
-;ддддддддддддддд			>Process image
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫			>Process image
 
 	mov	edi,eax
 
@@ -3915,7 +4082,7 @@ xnxt:
 
 	jmp	lp
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 
 draw:
@@ -4024,7 +4191,7 @@ sortend:
 	je	draw			;None?
 
 
-;ддддддддддддддд			>Get mem block
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫			>Get mem block
 
 	mov	eax,(LMAX+1)*4+LMAX*256+FSZ
 	call	mem_alloc
@@ -4051,7 +4218,7 @@ sortend:
 	mov	aff_p,eax
 
 
-;ддддддддддддддд			>Build TGA and face info
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫			>Build TGA and face info
 
 
 	mov	esi,srt_p
@@ -4193,7 +4360,7 @@ icpylp:
 
 
 
-;ддддддддддддддд			>Count used lines
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫			>Count used lines
 
 	mov	esi,dst_p
 	CLR	eax
@@ -4207,7 +4374,7 @@ icpylp:
 	mov	lcnt,eax
 
 
-;ддддддддддддддд			>Display
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫			>Display
 
 
 	mov	esi,dsti_p
@@ -4261,7 +4428,7 @@ zero:	add	esi,edx
 	call	waiton_keyormouse
 
 
-;ддддддддддддддд				>Open filereq
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Open filereq
 
 	mov	BPTR fnametmp_s,0
 
@@ -4317,7 +4484,7 @@ zero:	add	esi,edx
 	I21WRITE
 	jc	error
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 						;>Write palette
 	movzx	ecx,[edi].PAL.NUMC
 	shl	ecx,1
@@ -4326,7 +4493,7 @@ zero:	add	esi,edx
 	jc	error				;Error?
 
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 						;>Write pixels
 	mov	ecx,lcnt
 	mov	edx,256
@@ -4346,7 +4513,7 @@ pixlp:
 	loop	pixlp
 
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	mov	fileerr,0			;Clr error flag
 
@@ -4363,7 +4530,7 @@ error2:
 @@:
 
 
-;ддддддддддддддд				>Write ANF file
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Write ANF file
 
 
 	mov	al,'.'				;ANF extension
@@ -4420,7 +4587,7 @@ afwlp:
 	jmp	afwlp
 afwend:
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	mov	fileerr,0			;Clr error flag
 
@@ -4436,14 +4603,14 @@ aerr2:
 
 @@:
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 nospc:
 	mov	eax,dst_p
 	call	mem_free
 
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 
 draw:
@@ -4631,7 +4798,7 @@ chkform:
 fok:
 	mov	tw1,0
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 chunklp:
 	CLR	ecx				;Check file boundary
@@ -4660,7 +4827,7 @@ chunklp:
 	rol	eax,16
 	rol	ax,8
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 
 
@@ -4671,7 +4838,7 @@ chunklp:
 	jmp	chkform
 noform:
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	cmp	tl1,'DHMB'
 	jne	nobmhd				;!BMHD?
@@ -4695,7 +4862,7 @@ noform:
 
 nobmhd:
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	cmp	tl1,'PAMC'
 	jne	nocmap				;!CMAP?
@@ -4769,7 +4936,7 @@ pallp:
 	jmp	chunklp
 nocmap:
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	cmp	tl1,'YDOB'
 	jne	nobody				;!BODY?
@@ -4908,7 +5075,7 @@ bdone:
 	jmp	eof
 nobody:
 
-;ддддддддддддддд				>Skip unknown chunk
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Skip unknown chunk
 
 	mov	edx,eax
 	shr	eax,16
@@ -4919,7 +5086,7 @@ nobody:
 	jmp	chunklp
 
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 eof:
 	cmp	tw1,7
@@ -5109,7 +5276,7 @@ x:
 	I21WRITE
 	jc	error
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 						;>Write palette
 	mov	edi,offset pal_t
 	mov	ecx,256
@@ -5141,7 +5308,7 @@ pallp:
 	add	edi,2
 	loop	pallp
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	mov	ecx,4				;>Write BODY
 	mov	edx,offset body_s
@@ -5204,7 +5371,7 @@ pixlp:
 	jc	error
 
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	mov	fileerr,0			;Clr error flag
 
@@ -5301,7 +5468,7 @@ lp:
 	jne	error				;Bad pal type?
 @@:
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	call	img_alloc
 	jz	error
@@ -5347,7 +5514,7 @@ lp:
 	mov	BPTR [edi],0
 
 
-;ддддддддддддддд				;>Read palette
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				;>Read palette
 
 
 	movzx	ecx,tga_hdr.CMLEN
@@ -5415,7 +5582,7 @@ pallp:
 	mov	WPTR [edi],'P'
 
 
-;ддддддддддддддд				;>Read pixels
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				;>Read pixels
 
 
 	movzx	ecx,tga_hdr.H
@@ -5449,7 +5616,7 @@ pixlp:
 
 
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 
 	mov	fileerr,0			;Clr error flag
@@ -5560,7 +5727,7 @@ x:
 	I21WRITE
 	jc	error
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 						;>Write palette
 	movzx	ecx,[edi].PAL.NUMC
 	shl	ecx,1
@@ -5569,7 +5736,7 @@ x:
 	jc	error				;Error?
 
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 						;>Write pixels
 	movzx	ecx,[esi].IMG.H
 	movzx	edx,[esi].IMG.W
@@ -5594,7 +5761,7 @@ pixlp:
 	loop	pixlp
 
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	mov	fileerr,0			;Clr error flag
 
@@ -5631,7 +5798,7 @@ x:
 	local	cnt:dword,\
 		aninum:dword
 
-;ддддддддддддддд				>Open filereq
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Open filereq
 
 	mov	DPTR fpath_s,'\:d'
 	mov	WPTR fnametmp_s,'x'
@@ -5643,7 +5810,7 @@ x:
 	call	filereq_open
 	jnz	draw
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	mov	fileerr,1
 
@@ -5703,7 +5870,7 @@ ilp:
 	jmp	ilp
 iend:
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	mov	fileerr,0			;Clr error flag
 
@@ -5719,7 +5886,7 @@ error2:
 
 @@:
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 
 draw:
@@ -5813,7 +5980,7 @@ nxt:	mov	esi,[esi]
 	jmp	x
 
 n0:
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	cmp	al,10h
 	jne	n10
@@ -5821,7 +5988,7 @@ n0:
 
 	jmp	x
 n10:
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 ;	cmp	al,20h
 ;	jne	n20
@@ -5964,7 +6131,7 @@ fnd:
 	mov	[esi].PTBOX.H,bl
 
 
-;ддддддддддддддд			>Get work buffer
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫			>Get work buffer
 
 
 	movzx	eax,[edi].IMG.W
@@ -5990,7 +6157,7 @@ fnd:
 	jg	@B
 
 
-;ддддддддддддддд			>Clr pixels in work buf of prev def boxes
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫			>Clr pixels in work buf of prev def boxes
 
 	mov	pt_p,esi
 	push	esi
@@ -6042,7 +6209,7 @@ cboxnxt:
 	pop	esi
 
 
-;ддддддддддддддд			>Do least square on box
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫			>Do least square on box
 
 
 lxlp:					;>Check left edge
@@ -6151,7 +6318,7 @@ abort:
 
 @@:
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 
 	mov	eax,[edi].IMG.TEMP	;Work buf
@@ -6285,7 +6452,7 @@ x:
 	jmp	x
 
 n0:
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	cmp	al,20h
 	jne	n20
@@ -6295,7 +6462,7 @@ n0:
 	jmp	x
 
 n20:
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	call	cbox_copytomrkd
 
@@ -6428,7 +6595,7 @@ hvpt:
 
 
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 
 	CLR	eax
@@ -6591,7 +6758,7 @@ gadup:
 	jmp	x
 
 n0:
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	cmp	al,8
 	jne	n8
@@ -6602,7 +6769,7 @@ n0:
 	mov	edi,offset iwincx
 	jmp	scrl
 n8:
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	mov	eax,offset iwin_showscale
 	mov	cx,64
@@ -6941,7 +7108,7 @@ sethgt:	mov	tw2,cx			;Save height
 	jle	done			;All right clipped?
 @@:
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 lpx:	push	ecx
 
@@ -6978,7 +7145,7 @@ zero:	add	esi,edx
 
 done:
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	cmp	iwinanipton,0
 	je	noap
@@ -7035,7 +7202,7 @@ ynorm:	add	cx,iwincx
 ;@@:
 
 noap:
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	mov	esi,[ebx].IMG.PTTBL_p	;>Draw multi part & collision boxes
 	TST	esi
@@ -7197,7 +7364,7 @@ cboxnxt:
 
 nocbox:
 noboxes:
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 
 noimg:
@@ -7398,7 +7565,7 @@ skipx:
 
 scldone:
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	pop	ecx
 
@@ -7472,7 +7639,7 @@ scldone:
 	call	crossh_draw
 @@:
 noap:
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 
 	mov	cx,iwinrx		;Draw reference mark
@@ -7754,7 +7921,7 @@ sel:
 	jmp	x
 
 n0:
-;ддддддддддддддд			>Move all marked imgs anipt 1
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫			>Move all marked imgs anipt 1
 
 	cmp	al,40h
 	jne	n40
@@ -7763,7 +7930,7 @@ n0:
 	jmp	x
 
 n40:
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 
 
@@ -7872,7 +8039,7 @@ x:
 	add	ecx,ecx				;*2
 	call	mem_copy
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	CLR	cl				;>Convert format of palmap
 	mov	esi,offset palmap_t
@@ -7886,7 +8053,7 @@ x:
 	jnz	@B
 
 
-;ддддддддддддддд				;>Remap pixels
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				;>Remap pixels
 
 
 	lea	esi,img_p
@@ -8194,7 +8361,7 @@ mlp:
 	movzx	edx,[edi].PAL.NUMC
 	call	pal_makemergemap
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	PUSHM	esi,edi
 
@@ -8234,7 +8401,7 @@ mpnxt:
 	jmp	mlp
 
 mend:
-;ддддддддддддддд			>Delete merged pals
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫			>Delete merged pals
 
 	CLR	eax
 	dec	eax
@@ -8269,7 +8436,7 @@ ifixlp:
 
 	jmp	delsmlp
 dend:
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 
 	call	main_draw
@@ -8424,7 +8591,7 @@ PHSTH	equ	256+54
 	mov	esi,eax				;ESI=*PAL struc
 
 
-;ддддддддддддддд				>Clr hist buf
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Clr hist buf
 
 	CLR	eax
 	lea	ebx,hbuf_t
@@ -8435,7 +8602,7 @@ clp:
 	loop	clp
 
 
-;ддддддддддддддд				>Count color usage
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Count color usage
 
 	CLR	eax
 	mov	icnt,eax
@@ -8468,7 +8635,7 @@ cntnxt:
 	jnz	cntlp
 
 
-;ддддддддддддддд				>Find max count
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Find max count
 
 	CLR	edx
 	lea	ebx,hbuf_t+4			;Skip 1st
@@ -8488,7 +8655,7 @@ maxlp:
 @@:
 	mov	hmax,edx
 
-;ддддддддддддддд				>Print imgcnt and max
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Print imgcnt and max
 
 	push	esi
 
@@ -8512,7 +8679,7 @@ maxlp:
 
 	pop	esi
 
-;ддддддддддддддд				>Draw graph
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Draw graph
 
 	mov	eax,PHSTX+24
 	mov	linex2,eax
@@ -8556,7 +8723,7 @@ dlp:
 	loop	dlp
 
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 
 	call	waiton_keyormouse
@@ -8584,7 +8751,7 @@ err:
 	mov	esi,eax				;ESI=*PAL struc
 
 
-;ддддддддддддддд				>Clr hist buf
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Clr hist buf
 
 	CLR	eax
 	lea	ebx,hbuf_t
@@ -8595,7 +8762,7 @@ clp:
 	loop	clp
 
 
-;ддддддддддддддд				>Count color usage
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Count color usage
 
 	CLR	eax
 	mov	icnt,eax
@@ -8628,7 +8795,7 @@ cntnxt:
 	jnz	cntlp
 
 
-;ддддддддддддддд				>Set new color count
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Set new color count
 
 	lea	ebx,hbuf_t+4
 	mov	ecx,255
@@ -8644,7 +8811,7 @@ cnlp:
 	loop	cnlp
 
 
-;ддддддддддддддд				>Pack used colors
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫				>Pack used colors
 
 
 	movzx	ecx,[esi].PAL.NUMC
@@ -8690,7 +8857,7 @@ dnxt:
 
 	pop	esi
 
-;ддддддддддддддд
+;О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
 	call	plst_savepblk
 
