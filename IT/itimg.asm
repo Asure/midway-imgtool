@@ -1585,6 +1585,12 @@ coi_lp:
 	mov	WPTR lib_hdr.SEQCNT,0
 	mov	WPTR lib_hdr.SCRCNT,0
 
+	;--- Adjust OSET so paloset = OSET + N*sizeof(IMAGE) lands on the
+	;    actual palette offset in the old file (OSET + N*42, not N*50)
+	movzx	eax,lib_hdr.IMGCNT
+	imul	eax,sizeof IMAGE - 42		;eax = N * 8
+	sub	lib_hdr.OSET,eax
+
 	mov	eax,oldimg_tbl_p
 	mov	oldimg_cur_p,eax		;Init read cursor to table start
 
