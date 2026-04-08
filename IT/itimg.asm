@@ -54,6 +54,7 @@ SLGAME	equ	0
 	externdef	boxh_drawclip:near
 	externdef	line_draw:near
 	externdef	mem_alloc:near
+	externdef	mem_alloc0:near
 	externdef	mem_free:near
 	externdef	mem_copy:near
 	externdef	mem_duplicate:near
