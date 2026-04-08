@@ -5493,7 +5493,7 @@ lp:
 	add	ax,3
 	and	al,0fch
 	imul	eax,edx
-	call	mem_alloc
+	call	mem_alloc0		;Zero-fill so stride padding bytes are clean
 	jz	error
 	mov	[esi].IMG.DATA_p,eax
 
