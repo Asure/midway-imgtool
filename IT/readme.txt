@@ -3,4 +3,6 @@ Using microsoft make 1.13
 
 SL-18 JUL 94
 
-
+Precompile IT.EXE is included. Place IT.EXE and IT.HLP/CFG into a folder and include it in your path. Enjoy!
+
+AM 9 APR 26
