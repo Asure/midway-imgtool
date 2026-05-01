@@ -1,0 +1,25 @@
+	.DATA
+	.word	2
+Y4AH4A01:
+	.word   34,118,27,110
+	.long   00H
+	.word   06580H
+	.long   YOKRED_P
+	.word   -1,-1,-1,0
+	.word	-21,-106,35,110
+	.word   21,114,-7,110
+	.long   03698H
+	.word   06080H
+	.word	2
+Y4AH4A02:
+	.word   33,115,26,107
+	.long   0620cH
+	.word   06480H
+	.long   YOKRED_P
+	.word   -1,-1,-1,0
+	.word	-21,-106,35,110
+	.word   24,94,-7,90
+	.long   09bfeH
+	.word   06080H
+	.TEXT
+
