@@ -1589,6 +1589,15 @@ static void process_lod(const char *lod_path) {
                 fprintf(g.bgndequ_fp, "W%s\t.EQU\t%d\r\n", bdb_name, bdb_w);
                 fprintf(g.bgndequ_fp, "H%s\t.EQU\t%d\r\n", bdb_name, bdb_h);
             }
+            /* HDRS label: last 2 chars of BDB header name + "HDRS" */
+            int bdb_nlen = (int)strlen(bdb_name);
+            const char *hdr_suffix = (bdb_nlen >= 2) ? bdb_name + bdb_nlen - 2 : bdb_name;
+            char hdrs_label[64];
+            snprintf(hdrs_label, sizeof(hdrs_label), "%sHDRS", hdr_suffix);
+            if (g.bgnd_fp)
+                fprintf(g.bgnd_fp, "%s:\r\n", hdrs_label);
+            if (g.bgndtbl_glo_fp)
+                fprintf(g.bgndtbl_glo_fp, "\t.globl\t%s\r\n", hdrs_label);
 
 #define MAX_GLOBJ 4096
             struct { char name[64]; int is_mod; int wx, dp, sy, ii, fl; } gobjs[MAX_GLOBJ];
