@@ -1696,6 +1696,79 @@ static void process_lod(const char *lod_path) {
             char bmod_list[64][64];
             int n_bmod = 0, mod_obj_count[64] = {0};
 
+            /* Compute SINGLE best LM/TM across ALL BDD images (LOADW uses one
+             * leading/trailing factor per BG block, not per-image). */
+            int best_block_lm = 0, best_block_tm = 0;
+            int64_t best_block_sz = (int64_t)1 << 60;
+            for (int lmt = 0; lmt < 4; lmt++) {
+                int lmm = 1 << lmt;
+                for (int tmt = 0; tmt < 4; tmt++) {
+                    int tmm = 1 << tmt;
+                    int64_t total = 0;
+                    for (int di = 0; di < n_bdds; di++) {
+                        int w = bdds[di].w, h = bdds[di].h;
+                        uint8_t *pix = bdds[di].pix;
+                        int sizx_a = (w + 3) & ~3;
+                        uint32_t maxpx = 0;
+                        for (int pi = 0; pi < w * h; pi++)
+                            if (pix[pi] > maxpx) maxpx = pix[pi];
+                        int per_bpp = bpp_for_max(maxpx);
+                        if (per_bpp < 1 || per_bpp > 8) per_bpp = 4;
+                        for (int row = 0; row < h; row++) {
+                            uint8_t *rp = pix + row * w;
+                            int lead = 0, trail = 0, d1 = 0;
+                            for (int x = 0; x < sizx_a; x++) {
+                                uint8_t px = (x < w) ? rp[x] : 0;
+                                if (!d1 && lead < 120 && px == 0) lead++;
+                                else d1 = 1;
+                                if (d1 && sizx_a - 120 < x)
+                                    if (px == 0) trail++; else trail = 0;
+                            }
+                            int ln = lead / lmm; if (ln > 15) ln = 15;
+                            int tn = trail / tmm; if (tn > 15) tn = 15;
+                            int lc = ln * lmm, tc = tn * tmm;
+                            if (lc + tc > sizx_a) tc = sizx_a - lc;
+                            int stored = sizx_a - lc - tc;
+                            if (stored < 0) stored = 0;
+                            if (stored < 10) {
+                                int i6 = lc, i7 = sizx_a - tc - 1;
+                                if ((i7 - i6) + 1 < 10) {
+                                    int l2c = (i6 - i7) + 9, i9 = l2c;
+                                    if (i6 < l2c) { i9 = l2c - i6; l2c = i6; }
+                                    ln = lmm > 0 ? (lc - l2c) / lmm : 0;
+                                    if (((i7 - (lc - l2c)) + 1) < 10)
+                                        tn = tmm > 0 ? (tc - i9) / tmm : 0;
+                                    lc = ln * lmm; tc = tn * tmm;
+                                    if (lc + tc > sizx_a) tc = sizx_a - lc;
+                                    stored = sizx_a - lc - tc;
+                                    if (stored < 0) stored = 0;
+                                }
+                            }
+                            total += 8 + stored * per_bpp;
+                        }
+                    }
+                    if (total < best_block_sz) {
+                        best_block_sz = total; best_block_lm = lmt; best_block_tm = tmt;
+                    }
+                }
+            }
+            if (g.verbose) printf("  BG block LM=%d TM=%d (%d BDD images)\n", best_block_lm, best_block_tm, n_bdds);
+
+            /* Compute total raw bits for CMP decision */
+            int64_t total_raw = 0;
+            for (int di = 0; di < n_bdds; di++) {
+                int w = bdds[di].w, h = bdds[di].h;
+                uint8_t *pix = bdds[di].pix;
+                int sizx_a = (w + 3) & ~3;
+                uint32_t maxpx = 0;
+                for (int pi = 0; pi < w * h; pi++)
+                    if (pix[pi] > maxpx) maxpx = pix[pi];
+                int per_bpp = bpp_for_max(maxpx);
+                if (per_bpp < 1 || per_bpp > 8) per_bpp = 4;
+                total_raw += sizx_a * h * per_bpp;
+            }
+            int block_cmp = (total_raw > best_block_sz) ? 1 : 0;
+
             for (int gi = 0; gi < ng; gi++) {
                 if (gobjs[gi].is_mod) {
                     const char *mn = gobjs[gi].name;
@@ -1739,47 +1812,10 @@ static void process_lod(const char *lod_path) {
                     img_written[img_i] = 1;
                     img_sags[img_i] = g.irw_bit;
 
-                    int raw_bits = sizx_a * h * per_bpp;
-                    int best_bits = raw_bits, best_lm = 0, best_tm = 0;
-                    for (int lmt = 0; lmt < 4; lmt++) {
-                        int lmm = 1 << lmt;
-                        for (int tmt = 0; tmt < 4; tmt++) {
-                            int tmm = 1 << tmt, total = 0;
-                            for (int row = 0; row < h && total < best_bits; row++) {
-                                uint8_t *rp = pix + row * w;
-                                int lead = 0, trail = 0, d1 = 0;
-                                for (int x = 0; x < sizx_a; x++) {
-                                    uint8_t px = (x < w) ? rp[x] : 0;
-                                    if (!d1 && lead < 120 && px == 0) lead++;
-                                    else d1 = 1;
-                                    if (d1 && sizx_a - 120 < x)
-                                        if (px == 0) trail++; else trail = 0;
-                                }
-                                int ln = lead / lmm; if (ln > 15) ln = 15;
-                                int tn = trail / tmm; if (tn > 15) tn = 15;
-                                int lc = ln * lmm, tc = tn * tmm;
-                                if (lc + tc > sizx_a) tc = sizx_a - lc;
-                                int stored = sizx_a - lc - tc;
-                                if (stored < 0) stored = 0;
-                                if (stored < 10) {
-                                    int i6 = lc, i7 = sizx_a - tc - 1;
-                                    if ((i7 - i6) + 1 < 10) {
-                                        int l2c = (i6 - i7) + 9, i9 = l2c;
-                                        if (i6 < l2c) { i9 = l2c - i6; l2c = i6; }
-                                        ln = lmm > 0 ? (lc - l2c) / lmm : 0;
-                                        if (((i7 - (lc - l2c)) + 1) < 10)
-                                            tn = tmm > 0 ? (tc - i9) / tmm : 0;
-                                    }
-                                }
-                                total += 8 + (sizx_a - ln * lmm - tn * tmm) * per_bpp;
-                            }
-                            if (total < best_bits) { best_bits = total; best_lm = lmt; best_tm = tmt; }
-                        }
-                    }
-
-                    int do_cmp = (g.zon && best_bits < raw_bits) ? 1 : 0;
+                    /* Use single block-level LM/TM for all BDD images */
+                    int best_lm = best_block_lm, best_tm = best_block_tm;
+                    int do_cmp = (g.zon && block_cmp) ? 1 : 0;
                     img_cmp[img_i] = do_cmp; img_lm[img_i] = best_lm;
-                    img_tm[img_i] = best_tm; img_bpp[img_i] = per_bpp;
 
                     int lmm = 1 << best_lm, tmm = 1 << best_tm;
                     if (do_cmp) {
