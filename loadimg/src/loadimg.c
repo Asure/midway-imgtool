@@ -1600,15 +1600,23 @@ static void process_lod(const char *lod_path) {
 
             /* HDRS label: last 2 chars of BDB header name + "HDRS" */
             int bdb_nlen = (int)strlen(bdb_name);
-            /* HDRS/PALS suffix: last 2 chars of BDB header name.
-             * Short names (< 5 chars) get empty suffix (e.g., "TOMB" → "").
-             * Longer names use last 2 chars (e.g., "NUPOOL" → "OL"). */
+            /* HDRS/PALS suffix: chars from index 4 to end of padded 8-char DOS name,
+             * trimmed of trailing spaces. "NUPOOL" → "OL", "TOMB" → "", "FOREST2" → "st2". */
+            char bdb8[9]; int idx;
+            for (idx = 0; idx < 8 && idx < bdb_nlen; idx++) bdb8[idx] = bdb_name[idx];
+            while (idx < 8) bdb8[idx++] = ' ';
+            bdb8[8] = 0;
+            char hdr_buf[8]; int hi = 0;
+            for (int ci = 4; ci < 8; ci++)
+                if (bdb8[ci] != ' ') hdr_buf[hi++] = bdb8[ci];
+            hdr_buf[hi] = 0;
+             const char *hdr_suffix = hdr_buf;
             static char hdrs_label[64] = "";
-            const char *hdr_suffix = (bdb_nlen >= 5) ? bdb_name + bdb_nlen - 2 : "";
-            if (!hdrs_label[0]) {
-                snprintf(hdrs_label, sizeof(hdrs_label), "%sHDRS", hdr_suffix);
-                if (g.bgnd_fp)
-                    fprintf(g.bgnd_fp, "%s:\r\n", hdrs_label);
+            if (g.bgnd_fp) {
+                char cur_hdrs[64];
+                snprintf(cur_hdrs, sizeof(cur_hdrs), "%sHDRS", hdr_suffix);
+                fprintf(g.bgnd_fp, "%s:\r\n", cur_hdrs);
+                if (!hdrs_label[0]) strncpy(hdrs_label, cur_hdrs, 63);
             }
             if (g.bgndtbl_glo_fp) {
                 fprintf(g.bgndtbl_glo_fp, "\t.globl\t%sPALS\r\n", hdr_suffix);
