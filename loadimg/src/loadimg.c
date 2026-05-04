@@ -1884,9 +1884,11 @@ static void process_lod(const char *lod_path) {
                 if (g.bgnd_fp) {
                     uint16_t ctrl = (uint16_t)((img_bpp[di] << 12) | (img_tm[di] << 10) |
                                                 (img_lm[di] << 8) | (img_cmp[di] ? 0x80 : 0));
-                    fprintf(g.bgnd_fp, "\t.word\t%d,%d\r\n", w, h);
-                    fprintf(g.bgnd_fp, "\t.long\t0%XH\r\n", g.base_addr + img_sags[di]);
-                    fprintf(g.bgnd_fp, "\t.word\t0%04XH\r\n", ctrl);
+                    static int first_bgnd = 1;
+                    fprintf(g.bgnd_fp, "\t.word\t%d,%d%s\r\n", w, h, first_bgnd ? "\t;x size, y size" : "");
+                    fprintf(g.bgnd_fp, "\t.long\t0%xH%s\r\n", g.base_addr + img_sags[di], first_bgnd ? "\t;address" : "");
+                    fprintf(g.bgnd_fp, "\t.word\t0%04xH%s\r\n", ctrl, first_bgnd ? "\t;dma ctrl" : "");
+                    first_bgnd = 0;
                 }
             }
 
