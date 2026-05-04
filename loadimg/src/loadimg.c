@@ -1950,6 +1950,16 @@ static void process_lod(const char *lod_path) {
 
             if (g.bgndpal_fp)
                 for (int pi = 0; pi < np; pi++) {
+                    /* Skip palettes already defined in IMGPAL.ASM */
+                    int already_written = 0;
+                    for (int pi2 = 0; pi2 < g.n_palettes; pi2++)
+                        if (g.palettes[pi2].written && strcmp(g.palettes[pi2].name, pals[pi].name) == 0)
+                            { already_written = 1; break; }
+                    if (already_written) {
+                        if (g.bgndtbl_glo_fp)
+                            fprintf(g.bgndtbl_glo_fp, "\t.globl\t%s\r\n", pals[pi].name);
+                        continue;
+                    }
                     fprintf(g.bgndpal_fp, "%s:\t;PAL #%d\r\n", pals[pi].name, pi + 1);
                     fprintf(g.bgndpal_fp, "\t.word\t%d\t;pal size\r\n", pals[pi].cnt);
                     fputs("\t.word ", g.bgndpal_fp);
