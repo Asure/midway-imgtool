@@ -1,3 +1,58 @@
+# Build directory
+build-linux/
+loadimg/build/
 
-IT/IT.EXE
-*.OBJ
+# Compiled output
+*.o
+*.obj
+*.exe
+
+# Test output files
+loadimg/work/
+loadimg/work2/
+loadimg/work3/
+loadimg/irw/
+loadimg/lod/
+loadimg/output/
+loadimg/output2/
+loadimg/output3/
+loadimg/output4/
+
+# Generated runtime files
+loadimg/*.IRW
+loadimg/*.TBL
+loadimg/*.GLO
+loadimg/*.ASM
+loadimg/*.H
+loadimg/*.SEQ
+
+# DOSBox test artifacts
+/tmp/work_*/
+
+# Ghidra project files
+/tmp/ghidra_proj*/
+/tmp/ghidra_scripts*/
+/tmp/ghidra_out*/
+
+# Backups and patches
+*.bak
+*.mod
+*.orig
+/tmp/patch_*.py
+/tmp/bbb_handler.txt
+
+# Error logs
+*.err
+stdin.err
+
+# Binary packages
+dosbox-debug_0.74-3-5build2_amd64.deb
+dosbox-x_2024.03.01+dfsg-1build2_amd64.deb
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
