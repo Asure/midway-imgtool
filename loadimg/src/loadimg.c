@@ -1479,7 +1479,7 @@ static void process_lod(const char *lod_path) {
                 char full[MAX_PATH];
                 if (g.tbldir[0]) path_cat(full, g.tbldir, fname, MAX_PATH);
                 else strncpy(full, fname, MAX_PATH-1);
-                g.glo_fp = fopen(full, g.append ? "a" : "w");
+                g.glo_fp = fopen(full, "a");
                 if (!g.glo_fp) die("cannot create %s", full);
             }
         }
@@ -1631,9 +1631,6 @@ static void process_lod(const char *lod_path) {
                     gobjs[ng].wx = wx_t; gobjs[ng].dp = dp_t; gobjs[ng].sy = sy_t;
                     gobjs[ng].ii = ii_t; gobjs[ng].fl = fl_t; ng++;
                 } else if (sscanf(tmp, "%63s", modname) == 1) {
-                    /* Module = first token is NOT a valid hex number.
-                     * Use strtol to check ENTIRE string (sscanf %lx would
-                     * match partial strings like "DPUL6" via leading 'D'). */
                     char *endp = modname;
                     strtol(modname, &endp, 16);
                     int is_hex = (*endp == 0 && endp > modname);
@@ -1721,12 +1718,8 @@ static void process_lod(const char *lod_path) {
                     if (g.bgnd_fp) {
                         fprintf(g.bgnd_fp, "%sBLKS:\r\n", mn);
                     }
-                    if (g.bgndtbl_glo_fp) {
-                        fprintf(g.bgndtbl_glo_fp, "\t.globl\t%sBMOD\r\n", mn);
-                    }
                     if (n_bmod < 64) {
                         strncpy(bmod_list[n_bmod], mn, 63);
-                        /* Module ranges: wx=depth_start, dp=depth_end, sy=sy_start, ii=sy_end */
                         mod_ds[n_bmod] = gobjs[gi].wx;
                         mod_de[n_bmod] = gobjs[gi].dp;
                         mod_ys[n_bmod] = gobjs[gi].sy;
@@ -1943,9 +1936,13 @@ static void process_lod(const char *lod_path) {
                     fprintf(g.bgnd_fp, "\t.long\t%sBLKS, %s, %sPALS\r\n", mn, hdrs_label, hdr_suffix);
                 }
             }
-            if (g.bgndtbl_glo_fp)
+            if (g.bgndtbl_glo_fp) {
+                /* Palette .globl before BMOD (matching LOADW output order) */
+                for (int pi = 0; pi < np; pi++)
+                    fprintf(g.bgndtbl_glo_fp, "\t.globl\t%s\r\n", pals[pi].name);
                 for (int bi = 0; bi < n_bmod; bi++)
                     fprintf(g.bgndtbl_glo_fp, "\t.globl\t%sBMOD\r\n", bmod_list[bi]);
+            }
 
             if (g.bgndpal_fp)
                 for (int pi = 0; pi < np; pi++) {
@@ -1954,11 +1951,7 @@ static void process_lod(const char *lod_path) {
                     for (int pi2 = 0; pi2 < g.n_palettes; pi2++)
                         if (g.palettes[pi2].written && strcmp(g.palettes[pi2].name, pals[pi].name) == 0)
                             { already_written = 1; break; }
-                    if (already_written) {
-                        if (g.bgndtbl_glo_fp)
-                            fprintf(g.bgndtbl_glo_fp, "\t.globl\t%s\r\n", pals[pi].name);
-                        continue;
-                    }
+                    if (already_written) continue;
                     fprintf(g.bgndpal_fp, "%s:\t;PAL #%d\r\n", pals[pi].name, pi + 1);
                     fprintf(g.bgndpal_fp, "\t.word\t%d\t;pal size\r\n", pals[pi].cnt);
                     fputs("\t.word ", g.bgndpal_fp);
@@ -1967,8 +1960,6 @@ static void process_lod(const char *lod_path) {
                         if (ci < pals[pi].cnt - 1) fputc(',', g.bgndpal_fp);
                     }
                     fputs("\r\n\r\n", g.bgndpal_fp);
-                    if (g.bgndtbl_glo_fp)
-                        fprintf(g.bgndtbl_glo_fp, "\t.globl\t%s\r\n", pals[pi].name);
                 }
 
             if (g.verbose) printf("  %s: %d BDD images, %d BGND output, %d palettes\n", bdb_name, n_bdds, bgnd_count, np);
