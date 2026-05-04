@@ -1582,7 +1582,9 @@ static void process_lod(const char *lod_path) {
             if (!nl) { free(bdd_data); continue; }
             *nl = 0;
             char bdb_name[64]; int bdb_w = 0, bdb_h = 0;
-            sscanf(bp, "%63s %d %d", bdb_name, &bdb_w, &bdb_h);
+            int bdb_md = 0, bdb_nm = 0, bdb_np = 0, bdb_no = 0;
+            sscanf(bp, "%63s %d %d %d %d %d %d", bdb_name, &bdb_w, &bdb_h,
+                   &bdb_md, &bdb_nm, &bdb_np, &bdb_no);
             bp = nl + 1;
 
             if (g.bgndequ_fp) {
