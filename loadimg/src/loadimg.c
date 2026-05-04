@@ -1616,7 +1616,7 @@ static void process_lod(const char *lod_path) {
                 memcpy(tmp, bp, tlen); tmp[tlen] = 0;
 
                 int wx_t, dp_t, sy_t, ii_t, fl_t; char modname[64];
-                /* Object = all 5 fields, first is valid hex */
+                /* Image line = 5 fields, first hex, ii hex (same convention as BDD idx) */
                 if (sscanf(tmp, "%x %d %d %x %d", &wx_t, &dp_t, &sy_t, &ii_t, &fl_t) == 5) {
                     strncpy(gobjs[ng].name, cur_mod, 63);
                     gobjs[ng].is_mod = 0;
@@ -1661,10 +1661,13 @@ static void process_lod(const char *lod_path) {
                 while (bdp < bdd_sz && (bdd_data[bdp] == 0x0a || bdd_data[bdp] == 0x0d)) bdp++;
                 int idx = 0, w = 0, h = 0, f = 0;
                 sscanf(hl, "%x %d %d %d", &idx, &w, &h, &f);
-                if (w < 1 || w > 1024 || h < 1 || h > 1024 || bdp + w * h > bdd_sz) break;
+                if (w < 0 || w > 4096 || h < 0 || h > 4096 || bdp + (w * h > 0 ? w * h : 0) > bdd_sz) {
+                    if (g.verbose) printf("  Skip BDD img idx=%x w=%d h=%d (bdp=%ld sz=%ld)\n", idx, w, h, bdp, bdd_sz);
+                    continue;
+                }
                 bdds[n_bdds].idx = idx; bdds[n_bdds].w = w; bdds[n_bdds].h = h;
-                bdds[n_bdds].fl = f; bdds[n_bdds].pix = bdd_data + bdp;
-                n_bdds++; bdp += w * h;
+                bdds[n_bdds].fl = f; bdds[n_bdds].pix = (w > 0 && h > 0) ? bdd_data + bdp : NULL;
+                n_bdds++; bdp += (w * h > 0) ? w * h : 0;
             }
 
             /* Palettes */
@@ -1695,79 +1698,11 @@ static void process_lod(const char *lod_path) {
             int img_lm[256] = {0}, img_tm[256] = {0}, img_bpp[256] = {0}, img_cmp[256] = {0};
             char bmod_list[64][64];
             int n_bmod = 0, mod_obj_count[64] = {0};
+            int img_module[256]; /* which module index owns each BDD image */
+            for (int i = 0; i < 256; i++) img_module[i] = -1;
+            for (int mi = 0; mi < 64; mi++) mod_obj_count[mi] = 0;
 
-            /* Compute block-level LM/TM across all BDD images */
-            int best_block_lm = 0, best_block_tm = 0, block_cmp = 0;
-            {
-                int64_t best_block_sz = (int64_t)1 << 60;
-                for (int lmt = 0; lmt < 4; lmt++) {
-                    int lmm = 1 << lmt;
-                    for (int tmt = 0; tmt < 4; tmt++) {
-                        int tmm = 1 << tmt;
-                        int64_t total = 0;
-                        for (int di = 0; di < n_bdds; di++) {
-                            int w = bdds[di].w, h = bdds[di].h;
-                            uint8_t *pix = bdds[di].pix;
-                            int sizx_a = (w + 3) & ~3;
-                            uint32_t maxpx = 0;
-                            for (int pi = 0; pi < w * h; pi++)
-                                if (pix[pi] > maxpx) maxpx = pix[pi];
-                            int per_bpp = bpp_for_max(maxpx);
-                            if (per_bpp < 1 || per_bpp > 8) per_bpp = 4;
-                            for (int row = 0; row < h; row++) {
-                                uint8_t *rp = pix + row * w;
-                                int lead = 0, trail = 0, d1 = 0;
-                                for (int x = 0; x < sizx_a; x++) {
-                                    uint8_t px = (x < w) ? rp[x] : 0;
-                                    if (!d1 && lead < 120 && px == 0) lead++;
-                                    else d1 = 1;
-                                    if (d1 && sizx_a - 120 < x)
-                                        if (px == 0) trail++; else trail = 0;
-                                }
-                                int ln = lead / lmm; if (ln > 15) ln = 15;
-                                int tn = trail / tmm; if (tn > 15) tn = 15;
-                                int lc = ln * lmm, tc = tn * tmm;
-                                if (lc + tc > sizx_a) tc = sizx_a - lc;
-                                int stored = sizx_a - lc - tc;
-                                if (stored < 0) stored = 0;
-                                if (stored < 10) {
-                                    int i6 = lc, i7 = sizx_a - tc - 1;
-                                    if ((i7 - i6) + 1 < 10) {
-                                        int l2c = (i6 - i7) + 9, i9 = l2c;
-                                        if (i6 < l2c) { i9 = l2c - i6; l2c = i6; }
-                                        ln = lmm > 0 ? (lc - l2c) / lmm : 0;
-                                        if (((i7 - (lc - l2c)) + 1) < 10)
-                                            tn = tmm > 0 ? (tc - i9) / tmm : 0;
-                                        lc = ln * lmm; tc = tn * tmm;
-                                        if (lc + tc > sizx_a) tc = sizx_a - lc;
-                                        stored = sizx_a - lc - tc;
-                                        if (stored < 0) stored = 0;
-                                    }
-                                }
-                                total += 8 + stored * per_bpp;
-                            }
-                        }
-                        if (total < best_block_sz) {
-                            best_block_sz = total; best_block_lm = lmt; best_block_tm = tmt;
-                        }
-                    }
-                }
-                int64_t total_raw = 0;
-                for (int di = 0; di < n_bdds; di++) {
-                    int w = bdds[di].w, h = bdds[di].h;
-                    uint8_t *pix = bdds[di].pix;
-                    int sizx_a = (w + 3) & ~3;
-                    uint32_t maxpx = 0;
-                    for (int pi = 0; pi < w * h; pi++)
-                        if (pix[pi] > maxpx) maxpx = pix[pi];
-                    int per_bpp = bpp_for_max(maxpx);
-                    if (per_bpp < 1 || per_bpp > 8) per_bpp = 4;
-                    total_raw += sizx_a * h * per_bpp;
-                }
-                block_cmp = (total_raw > best_block_sz) ? 1 : 0;
-            }
-            if (g.verbose) printf("  BG block LM=%d TM=%d CMP=%d (%d BDD images)\n", best_block_lm, best_block_tm, block_cmp, n_bdds);
-
+            /* Phase 1: Output module BLKS labels and build module list */
             for (int gi = 0; gi < ng; gi++) {
                 if (gobjs[gi].is_mod) {
                     const char *mn = gobjs[gi].name;
@@ -1780,62 +1715,132 @@ static void process_lod(const char *lod_path) {
                     if (n_bmod < 64) strncpy(bmod_list[n_bmod++], mn, 63);
                     continue;
                 }
-                /* Count object for its module */
-                if (gobjs[gi].name[0]) {
-                    int matched = 0;
-                    for (int mi = 0; mi < n_bmod; mi++)
-                        if (strcmp(gobjs[gi].name, bmod_list[mi]) == 0) {
-                            mod_obj_count[mi]++;
-                            matched = 1; break;
-                        }
-                    if (g.verbose && !matched && gi < 20)
-                        printf("  OBJ name='%s' n_bmod=%d bmod[0]='%s'\n", gobjs[gi].name, n_bmod, n_bmod>0?bmod_list[0]:"(none)");
-                }
+                /* Map each BDD image to its module via first-referencing GOBJ */
                 int ii = gobjs[gi].ii;
-                int img_i = -1;
-                for (int di = 0; di < n_bdds; di++)
-                    if (bdds[di].idx == ii) { img_i = di; break; }
-                if (img_i < 0) continue;
+                for (int di = 0; di < n_bdds; di++) {
+                    if (bdds[di].idx == ii && img_module[di] < 0) {
+                        int found_mod = 0;
+                        for (int mi = 0; mi < n_bmod; mi++) {
+                            if (strcmp(gobjs[gi].name, bmod_list[mi]) == 0) {
+                                img_module[di] = mi;
+                                mod_obj_count[mi]++;
+                                found_mod = 1;
+                                break;
+                            }
+                        }
+                        break;
+                    }
+                }
+            }
 
-                int w = bdds[img_i].w, h = bdds[img_i].h;
-                uint8_t *pix = bdds[img_i].pix;
-                int sizx_a = (w + 3) & ~3;
+            /* Phase 2: Process BDD images in FILE ORDER (only GOBJ-referenced) */
+            int bgnd_count = 0;
+            for (int di = 0; di < n_bdds; di++) {
+                if (img_module[di] < 0) continue;
+                bgnd_count++;
 
-                uint32_t maxpx = 0;
-                for (int pi = 0; pi < w * h; pi++)
-                    if (pix[pi] > maxpx) maxpx = pix[pi];
-                int per_bpp = bpp_for_max(maxpx);
-                if (per_bpp < 1 || per_bpp > 8) per_bpp = 4;
+                int w = bdds[di].w, h = bdds[di].h;
+                uint8_t *pix = bdds[di].pix;
+                int sizx_a = w > 0 ? w : 1;
+                int mod_i = img_module[di]; /* -1 if unreferenced */
 
-                if (!img_written[img_i]) {
-                    img_written[img_i] = 1;
-                    img_sags[img_i] = g.irw_bit;
+                if (!img_written[di]) {
+                    img_written[di] = 1;
+                    img_sags[di] = g.irw_bit;
 
-                    /* Use single block-level LM/TM for all BDD images */
-                    int best_lm = best_block_lm, best_tm = best_block_tm;
-                    int do_cmp = (g.zon && block_cmp) ? 1 : 0;
-                    img_cmp[img_i] = do_cmp; img_lm[img_i] = best_lm;
+                    uint32_t maxpx = 0;
+                    if (pix && w > 0 && h > 0)
+                        for (int pi = 0; pi < w * h; pi++)
+                            if (pix[pi] > maxpx) maxpx = pix[pi];
+                    int per_bpp = bpp_for_max(maxpx);
+                    if (per_bpp < 1 || per_bpp > 8) per_bpp = 4;
 
-                    int lmm = 1 << best_lm, tmm = 1 << best_tm;
-                    if (do_cmp) {
+                    int best_lm = 0, best_tm = 0, do_cmp = 0;
+                    int lmm = 1, tmm = 1;
+                    if (w > 0 && h > 0) {
+                        /* Per-image LM/TM selection */
+                        int64_t lead_err[4] = {0}, trail_err[4] = {0};
                         for (int row = 0; row < h; row++) {
                             uint8_t *rp = pix + row * w;
                             int lead = 0, trail = 0, d1 = 0;
-                            for (int x = 0; x < sizx_a; x++) {
-                                uint8_t px = (x < w) ? rp[x] : 0;
-                                if (!d1 && lead < 120 && px == 0) lead++;
+                            for (int x = 0; x < w; x++) {
+                                uint8_t px2 = rp[x];
+                                if (!d1 && lead < 120 && px2 == 0) lead++;
                                 else d1 = 1;
-                                if (d1 && sizx_a - 120 < x)
-                                    if (px == 0) trail++; else trail = 0;
+                                if (d1 && w - 120 < x)
+                                    if (px2 == 0) trail++; else trail = 0;
+                            }
+                            for (int m = 0; m < 4; m++) {
+                                int mult = 1 << m;
+                                int ln = lead / mult; if (ln > 15) ln = 15;
+                                int tn = trail / mult; if (tn > 15) tn = 15;
+                                lead_err[m] += lead - ln * mult;
+                                trail_err[m] += trail - tn * mult;
+                            }
+                        }
+                        for (int m = 1; m < 4; m++) {
+                            if (lead_err[m] < lead_err[best_lm]) best_lm = m;
+                            if (trail_err[m] < trail_err[best_tm]) best_tm = m;
+                        }
+
+                        /* Per-image CMP decision */
+                        lmm = 1 << best_lm; tmm = 1 << best_tm;
+                        int64_t comp_bits = 0, raw_bits = h * w * per_bpp;
+                        for (int row = 0; row < h; row++) {
+                            uint8_t *rp = pix + row * w;
+                            int lead = 0, trail = 0, d1 = 0;
+                            for (int x = 0; x < w; x++) {
+                                uint8_t px2 = rp[x];
+                                if (!d1 && lead < 120 && px2 == 0) lead++;
+                                else d1 = 1;
+                                if (d1 && w - 120 < x)
+                                    if (px2 == 0) trail++; else trail = 0;
                             }
                             int ln = lead / lmm; if (ln > 15) ln = 15;
                             int tn = trail / tmm; if (tn > 15) tn = 15;
                             int lc = ln * lmm, tc = tn * tmm;
-                            if (lc + tc > sizx_a) tc = sizx_a - lc;
-                            int stored = sizx_a - lc - tc;
+                            if (lc + tc > w) tc = w - lc;
+                            int stored = w - lc - tc;
                             if (stored < 0) stored = 0;
                             if (stored < 10) {
-                                int i6 = lc, i7 = sizx_a - tc - 1;
+                                int i6 = lc, i7 = w - tc - 1;
+                                if ((i7 - i6) + 1 < 10) {
+                                    int l2c = (i6 - i7) + 9, i9 = l2c;
+                                    if (i6 < l2c) { i9 = l2c - i6; l2c = i6; }
+                                    ln = lmm > 0 ? (lc - l2c) / lmm : 0;
+                                    if (((i7 - (lc - l2c)) + 1) < 10)
+                                        tn = tmm > 0 ? (tc - i9) / tmm : 0;
+                                    lc = ln * lmm; tc = tn * tmm;
+                                    if (lc + tc > w) tc = w - lc;
+                                    stored = w - lc - tc;
+                                    if (stored < 0) stored = 0;
+                                }
+                            }
+                            comp_bits += 8 + stored * per_bpp;
+                        }
+                        do_cmp = (g.zon && raw_bits > comp_bits) ? 1 : 0;
+                        img_bpp[di] = per_bpp; img_cmp[di] = do_cmp;
+                        img_lm[di] = best_lm; img_tm[di] = best_tm;
+
+                        if (do_cmp) {
+                            for (int row = 0; row < h; row++) {
+                                uint8_t *rp = pix + row * w;
+                                int lead = 0, trail = 0, d1 = 0;
+                                for (int x = 0; x < sizx_a; x++) {
+                                    uint8_t px2 = (x < w) ? rp[x] : 0;
+                                    if (!d1 && lead < 120 && px2 == 0) lead++;
+                                    else d1 = 1;
+                                    if (d1 && sizx_a - 120 < x)
+                                        if (px2 == 0) trail++; else trail = 0;
+                                }
+                                int ln = lead / lmm; if (ln > 15) ln = 15;
+                                int tn = trail / tmm; if (tn > 15) tn = 15;
+                                int lc = ln * lmm, tc = tn * tmm;
+                                if (lc + tc > sizx_a) tc = sizx_a - lc;
+                                int stored = sizx_a - lc - tc;
+                                if (stored < 0) stored = 0;
+                                if (stored < 10) {
+                                    int i6 = lc, i7 = sizx_a - tc - 1;
                                 if ((i7 - i6) + 1 < 10) {
                                     int l2c = (i6 - i7) + 9, i9 = l2c;
                                     if (i6 < l2c) { i9 = l2c - i6; l2c = i6; }
@@ -1859,15 +1864,16 @@ static void process_lod(const char *lod_path) {
                                 irw_write_bits(x < w ? rp[x] : 0, per_bpp);
                         }
                     }
+                    }
                     if (g.verbose) printf("  BGND 0x%02X (%dx%d) bit=%u bpp=%d LM=%d TM=%d CMP=%d\n",
-                           bdds[img_i].idx, w, h, img_sags[img_i], per_bpp, best_lm, best_tm, do_cmp);
+                           bdds[di].idx, w, h, img_sags[di], per_bpp, best_lm, best_tm, do_cmp);
                 }
 
                 if (g.bgnd_fp) {
-                    uint16_t ctrl = (uint16_t)((img_bpp[img_i] << 12) | (img_tm[img_i] << 10) |
-                                                (img_lm[img_i] << 8) | (img_cmp[img_i] ? 0x80 : 0));
+                    uint16_t ctrl = (uint16_t)((img_bpp[di] << 12) | (img_tm[di] << 10) |
+                                                (img_lm[di] << 8) | (img_cmp[di] ? 0x80 : 0));
                     fprintf(g.bgnd_fp, "\t.word\t%d,%d\r\n", w, h);
-                    fprintf(g.bgnd_fp, "\t.long\t0%XH\r\n", g.base_addr + img_sags[img_i]);
+                    fprintf(g.bgnd_fp, "\t.long\t0%XH\r\n", g.base_addr + img_sags[di]);
                     fprintf(g.bgnd_fp, "\t.word\t0%04XH\r\n", ctrl);
                 }
             }
@@ -1925,6 +1931,7 @@ static void process_lod(const char *lod_path) {
                         fprintf(g.bgndtbl_glo_fp, "\t.globl\t%s\r\n", pals[pi].name);
                 }
 
+            if (g.verbose) printf("  %s: %d BDD images, %d BGND output\n", bdb_name, n_bdds, bgnd_count);
             free(bdd_data);
         }
 
