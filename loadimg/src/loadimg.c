@@ -1611,12 +1611,10 @@ static void process_lod(const char *lod_path) {
                 if (bdb8[ci] != ' ') hdr_buf[hi++] = bdb8[ci];
             hdr_buf[hi] = 0;
              const char *hdr_suffix = hdr_buf;
-            static char hdrs_label[64] = "";
+            char cur_hdrs[64] = "";
             if (g.bgnd_fp) {
-                char cur_hdrs[64];
                 snprintf(cur_hdrs, sizeof(cur_hdrs), "%sHDRS", hdr_suffix);
                 fprintf(g.bgnd_fp, "%s:\r\n", cur_hdrs);
-                if (!hdrs_label[0]) strncpy(hdrs_label, cur_hdrs, 63);
             }
             if (g.bgndtbl_glo_fp) {
                 fprintf(g.bgndtbl_glo_fp, "\t.globl\t%sPALS\r\n", hdr_suffix);
@@ -1968,7 +1966,7 @@ static void process_lod(const char *lod_path) {
                     }
                 fprintf(g.bgnd_fp, "%sBMOD:\r\n", mn);
                 fprintf(g.bgnd_fp, "\t.word\t%d,%d,%d\t;x size, y size, #blocks\r\n", mw, mh, mod_obj_count[mi]);
-                    fprintf(g.bgnd_fp, "\t.long\t%sBLKS, %s, %sPALS\r\n", mn, hdrs_label, hdr_suffix);
+                    fprintf(g.bgnd_fp, "\t.long\t%sBLKS, %s, %sPALS\r\n", mn, cur_hdrs, hdr_suffix);
                 }
             }
             if (g.bgndtbl_glo_fp) {
