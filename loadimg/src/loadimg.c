@@ -480,8 +480,14 @@ static ImgFile* img_load(const char *path) {
     img->pals = (PAL_REC*)(img->data + pal_ofs);
     img->n_palettes = img->hdr.palcnt;
 
-    /* PTTBL offset: after all palette records */
+    /* PTTBL offset: after palette records + sequences + scripts */
     uint32_t pttbl_ofs = pal_ofs + (uint32_t)img->n_palettes * sizeof(PAL_REC);
+    /* SEQSCR entries between palettes and PTTBL */
+    int n_seqscr = (int)img->hdr.seqcnt + (int)img->hdr.scrcnt;
+    if (n_seqscr > 0) {
+        /* SEQSCR struct (pack 2): name[16] + flags(2) + num(2) + entry_t[16](dd=4*16) + startx(2) + starty(2) + dam[6] + spare1(2) + spare2(2) = 98 */
+        pttbl_ofs += (uint32_t)n_seqscr * 98;
+    }
 
     /* Compute max PTTBL index */
     int max_pttbl = -1;
@@ -1440,9 +1446,14 @@ static void process_lod(const char *lod_path) {
                 char full[MAX_PATH];
                 if (g.tbldir[0]) path_cat(full, g.tbldir, fname, MAX_PATH);
                 else strncpy(full, fname, MAX_PATH-1);
-                g.asm_fp = fopen(full, "w");
+                /* LOADW appends to existing TBL files (ASM> can be used
+                 * multiple times for the same table) */
+                g.asm_fp = fopen(full, "a");
                 if (!g.asm_fp) die("cannot create %s", full);
-                write_tbl_header(g.asm_fp);
+                /* Write header only for new files */
+                fseek(g.asm_fp, 0, SEEK_END);
+                if (ftell(g.asm_fp) == 0)
+                    write_tbl_header(g.asm_fp);
             }
         }
         else if (!strncmp(upper, "GLO>", 4)) {
@@ -1468,6 +1479,45 @@ static void process_lod(const char *lod_path) {
         else if (!strncmp(upper, "CON>", 4)) g.dedup = 1;
         else if (!strncmp(upper, "COF>", 4)) g.dedup = 0;
         else if (!strncmp(upper, "PPP>", 4)) g.ppp = atoi(line+4);
+        else if (!strncmp(upper, "FRM>", 4)) {
+            char fname[MAX_PATH];
+            sscanf(line + 4, " %255s", fname);
+            /* Try locating the .BIN file */
+            char binpath[MAX_PATH];
+            FILE *bf = NULL;
+            if (g.imgdir[0]) {
+                snprintf(binpath, MAX_PATH, "%s%c%s.BIN", g.imgdir, PATH_SEP, fname);
+                bf = fopen(binpath, "rb");
+            }
+            if (!bf) {
+                snprintf(binpath, MAX_PATH, "%s.BIN", fname);
+                bf = fopen(binpath, "rb");
+            }
+            if (bf) {
+                fseek(bf, 0, SEEK_END);
+                long bsz = ftell(bf);
+                fseek(bf, 0, SEEK_SET);
+                if (g.build_tables && g.asm_fp) {
+                    fprintf(g.asm_fp, "%s\t.set\t0%XH\r\n", fname, g.base_addr + g.irw_bit);
+                }
+                if (g.glo_fp) {
+                    fprintf(g.glo_fp, "\t.globl\t%s\r\n", fname);
+                }
+                uint32_t sag = g.irw_bit;
+                uint8_t *buf = (uint8_t*)malloc(bsz);
+                if (buf) {
+                    fread(buf, 1, bsz, bf);
+                    for (long i = 0; i < bsz; i++)
+                        irw_write_byte(buf[i]);
+                    free(buf);
+                }
+                fclose(bf);
+                if (g.verbose)
+                    printf("  FRM %s at bit %u (%ld bytes)\n", fname, sag, bsz);
+            } else {
+                fprintf(stderr, "WARNING: cannot open .BIN file: %s.BIN\n", fname);
+            }
+        }
         else if (!strncmp(upper, "MON>", 4)) { }
         else if (!strncmp(upper, "BON>", 4)) { }
         else if (!strncmp(upper, "ROM>", 4)) { }
