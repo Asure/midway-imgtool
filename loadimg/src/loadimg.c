@@ -993,7 +993,7 @@ static void write_image_tbl(FILE *fp, ImageEntry *ie) {
 
         if (sz == SZ_L) {
             if (n_words > 0) {
-                fprintf(fp, "\t.word\t");
+                fprintf(fp, "\t.word   ");
                 for (int j = 0; j < n_words; j++) {
                     if (j > 0) fputc(',', fp);
                     fprintf(fp, "%d", word_buf[j]);
@@ -1003,19 +1003,19 @@ static void write_image_tbl(FILE *fp, ImageEntry *ie) {
             }
             if (f == IHDR_SAG) {
                 uint32_t base = g.base_addr;
-                fprintf(fp, "\t.long\t0%XH\r\n", base + ie->sag);
+                fprintf(fp, "\t.long   0%xH\r\n", base + ie->sag);
             } else if (f == IHDR_PAL) {
                 if (have_pal)
-                    fprintf(fp, "\t.long\t%s\r\n", ie->pal_name);
+                    fprintf(fp, "\t.long   %s\r\n", ie->pal_name);
                 else
-                    fprintf(fp, "\t.long\t-1\r\n");
+                    fprintf(fp, "\t.long   -1\r\n");
             } else {
-                fprintf(fp, "\t.long\t-1\r\n");
+                fprintf(fp, "\t.long   -1\r\n");
             }
         } else {
             if (f == IHDR_CTRL) {
                 if (n_words > 0) {
-                    fprintf(fp, "\t.word\t");
+                    fprintf(fp, "\t.word   ");
                     for (int j = 0; j < n_words; j++) {
                         if (j > 0) fputc(',', fp);
                         fprintf(fp, "%d", word_buf[j]);
@@ -1023,7 +1023,7 @@ static void write_image_tbl(FILE *fp, ImageEntry *ie) {
                     fprintf(fp, "\r\n");
                     n_words = 0;
                 }
-                fprintf(fp, "\t.word\t0%04XH\r\n", ie->ctrl);
+                fprintf(fp, "\t.word   0%04xH\r\n", ie->ctrl);
             } else {
                 int val = get_ihdr_word_value(ie, f, 1);
                 word_buf[n_words++] = val;
@@ -1032,7 +1032,7 @@ static void write_image_tbl(FILE *fp, ImageEntry *ie) {
     }
 
     if (n_words > 0) {
-        fprintf(fp, "\t.word\t");
+        fprintf(fp, "\t.word   ");
         for (int j = 0; j < n_words; j++) {
             if (j > 0) fputc(',', fp);
             fprintf(fp, "%d", word_buf[j]);
@@ -1445,8 +1445,14 @@ static void process_lod(const char *lod_path) {
             sscanf(line + 4, " %255s", fname);
             char *comma = strchr(fname, ',');
             if (comma) *comma = 0;
-            if (g.build_tables) {
-                if (g.asm_fp) fclose(g.asm_fp);
+             if (g.build_tables) {
+                /* Finalize previous TBL file before opening a new one */
+                if (g.asm_fp) {
+                    fprintf(g.asm_fp, "\t.TEXT\r\n");
+                    fputc(0x1a, g.asm_fp);
+                    fclose(g.asm_fp);
+                    g.asm_fp = NULL;
+                }
                 char full[MAX_PATH];
                 if (g.tbldir[0]) path_cat(full, g.tbldir, fname, MAX_PATH);
                 else strncpy(full, fname, MAX_PATH-1);
@@ -1931,7 +1937,7 @@ static void process_lod(const char *lod_path) {
                         fprintf(g.bgndtbl_glo_fp, "\t.globl\t%s\r\n", pals[pi].name);
                 }
 
-            if (g.verbose) printf("  %s: %d BDD images, %d BGND output\n", bdb_name, n_bdds, bgnd_count);
+            if (g.verbose) printf("  %s: %d BDD images, %d BGND output, %d palettes\n", bdb_name, n_bdds, bgnd_count, np);
             free(bdd_data);
         }
 
