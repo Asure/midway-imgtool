@@ -1900,8 +1900,9 @@ static void process_lod(const char *lod_path) {
                         int od = gobjs[gi].dp, osy = gobjs[gi].sy;
                         if (od < mod_ds[mi] || od > mod_de[mi]) continue;
                         if (osy < mod_ys[mi] || osy > mod_ye[mi]) continue;
-                        fprintf(g.bgnd_fp, "\t.word\t0%xH,%d,%d,0%xH\r\n",
-                                gobjs[gi].wx, od, osy, gobjs[gi].ii);
+                        fprintf(g.bgnd_fp, "\t.word\t0%xH\t;flags\r\n", gobjs[gi].wx);
+                        fprintf(g.bgnd_fp, "\t.word\t%d,%d\t;x,y\r\n", od, osy);
+                        fprintf(g.bgnd_fp, "\t.word\t0%xH\t;pal5,pal4,hdr13-0\r\n", gobjs[gi].ii);
                     }
                     fprintf(g.bgnd_fp, "\t.word\t0FFFFH\t;End Marker\r\n");
                 }
