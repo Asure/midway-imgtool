@@ -1603,8 +1603,9 @@ static void process_lod(const char *lod_path) {
             const char *hdr_suffix = (bdb_nlen >= 2) ? bdb_name + bdb_nlen - 2 : bdb_name;
             char hdrs_label[64];
             snprintf(hdrs_label, sizeof(hdrs_label), "%sHDRS", hdr_suffix);
-            if (g.bgnd_fp)
+            if (g.bgnd_fp) {
                 fprintf(g.bgnd_fp, "%s:\r\n", hdrs_label);
+            }
             if (g.bgndtbl_glo_fp) {
                 fprintf(g.bgndtbl_glo_fp, "\t.globl\t%sPALS\r\n", hdr_suffix);
             }
@@ -1715,9 +1716,6 @@ static void process_lod(const char *lod_path) {
             for (int gi = 0; gi < ng; gi++) {
                 if (gobjs[gi].is_mod) {
                     const char *mn = gobjs[gi].name;
-                    if (g.bgnd_fp) {
-                        fprintf(g.bgnd_fp, "%sBLKS:\r\n", mn);
-                    }
                     if (n_bmod < 64) {
                         strncpy(bmod_list[n_bmod], mn, 63);
                         mod_ds[n_bmod] = gobjs[gi].wx;
@@ -1889,6 +1887,23 @@ static void process_lod(const char *lod_path) {
                     fprintf(g.bgnd_fp, "\t.long\t0%xH%s\r\n", g.base_addr + img_sags[di], first_bgnd ? "\t;address" : "");
                     fprintf(g.bgnd_fp, "\t.word\t0%04xH%s\r\n", ctrl, first_bgnd ? "\t;dma ctrl" : "");
                     first_bgnd = 0;
+                }
+            }
+
+            /* Phase 3: Output BLKS map layout data (after image entries, before BMOD) */
+            if (g.bgnd_fp && n_bmod > 0) {
+                for (int mi = 0; mi < n_bmod; mi++) {
+                    const char *mn = bmod_list[mi];
+                    fprintf(g.bgnd_fp, "%sBLKS:\r\n", mn);
+                    for (int gi = 0; gi < ng; gi++) {
+                        if (gobjs[gi].is_mod) continue;
+                        int od = gobjs[gi].dp, osy = gobjs[gi].sy;
+                        if (od < mod_ds[mi] || od > mod_de[mi]) continue;
+                        if (osy < mod_ys[mi] || osy > mod_ye[mi]) continue;
+                        fprintf(g.bgnd_fp, "\t.word\t0%xH,%d,%d,0%xH\r\n",
+                                gobjs[gi].wx, od, osy, gobjs[gi].ii);
+                    }
+                    fprintf(g.bgnd_fp, "\t.word\t0FFFFH\t;End Marker\r\n");
                 }
             }
 
