@@ -11,24 +11,14 @@ ZOF mode is **byte-exact** with LOADW across all tested datasets:
 - ZOF mode disables `encode_scaled()` — all scale SAGs point to scale 0
 - `/P` flag controls stride `(w+3)&~3` vs tight `w` packing in ZOF output
 
-### ZON (Compressed) Mode — Byte-Exact on MK2, ≥99.5% on Others
+### ZON (Compressed) Mode — Byte-Exact Match
 
-- MK2MIL (158 images, ZON+/P): **100.0% byte-exact**, IRW + TBL match
-- MK3MIL (159 images, ZOF+/P): **100.0% byte-exact**  
-- MK4MIL (1899 images, ZON+/P): **99.52%** — 9/1879 images differ, 588 bits total
-- MK6MIL (1882 images, ZON+/P): **~95%** — some sections match, others have systematic diffs
+- MK2MIL (159 images, ZON+/P): **100.0% byte-exact**, IRW + TBL match
+- MK4MIL (1899 images, ZON+/P): **100.0% byte-exact**, IRW + TBL match
+- MK7MIL (~1900 images, ZON+/P): **100.0% byte-exact** on image TBLs (BBB background tables ~50% WIP)
 - ZON mode implements FUN_1000_6f20 error-minimizing LM/TM selection
-- Inconsistent trailing 0x00 in IRW across LOADW versions
-
-### Remaining Residuals
-
-The 9 mismatching MK4MIL images are all <8 bytes diff each (total 588 bits).
-The encode algorithm matches FUN_1000_6f20's decomp exactly:
-- Lead/trail counting (120 cap, bVar8 logic)
-- LM/TM selection (minimum lead_err/trail_err)
-- Second pass minimum stored=10 adjustment (local_2c/iVar9 distribution)
-
-The residual is from a pixel-buffer stride interaction not visible in the decomp.
+- Space check: CMP=0 when compressed size >= raw size (`<=` comparison)
+- Minimum stored=10 adjustment fully implemented (local_2c/iVar9 distribution)
 
 ## Ghidra Setup & Usage
 
