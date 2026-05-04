@@ -1630,7 +1630,14 @@ static void process_lod(const char *lod_path) {
                     if (!is_hex) {
                         strncpy(cur_mod, modname, 63);
                         strncpy(gobjs[ng].name, modname, 63);
-                        gobjs[ng].is_mod = 1; ng++;
+                        gobjs[ng].is_mod = 1;
+                        /* Module params: NAME w x y z (all decimal in BDB) */
+                        int wxt, dpt, syt, iit;
+                        if (sscanf(tmp, "%*s %d %d %d %d", &wxt, &dpt, &syt, &iit) >= 4) {
+                            gobjs[ng].wx = wxt; gobjs[ng].dp = dpt;
+                            gobjs[ng].sy = syt; gobjs[ng].ii = iit;
+                        }
+                        ng++;
                     }
                 }
                 bp = *eol ? eol + 1 : eol;
@@ -1684,26 +1691,31 @@ static void process_lod(const char *lod_path) {
             int img_written[256] = {0};
             uint32_t img_sags[256] = {0};
             int img_lm[256] = {0}, img_tm[256] = {0}, img_bpp[256] = {0}, img_cmp[256] = {0};
+            char bmod_list[64][64];
+            int n_bmod = 0, mod_obj_count[64] = {0};
 
             for (int gi = 0; gi < ng; gi++) {
                 if (gobjs[gi].is_mod) {
-                    /* LOADW generates three labels per module: BLKS, BMOD, HDRS */
                     const char *mn = gobjs[gi].name;
-                    if (g.bgndequ_fp) {
-                        fprintf(g.bgndequ_fp, "W%s\t.EQU\t%d\r\n", mn, bdb_w);
-                        fprintf(g.bgndequ_fp, "H%s\t.EQU\t%d\r\n", mn, bdb_h);
-                    }
                     if (g.bgnd_fp) {
-                        /* BLKS section: block entries */
                         fprintf(g.bgnd_fp, "%sBLKS:\r\n", mn);
-                        /* BMOD section: module descriptor */
-                        fprintf(g.bgnd_fp, "%sBMOD:\r\n", mn);
                     }
                     if (g.bgndtbl_glo_fp) {
                         fprintf(g.bgndtbl_glo_fp, "\t.globl\t%sBLKS\r\n", mn);
-                        fprintf(g.bgndtbl_glo_fp, "\t.globl\t%sBMOD\r\n", mn);
                     }
+                    if (n_bmod < 64) strncpy(bmod_list[n_bmod++], mn, 63);
                     continue;
+                }
+                /* Count object for its module */
+                if (gobjs[gi].name[0]) {
+                    int matched = 0;
+                    for (int mi = 0; mi < n_bmod; mi++)
+                        if (strcmp(gobjs[gi].name, bmod_list[mi]) == 0) {
+                            mod_obj_count[mi]++;
+                            matched = 1; break;
+                        }
+                    if (g.verbose && !matched && gi < 20)
+                        printf("  OBJ name='%s' n_bmod=%d bmod[0]='%s'\n", gobjs[gi].name, n_bmod, n_bmod>0?bmod_list[0]:"(none)");
                 }
                 int ii = gobjs[gi].ii;
                 int img_i = -1;
@@ -1822,6 +1834,45 @@ static void process_lod(const char *lod_path) {
                     fprintf(g.bgnd_fp, "\t.word\t0%04XH\r\n", ctrl);
                 }
             }
+
+            /* BMOD sections (after all BLKS sections) */
+            if (g.verbose) {
+                printf("  BMOD enter ng=%d n_bmod=%d bmod[0]='%s'\n", ng, n_bmod, n_bmod>0?bmod_list[0]:"?");
+                for (int z = 0; z < ng && z < 8; z++)
+                    printf("  ][%d] is_mod=%d name='%s'\n", z, gobjs[z].is_mod, gobjs[z].name);
+            }
+            if (g.bgnd_fp && n_bmod > 0) {
+                /* Compute per-module object counts */
+                int modc[64];
+                for (int mi = 0; mi < n_bmod; mi++) {
+                    int c = 0;
+                    for (int j = 0; j < ng; j++)
+                        if (!gobjs[j].is_mod && strcmp(gobjs[j].name, bmod_list[mi]) == 0)
+                            c++;
+                    modc[mi] = c;
+                }
+                for (int mi = 0; mi < n_bmod; mi++) {
+                    const char *mn = bmod_list[mi];
+                    int p1 = 0, p2 = 0, p3 = 0, p4 = 0;
+                    for (int gi = 0; gi < ng; gi++)
+                        if (gobjs[gi].is_mod && strcmp(gobjs[gi].name, mn) == 0) {
+                            p1 = gobjs[gi].wx; p2 = gobjs[gi].dp;
+                            p3 = gobjs[gi].sy; p4 = gobjs[gi].ii; break;
+                        }
+                    int mw = (p2 > p1) ? p2 - p1 : 0;
+                    int mh = (p4 > p3) ? p4 - p3 : 0;
+                    if (g.bgndequ_fp) {
+                        fprintf(g.bgndequ_fp, "W%s\t.EQU\t%d\r\n", mn, mw);
+                        fprintf(g.bgndequ_fp, "H%s\t.EQU\t%d\r\n", mn, mh);
+                    }
+                    fprintf(g.bgnd_fp, "%sBMOD:\r\n", mn);
+                    fprintf(g.bgnd_fp, "\t.word\t%d,%d,%d\r\n", mw, mh, modc[mi]);
+                    fprintf(g.bgnd_fp, "\t.long\t%sBLKS, %s, %sPALS\r\n", mn, hdrs_label, hdr_suffix);
+                }
+            }
+            if (g.bgndtbl_glo_fp)
+                for (int bi = 0; bi < n_bmod; bi++)
+                    fprintf(g.bgndtbl_glo_fp, "\t.globl\t%sBMOD\r\n", bmod_list[bi]);
 
             if (g.bgndpal_fp)
                 for (int pi = 0; pi < np; pi++) {
