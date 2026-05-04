@@ -1669,9 +1669,22 @@ static void process_lod(const char *lod_path) {
 
             for (int gi = 0; gi < ng; gi++) {
                 if (gobjs[gi].is_mod) {
-                    if (g.bgnd_fp) fprintf(g.bgnd_fp, "%s:\r\n", gobjs[gi].name);
-                    if (g.bgndtbl_glo_fp)
-                        fprintf(g.bgndtbl_glo_fp, "\t.globl\t%s\r\n", gobjs[gi].name);
+                    /* LOADW generates three labels per module: BLKS, BMOD, HDRS */
+                    const char *mn = gobjs[gi].name;
+                    if (g.bgndequ_fp) {
+                        fprintf(g.bgndequ_fp, "W%s\t.EQU\t%d\r\n", mn, bdb_w);
+                        fprintf(g.bgndequ_fp, "H%s\t.EQU\t%d\r\n", mn, bdb_h);
+                    }
+                    if (g.bgnd_fp) {
+                        /* BLKS section: block entries */
+                        fprintf(g.bgnd_fp, "%sBLKS:\r\n", mn);
+                        /* BMOD section: module descriptor */
+                        fprintf(g.bgnd_fp, "%sBMOD:\r\n", mn);
+                    }
+                    if (g.bgndtbl_glo_fp) {
+                        fprintf(g.bgndtbl_glo_fp, "\t.globl\t%sBLKS\r\n", mn);
+                        fprintf(g.bgndtbl_glo_fp, "\t.globl\t%sBMOD\r\n", mn);
+                    }
                     continue;
                 }
                 int ii = gobjs[gi].ii;
