@@ -1614,15 +1614,21 @@ static void process_lod(const char *lod_path) {
                 memcpy(tmp, bp, tlen); tmp[tlen] = 0;
 
                 int wx_t, dp_t, sy_t, ii_t, fl_t; char modname[64];
+                /* Object = all 5 fields, first is valid hex */
                 if (sscanf(tmp, "%x %d %d %x %d", &wx_t, &dp_t, &sy_t, &ii_t, &fl_t) == 5) {
                     strncpy(gobjs[ng].name, cur_mod, 63);
                     gobjs[ng].is_mod = 0;
                     gobjs[ng].wx = wx_t; gobjs[ng].dp = dp_t; gobjs[ng].sy = sy_t;
                     gobjs[ng].ii = ii_t; gobjs[ng].fl = fl_t; ng++;
-                } else if (sscanf(tmp, "%63s %x %d %d %x", modname, &wx_t, &dp_t, &sy_t, &ii_t) >= 1) {
-                    strncpy(cur_mod, modname, 63);
-                    strncpy(gobjs[ng].name, modname, 63);
-                    gobjs[ng].is_mod = 1; ng++;
+                } else if (sscanf(tmp, "%63s", modname) == 1) {
+                    /* Module = first token is NOT a valid hex number */
+                    int is_hex; long v; char c;
+                    is_hex = (sscanf(modname, "%lx%c", &v, &c) >= 1);
+                    if (!is_hex) {
+                        strncpy(cur_mod, modname, 63);
+                        strncpy(gobjs[ng].name, modname, 63);
+                        gobjs[ng].is_mod = 1; ng++;
+                    }
                 }
                 bp = *eol ? eol + 1 : eol;
             }
