@@ -1671,8 +1671,9 @@ static void process_lod(const char *lod_path) {
                 if (hlen > 127) hlen = 127; memcpy(hl, bdd_data + hs, hlen); hl[hlen] = 0;
                 while (bdp < bdd_sz && (bdd_data[bdp] == 0x0a || bdd_data[bdp] == 0x0d)) bdp++;
                 int idx = 0, w = 0, h = 0, f = 0;
-                sscanf(hl, "%x %d %d %d", &idx, &w, &h, &f);
-                if (w < 0 || w > 4096 || h < 0 || h > 4096 || bdp + (w * h > 0 ? w * h : 0) > bdd_sz) {
+                int nf = sscanf(hl, "%x %d %d %d", &idx, &w, &h, &f);
+                if (nf < 4 || w <= 0 || h <= 0) { bdp = hs; break; } /* end of image data, restore bdp */
+                if (w > 4096 || h > 4096 || bdp + w * h > bdd_sz) {
                     if (g.verbose) printf("  Skip BDD img idx=%x w=%d h=%d (bdp=%ld sz=%ld)\n", idx, w, h, bdp, bdd_sz);
                     continue;
                 }
