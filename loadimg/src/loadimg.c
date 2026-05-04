@@ -1621,9 +1621,12 @@ static void process_lod(const char *lod_path) {
                     gobjs[ng].wx = wx_t; gobjs[ng].dp = dp_t; gobjs[ng].sy = sy_t;
                     gobjs[ng].ii = ii_t; gobjs[ng].fl = fl_t; ng++;
                 } else if (sscanf(tmp, "%63s", modname) == 1) {
-                    /* Module = first token is NOT a valid hex number */
-                    int is_hex; long v; char c;
-                    is_hex = (sscanf(modname, "%lx%c", &v, &c) >= 1);
+                    /* Module = first token is NOT a valid hex number.
+                     * Use strtol to check ENTIRE string (sscanf %lx would
+                     * match partial strings like "DPUL6" via leading 'D'). */
+                    char *endp = modname;
+                    strtol(modname, &endp, 16);
+                    int is_hex = (*endp == 0 && endp > modname);
                     if (!is_hex) {
                         strncpy(cur_mod, modname, 63);
                         strncpy(gobjs[ng].name, modname, 63);
