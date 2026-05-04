@@ -1911,14 +1911,32 @@ static void process_lod(const char *lod_path) {
             if (g.bgnd_fp && n_bmod > 0) {
                 for (int mi = 0; mi < n_bmod; mi++) {
                     const char *mn = bmod_list[mi];
-                    int p1 = 0, p2 = 0, p3 = 0, p4 = 0;
-                    for (int gi = 0; gi < ng; gi++)
-                        if (gobjs[gi].is_mod && strcmp(gobjs[gi].name, mn) == 0) {
-                            p1 = gobjs[gi].wx; p2 = gobjs[gi].dp;
-                            p3 = gobjs[gi].sy; p4 = gobjs[gi].ii; break;
-                        }
-                    int mw = (p2 > p1) ? p2 - p1 : 0;
-                    int mh = (p4 > p3) ? p4 - p3 : 0;
+                    int mw = 0, mh = 0;
+                    /* Compute bounding box from object positions + image sizes */
+                    int min_d = 99999, max_de = 0, min_sy = 99999, max_se = 0;
+                    int found_any = 0;
+                    for (int gj = 0; gj < ng; gj++) {
+                        if (gobjs[gj].is_mod) continue;
+                        int od = gobjs[gj].dp, osy = gobjs[gj].sy;
+                        if (od < mod_ds[mi] || od > mod_de[mi]) continue;
+                        if (osy < mod_ys[mi] || osy > mod_ye[mi]) continue;
+                        int ii = gobjs[gj].ii;
+                        int iw = 0, ih = 0;
+                        for (int di = 0; di < n_bdds; di++)
+                            if (bdds[di].idx == ii) { iw = bdds[di].w; ih = bdds[di].h; break; }
+                        if (od < min_d) min_d = od;
+                        if (od + iw > max_de) max_de = od + iw;
+                        if (osy < min_sy) min_sy = osy;
+                        if (osy + ih > max_se) max_se = osy + ih;
+                        found_any = 1;
+                    }
+                    if (found_any) {
+                        mw = max_de - min_d;
+                        mh = max_se - min_sy;
+                    } else {
+                        mw = mod_de[mi] - mod_ds[mi];
+                        mh = mod_ye[mi] - mod_ys[mi];
+                    }
                     if (g.bgndequ_fp) {
                         fprintf(g.bgndequ_fp, "W%s\t.EQU\t%d\r\n", mn, mw);
                         fprintf(g.bgndequ_fp, "H%s\t.EQU\t%d\r\n", mn, mh);
