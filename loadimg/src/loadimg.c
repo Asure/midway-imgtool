@@ -1598,10 +1598,6 @@ static void process_lod(const char *lod_path) {
                    &bdb_md, &bdb_nm, &bdb_np, &bdb_no);
             bp = nl + 1;
 
-            if (g.bgndequ_fp) {
-                fprintf(g.bgndequ_fp, "W%s\t.EQU\t%d\r\n", bdb_name, bdb_w);
-                fprintf(g.bgndequ_fp, "H%s\t.EQU\t%d\r\n", bdb_name, bdb_h);
-            }
             /* HDRS label: last 2 chars of BDB header name + "HDRS" */
             int bdb_nlen = (int)strlen(bdb_name);
             const char *hdr_suffix = (bdb_nlen >= 2) ? bdb_name + bdb_nlen - 2 : bdb_name;
@@ -1937,9 +1933,9 @@ static void process_lod(const char *lod_path) {
                         mw = mod_de[mi] - mod_ds[mi];
                         mh = mod_ye[mi] - mod_ys[mi];
                     }
-                    if (g.bgndequ_fp) {
-                        fprintf(g.bgndequ_fp, "W%s\t.EQU\t%d\r\n", mn, mw);
-                        fprintf(g.bgndequ_fp, "H%s\t.EQU\t%d\r\n", mn, mh);
+                    if (g.bgndequ_fp && mod_obj_count[mi] > 0) {
+                        fprintf(g.bgndequ_fp, "W%s .EQU\t%d\r\n", mn, mw);
+                        fprintf(g.bgndequ_fp, "H%s .EQU\t%d\r\n", mn, mh);
                     }
                 fprintf(g.bgnd_fp, "%sBMOD:\r\n", mn);
                 fprintf(g.bgnd_fp, "\t.word\t%d,%d,%d\r\n", mw, mh, mod_obj_count[mi]);
