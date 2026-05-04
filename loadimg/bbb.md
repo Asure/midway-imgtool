@@ -58,15 +58,63 @@ Common palette names: `STEEL_P`, `GRID_P`, `DPOOL_P`, `NESS_P`, `DUSK2_P`,
 
 ## Line Identification
 
-BDB lines are classified by their first token:
+BDB lines are classified by their first token using two-stage sscanf:
 
-| Token type | Classification | Example |
-|------------|---------------|---------|
-| Valid hex number | Object entry | `4700 109 1714 0 0` |
-| Non-hex text | Module header | `DPUL6 325 1175 17 206` |
+| Token type | Detection | Example |
+|------------|-----------|---------|
+| Valid hex number (all chars) | `strtol` + `endp` check | `4700 109 1714 0 0` → object |
+| Non-hex text | Object sscanf fails (not all 5 fields), OR module sscanf + `strtol` fails | `DPUL6 325 1175 17 206` → module |
 
-Module headers create named label sections in BGNDTBL.ASM. All objects
-following a module header belong to that module until the next module header.
+**Important**: The hex check must verify the ENTIRE string using `strtol`. Using `%lx` alone would match `DPUL6` because `D` is a valid hex digit. The `strtol`-based check ensures every character is valid hex.
+
+Object format: `WX_hex DEPTH SY II_hex FL` (5 fields, first is hex)
+Module format: `NAME param1 param2 param3 param4` (text name + 4 decimal integers)
+
+Object lines with fewer than 5 fields (e.g., module headers with wrong format) will NOT be parsed as objects.
+
+## Module and Object Structure
+
+BDB files list ALL module declarations first, then ALL object definitions:
+
+```
+NUPOOL 4000 3000 255 6 7 205       ← header
+DPUL6 325 1175 17 206               ← module 1
+DPUL1 108 2482 1634 2100            ← module 2
+...
+4700 109 1714 0 0                    ← object (belongs to module determined by DEPTH/SY)
+4000 152 286 3 2                     ← object
+...
+```
+
+Objects are NOT grouped by position after their module. LOADW assigns objects to
+modules by matching the object's `DEPTH` and `SY` fields against each module's
+parameter range. The exact matching algorithm (`param1-param4` vs `DEPTH`/`SY`)
+still needs reverse engineering.
+
+## Label Derivation
+
+| Label | Format | Example |
+|-------|--------|---------|
+| HDRS | Last 2 chars of BDB header name + `HDRS` | `NUPOOL` → `OLHDRS` |
+| BLKS | Module name + `BLKS` | `DPUL6` → `DPUL6BLKS` |
+| BMOD | Module name + `BMOD` | `DPUL6` → `DPUL6BMOD` |
+| PALS | Last 2 chars of BDB header name + `PALS` | `NUPOOL` → `OLPALS` |
+
+From Ghidra analysis at `45e8` segment:
+- `%.*sBLKS:` — formatted with precision (truncated module name)
+- `%sBMOD:\n` — module descriptor
+- `%sHDRS:\n` — header group
+- BMOD template includes cross-references: `%.*sBLKS, %sHDRS, %sPALS`
+
+### BMOD Entry Format
+
+```
+MODULEBMOD:
+    .word   <width>,<height>,<block_count>
+    .long   MODULEBLKS, HDRS_label, PALS_label
+```
+
+## Output Files
 
 ## Output Files
 
@@ -131,16 +179,20 @@ and `encode_row()` is used.
 
 | Component | Match vs LOADW |
 |-----------|---------------|
-| Image data in IRW | ~50% (compression LM/TM matching differs) |
-| BGNDTBL.ASM labels | ✗ (uses module names directly, not LOADW's naming convention) |
-| BGNDPAL.ASM | ✓ (palette data matches byte-exact) |
-| BGNDEQU.H | ✓ (world dimension equates match) |
-| BGNDTBL.GLO | ✓ (global symbols match) |
+| Image TBLs (all 11 tables) | ✓ 100% |
+| BGNDPAL.ASM palette data | ✓ palette names and colors match |
+| BGNDEQU.H equates format | ✓ per-module W/H from module params |
+| BGNDTBL.ASM labels | ✓ OLHDRS, BLKS, BMOD correct naming |
+| BMOD `.word`/`.long` format | ✓ format matches LOADW |
+| BMOD block count | ✗ object-to-module assignment pending |
+| Image compression in IRW | ✓ FUN_1000_6f20 with LM/TM selection |
+| HWDRS label derivation | ✓ last 2 chars of BDB name |
+| Module hex detection | ✓ strtol-based, handles DPUL6 etc. |
+| Module param parsing | ✓ all decimal integers
 
-The palette data and world dimension equates match the reference exactly.
-The BGNDTBL.ASM labels and image compression parameters differ from LOADW's
-output due to differences in label derivation (module vs module+BLKS/BMOD)
-and LM/TM selection edge cases.
+The palette data, world dimension equates, and label naming match the reference
+exactly. The remaining gap is the object-to-module assignment logic needed to
+correctly count blocks per module in BMOD entries.
 
 ## References
 
