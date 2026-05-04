@@ -206,6 +206,10 @@ typedef struct {
     FILE     *asm_fp;
     FILE     *glo_fp;
     FILE     *pal_fp;
+    FILE     *bgnd_fp;     /* BGNDTBL.ASM */
+    FILE     *bgndpal_fp;  /* BGNDPAL.ASM */
+    FILE     *bgndequ_fp;  /* BGNDEQU.H */
+    FILE     *bgndtbl_glo_fp; /* BGNDTBL.GLO */
 
     ImageEntry images[MAX_IMAGES];
     int      n_images;
@@ -1517,6 +1521,404 @@ static void process_lod(const char *lod_path) {
             } else {
                 fprintf(stderr, "WARNING: cannot open .BIN file: %s.BIN\n", fname);
             }
+        }
+        else if (!strncmp(upper, "BBB>", 4)) {
+            char bgname[MAX_PATH];
+            sscanf(line + 4, " %255s", bgname);
+            /* Extract basename from DOS path */
+            const char *base = bgname;
+            for (const char *p = bgname; *p; p++)
+                if (*p == '\\' || *p == '/' || *p == ':') base = p + 1;
+            if (!base[0]) continue;
+
+            /* Open background table files on first BBB> */
+            if (g.build_tables && !g.bgnd_fp) {
+                char path[MAX_PATH];
+                snprintf(path, MAX_PATH, "BGNDTBL.ASM");
+                g.bgnd_fp = fopen(path, "w");
+                if (g.bgnd_fp) {
+                    fprintf(g.bgnd_fp, "\t.OPTION\tB,D,L,T\r\n");
+                    fprintf(g.bgnd_fp, "\t.include\t\"BGNDTBL.GLO\"\r\n");
+                    fprintf(g.bgnd_fp, "\t.DATA\r\n\r\n");
+                }
+                snprintf(path, MAX_PATH, "BGNDPAL.ASM");
+                g.bgndpal_fp = fopen(path, "w");
+                if (g.bgndpal_fp) {
+                    fprintf(g.bgndpal_fp, "\t.OPTION\tB,D,L,T\r\n");
+                    fprintf(g.bgndpal_fp, "\t.include\t\"BGNDTBL.GLO\"\r\n");
+                    fprintf(g.bgndpal_fp, "\t.DATA\r\n\r\n");
+                }
+                snprintf(path, MAX_PATH, "BGNDEQU.H");
+                g.bgndequ_fp = fopen(path, "w");
+                snprintf(path, MAX_PATH, "BGNDTBL.GLO");
+                g.bgndtbl_glo_fp = fopen(path, "w");
+            }
+
+            /* Try to find BDB and BDD files */
+            char bdb_path[MAX_PATH], bdd_path[MAX_PATH];
+            FILE *bdb_f = NULL, *bdd_f = NULL;
+            const char *dirs[] = { g.imgdir, "." };
+            for (int di = 0; di < 2 && !bdb_f; di++) {
+                if (!dirs[di][0]) continue;
+                snprintf(bdb_path, MAX_PATH, "%s%c%s.BDB", dirs[di], PATH_SEP, base);
+                bdb_f = fopen(bdb_path, "rb");
+            }
+            for (int di = 0; di < 2 && !bdd_f; di++) {
+                if (!dirs[di][0]) continue;
+                snprintf(bdd_path, MAX_PATH, "%s%c%s.BDD", dirs[di], PATH_SEP, base);
+                bdd_f = fopen(bdd_path, "rb");
+            }
+            if (!bdb_f) { fprintf(stderr, "WARNING: cannot open %s.BDB\n", base); continue; }
+            if (!bdd_f) { fclose(bdb_f); fprintf(stderr, "WARNING: cannot open %s.BDD\n", base); continue; }
+
+            /* Read BDB (ASCII text, object placement) */
+            char bdb_buf[65536];
+            size_t bdb_len = fread(bdb_buf, 1, sizeof(bdb_buf)-1, bdb_f);
+            bdb_buf[bdb_len] = 0;
+            fclose(bdb_f);
+
+            /* Read BDD (binary, images + palettes) */
+            fseek(bdd_f, 0, SEEK_END);
+            long bdd_sz = ftell(bdd_f);
+            fseek(bdd_f, 0, SEEK_SET);
+            uint8_t *bdd_data = (uint8_t*)malloc(bdd_sz);
+            if (!bdd_data) { fclose(bdd_f); continue; }
+            fread(bdd_data, 1, bdd_sz, bdd_f);
+            fclose(bdd_f);
+
+            /* Parse BDB header line: NAME W H ... */
+            char *bp = bdb_buf;
+            char *nl = strchr(bp, '\n');
+            if (!nl) { free(bdd_data); continue; }
+            *nl = 0;
+            char bdb_name[64]; int bdb_w = 0, bdb_h = 0;
+            sscanf(bp, "%63s %d %d", bdb_name, &bdb_w, &bdb_h);
+            bp = nl + 1;
+
+            /* Write BGNDEQU.H label (world dimensions) */
+            if (g.bgndequ_fp) {
+                fprintf(g.bgndequ_fp, "W%s\t.EQU\t%d\r\n", bdb_name, bdb_w);
+                fprintf(g.bgndequ_fp, "H%s\t.EQU\t%d\r\n", bdb_name, bdb_h);
+            }
+            if (g.bgndtbl_glo_fp)
+                fprintf(g.bgndtbl_glo_fp, "\t.globl\t%s\r\n", bdb_name);
+
+            /* Parse BDB object lines */
+            int max_img_idx = -1;
+            /* First pass: count max image index */
+            char obj_lines[1024][128];
+            int n_objs = 0;
+            while (*bp && n_objs < 1024) {
+                while (*bp == '\r' || *bp == '\n') bp++;
+                if (!*bp) break;
+                char *eol = strchr(bp, '\n');
+                if (!eol) eol = bp + strlen(bp);
+                int len = (int)(eol - bp);
+                if (len > 127) len = 127;
+                memcpy(obj_lines[n_objs], bp, len);
+                obj_lines[n_objs][len] = 0;
+                n_objs++;
+                bp = *eol ? eol + 1 : eol;
+            }
+
+            /* Parse BDD: image count */
+            char *bdp = (char*)bdd_data;
+            int n_bdd = atoi(bdp);
+            bdp = strchr(bdp, '\n');
+            if (!bdp) { free(bdd_data); continue; }
+            bdp++;
+
+            /* For each object, compute its image index and process it */
+            /* Track which BDD images we've already written */
+            int *img_written = (int*)calloc(n_bdd + 1, sizeof(int));
+            uint32_t *img_sag = (uint32_t*)calloc(n_bdd + 1, sizeof(uint32_t));
+            int *img_written_h = (int*)calloc(n_bdd + 1, sizeof(int));
+
+            if (g.bgnd_fp)
+                fprintf(g.bgnd_fp, "%s:\r\n", bdb_name);
+
+            /* Store BDD image data for later writing */
+            struct {
+                int idx, w, h, flags;
+                uint8_t *pix;
+                int pal_idx;
+            } bdd_imgs[256];
+            int n_bdd_imgs = 0;
+
+            /* Parse BDD images */
+            uint8_t *pal_data_start = NULL;
+            for (int i = 0; i < n_bdd; i++) {
+                int idx, w, h, f;
+                char *next = bdp;
+                /* Skip to end of header line */
+                char *hdr_end = strchr(bdp, '\n');
+                if (!hdr_end) break;
+                *hdr_end = 0;
+                sscanf(bdp, "%x %d %d %d", &idx, &w, &h, &f);
+                bdp = hdr_end + 1;
+                int pix_bytes = w * h;
+                if (bdp + pix_bytes > (char*)bdd_data + bdd_sz) break;
+                bdd_imgs[n_bdd_imgs].idx = idx;
+                bdd_imgs[n_bdd_imgs].w = w;
+                bdd_imgs[n_bdd_imgs].h = h;
+                bdd_imgs[n_bdd_imgs].flags = f;
+                bdd_imgs[n_bdd_imgs].pix = (uint8_t*)bdp;
+                bdd_imgs[n_bdd_imgs].pal_idx = -1;
+                n_bdd_imgs++;
+                bdp += pix_bytes;
+            }
+            pal_data_start = (uint8_t*)bdp;
+
+            /* Parse BDD palettes */
+            char pal_names[64][64];
+            int pal_counts[64];
+            uint16_t *pal_colors[64];
+            int n_pals = 0;
+            bdp = (char*)pal_data_start;
+            while (bdp && bdp < (char*)bdd_data + bdd_sz && n_pals < 64) {
+                while (*bdp == '\r' || *bdp == '\n') bdp++;
+                if (!*bdp || bdp >= (char*)bdd_data + bdd_sz) break;
+                char *eol = strchr(bdp, '\n');
+                if (!eol) break;
+                *eol = 0;
+                int cnt;
+                char pn[64];
+                if (sscanf(bdp, "%63s %d", pn, &cnt) >= 2 && cnt > 0 && cnt <= 256) {
+                    strncpy(pal_names[n_pals], pn, 63);
+                    pal_counts[n_pals] = cnt;
+                    bdp = eol + 1;
+                    pal_colors[n_pals] = (uint16_t*)bdp;
+                    n_pals++;
+                    bdp += cnt * 2;
+                } else {
+                    bdp = eol + 1;
+                }
+            }
+
+            /* For each object, find the corresponding BDD image and palette */
+            for (int oi = 0; oi < n_objs; oi++) {
+                char *line = obj_lines[oi];
+                if (!line[0]) continue;
+                int wx, dp, sy, ii, fl;
+                if (sscanf(line, "%x %d %d %x %d", &wx, &dp, &sy, &ii, &fl) < 5)
+                    continue;
+
+                /* Find BDD image by index */
+                int img_idx = -1;
+                for (int bi = 0; bi < n_bdd_imgs; bi++) {
+                    if (bdd_imgs[bi].idx == ii) { img_idx = bi; break; }
+                }
+                if (img_idx < 0) continue;
+
+                /* Mark palette association */
+                bdd_imgs[img_idx].pal_idx = fl;
+
+                /* Compute compressed size */
+                int w = bdd_imgs[img_idx].w;
+                int h = bdd_imgs[img_idx].h;
+                uint8_t *pix = bdd_imgs[img_idx].pix;
+
+                /* Determine bpp from max pixel value */
+                uint32_t maxpx = 0;
+                for (int pi = 0; pi < w * h; pi++)
+                    if (pix[pi] > maxpx) maxpx = pix[pi];
+                int per_bpp = bpp_for_max(maxpx);
+                if (per_bpp < 1) per_bpp = 1;
+                if (per_bpp > 8) per_bpp = 8;
+
+                /* Write to IRW: either compressed or raw */
+                if (!img_written[img_idx]) {
+                    img_written[img_idx] = 1;
+                    img_sag[img_idx] = g.irw_bit;
+                    img_written_h[img_idx] = h;
+
+                    int sizx_align = (w + 3) & ~3;
+                    int raw_bits = sizx_align * h * per_bpp;
+
+                    /* For background images, compute compression the same way as regular images */
+                    /* Try LM/TM = 0,1,2,3 and pick the one with smallest total bits */
+                    int best_bits = raw_bits;
+                    for (int lm_try = 0; lm_try < 4; lm_try++) {
+                        int lmm = 1 << lm_try;
+                        for (int tm_try = 0; tm_try < 4; tm_try++) {
+                            int tmm = 1 << tm_try;
+                            int total = 0;
+                            for (int row = 0; row < h; row++) {
+                                uint8_t *rp = pix + row * w;
+                                int lead = 0, trail = 0, lead_done = 0;
+                                for (int x = 0; x < sizx_align; x++) {
+                                    uint8_t px = (x < w) ? rp[x] : 0;
+                                    if (!lead_done) {
+                                        if (lead == 120) { lead_done = 1; }
+                                        else if (px == 0) { lead++; }
+                                        else { lead_done = 1; }
+                                    }
+                                    if (lead_done && sizx_align - 120 < x) {
+                                        if (px == 0) trail++; else trail = 0;
+                                    }
+                                }
+                                int ln = lead / lmm; if (ln > 15) ln = 15;
+                                int tn = trail / tmm; if (tn > 15) tn = 15;
+                                int lc = ln * lmm; int tc = tn * tmm;
+                                if (lc + tc > sizx_align) tc = sizx_align - lc;
+                                int stored = sizx_align - lc - tc;
+                                if (stored < 0) stored = 0;
+                                /* Apply minimum stored=10 adjustment */
+                                if (stored < 10) {
+                                    int i6 = lc, i7 = sizx_align - tc - 1;
+                                    if ((i7 - i6) + 1 < 10) {
+                                        int l2c = (i6 - i7) + 9, i9 = l2c;
+                                        if (i6 < l2c) { i9 = l2c - i6; l2c = i6; }
+                                        ln = lmm > 0 ? (lc - l2c) / lmm : 0;
+                                        if (((i7 - (lc - l2c)) + 1) < 10)
+                                            tn = tmm > 0 ? (tc - i9) / tmm : 0;
+                                        lc = ln * lmm; tc = tn * tmm;
+                                        if (lc + tc > sizx_align) tc = sizx_align - lc;
+                                        stored = sizx_align - lc - tc;
+                                        if (stored < 0) stored = 0;
+                                    }
+                                }
+                                total += 8 + stored * per_bpp;
+                                if (total >= best_bits) break;
+                            }
+                            if (total < best_bits) {
+                                best_bits = total;
+                            }
+                        }
+                    }
+
+                    int do_cmp = (best_bits < raw_bits) ? 1 : 0;
+                    if (g.zon && do_cmp) {
+                        /* Compressed write - pick the best LM/TM and write rows */
+                        int best_lm = 0, best_tm = 0;
+                        int best_sz = raw_bits;
+                        for (int lm_try = 0; lm_try < 4; lm_try++) {
+                            int lmm = 1 << lm_try;
+                            for (int tm_try = 0; tm_try < 4; tm_try++) {
+                                int tmm = 1 << tm_try;
+                                int total = 0;
+                                for (int row = 0; row < h; row++) {
+                                    uint8_t *rp = pix + row * w;
+                                    int lead = 0, trail = 0, d1 = 0;
+                                    for (int x = 0; x < sizx_align; x++) {
+                                        uint8_t px = (x < w) ? rp[x] : 0;
+                                        if (!d1 && lead < 120 && px == 0) lead++;
+                                        else d1 = 1;
+                                        if (d1 && sizx_align - 120 < x) {
+                                            if (px == 0) trail++; else trail = 0;
+                                        }
+                                    }
+                                    int ln = lead / lmm; if (ln > 15) ln = 15;
+                                    int tn = trail / tmm; if (tn > 15) tn = 15;
+                                    int lc = ln * lmm; int tc = tn * tmm;
+                                    if (lc + tc > sizx_align) tc = sizx_align - lc;
+                                    int stored = sizx_align - lc - tc;
+                                    if (stored < 0) stored = 0;
+                                    if (stored < 10) {
+                                        int i6 = lc, i7 = sizx_align - tc - 1;
+                                        if ((i7 - i6) + 1 < 10) {
+                                            int l2c = (i6 - i7) + 9, i9 = l2c;
+                                            if (i6 < l2c) { i9 = l2c - i6; l2c = i6; }
+                                            ln = lmm > 0 ? (lc - l2c) / lmm : 0;
+                                            if (((i7 - (lc - l2c)) + 1) < 10)
+                                                tn = tmm > 0 ? (tc - i9) / tmm : 0;
+                                        }
+                                    }
+                                    total += 8 + (sizx_align - ln * lmm - tn * tmm) * per_bpp;
+                                }
+                                if (total < best_sz) {
+                                    best_sz = total; best_lm = lm_try; best_tm = tm_try;
+                                }
+                            }
+                        }
+                        /* Write rows with selected LM/TM */
+                        int lmm = 1 << best_lm, tmm = 1 << best_tm;
+                        for (int row = 0; row < h; row++) {
+                            uint8_t *rp = pix + row * w;
+                            int lead = 0, trail = 0, d1 = 0;
+                            for (int x = 0; x < sizx_align; x++) {
+                                uint8_t px = (x < w) ? rp[x] : 0;
+                                if (!d1 && lead < 120 && px == 0) lead++;
+                                else d1 = 1;
+                                if (d1 && sizx_align - 120 < x) {
+                                    if (px == 0) trail++; else trail = 0;
+                                }
+                            }
+                            int ln = lead / lmm; if (ln > 15) ln = 15;
+                            int tn = trail / tmm; if (tn > 15) tn = 15;
+                            int lc = ln * lmm; int tc = tn * tmm;
+                            if (lc + tc > sizx_align) tc = sizx_align - lc;
+                            int stored = sizx_align - lc - tc;
+                            if (stored < 0) stored = 0;
+                            if (stored < 10) {
+                                int i6 = lc, i7 = sizx_align - tc - 1;
+                                if ((i7 - i6) + 1 < 10) {
+                                    int l2c = (i6 - i7) + 9, i9 = l2c;
+                                    if (i6 < l2c) { i9 = l2c - i6; l2c = i6; }
+                                    ln = lmm > 0 ? (lc - l2c) / lmm : 0;
+                                    if (((i7 - (lc - l2c)) + 1) < 10)
+                                        tn = tmm > 0 ? (tc - i9) / tmm : 0;
+                                    lc = ln * lmm; tc = tn * tmm;
+                                    if (lc + tc > sizx_align) tc = sizx_align - lc;
+                                    stored = sizx_align - lc - tc;
+                                    if (stored < 0) stored = 0;
+                                }
+                            }
+                            uint8_t hdr = (uint8_t)((tn << 4) | (ln & 0xf));
+                            irw_write_byte(hdr);
+                            for (int si = 0; si < stored; si++) {
+                                int px_idx = lc + si;
+                                irw_write_bits(px_idx < w ? rp[px_idx] : 0, per_bpp);
+                            }
+                        }
+                    } else {
+                        /* Raw write */
+                        for (int row = 0; row < h; row++) {
+                            uint8_t *rp = pix + row * w;
+                            for (int x = 0; x < sizx_align; x++)
+                                irw_write_bits(x < w ? rp[x] : 0, per_bpp);
+                        }
+                    }
+                    if (g.verbose)
+                        printf("  BGND img idx=%d (%dx%d) at bit %u bpp=%d\n",
+                               bdd_imgs[img_idx].idx, w, h, img_sag[img_idx], per_bpp);
+                }
+
+                /* Write TBL entry for this object */
+                if (g.bgnd_fp) {
+                    uint16_t ctrl = (uint16_t)((per_bpp << 12) | (0 << 10) | (0 << 8) | 0x80);
+                    if (g.bgnd_fp) {
+                        fprintf(g.bgnd_fp, "\t.word\t%d,%d\r\n", w, h);
+                        fprintf(g.bgnd_fp, "\t.long\t0%XH\r\n", g.base_addr + img_sag[img_idx]);
+                        fprintf(g.bgnd_fp, "\t.word\t0%04XH\r\n", ctrl);
+                    }
+                }
+            }
+
+            /* Write palettes to BGNDPAL.ASM */
+            if (g.bgndpal_fp) {
+                for (int pi = 0; pi < n_pals; pi++) {
+                    fprintf(g.bgndpal_fp, "%s:\t;PAL #%d\r\n", pal_names[pi], pi + 1);
+                    fprintf(g.bgndpal_fp, "\t.word\t%d\t;pal size\r\n", pal_counts[pi]);
+                    fprintf(g.bgndpal_fp, "\t.word ");
+                    for (int ci = 0; ci < pal_counts[pi]; ci++) {
+                        uint16_t c = pal_colors[pi][ci];
+                        fprintf(g.bgndpal_fp, "%04XH", c);
+                        if (ci < pal_counts[pi] - 1)
+                            fprintf(g.bgndpal_fp, ",");
+                        else
+                            fprintf(g.bgndpal_fp, "\r\n");
+                    }
+                    fprintf(g.bgndpal_fp, "\r\n");
+                    if (g.bgndtbl_glo_fp)
+                        fprintf(g.bgndtbl_glo_fp, "\t.globl\t%s\r\n", pal_names[pi]);
+                }
+            }
+
+            free(img_written);
+            free(img_sag);
+            free(img_written_h);
+            free(bdd_data);
         }
         else if (!strncmp(upper, "MON>", 4)) { }
         else if (!strncmp(upper, "BON>", 4)) { }
