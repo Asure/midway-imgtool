@@ -1023,7 +1023,7 @@ static void write_image_tbl(FILE *fp, ImageEntry *ie) {
                     fprintf(fp, "\r\n");
                     n_words = 0;
                 }
-                fprintf(fp, "\t.word   0%04xH\r\n", ie->ctrl);
+                fprintf(fp, "\t.word   0%xH\r\n", ie->ctrl);
             } else {
                 int val = get_ihdr_word_value(ie, f, 1);
                 word_buf[n_words++] = val;
@@ -1460,10 +1460,15 @@ static void process_lod(const char *lod_path) {
                  * multiple times for the same table) */
                 g.asm_fp = fopen(full, "a");
                 if (!g.asm_fp) die("cannot create %s", full);
-                /* Write header only for new files */
                 fseek(g.asm_fp, 0, SEEK_END);
-                if (ftell(g.asm_fp) == 0)
+                if (ftell(g.asm_fp) == 0) {
                     write_tbl_header(g.asm_fp);
+                } else {
+                    /* Existing file: write .TEXT/^Z separator before appending */
+                    fprintf(g.asm_fp, "\t.TEXT\r\n");
+                    fputc(0x1a, g.asm_fp);
+                    write_tbl_header(g.asm_fp);
+                }
             }
         }
         else if (!strncmp(upper, "GLO>", 4)) {
@@ -1508,7 +1513,7 @@ static void process_lod(const char *lod_path) {
                 long bsz = ftell(bf);
                 fseek(bf, 0, SEEK_SET);
                 if (g.build_tables && g.asm_fp) {
-                    fprintf(g.asm_fp, "%s\t.set\t0%XH\r\n", fname, g.base_addr + g.irw_bit);
+                    fprintf(g.asm_fp, "%s\t.set\t0%xh\r\n", fname, g.base_addr + g.irw_bit);
                 }
                 if (g.glo_fp) {
                     fprintf(g.glo_fp, "\t.globl\t%s\r\n", fname);
