@@ -746,7 +746,7 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
         }
         comp_bits += 8 + stored * bpp;
     }
-    int do_cmp = (sizx >= 10 && comp_bits < raw_bits) ? 1 : 0;
+    int do_cmp = (sizx >= 10 && comp_bits <= raw_bits) ? 1 : 0;
 
     p.ctrl = compute_ctrl(bpp, p.lm, p.tm, do_cmp);
 
