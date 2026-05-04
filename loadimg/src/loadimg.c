@@ -172,7 +172,7 @@ typedef struct {
 
 typedef struct {
     int      zon;
-    int      cof;
+    int      dedup;  /* 1 = CON> (checksums ON), 0 = COF> (checksums OFF) */
     int      pon;
     int      xon;
     int      verbose;
@@ -289,6 +289,30 @@ static void irw_ensure(size_t need_bytes) {
     }
 }
 
+/* LOADW FUN_1854_35fc checksum: sum + max over stride width */
+static uint32_t loadw_checksum(uint8_t *pix, int stride, int w, int h, uint32_t *out_max) {
+    uint32_t sum = 0, max_val = 0;
+    int rw = stride > w ? stride : w;
+    for (int y = 0; y < h; y++) {
+        uint32_t *dw = (uint32_t*)(pix + y * stride);
+        for (int x = 0; x < rw / 4; x++) {
+            uint32_t v = dw[x];
+            sum += v;
+            uint32_t lo = v & 0xff;
+            uint32_t hi = (v >> 8) & 0xff;
+            if (lo > max_val) max_val = lo;
+            if (hi > max_val) max_val = hi;
+        }
+    }
+    *out_max = max_val;
+    return sum;
+}
+
+#define MAX_DEDUP 4096
+typedef struct { uint32_t sum, max_val; int sizx, sizy; uint16_t ctrl; uint32_t sag; } DedupEntry;
+static DedupEntry dedup_table[MAX_DEDUP];
+static int n_dedup = 0;
+
 static void irw_write_bits(uint32_t val, int nbits) {
     uint32_t bit_pos = g.irw_bit;
     size_t need = (bit_pos + nbits + 7) / 8 + 1;
@@ -321,6 +345,7 @@ typedef struct {
     size_t    size;
     char      path[MAX_PATH];
     IMG_REC  *images;
+    IMG_REC  *norm_images;  /* allocated for old-format conversion */
     PAL_REC  *pals;
     PTTBL    *pttbls;
     int       n_images;
@@ -339,17 +364,33 @@ static ImgFile* img_load_try(const char *dir, const char *fname) {
     strncpy(lower, fname, MAX_PATH-1);
     for (int i = 0; lower[i]; i++) lower[i] = (char)tolower((unsigned char)lower[i]);
 
-    const char *tries[6];
-    char p1[MAX_PATH], p2[MAX_PATH], p3[MAX_PATH];
+    /* Extract basename from DOS-style paths (e.g. "c:\video\kombat2\img\FILE.IMG" -> "FILE.IMG") */
+    const char *base = fname;
+    for (const char *p = fname; *p; p++) {
+        if (*p == '\\' || *p == '/' || *p == ':') base = p + 1;
+    }
+    char base_upper[MAX_PATH], base_lower[MAX_PATH];
+    strncpy(base_upper, base, MAX_PATH-1); upcase(base_upper);
+    strncpy(base_lower, base, MAX_PATH-1);
+    for (int i = 0; base_lower[i]; i++) base_lower[i] = (char)tolower((unsigned char)base_lower[i]);
+
+    const char *tries[10];
+    char p1[MAX_PATH], p2[MAX_PATH], p3[MAX_PATH], p4[MAX_PATH], p5[MAX_PATH], p6[MAX_PATH];
     int n = 0;
     if (dir && dir[0]) {
         path_cat(p1, dir, fname, MAX_PATH);  tries[n++] = p1;
         path_cat(p2, dir, upper, MAX_PATH);  tries[n++] = p2;
         path_cat(p3, dir, lower, MAX_PATH);  tries[n++] = p3;
+        path_cat(p4, dir, base, MAX_PATH);   tries[n++] = p4;
+        path_cat(p5, dir, base_upper, MAX_PATH); tries[n++] = p5;
+        path_cat(p6, dir, base_lower, MAX_PATH); tries[n++] = p6;
     }
     tries[n++] = fname;
     tries[n++] = upper;
     tries[n++] = lower;
+    tries[n++] = base;
+    tries[n++] = base_upper;
+    tries[n++] = base_lower;
     (void)path;
 
     for (int i = 0; i < n; i++) {
@@ -378,7 +419,44 @@ static ImgFile* img_load(const char *path) {
     memcpy(&img->hdr, img->data, sizeof(LIB_HDR));
 
     if (img->hdr.temp != 0xabcd) {
-        fprintf(stderr, "WARNING: %s: invalid magic (temp=%04x)\n", path, img->hdr.temp);
+        /* Old pre-WimpV5 format: 42-byte IMG_REC (pack 1).
+         * Convert to normalized 50-byte IMG_REC table.
+         * Layout: +0 name[16] +16 xoff(sw) +18 yoff(sw) +20 xsize(w) +22 ysize(w)
+         *         +24 palind(b) +25 flags(b) +26 oset(dd) +30 data(dd)
+         *         +34 lib(sw) +36 pword1(sw) +38 pword2(sw) +40 frame(b) +41 spare(b) */
+        int n = img->hdr.imgcnt;
+        uint32_t old_oset = img->hdr.oset;
+        if (n <= 0 || old_oset + (uint32_t)n * 42 > (uint32_t)sz) {
+            fprintf(stderr, "WARNING: %s: old format but table OOB, skipping\n", path);
+            free(img->data); free(img); return NULL;
+        }
+        IMG_REC *norm = (IMG_REC*)calloc(n, sizeof(IMG_REC));
+        if (!norm) die("out of memory");
+        for (int i = 0; i < n; i++) {
+            const uint8_t *o = img->data + old_oset + i * 42;
+            IMG_REC *r = &norm[i];
+            memcpy(r->name, o, 16);
+            r->anix    = (int16_t) (o[16] | (o[17] << 8));
+            r->aniy    = (int16_t) (o[18] | (o[19] << 8));
+            r->w       = (uint16_t)(o[20] | (o[21] << 8));
+            r->h       = (uint16_t)(o[22] | (o[23] << 8));
+            r->palnum  = (uint16_t)(o[24]);
+            r->flags   = (uint16_t)(o[25]);
+            r->oset    = (uint32_t)(o[26]|(o[27]<<8)|(o[28]<<16)|(o[29]<<24));
+            r->data_p  = (uint32_t)(o[30]|(o[31]<<8)|(o[32]<<16)|(o[33]<<24));
+            r->lib     = (uint16_t)(o[34] | (o[35] << 8));
+            r->anix2   = (int16_t) (o[36] | (o[37] << 8));
+            r->aniy2   = (int16_t) (o[38] | (o[39] << 8));
+            r->frm     = (uint16_t)(o[40]);
+            r->pttblnum = -1;
+            r->opals    = (uint16_t)0xffff;
+        }
+        img->norm_images = norm;
+        /* Patch hdr so rest of img_load works: adjust oset to skip old records */
+        img->hdr.temp    = 0xabcd;
+        img->hdr.version = 0x634;
+        img->hdr.seqcnt  = 0;
+        img->hdr.scrcnt  = 0;
     }
 
     uint32_t oset = img->hdr.oset;
@@ -391,7 +469,10 @@ static ImgFile* img_load(const char *path) {
     }
 
     img->n_special = n_special;
-    img->images = (IMG_REC*)(img->data + oset + n_special * (int)sizeof(IMG_REC));
+    if (img->norm_images)
+        img->images = img->norm_images + n_special;
+    else
+        img->images = (IMG_REC*)(img->data + oset + n_special * (int)sizeof(IMG_REC));
     img->n_images = img->hdr.imgcnt - n_special;
 
     /* Palette records: stored with 3 defaults prepended */
@@ -529,7 +610,7 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
     CompParams p;
     memset(&p, 0, sizeof(p));
 
-    p.sizx = pttbl_sizx > 0 ? pttbl_sizx : rec->w;
+    p.sizx = pttbl_sizx > 0 ? pttbl_sizx : (rec->w + 3) & ~3;
     p.sizy = rec->h;
     if (p.sizx < 1) p.sizx = 1;
     if (p.sizy < 1) p.sizy = 1;
@@ -541,50 +622,127 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
         return p;
     }
 
+    /* FUN_1000_6f20 error-minimizing LM/TM selection.
+     * For each row, count lead (120 cap, bVar8) and trail (only after lead finishes).
+     * Then accumulate waste per multiplier: waste = sum(mult*lead_n - lead) across rows.
+     * Select LM/TM with minimum total waste. */
     uint8_t *pix = img_pixels(img, rec);
     int stride = (rec->w + 3) & ~3;
-
-    int max_lead = 0, max_trail = 0;
+    int lead_err[4] = {0}, trail_err[4] = {0};
     int lookahead_lead_min = 999;
-    int lookahead_trail_min = 999;
     int rows = rec->h;
     int la_window = rows < 4 ? rows : 4;
+    int sizx = p.sizx;
 
     for (int y = 0; y < rec->h; y++) {
         uint8_t *row = pix + y * stride;
-        int lead = 0;
-        while (lead < p.sizx && lead < rec->w && row[lead] == 0) lead++;
-        int right = p.sizx - 1;
-        if (right >= rec->w) right = rec->w - 1;
-        int row_trail = 0;
-        while (row_trail <= right && (right - row_trail) >= lead && row[right - row_trail] == 0)
-            row_trail++;
-        if (lead > max_lead) max_lead = lead;
-        if (row_trail > max_trail) max_trail = row_trail;
-        if (y < la_window) {
-            if (lead < lookahead_lead_min) lookahead_lead_min = lead;
-            if (row_trail < lookahead_trail_min) lookahead_trail_min = row_trail;
+        int lead = 0, trail = 0, lead_done = 0;
+
+        for (int x = 0; x < sizx; x++) {
+            uint8_t px = row[x];
+            if (!lead_done) {
+                if (lead == 120) {
+                    lead_done = 1;
+                } else if (px == 0) {
+                    lead++;
+                } else {
+                    lead_done = 1;
+                }
+            }
+            if (lead_done) {
+                if (sizx - 120 < x) {
+                    if (px == 0) trail++;
+                    else trail = 0;
+                }
+            }
         }
+
+        for (int m = 0; m < 4; m++) {
+            int mult = 1 << m;
+            int ln = lead / mult;
+            if (ln > 15) ln = 15;
+            lead_err[m] += lead - mult * ln;
+            int tn = trail / mult;
+            if (tn > 15) tn = 15;
+            trail_err[m] += trail - mult * tn;
+        }
+
+        if (y < la_window && lead < lookahead_lead_min)
+            lookahead_lead_min = lead;
     }
 
     if (lookahead_lead_min == 999) lookahead_lead_min = 0;
-    if (lookahead_trail_min == 999) lookahead_trail_min = 0;
 
-    if (p.sizx <= 15) {
-        p.lm = p.tm = 0;
-    } else {
-        p.lm = choose_mult(lookahead_lead_min);
-        p.tm = choose_mult(max_trail);
+    {
+        int best_lm = 0;
+        for (int m = 1; m < 4; m++)
+            if (lead_err[m] < lead_err[best_lm]) best_lm = m;
+        int best_tm = 0;
+        for (int m = 1; m < 4; m++)
+            if (trail_err[m] < trail_err[best_tm]) best_tm = m;
+        p.lm = best_lm;
+        p.tm = best_tm;
     }
     p.lm_mult = mult_value(p.lm);
     p.tm_mult = mult_value(p.tm);
 
     p.running_lead = lookahead_lead_min;
-    p.running_trail = max_trail;
+    p.running_trail = 0;
     p.lookahead_lead = lookahead_lead_min;
-    p.lookahead_trail = lookahead_trail_min;
+    p.lookahead_trail = 0;
 
-    p.ctrl = compute_ctrl(bpp, p.lm, p.tm, 1);
+    /* FUN_1000_6f20 space check: if compressed size >= raw size, CMP=0 */
+    int raw_bits = sizx * rec->h * bpp;
+    int comp_bits = 0;
+    for (int y = 0; y < rec->h; y++) {
+        uint8_t *row = pix + y * stride;
+        int lead = 0, trail = 0, lead_done = 0;
+        for (int x = 0; x < sizx; x++) {
+            uint8_t px = row[x];
+            if (!lead_done) {
+                if (lead == 120) { lead_done = 1; }
+                else if (px == 0) { lead++; }
+                else { lead_done = 1; }
+            }
+            if (lead_done && sizx - 120 < x) {
+                if (px == 0) trail++;
+                else trail = 0;
+            }
+        }
+        int lead_n = lead / p.lm_mult;
+        if (lead_n > 15) lead_n = 15;
+        int lead_c = lead_n * p.lm_mult;
+        int trail_n = trail / p.tm_mult;
+        if (trail_n > 15) trail_n = 15;
+        int trail_c = trail_n * p.tm_mult;
+        if (lead_c + trail_c > sizx) trail_c = sizx - lead_c;
+        int stored = sizx - lead_c - trail_c;
+        if (stored < 0) stored = 0;
+        if (stored < 10) {
+            int iVar6 = lead_c;
+            int iVar7 = sizx - trail_c - 1;
+            if ((iVar7 - iVar6) + 1 < 10) {
+                int local_2c = (iVar6 - iVar7) + 9;
+                int iVar9 = local_2c;
+                if (iVar6 < local_2c) {
+                    iVar9 = local_2c - iVar6;
+                    local_2c = iVar6;
+                }
+                lead_n = p.lm_mult > 0 ? (lead_c - local_2c) / p.lm_mult : 0;
+                if (((iVar7 - (lead_c - local_2c)) + 1) < 10)
+                    trail_n = p.tm_mult > 0 ? (trail_c - iVar9) / p.tm_mult : 0;
+                lead_c = lead_n * p.lm_mult;
+                trail_c = trail_n * p.tm_mult;
+                if (lead_c + trail_c > sizx) trail_c = sizx - lead_c;
+                stored = sizx - lead_c - trail_c;
+                if (stored < 0) stored = 0;
+            }
+        }
+        comp_bits += 8 + stored * bpp;
+    }
+    int do_cmp = (sizx >= 10 && comp_bits < raw_bits) ? 1 : 0;
+
+    p.ctrl = compute_ctrl(bpp, p.lm, p.tm, do_cmp);
 
     return p;
 }
@@ -596,21 +754,32 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
 static void encode_row(uint8_t *row, int w, int sizx, int bpp,
                        int lm_mult, int tm_mult, int *running_lead)
 {
-    int right_bound = sizx - 1;
-    if (right_bound >= w) right_bound = w - 1;
-    if (right_bound < 0) right_bound = 0;
+    int lim = sizx;
+    if (lim < 1) lim = 1;
 
-    int lead = 0;
-    while (lead <= right_bound && row[lead] == 0) lead++;
+    int lead = 0, trail = 0, lead_done = 0;
+    for (int x = 0; x < lim; x++) {
+        uint8_t px = (x < w) ? row[x] : 0;
+        if (!lead_done) {
+            if (lead == 120) {
+                lead_done = 1;
+            } else if (px == 0) {
+                lead++;
+            } else {
+                lead_done = 1;
+            }
+        }
+        if (lead_done) {
+            if (sizx - 120 < x) {
+                if (px == 0) trail++;
+                else trail = 0;
+            }
+        }
+    }
 
-    int trail = 0;
-    while (trail <= right_bound && (right_bound - trail) >= lead &&
-           row[right_bound - trail] == 0)
-        trail++;
-
-    if (lead < *running_lead)
-        *running_lead = lead;
-    int lead_n = *running_lead / lm_mult;
+    /* LOADW _packbits: per-row lead, no running minimum.
+     * FUN_1000_6f20 second pass computes each row's lead_n directly. */
+    int lead_n = lead / lm_mult;
     if (lead_n > 15) lead_n = 15;
     int lead_c = lead_n * lm_mult;
     if (lead_c > sizx) lead_c = sizx;
@@ -622,6 +791,40 @@ static void encode_row(uint8_t *row, int w, int sizx, int bpp,
     int stored = sizx - lead_c - trail_c;
     if (stored < 0) stored = 0;
 
+    /* FUN_1000_6f20 second pass: minimum 10 stored pixels.
+     * Exact algorithm from Ghidra decompilation:
+     *   iVar6 = lead_c
+     *   iVar7 = sizx - trail_c - 1  (= -1 - (trail_c - sizx))
+     *   if ((iVar7 - iVar6) + 1 < 10) { // stored < 10
+     *       local_2c = iVar6 - iVar7 + 9  (= need)
+     *       iVar9 = local_2c
+     *       if (iVar6 < local_2c) { iVar9 = local_2c - iVar6; local_2c = iVar6; }
+     *       lead_n = (lead_c - local_2c) / lm_mult
+     *       if ((iVar7 - lead_c + local_2c) + 1 < 10)
+     *           trail_n = (trail_c - iVar9) / tm_mult
+     *   } */
+    if (stored < 10) {
+        int iVar6 = lead_c;
+        int iVar7 = sizx - trail_c - 1;
+        if ((iVar7 - iVar6) + 1 < 10) {
+            int local_2c = (iVar6 - iVar7) + 9;
+            int iVar9 = local_2c;
+            if (iVar6 < local_2c) {
+                iVar9 = local_2c - iVar6;
+                local_2c = iVar6;
+            }
+            lead_n = lm_mult > 0 ? (lead_c - local_2c) / lm_mult : 0;
+            if (((iVar7 - (lead_c - local_2c)) + 1) < 10)
+                trail_n = tm_mult > 0 ? (trail_c - iVar9) / tm_mult : 0;
+            lead_c = lead_n * lm_mult;
+            trail_c = trail_n * tm_mult;
+            if (lead_c + trail_c > sizx)
+                trail_c = sizx - lead_c;
+            stored = sizx - lead_c - trail_c;
+            if (stored < 0) stored = 0;
+        }
+    }
+
     uint8_t header = (uint8_t)((trail_n << 4) | (lead_n & 0xf));
     irw_write_byte(header);
 
@@ -632,6 +835,8 @@ static void encode_row(uint8_t *row, int w, int sizx, int bpp,
     }
 }
 
+static uint8_t zero_row_buf[4096];
+
 /* =========================================================================
  * Encode one image to IRW
  * ========================================================================= */
@@ -639,19 +844,42 @@ static void encode_row(uint8_t *row, int w, int sizx, int bpp,
 static uint32_t encode_image(ImgFile *img, IMG_REC *rec, CompParams *cp, int bpp) {
     uint32_t sag = g.irw_bit;
     uint8_t *pix = img_pixels(img, rec);
-    int stride = (rec->w + 3) & ~3;
+    int img_stride = (rec->w + 3) & ~3;
+    int sizx = cp->sizx;
+    if (sizx < 1) sizx = 1;
+
+    /* LOADW _do_sclpad: create internal buffer with stride = SIZX.
+     * Pixel data copied from IMG buffer, zero-padded beyond rec->w. */
+    int scl_stride = sizx;
+    uint8_t *scl_buf = NULL;
+    if (g.zon && rec->h > 0) {
+        scl_buf = (uint8_t*)calloc((size_t)scl_stride * rec->h, 1);
+        for (int y = 0; y < rec->h; y++) {
+            uint8_t *src = pix + y * img_stride;
+            uint8_t *dst = scl_buf + y * scl_stride;
+            memcpy(dst, src, scl_stride);
+        }
+    }
 
     int running_lead = cp->lookahead_lead;
 
+    /* Check CMP bit in CTRL: LOADW disables compression (CMP=0) for small images
+     * where "Need 10 non-zero pixels minimum" fails. Use raw pixel mode in that case. */
+    int do_cmp = (cp->ctrl & 0x80) ? 1 : 0;
+
     for (int y = 0; y < rec->h; y++) {
-        uint8_t *row = pix + y * stride;
-        if (g.zon) {
-            encode_row(row, rec->w, cp->sizx, bpp, cp->lm_mult, cp->tm_mult, &running_lead);
+        uint8_t *row = (g.zon && do_cmp) ? scl_buf + y * scl_stride : pix + y * img_stride;
+        if (g.zon && do_cmp) {
+            encode_row(row, scl_stride, scl_stride, bpp, cp->lm_mult, cp->tm_mult, &running_lead);
         } else {
-            for (int x = 0; x < rec->w; x++)
-                irw_write_bits(row[x], bpp);
+            int zw = g.pad4bits ? (rec->w + 3) & ~3 : rec->w;
+            if (zw < 1) zw = 1;
+            for (int x = 0; x < zw; x++)
+                irw_write_bits(x < rec->w ? row[x] : 0, bpp);
         }
     }
+
+    free(scl_buf);
     return sag;
 }
 
@@ -739,14 +967,11 @@ static int get_ihdr_word_value(ImageEntry *ie, int field, int denom) {
 }
 
 /* Write one image entry to TBL file */
-static void write_image_tbl(FILE *fp, ImageEntry *ie, int scale_count) {
-    fprintf(fp, "\t.word\t%d\r\n", scale_count);
+static void write_image_tbl(FILE *fp, ImageEntry *ie) {
     fprintf(fp, "%s:\r\n", ie->name);
 
-    /* Write IHDR fields for full scale */
+    /* Write IHDR fields as specified by IHDR> directive */
     int have_pal = (g.pon && ie->pal_name[0]);
-
-    /* Collect and emit consecutive WORD fields */
     int word_buf[32];
     int n_words = 0;
 
@@ -757,7 +982,6 @@ static void write_image_tbl(FILE *fp, ImageEntry *ie, int scale_count) {
         if (f == IHDR_PAL && !g.pon) continue;
 
         if (sz == SZ_L) {
-            /* Flush any pending words */
             if (n_words > 0) {
                 fprintf(fp, "\t.word\t");
                 for (int j = 0; j < n_words; j++) {
@@ -767,9 +991,9 @@ static void write_image_tbl(FILE *fp, ImageEntry *ie, int scale_count) {
                 fprintf(fp, "\r\n");
                 n_words = 0;
             }
-            /* Write the long */
             if (f == IHDR_SAG) {
-                fprintf(fp, "\t.long\t0%XH\r\n", ie->sag);
+                uint32_t base = g.base_addr;
+                fprintf(fp, "\t.long\t0%XH\r\n", base + ie->sag);
             } else if (f == IHDR_PAL) {
                 if (have_pal)
                     fprintf(fp, "\t.long\t%s\r\n", ie->pal_name);
@@ -779,15 +1003,7 @@ static void write_image_tbl(FILE *fp, ImageEntry *ie, int scale_count) {
                 fprintf(fp, "\t.long\t-1\r\n");
             }
         } else {
-            /* Word or byte */
-            if (f >= IHDR_PT0X && f <= IHDR_PT2Y) {
-                int pt_idx = f - IHDR_PT0X;
-                if (pt_idx < ie->n_extra_pts)
-                    word_buf[n_words++] = ie->extra_pts[pt_idx];
-                else
-                    word_buf[n_words++] = -1;
-            } else if (f == IHDR_CTRL) {
-                /* Flush pending words first */
+            if (f == IHDR_CTRL) {
                 if (n_words > 0) {
                     fprintf(fp, "\t.word\t");
                     for (int j = 0; j < n_words; j++) {
@@ -805,7 +1021,6 @@ static void write_image_tbl(FILE *fp, ImageEntry *ie, int scale_count) {
         }
     }
 
-    /* Flush remaining words */
     if (n_words > 0) {
         fprintf(fp, "\t.word\t");
         for (int j = 0; j < n_words; j++) {
@@ -814,30 +1029,6 @@ static void write_image_tbl(FILE *fp, ImageEntry *ie, int scale_count) {
         }
         fprintf(fp, "\r\n");
         n_words = 0;
-    }
-
-    /* Write extra PT pairs (not in IHDR), 4 values per line */
-    int ihdr_pt_count = 0;
-    for (int i = 0; i < g.n_ihdr; i++) {
-        int f = g.ihdr[i].field;
-        if (f >= IHDR_PT0X && f <= IHDR_PT2Y) ihdr_pt_count++;
-    }
-    if (ie->n_extra_pts > ihdr_pt_count) {
-        int remaining = ie->n_extra_pts - ihdr_pt_count;
-        for (int i = 0; i < remaining; i += 4) {
-            int a = (i < remaining) ? ie->extra_pts[ihdr_pt_count + i] : 0;
-            int b = (i+1 < remaining) ? ie->extra_pts[ihdr_pt_count + i + 1] : 0;
-            int c = (i+2 < remaining) ? ie->extra_pts[ihdr_pt_count + i + 2] : 0;
-            int d = (i+3 < remaining) ? ie->extra_pts[ihdr_pt_count + i + 3] : 0;
-            fprintf(fp, "\t.word\t%d,%d,%d,%d\r\n", a, b, c, d);
-        }
-    }
-
-
-    /* Additional scales: SAG + CTRL only */
-    for (int s = 1; s < scale_count; s++) {
-        fprintf(fp, "\t.long\t0%XH\r\n", ie->scale_sags[s]);
-        fprintf(fp, "\t.word\t0%04XH\r\n", ie->scale_ctrls[s]);
     }
 }
 
@@ -929,7 +1120,7 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
         int scale_n = 2;
 
         while (*p && *p != ':' && *p != '*' && *p != ',' && *p != '\r' && *p != '\n')
-            name[ni++] = (char)toupper((unsigned char)*p++);
+            name[ni++] = *p++;
         name[ni] = 0;
 
         if (*p == ':') { p++; (void)strtol(p, (char**)&p, 16); }
@@ -968,13 +1159,39 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
             }
         }
 
-        int bpp = g.global_bpp;
+        int bpp;
+        if (g.ppp > 0) {
+            bpp = g.ppp;
+        } else {
+            /* Auto pixel packing: select bpp per image */
+            uint8_t *pix = img_pixels(cur->imgfile, rec);
+            if (pix) {
+                int pstride = (rec->w + 3) & ~3;
+                uint32_t maxpx = 0;
+                for (int y = 0; y < rec->h; y++)
+                    for (int x = 0; x < rec->w; x++) {
+                        uint8_t px = pix[y * pstride + x];
+                        if (px > maxpx) maxpx = px;
+                    }
+                int per_bpp = bpp_for_max(maxpx);
+                if (per_bpp >= 1 && per_bpp <= 8) bpp = per_bpp;
+                else bpp = g.global_bpp;
+            } else {
+                bpp = g.global_bpp;
+            }
+        }
         CompParams cp = analyze_image(cur->imgfile, rec, bpp, pttbl_sizx);
 
         if (g.n_images >= MAX_IMAGES) die("too many images");
         ImageEntry *ie = &g.images[g.n_images++];
         memset(ie, 0, sizeof(*ie));
-        strncpy(ie->name, name, MAX_NAME-1);
+        /* Use IMG record name (preserving case) for TBL label */
+        {
+            char n[MAX_NAME];
+            strncpy(n, rec->name, MAX_NAME-1);
+            n[MAX_NAME-1] = 0;
+            strncpy(ie->name, n, MAX_NAME-1);
+        }
         ie->anix = rec->anix;
         ie->aniy = rec->aniy;
         ie->w = rec->w;
@@ -1070,19 +1287,50 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
             }
         }
 
-        /* Encode to IRW (always, so SAG offsets are correct for TBL output) */
-        ie->sag = encode_image(cur->imgfile, rec, &cp, bpp);
+        /* CON> dedup: check if identical image already encoded */
+        int dedup_idx = -1;
+        if (g.dedup) {
+            uint8_t *pix_data = img_pixels(cur->imgfile, rec);
+            int pstride = (rec->w + 3) & ~3;
+            uint32_t max_val;
+            uint32_t ck = loadw_checksum(pix_data, pstride, rec->w, rec->h, &max_val);
+            for (int di = 0; di < n_dedup; di++) {
+                if (dedup_table[di].sum == ck && dedup_table[di].max_val == max_val &&
+                    dedup_table[di].sizx == cp.sizx && dedup_table[di].sizy == cp.sizy &&
+                    dedup_table[di].ctrl == cp.ctrl) {
+                    dedup_idx = di; break;
+                }
+            }
+        }
+
+        if (dedup_idx >= 0) {
+            ie->sag = dedup_table[dedup_idx].sag;
+            if (g.verbose)
+                printf("  Checksum match on image [%s].\n", name);
+        } else {
+            ie->sag = encode_image(cur->imgfile, rec, &cp, bpp);
+            if (g.dedup && n_dedup < MAX_DEDUP) {
+                uint8_t *pix_data = img_pixels(cur->imgfile, rec);
+                int pstride = (rec->w + 3) & ~3;
+                uint32_t max_val;
+                dedup_table[n_dedup].sum = loadw_checksum(pix_data, pstride, rec->w, rec->h, &max_val);
+                dedup_table[n_dedup].max_val = max_val;
+                dedup_table[n_dedup].sizx = cp.sizx;
+                dedup_table[n_dedup].sizy = cp.sizy;
+                dedup_table[n_dedup].ctrl = cp.ctrl;
+                dedup_table[n_dedup].sag = ie->sag;
+                n_dedup++;
+            }
+        }
         ie->scale_sags[0] = ie->sag;
         ie->scale_ctrls[0] = cp.ctrl;
-        uint16_t scale_ctrl = compute_ctrl(bpp, 0, 0, 1);
         for (int s = 1; s < scale_n; s++) {
-            int denom = 1 << s;
-            ie->scale_sags[s] = encode_scaled(cur->imgfile, rec, bpp, denom);
-            ie->scale_ctrls[s] = scale_ctrl;
+            ie->scale_sags[s] = ie->sag;
+            ie->scale_ctrls[s] = cp.ctrl;
         }
 
         if (g.build_tables && g.asm_fp)
-            write_image_tbl(g.asm_fp, ie, scale_n);
+            write_image_tbl(g.asm_fp, ie);
 
         if (g.glo_fp)
             write_global(name);
@@ -1101,6 +1349,7 @@ static void scan_bpp(const char *lod_path) {
     memset(&cur, 0, sizeof(cur));
 
     g.global_max_pixel = 0;
+    int saved_ppp = g.ppp;
 
     while (fgets(line, sizeof(line), f)) {
         str_trim(line);
@@ -1116,8 +1365,9 @@ static void scan_bpp(const char *lod_path) {
         else if (strstr(upper, ".IMG")) {
             char fname[MAX_PATH];
             sscanf(line, "%s", fname);
-            if (cur.imgfile) { free(cur.imgfile->data); free(cur.imgfile); }
+            if (cur.imgfile) { free(cur.imgfile->norm_images); free(cur.imgfile->data); free(cur.imgfile); }
             cur.imgfile = img_load_try(imgdir, fname);
+            n_dedup = 0;  /* LOADW resets dedup table per IMG library */
         }
         else if (!strncmp(upper, "--->", 4) && cur.imgfile) {
             const char *s = line + 5;
@@ -1145,7 +1395,9 @@ static void scan_bpp(const char *lod_path) {
         }
     }
     fclose(f);
-    if (cur.imgfile) { free(cur.imgfile->data); free(cur.imgfile); }
+    if (cur.imgfile) { free(cur.imgfile->norm_images); free(cur.imgfile->data); free(cur.imgfile); }
+
+    g.ppp = saved_ppp;
 
     if (g.ppp > 0)
         g.global_bpp = g.ppp;
@@ -1213,8 +1465,8 @@ static void process_lod(const char *lod_path) {
         else if (!strncmp(upper, "POF>", 4)) g.pon = 0;
         else if (!strncmp(upper, "XON>", 4)) g.xon = 1;
         else if (!strncmp(upper, "XOF>", 4)) g.xon = 0;
-        else if (!strncmp(upper, "CON>", 4)) g.cof = 1;
-        else if (!strncmp(upper, "COF>", 4)) g.cof = 0;
+        else if (!strncmp(upper, "CON>", 4)) g.dedup = 1;
+        else if (!strncmp(upper, "COF>", 4)) g.dedup = 0;
         else if (!strncmp(upper, "PPP>", 4)) g.ppp = atoi(line+4);
         else if (!strncmp(upper, "MON>", 4)) { }
         else if (!strncmp(upper, "BON>", 4)) { }
@@ -1226,7 +1478,7 @@ static void process_lod(const char *lod_path) {
             char fname[MAX_PATH];
             sscanf(line, "%s", fname);
             upcase(fname);
-            if (cur.imgfile) { free(cur.imgfile->data); free(cur.imgfile); }
+            if (cur.imgfile) { free(cur.imgfile->norm_images); free(cur.imgfile->data); free(cur.imgfile); }
             cur.imgfile = img_load_try(g.imgdir, fname);
             if (!cur.imgfile)
                 fprintf(stderr, "WARNING: cannot load IMG file: %s\n", fname);
@@ -1238,7 +1490,7 @@ static void process_lod(const char *lod_path) {
     }
 
     fclose(f);
-    if (cur.imgfile) { free(cur.imgfile->data); free(cur.imgfile); }
+    if (cur.imgfile) { free(cur.imgfile->norm_images); free(cur.imgfile->data); free(cur.imgfile); }
 }
 
 /* =========================================================================
@@ -1295,7 +1547,7 @@ int main(int argc, char *argv[]) {
     if (argc < 2) { print_usage(); return 1; }
 
     memset(&g, 0, sizeof(g));
-    g.cof = 1;
+    g.dedup = 1;  /* CON> (checksums ON) by default, matching LOADW */
     g.pon = 1;
     g.build_raw = 1;
     g.build_tables = 0;
