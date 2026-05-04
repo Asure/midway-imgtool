@@ -1607,7 +1607,6 @@ static void process_lod(const char *lod_path) {
                 fprintf(g.bgnd_fp, "%s:\r\n", hdrs_label);
             if (g.bgndtbl_glo_fp) {
                 fprintf(g.bgndtbl_glo_fp, "\t.globl\t%sPALS\r\n", hdr_suffix);
-                fprintf(g.bgndtbl_glo_fp, "\t.globl\t%s\r\n", hdrs_label);
             }
 
 #define MAX_GLOBJ 4096
@@ -1723,7 +1722,7 @@ static void process_lod(const char *lod_path) {
                         fprintf(g.bgnd_fp, "%sBLKS:\r\n", mn);
                     }
                     if (g.bgndtbl_glo_fp) {
-                        fprintf(g.bgndtbl_glo_fp, "\t.globl\t%sBLKS\r\n", mn);
+                        fprintf(g.bgndtbl_glo_fp, "\t.globl\t%sBMOD\r\n", mn);
                     }
                     if (n_bmod < 64) {
                         strncpy(bmod_list[n_bmod], mn, 63);
