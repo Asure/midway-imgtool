@@ -1043,7 +1043,7 @@ static void write_image_tbl(FILE *fp, ImageEntry *ie) {
 }
 
 static void write_global(const char *name) {
-    fprintf(g.glo_fp, "\t.global %s\r\n", name);
+    fprintf(g.glo_fp, "\t.globl\t%s\r\n", name);
 }
 
 /* =========================================================================
@@ -1605,8 +1605,10 @@ static void process_lod(const char *lod_path) {
             snprintf(hdrs_label, sizeof(hdrs_label), "%sHDRS", hdr_suffix);
             if (g.bgnd_fp)
                 fprintf(g.bgnd_fp, "%s:\r\n", hdrs_label);
-            if (g.bgndtbl_glo_fp)
+            if (g.bgndtbl_glo_fp) {
+                fprintf(g.bgndtbl_glo_fp, "\t.globl\t%sPALS\r\n", hdr_suffix);
                 fprintf(g.bgndtbl_glo_fp, "\t.globl\t%s\r\n", hdrs_label);
+            }
 
 #define MAX_GLOBJ 4096
             struct { char name[64]; int is_mod; int wx, dp, sy, ii, fl; } gobjs[MAX_GLOBJ];
@@ -1938,7 +1940,7 @@ static void process_lod(const char *lod_path) {
                         fprintf(g.bgndequ_fp, "H%s .EQU\t%d\r\n", mn, mh);
                     }
                 fprintf(g.bgnd_fp, "%sBMOD:\r\n", mn);
-                fprintf(g.bgnd_fp, "\t.word\t%d,%d,%d\r\n", mw, mh, mod_obj_count[mi]);
+                fprintf(g.bgnd_fp, "\t.word\t%d,%d,%d\t;x size, y size, #blocks\r\n", mw, mh, mod_obj_count[mi]);
                     fprintf(g.bgnd_fp, "\t.long\t%sBLKS, %s, %sPALS\r\n", mn, hdrs_label, hdr_suffix);
                 }
             }
