@@ -1600,11 +1600,15 @@ static void process_lod(const char *lod_path) {
 
             /* HDRS label: last 2 chars of BDB header name + "HDRS" */
             int bdb_nlen = (int)strlen(bdb_name);
-            const char *hdr_suffix = (bdb_nlen >= 2) ? bdb_name + bdb_nlen - 2 : bdb_name;
-            char hdrs_label[64];
-            snprintf(hdrs_label, sizeof(hdrs_label), "%sHDRS", hdr_suffix);
-            if (g.bgnd_fp) {
-                fprintf(g.bgnd_fp, "%s:\r\n", hdrs_label);
+            /* HDRS/PALS suffix: last 2 chars of BDB header name.
+             * Short names (< 5 chars) get empty suffix (e.g., "TOMB" → "").
+             * Longer names use last 2 chars (e.g., "NUPOOL" → "OL"). */
+            static char hdrs_label[64] = "";
+            const char *hdr_suffix = (bdb_nlen >= 5) ? bdb_name + bdb_nlen - 2 : "";
+            if (!hdrs_label[0]) {
+                snprintf(hdrs_label, sizeof(hdrs_label), "%sHDRS", hdr_suffix);
+                if (g.bgnd_fp)
+                    fprintf(g.bgnd_fp, "%s:\r\n", hdrs_label);
             }
             if (g.bgndtbl_glo_fp) {
                 fprintf(g.bgndtbl_glo_fp, "\t.globl\t%sPALS\r\n", hdr_suffix);
@@ -1895,14 +1899,21 @@ static void process_lod(const char *lod_path) {
                 for (int mi = 0; mi < n_bmod; mi++) {
                     const char *mn = bmod_list[mi];
                     fprintf(g.bgnd_fp, "%sBLKS:\r\n", mn);
+                    int first_blk = 1;
                     for (int gi = 0; gi < ng; gi++) {
                         if (gobjs[gi].is_mod) continue;
                         int od = gobjs[gi].dp, osy = gobjs[gi].sy;
                         if (od < mod_ds[mi] || od > mod_de[mi]) continue;
                         if (osy < mod_ys[mi] || osy > mod_ye[mi]) continue;
-                        fprintf(g.bgnd_fp, "\t.word\t0%xH\t;flags\r\n", gobjs[gi].wx);
-                        fprintf(g.bgnd_fp, "\t.word\t%d,%d\t;x,y\r\n", od, osy);
-                        fprintf(g.bgnd_fp, "\t.word\t0%xH\t;pal5,pal4,hdr13-0\r\n", gobjs[gi].ii);
+                        if (first_blk) {
+                            fprintf(g.bgnd_fp, "\t.word\t0%xH\t;flags\r\n", gobjs[gi].wx);
+                            fprintf(g.bgnd_fp, "\t.word\t%d,%d\t;x,y\r\n", od, osy);
+                            fprintf(g.bgnd_fp, "\t.word\t0%xH\t;pal5,pal4,hdr13-0\r\n", gobjs[gi].ii);
+                            first_blk = 0;
+                        } else {
+                            fprintf(g.bgnd_fp, "\t.word\t0%xH,%d,%d,0%xH\r\n",
+                                    gobjs[gi].wx, od, osy, gobjs[gi].ii);
+                        }
                     }
                     fprintf(g.bgnd_fp, "\t.word\t0FFFFH\t;End Marker\r\n");
                 }
