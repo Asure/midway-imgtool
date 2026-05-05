@@ -1189,6 +1189,20 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
         int bpp;
         if (g.ppp > 0) {
             bpp = g.ppp;
+            /* Auto pixel packing: can use fewer bits than PPP when image data
+             * is directly accessible (new-format IMG or old-format with data_p) */
+            uint8_t *pix = img_pixels(cur->imgfile, rec);
+            if (pix && rec->data_p != 0) {
+                int pstride = (rec->w + 3) & ~3;
+                uint32_t maxpx = 0;
+                for (int y = 0; y < rec->h; y++)
+                    for (int x = 0; x < rec->w; x++) {
+                        uint8_t px = pix[y * pstride + x];
+                        if (px > maxpx) maxpx = px;
+                    }
+                int per_bpp = bpp_for_max(maxpx);
+                if (per_bpp >= 1 && per_bpp < bpp) bpp = per_bpp;
+            }
         } else {
             /* Auto pixel packing: select bpp per image */
             uint8_t *pix = img_pixels(cur->imgfile, rec);
