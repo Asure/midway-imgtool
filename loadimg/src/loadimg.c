@@ -1003,7 +1003,7 @@ static void write_image_tbl(FILE *fp, ImageEntry *ie) {
             }
             if (f == IHDR_SAG) {
                 uint32_t base = g.base_addr;
-                fprintf(fp, "\t.long   0%XH\r\n", base + ie->sag);
+                fprintf(fp, "\t.long   0%xH\r\n", base + ie->sag);
             } else if (f == IHDR_PAL) {
                 if (have_pal)
                     fprintf(fp, "\t.long   %s\r\n", ie->pal_name);
@@ -1023,7 +1023,7 @@ static void write_image_tbl(FILE *fp, ImageEntry *ie) {
                     fprintf(fp, "\r\n");
                     n_words = 0;
                 }
-                fprintf(fp, "\t.word   0%XH\r\n", ie->ctrl);
+                fprintf(fp, "\t.word   0%xH\r\n", ie->ctrl);
             } else {
                 int val = get_ihdr_word_value(ie, f, 1);
                 word_buf[n_words++] = val;
