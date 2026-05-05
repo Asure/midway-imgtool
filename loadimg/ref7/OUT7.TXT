@@ -1,0 +1,7782 @@
+
+Copyright (C) Williams Electronics Games, Inc. 1993.
+GSP Image Loader - DMA 2 - Version 5/25/94
+Using a page of expanded memory.
+
+
+GSP is Memory Mapped at PC address C000:7000
+Loading images ...
+	from: C:\MK7MIL.lod
+	to:   Table header files (written to directory C:\TMP\)
+	      GSP target system.
+	      C:\TMP\MK7MIL.irw
+	      Padding images to multiple of 4 pixels
+
+SET new IRAM address = 2000000
+SET new IRAM address = 3000000
+Loading Frames in C:\FL_ARM at 3000000
+Loading Frames in C:\FL_TOW at 306cfc0
+Loading Frames in C:\FL_TOMB at 30f0d20
+Loading Frames in C:\FL_FORST at 3158880
+Loading Frames in C:\FL_BATTL at 319d160
+Loading Frames in C:\FL_PORT at 31ec300
+Loading Frames in C:\FL_ARENA at 323b4a0
+Image Library [c:\video\kombat2\img\NINJAS12.IMG] could not be opened.
+Image Library [c:\video\kombat2\img\NUJAX9.IMG] could not be opened.
+Image Library [c:\video\kombat2\img\RAID8.IMG] could not be opened.
+Image Library [c:\video\kombat2\img\TSUNG9.IMG] could not be opened.
+Image Library [c:\video\kombat2\img\HATHED10.IMG] could not be opened.
+Image Library [c:\video\kombat2\img\FROZEN.IMG] could not be opened.
+Image Library [c:\video\kombat2\img\SPLITTER.IMG] could not be opened.
+Image Library [c:\video\kombat2\img\RADBOLT1.IMG] could not be opened.
+Image Library [c:\video\kombat2\img\RADBOLT2.IMG] could not be opened.
+Image Library [c:\video\kombat2\img\MKBABY.IMG] could not be opened.
+Image Library [c:\video\kombat2\img\BIGGORO.IMG] could not be opened.
+Image Library [c:\video\kombat2\img\SNOBALL.IMG] could not be opened.
+Image Library [c:\video\kombat2\img\MKCHUNKS.IMG] could not be opened.
+Image Library [c:\video\kombat2\img\MKSILO.IMG] could not be opened.
+Image Library [c:\video\kombat2\img\MKHANG.IMG] could not be opened.
+Image Library [c:\video\kombat2\img\ROCKS1.IMG] could not be opened.
+Image Library [c:\video\kombat2\img\TCXPLODE.IMG] could not be opened.
+Image Library [c:\video\kombat2\img\MKXTRAS.IMG] could not be opened.
+Image Library [C:\video\kombat2\img\CRIGHT.IMG] could not be opened.
+Image Library [C:\video\kombat2\img\CHALCOME.IMG] could not be opened.
+Image Library [c:\video\kombat2\img\MKCD.IMG] could not be opened.
+Image Library [c:\video\kombat2\img\MKJXARMS.IMG] could not be opened.
+Loading Background C:\VIDEO\kombat2\img\NUPOOL
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 4
+trailing factor = 4
+
+
+
+leftover zeros for x1, 1635 leading, 710 trailing
+leftover zeros for x2, 1031 leading, 351 trailing
+leftover zeros for x4, 159 leading, 113 trailing
+leftover zeros for x8, 171 leading, 213 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 186 trailing
+leftover zeros for x4, 0 leading, 558 trailing
+leftover zeros for x8, 0 leading, 558 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 2 trailing
+leftover zeros for x2, 0 leading, 149 trailing
+leftover zeros for x4, 0 leading, 443 trailing
+leftover zeros for x8, 0 leading, 535 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 83 leading, 115 trailing
+leftover zeros for x2, 17 leading, 12 trailing
+leftover zeros for x4, 39 leading, 50 trailing
+leftover zeros for x8, 83 leading, 90 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 121 leading, 0 trailing
+leftover zeros for x2, 12 leading, 0 trailing
+leftover zeros for x4, 18 leading, 162 trailing
+leftover zeros for x8, 54 leading, 162 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 277 trailing
+leftover zeros for x2, 0 leading, 49 trailing
+leftover zeros for x4, 0 leading, 399 trailing
+leftover zeros for x8, 0 leading, 479 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 8
+
+
+
+leftover zeros for x1, 121 leading, 717 trailing
+leftover zeros for x2, 12 leading, 567 trailing
+leftover zeros for x4, 18 leading, 271 trailing
+leftover zeros for x8, 54 leading, 183 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 504 leading, 395 trailing
+leftover zeros for x2, 54 leading, 78 trailing
+leftover zeros for x4, 134 leading, 130 trailing
+leftover zeros for x8, 254 leading, 274 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 1 leading, 0 trailing
+leftover zeros for x4, 1 leading, 0 trailing
+leftover zeros for x8, 1 leading, 0 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 62 trailing
+leftover zeros for x2, 0 leading, 25 trailing
+leftover zeros for x4, 0 leading, 37 trailing
+leftover zeros for x8, 0 leading, 85 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 86 trailing
+leftover zeros for x8, 0 leading, 86 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 26 trailing
+leftover zeros for x8, 0 leading, 26 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 175 leading, 195 trailing
+leftover zeros for x2, 25 leading, 25 trailing
+leftover zeros for x4, 73 leading, 73 trailing
+leftover zeros for x8, 165 leading, 173 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 33 leading, 33 trailing
+leftover zeros for x4, 33 leading, 33 trailing
+leftover zeros for x8, 33 leading, 33 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 148 leading, 0 trailing
+leftover zeros for x2, 58 leading, 0 trailing
+leftover zeros for x4, 10 leading, 0 trailing
+leftover zeros for x8, 14 leading, 0 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 20 leading, 0 trailing
+leftover zeros for x2, 10 leading, 43 trailing
+leftover zeros for x4, 38 leading, 95 trailing
+leftover zeros for x8, 146 leading, 223 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 94 trailing
+leftover zeros for x8, 0 leading, 94 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 42 trailing
+leftover zeros for x2, 0 leading, 14 trailing
+leftover zeros for x4, 4 leading, 84 trailing
+leftover zeros for x8, 8 leading, 92 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 14 leading, 49 trailing
+leftover zeros for x4, 86 leading, 211 trailing
+leftover zeros for x8, 86 leading, 211 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 91 leading, 153 trailing
+leftover zeros for x2, 14 leading, 17 trailing
+leftover zeros for x4, 42 leading, 45 trailing
+leftover zeros for x8, 94 leading, 109 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 4
+
+
+
+leftover zeros for x1, 33 leading, 812 trailing
+leftover zeros for x2, 18 leading, 306 trailing
+leftover zeros for x4, 0 leading, 62 trailing
+leftover zeros for x8, 0 leading, 150 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 4
+
+
+
+leftover zeros for x1, 0 leading, 844 trailing
+leftover zeros for x2, 0 leading, 323 trailing
+leftover zeros for x4, 0 leading, 65 trailing
+leftover zeros for x8, 0 leading, 157 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 282 leading, 0 trailing
+leftover zeros for x2, 82 leading, 103 trailing
+leftover zeros for x4, 122 leading, 103 trailing
+leftover zeros for x8, 274 leading, 103 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 812 leading, 0 trailing
+leftover zeros for x2, 368 leading, 0 trailing
+leftover zeros for x4, 124 leading, 0 trailing
+leftover zeros for x8, 212 leading, 0 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 844 leading, 0 trailing
+leftover zeros for x2, 323 leading, 99 trailing
+leftover zeros for x4, 61 leading, 99 trailing
+leftover zeros for x8, 149 leading, 99 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 25 leading, 26 trailing
+leftover zeros for x4, 45 leading, 42 trailing
+leftover zeros for x8, 81 leading, 158 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 446 trailing
+leftover zeros for x8, 0 leading, 446 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 12 leading, 13 trailing
+leftover zeros for x4, 40 leading, 39 trailing
+leftover zeros for x8, 84 leading, 87 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 4
+
+
+
+leftover zeros for x1, 41 leading, 265 trailing
+leftover zeros for x2, 26 leading, 145 trailing
+leftover zeros for x4, 0 leading, 17 trailing
+leftover zeros for x8, 0 leading, 33 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 47 trailing
+leftover zeros for x4, 0 leading, 47 trailing
+leftover zeros for x8, 0 leading, 47 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 73 leading, 0 trailing
+leftover zeros for x2, 40 leading, 46 trailing
+leftover zeros for x4, 16 leading, 46 trailing
+leftover zeros for x8, 20 leading, 46 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 85 leading, 0 trailing
+leftover zeros for x2, 70 leading, 0 trailing
+leftover zeros for x4, 106 leading, 66 trailing
+leftover zeros for x8, 70 leading, 66 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 168 leading, 0 trailing
+leftover zeros for x4, 168 leading, 0 trailing
+leftover zeros for x8, 168 leading, 0 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 1 leading, 1 trailing
+leftover zeros for x4, 1 leading, 131 trailing
+leftover zeros for x8, 1 leading, 131 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 4
+trailing factor = 2
+
+
+
+leftover zeros for x1, 350 leading, 151 trailing
+leftover zeros for x2, 90 leading, 29 trailing
+leftover zeros for x4, 38 leading, 43 trailing
+leftover zeros for x8, 66 leading, 99 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 33 trailing
+leftover zeros for x4, 0 leading, 33 trailing
+leftover zeros for x8, 0 leading, 33 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 66 leading, 78 trailing
+leftover zeros for x2, 18 leading, 28 trailing
+leftover zeros for x4, 50 leading, 80 trailing
+leftover zeros for x8, 134 leading, 164 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 35 leading, 60 trailing
+leftover zeros for x4, 95 leading, 172 trailing
+leftover zeros for x8, 163 leading, 396 trailing
+
+
+
+Loading Background C:\VIDEO\kombat2\img\TOMB
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 183 leading, 142 trailing
+leftover zeros for x2, 36 leading, 18 trailing
+leftover zeros for x4, 56 leading, 64 trailing
+leftover zeros for x8, 100 leading, 108 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 58 trailing
+leftover zeros for x4, 0 leading, 58 trailing
+leftover zeros for x8, 0 leading, 58 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 42 trailing
+leftover zeros for x2, 0 leading, 14 trailing
+leftover zeros for x4, 4 leading, 84 trailing
+leftover zeros for x8, 8 leading, 92 trailing
+
+
+
+block cksum match w:140, h:44, dma2:6480 add:32F94BB
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 94 trailing
+leftover zeros for x8, 0 leading, 94 trailing
+
+
+
+block cksum match w:140, h:47, dma2:6080 add:32EFB3F
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 5 leading, 7 trailing
+leftover zeros for x4, 9 leading, 55 trailing
+leftover zeros for x8, 13 leading, 75 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 15 leading, 9 trailing
+leftover zeros for x2, 5 leading, 16 trailing
+leftover zeros for x4, 17 leading, 48 trailing
+leftover zeros for x8, 33 leading, 112 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 470 leading, 100 trailing
+leftover zeros for x2, 78 leading, 23 trailing
+leftover zeros for x4, 80 leading, 85 trailing
+leftover zeros for x8, 184 leading, 181 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 1 leading, 0 trailing
+leftover zeros for x2, 16 leading, 0 trailing
+leftover zeros for x4, 48 leading, 64 trailing
+leftover zeros for x8, 112 leading, 64 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 56 leading, 0 trailing
+leftover zeros for x2, 22 leading, 45 trailing
+leftover zeros for x4, 66 leading, 45 trailing
+leftover zeros for x8, 154 leading, 45 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 4
+
+
+
+leftover zeros for x1, 0 leading, 145 trailing
+leftover zeros for x2, 0 leading, 25 trailing
+leftover zeros for x4, 0 leading, 17 trailing
+leftover zeros for x8, 0 leading, 25 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 56 leading, 56 trailing
+leftover zeros for x4, 88 leading, 180 trailing
+leftover zeros for x8, 120 leading, 212 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 2 leading, 108 trailing
+leftover zeros for x8, 2 leading, 112 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 73 leading, 0 trailing
+leftover zeros for x2, 40 leading, 46 trailing
+leftover zeros for x4, 16 leading, 46 trailing
+leftover zeros for x8, 20 leading, 46 trailing
+
+
+
+block cksum match w:144, h:46, dma2:6280 add:3350DFD
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 47 trailing
+leftover zeros for x4, 0 leading, 47 trailing
+leftover zeros for x8, 0 leading, 47 trailing
+
+
+
+block cksum match w:144, h:47, dma2:6000 add:3346F5D
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 50 trailing
+leftover zeros for x4, 0 leading, 150 trailing
+leftover zeros for x8, 0 leading, 150 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 100 leading, 0 trailing
+leftover zeros for x2, 4 leading, 0 trailing
+leftover zeros for x4, 8 leading, 116 trailing
+leftover zeros for x8, 28 leading, 116 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 101 trailing
+leftover zeros for x2, 32 leading, 7 trailing
+leftover zeros for x4, 96 leading, 143 trailing
+leftover zeros for x8, 220 leading, 159 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 3 trailing
+leftover zeros for x4, 0 leading, 7 trailing
+leftover zeros for x8, 0 leading, 19 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 61 trailing
+leftover zeros for x2, 0 leading, 19 trailing
+leftover zeros for x4, 0 leading, 127 trailing
+leftover zeros for x8, 0 leading, 171 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 15 leading, 13 trailing
+leftover zeros for x4, 37 leading, 61 trailing
+leftover zeros for x8, 81 leading, 105 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 32 leading, 0 trailing
+leftover zeros for x2, 21 leading, 65 trailing
+leftover zeros for x4, 41 leading, 65 trailing
+leftover zeros for x8, 85 leading, 65 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 2 trailing
+leftover zeros for x4, 0 leading, 8 trailing
+leftover zeros for x8, 12 leading, 20 trailing
+
+
+
+Loading Background C:\VIDEO\kombat2\img\TOWER2
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 17 trailing
+leftover zeros for x2, 17 leading, 31 trailing
+leftover zeros for x4, 17 leading, 31 trailing
+leftover zeros for x8, 17 leading, 31 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 7 trailing
+leftover zeros for x4, 0 leading, 21 trailing
+leftover zeros for x8, 0 leading, 21 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 840 leading, 0 trailing
+leftover zeros for x2, 420 leading, 46 trailing
+leftover zeros for x4, 28 leading, 138 trailing
+leftover zeros for x8, 140 leading, 138 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 840 leading, 0 trailing
+leftover zeros for x2, 420 leading, 99 trailing
+leftover zeros for x4, 28 leading, 297 trailing
+leftover zeros for x8, 140 leading, 297 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 56 trailing
+leftover zeros for x8, 0 leading, 56 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 56 trailing
+leftover zeros for x8, 0 leading, 56 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 72 leading, 99 trailing
+leftover zeros for x4, 124 leading, 293 trailing
+leftover zeros for x8, 356 leading, 669 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 11 leading, 69 trailing
+leftover zeros for x4, 33 leading, 207 trailing
+leftover zeros for x8, 85 leading, 207 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 160 leading, 0 trailing
+leftover zeros for x2, 23 leading, 0 trailing
+leftover zeros for x4, 77 leading, 0 trailing
+leftover zeros for x8, 205 leading, 0 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 54 trailing
+leftover zeros for x2, 0 leading, 8 trailing
+leftover zeros for x4, 0 leading, 86 trailing
+leftover zeros for x8, 0 leading, 118 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 1614 leading, 0 trailing
+leftover zeros for x2, 875 leading, 16 trailing
+leftover zeros for x4, 105 leading, 50 trailing
+leftover zeros for x8, 257 leading, 122 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 416 leading, 0 trailing
+leftover zeros for x2, 183 leading, 0 trailing
+leftover zeros for x4, 27 leading, 96 trailing
+leftover zeros for x8, 59 leading, 96 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 2
+
+
+
+leftover zeros for x1, 793 leading, 143 trailing
+leftover zeros for x2, 359 leading, 62 trailing
+leftover zeros for x4, 43 leading, 92 trailing
+leftover zeros for x8, 107 leading, 128 trailing
+
+
+
+Loading Background C:\VIDEO\kombat2\img\BATTLE
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 8
+
+
+
+leftover zeros for x1, 284 leading, 806 trailing
+leftover zeros for x2, 80 leading, 596 trailing
+leftover zeros for x4, 26 leading, 200 trailing
+leftover zeros for x8, 70 leading, 48 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 98 trailing
+leftover zeros for x2, 5 leading, 74 trailing
+leftover zeros for x4, 17 leading, 78 trailing
+leftover zeros for x8, 33 leading, 78 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 8
+trailing factor = 1
+
+
+
+leftover zeros for x1, 642 leading, 0 trailing
+leftover zeros for x2, 537 leading, 3 trailing
+leftover zeros for x4, 335 leading, 187 trailing
+leftover zeros for x8, 47 leading, 191 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 885 leading, 732 trailing
+leftover zeros for x2, 630 leading, 539 trailing
+leftover zeros for x4, 144 leading, 153 trailing
+leftover zeros for x8, 60 leading, 65 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 209 leading, 0 trailing
+leftover zeros for x2, 136 leading, 30 trailing
+leftover zeros for x4, 56 leading, 90 trailing
+leftover zeros for x8, 92 leading, 90 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 8
+trailing factor = 4
+
+
+
+leftover zeros for x1, 676 leading, 859 trailing
+leftover zeros for x2, 557 leading, 528 trailing
+leftover zeros for x4, 217 leading, 114 trailing
+leftover zeros for x8, 93 leading, 178 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 4
+
+
+
+leftover zeros for x1, 52 leading, 143 trailing
+leftover zeros for x2, 14 leading, 62 trailing
+leftover zeros for x4, 46 leading, 60 trailing
+leftover zeros for x8, 106 leading, 152 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 26 leading, 47 trailing
+leftover zeros for x2, 4 leading, 88 trailing
+leftover zeros for x4, 6 leading, 94 trailing
+leftover zeros for x8, 10 leading, 122 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 160 leading, 80 trailing
+leftover zeros for x2, 55 leading, 64 trailing
+leftover zeros for x4, 135 leading, 168 trailing
+leftover zeros for x8, 379 leading, 336 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 8
+
+
+
+leftover zeros for x1, 0 leading, 670 trailing
+leftover zeros for x2, 0 leading, 536 trailing
+leftover zeros for x4, 0 leading, 260 trailing
+leftover zeros for x8, 0 leading, 92 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 101 trailing
+leftover zeros for x2, 5 leading, 74 trailing
+leftover zeros for x4, 19 leading, 78 trailing
+leftover zeros for x8, 39 leading, 78 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 49 trailing
+leftover zeros for x4, 2 leading, 49 trailing
+leftover zeros for x8, 6 leading, 49 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 8
+
+
+
+leftover zeros for x1, 837 leading, 2794 trailing
+leftover zeros for x2, 412 leading, 2077 trailing
+leftover zeros for x4, 166 leading, 1005 trailing
+leftover zeros for x8, 190 leading, 193 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 95 leading, 57 trailing
+leftover zeros for x2, 16 leading, 66 trailing
+leftover zeros for x4, 68 leading, 102 trailing
+leftover zeros for x8, 108 leading, 130 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 8
+trailing factor = 2
+
+
+
+leftover zeros for x1, 549 leading, 123 trailing
+leftover zeros for x2, 400 leading, 49 trailing
+leftover zeros for x4, 112 leading, 181 trailing
+leftover zeros for x8, 36 leading, 205 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 27 trailing
+leftover zeros for x4, 0 leading, 81 trailing
+leftover zeros for x8, 0 leading, 81 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 2610 leading, 0 trailing
+leftover zeros for x2, 1653 leading, 13 trailing
+leftover zeros for x4, 197 leading, 49 trailing
+leftover zeros for x8, 257 leading, 77 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 4
+
+
+
+leftover zeros for x1, 0 leading, 1293 trailing
+leftover zeros for x2, 12 leading, 760 trailing
+leftover zeros for x4, 34 leading, 76 trailing
+leftover zeros for x8, 94 leading, 164 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 6 leading, 6 trailing
+leftover zeros for x8, 18 leading, 18 trailing
+
+
+
+Loading Background C:\VIDEO\kombat2\img\FOREST2
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 4
+
+
+
+leftover zeros for x1, 0 leading, 99 trailing
+leftover zeros for x2, 6 leading, 63 trailing
+leftover zeros for x4, 18 leading, 13 trailing
+leftover zeros for x8, 30 leading, 33 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 152 leading, 21 trailing
+leftover zeros for x2, 25 leading, 33 trailing
+leftover zeros for x4, 79 leading, 71 trailing
+leftover zeros for x8, 163 leading, 219 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 2
+
+
+
+leftover zeros for x1, 203 leading, 71 trailing
+leftover zeros for x2, 161 leading, 10 trailing
+leftover zeros for x4, 59 leading, 50 trailing
+leftover zeros for x8, 59 leading, 90 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 61 trailing
+leftover zeros for x4, 0 leading, 61 trailing
+leftover zeros for x8, 0 leading, 61 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 13 leading, 32 trailing
+leftover zeros for x2, 11 leading, 8 trailing
+leftover zeros for x4, 15 leading, 26 trailing
+leftover zeros for x8, 35 leading, 54 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 8
+trailing factor = 2
+
+
+
+leftover zeros for x1, 234 leading, 8 trailing
+leftover zeros for x2, 162 leading, 5 trailing
+leftover zeros for x4, 68 leading, 19 trailing
+leftover zeros for x8, 28 leading, 43 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 4
+
+
+
+leftover zeros for x1, 123 leading, 48 trailing
+leftover zeros for x2, 21 leading, 32 trailing
+leftover zeros for x4, 13 leading, 24 trailing
+leftover zeros for x8, 33 leading, 24 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 2461 leading, 1 trailing
+leftover zeros for x2, 873 leading, 1 trailing
+leftover zeros for x4, 171 leading, 259 trailing
+leftover zeros for x8, 427 leading, 271 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 68 trailing
+leftover zeros for x8, 0 leading, 68 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 90 leading, 163 trailing
+leftover zeros for x2, 23 leading, 39 trailing
+leftover zeros for x4, 87 leading, 133 trailing
+leftover zeros for x8, 147 leading, 177 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 61 trailing
+leftover zeros for x4, 0 leading, 61 trailing
+leftover zeros for x8, 0 leading, 61 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 2
+
+
+
+leftover zeros for x1, 63 leading, 34 trailing
+leftover zeros for x2, 30 leading, 14 trailing
+leftover zeros for x4, 22 leading, 38 trailing
+leftover zeros for x8, 50 leading, 62 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 2 leading, 30 trailing
+leftover zeros for x4, 2 leading, 40 trailing
+leftover zeros for x8, 2 leading, 44 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 75 leading, 0 trailing
+leftover zeros for x2, 17 leading, 10 trailing
+leftover zeros for x4, 15 leading, 22 trailing
+leftover zeros for x8, 23 leading, 78 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 19 leading, 136 trailing
+leftover zeros for x2, 12 leading, 16 trailing
+leftover zeros for x4, 48 leading, 52 trailing
+leftover zeros for x8, 124 leading, 96 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 77 leading, 6 trailing
+leftover zeros for x2, 23 leading, 64 trailing
+leftover zeros for x4, 43 leading, 212 trailing
+leftover zeros for x8, 87 leading, 240 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 23 leading, 36 trailing
+leftover zeros for x2, 17 leading, 20 trailing
+leftover zeros for x4, 29 leading, 34 trailing
+leftover zeros for x8, 53 leading, 86 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 2
+
+
+
+leftover zeros for x1, 59 leading, 1643 trailing
+leftover zeros for x2, 29 leading, 140 trailing
+leftover zeros for x4, 5 leading, 182 trailing
+leftover zeros for x8, 9 leading, 458 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 9 leading, 6 trailing
+leftover zeros for x2, 3 leading, 3 trailing
+leftover zeros for x4, 7 leading, 15 trailing
+leftover zeros for x8, 7 leading, 35 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 4
+
+
+
+leftover zeros for x1, 0 leading, 865 trailing
+leftover zeros for x2, 13 leading, 496 trailing
+leftover zeros for x4, 27 leading, 86 trailing
+leftover zeros for x8, 59 leading, 146 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 247 leading, 117 trailing
+leftover zeros for x2, 30 leading, 37 trailing
+leftover zeros for x4, 74 leading, 109 trailing
+leftover zeros for x8, 198 leading, 141 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 114 leading, 10 trailing
+leftover zeros for x2, 37 leading, 36 trailing
+leftover zeros for x4, 105 leading, 50 trailing
+leftover zeros for x8, 145 leading, 206 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 2098 leading, 0 trailing
+leftover zeros for x2, 755 leading, 105 trailing
+leftover zeros for x4, 191 leading, 105 trailing
+leftover zeros for x8, 383 leading, 105 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 11 leading, 9 trailing
+leftover zeros for x2, 69 leading, 69 trailing
+leftover zeros for x4, 207 leading, 209 trailing
+leftover zeros for x8, 515 leading, 277 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 409 leading, 97 trailing
+leftover zeros for x2, 35 leading, 39 trailing
+leftover zeros for x4, 75 leading, 95 trailing
+leftover zeros for x8, 159 leading, 167 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 4
+
+
+
+leftover zeros for x1, 123 leading, 192 trailing
+leftover zeros for x2, 90 leading, 77 trailing
+leftover zeros for x4, 22 leading, 47 trailing
+leftover zeros for x8, 38 leading, 71 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 8
+
+
+
+leftover zeros for x1, 0 leading, 107 trailing
+leftover zeros for x2, 6 leading, 87 trailing
+leftover zeros for x4, 18 leading, 71 trailing
+leftover zeros for x8, 30 leading, 47 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 4
+
+
+
+leftover zeros for x1, 635 leading, 386 trailing
+leftover zeros for x2, 201 leading, 120 trailing
+leftover zeros for x4, 83 leading, 74 trailing
+leftover zeros for x8, 143 leading, 158 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 8
+
+
+
+leftover zeros for x1, 14 leading, 94 trailing
+leftover zeros for x2, 2 leading, 57 trailing
+leftover zeros for x4, 4 leading, 41 trailing
+leftover zeros for x8, 8 leading, 37 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 154 trailing
+leftover zeros for x8, 0 leading, 154 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 1163 trailing
+leftover zeros for x2, 0 leading, 103 trailing
+leftover zeros for x4, 0 leading, 191 trailing
+leftover zeros for x8, 0 leading, 479 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 8
+trailing factor = 1
+
+
+
+leftover zeros for x1, 149 leading, 0 trailing
+leftover zeros for x2, 104 leading, 2 trailing
+leftover zeros for x4, 46 leading, 4 trailing
+leftover zeros for x8, 10 leading, 8 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 1978 leading, 0 trailing
+leftover zeros for x2, 675 leading, 103 trailing
+leftover zeros for x4, 73 leading, 309 trailing
+leftover zeros for x8, 209 leading, 309 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 1209 trailing
+leftover zeros for x2, 0 leading, 70 trailing
+leftover zeros for x4, 0 leading, 184 trailing
+leftover zeros for x8, 0 leading, 496 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 2
+
+
+
+leftover zeros for x1, 2098 leading, 1254 trailing
+leftover zeros for x2, 755 leading, 134 trailing
+leftover zeros for x4, 191 leading, 156 trailing
+leftover zeros for x8, 383 leading, 392 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 832 leading, 0 trailing
+leftover zeros for x2, 58 leading, 113 trailing
+leftover zeros for x4, 174 leading, 113 trailing
+leftover zeros for x8, 350 leading, 113 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 625 trailing
+leftover zeros for x2, 0 leading, 61 trailing
+leftover zeros for x4, 0 leading, 235 trailing
+leftover zeros for x8, 0 leading, 615 trailing
+
+
+
+Loading Background C:\VIDEO\kombat2\img\ARMORY1
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 8
+trailing factor = 1
+
+
+
+leftover zeros for x1, 328 leading, 1 trailing
+leftover zeros for x2, 253 leading, 2 trailing
+leftover zeros for x4, 103 leading, 70 trailing
+leftover zeros for x8, 19 leading, 82 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 4
+
+
+
+leftover zeros for x1, 0 leading, 696 trailing
+leftover zeros for x2, 0 leading, 430 trailing
+leftover zeros for x4, 0 leading, 192 trailing
+leftover zeros for x8, 0 leading, 420 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 164 trailing
+leftover zeros for x8, 0 leading, 164 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 198 trailing
+leftover zeros for x8, 0 leading, 198 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 82 trailing
+leftover zeros for x4, 0 leading, 82 trailing
+leftover zeros for x8, 0 leading, 82 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 99 trailing
+leftover zeros for x4, 0 leading, 99 trailing
+leftover zeros for x8, 0 leading, 99 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 48 leading, 0 trailing
+leftover zeros for x2, 22 leading, 36 trailing
+leftover zeros for x4, 138 leading, 130 trailing
+leftover zeros for x8, 342 leading, 294 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 451 trailing
+leftover zeros for x2, 0 leading, 49 trailing
+leftover zeros for x4, 0 leading, 171 trailing
+leftover zeros for x8, 424 leading, 391 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 8
+trailing factor = 1
+
+
+
+leftover zeros for x1, 1835 leading, 0 trailing
+leftover zeros for x2, 1083 leading, 0 trailing
+leftover zeros for x4, 235 leading, 0 trailing
+leftover zeros for x8, 231 leading, 0 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 3 trailing
+leftover zeros for x2, 46 leading, 49 trailing
+leftover zeros for x4, 136 leading, 147 trailing
+leftover zeros for x8, 360 leading, 291 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 22 trailing
+leftover zeros for x2, 20 leading, 30 trailing
+leftover zeros for x4, 60 leading, 80 trailing
+leftover zeros for x8, 204 leading, 212 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 189 leading, 2 trailing
+leftover zeros for x2, 57 leading, 56 trailing
+leftover zeros for x4, 163 leading, 148 trailing
+leftover zeros for x8, 335 leading, 468 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 70 trailing
+leftover zeros for x4, 4 leading, 70 trailing
+leftover zeros for x8, 4 leading, 70 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 44 trailing
+leftover zeros for x4, 0 leading, 108 trailing
+leftover zeros for x8, 0 leading, 352 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 40 leading, 93 trailing
+leftover zeros for x4, 104 leading, 279 trailing
+leftover zeros for x8, 360 leading, 279 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 32 trailing
+leftover zeros for x4, 0 leading, 112 trailing
+leftover zeros for x8, 0 leading, 368 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 347 leading, 194 trailing
+leftover zeros for x2, 41 leading, 61 trailing
+leftover zeros for x4, 179 leading, 133 trailing
+leftover zeros for x8, 339 leading, 273 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 86 trailing
+leftover zeros for x8, 0 leading, 86 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 84 trailing
+leftover zeros for x8, 0 leading, 84 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 192 trailing
+leftover zeros for x8, 0 leading, 192 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 2 trailing
+leftover zeros for x2, 37 leading, 40 trailing
+leftover zeros for x4, 105 leading, 162 trailing
+leftover zeros for x8, 261 leading, 306 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 6 leading, 14 trailing
+leftover zeros for x4, 82 leading, 62 trailing
+leftover zeros for x8, 94 leading, 70 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 40 leading, 25 trailing
+leftover zeros for x4, 134 leading, 107 trailing
+leftover zeros for x8, 238 leading, 343 trailing
+
+
+
+Loading Background C:\VIDEO\kombat2\img\BRIDGE1
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 27 leading, 35 trailing
+leftover zeros for x4, 87 leading, 131 trailing
+leftover zeros for x8, 119 leading, 167 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 35 leading, 27 trailing
+leftover zeros for x4, 65 leading, 93 trailing
+leftover zeros for x8, 121 leading, 213 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 8
+trailing factor = 1
+
+
+
+leftover zeros for x1, 2200 leading, 0 trailing
+leftover zeros for x2, 1690 leading, 38 trailing
+leftover zeros for x4, 686 leading, 114 trailing
+leftover zeros for x8, 126 leading, 114 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 2
+
+
+
+leftover zeros for x1, 556 leading, 66 trailing
+leftover zeros for x2, 133 leading, 6 trailing
+leftover zeros for x4, 93 leading, 6 trailing
+leftover zeros for x8, 249 leading, 14 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 36 leading, 0 trailing
+leftover zeros for x2, 7 leading, 24 trailing
+leftover zeros for x4, 11 leading, 72 trailing
+leftover zeros for x8, 35 leading, 72 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 8
+trailing factor = 2
+
+
+
+leftover zeros for x1, 1461 leading, 120 trailing
+leftover zeros for x2, 1026 leading, 17 trailing
+leftover zeros for x4, 228 leading, 51 trailing
+leftover zeros for x8, 96 leading, 95 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 2
+
+
+
+leftover zeros for x1, 414 leading, 22 trailing
+leftover zeros for x2, 204 leading, 15 trailing
+leftover zeros for x4, 20 leading, 35 trailing
+leftover zeros for x8, 56 leading, 47 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 46 trailing
+leftover zeros for x8, 0 leading, 46 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 4
+trailing factor = 4
+
+
+
+leftover zeros for x1, 131 leading, 155 trailing
+leftover zeros for x2, 38 leading, 49 trailing
+leftover zeros for x4, 26 leading, 23 trailing
+leftover zeros for x8, 46 leading, 47 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 4
+trailing factor = 4
+
+
+
+leftover zeros for x1, 244 leading, 149 trailing
+leftover zeros for x2, 99 leading, 65 trailing
+leftover zeros for x4, 15 leading, 25 trailing
+leftover zeros for x8, 35 leading, 49 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 4
+trailing factor = 4
+
+
+
+leftover zeros for x1, 101 leading, 110 trailing
+leftover zeros for x2, 48 leading, 51 trailing
+leftover zeros for x4, 14 leading, 17 trailing
+leftover zeros for x8, 26 leading, 41 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 8
+trailing factor = 2
+
+
+
+leftover zeros for x1, 422 leading, 18 trailing
+leftover zeros for x2, 317 leading, 3 trailing
+leftover zeros for x4, 205 leading, 25 trailing
+leftover zeros for x8, 33 leading, 33 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 25 leading, 27 trailing
+leftover zeros for x2, 10 leading, 5 trailing
+leftover zeros for x4, 14 leading, 9 trailing
+leftover zeros for x8, 22 leading, 21 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 8
+
+
+
+leftover zeros for x1, 72 leading, 299 trailing
+leftover zeros for x2, 10 leading, 237 trailing
+leftover zeros for x4, 16 leading, 157 trailing
+leftover zeros for x8, 44 leading, 61 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 2
+
+
+
+leftover zeros for x1, 1791 leading, 407 trailing
+leftover zeros for x2, 663 leading, 53 trailing
+leftover zeros for x4, 269 leading, 337 trailing
+leftover zeros for x8, 585 leading, 533 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 8
+
+
+
+leftover zeros for x1, 2 leading, 1111 trailing
+leftover zeros for x2, 7 leading, 757 trailing
+leftover zeros for x4, 19 leading, 213 trailing
+leftover zeros for x8, 23 leading, 117 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 31 leading, 361 trailing
+leftover zeros for x2, 19 leading, 58 trailing
+leftover zeros for x4, 51 leading, 172 trailing
+leftover zeros for x8, 139 leading, 396 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 2
+trailing factor = 4
+
+
+
+leftover zeros for x1, 29 leading, 236 trailing
+leftover zeros for x2, 7 leading, 90 trailing
+leftover zeros for x4, 19 leading, 22 trailing
+leftover zeros for x8, 39 leading, 66 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 4 leading, 0 trailing
+leftover zeros for x2, 1 leading, 9 trailing
+leftover zeros for x4, 3 leading, 13 trailing
+leftover zeros for x8, 3 leading, 25 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 141 leading, 160 trailing
+leftover zeros for x2, 15 leading, 33 trailing
+leftover zeros for x4, 19 leading, 35 trailing
+leftover zeros for x8, 51 leading, 47 trailing
+
+
+
+Auto pixel packing to 3 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 8
+trailing factor = 1
+
+
+
+leftover zeros for x1, 659 leading, 44 trailing
+leftover zeros for x2, 495 leading, 61 trailing
+leftover zeros for x4, 233 leading, 97 trailing
+leftover zeros for x8, 37 leading, 101 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 40 leading, 48 trailing
+leftover zeros for x2, 24 leading, 27 trailing
+leftover zeros for x4, 60 leading, 79 trailing
+leftover zeros for x8, 124 leading, 159 trailing
+
+
+
+Loading Background C:\VIDEO\kombat2\img\SPIRAL
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 288 leading, 0 trailing
+leftover zeros for x2, 198 leading, 24 trailing
+leftover zeros for x4, 18 leading, 36 trailing
+leftover zeros for x8, 42 leading, 60 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 48 trailing
+leftover zeros for x8, 0 leading, 48 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 32 trailing
+leftover zeros for x4, 4 leading, 108 trailing
+leftover zeros for x8, 4 leading, 260 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 33 trailing
+leftover zeros for x2, 0 leading, 3 trailing
+leftover zeros for x4, 0 leading, 163 trailing
+leftover zeros for x8, 0 leading, 179 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 38 leading, 0 trailing
+leftover zeros for x4, 114 leading, 0 trailing
+leftover zeros for x8, 114 leading, 0 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 468 trailing
+leftover zeros for x2, 0 leading, 89 trailing
+leftover zeros for x4, 0 leading, 127 trailing
+leftover zeros for x8, 0 leading, 227 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 36 leading, 70 trailing
+leftover zeros for x4, 108 leading, 210 trailing
+leftover zeros for x8, 252 leading, 210 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 11 trailing
+leftover zeros for x4, 0 leading, 35 trailing
+leftover zeros for x8, 0 leading, 83 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 29 leading, 0 trailing
+leftover zeros for x2, 7 leading, 1 trailing
+leftover zeros for x4, 3 leading, 1 trailing
+leftover zeros for x8, 11 leading, 1 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 43 trailing
+leftover zeros for x2, 0 leading, 53 trailing
+leftover zeros for x4, 0 leading, 73 trailing
+leftover zeros for x8, 0 leading, 109 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 4
+
+
+
+leftover zeros for x1, 0 leading, 50 trailing
+leftover zeros for x2, 0 leading, 59 trailing
+leftover zeros for x4, 14 leading, 41 trailing
+leftover zeros for x8, 42 leading, 61 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 97 trailing
+leftover zeros for x4, 0 leading, 291 trailing
+leftover zeros for x8, 0 leading, 291 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 1 leading, 10 trailing
+leftover zeros for x4, 1 leading, 38 trailing
+leftover zeros for x8, 1 leading, 66 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 4
+
+
+
+leftover zeros for x1, 19 leading, 242 trailing
+leftover zeros for x2, 2 leading, 132 trailing
+leftover zeros for x4, 4 leading, 18 trailing
+leftover zeros for x8, 8 leading, 34 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 8
+
+
+
+leftover zeros for x1, 113 leading, 380 trailing
+leftover zeros for x2, 11 leading, 243 trailing
+leftover zeros for x4, 19 leading, 53 trailing
+leftover zeros for x8, 39 leading, 41 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 47 trailing
+leftover zeros for x4, 0 leading, 47 trailing
+leftover zeros for x8, 0 leading, 47 trailing
+
+
+
+block cksum match w:144, h:47, dma2:6000 add:3346F5D
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 42 trailing
+leftover zeros for x2, 0 leading, 14 trailing
+leftover zeros for x4, 4 leading, 84 trailing
+leftover zeros for x8, 8 leading, 92 trailing
+
+
+
+block cksum match w:140, h:44, dma2:6480 add:32F94BB
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 39 trailing
+leftover zeros for x4, 0 leading, 39 trailing
+leftover zeros for x8, 0 leading, 39 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 8 trailing
+leftover zeros for x4, 0 leading, 24 trailing
+leftover zeros for x8, 0 leading, 24 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 145 leading, 203 trailing
+leftover zeros for x2, 37 leading, 55 trailing
+leftover zeros for x4, 89 leading, 137 trailing
+leftover zeros for x8, 205 leading, 277 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 14 leading, 0 trailing
+leftover zeros for x2, 3 leading, 128 trailing
+leftover zeros for x4, 5 leading, 132 trailing
+leftover zeros for x8, 13 leading, 132 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 486 leading, 688 trailing
+leftover zeros for x2, 396 leading, 538 trailing
+leftover zeros for x4, 216 leading, 238 trailing
+leftover zeros for x8, 0 leading, 38 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 60 leading, 0 trailing
+leftover zeros for x2, 6 leading, 138 trailing
+leftover zeros for x4, 20 leading, 146 trailing
+leftover zeros for x8, 48 leading, 158 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 93 leading, 0 trailing
+leftover zeros for x2, 24 leading, 12 trailing
+leftover zeros for x4, 16 leading, 32 trailing
+leftover zeros for x8, 32 leading, 72 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 31 leading, 107 trailing
+leftover zeros for x2, 12 leading, 12 trailing
+leftover zeros for x4, 46 leading, 282 trailing
+leftover zeros for x8, 78 leading, 326 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 4 leading, 0 trailing
+leftover zeros for x2, 1 leading, 0 trailing
+leftover zeros for x4, 3 leading, 0 trailing
+leftover zeros for x8, 3 leading, 0 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 4
+
+
+
+leftover zeros for x1, 0 leading, 76 trailing
+leftover zeros for x2, 0 leading, 86 trailing
+leftover zeros for x4, 0 leading, 58 trailing
+leftover zeros for x8, 0 leading, 58 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 39 trailing
+leftover zeros for x4, 0 leading, 117 trailing
+leftover zeros for x8, 0 leading, 117 trailing
+
+
+
+Loading Background C:\VIDEO\kombat2\img\ARENA
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 1 leading, 2 trailing
+leftover zeros for x4, 3 leading, 14 trailing
+leftover zeros for x8, 3 leading, 18 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 19 trailing
+leftover zeros for x4, 0 leading, 57 trailing
+leftover zeros for x8, 0 leading, 57 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 8 trailing
+leftover zeros for x4, 0 leading, 24 trailing
+leftover zeros for x8, 0 leading, 24 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 11 trailing
+leftover zeros for x4, 0 leading, 33 trailing
+leftover zeros for x8, 0 leading, 33 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 172 leading, 159 trailing
+leftover zeros for x2, 25 leading, 7 trailing
+leftover zeros for x4, 71 leading, 131 trailing
+leftover zeros for x8, 115 leading, 159 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 4 leading, 49 trailing
+leftover zeros for x2, 4 leading, 2 trailing
+leftover zeros for x4, 12 leading, 108 trailing
+leftover zeros for x8, 40 leading, 140 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 82 leading, 0 trailing
+leftover zeros for x2, 27 leading, 66 trailing
+leftover zeros for x4, 31 leading, 198 trailing
+leftover zeros for x8, 59 leading, 206 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 4
+
+
+
+leftover zeros for x1, 1064 leading, 560 trailing
+leftover zeros for x2, 587 leading, 234 trailing
+leftover zeros for x4, 47 leading, 122 trailing
+leftover zeros for x8, 183 leading, 210 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 4
+
+
+
+leftover zeros for x1, 1 leading, 422 trailing
+leftover zeros for x2, 3 leading, 86 trailing
+leftover zeros for x4, 7 leading, 80 trailing
+leftover zeros for x8, 15 leading, 180 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 1 leading, 2 trailing
+leftover zeros for x4, 1 leading, 2 trailing
+leftover zeros for x8, 1 leading, 2 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 4
+
+
+
+leftover zeros for x1, 0 leading, 443 trailing
+leftover zeros for x2, 5 leading, 280 trailing
+leftover zeros for x4, 23 leading, 54 trailing
+leftover zeros for x8, 35 leading, 82 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 0 trailing
+leftover zeros for x4, 12 leading, 42 trailing
+leftover zeros for x8, 28 leading, 42 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 18 leading, 24 trailing
+leftover zeros for x4, 58 leading, 82 trailing
+leftover zeros for x8, 142 leading, 182 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 24 leading, 0 trailing
+leftover zeros for x2, 7 leading, 8 trailing
+leftover zeros for x4, 15 leading, 24 trailing
+leftover zeros for x8, 27 leading, 64 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 11 leading, 26 trailing
+leftover zeros for x2, 6 leading, 2 trailing
+leftover zeros for x4, 14 leading, 8 trailing
+leftover zeros for x8, 22 leading, 44 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 21 trailing
+leftover zeros for x4, 0 leading, 21 trailing
+leftover zeros for x8, 0 leading, 21 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 8 leading, 74 trailing
+leftover zeros for x2, 13 leading, 20 trailing
+leftover zeros for x4, 29 leading, 38 trailing
+leftover zeros for x8, 81 leading, 86 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 89 leading, 40 trailing
+leftover zeros for x2, 11 leading, 40 trailing
+leftover zeros for x4, 23 leading, 96 trailing
+leftover zeros for x8, 55 leading, 112 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 0 trailing
+leftover zeros for x4, 12 leading, 42 trailing
+leftover zeros for x8, 28 leading, 42 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 28 leading, 29 trailing
+leftover zeros for x4, 56 leading, 101 trailing
+leftover zeros for x8, 144 leading, 241 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 25 trailing
+leftover zeros for x4, 12 leading, 25 trailing
+leftover zeros for x8, 28 leading, 25 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 27 trailing
+leftover zeros for x2, 18 leading, 12 trailing
+leftover zeros for x4, 44 leading, 92 trailing
+leftover zeros for x8, 144 leading, 92 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 25 trailing
+leftover zeros for x4, 0 leading, 75 trailing
+leftover zeros for x8, 0 leading, 75 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 52 trailing
+leftover zeros for x2, 19 leading, 7 trailing
+leftover zeros for x4, 53 leading, 77 trailing
+leftover zeros for x8, 133 leading, 81 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 9 leading, 0 trailing
+leftover zeros for x4, 33 leading, 42 trailing
+leftover zeros for x8, 89 leading, 42 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 11 leading, 19 trailing
+leftover zeros for x2, 6 leading, 3 trailing
+leftover zeros for x4, 14 leading, 5 trailing
+leftover zeros for x8, 22 leading, 45 trailing
+
+
+
+Loading Background C:\VIDEO\kombat2\img\MKHUGE
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 9 leading, 0 trailing
+leftover zeros for x2, 31 leading, 81 trailing
+leftover zeros for x4, 77 leading, 81 trailing
+leftover zeros for x8, 153 leading, 81 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 89 leading, 0 trailing
+leftover zeros for x2, 28 leading, 55 trailing
+leftover zeros for x4, 76 leading, 165 trailing
+leftover zeros for x8, 164 leading, 165 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 1202 leading, 1280 trailing
+leftover zeros for x2, 741 leading, 780 trailing
+leftover zeros for x4, 247 leading, 268 trailing
+leftover zeros for x8, 203 leading, 192 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 4
+
+
+
+leftover zeros for x1, 892 leading, 906 trailing
+leftover zeros for x2, 515 leading, 510 trailing
+leftover zeros for x4, 157 leading, 152 trailing
+leftover zeros for x8, 157 leading, 160 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 104 trailing
+leftover zeros for x2, 0 leading, 29 trailing
+leftover zeros for x4, 0 leading, 93 trailing
+leftover zeros for x8, 0 leading, 185 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 36 trailing
+leftover zeros for x2, 0 leading, 36 trailing
+leftover zeros for x4, 0 leading, 94 trailing
+leftover zeros for x8, 0 leading, 182 trailing
+
+
+
+Loading Background C:\VIDEO\kombat2\img\MOUNTAIN
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 299 leading, 0 trailing
+leftover zeros for x2, 175 leading, 0 trailing
+leftover zeros for x4, 67 leading, 72 trailing
+leftover zeros for x8, 123 leading, 72 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 2
+
+
+
+leftover zeros for x1, 1398 leading, 533 trailing
+leftover zeros for x2, 810 leading, 94 trailing
+leftover zeros for x4, 130 leading, 156 trailing
+leftover zeros for x8, 294 leading, 224 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 2
+
+
+
+leftover zeros for x1, 668 leading, 12 trailing
+leftover zeros for x2, 305 leading, 8 trailing
+leftover zeros for x4, 53 leading, 252 trailing
+leftover zeros for x8, 181 leading, 268 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 8
+trailing factor = 4
+
+
+
+leftover zeros for x1, 1200 leading, 2741 trailing
+leftover zeros for x2, 903 leading, 1120 trailing
+leftover zeros for x4, 455 leading, 450 trailing
+leftover zeros for x8, 75 leading, 598 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 8
+trailing factor = 1
+
+
+
+leftover zeros for x1, 110 leading, 0 trailing
+leftover zeros for x2, 81 leading, 2 trailing
+leftover zeros for x4, 23 leading, 124 trailing
+leftover zeros for x8, 15 leading, 128 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 4
+
+
+
+leftover zeros for x1, 0 leading, 70 trailing
+leftover zeros for x2, 13 leading, 42 trailing
+leftover zeros for x4, 13 leading, 12 trailing
+leftover zeros for x8, 13 leading, 12 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 4
+
+
+
+leftover zeros for x1, 0 leading, 39 trailing
+leftover zeros for x2, 0 leading, 49 trailing
+leftover zeros for x4, 0 leading, 27 trailing
+leftover zeros for x8, 0 leading, 31 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 98 trailing
+leftover zeros for x8, 0 leading, 98 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 232 leading, 0 trailing
+leftover zeros for x2, 27 leading, 0 trailing
+leftover zeros for x4, 71 leading, 98 trailing
+leftover zeros for x8, 155 leading, 98 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 8
+trailing factor = 4
+
+
+
+leftover zeros for x1, 661 leading, 221 trailing
+leftover zeros for x2, 468 leading, 135 trailing
+leftover zeros for x4, 116 leading, 59 trailing
+leftover zeros for x8, 108 leading, 111 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 3 leading, 0 trailing
+leftover zeros for x4, 7 leading, 110 trailing
+leftover zeros for x8, 7 leading, 110 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 8 leading, 0 trailing
+leftover zeros for x2, 18 leading, 41 trailing
+leftover zeros for x4, 56 leading, 41 trailing
+leftover zeros for x8, 92 leading, 41 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 43 trailing
+leftover zeros for x4, 0 leading, 129 trailing
+leftover zeros for x8, 0 leading, 129 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 46 trailing
+leftover zeros for x4, 0 leading, 138 trailing
+leftover zeros for x8, 0 leading, 138 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 8 leading, 0 trailing
+leftover zeros for x4, 28 leading, 0 trailing
+leftover zeros for x8, 124 leading, 0 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 4
+
+
+
+leftover zeros for x1, 0 leading, 364 trailing
+leftover zeros for x2, 0 leading, 207 trailing
+leftover zeros for x4, 0 leading, 153 trailing
+leftover zeros for x8, 0 leading, 153 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 13 leading, 29 trailing
+leftover zeros for x4, 41 leading, 29 trailing
+leftover zeros for x8, 109 leading, 29 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 34 leading, 0 trailing
+leftover zeros for x2, 4 leading, 0 trailing
+leftover zeros for x4, 0 leading, 54 trailing
+leftover zeros for x8, 0 leading, 54 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 8
+trailing factor = 2
+
+
+
+leftover zeros for x1, 2379 leading, 579 trailing
+leftover zeros for x2, 1783 leading, 225 trailing
+leftover zeros for x4, 867 leading, 231 trailing
+leftover zeros for x8, 67 leading, 367 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 88 trailing
+leftover zeros for x8, 0 leading, 88 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 116 trailing
+leftover zeros for x8, 0 leading, 116 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 4
+
+
+
+leftover zeros for x1, 302 leading, 52 trailing
+leftover zeros for x2, 200 leading, 57 trailing
+leftover zeros for x4, 40 leading, 39 trailing
+leftover zeros for x8, 48 leading, 39 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 4
+
+
+
+leftover zeros for x1, 120 leading, 1488 trailing
+leftover zeros for x2, 26 leading, 889 trailing
+leftover zeros for x4, 28 leading, 209 trailing
+leftover zeros for x8, 80 leading, 209 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 8
+trailing factor = 1
+
+
+
+leftover zeros for x1, 308 leading, 0 trailing
+leftover zeros for x2, 249 leading, 3 trailing
+leftover zeros for x4, 129 leading, 45 trailing
+leftover zeros for x8, 17 leading, 65 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 10 leading, 53 trailing
+leftover zeros for x2, 1 leading, 70 trailing
+leftover zeros for x4, 1 leading, 172 trailing
+leftover zeros for x8, 1 leading, 176 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 30 leading, 74 trailing
+leftover zeros for x4, 92 leading, 222 trailing
+leftover zeros for x8, 200 leading, 222 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 116 trailing
+leftover zeros for x8, 0 leading, 116 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 38 trailing
+leftover zeros for x4, 0 leading, 114 trailing
+leftover zeros for x8, 0 leading, 114 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 105 leading, 0 trailing
+leftover zeros for x2, 11 leading, 33 trailing
+leftover zeros for x4, 35 leading, 33 trailing
+leftover zeros for x8, 83 leading, 33 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 83 trailing
+leftover zeros for x4, 12 leading, 83 trailing
+leftover zeros for x8, 36 leading, 83 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 62 trailing
+leftover zeros for x4, 0 leading, 186 trailing
+leftover zeros for x8, 0 leading, 186 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 11 leading, 26 trailing
+leftover zeros for x2, 9 leading, 63 trailing
+leftover zeros for x4, 25 leading, 187 trailing
+leftover zeros for x8, 57 leading, 223 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 1873 leading, 17 trailing
+leftover zeros for x2, 1109 leading, 48 trailing
+leftover zeros for x4, 81 leading, 94 trailing
+leftover zeros for x8, 205 leading, 142 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 8
+trailing factor = 1
+
+
+
+leftover zeros for x1, 351 leading, 0 trailing
+leftover zeros for x2, 291 leading, 3 trailing
+leftover zeros for x4, 173 leading, 73 trailing
+leftover zeros for x8, 13 leading, 89 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 54 trailing
+leftover zeros for x4, 0 leading, 162 trailing
+leftover zeros for x8, 0 leading, 162 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 21 leading, 0 trailing
+leftover zeros for x2, 6 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 80 leading, 0 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 38 trailing
+leftover zeros for x4, 0 leading, 114 trailing
+leftover zeros for x8, 0 leading, 114 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 12 leading, 23 trailing
+leftover zeros for x4, 46 leading, 71 trailing
+leftover zeros for x8, 46 leading, 191 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 36 leading, 33 trailing
+leftover zeros for x4, 66 leading, 107 trailing
+leftover zeros for x8, 170 leading, 303 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 35 leading, 0 trailing
+leftover zeros for x2, 18 leading, 20 trailing
+leftover zeros for x4, 44 leading, 52 trailing
+leftover zeros for x8, 104 leading, 164 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 2 leading, 0 trailing
+leftover zeros for x2, 4 leading, 7 trailing
+leftover zeros for x4, 10 leading, 15 trailing
+leftover zeros for x8, 26 leading, 39 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 41 trailing
+leftover zeros for x4, 0 leading, 73 trailing
+leftover zeros for x8, 0 leading, 217 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 2 trailing
+leftover zeros for x2, 17 leading, 28 trailing
+leftover zeros for x4, 99 leading, 120 trailing
+leftover zeros for x8, 211 leading, 236 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 37 leading, 37 trailing
+leftover zeros for x4, 107 leading, 117 trailing
+leftover zeros for x8, 247 leading, 277 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 1 leading, 444 trailing
+leftover zeros for x2, 51 leading, 111 trailing
+leftover zeros for x4, 161 leading, 153 trailing
+leftover zeros for x8, 373 leading, 365 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 4
+
+
+
+leftover zeros for x1, 0 leading, 110 trailing
+leftover zeros for x2, 0 leading, 56 trailing
+leftover zeros for x4, 0 leading, 10 trailing
+leftover zeros for x8, 0 leading, 26 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 362 leading, 0 trailing
+leftover zeros for x2, 175 leading, 31 trailing
+leftover zeros for x4, 21 leading, 93 trailing
+leftover zeros for x8, 45 leading, 93 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 64 leading, 0 trailing
+leftover zeros for x2, 6 leading, 9 trailing
+leftover zeros for x4, 10 leading, 9 trailing
+leftover zeros for x8, 26 leading, 9 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 18 leading, 0 trailing
+leftover zeros for x2, 3 leading, 0 trailing
+leftover zeros for x4, 3 leading, 0 trailing
+leftover zeros for x8, 3 leading, 0 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 4
+
+
+
+leftover zeros for x1, 1 leading, 1081 trailing
+leftover zeros for x2, 13 leading, 594 trailing
+leftover zeros for x4, 19 leading, 70 trailing
+leftover zeros for x8, 87 leading, 166 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 39 leading, 0 trailing
+leftover zeros for x2, 12 leading, 1 trailing
+leftover zeros for x4, 36 leading, 1 trailing
+leftover zeros for x8, 48 leading, 5 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 257 trailing
+leftover zeros for x2, 0 leading, 14 trailing
+leftover zeros for x4, 0 leading, 66 trailing
+leftover zeros for x8, 0 leading, 306 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 8
+trailing factor = 4
+
+
+
+leftover zeros for x1, 982 leading, 40 trailing
+leftover zeros for x2, 695 leading, 7 trailing
+leftover zeros for x4, 313 leading, 5 trailing
+leftover zeros for x8, 73 leading, 13 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 1480 leading, 752 trailing
+leftover zeros for x2, 1049 leading, 481 trailing
+leftover zeros for x4, 363 leading, 177 trailing
+leftover zeros for x8, 127 leading, 113 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 8
+trailing factor = 1
+
+
+
+leftover zeros for x1, 765 leading, 0 trailing
+leftover zeros for x2, 630 leading, 0 trailing
+leftover zeros for x4, 488 leading, 128 trailing
+leftover zeros for x8, 164 leading, 384 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 2
+
+
+
+leftover zeros for x1, 180 leading, 138 trailing
+leftover zeros for x2, 122 leading, 52 trailing
+leftover zeros for x4, 12 leading, 82 trailing
+leftover zeros for x8, 28 leading, 106 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 10 leading, 44 trailing
+leftover zeros for x2, 15 leading, 19 trailing
+leftover zeros for x4, 49 leading, 59 trailing
+leftover zeros for x8, 109 leading, 147 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 215 leading, 279 trailing
+leftover zeros for x2, 173 leading, 237 trailing
+leftover zeros for x4, 89 leading, 161 trailing
+leftover zeros for x8, 21 leading, 109 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 8
+trailing factor = 1
+
+
+
+leftover zeros for x1, 138 leading, 0 trailing
+leftover zeros for x2, 108 leading, 29 trailing
+leftover zeros for x4, 48 leading, 29 trailing
+leftover zeros for x8, 8 leading, 29 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 30 trailing
+leftover zeros for x4, 0 leading, 96 trailing
+leftover zeros for x8, 0 leading, 176 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 32 leading, 11 trailing
+leftover zeros for x4, 80 leading, 127 trailing
+leftover zeros for x8, 192 leading, 183 trailing
+
+
+
+Loading Background C:\VIDEO\kombat2\img\MKSELECT
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 252 trailing
+leftover zeros for x8, 0 leading, 252 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 260 trailing
+leftover zeros for x8, 0 leading, 260 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 62 trailing
+leftover zeros for x8, 0 leading, 62 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 5 trailing
+leftover zeros for x4, 0 leading, 5 trailing
+leftover zeros for x8, 0 leading, 5 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 5 trailing
+leftover zeros for x4, 0 leading, 5 trailing
+leftover zeros for x8, 0 leading, 5 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 5 trailing
+leftover zeros for x4, 0 leading, 5 trailing
+leftover zeros for x8, 0 leading, 5 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+Loading Background C:\VIDEO\kombat2\img\MKWINNER
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 99 leading, 34 trailing
+leftover zeros for x2, 42 leading, 22 trailing
+leftover zeros for x4, 44 leading, 42 trailing
+leftover zeros for x8, 104 leading, 126 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 369 leading, 292 trailing
+leftover zeros for x2, 60 leading, 61 trailing
+leftover zeros for x4, 66 leading, 131 trailing
+leftover zeros for x8, 110 leading, 239 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 7 leading, 33 trailing
+leftover zeros for x2, 1 leading, 3 trailing
+leftover zeros for x4, 7 leading, 191 trailing
+leftover zeros for x8, 15 leading, 199 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 27 leading, 54 trailing
+leftover zeros for x2, 8 leading, 50 trailing
+leftover zeros for x4, 20 leading, 104 trailing
+leftover zeros for x8, 36 leading, 252 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 4
+
+
+
+leftover zeros for x1, 10 leading, 914 trailing
+leftover zeros for x2, 24 leading, 317 trailing
+leftover zeros for x4, 92 leading, 171 trailing
+leftover zeros for x8, 172 leading, 323 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 141 trailing
+leftover zeros for x4, 0 leading, 141 trailing
+leftover zeros for x8, 0 leading, 141 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 524 leading, 0 trailing
+leftover zeros for x2, 153 leading, 78 trailing
+leftover zeros for x4, 75 leading, 234 trailing
+leftover zeros for x8, 147 leading, 234 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 4
+
+
+
+leftover zeros for x1, 69 leading, 255 trailing
+leftover zeros for x2, 11 leading, 116 trailing
+leftover zeros for x4, 31 leading, 56 trailing
+leftover zeros for x8, 83 leading, 132 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 4
+
+
+
+leftover zeros for x1, 6 leading, 471 trailing
+leftover zeros for x2, 12 leading, 112 trailing
+leftover zeros for x4, 34 leading, 84 trailing
+leftover zeros for x8, 78 leading, 188 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 13 leading, 37 trailing
+leftover zeros for x4, 35 leading, 111 trailing
+leftover zeros for x8, 91 leading, 111 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 7 leading, 106 trailing
+leftover zeros for x2, 5 leading, 84 trailing
+leftover zeros for x4, 105 leading, 100 trailing
+leftover zeros for x8, 109 leading, 184 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 37 trailing
+leftover zeros for x4, 0 leading, 111 trailing
+leftover zeros for x8, 0 leading, 111 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 141 trailing
+leftover zeros for x4, 0 leading, 141 trailing
+leftover zeros for x8, 0 leading, 141 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 108 trailing
+leftover zeros for x4, 0 leading, 108 trailing
+leftover zeros for x8, 0 leading, 108 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 148 trailing
+leftover zeros for x4, 0 leading, 148 trailing
+leftover zeros for x8, 0 leading, 148 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 55 leading, 62 trailing
+leftover zeros for x4, 55 leading, 92 trailing
+leftover zeros for x8, 55 leading, 296 trailing
+
+
+
+Loading Background C:\VIDEO\kombat2\img\MKVERSUS
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 44 trailing
+leftover zeros for x4, 0 leading, 44 trailing
+leftover zeros for x8, 0 leading, 44 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 55 trailing
+leftover zeros for x4, 0 leading, 55 trailing
+leftover zeros for x8, 0 leading, 55 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 2
+trailing factor = 4
+
+
+
+leftover zeros for x1, 118 leading, 393 trailing
+leftover zeros for x2, 26 leading, 103 trailing
+leftover zeros for x4, 56 leading, 63 trailing
+leftover zeros for x8, 152 leading, 147 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 37 leading, 65 trailing
+leftover zeros for x2, 13 leading, 9 trailing
+leftover zeros for x4, 33 leading, 37 trailing
+leftover zeros for x8, 85 leading, 89 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 7 leading, 5 trailing
+leftover zeros for x4, 13 leading, 17 trailing
+leftover zeros for x8, 41 leading, 33 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 7 leading, 9 trailing
+leftover zeros for x4, 41 leading, 23 trailing
+leftover zeros for x8, 89 leading, 103 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 106 trailing
+leftover zeros for x8, 0 leading, 106 trailing
+
+
+
+Loading Background C:\VIDEO\kombat2\img\MKSTORY1
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 100 trailing
+leftover zeros for x8, 0 leading, 100 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 7 leading, 9 trailing
+leftover zeros for x4, 41 leading, 23 trailing
+leftover zeros for x8, 89 leading, 103 trailing
+
+
+
+block cksum match w:16, h:28, dma2:4080 add:38722AE
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 37 leading, 65 trailing
+leftover zeros for x2, 13 leading, 9 trailing
+leftover zeros for x4, 33 leading, 37 trailing
+leftover zeros for x8, 85 leading, 89 trailing
+
+
+
+block cksum match w:28, h:25, dma2:4580 add:3871A0E
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 3 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 2
+trailing factor = 4
+
+
+
+leftover zeros for x1, 118 leading, 393 trailing
+leftover zeros for x2, 26 leading, 103 trailing
+leftover zeros for x4, 56 leading, 63 trailing
+leftover zeros for x8, 152 leading, 147 trailing
+
+
+
+block cksum match w:48, h:39, dma2:4980 add:3870FCE
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+Loading Background C:\VIDEO\kombat2\img\MKSTORY2
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 100 trailing
+leftover zeros for x8, 0 leading, 100 trailing
+
+
+
+block cksum match w:52, h:50, dma2:4080 add:3877D3E
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 7 leading, 9 trailing
+leftover zeros for x4, 41 leading, 23 trailing
+leftover zeros for x8, 89 leading, 103 trailing
+
+
+
+block cksum match w:16, h:28, dma2:4080 add:38722AE
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:46, dma2:5000 add:387B656
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:4000 add:387BA4E
+Auto pixel packing to 3 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:3000 add:387BA7E
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+block cksum match w:40, h:3, dma2:5000 add:387A5DE
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387A836
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387AD96
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:4000 add:387BAA2
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:5000 add:387ADE6
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:4000 add:387B296
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 37 leading, 65 trailing
+leftover zeros for x2, 13 leading, 9 trailing
+leftover zeros for x4, 33 leading, 37 trailing
+leftover zeros for x8, 85 leading, 89 trailing
+
+
+
+block cksum match w:28, h:25, dma2:4580 add:3871A0E
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:4000 add:387B9EE
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:4000 add:387BA1E
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:5000 add:387BF42
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387C54A
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387C50A
+Loading Background C:\VIDEO\kombat2\img\MKSTORY3
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 100 trailing
+leftover zeros for x8, 0 leading, 100 trailing
+
+
+
+block cksum match w:52, h:50, dma2:4080 add:3877D3E
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 7 leading, 9 trailing
+leftover zeros for x4, 41 leading, 23 trailing
+leftover zeros for x8, 89 leading, 103 trailing
+
+
+
+block cksum match w:16, h:28, dma2:4080 add:38722AE
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:46, dma2:5000 add:387B656
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:4000 add:387BA4E
+Auto pixel packing to 3 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:3000 add:387BA7E
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+block cksum match w:40, h:3, dma2:5000 add:387A5DE
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387A836
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387AD96
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:4000 add:387BAA2
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:5000 add:387ADE6
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:4000 add:387B296
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 37 leading, 65 trailing
+leftover zeros for x2, 13 leading, 9 trailing
+leftover zeros for x4, 33 leading, 37 trailing
+leftover zeros for x8, 85 leading, 89 trailing
+
+
+
+block cksum match w:28, h:25, dma2:4580 add:3871A0E
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 8
+trailing factor = 4
+
+
+
+leftover zeros for x1, 2428 leading, 1310 trailing
+leftover zeros for x2, 1565 leading, 508 trailing
+leftover zeros for x4, 1029 leading, 340 trailing
+leftover zeros for x8, 341 leading, 476 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:4000 add:387B9EE
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:30, dma2:5000 add:387CC02
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:4000 add:387BA1E
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:5000 add:387BF42
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387C54A
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387C50A
+Loading Background C:\VIDEO\kombat2\img\ATRAX1
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 100 trailing
+leftover zeros for x8, 0 leading, 100 trailing
+
+
+
+block cksum match w:52, h:50, dma2:4080 add:3877D3E
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387AD96
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387A836
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 33 leading, 0 trailing
+leftover zeros for x2, 74 leading, 0 trailing
+leftover zeros for x4, 56 leading, 0 trailing
+leftover zeros for x8, 56 leading, 0 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 37 leading, 65 trailing
+leftover zeros for x2, 13 leading, 9 trailing
+leftover zeros for x4, 33 leading, 37 trailing
+leftover zeros for x8, 85 leading, 89 trailing
+
+
+
+block cksum match w:28, h:25, dma2:4580 add:3871A0E
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:4000 add:387B296
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:5000 add:387ADE6
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 7 leading, 9 trailing
+leftover zeros for x4, 41 leading, 23 trailing
+leftover zeros for x8, 89 leading, 103 trailing
+
+
+
+block cksum match w:16, h:28, dma2:4080 add:38722AE
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:4000 add:387BAA2
+Auto pixel packing to 8 bits on BG block.
+
+bits per pixel = 8
+leading factor = 4
+trailing factor = 4
+
+
+
+leftover zeros for x1, 2055 leading, 1228 trailing
+leftover zeros for x2, 1170 leading, 500 trailing
+leftover zeros for x4, 178 leading, 374 trailing
+leftover zeros for x8, 550 leading, 614 trailing
+
+
+
+Auto pixel packing to 8 bits on BG block.
+
+bits per pixel = 8
+leading factor = 4
+trailing factor = 4
+
+
+
+leftover zeros for x1, 426 leading, 3975 trailing
+leftover zeros for x2, 189 leading, 2395 trailing
+leftover zeros for x4, 149 leading, 317 trailing
+leftover zeros for x8, 261 leading, 517 trailing
+
+
+
+Auto pixel packing to 8 bits on BG block.
+
+bits per pixel = 8
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 93 leading, 13 trailing
+leftover zeros for x2, 32 leading, 29 trailing
+leftover zeros for x4, 92 leading, 91 trailing
+leftover zeros for x8, 180 leading, 195 trailing
+
+
+
+Auto pixel packing to 8 bits on BG block.
+
+bits per pixel = 8
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 613 leading, 0 trailing
+leftover zeros for x2, 131 leading, 30 trailing
+leftover zeros for x4, 203 leading, 154 trailing
+leftover zeros for x8, 443 leading, 186 trailing
+
+
+
+Auto pixel packing to 8 bits on BG block.
+
+bits per pixel = 8
+leading factor = 1
+trailing factor = 4
+
+
+
+leftover zeros for x1, 0 leading, 2641 trailing
+leftover zeros for x2, 18 leading, 1591 trailing
+leftover zeros for x4, 42 leading, 277 trailing
+leftover zeros for x8, 194 leading, 421 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:5000 add:387BF42
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387C54A
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387C50A
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+Loading Background C:\VIDEO\kombat2\img\ATRAX2
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 100 trailing
+leftover zeros for x8, 0 leading, 100 trailing
+
+
+
+block cksum match w:52, h:50, dma2:4080 add:3877D3E
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:56, dma2:4000 add:38920BA
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387AD96
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387A836
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 33 leading, 0 trailing
+leftover zeros for x2, 74 leading, 0 trailing
+leftover zeros for x4, 56 leading, 0 trailing
+leftover zeros for x8, 56 leading, 0 trailing
+
+
+
+block cksum match w:48, h:57, dma2:4000 add:389243A
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 37 leading, 65 trailing
+leftover zeros for x2, 13 leading, 9 trailing
+leftover zeros for x4, 33 leading, 37 trailing
+leftover zeros for x8, 85 leading, 89 trailing
+
+
+
+block cksum match w:28, h:25, dma2:4580 add:3871A0E
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:4000 add:387B296
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:5000 add:387ADE6
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 7 leading, 9 trailing
+leftover zeros for x4, 41 leading, 23 trailing
+leftover zeros for x8, 89 leading, 103 trailing
+
+
+
+block cksum match w:16, h:28, dma2:4080 add:38722AE
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:4000 add:387BAA2
+Auto pixel packing to 8 bits on BG block.
+
+bits per pixel = 8
+leading factor = 2
+trailing factor = 4
+
+
+
+leftover zeros for x1, 66 leading, 1168 trailing
+leftover zeros for x2, 65 leading, 327 trailing
+leftover zeros for x4, 171 leading, 253 trailing
+leftover zeros for x8, 403 leading, 413 trailing
+
+
+
+Auto pixel packing to 8 bits on BG block.
+
+bits per pixel = 8
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 117 trailing
+leftover zeros for x2, 5 leading, 23 trailing
+leftover zeros for x4, 11 leading, 65 trailing
+leftover zeros for x8, 39 leading, 145 trailing
+
+
+
+Auto pixel packing to 7 bits on BG block.
+
+bits per pixel = 7
+leading factor = 2
+trailing factor = 8
+
+
+
+leftover zeros for x1, 89 leading, 2725 trailing
+leftover zeros for x2, 30 leading, 1911 trailing
+leftover zeros for x4, 92 leading, 593 trailing
+leftover zeros for x8, 180 leading, 213 trailing
+
+
+
+Auto pixel packing to 7 bits on BG block.
+
+bits per pixel = 7
+leading factor = 4
+trailing factor = 2
+
+
+
+leftover zeros for x1, 1587 leading, 198 trailing
+leftover zeros for x2, 593 leading, 59 trailing
+leftover zeros for x4, 165 leading, 171 trailing
+leftover zeros for x8, 365 leading, 371 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:5000 add:387BF42
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387C54A
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387C50A
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:56, dma2:5000 add:38CC7B2
+Loading Background C:\VIDEO\kombat2\img\ATRAX3
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 100 trailing
+leftover zeros for x8, 0 leading, 100 trailing
+
+
+
+block cksum match w:52, h:50, dma2:4080 add:3877D3E
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:56, dma2:4000 add:38920BA
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387AD96
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387A836
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 33 leading, 0 trailing
+leftover zeros for x2, 74 leading, 0 trailing
+leftover zeros for x4, 56 leading, 0 trailing
+leftover zeros for x8, 56 leading, 0 trailing
+
+
+
+block cksum match w:48, h:57, dma2:4000 add:389243A
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 37 leading, 65 trailing
+leftover zeros for x2, 13 leading, 9 trailing
+leftover zeros for x4, 33 leading, 37 trailing
+leftover zeros for x8, 85 leading, 89 trailing
+
+
+
+block cksum match w:28, h:25, dma2:4580 add:3871A0E
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:4000 add:387B296
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:5000 add:387ADE6
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 7 leading, 9 trailing
+leftover zeros for x4, 41 leading, 23 trailing
+leftover zeros for x8, 89 leading, 103 trailing
+
+
+
+block cksum match w:16, h:28, dma2:4080 add:38722AE
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:4000 add:387BAA2
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:5000 add:387BF42
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387C54A
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387C50A
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:56, dma2:5000 add:38CC7B2
+Loading Background C:\VIDEO\kombat2\img\ATRAX4
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 100 trailing
+leftover zeros for x8, 0 leading, 100 trailing
+
+
+
+block cksum match w:52, h:50, dma2:4080 add:3877D3E
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:56, dma2:4000 add:38920BA
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387AD96
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387A836
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 33 leading, 0 trailing
+leftover zeros for x2, 74 leading, 0 trailing
+leftover zeros for x4, 56 leading, 0 trailing
+leftover zeros for x8, 56 leading, 0 trailing
+
+
+
+block cksum match w:48, h:57, dma2:4000 add:389243A
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 37 leading, 65 trailing
+leftover zeros for x2, 13 leading, 9 trailing
+leftover zeros for x4, 33 leading, 37 trailing
+leftover zeros for x8, 85 leading, 89 trailing
+
+
+
+block cksum match w:28, h:25, dma2:4580 add:3871A0E
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:4000 add:387B296
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:5000 add:387ADE6
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 7 leading, 9 trailing
+leftover zeros for x4, 41 leading, 23 trailing
+leftover zeros for x8, 89 leading, 103 trailing
+
+
+
+block cksum match w:16, h:28, dma2:4080 add:38722AE
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:4000 add:387BAA2
+Auto pixel packing to 8 bits on BG block.
+
+bits per pixel = 8
+leading factor = 4
+trailing factor = 4
+
+
+
+leftover zeros for x1, 2993 leading, 3891 trailing
+leftover zeros for x2, 1848 leading, 2464 trailing
+leftover zeros for x4, 294 leading, 540 trailing
+leftover zeros for x8, 714 leading, 616 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:5000 add:387BF42
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387C54A
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387C50A
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:56, dma2:5000 add:38CC7B2
+Loading Background C:\VIDEO\kombat2\img\MK1CAVE
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 11 trailing
+leftover zeros for x4, 0 leading, 11 trailing
+leftover zeros for x8, 0 leading, 11 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 5 trailing
+leftover zeros for x4, 0 leading, 5 trailing
+leftover zeros for x8, 0 leading, 5 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 186 leading, 5 trailing
+leftover zeros for x2, 19 leading, 0 trailing
+leftover zeros for x4, 45 leading, 0 trailing
+leftover zeros for x8, 165 leading, 4 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 21 leading, 0 trailing
+leftover zeros for x2, 31 leading, 0 trailing
+leftover zeros for x4, 87 leading, 0 trailing
+leftover zeros for x8, 127 leading, 0 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 14 trailing
+leftover zeros for x4, 0 leading, 14 trailing
+leftover zeros for x8, 0 leading, 14 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 16 trailing
+leftover zeros for x4, 0 leading, 16 trailing
+leftover zeros for x8, 0 leading, 16 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 11 trailing
+leftover zeros for x4, 0 leading, 11 trailing
+leftover zeros for x8, 0 leading, 11 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 19 trailing
+leftover zeros for x4, 0 leading, 19 trailing
+leftover zeros for x8, 0 leading, 19 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 18 leading, 0 trailing
+leftover zeros for x4, 18 leading, 0 trailing
+leftover zeros for x8, 18 leading, 0 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 17 trailing
+leftover zeros for x4, 0 leading, 51 trailing
+leftover zeros for x8, 0 leading, 51 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 69 leading, 10 trailing
+leftover zeros for x2, 15 leading, 8 trailing
+leftover zeros for x4, 31 leading, 24 trailing
+leftover zeros for x8, 79 leading, 44 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+Auto pixel packing to 7 bits on BG block.
+
+bits per pixel = 7
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 100 trailing
+leftover zeros for x4, 0 leading, 300 trailing
+leftover zeros for x8, 0 leading, 300 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 100 trailing
+leftover zeros for x4, 0 leading, 300 trailing
+leftover zeros for x8, 0 leading, 300 trailing
+
+
+
+Auto pixel packing to 7 bits on BG block.
+
+bits per pixel = 7
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 100 trailing
+leftover zeros for x4, 0 leading, 300 trailing
+leftover zeros for x8, 0 leading, 300 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 4
+
+
+
+leftover zeros for x1, 237 leading, 202 trailing
+leftover zeros for x2, 95 leading, 63 trailing
+leftover zeros for x4, 31 leading, 33 trailing
+leftover zeros for x8, 71 leading, 69 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 23 leading, 28 trailing
+leftover zeros for x4, 67 leading, 86 trailing
+leftover zeros for x8, 143 leading, 266 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 30 trailing
+leftover zeros for x4, 0 leading, 76 trailing
+leftover zeros for x8, 0 leading, 112 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 33 leading, 0 trailing
+leftover zeros for x2, 18 leading, 16 trailing
+leftover zeros for x4, 0 leading, 48 trailing
+leftover zeros for x8, 0 leading, 100 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 2 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 8 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 18 trailing
+leftover zeros for x4, 0 leading, 56 trailing
+leftover zeros for x8, 0 leading, 136 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 27 leading, 0 trailing
+leftover zeros for x2, 13 leading, 13 trailing
+leftover zeros for x4, 33 leading, 27 trailing
+leftover zeros for x8, 77 leading, 75 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 22 trailing
+leftover zeros for x8, 0 leading, 22 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 1 leading, 0 trailing
+leftover zeros for x4, 1 leading, 2 trailing
+leftover zeros for x8, 5 leading, 2 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 60 leading, 45 trailing
+leftover zeros for x2, 8 leading, 3 trailing
+leftover zeros for x4, 22 leading, 23 trailing
+leftover zeros for x8, 34 leading, 47 trailing
+
+
+
+Auto pixel packing to 3 bits on BG block.
+
+bits per pixel = 3
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 129 leading, 0 trailing
+leftover zeros for x2, 43 leading, 3 trailing
+leftover zeros for x4, 13 leading, 9 trailing
+leftover zeros for x8, 33 leading, 9 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 9 trailing
+leftover zeros for x2, 5 leading, 10 trailing
+leftover zeros for x4, 17 leading, 36 trailing
+leftover zeros for x8, 29 leading, 72 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 4 leading, 0 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 4
+trailing factor = 2
+
+
+
+leftover zeros for x1, 30 leading, 29 trailing
+leftover zeros for x2, 20 leading, 15 trailing
+leftover zeros for x4, 8 leading, 17 trailing
+leftover zeros for x8, 12 leading, 21 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 5 leading, 0 trailing
+leftover zeros for x2, 23 leading, 43 trailing
+leftover zeros for x4, 63 leading, 105 trailing
+leftover zeros for x8, 95 leading, 105 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 1 leading, 17 trailing
+leftover zeros for x4, 3 leading, 17 trailing
+leftover zeros for x8, 7 leading, 17 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 2 leading, 8 trailing
+leftover zeros for x4, 10 leading, 20 trailing
+leftover zeros for x8, 30 leading, 44 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 48 leading, 35 trailing
+leftover zeros for x2, 7 leading, 3 trailing
+leftover zeros for x4, 17 leading, 11 trailing
+leftover zeros for x8, 37 leading, 27 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 8 leading, 7 trailing
+leftover zeros for x4, 34 leading, 21 trailing
+leftover zeros for x8, 70 leading, 45 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 6 leading, 4 trailing
+leftover zeros for x4, 16 leading, 16 trailing
+leftover zeros for x8, 32 leading, 36 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 11 leading, 23 trailing
+leftover zeros for x4, 33 leading, 61 trailing
+leftover zeros for x8, 33 leading, 93 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 12 leading, 13 trailing
+leftover zeros for x4, 32 leading, 41 trailing
+leftover zeros for x8, 56 leading, 105 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 9 leading, 10 trailing
+leftover zeros for x4, 19 leading, 14 trailing
+leftover zeros for x8, 23 leading, 22 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 55 trailing
+leftover zeros for x2, 19 leading, 31 trailing
+leftover zeros for x4, 65 leading, 103 trailing
+leftover zeros for x8, 229 leading, 303 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 10 leading, 26 trailing
+leftover zeros for x2, 8 leading, 9 trailing
+leftover zeros for x4, 20 leading, 21 trailing
+leftover zeros for x8, 48 leading, 61 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 12 leading, 9 trailing
+leftover zeros for x4, 34 leading, 27 trailing
+leftover zeros for x8, 62 leading, 59 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 11 trailing
+leftover zeros for x4, 16 leading, 29 trailing
+leftover zeros for x8, 40 leading, 53 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 100 trailing
+leftover zeros for x4, 0 leading, 300 trailing
+leftover zeros for x8, 0 leading, 300 trailing
+
+
+
+Auto pixel packing to 6 bits on BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 100 trailing
+leftover zeros for x4, 0 leading, 100 trailing
+leftover zeros for x8, 0 leading, 100 trailing
+
+
+
+Loading Background C:\VIDEO\kombat2\img\MKTEAM
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 100 trailing
+leftover zeros for x8, 0 leading, 100 trailing
+
+
+
+block cksum match w:52, h:50, dma2:4080 add:3877D3E
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 37 leading, 65 trailing
+leftover zeros for x2, 13 leading, 9 trailing
+leftover zeros for x4, 33 leading, 37 trailing
+leftover zeros for x8, 85 leading, 89 trailing
+
+
+
+block cksum match w:28, h:25, dma2:4580 add:3871A0E
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 7 leading, 9 trailing
+leftover zeros for x4, 41 leading, 23 trailing
+leftover zeros for x8, 89 leading, 103 trailing
+
+
+
+block cksum match w:16, h:28, dma2:4080 add:38722AE
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387A836
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:4000 add:387BAA2
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387AD96
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:4000 add:387B296
+Auto pixel packing to 8 bits on BG block.
+
+bits per pixel = 8
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 116 trailing
+leftover zeros for x4, 0 leading, 116 trailing
+leftover zeros for x8, 0 leading, 116 trailing
+
+
+
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:5000 add:387ADE6
+Auto pixel packing to 8 bits on BG block.
+
+bits per pixel = 8
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 116 trailing
+leftover zeros for x4, 0 leading, 116 trailing
+leftover zeros for x8, 0 leading, 116 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387C50A
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:5000 add:387BF42
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387C54A
+Auto pixel packing to 8 bits on BG block.
+
+bits per pixel = 8
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 116 trailing
+leftover zeros for x4, 0 leading, 116 trailing
+leftover zeros for x8, 0 leading, 116 trailing
+
+
+
+Auto pixel packing to 8 bits on BG block.
+
+bits per pixel = 8
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 116 trailing
+leftover zeros for x4, 0 leading, 116 trailing
+leftover zeros for x8, 0 leading, 116 trailing
+
+
+
+Loading Background C:\VIDEO\kombat2\img\HISCORE1
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 100 trailing
+leftover zeros for x8, 0 leading, 100 trailing
+
+
+
+block cksum match w:52, h:50, dma2:4080 add:3877D3E
+Auto pixel packing to 3 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:3000 add:387BA7E
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:46, dma2:5000 add:387B656
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:4000 add:387BA4E
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387AD96
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387A836
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:4000 add:387BAA2
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+block cksum match w:40, h:3, dma2:5000 add:387A5DE
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+block cksum match w:40, h:3, dma2:5000 add:387A5DE
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:5000 add:387ADE6
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:4000 add:387B296
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 100 trailing
+leftover zeros for x8, 0 leading, 100 trailing
+
+
+
+block cksum match w:52, h:50, dma2:4080 add:3877D3E
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387C50A
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387C54A
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:5000 add:387BF42
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:4000 add:387BA1E
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:4000 add:387B9EE
+Loading Background C:\VIDEO\kombat2\img\NUENT1
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 100 trailing
+leftover zeros for x8, 0 leading, 100 trailing
+
+
+
+block cksum match w:52, h:50, dma2:4080 add:3877D3E
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:46, dma2:5000 add:387B656
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:4000 add:387BA4E
+Auto pixel packing to 3 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:3000 add:387BA7E
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+block cksum match w:40, h:3, dma2:5000 add:387A5DE
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387A836
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:4000 add:387BAA2
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387AD96
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:5000 add:387ADE6
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:4000 add:387B296
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387C50A
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:5000 add:387BF42
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387C54A
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:4000 add:387B9EE
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:4000 add:387BA1E
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:4000 add:387BA4E
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+block cksum match w:40, h:3, dma2:5000 add:387A5DE
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 100 trailing
+leftover zeros for x8, 0 leading, 100 trailing
+
+
+
+block cksum match w:52, h:50, dma2:4080 add:3877D3E
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 61 trailing
+leftover zeros for x4, 0 leading, 183 trailing
+leftover zeros for x8, 0 leading, 183 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:4000 add:387B9EE
+Loading Background C:\VIDEO\kombat2\img\NUENT2
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 100 trailing
+leftover zeros for x8, 0 leading, 100 trailing
+
+
+
+block cksum match w:52, h:50, dma2:4080 add:3877D3E
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:4000 add:387BA4E
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:46, dma2:5000 add:387B656
+Auto pixel packing to 3 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:3000 add:387BA7E
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+block cksum match w:40, h:3, dma2:5000 add:387A5DE
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 0 trailing
+leftover zeros for x8, 0 leading, 0 trailing
+
+
+
+block cksum match w:40, h:3, dma2:5000 add:387A5DE
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387A836
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:4000 add:387BAA2
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387AD96
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 100 trailing
+leftover zeros for x8, 0 leading, 100 trailing
+
+
+
+block cksum match w:52, h:50, dma2:4080 add:3877D3E
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:5000 add:387ADE6
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:4000 add:387B296
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387C50A
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:5000 add:387BF42
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 61 trailing
+leftover zeros for x4, 0 leading, 183 trailing
+leftover zeros for x8, 0 leading, 183 trailing
+
+
+
+block cksum match w:64, h:61, dma2:5080 add:39CD91C
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387C54A
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:4000 add:387B9EE
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:4000 add:387BA1E
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:4000 add:387BA4E
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:3, dma2:4000 add:387B9EE
+Loading Background C:\VIDEO\kombat2\img\COMESOON
+
+Auto pixel packing to 8 bits on BG block.
+
+bits per pixel = 8
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 126 trailing
+leftover zeros for x4, 0 leading, 126 trailing
+leftover zeros for x8, 0 leading, 126 trailing
+
+
+
+Auto pixel packing to 7 bits on BG block.
+
+bits per pixel = 7
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 6 leading, 0 trailing
+leftover zeros for x4, 6 leading, 0 trailing
+leftover zeros for x8, 6 leading, 0 trailing
+
+
+
+Auto pixel packing to 8 bits on BG block.
+
+bits per pixel = 8
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 2825 leading, 0 trailing
+leftover zeros for x2, 1249 leading, 17 trailing
+leftover zeros for x4, 259 leading, 53 trailing
+leftover zeros for x8, 599 leading, 141 trailing
+
+
+
+Auto pixel packing to 8 bits on BG block.
+
+bits per pixel = 8
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 2205 leading, 6681 trailing
+leftover zeros for x2, 1907 leading, 4700 trailing
+leftover zeros for x4, 1307 leading, 2344 trailing
+leftover zeros for x8, 99 leading, 712 trailing
+
+
+
+Auto pixel packing to 8 bits on BG block.
+
+bits per pixel = 8
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 126 trailing
+leftover zeros for x4, 0 leading, 126 trailing
+leftover zeros for x8, 0 leading, 126 trailing
+
+
+
+Auto pixel packing to 7 bits on BG block.
+
+bits per pixel = 7
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 125 trailing
+leftover zeros for x4, 0 leading, 125 trailing
+leftover zeros for x8, 0 leading, 125 trailing
+
+
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 27 leading, 0 trailing
+leftover zeros for x2, 8 leading, 5 trailing
+leftover zeros for x4, 30 leading, 25 trailing
+leftover zeros for x8, 46 leading, 33 trailing
+
+
+
+Loading Background C:\VIDEO\kombat2\img\STORY1
+
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 100 trailing
+leftover zeros for x8, 0 leading, 100 trailing
+
+
+
+block cksum match w:52, h:50, dma2:4080 add:3877D3E
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 37 leading, 65 trailing
+leftover zeros for x2, 13 leading, 9 trailing
+leftover zeros for x4, 33 leading, 37 trailing
+leftover zeros for x8, 85 leading, 89 trailing
+
+
+
+block cksum match w:28, h:25, dma2:4580 add:3871A0E
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 7 leading, 9 trailing
+leftover zeros for x4, 41 leading, 23 trailing
+leftover zeros for x8, 89 leading, 103 trailing
+
+
+
+block cksum match w:16, h:28, dma2:4080 add:38722AE
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:4000 add:387BAA2
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387A836
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387AD96
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:4000 add:387B296
+Auto pixel packing to 4 bits on BG block.
+
+bits per pixel = 4
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 33 leading, 0 trailing
+leftover zeros for x2, 74 leading, 0 trailing
+leftover zeros for x4, 56 leading, 0 trailing
+leftover zeros for x8, 56 leading, 0 trailing
+
+
+
+block cksum match w:48, h:57, dma2:4000 add:389243A
+Auto pixel packing to 5 bits on BG block.
+
+bits per pixel = 5
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 4 trailing
+leftover zeros for x4, 0 leading, 4 trailing
+leftover zeros for x8, 0 leading, 4 trailing
+
+
+
+block cksum match w:60, h:4, dma2:5000 add:387ADE6
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:5000 add:387C54A
+Auto pixel packing to 5 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:74, dma2:5000 add:387BF42
+Auto pixel packing to 4 bits on BG block.
+Bogus X-size for compressing BG block.
+block cksum match w:4, h:4, dma2:4000 add:387C50A
+Image Library [C:\video\kombat2\img\boonpics.img] could not be opened.
+
+Bytes Loaded...
+	IMAGE RAM              1425058 dec	  15BEA2 hex
+
+	TOTAL LOAD             1425058 dec	  15BEA2 hex
+
+Bytes Written to Raw File...
+	In IMAGE RAM records      1425058 dec	  15BEA2 hex
+
+	TOTAL bytes written       1425058 dec	  15BEA2 hex, in 2 records.
+
+Bytes Represented in Tables ... 1425058 dec 15BEA2 hex
+
+128 images were NOT zero-compressed because they are
+	smaller than 10 pixels wide.
+
+WARNING!! Some image libs could not be opened!!!
+

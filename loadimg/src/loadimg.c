@@ -1550,10 +1550,6 @@ static void process_lod(const char *lod_path) {
                 fseek(bf, 0, SEEK_END);
                 long bsz = ftell(bf);
                 fseek(bf, 0, SEEK_SET);
-                /* LOADW adds a 0x00 padding byte between FRM files */
-                static int frm_pad = 0;
-                if (frm_pad) irw_write_byte(0);
-                frm_pad = 1;
                 if (g.build_tables && g.asm_fp) {
                     fprintf(g.asm_fp, "%s\t.set\t0%xh\r\n", fname, g.base_addr + g.irw_bit);
                 }
