@@ -56,6 +56,8 @@ typedef struct {
 
 /* IMG_REC struct may have padding — file format uses 50-byte records */
 #define IMG_REC_SIZE 50
+/* Image row stride: paddded to 4 bytes when /P flag is active */
+#define IMG_STRIDE(w) (g.pad4bits ? ((w) + 3) & ~3 : (w))
 
 typedef struct {
     char     name[MAX_NAME];
@@ -537,7 +539,7 @@ static uint16_t* img_pal_colors(ImgFile *img, PAL_REC *pal) {
 static int img_max_pixel(ImgFile *img, IMG_REC *rec) {
     uint8_t *pix = img_pixels(img, rec);
     if (!pix) return 0;
-    int stride = (rec->w + 3) & ~3;
+    int stride = IMG_STRIDE(rec->w);
     int max_val = 0;
     for (int y = 0; y < rec->h; y++) {
         for (int x = 0; x < rec->w; x++) {
@@ -595,7 +597,7 @@ typedef struct {
 static int compute_content_sizx(ImgFile *img, IMG_REC *rec) {
     uint8_t *pix = img_pixels(img, rec);
     if (!pix) return rec->w;
-    int stride = (rec->w + 3) & ~3;
+    int stride = IMG_STRIDE(rec->w);
     int max_x = 0;
     for (int y = 0; y < rec->h; y++) {
         for (int x = rec->w - 1; x >= 0; x--) {
@@ -612,7 +614,7 @@ static int compute_content_sizx(ImgFile *img, IMG_REC *rec) {
 static int compute_content_sizy(ImgFile *img, IMG_REC *rec) {
     uint8_t *pix = img_pixels(img, rec);
     if (!pix) return rec->h;
-    int stride = (rec->w + 3) & ~3;
+    int stride = IMG_STRIDE(rec->w);
     for (int y = rec->h - 1; y >= 0; y--) {
         for (int x = 0; x < rec->w; x++) {
             if (pix[y * stride + x] != 0)
@@ -626,7 +628,7 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
     CompParams p;
     memset(&p, 0, sizeof(p));
 
-    p.sizx = pttbl_sizx > 0 ? pttbl_sizx : (rec->w + 3) & ~3;
+    p.sizx = pttbl_sizx > 0 ? pttbl_sizx : IMG_STRIDE(rec->w);
     p.sizy = rec->h;
     if (p.sizx < 1) p.sizx = 1;
     if (p.sizy < 1) p.sizy = 1;
@@ -643,8 +645,8 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
      * Then accumulate waste per multiplier: waste = sum(mult*lead_n - lead) across rows.
      * Select LM/TM with minimum total waste. */
     uint8_t *pix = img_pixels(img, rec);
-    int stride = (rec->w + 3) & ~3;
-    int lead_err[4] = {0}, trail_err[4] = {0};
+    int stride = IMG_STRIDE(rec->w);
+     int lead_err[4] = {0}, trail_err[4] = {0};
     int lookahead_lead_min = 999;
     int rows = rec->h;
     int la_window = rows < 4 ? rows : 4;
@@ -860,7 +862,7 @@ static uint8_t zero_row_buf[4096];
 static uint32_t encode_image(ImgFile *img, IMG_REC *rec, CompParams *cp, int bpp) {
     uint32_t sag = g.irw_bit;
     uint8_t *pix = img_pixels(img, rec);
-    int img_stride = (rec->w + 3) & ~3;
+    int img_stride = IMG_STRIDE(rec->w);
     int sizx = cp->sizx;
     if (sizx < 1) sizx = 1;
 
@@ -905,7 +907,7 @@ static uint32_t encode_scaled(ImgFile *img, IMG_REC *rec, int bpp, int denom) {
     if (sw < 1) sw = 1;
     if (sh < 1) sh = 1;
 
-    int stride = (rec->w + 3) & ~3;
+    int stride = IMG_STRIDE(rec->w);
     uint8_t *pix = img_pixels(img, rec);
     uint8_t *sbuf = (uint8_t*)calloc(sw, 1);
     uint32_t sag = g.irw_bit;
@@ -1199,7 +1201,7 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
              * (fonts, UI elements — not animated sprites with offsets) */
             uint8_t *pix = img_pixels(cur->imgfile, rec);
             if (pix && rec->data_p != 0 && rec->anix == 0 && rec->aniy == 0) {
-                int pstride = (rec->w + 3) & ~3;
+                int pstride = IMG_STRIDE(rec->w);
                 uint32_t maxpx = 0;
                 for (int y = 0; y < rec->h; y++)
                     for (int x = 0; x < rec->w; x++) {
@@ -1213,7 +1215,7 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
               /* Auto pixel packing: select bpp per image */
               uint8_t *pix = img_pixels(cur->imgfile, rec);
               if (pix) {
-                 int pstride = (rec->w + 3) & ~3;
+                 int pstride = IMG_STRIDE(rec->w);
                  uint32_t maxpx = 0;
                  for (int y = 0; y < rec->h; y++)
                      for (int x = 0; x < rec->w; x++) {
@@ -1241,7 +1243,7 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
         }
         ie->anix = rec->anix;
         ie->aniy = rec->aniy;
-        ie->w = rec->w;
+        ie->w = IMG_STRIDE(rec->w);
         ie->h = rec->h;
         ie->sizx = cp.sizx;
         ie->sizy = cp.sizy;
@@ -1358,7 +1360,7 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
             ie->sag = encode_image(cur->imgfile, rec, &cp, bpp);
             if (g.dedup && n_dedup < MAX_DEDUP) {
                 uint8_t *pix_data = img_pixels(cur->imgfile, rec);
-                int pstride = (rec->w + 3) & ~3;
+                int pstride = IMG_STRIDE(rec->w);
                 uint32_t max_val;
                 dedup_table[n_dedup].sum = loadw_checksum(pix_data, pstride, rec->w, rec->h, &max_val);
                 dedup_table[n_dedup].max_val = max_val;
