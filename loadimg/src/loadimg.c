@@ -1195,7 +1195,7 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
                 int pstride = (rec->w + 3) & ~3;
                 uint32_t maxpx = 0;
                 for (int y = 0; y < rec->h; y++)
-        for (int x = 0; x < sizx; x++) {
+                    for (int x = 0; x < pstride; x++) {
                         uint8_t px = pix[y * pstride + x];
                         if (px > maxpx) maxpx = px;
                     }
