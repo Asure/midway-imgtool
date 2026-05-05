@@ -1550,6 +1550,8 @@ static void process_lod(const char *lod_path) {
                 fseek(bf, 0, SEEK_END);
                 long bsz = ftell(bf);
                 fseek(bf, 0, SEEK_SET);
+                /* Pad to 2-byte boundary before FRM data (LOADW aligns FRM files to words) */
+                if ((g.irw_bit / 8) & 1) irw_write_byte(0);
                 if (g.build_tables && g.asm_fp) {
                     fprintf(g.asm_fp, "%s\t.set\t0%xh\r\n", fname, g.base_addr + g.irw_bit);
                 }
