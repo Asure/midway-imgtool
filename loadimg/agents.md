@@ -787,8 +787,9 @@ timeout 120 dosbox -conf /tmp/dosbox_ref.conf 2>&1 | tail -3
 
 Flags:
 - `/P` — pad to 4-bit boundary (required for matching)
-- `/F=C:\TMP` — IRW output directory (`/F` flag, not `/R`)
+- `/F=C:\TMP` — IRW output directory
 - `/T=C:\TMP` — Table file output directory
+- `/V5 > C:\TMP\OUT.TXT` — verbose level 5 redirected to file for debug analysis
 - **Important**: LOADW adds `.lod` extension automatically — pass ONLY the basename (e.g. `MK2MIL` not `MK2MIL.LOD`)
 
 #### Copy Reference Files
