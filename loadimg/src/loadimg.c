@@ -1120,6 +1120,12 @@ static PAL_REC* find_user_palette(ImgFile *img, int stored_palnum) {
 }
 
 static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_override) {
+    /* Track image names already processed within the current IMG file.
+     * LOADW skips duplicate name references in ---> lines. */
+    static char seen_names[4096][MAX_NAME];
+    static int n_seen = 0;
+    static void *last_imgfile = NULL;
+    if (cur->imgfile != last_imgfile) { n_seen = 0; last_imgfile = cur->imgfile; }
     const char *p = line + 5;
     while (*p) {
         while (*p == ' ' || *p == ',') p++;
@@ -1132,6 +1138,16 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
         while (*p && *p != ':' && *p != '*' && *p != ',' && *p != '\r' && *p != '\n')
             name[ni++] = *p++;
         name[ni] = 0;
+
+        /* Skip duplicate names (LOADW only processes first occurrence per IMG) */
+        int dup = 0;
+        for (int si = 0; si < n_seen; si++)
+            if (strcasecmp(seen_names[si], name) == 0) { dup = 1; break; }
+        if (!dup && n_seen < 4096) strncpy(seen_names[n_seen++], name, MAX_NAME-1);
+        if (dup) {
+            while (*p && *p != ',' && *p != '\r' && *p != '\n') p++;
+            continue;
+        }
 
         if (*p == ':') { p++; (void)strtol(p, (char**)&p, 16); }
         if (*p == '*') { p++; scale_n = (int)strtol(p, (char**)&p, 10); }
@@ -1796,8 +1812,9 @@ static void process_lod(const char *lod_path) {
                                 int tn = trail / mult; if (tn > 15) tn = 15;
                                 lead_err[m] += lead - ln * mult;
                                 trail_err[m] += trail - tn * mult;
-                            }
-                        }
+                }
+                fprintf(g.bgnd_fp, "\r\n");
+            }
                         for (int m = 1; m < 4; m++) {
                             if (lead_err[m] < lead_err[best_lm]) best_lm = m;
                             if (trail_err[m] < trail_err[best_tm]) best_tm = m;
