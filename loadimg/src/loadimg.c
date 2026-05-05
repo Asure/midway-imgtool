@@ -1146,7 +1146,7 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
         /* Skip duplicate names (LOADW only processes first occurrence per IMG) */
         int dup = 0;
         for (int si = 0; si < n_seen; si++)
-            if (strcasecmp(seen_names[si], name) == 0) { dup = 1; break; }
+            if (strcmp(seen_names[si], name) == 0) { dup = 1; break; }
         if (!dup && n_seen < 4096) strncpy(seen_names[n_seen++], name, MAX_NAME-1);
         if (dup) {
             while (*p && *p != ',' && *p != '\r' && *p != '\n') p++;
@@ -1173,7 +1173,7 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
             strncpy(n, cur->imgfile->images[i].name, MAX_NAME-1);
             n[MAX_NAME-1] = 0;
             for (int j = 0; j < MAX_NAME; j++) if (!n[j]) break;
-            if (strcasecmp(n, name) == 0) {
+            if (strcmp(n, name) == 0) {
                 rec = &cur->imgfile->images[i];
                 if (img_is_oldfmt) break;
             }
@@ -1435,7 +1435,7 @@ static void scan_bpp(const char *lod_path) {
                     strncpy(n, cur.imgfile->images[i].name, MAX_NAME-1);
                     n[MAX_NAME-1] = 0;
                     for (int j = 0; j < MAX_NAME; j++) if (!n[j]) break;
-                    if (strcasecmp(n, nm) == 0) {
+                    if (strcmp(n, nm) == 0) {
                         int mv = img_max_pixel(cur.imgfile, &cur.imgfile->images[i]);
                         if (mv > g.global_max_pixel) g.global_max_pixel = mv;
                         break;
