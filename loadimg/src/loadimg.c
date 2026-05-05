@@ -1782,7 +1782,7 @@ static void process_lod(const char *lod_path) {
 
                 int w = bdds[di].w, h = bdds[di].h;
                 uint8_t *pix = bdds[di].pix;
-                int sizx_a = w > 0 ? w : 1;
+                int sizx_a = ((w + 3) & ~3) > 0 ? ((w + 3) & ~3) : 1;
                 int mod_i = img_module[di]; /* -1 if unreferenced */
 
                  if (!img_written[di]) {
@@ -1870,16 +1870,16 @@ static void process_lod(const char *lod_path) {
                         img_lm[di] = best_lm; img_tm[di] = best_tm;
 
                         if (do_cmp) {
-                            for (int row = 0; row < h; row++) {
-                                uint8_t *rp = pix + row * w;
-                                int lead = 0, trail = 0, d1 = 0;
-                                for (int x = 0; x < sizx_a; x++) {
-                                    uint8_t px2 = (x < w) ? rp[x] : 0;
-                                    if (!d1 && lead < 120 && px2 == 0) lead++;
-                                    else d1 = 1;
-                                    if (d1 && sizx_a - 120 < x)
-                                        if (px2 == 0) trail++; else trail = 0;
-                                }
+                         for (int row = 0; row < h; row++) {
+                             uint8_t *rp = pix + row * w;
+                             int lead = 0, trail = 0, d1 = 0;
+                             for (int x = 0; x < sizx_a; x++) {
+                                 uint8_t px2 = (x < w) ? rp[x] : 0;
+                                 if (!d1 && lead < 120 && px2 == 0) lead++;
+                                 else d1 = 1;
+                                 if (d1 && sizx_a - 120 < x)
+                                     if (px2 == 0) trail++; else trail = 0;
+                             }
                                 int ln = lead / lmm; if (ln > 15) ln = 15;
                                 int tn = trail / tmm; if (tn > 15) tn = 15;
                                 int lc = ln * lmm, tc = tn * tmm;
