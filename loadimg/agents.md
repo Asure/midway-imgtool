@@ -747,138 +747,84 @@ patches `lib_hdr` (sets `temp=0xabcd`, adjusts `oset` so palette lookup lands co
 sets `img->images` to point into `norm_images`. No PTTBL entries (`pttblnum=-1`, `opals=0xffff`).
 Field mapping from `IT/itimg.asm convert_old_img` is authoritative.
 
-### How to Compare loadimg vs LOADW Output
+### How to Generate LOADW Reference Output (DOSBox)
 
-This is the standard procedure for verifying IRW output against LOADW reference files.
+This procedure runs the original LOADW.EXE under DOSBox to generate reference `.IRW`, `.TBL`, `.GLO`, and `.ASM` files for comparison.
 
 #### Prerequisites
-- LOADW.EXE (or LOADWV.EXE for verbose) at `loadimg/binary/`
-- DOSBox installed
-- IMG files and LOD files in a DOSBox-accessible directory
+- LOADW.EXE at `loadimg/binary/LOADW.EXE`
+- DOSBox installed (`which dosbox`)
+- All required `.IMG`, `.BIN`, `.BDB`, `.BDD` files accessible
 - Our loadimg built at `loadimg/build/loadimg`
 
-#### Quick Comparison (Single Image)
+#### One-Time Setup: Copy Required Files
 ```bash
-# 1. Create test LOD
-cat > /tmp/test.LOD << 'EOF'
-ASM> TEST.TBL
-***> 2B04A90,1
-IHDR SIZX:W,SIZY:W,ANIX:W,ANIY:W,SAG:L,CTRL:W,PAL:L,PWRD1:W,PWRD2:W,PWRD3:W,PT3Y:W
-ZOF>
-COF>
-bam_hit.img
----> B4AM4A01
-EOF
-
-# 2. Run LOADW reference
-cp /tmp/test.LOD /tmp/dosbox_work/
-timeout 60 dosbox -c "mount c /tmp/dosbox_work" \
-  -c "c:" -c "LOADW TEST /F=C:\ /T=C:\ > NUL" -c "exit" 2>/dev/null
-
-# 3. Run our loadimg
-cd /home/alex/Projects/midway-imgtool/loadimg
-cp /tmp/test.LOD test.LOD
-timeout 30 ./build/loadimg test.LOD /F 2>/dev/null
-
-# 4. Compare
-python3 << 'PYEOF'
-import struct
-ld = open('/tmp/dosbox_work/TEST.IRW','rb').read()
-our = open('TEST.IRW','rb').read()
-ad, bd = ld[68:], our[68:]
-print(f"LOADW: {len(ad)}B data  Ours: {len(bd)}B data")
-print(f"Match: {ad == bd}")
-if ad != bd:
-    for i in range(min(len(ad), len(bd))):
-        if ad[i] != bd[i]:
-            print(f"First diff @ byte {i}: LOADW=0x{ad[i]:02x} Ours=0x{bd[i]:02x}")
-            break
-PYEOF
+# Create a clean test directory with ALL needed files
+mkdir -p /tmp/ref_test
+cp /home/alex/Projects/midway-imgtool/loadimg/binary/LOADW.EXE /tmp/ref_test/
+cp /home/alex/Projects/midway-imgtool/loadimg/work2/<LOD>.LOD /tmp/ref_test/
+cp /home/alex/Projects/midway-imgtool/loadimg/work2/*.IMG /tmp/ref_test/
+cp /home/alex/Projects/midway-imgtool/loadimg/work2/*.BIN /tmp/ref_test/
+cp /home/alex/Projects/midway-imgtool/loadimg/work2/*.BDB /tmp/ref_test/
+cp /home/alex/Projects/midway-imgtool/loadimg/work2/*.BDD /tmp/ref_test/
 ```
 
-#### Full LOD Comparison
+#### Run LOADW in DOSBox
 ```bash
-# 1. Run LOADW with config that sets TMP/TEMP
-mkdir -p /tmp/work/TMP
-cp binary/LOADW.EXE /tmp/work/
-cp <LOD> /tmp/work/
-cp <IMG files> /tmp/work/
-
-cat > /tmp/dosbox.conf << 'CONFEOF'
-[sdl]
-fullscreen=false
-windowresolution=640x480
-output=surface
-[dosbox] machine=svga_s3 memsize=16
-[render] frameskip=0 scaler=normal2x
-[cpu] core=dynamic cycles=max
-[mixer] nosound=true
+cat > /tmp/dosbox_ref.conf << 'EOF'
+[dosbox]
+machine=svga_s3
+memsize=16
 [autoexec]
-mount c /tmp/work
-SET TMP=C:\TMP
-SET TEMP=C:\TMP
+mount c /tmp/ref_test
 c:
-LOADWV <LOD_BASENAME> /F=C:\ /T=C:\TMP /V5 > C:\LOG.TXT
+md TMP
+LOADW <LOD_BASENAME> /P /F=C:\TMP /T=C:\TMP
 exit
-CONFEOF
-
-timeout 120 dosbox -conf /tmp/dosbox.conf 2>/dev/null
-
-# 2. Run our loadimg
-/home/alex/Projects/midway-imgtool/loadimg/build/loadimg <LOD_PATH> /F 2>/dev/null
-
-# 3. Compare via Python
-python3 << 'PYEOF'
-def get_sag_offsets(tbl_path, base_addr):
-    """Extract SAG offsets from LOADW TBL file"""
-    entries = []
-    with open(tbl_path) as f:
-        for line in f:
-            s = line.strip()
-            if s.endswith(':'):
-                entries.append((s[:-1], []))
-            elif '.long' in s:
-                try:
-                    val = int(s.split('.long')[1].strip().rstrip('H'), 16)
-                    if entries:
-                        entries[-1][1].append(val)
-                except ValueError:
-                    pass
-    # Compute byte offsets relative to base_addr
-    return [(name, (sags[0] - base_addr) // 8) for name, sags in entries if sags]
-
-ld = open('/tmp/work/<LOD_BASENAME>.IRW','rb').read()[68:]
-our = open('<IRW_NAME>.IRW','rb').read()[68:]
-# TBL SAGs give per-image byte boundaries
-sags = get_sag_offsets('/tmp/work/TMP/<TBL_NAME>.TBL', 0x2b04a90)
-for i, (name, byte_off) in enumerate(sags):
-    end_off = sags[i+1][1] if i+1 < len(sags) else len(ld)
-    rd = ld[byte_off:end_off]
-    od = our[byte_off:end_off]
-    match = "MATCH" if rd == od else f"DIFF (first byte @{next((j for j in range(min(len(rd),len(od))) if rd[j]!=od[j]), 'N/A')})"
-    if len(rd) != len(od): match += f" size={len(rd)}/{len(od)}"
-    print(f"{name:20s}: [{len(rd):5d}B] {match}")
-PYEOF
+EOF
+timeout 120 dosbox -conf /tmp/dosbox_ref.conf 2>&1 | tail -3
 ```
 
-#### What to Check
-| Aspect | Expected | Notes |
-|--------|----------|-------|
-| **ZOF header** | `@0x22=100`, `@0x2e=0`, `@0x30=0` | LOADW has these values; our header differs but data is what matters |
-| **ZOF data** | Byte-exact for same images | First image should match perfectly if using stride width |
-| **ZON header** | `@0x22=100` | Same as ZOF |
-| **ZON data** | **100% byte-exact** across all tested LODs | MK2MIL, MK4MIL confirmed |
-| **n_images** | Should match LOD's name count | Our pairing may create 2× entries if pairing is active |
-| **Per-image SAGs** | SAG from TBL + SAG from our run should point to same-sized data | Use the Python script above |
-| **Old-format IMGs** | Supported | `temp != 0xabcd` → converted to 50-byte norm_images, no PTTBL |
+Flags:
+- `/P` — pad to 4-bit boundary (required for matching)
+- `/F=C:\TMP` — IRW output directory (`/F` flag, not `/R`)
+- `/T=C:\TMP` — Table file output directory
+- **Important**: LOADW adds `.lod` extension automatically — pass ONLY the basename (e.g. `MK2MIL` not `MK2MIL.LOD`)
+
+#### Copy Reference Files
+```bash
+mkdir -p /home/alex/Projects/midway-imgtool/loadimg/ref2
+cp /tmp/ref_test/TMP/* /home/alex/Projects/midway-imgtool/loadimg/ref2/
+```
+
+#### Run Our loadimg and Compare
+```bash
+cd /home/alex/Projects/midway-imgtool/loadimg/work2
+# Clean previous output
+rm -f <LOD>.IRW *.TBL IMGTBL.ASM IMGTBL.GLO IMGPAL.ASM
+# Run our loadimg
+/home/alex/Projects/midway-imgtool/loadimg/build/loadimg <LOD>.LOD /P /T 2>/dev/null
+# Compare TBL files
+for f in <LOD>.TBL <OTHER_TBLS>.TBL; do
+    diff /home/alex/Projects/midway-imgtool/loadimg/ref2/$f $f >/dev/null 2>&1 \
+        && echo "$f: MATCH" || echo "$f: DIFFER"
+done
+```
 
 #### Known Pitfalls
-- **LOADW is stateful**: Running LOADW multiple times in the same DOSBox session
-  can contaminate results (stale n_images in header). Always use a fresh temp directory.
-- **TMP/TEMP vars**: LOADW needs `C:\TMP` for temp files. Set via `SET TMP=C:\TMP`
-  and `SET TEMP=C:\TMP` in DOSBox config.
-- **Old-format IMGs**: Files with `temp != 0xabcd` use 42-byte IMG_REC. Now supported via `norm_images` conversion.
+- **LOADW adds `.lod`**: Pass the basename WITHOUT extension. `LOADW MK2MIL` not `LOADW MK2MIL.LOD`.
+- **TMP/TEMP vars**: The `md TMP` and output to `C:\TMP` are required — LOADW crashes without `C:\TMP`.
+- **DOSBox statefulness**: Always use a fresh temp directory to avoid stale state.
+- **.lod extension**: Some LOD files use `.LOD`, others `.lod`. DOSBox is case-sensitive; LOADW doesn't care.
+- **`/F` not `/R`**: LOADW uses `/F` for the raw/IRW output directory, not `/R`.
 - **8.3 filenames**: DOSBox requires uppercase 8.3 filenames. Our loadimg is case-insensitive.
+
+#### Reference File Locations
+| Directory | Content |
+|-----------|---------|
+| `loadimg/work3/` | MK7MIL reference (images + backgrounds) |
+| `loadimg/ref2/` | MK2MIL reference (images only, no BBB) |
+| `loadimg/binary/LOADW.EXE` | Original MS-DOS LOADW binary |
 
 ### Key Files
 - `loadimg/DMA2.DOC` — Original DMA2 hardware specification (23KB)
