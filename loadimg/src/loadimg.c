@@ -1003,7 +1003,7 @@ static void write_image_tbl(FILE *fp, ImageEntry *ie) {
             }
             if (f == IHDR_SAG) {
                 uint32_t base = g.base_addr;
-                fprintf(fp, "\t.long   0%xH\r\n", base + ie->sag);
+                fprintf(fp, "\t.long   0%XH\r\n", base + ie->sag);
             } else if (f == IHDR_PAL) {
                 if (have_pal)
                     fprintf(fp, "\t.long   %s\r\n", ie->pal_name);
@@ -1023,7 +1023,7 @@ static void write_image_tbl(FILE *fp, ImageEntry *ie) {
                     fprintf(fp, "\r\n");
                     n_words = 0;
                 }
-                fprintf(fp, "\t.word   0%xH\r\n", ie->ctrl);
+                fprintf(fp, "\t.word   0%XH\r\n", ie->ctrl);
             } else {
                 int val = get_ihdr_word_value(ie, f, 1);
                 word_buf[n_words++] = val;
@@ -1785,16 +1785,21 @@ static void process_lod(const char *lod_path) {
                 int sizx_a = w > 0 ? w : 1;
                 int mod_i = img_module[di]; /* -1 if unreferenced */
 
-                if (!img_written[di]) {
-                    img_written[di] = 1;
-                    img_sags[di] = g.irw_bit;
+                 if (!img_written[di]) {
+                     img_written[di] = 1;
+                     img_sags[di] = g.irw_bit;
 
-                    uint32_t maxpx = 0;
-                    if (pix && w > 0 && h > 0)
-                        for (int pi = 0; pi < w * h; pi++)
-                            if (pix[pi] > maxpx) maxpx = pix[pi];
-                    int per_bpp = bpp_for_max(maxpx);
-                    if (per_bpp < 1 || per_bpp > 8) per_bpp = 4;
+                     int per_bpp;
+                     if (g.ppp > 0) {
+                         per_bpp = g.ppp;
+                     } else {
+                         uint32_t maxpx = 0;
+                         if (pix && w > 0 && h > 0)
+                             for (int pi = 0; pi < w * h; pi++)
+                                 if (pix[pi] > maxpx) maxpx = pix[pi];
+                         per_bpp = bpp_for_max(maxpx);
+                         if (per_bpp < 1 || per_bpp > 8) per_bpp = 4;
+                     }
 
                     int best_lm = 0, best_tm = 0, do_cmp = 0;
                     int lmm = 1, tmm = 1;
@@ -1916,8 +1921,8 @@ static void process_lod(const char *lod_path) {
                                                 (img_lm[di] << 8) | (img_cmp[di] ? 0x80 : 0));
                     static int first_bgnd = 1;
                     fprintf(g.bgnd_fp, "\t.word\t%d,%d%s\r\n", w, h, first_bgnd ? "\t;x size, y size" : "");
-                    fprintf(g.bgnd_fp, "\t.long\t0%xH%s\r\n", g.base_addr + img_sags[di], first_bgnd ? "\t;address" : "");
-                    fprintf(g.bgnd_fp, "\t.word\t0%04xH%s\r\n", ctrl, first_bgnd ? "\t;dma ctrl" : "");
+                    fprintf(g.bgnd_fp, "\t.long\t0%XH%s\r\n", g.base_addr + img_sags[di], first_bgnd ? "\t;address" : "");
+                    fprintf(g.bgnd_fp, "\t.word\t0%XH%s\r\n", ctrl, first_bgnd ? "\t;dma ctrl" : "");
                     first_bgnd = 0;
                 }
             }
@@ -1972,11 +1977,10 @@ static void process_lod(const char *lod_path) {
                              }
                      for (int bi = 0; bi < n_blk; bi++) {
                          if (bi == 0) {
-                             fprintf(g.bgnd_fp, "\t.word\t0%xH\t;flags\r\n", blk_objs[bi].wx);
-                             fprintf(g.bgnd_fp, "\t.word\t%d,%d\t;x,y\r\n", blk_objs[bi].x, blk_objs[bi].y);
-                             fprintf(g.bgnd_fp, "\t.word\t0%xH\t;pal5,pal4,hdr13-0\r\n", blk_objs[bi].ii);
+                             fprintf(g.bgnd_fp, "\t.word\t0%XH\t;flags\r\n", blk_objs[bi].wx);
+                             fprintf(g.bgnd_fp, "\t.word\t0%XH\t;pal5,pal4,hdr13-0\r\n", blk_objs[bi].ii);
                          } else {
-                             fprintf(g.bgnd_fp, "\t.word\t0%xH,%d,%d,0%xH\r\n",
+                             fprintf(g.bgnd_fp, "\t.word\t0%XH,%d,%d,0%XH\r\n",
                                      blk_objs[bi].wx, blk_objs[bi].x, blk_objs[bi].y, blk_objs[bi].ii);
                          }
                      }
