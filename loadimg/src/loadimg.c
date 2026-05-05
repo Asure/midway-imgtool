@@ -1971,8 +1971,10 @@ static void process_lod(const char *lod_path) {
                           int hdr_idx = 0;
                           for (int di = 0; di < n_bdds; di++) {
                               if (bdds[di].idx == ii) {
-                                  wx_blks = (wx_blks & 0xFFF0) | 0x0040 | (gobjs[gi].fl & 0x0F);
-                                  wx_blks = (wx_blks & ~0x0001) | (bdds[di].fl & 1);
+                                   wx_blks = (wx_blks & 0xFFF0) | 0x0040 | (gobjs[gi].fl & 0x0F);
+                                   wx_blks = (wx_blks & ~0x0001) | 0x0001;
+                                   /* Note: dma_bit0 from BDD is stored in bdds[di].fl
+                                    * but LOADW always sets bit 0 = 1 for background images */
                                   hdr_idx = di;
                                   break;
                               }
@@ -2068,7 +2070,7 @@ static void process_lod(const char *lod_path) {
                         if (g.palettes[pi2].written && strcmp(g.palettes[pi2].name, pals[pi].name) == 0)
                             { already_written = 1; break; }
                     if (already_written) continue;
-                    fprintf(g.bgndpal_fp, "%s:\t;PAL #%d\r\n", pals[pi].name, pi + 1);
+                    fprintf(g.bgndpal_fp, "%s:\t;PAL #%d\r\n", pals[pi].name, pi);
                     fprintf(g.bgndpal_fp, "\t.word\t%d\t;pal size\r\n", pals[pi].cnt);
                     fputs("\t.word ", g.bgndpal_fp);
                     for (int ci = 0; ci < pals[pi].cnt; ci++) {
