@@ -1930,12 +1930,20 @@ static void process_lod(const char *lod_path) {
                      /* Collect objects for this module, convert to module-local coords */
                      struct { int wx, x, y, ii; } blk_objs[2048];
                      int n_blk = 0;
-                     for (int gi = 0; gi < ng; gi++) {
-                         if (gobjs[gi].is_mod) continue;
-                         int od = gobjs[gi].dp, osy = gobjs[gi].sy;
-                         if (od < mod_ds[mi] || od > mod_de[mi]) continue;
-                         if (osy < mod_ys[mi] || osy > mod_ye[mi]) continue;
-                          int wx_blks = gobjs[gi].wx;
+                      for (int gi = 0; gi < ng; gi++) {
+                          if (gobjs[gi].is_mod) continue;
+                          int od = gobjs[gi].dp, osy = gobjs[gi].sy;
+                          /* First-fit: check all modules in file order to see which one claims this object */
+                          int assigned_mi = -1;
+                          for (int ti = 0; ti < n_bmod; ti++) {
+                              if (od >= mod_ds[ti] && od <= mod_de[ti] &&
+                                  osy >= mod_ys[ti] && osy <= mod_ye[ti]) {
+                                  assigned_mi = ti;
+                                  break;
+                              }
+                          }
+                          if (assigned_mi != mi) continue;
+                           int wx_blks = gobjs[gi].wx;
                           int ii = gobjs[gi].ii;
                           int hdr_idx = 0;
                           for (int di = 0; di < n_bdds; di++) {
@@ -1989,12 +1997,20 @@ static void process_lod(const char *lod_path) {
                     /* Compute bounding box from object positions + image sizes */
                     int min_d = 99999, max_de = 0, min_sy = 99999, max_se = 0;
                     int found_any = 0;
-                    for (int gj = 0; gj < ng; gj++) {
-                        if (gobjs[gj].is_mod) continue;
-                        int od = gobjs[gj].dp, osy = gobjs[gj].sy;
-                        if (od < mod_ds[mi] || od > mod_de[mi]) continue;
-                        if (osy < mod_ys[mi] || osy > mod_ye[mi]) continue;
-                        int ii = gobjs[gj].ii;
+                     for (int gj = 0; gj < ng; gj++) {
+                         if (gobjs[gj].is_mod) continue;
+                         int od = gobjs[gj].dp, osy = gobjs[gj].sy;
+                         /* First-fit: check all modules in file order */
+                         int assigned_mi = -1;
+                         for (int ti = 0; ti < n_bmod; ti++) {
+                             if (od >= mod_ds[ti] && od <= mod_de[ti] &&
+                                 osy >= mod_ys[ti] && osy <= mod_ye[ti]) {
+                                 assigned_mi = ti;
+                                 break;
+                             }
+                         }
+                         if (assigned_mi != mi) continue;
+                         int ii = gobjs[gj].ii;
                         int iw = 0, ih = 0;
                         for (int di = 0; di < n_bdds; di++)
                             if (bdds[di].idx == ii) { iw = bdds[di].w; ih = bdds[di].h; break; }
