@@ -12,8 +12,9 @@ ZOF mode is **byte-exact** with LOADW across all tested datasets:
 
 - MK2MIL, MK4MIL, MK8MIL: **100.0% byte-exact** (IRW + all TBLs)
 - MK3MIL, MK5MIL, MK6MIL, MK7MIL: **partial** — LM/TM selection now matches LOADW
-  (FUN_1000_6f20 trail counting uses `else if`, not double-if, fixing TE values),
-  but an encoder cascade remains (~3-31 bytes per TBL per LOD)
+  (FUN_1000_6f20 trail counting uses `else if` in all three code paths).
+  MK3MIL now passes fully (5/5). MK6MIL passes 9/17 (auto-bpp garbage pixel
+  fix for pitblood1a). Remaining encoder cascade affects MK5MIL, MK6MIL, MK7MIL.
 - Space check: CMP=0 when compressed size >= raw size (`<=` comparison)
 - Minimum stored=10 adjustment fully implemented (local_2c/iVar9 distribution)
 
