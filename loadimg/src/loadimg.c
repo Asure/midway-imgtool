@@ -56,8 +56,10 @@ typedef struct {
 
 /* IMG_REC struct may have padding — file format uses 50-byte records */
 #define IMG_REC_SIZE 50
-/* Image row stride: paddded to 4 bytes when /P flag is active */
-#define IMG_STRIDE(w) (g.pad4bits ? ((w) + 3) & ~3 : (w))
+/* IMG files always use 4-byte aligned row stride */
+#define IMG_STRIDE(w) (((w) + 3) & ~3)
+/* Output stride: follows /P flag (padded if set, raw otherwise), minimum 3 */
+#define OUT_STRIDE(w) (g.pad4bits ? (((w) + 3) & ~3) : ((w) > 2 ? (w) : 3))
 
 typedef struct {
     char     name[MAX_NAME];
@@ -628,7 +630,7 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
     CompParams p;
     memset(&p, 0, sizeof(p));
 
-    p.sizx = pttbl_sizx > 0 ? pttbl_sizx : IMG_STRIDE(rec->w);
+    p.sizx = pttbl_sizx > 0 ? pttbl_sizx : OUT_STRIDE(rec->w);
     p.sizy = rec->h;
     if (p.sizx < 1) p.sizx = 1;
     if (p.sizy < 1) p.sizy = 1;
@@ -1243,7 +1245,7 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
         }
         ie->anix = rec->anix;
         ie->aniy = rec->aniy;
-        ie->w = IMG_STRIDE(rec->w);
+        ie->w = OUT_STRIDE(rec->w);
         ie->h = rec->h;
         ie->sizx = cp.sizx;
         ie->sizy = cp.sizy;
