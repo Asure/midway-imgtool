@@ -1217,19 +1217,31 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
               uint8_t *pix = img_pixels(cur->imgfile, rec);
               if (pix) {
                  int pstride = IMG_STRIDE(rec->w);
-                 uint32_t maxpx = 0;
-                 for (int y = 0; y < rec->h; y++)
-                     for (int x = 0; x < rec->w; x++) {
-                         uint8_t px = pix[y * pstride + x];
-                         if (px > maxpx) maxpx = px;
-                     }
+                  uint32_t maxpx = 0;
+                  for (int y = 0; y < rec->h; y++)
+                      for (int x = 0; x < rec->w; x++) {
+                          uint8_t px = pix[y * pstride + x];
+                          if (px > maxpx) maxpx = px;
+                      }
                   int per_bpp = bpp_for_max(maxpx);
                   if (per_bpp >= 1 && per_bpp <= 8) bpp = per_bpp;
                   else bpp = g.global_bpp;
+                  /* When maxpx exceeds what any reasonable palette can
+                   * index (>127, high bit set), the pixel data likely
+                   * contains garbage bytes. Cap to palette bitspix. */
+                  if (maxpx > 127) {
+                      PAL_REC *pal_rec = find_user_palette(cur->imgfile, rec->palnum);
+                      if (pal_rec && pal_rec->bitspix >= 1 && pal_rec->bitspix <= 8 &&
+                          pal_rec->numc > 1 && pal_rec->numc <= 256 &&
+                          (int)maxpx >= (int)pal_rec->numc &&
+                          pal_rec->bitspix < bpp) {
+                          bpp = pal_rec->bitspix;
+                      }
+                  }
              } else {
                  bpp = g.global_bpp;
              }
-         }
+          }
         CompParams cp = analyze_image(cur->imgfile, rec, bpp, pttbl_sizx);
 
         if (g.n_images >= MAX_IMAGES) die("too many images");
