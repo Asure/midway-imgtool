@@ -54,6 +54,9 @@ typedef struct {
     uint16_t spare1, spare2, spare3;
 } LIB_HDR;
 
+/* IMG_REC struct may have padding — file format uses 50-byte records */
+#define IMG_REC_SIZE 50
+
 typedef struct {
     char     name[MAX_NAME];
     uint16_t flags;
@@ -467,7 +470,7 @@ static ImgFile* img_load(const char *path) {
 
     int n_special = 0;
     for (int i = 0; i < 10; i++) {
-        IMG_REC *rec = (IMG_REC*)(img->data + oset + i * (int)sizeof(IMG_REC));
+        IMG_REC *rec = (IMG_REC*)(img->data + oset + i * (int)IMG_REC_SIZE);
         if (rec->name[0] == '!') n_special++;
         else break;
     }
@@ -476,11 +479,11 @@ static ImgFile* img_load(const char *path) {
     if (img->norm_images)
         img->images = img->norm_images + n_special;
     else
-        img->images = (IMG_REC*)(img->data + oset + n_special * (int)sizeof(IMG_REC));
+        img->images = (IMG_REC*)(img->data + oset + n_special * IMG_REC_SIZE);
     img->n_images = img->hdr.imgcnt - n_special;
 
     /* Palette records: stored with 3 defaults prepended */
-    uint32_t pal_ofs = oset + (uint32_t)img->hdr.imgcnt * (uint32_t)sizeof(IMG_REC);
+    uint32_t pal_ofs = oset + (uint32_t)img->hdr.imgcnt * (uint32_t)IMG_REC_SIZE;
     img->pals = (PAL_REC*)(img->data + pal_ofs);
     img->n_palettes = img->hdr.palcnt;
 
@@ -496,7 +499,7 @@ static ImgFile* img_load(const char *path) {
     /* Compute max PTTBL index */
     int max_pttbl = -1;
     for (int i = 0; i < img->hdr.imgcnt; i++) {
-        IMG_REC *rec = (IMG_REC*)(img->data + oset + i * (int)sizeof(IMG_REC));
+        IMG_REC *rec = (IMG_REC*)(img->data + oset + i * (int)IMG_REC_SIZE);
         if (rec->pttblnum >= 0 && rec->pttblnum > max_pttbl)
             max_pttbl = rec->pttblnum;
     }
@@ -1202,11 +1205,13 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
                     }
                 int per_bpp = bpp_for_max(maxpx);
                 if (per_bpp >= 1 && per_bpp < bpp) bpp = per_bpp;
+                if (g.verbose) printf("  AUTO-BPP %s maxpx=%d per_bpp=%d bpp=%d (PPP override)\n",
+                       rec->name, maxpx, per_bpp, bpp);
             }
-        } else {
-            /* Auto pixel packing: select bpp per image */
-            uint8_t *pix = img_pixels(cur->imgfile, rec);
-            if (pix) {
+         } else {
+             /* Auto pixel packing: select bpp per image */
+             uint8_t *pix = img_pixels(cur->imgfile, rec);
+             if (pix) {
                 int pstride = (rec->w + 3) & ~3;
                 uint32_t maxpx = 0;
                 for (int y = 0; y < rec->h; y++)
@@ -1214,10 +1219,12 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
                         uint8_t px = pix[y * pstride + x];
                         if (px > maxpx) maxpx = px;
                     }
-                int per_bpp = bpp_for_max(maxpx);
-                if (per_bpp >= 1 && per_bpp <= 8) bpp = per_bpp;
-                else bpp = g.global_bpp;
-            } else {
+                 int per_bpp = bpp_for_max(maxpx);
+                 if (per_bpp >= 1 && per_bpp <= 8) bpp = per_bpp;
+                 else bpp = g.global_bpp;
+                 if (g.verbose) printf("  AUTO-BPP %s maxpx=%d per_bpp=%d bpp=%d data_p=0x%x oset=0x%x\n",
+                        rec->name, maxpx, per_bpp, bpp, rec->data_p, rec->oset);
+             } else {
                 bpp = g.global_bpp;
             }
         }
@@ -1476,6 +1483,7 @@ static void process_lod(const char *lod_path) {
             sscanf(line + 4, " %255s", fname);
             char *comma = strchr(fname, ',');
             if (comma) *comma = 0;
+            upcase(fname);  /* DOS filenames are case-insensitive */
              if (g.build_tables) {
                 /* Finalize previous TBL file before opening a new one */
                 if (g.asm_fp) {
