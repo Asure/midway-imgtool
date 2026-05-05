@@ -571,7 +571,8 @@ matches LOAD2 (separate lines), which is the correct target.
 | Palette (.globl) | ✓ | Writes `.globl\tPALNAME` to GLO |
 | IRW header | ✓ | Date, n_images, bpp, total_size |
 | FUN_1000_6f20 (LM/TM) | ✓ | Error-minimizing, 120 cap, `else if` for trail (not double-if), minimum stored=10 |
-| IRW encoder cascade | △ | TE matches LOADW; 4 LODs still have encoder differences (probably CMP or packbits) |
+| IMG record duplicate handling | ✓ | Last-wins for new-format IMG (0x63c/0x64e), first-wins for old (0x634) |
+| IRW encoder cascade | △ | TE matches LOADW; BGSPEAR6 still differs by 252 bits (encoder or minimum-10 path) |
 | FUN_1854_35fc (checksum) | ✓ | DWORD sum + max over byte-pairs |
 | Minimum stored = 10 | ✓ | Second-pass adjustment (local_2c/iVar9 distribution) |
 | Space check (CMP=0) | ✓ | `sizx < 10` or `comp_bits >= raw_bits` (`<=` comparison) |
@@ -594,9 +595,9 @@ All LOD files are from **Mortal Kombat 2** arcade data. Naming: MK2MIL = MK2 rev
 | **MK2MIL** | ZON + ZOF | 1937 | 5/5 | **PASS** — IRW + TBLs byte-exact |
 | **MK4MIL** | ZON | 1885 | 6/6 | **PASS** — IRW + TBLs byte-exact |
 | **MK8MIL** | FRM | 0 sprites | 1/1 | **PASS** — MKREVX.TBL match |
-| **MK3MIL** | ZOF | 1949 | 1/5 | FAIL (encoder cascade, TE now correct) |
-| **MK5MIL** | ZON | 702 | 1/7 | FAIL (encoder cascade, TE now correct) |
-| **MK6MIL** | ZON/ZOF | 1859 | 8/17 | FAIL (encoder cascade) |
+| **MK3MIL** | ZOF | 1949 | 5/5 | **PASS** — IRW + TBLs byte-exact (TE + duplicate fix) |
+| **MK5MIL** | ZON | 702 | 1/7 | FAIL (252-bit BGSPEAR6 encoder cascade) |
+| **MK6MIL** | ZON/ZOF | 1859 | 0/17 | FAIL (encoder cascade) |
 | **MK7MIL** | Mixed | 703 | 1/11 | FAIL (encoder cascade + BGND addresses) |
 | **MKBBB (NUPOOL)** | BBB | 43 bgnd | — | **PASS** — IRW + BGND TBLs byte-exact |
 | **MKBBB (TOMB)** | BBB | — | — | FAIL (LM/TM for CMP=1 images) |
@@ -605,8 +606,17 @@ All LOD files are from **Mortal Kombat 2** arcade data. Naming: MK2MIL = MK2 rev
 (the trail loop used a separate `if (lead_done)` block instead of `else if`,
 causing one extra trailing pixel to be counted when the lead cap of 120 was hit
 on the same iteration). This has been fixed — TE values now match LOADW's verbose
-output exactly (e.g. BGSPEAR6: `TE[34 24 72 128]`). However, 4 LODs still fail
-due to a secondary encoder cascade: even with matching LM/TM selection, the
+output exactly (e.g. BGSPEAR6: `TE[34 24 72 128]`). Additionally, a duplicate IMG
+record bug was fixed: LOADW uses the LAST record when two IMG records share the
+same name (hash-table overwrite), while our code only found the FIRST. Fixed by
+continuing the scan for new-format IMG files.
+
+Current cascade: BGSPEAR6 (BOSS3.IMG, w=138) is the first image whose encoded
+size differs from LOADW (by 252 bits) despite matching LM=3, TM=1, CMP=1, bpp=6.
+The encoder (`encode_row`) produces different output for the same lead/trail
+parameters, suggesting a subtle difference in the per-row stored-pixel calculation
+or the minimum-10 adjustment path. MK3MIL now passes fully; MK2MIL, MK4MIL, MK8MIL
+remain byte-exact.
 compressed IRW output differs starting at some image, cascading through
 subsequent images. The cascade size is ~3-31 bytes per TBL. MK2MIL, MK4MIL, and
 MK8MIL are fully byte-exact, confirming the encoder is correct for those
