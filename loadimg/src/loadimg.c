@@ -1195,10 +1195,10 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
         int bpp;
         if (g.ppp > 0) {
             bpp = g.ppp;
-            /* Auto pixel packing: can use fewer bits than PPP when image data
-             * is directly accessible (new-format IMG or old-format with data_p) */
+            /* Auto pixel packing: only for images with origin at (0,0)
+             * (fonts, UI elements — not animated sprites with offsets) */
             uint8_t *pix = img_pixels(cur->imgfile, rec);
-            if (pix && rec->data_p != 0) {
+            if (pix && rec->data_p != 0 && rec->anix == 0 && rec->aniy == 0) {
                 int pstride = (rec->w + 3) & ~3;
                 uint32_t maxpx = 0;
                 for (int y = 0; y < rec->h; y++)
@@ -1208,29 +1208,25 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
                     }
                 int per_bpp = bpp_for_max(maxpx);
                 if (per_bpp >= 1 && per_bpp < bpp) bpp = per_bpp;
-                if (g.verbose) printf("  AUTO-BPP %s maxpx=%d per_bpp=%d bpp=%d (PPP override)\n",
-                       rec->name, maxpx, per_bpp, bpp);
             }
-          } else {
-              /* Auto pixel packing: select bpp per image when data is directly accessible */
+        } else {
+              /* Auto pixel packing: select bpp per image */
               uint8_t *pix = img_pixels(cur->imgfile, rec);
-              if (pix && rec->data_p != 0) {
-                int pstride = (rec->w + 3) & ~3;
-                uint32_t maxpx = 0;
-                for (int y = 0; y < rec->h; y++)
-                    for (int x = 0; x < rec->w; x++) {
-                        uint8_t px = pix[y * pstride + x];
-                        if (px > maxpx) maxpx = px;
-                    }
-                 int per_bpp = bpp_for_max(maxpx);
-                 if (per_bpp >= 1 && per_bpp <= 8) bpp = per_bpp;
-                 else bpp = g.global_bpp;
-                 if (g.verbose) printf("  AUTO-BPP %s maxpx=%d per_bpp=%d bpp=%d data_p=0x%x oset=0x%x\n",
-                        rec->name, maxpx, per_bpp, bpp, rec->data_p, rec->oset);
+              if (pix) {
+                 int pstride = (rec->w + 3) & ~3;
+                 uint32_t maxpx = 0;
+                 for (int y = 0; y < rec->h; y++)
+                     for (int x = 0; x < rec->w; x++) {
+                         uint8_t px = pix[y * pstride + x];
+                         if (px > maxpx) maxpx = px;
+                     }
+                  int per_bpp = bpp_for_max(maxpx);
+                  if (per_bpp >= 1 && per_bpp <= 8) bpp = per_bpp;
+                  else bpp = g.global_bpp;
              } else {
-                bpp = g.global_bpp;
-            }
-        }
+                 bpp = g.global_bpp;
+             }
+         }
         CompParams cp = analyze_image(cur->imgfile, rec, bpp, pttbl_sizx);
 
         if (g.n_images >= MAX_IMAGES) die("too many images");

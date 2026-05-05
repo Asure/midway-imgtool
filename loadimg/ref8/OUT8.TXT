@@ -1,0 +1,31 @@
+
+Copyright (C) Williams Electronics Games, Inc. 1993.
+GSP Image Loader - DMA 2 - Version 5/25/94
+Using a page of expanded memory.
+
+
+GSP is Memory Mapped at PC address C000:7000
+Loading images ...
+	from: C:\MK8MIL.lod
+	to:   Table header files (written to directory C:\TMP\)
+	      GSP target system.
+	      C:\TMP\MK8MIL.irw
+	      Padding images to multiple of 4 pixels
+
+SET new IRAM address = 2000000
+SET new Program ROM address = FFD00000
+Loading Frames in C:\REVX at ffd00000
+Loading Frames in C:\DCS at ffd3b730
+
+Bytes Loaded...
+	PROGRAM ROM              35132 dec	    893C hex
+
+	TOTAL LOAD               35132 dec	    893C hex
+
+Bytes Written to Raw File...
+	In PROGRAM ROM records      35132 dec	    893C hex
+
+	TOTAL bytes written         35132 dec	    893C hex, in 2 records.
+
+Bytes Represented in Tables ... 35132 dec 893C hex
+
