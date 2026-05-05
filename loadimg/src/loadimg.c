@@ -667,24 +667,24 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
             }
         }
 
-        for (int m = 0; m < 4; m++) {
-            int mult = 1 << m;
-            int ln = lead / mult;
-            if (ln > 15) ln = 15;
-            lead_err[m] += lead - mult * ln;
-            int tn = trail / mult;
-            if (tn > 15) tn = 15;
-            trail_err[m] += trail - mult * tn;
-        }
-
-        if (y < la_window && lead < lookahead_lead_min)
-            lookahead_lead_min = lead;
+    for (int m = 0; m < 4; m++) {
+        int mult = 1 << m;
+        int ln = lead / mult;
+        if (ln > 15) ln = 15;
+        lead_err[m] += lead - mult * ln;
+        int tn = trail / mult;
+        if (tn > 15) tn = 15;
+        trail_err[m] += trail - mult * tn;
     }
 
-    if (lookahead_lead_min == 999) lookahead_lead_min = 0;
+    if (y < la_window && lead < lookahead_lead_min)
+        lookahead_lead_min = lead;
+}
 
-    {
-        int best_lm = 0;
+if (lookahead_lead_min == 999) lookahead_lead_min = 0;
+
+{
+    int best_lm = 0;
         for (int m = 1; m < 4; m++)
             if (lead_err[m] < lead_err[best_lm]) best_lm = m;
         int best_tm = 0;
@@ -1207,6 +1207,10 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
             }
         }
         CompParams cp = analyze_image(cur->imgfile, rec, bpp, pttbl_sizx);
+
+        if (g.n_images >= MAX_IMAGES) die("too many images");
+        ImageEntry *ie = &g.images[g.n_images++];
+        memset(ie, 0, sizeof(*ie));
         ie->scale_sags[0] = ie->sag;
         ie->scale_ctrls[0] = cp.ctrl;
         for (int s = 1; s < scale_n; s++) {
