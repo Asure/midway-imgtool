@@ -459,6 +459,9 @@ static ImgFile* img_load(const char *path) {
             r->opals    = (uint16_t)0xffff;
         }
         img->norm_images = norm;
+        /* Update oset to point past the old records so palette/PAL_REC
+         * offsets are computed correctly from the old record table size. */
+        img->hdr.oset = old_oset + (uint32_t)n * 42;
         /* Patch hdr so rest of img_load works: adjust oset to skip old records */
         img->hdr.temp    = 0xabcd;
         img->hdr.version = 0x634;
@@ -1208,10 +1211,10 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
                 if (g.verbose) printf("  AUTO-BPP %s maxpx=%d per_bpp=%d bpp=%d (PPP override)\n",
                        rec->name, maxpx, per_bpp, bpp);
             }
-         } else {
-             /* Auto pixel packing: select bpp per image */
-             uint8_t *pix = img_pixels(cur->imgfile, rec);
-             if (pix) {
+          } else {
+              /* Auto pixel packing: select bpp per image when data is directly accessible */
+              uint8_t *pix = img_pixels(cur->imgfile, rec);
+              if (pix && rec->data_p != 0) {
                 int pstride = (rec->w + 3) & ~3;
                 uint32_t maxpx = 0;
                 for (int y = 0; y < rec->h; y++)
