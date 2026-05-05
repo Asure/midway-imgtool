@@ -1972,9 +1972,6 @@ static void process_lod(const char *lod_path) {
                           for (int di = 0; di < n_bdds; di++) {
                               if (bdds[di].idx == ii) {
                                    wx_blks = (wx_blks & 0xFFF0) | 0x0040 | (gobjs[gi].fl & 0x0F);
-                                   wx_blks = (wx_blks & ~0x0001) | 0x0001;
-                                   /* Note: dma_bit0 from BDD is stored in bdds[di].fl
-                                    * but LOADW always sets bit 0 = 1 for background images */
                                   hdr_idx = di;
                                   break;
                               }
@@ -1991,7 +1988,7 @@ static void process_lod(const char *lod_path) {
                       for (int bi = 0; bi < n_blk; bi++) {
                           if (bi == 0) {
                               fprintf(g.bgnd_fp, "\t.word\t0%XH\t;flags\r\n", blk_objs[bi].wx);
-                              fprintf(g.bgnd_fp, "\t.word\t%d,%d\t;x,y\r\n", blk_objs[bi].x, blk_objs[bi].y);
+                              fprintf(g.bgnd_fp, "\t.word\t%d,%d ;x,y\r\n", blk_objs[bi].x, blk_objs[bi].y);
                               fprintf(g.bgnd_fp, "\t.word\t0%XH\t;pal5,pal4,hdr13-0\r\n", blk_objs[bi].ii);
                           } else {
                              fprintf(g.bgnd_fp, "\t.word\t0%XH,%d,%d,0%XH\r\n",
