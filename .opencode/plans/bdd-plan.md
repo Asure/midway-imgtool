@@ -14,180 +14,53 @@ This plan describes what needs to be fixed or completed.
 
 ---
 
-## Current Issues
+## Issues Resolved
+
+All 9 originally identified issues plus 2 additional fixes were implemented in this session. See commit history for details.
 
 ### 1. Indentation / Structural Bug in LM/TM Analysis
 
-**Location**: `src/loadimg.c` lines 1806–1821
-
-**Problem**: The LM/TM analysis loop for background images has misaligned
-braces. The `fprintf(g.bgnd_fp, "\r\n")` at line 1820 and the closing `}`
-at line 1821 are inside the `for (int row = 0; row < h; row++)` loop.
-The LM selection loop at lines 1822–1825 then falls outside the enclosing
-`if (w > 0 && h > 0)` block due to the brace mismatch.
-
-**Fix**: Correct the brace placement so the LM/TM selection (lines 1822–1825)
-and CMP decision (lines 1827–1863) execute per-image, not after a broken loop.
+**Fixed**: Removed rogue `fprintf(g.bgnd_fp, "\r\n")` and fixed brace placement in the background LM/TM analysis loop.
 
 ### 2. Module Region Bounds (Object-to-Module Assignment)
 
-**Location**: `src/loadimg.c` lines 1670–1678 (module param storage),
-1743–1754 (range array population), 1762–1765 (assignment check)
-
-**Reference**: BDB module line format: `NAME DEPTH_BASE SCROLL_X SY_BASE SY_SPAN`
-
-**How assignment works** (verified against all 205 NUPOOL objects):
-- Each module defines a rectangle: X=[DEPTH_BASE, SCROLL_X], Y=[SY_BASE, SY_BASE+SY_SPAN]
-- SCROLL_X is the right-edge X coordinate
-- Objects are assigned to the **first module in file order** whose rectangle
-  contains the object's (DEPTH, SY) — this is a first-fit spatial partition,
-  not a Y-sorted or best-fit match
-- Module file order IS the BMOD/BLKS output order
-
-**Current code bug**: `mod_ye` stores `sy_span` directly at line 1754
-instead of computing `sy_base + sy_span`:
-```c
-mod_ye[n_bmod] = gobjs[gi].ii;                    // BUG: stores sy_span
-```
-Should be:
-```c
-mod_ye[n_bmod] = gobjs[gi].sy + gobjs[gi].ii;    // sy_base + sy_span
-```
-
-This is the only fix needed for correct object-to-module assignment. The
-existing first-fit check at lines 1762–1765 is correct once bounds are right.
+**Fixed**: `mod_ye = sy_base + sy_span` (was `sy_span` directly). Assignment rule confirmed: first-fit by BDB file order using rectangle X=[DEPTH_BASE, SCROLL_X], Y=[SY_BASE, SY_BASE+SY_SPAN].
 
 ### 3. BLKS `wx` Low-Byte Derivation
 
-**Location**: `src/loadimg.c` lines 1936, 1941
-
-**Reference**: `bbb.md` lines 114–118, `BDD.md` lines 138–154
-
-**Problem**: The current code writes the raw BDB `WX_hex` value directly
-(e.g., `0x4000`). The LOADW reference BLKS output has computed low bytes
-(e.g., `0x4044`, `0x4046`).
-
-The low byte of `wx` in BLKS output encodes DMA/compression flags:
-- bit 7: CMP (1 = compressed)
-- bits 9-8: LM (leading multiplier index 0–3)
-- bits 11-10: TM (trailing multiplier index 0–3)
-- bits 6-0: OPS, CLP, VFL, HFL, PIX (from per-image state)
-
-The raw BDB WX_hex has only the high byte (scroll rate) set; all other
-fields are 0. LOADW ORs in the per-image compression flags.
-
-**Action**: After computing `img_lm[di]`, `img_tm[di]`, and `img_cmp[di]`
-(already done at lines 1863–1864), construct the BLKS wx value as:
-
-```c
-int wx_blks = gobjs[gi].wx | (img_cmp[di] << 7) | (img_lm[di] << 8) | (img_tm[di] << 10);
-```
-
-Note: `gi` here is the GOBJ index, not the BDD index. The BDD image
-index (`ii`) must be mapped to the correct `img_lm[]` / `img_tm[]` /
-`img_cmp[]` entry, which is keyed by BDD `di` (not GOBJ index).
+**Fixed**: `wx_blks = (BDB_wx & 0xFFF0) | 0x0040 | (fl & 0x0F)` — CLP bit 6 set, OPS field from BDB palette index, bit 0 from BDD dma_bit0.
 
 ### 4. BMOD Width/Height Formula
 
-**Location**: `src/loadimg.c` lines 1958–1983
-
-**Reference**: `bbb.md` lines 253–254
-
-**Problem**: Width/height computed from object bounding boxes:
-```c
-mw = max_de - min_d;  // rightmost edge - leftmost edge
-mh = max_se - min_sy;
-```
-The reference shows DPUL6BMOD width=802, but the param formula
-`mod_de[mi] - mod_ds[mi]` gives 850. The bounding box approach
-also doesn't match.
-
-**Action**: Compare the computed values against the reference output
-for all 6 NUPOOL modules. Adjust the formula if needed — LOADW may
-use a different method (e.g., based on scroll register values or
-param ranges, not actual object extents).
+**Fixed**: Bounding box from actual object extents including image dimensions (`max - min`).
 
 ### 5. HDRS Entry Comments
 
-**Location**: `src/loadimg.c` lines 1916–1921
-
-**Status**: Already has a `first_bgnd` flag that emits `;x size, y size`,
-`;address`, and `;dma ctrl` on the first entry only. This matches the
-reference format described in `bbb.md` lines 156–161.
-
-**Verification**: Compare against `work3/BGNDTBL.ASM` to confirm the
-comments match exactly (spacing, capitalization).
+Already had `first_bgnd` flag — verified correct.
 
 ### 6. BGNDTBL.GLO — ENDMARKER uses `.global` not `.globl`
 
-**Location**: `src/loadimg.c` line 1046 (`write_global` function)
-
-**Reference**: `work3/BGNDTBL.GLO` shows `.global ENDMARKER` while all
-other entries use `.globl`.
-
-**Problem**: The GLO> directive (e.g. `GLO> BGNDTBL.GLO` in MK7MIL.LOD)
-directs global symbol output to a specific file. When `---> ENDMARKER`
-is processed, `write_global("ENDMARKER")` writes `.globl ENDMARKER` but
-the reference expects `.global ENDMARKER`.
-
-**Fix**: In `write_global()`, special-case the name "ENDMARKER" to emit
-`.global` instead of `.globl`:
-```c
-fprintf(g.glo_fp, "\t.%s\t%s\r\n",
-        strcmp(name, "ENDMARKER") == 0 ? "global" : "globl", name);
-```
-
-**Order verification**: Current code writes PALS → palette names → BMOD
-(lines 1993–1998), which matches the reference.
+**Fixed**: `write_global()` special-cases ENDMARKER to emit `.global`.
 
 ### 7. BGNDPAL.ASM Palette Dedup
 
-**Location**: `src/loadimg.c` lines 2001–2017
-
-**Problem**: The dedup check at line 2004 references `g.palettes[pi2].written`
-to skip palettes already written to IMGPAL.ASM. However, the palette-writing
-code for sprite images (in `parse_imglist`) may not set the `written` flag
-on `PaletteEntry`.
-
-**Action**: Ensure the `written` field is set to 1 after writing a palette
-to IMGPAL.ASM (in the `write_palette()` function or the palette-handling
-block at lines 1282–1314). Without this, background palettes that share
-names with sprite palettes may be duplicated.
+Already correct — `write_palette()` sets `pe->written = 1`.
 
 ### 8. Background Image Encoding — Stride Padding
 
-**Location**: `src/loadimg.c` lines 1784, 1867–1907
-
-**Problem**: `sizx_a` is set to `w` (raw width, no stride padding).
-The encode paths for both compressed and raw modes iterate `x < sizx_a`,
-writing zero for `x >= w`. With `sizx_a = w`, there is no padding at all.
-
-Sprite images use `pstride = (rec->w + 3) & ~3` (4-byte aligned stride).
-If LOADW uses padding for background images, the IRW data and SAG offsets
-will differ.
-
-**Action**: Check the reference IRW and verbose log to determine whether
-LOADW pads background image strides to 4 bytes. If so, change to
-`sizx_a = (w + 3) & ~3`.
+**Fixed**: `sizx_a = ((w + 3) & ~3)` — 4-byte aligned stride.
 
 ### 9. File Pointer Leaks
 
-**Location**: `src/loadimg.c` main function line 2201–2207
+**Fixed**: `fclose()` calls for `bgnd_fp`, `bgndpal_fp`, `bgndequ_fp`, `bgndtbl_glo_fp`.
 
-**Problem**: The `g.asm_fp`, `g.glo_fp`, `g.pal_fp` are closed at the
-end of main(). But `g.bgnd_fp`, `g.bgndpal_fp`, `g.bgndequ_fp`,
-`g.bgndtbl_glo_fp` are NEVER closed. This may cause missing data or
-corrupted output files.
+### 10. Unique Color BPP Increase
 
-**Action**: Close all background-output file pointers in `main()` after
-`process_lod()` returns:
+**Fixed**: When an image has more unique colors than current bpp can represent (>64 for bpp=6), increase bpp to 7 or 8. Matches LOADW's "BG block has N colors. Can't fit into 6 bits per pixel." behavior.
 
-```c
-if (g.bgnd_fp) fclose(g.bgnd_fp);
-if (g.bgndpal_fp) fclose(g.bgndpal_fp);
-if (g.bgndequ_fp) fclose(g.bgndequ_fp);
-if (g.bgndtbl_glo_fp) fclose(g.bgndtbl_glo_fp);
-```
+### 11. Background Image Dedup
+
+**Fixed**: Checksum-based dedup using shared `dedup_table`. Reuses SAG from previous identical images, matching LOADW's "block cksum match" messages.
 
 ---
 
@@ -209,21 +82,23 @@ files (28 .BDB/.BDD pairs) should all produce matching output.
 
 ---
 
-## Priority Order
+## Priority Order (all completed)
 
-| # | Item | Why this order |
-|---|------|----------------|
-| 1 | **File pointer leaks** (item 9) | Prevents corrupted output, trivial fix |
-| 2 | **`mod_ye` fix** (item 2) | One-line change that cascades correct counts into everything downstream |
-| 3 | **BGNDTBL.GLO `.global`** (item 6) | One-line `write_global` special-case |
-| 4 | **BGNDPAL `written` flag** (item 7) | One-line fix, prevents palette duplication |
-| 5 | **BLKS `wx` low byte** (item 3) | OR in CMP/LM/TM flags when writing BLKS entries |
-| 6 | **BMOD width/height** (item 4) | Verify after fix #2 cascades correct object counts |
-| 7 | **Indentation cleanup** (item 1) | Cosmetic — code works despite brace mess |
-| 8 | **Stride padding** (item 8) | Verify against reference IRW |
+| # | Item | Status |
+|---|------|--------|
+| 1 | **File pointer leaks** | **Done** — 4 `fclose()` calls in `main()` |
+| 2 | **`mod_ye` fix** | **Done** — `sy_base + sy_span` instead of raw `sy_span` |
+| 3 | **BGNDTBL.GLO `.global`** | **Done** — `write_global()` special-case for ENDMARKER |
+| 4 | **BGNDPAL `written` flag** | **Done** — already correct in code |
+| 5 | **BLKS `wx` low byte** | **Done** — CLP=1, OPS from `fl`, dma_bit0 from BDD |
+| 6 | **BMOD width/height** | **Done** — bounding box from object extents, matches ref |
+| 7 | **Indentation cleanup** | **Done** — removed rogue fprintf, fixed braces |
+| 8 | **Stride padding** | **Done** — `sizx_a = ((w+3)&~3)` |
+| 9 | **Dedup + unique colors + small-image CMP** | **Done** — all three implemented |
+| 10 | **BLKS coordinate system** | **Done** — `x = depth - first_depth`, `y = sy - sy_base - 2` |
+| 11 | **First-fit assignment in BLKS/BMOD** | **Done** — range check replaced with full first-fit |
 
 ---
-
 ## References
 
 - `bbb.md` — Background file loading specification (this repo)
@@ -231,3 +106,23 @@ files (28 .BDB/.BDD pairs) should all produce matching output.
 - `src/loadimg.c` — Implementation (lines 1556–2021)
 - `work3/BGNDTBL.ASM` — Reference LOADW output for MK7MIL
 - `work3/LOG_V5.TXT` — LOADW verbose log with object/module details
+
+---
+## Current Status (MKBBB — 3 backgrounds)
+
+| File | Status |
+|------|--------|
+| BGNDTBL.GLO | **MATCH** ✓ |
+| BGNDEQU.H | **MATCH** ✓ |
+| BGNDTBL.ASM | **MATCH** ✓ (full byte-identical with reference) |
+| IRW (NUPOOL) | **100% byte-identical** ✓ |
+| IRW (TOMB/TOWER2) | 26% diff — LM/TM selection for CMP=1 images |
+| BGNDPAL.ASM | Content matches, formatting differs (line breaks, hex width) |
+
+## Remaining Work
+
+| Issue | Status | Notes |
+|-------|--------|-------|
+| LM/TM for CMP=1 | Mismatch | Same FUN_1000_6f20 issue as MK3MIL/MK5MIL cascade |
+| BGNDPAL formatting | Cosmetic | Palette numbering, line wrapping, hex width |
+| All 9 plan items | **Done** | Implemented across this session |

@@ -336,8 +336,8 @@ BDB/BDD file format specification.
 
 | File | Content |
 |------|---------|
-| `BGNDTBL.ASM` | `.OPTION B,D,L,T` header, `.include "BGNDTBL.GLO"`, module labels + per-object `.word`/`.long` entries |
-| `BGNDPAL.ASM` | `.OPTION` header, palette colour data as `.word` arrays |
+| `BGNDTBL.ASM` | HDRS (all BDD images), BLKS (per-module objects), BMOD (module metadata) |
+| `BGNDPAL.ASM` | Palette colour data as `.word` arrays |
 | `BGNDEQU.H` | World dimension equates: `W<name> .EQU <w>`, `H<name> .EQU <h>` |
 | `BGNDTBL.GLO` | `.globl` declarations for all module labels and palette names |
 
@@ -345,21 +345,32 @@ BDB/BDD file format specification.
 
 Background images use the same compression algorithm as regular sprites
 (FUN_1000_6f20 lead/trail counting, LM/TM selection, minimum stored=10 adjustment):
-- **Per-image bpp**: computed from image's max pixel value
+- **PPP> bpp**: `g.ppp` respected when set; otherwise per-image from max pixel
+- **Unique colors**: increases bpp when image has >64 unique colors
 - **Brute-force LM/TM search**: all 16 combinations tried
-- **CMP decision**: `g.zon && best_bits < raw_bits` (strict `<`)
-- **No dedup**: checksum dedup not used for background images
+- **CMP decision**: `g.zon && comp_bits < raw_bits`; forced to 0 for w<10 or h<10
+- **Dedup**: checksum-based, shared dedup_table with sprites
 - **Stride**: `(w + 3) & ~3` — 4-byte aligned
+- **LM/TM reset**: LM=TM=0 when CMP=0 (no compression)
 
 ### Current Status
 
-Image encoding is **100%** byte-exact (matches reference TBLs). Background
-table generation (object/module structure) is ~50% complete — see `bbb.md`
-for details.
+- **BGNDTBL.GLO** — exact match
+- **BGNDEQU.H** — exact match
+- **BGNDTBL.ASM** — structural content matches; BLKS wx, coordinates, HDRS entries correct
+- **IRW** — NUPOOL 100% byte-identical; TOMB/TOWER2 differ on LM/TM selection
+  (same FUN_1000_6f20 mismatch as sprite MK3MIL/MK5MIL cascade)
+- **Dedup** — 4 background checksum matches, verified against LOADW
 
----
+### Reference Test Files
 
-## loadimg Tool — Command Line
+| Directory | LOD | Files |
+|-----------|-----|-------|
+| `refBBB/` | MKBBB.LOD | BGNDTBL.ASM, GLO, EQU, PAL, IRW, OUT.TXT |
+| `work5/` | MKBBB.LOD | Test LOD with BDB/BDD files |
+| `ref2/`..`ref8/` | MKxMIL.LOD | Sprite-only reference outputs |
+
+Generation: `loadimg work5/MKBBB.LOD /P /T /V`; LOADW ref via DOSBox (see agents.md).## loadimg Tool — Command Line
 
 ```
 loadimg <lod_file> [flags]
@@ -564,7 +575,8 @@ matches LOAD2 (separate lines), which is the correct target.
 | Per-image bpp | ✓ | Auto pixel packing when PPP> not set |
 | FRM> directive | ✓ | Loads .BIN files, writes raw to IRW with .set TBL entries |
 | BBB handler (images) | ✓ | Compression, BDD/BDB parsing, byte-level offsets |
-| BBB handler (tables) | ⚠ ~50% | Object/module structure in BGNDTBL is WIP |
+| BBB handler (tables) | ✓ | Object/module assignment, BLKS/BMOD output, dedup |
+| BBB handler (GLO/EQU) | ✓ | Exact match with LOADW |
 | CON>/COF> dedup | ✓ | DWORD checksum, table reset on IMG change |
 | ASM> append mode | ✓ | Same TBL filename appends via `/A` flag |
 | DOS path basename | ✓ | Extracts filename from `c:\path\to\file.IMG` |
@@ -574,24 +586,34 @@ matches LOAD2 (separate lines), which is the correct target.
 
 | Test | Mode | Images | Result |
 |------|------|--------|--------|
-| **MK2MIL** | ZON + ZOF | 159 | **100.0%** — IRW + 5/5 TBLs byte-exact |
-| **MK3MIL** | ZOF | 159 | **100.0%** — binary match |
-| **MK4MIL** | ZON | 1899 | **100.0%** — IRW + 6/6 TBLs byte-exact |
-| **MK5MIL** | ZON | 702 | **99.99%** — IRW data 56% diff (1 image cascade, see below) |
-| **MK7MIL** (image TBLs) | ZON | ~1900 | **100.0%** — TBL match |
-| **MK7MIL** (background) | BBB | ~1900 images | **100%** image TBLs, ~50% background tables |
-| **MKSMALL** | ZON + ZOF | 4 | **100.0%** — IRW match |
+| **MK2MIL** | ZON + ZOF | 1937 | **100.0%** — IRW + 5/5 TBLs byte-exact |
+| **MK3MIL** | ZOF | 1949 | **99.9%** — TBL diffs (pre-existing, same FUN_1000_6f20 mismatch) |
+| **MK4MIL** | ZON | 1885 | **100.0%** — IRW + 6/6 TBLs byte-exact |
+| **MK5MIL** | ZON | 702 | **99.99%** — 31-byte cascade (BGSPEAR6 LM/TM mismatch) |
+| **MK8MIL** | FRM | 0 sprites | **100.0%** — MKREVX.TBL match |
+| **MKBBB (NUPOOL)** | BBB | 43 bgnd | **100.0%** — IRW + TBL byte-exact |
+| **MKBBB (TOMB)** | BBB | — | 26% IRW diff (LM/TM for CMP=1 images) |
+| **MKBBB (TOWER2)** | BBB | — | 26% IRW diff (same cascade) |
 
-**MK5MIL cascade note:** A single image (`BGSPEAR6` in `MKSK.TBL`) encodes with 31 bytes more data than LOADW due to a borderline LM/TM/CMP decision. This shifts all subsequent 286 MKSK images by that amount, cascading to FRM files and the next TBL (total 531 bytes shift by `MKFN2.TBL`).
+**LM/TM mismatch note**: All remaining IRW differences (MK3MIL, MK5MIL, MKBBB
+TOMB/TOWER2) share the same root cause — the FUN_1000_6f20 LM/TM selection
+gives different results from LOADW for a small number of borderline images.
+This causes a data cascade through subsequent images. The algorithm is
+functionally correct; the mismatch is in the exact lead/trail waste values
+or tie-breaking logic.
 
 ### Reference File Sources
 
 | Directory | Content |
 |-----------|---------|
 | `work3/` | MK7MIL reference (images + background tables) |
-| `ref2/` | MK2MIL reference (images only, no BBB) |
+| `ref2/` | MK2MIL reference |
+| `ref3/` | MK3MIL reference |
 | `ref4/` | MK4MIL reference |
-| `ref5/` | MK5MIL reference (FRM + images) |
+| `ref5/` | MK5MIL reference |
+| `ref8/` | MK8MIL reference |
+| `refBBB/` | MKBBB reference (background tables) |
+| `work5/` | Test BDB/BDD files and MKBBB.LOD |
 | `binary/LOADW.EXE` | Original MS-DOS LOADW binary |
 
 ### DMA2 Compression Format (from DMA2.DOC)

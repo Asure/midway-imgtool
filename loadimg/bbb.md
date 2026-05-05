@@ -80,42 +80,24 @@ DPUL1 108 2482 1634 2100            ← module 2
 
 ### Object-to-Module Assignment
 
-**Status: NOT YET DETERMINED** — the exact rule LOADW uses to assign each
-of the 205 objects to one of the 6 modules is still unknown.
+**Status: RESOLVED**
 
-**Key facts established from reference output (work3/BGNDTBL.ASM)**:
-- Total objects across all modules = NUM_OBJECTS (205 for NUPOOL). No objects
-  are left unassigned — every object appears in exactly one BLKS section.
-- BLKS block counts: DPUL6=12, DPUL1=14, DPUL2=46, DPUL3=19, DPUL4=20, DPUL5=94
+Objects are assigned to modules using **first-fit by file order**. Each module
+defines a rectangular region:
+- X: [DEPTH_BASE, SCROLL_X]
+- Y: [SY_BASE, SY_BASE + SY_SPAN]
 
-**wx high-byte distribution in BDB** vs **reference BLKS assignments**:
+An object belongs to the **first module** (in BDB file order) whose region
+contains the object's (DEPTH, SY) coordinates. This is NOT a spatial partition
+sorted by position — the BDB module order is the priority order.
 
-| Module  | BLKS count | wx_high bytes in ref BLKS  |
-|---------|-----------|---------------------------|
-| DPUL6   | 12        | 0x40 only                 |
-| DPUL1   | 14        | 0x47 only                 |
-| DPUL2   | 46        | 0x45, 0x46                |
-| DPUL3   | 19        | 0x44 only                 |
-| DPUL4   | 20        | 0x43 only                 |
-| DPUL5   | 94        | 0x3f, 0x40, 0x41, 0x42, 0x43 |
+**Verification**: This algorithm was verified against all 205 NUPOOL objects
+and produces exact reference block counts for all 6 modules:
+DPUL6=12, DPUL1=14, DPUL2=46, DPUL3=19, DPUL4=20, DPUL5=94.
 
-wx_high distribution in BDB: 0x3f=4, 0x40=72, 0x41=13, 0x42=15, 0x43=22,
-0x44=19, 0x45=32, 0x46=14, 0x47=14.
-
-DPUL1 (wx_high=0x47, 14 objects) and DPUL3 (wx_high=0x44, 19 objects) match
-exactly. DPUL2 (0x45+0x46 = 32+14 = 46) matches exactly. DPUL3/DPUL4 match.
-But DPUL6 (12) is a subset of 0x40 (72), and DPUL5 (94) contains multiple
-layers including most of 0x40. Assignment is NOT purely by wx_high byte.
-
-**Hypothesis**: Assignment may use a combination of wx_high byte AND module
-param ranges (SY_BASE/SY_SPAN or DEPTH_BASE/SCROLL_X) to disambiguate when
-multiple modules share the same parallax layer.
-
-**The `wx` value in BLKS output** differs from the BDB `WX_hex` field — the
-BDB stores coarse values like `0x4000`, while the BLKS output has `0x4044`,
-`0x4046`, etc. with computed low-byte flags. The low byte in BLKS is derived
-from compression parameters (CMP/LM/TM bits) or other per-image data.
-This relationship is not yet understood.
+**Key implementation detail**: When SCROLL_X IS the right-edge X coordinate
+of the module rectangle. The `scroll_x` field name refers to the horizontal
+scroll register position, which serves as the right boundary coordinate.
 
 ## Label Derivation
 
@@ -168,8 +150,12 @@ Each module gets one BLKS section. Format:
 - **Terminator**: `.word 0FFFFH ;End Marker`
 - `hdr_index` = 0-based position of the BDD image in the HDRS table (BDD file order)
 
-The `wx` value written to BLKS is NOT the raw BDB `WX_hex` — it appears to
-have computed low-byte flags. Exact derivation unknown.
+The `wx` value written to BLKS is assembled from:
+- **High byte (bits 15-8)**: from BDB `WX_hex` (parallax scroll rate)
+- **CLP bit (bit 6)**: always set (clip enable for all background objects)
+- **OPS field (bits 3-0)**: from BDB `fl` field (palette index)
+- **Bits 5-4**: VFL/HFL from BDB `WX_hex`
+- **Bit 0**: from BDD `dma_bit0` field
 
 ### BMOD Section
 
@@ -181,7 +167,8 @@ DPUL6BMOD:
     .long   DPUL6BLKS, OLHDRS, OLPALS
 ```
 
-- `width`, `height` — derived from module params (exact formula TBD)
+- `width`, `height` — computed from object bounding boxes (max_dim - min_dim
+  across all objects assigned to the module, including image dimensions)
 - `block_count` — number of objects assigned to this module
 - `.long` references: own BLKS, shared HDRS, shared PALS label
 
@@ -225,33 +212,35 @@ as regular sprites:
 | Component | Match vs LOADW |
 |-----------|---------------|
 | Image TBLs (all 11 tables) | ✓ 100% |
+| BGNDTBL.GLO | ✓ exact match |
+| BGNDEQU.H | ✓ exact match |
 | BGNDPAL.ASM palette data | ✓ palette names and colors match |
-| BGNDEQU.H equates format | ✓ per-module W/H from module params |
-| Linux path flag parsing | ✓ fixed `/home/...` treated as `/H` flag |
-| HDRS image data (all BDD images) | ✓ written in BDD file order |
-| HDRS comments | ✗ first entry needs `;x size, y size` etc. |
-| BLKS labels in correct position | ✗ currently emitted before HDRS data |
-| BLKS object list format | ✗ not yet implemented |
-| BLKS `wx` low-byte derivation | ✗ unknown (differs from BDB WX_hex) |
-| Object-to-module assignment | ✗ unknown algorithm |
-| BMOD width/height formula | ✗ unknown (not simply p2-p1, p4-p3) |
-| BMOD block count | ✗ depends on assignment |
-| Image compression in IRW | ✓ FUN_1000_6f20 with LM/TM selection |
-| HDRS label derivation | ✓ last 2 chars of BDB name |
+| BGNDTBL.ASM HDRS image data | ✓ all BDD images in file order |
+| BGNDTBL.ASM HDRS addresses/CTRL | ✓ match (bpp=0 for 8-bit, CMP=1 forced) |
+| BGNDTBL.ASM BLKS wx encoding | ✓ CLP+OPS+dma_bit0 correctly assembled |
+| BGNDTBL.ASM BLKS coordinates | ✓ module-local, BDB file order |
+| BGNDTBL.ASM BLKS object counts | ✓ first-fit by file order |
+| BGNDTBL.ASM BMOD w/h | ✓ bounding box from objects |
+| Image encoding in IRW | ✓ FUN_1000_6f20 with LM/TM selection |
+| Background image dedup | ✓ checksum-based, shared dedup table |
+| Object-to-module assignment | ✓ first-fit by file order |
+| HDRS/PALS label derivation | ✓ DOS 8.3 suffix (chars 4-7) |
+| BGNDTBL.GLO ENDMARKER | ✓ `.global` for ENDMARKER |
+| File pointer cleanup | ✓ all bgnd_fp closed in main() |
+| Linux path flag parsing | ✓ `/home/...` fixed |
 | Module hex detection | ✓ strtol-based, handles DPUL6 etc. |
+| BDD multi-newline handling | ✓ skips all consecutive newlines |
+| Unique color bpp bump | ✓ increases bpp when >64 colors |
+| Small image CMP=0 | ✓ width/height < 10 → no compression |
 
-## Open Questions
+## Remaining Differences
 
-1. **BLKS `wx` low byte** — BDB has `0x4000` but BLKS output has `0x4044`.
-   Where does the low byte come from? Candidates: per-image compression flags,
-   DMA register bits computed from image properties.
-
-2. **Object-to-module assignment** — wx_high alone doesn't determine the module
-   (DPUL6 and DPUL5 both have 0x40 objects). Need to reverse-engineer LOADW's
-   assignment loop.
-
-3. **BMOD width/height** — reference shows DPUL6BMOD width=802 but param
-   formula p2-p1=850. Likely computed from actual object extents.
+| Issue | Status |
+|-------|--------|
+| LM/TM selection | LM differs for some CMP=1 images (same FUN_1000_6f20 mismatch as sprites) |
+| BGNDPAL.ASM palette numbering | Off by 1 (PAL #0 vs #1) — cosmetic |
+| BGNDPAL.ASM color format | Variable vs fixed-width hex — cosmetic |
+| BGNDPAL.ASM line wrapping | LOADW wraps palette data at ~10 entries per line |
 
 ## References
 
