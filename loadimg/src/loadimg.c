@@ -1783,36 +1783,37 @@ static void process_lod(const char *lod_path) {
             int bgnd_count = 0;
             for (int di = 0; di < n_bdds; di++) {
                 if (img_module[di] < 0) continue;
-                bgnd_count++;
+                 bgnd_count++;
 
-                int w = bdds[di].w, h = bdds[di].h;
-                uint8_t *pix = bdds[di].pix;
-                int sizx_a = ((w + 3) & ~3) > 0 ? ((w + 3) & ~3) : 1;
-                int mod_i = img_module[di]; /* -1 if unreferenced */
+                 int w = bdds[di].w, h = bdds[di].h;
+                 uint8_t *pix = bdds[di].pix;
+                 int sizx_a = ((w + 3) & ~3) > 0 ? ((w + 3) & ~3) : 1;
+                 int mod_i = img_module[di]; /* -1 if unreferenced */
+                 int bg_dedup_idx = -1;
 
-                 if (!img_written[di]) {
-                     img_written[di] = 1;
-                     img_sags[di] = g.irw_bit;
+                  if (!img_written[di]) {
+                      img_written[di] = 1;
+                      img_sags[di] = g.irw_bit;
 
-                      int per_bpp;
-                      if (g.ppp > 0) {
-                          per_bpp = g.ppp;
-                      } else {
-                          uint32_t maxpx = 0;
-                          if (pix && w > 0 && h > 0)
-                              for (int pi = 0; pi < w * h; pi++)
-                                  if (pix[pi] > maxpx) maxpx = pix[pi];
-                          per_bpp = bpp_for_max(maxpx);
-                          if (per_bpp < 1 || per_bpp > 8) per_bpp = 4;
-                      }
-                     /* Increase bpp if unique colors exceed capacity */
-                     if (pix && w > 0 && h > 0) {
-                         uint8_t seen[256] = {0};
-                         int nunique = 0;
-                         for (int pi = 0; pi < w * h; pi++) {
-                             if (!seen[pix[pi]]) { seen[pix[pi]] = 1; nunique++; }
-                         }
-                         while (nunique > (1 << per_bpp) && per_bpp < 8) per_bpp++;
+                       int per_bpp;
+                       if (g.ppp > 0) {
+                           per_bpp = g.ppp;
+                       } else {
+                           uint32_t maxpx = 0;
+                           if (pix && w > 0 && h > 0)
+                               for (int pi = 0; pi < w * h; pi++)
+                                   if (pix[pi] > maxpx) maxpx = pix[pi];
+                           per_bpp = bpp_for_max(maxpx);
+                           if (per_bpp < 1 || per_bpp > 8) per_bpp = 4;
+                       }
+                      /* Increase bpp if unique colors exceed capacity */
+                      if (pix && w > 0 && h > 0) {
+                          uint8_t seen[256] = {0};
+                          int nunique = 0;
+                          for (int pi = 0; pi < w * h; pi++) {
+                              if (!seen[pix[pi]]) { seen[pix[pi]] = 1; nunique++; }
+                          }
+                          while (nunique > (1 << per_bpp) && per_bpp < 8) per_bpp++;
                      }
 
                     int best_lm = 0, best_tm = 0, do_cmp = 0;
@@ -1879,15 +1880,37 @@ static void process_lod(const char *lod_path) {
                             }
                              comp_bits += 8 + stored * per_bpp;
                          }
-                         do_cmp = (g.zon && raw_bits > comp_bits) ? 1 : 0;
-                         /* Background images: LOADW always compresses when ZON is on,
-                          * except for very small images (width < 10 or height < 10) */
-                         if (g.zon && w >= 10 && h >= 10) do_cmp = 1;
-                         if (w < 10) do_cmp = 0;
-                         img_bpp[di] = per_bpp; img_cmp[di] = do_cmp;
-                         img_lm[di] = best_lm; img_tm[di] = best_tm;
+                          do_cmp = (g.zon && raw_bits > comp_bits) ? 1 : 0;
+                          /* Images smaller than 10 pixels wide/tall are never compressed */
+                          if (w < 10 || h < 10) do_cmp = 0;
+                          /* When not compressing, LM/TM are irrelevant — reset to 0 */
+                          if (!do_cmp) { best_lm = 0; best_tm = 0; }
+                          img_bpp[di] = per_bpp; img_cmp[di] = do_cmp;
+                          img_lm[di] = best_lm; img_tm[di] = best_tm;
 
-                        if (do_cmp) {
+                         /* Dedup check before encoding */
+                         if (g.dedup && pix && w > 0 && h > 0) {
+                             uint32_t max_val;
+                             uint32_t ck = loadw_checksum(pix, w, w, h, &max_val);
+                             uint16_t bg_ctrl = (uint16_t)((per_bpp << 12) | (best_tm << 10) |
+                                                           (best_lm << 8) | (do_cmp ? 0x80 : 0));
+                             for (int di2 = 0; di2 < n_dedup; di2++) {
+                                 if (dedup_table[di2].sum == ck && dedup_table[di2].max_val == max_val &&
+                                     dedup_table[di2].sizx == sizx_a && dedup_table[di2].sizy == h &&
+                                     dedup_table[di2].ctrl == bg_ctrl) {
+                                     bg_dedup_idx = di2; break;
+                                 }
+                             }
+                         }
+
+                         if (bg_dedup_idx >= 0) {
+                             img_sags[di] = dedup_table[bg_dedup_idx].sag;
+                             if (g.verbose)
+                                 printf("  BGND 0x%02X (%dx%d) cksum match at bit=%u\n",
+                                        bdds[di].idx, w, h, dedup_table[bg_dedup_idx].sag);
+                         } else {
+
+                         if (do_cmp) {
                          for (int row = 0; row < h; row++) {
                              uint8_t *rp = pix + row * w;
                              int lead = 0, trail = 0, d1 = 0;
@@ -1929,8 +1952,23 @@ static void process_lod(const char *lod_path) {
                                 irw_write_bits(x < w ? rp[x] : 0, per_bpp);
                         }
                     }
-                    }
-                    if (g.verbose) printf("  BGND 0x%02X (%dx%d) bit=%u bpp=%d LM=%d TM=%d CMP=%d\n",
+                     }
+                     }
+                     /* Add to dedup table */
+                     if (g.dedup && bg_dedup_idx < 0 && n_dedup < MAX_DEDUP) {
+                         uint32_t max_val;
+                         uint32_t ck = loadw_checksum(pix, w, w, h, &max_val);
+                         uint16_t bg_ctrl = (uint16_t)((per_bpp << 12) | (best_tm << 10) |
+                                                       (best_lm << 8) | (do_cmp ? 0x80 : 0));
+                         dedup_table[n_dedup].sum = ck;
+                         dedup_table[n_dedup].max_val = max_val;
+                         dedup_table[n_dedup].sizx = sizx_a;
+                         dedup_table[n_dedup].sizy = h;
+                         dedup_table[n_dedup].ctrl = bg_ctrl;
+                         dedup_table[n_dedup].sag = img_sags[di];
+                         n_dedup++;
+                     }
+                     if (g.verbose) printf("  BGND 0x%02X (%dx%d) bit=%u bpp=%d LM=%d TM=%d CMP=%d\n",
                            bdds[di].idx, w, h, img_sags[di], per_bpp, best_lm, best_tm, do_cmp);
                 }
 
