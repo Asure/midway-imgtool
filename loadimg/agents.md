@@ -775,11 +775,17 @@ cat > /tmp/dosbox_ref.conf << 'EOF'
 [dosbox]
 machine=svga_s3
 memsize=16
+[cpu]
+core=auto
+cputype=auto
+cycles=max
+cycleup=10
+cycledown=20
 [autoexec]
 mount c /tmp/ref_test
 c:
 md TMP
-LOADW <LOD_BASENAME> /P /F=C:\TMP /T=C:\TMP
+LOADW <LOD_BASENAME> /P /F=C:\TMP /T=C:\TMP /V5 > C:\TMP\OUT.TXT
 exit
 EOF
 timeout 120 dosbox -conf /tmp/dosbox_ref.conf 2>&1 | tail -3
