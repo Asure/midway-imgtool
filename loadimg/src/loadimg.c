@@ -720,8 +720,7 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
                 if (lead == 120) { lead_done = 1; }
                 else if (px == 0) { lead++; }
                 else { lead_done = 1; }
-            }
-            if (lead_done && sizx - 120 < x) {
+            } else if (sizx - 120 < x) {
                 if (px == 0) trail++;
                 else trail = 0;
             }
@@ -777,21 +776,18 @@ static void encode_row(uint8_t *row, int w, int sizx, int bpp,
     int lead = 0, trail = 0, lead_done = 0;
     for (int x = 0; x < lim; x++) {
         uint8_t px = (x < w) ? row[x] : 0;
-        if (!lead_done) {
-            if (lead == 120) {
-                lead_done = 1;
-            } else if (px == 0) {
-                lead++;
-            } else {
-                lead_done = 1;
-            }
-        }
-        if (lead_done) {
-            if (sizx - 120 < x) {
+            if (!lead_done) {
+                if (lead == 120) {
+                    lead_done = 1;
+                } else if (px == 0) {
+                    lead++;
+                } else {
+                    lead_done = 1;
+                }
+            } else if (sizx - 120 < x) {
                 if (px == 0) trail++;
                 else trail = 0;
             }
-        }
     }
 
     /* LOADW _packbits: per-row lead, no running minimum.
