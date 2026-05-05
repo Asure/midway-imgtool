@@ -1789,16 +1789,25 @@ static void process_lod(const char *lod_path) {
                      img_written[di] = 1;
                      img_sags[di] = g.irw_bit;
 
-                     int per_bpp;
-                     if (g.ppp > 0) {
-                         per_bpp = g.ppp;
-                     } else {
-                         uint32_t maxpx = 0;
-                         if (pix && w > 0 && h > 0)
-                             for (int pi = 0; pi < w * h; pi++)
-                                 if (pix[pi] > maxpx) maxpx = pix[pi];
-                         per_bpp = bpp_for_max(maxpx);
-                         if (per_bpp < 1 || per_bpp > 8) per_bpp = 4;
+                      int per_bpp;
+                      if (g.ppp > 0) {
+                          per_bpp = g.ppp;
+                      } else {
+                          uint32_t maxpx = 0;
+                          if (pix && w > 0 && h > 0)
+                              for (int pi = 0; pi < w * h; pi++)
+                                  if (pix[pi] > maxpx) maxpx = pix[pi];
+                          per_bpp = bpp_for_max(maxpx);
+                          if (per_bpp < 1 || per_bpp > 8) per_bpp = 4;
+                      }
+                     /* Increase bpp if unique colors exceed capacity */
+                     if (pix && w > 0 && h > 0) {
+                         uint8_t seen[256] = {0};
+                         int nunique = 0;
+                         for (int pi = 0; pi < w * h; pi++) {
+                             if (!seen[pix[pi]]) { seen[pix[pi]] = 1; nunique++; }
+                         }
+                         while (nunique > (1 << per_bpp) && per_bpp < 8) per_bpp++;
                      }
 
                     int best_lm = 0, best_tm = 0, do_cmp = 0;
@@ -1863,11 +1872,15 @@ static void process_lod(const char *lod_path) {
                                     if (stored < 0) stored = 0;
                                 }
                             }
-                            comp_bits += 8 + stored * per_bpp;
-                        }
-                        do_cmp = (g.zon && raw_bits > comp_bits) ? 1 : 0;
-                        img_bpp[di] = per_bpp; img_cmp[di] = do_cmp;
-                        img_lm[di] = best_lm; img_tm[di] = best_tm;
+                             comp_bits += 8 + stored * per_bpp;
+                         }
+                         do_cmp = (g.zon && raw_bits > comp_bits) ? 1 : 0;
+                         /* Background images: LOADW always compresses when ZON is on,
+                          * except for very small images (width < 10 or height < 10) */
+                         if (g.zon && w >= 10 && h >= 10) do_cmp = 1;
+                         if (w < 10) do_cmp = 0;
+                         img_bpp[di] = per_bpp; img_cmp[di] = do_cmp;
+                         img_lm[di] = best_lm; img_tm[di] = best_tm;
 
                         if (do_cmp) {
                          for (int row = 0; row < h; row++) {
@@ -1917,7 +1930,7 @@ static void process_lod(const char *lod_path) {
                 }
 
                 if (g.bgnd_fp) {
-                    uint16_t ctrl = (uint16_t)((img_bpp[di] << 12) | (img_tm[di] << 10) |
+                    uint16_t ctrl = (uint16_t)(((img_bpp[di] == 8 ? 0 : img_bpp[di]) << 12) | (img_tm[di] << 10) |
                                                 (img_lm[di] << 8) | (img_cmp[di] ? 0x80 : 0));
                     static int first_bgnd = 1;
                     fprintf(g.bgnd_fp, "\t.word\t%d,%d%s\r\n", w, h, first_bgnd ? "\t;x size, y size" : "");
