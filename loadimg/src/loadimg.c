@@ -1128,8 +1128,14 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
      * LOADW skips duplicate name references in ---> lines. */
     static char seen_names[4096][MAX_NAME];
     static int n_seen = 0;
-    static void *last_imgfile = NULL;
-    if (cur->imgfile != last_imgfile) { n_seen = 0; last_imgfile = cur->imgfile; }
+    /* Use imgpath (file path string) for identity, not the ImgFile pointer
+     * which may be recycled by calloc after free. */
+    static char last_imgpath[MAX_PATH] = "";
+    if (strcmp(cur->imgpath, last_imgpath) != 0) {
+        n_seen = 0;
+        strncpy(last_imgpath, cur->imgpath, MAX_PATH-1);
+        last_imgpath[MAX_PATH-1] = 0;
+    }
     const char *p = line + 5;
     while (*p) {
         while (*p == ' ' || *p == ',') p++;
@@ -1173,15 +1179,20 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
             strncpy(n, cur->imgfile->images[i].name, MAX_NAME-1);
             n[MAX_NAME-1] = 0;
             for (int j = 0; j < MAX_NAME; j++) if (!n[j]) break;
-            if (strcmp(n, name) == 0) {
-                rec = &cur->imgfile->images[i];
-                if (img_is_oldfmt) break;
-            }
-        }
-        if (!rec) {
-            fprintf(stderr, "WARNING: image %s not found in %s\n", name, cur->imgpath);
-            continue;
-        }
+             if (strcmp(n, name) == 0) {
+                 rec = &cur->imgfile->images[i];
+                 if (img_is_oldfmt) break;
+             }
+         }
+         if (!rec) {
+             fprintf(stderr, "WARNING: image %s not found in %s\n", name, cur->imgpath);
+             continue;
+         }
+         /* Debug: check IMG file identity for thunder3a */
+         if (strcmp(name, "thunder3a") == 0 && g.verbose) {
+             fprintf(stderr, "THUNDER3A rec=%p imgfile=%p n_seen=%d dup=%d\n",
+                     (void*)rec, (void*)cur->imgfile, n_seen, dup);
+         }
 
         /* Determine SIZX from PTTBL: SIZX = PTTBL[pttblnum - n_special].BOX[1].W */
         int pttbl_sizx = 0;
@@ -1391,8 +1402,10 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
             ie->scale_ctrls[s] = cp.ctrl;
         }
 
-        if (g.build_tables && g.asm_fp)
-            write_image_tbl(g.asm_fp, ie);
+         if (g.build_tables && g.asm_fp)
+             write_image_tbl(g.asm_fp, ie);
+         else if (g.verbose && strcmp(name, "thunder3a") == 0)
+             fprintf(stderr, "THUNDER3A NO_TBL: build_tables=%d asm_fp=%p\n", g.build_tables, (void*)g.asm_fp);
 
         if (g.glo_fp)
             write_global(name);
@@ -2159,6 +2172,7 @@ else if (!strncmp(upper, "MON>", 4)) { }
             upcase(fname);
             if (cur.imgfile) { free(cur.imgfile->norm_images); free(cur.imgfile->data); free(cur.imgfile); }
             cur.imgfile = img_load_try(g.imgdir, fname);
+            n_dedup = 0;  /* LOADW resets dedup table per IMG library */
             if (!cur.imgfile)
                 fprintf(stderr, "WARNING: cannot load IMG file: %s\n", fname);
             else {
