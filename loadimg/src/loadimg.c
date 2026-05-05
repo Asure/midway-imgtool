@@ -1742,6 +1742,8 @@ static void process_lod(const char *lod_path) {
             for (int i = 0; i < 256; i++) img_module[i] = -1;
             for (int mi = 0; mi < 64; mi++) mod_obj_count[mi] = 0;
             int mod_ds[64], mod_de[64], mod_ys[64], mod_ye[64]; /* module depth/sy ranges */
+            int mod_first_depth[64]; /* depth of first object in BDB file order */
+            for (int i = 0; i < 64; i++) mod_first_depth[i] = -1;
 
             /* Phase 1: Output module BLKS labels and build module list */
             for (int gi = 0; gi < ng; gi++) {
@@ -1764,6 +1766,9 @@ static void process_lod(const char *lod_path) {
                     if (obj_ds >= mod_ds[mj] && obj_ds <= mod_de[mj] &&
                         obj_sy >= mod_ys[mj] && obj_sy <= mod_ye[mj])
                         { mi = mj; mod_obj_count[mj]++; break; }
+                /* Track first object depth per module (BDB file order) */
+                if (mi < n_bmod && mod_first_depth[mi] < 0)
+                    mod_first_depth[mi] = obj_ds;
                 /* Map each BDD image to its module via first-referencing GOBJ */
                 int ii = gobjs[gi].ii;
                 for (int di = 0; di < n_bdds; di++) {
@@ -1972,27 +1977,21 @@ static void process_lod(const char *lod_path) {
                                   break;
                               }
                           }
-                         blk_objs[n_blk].wx = wx_blks;
-                         blk_objs[n_blk].x = od - mod_ds[mi] - 1;
+                          blk_objs[n_blk].wx = wx_blks;
+                         /* Module-local coordinates: x relative to first object, y relative to sy_base */
+                         int first_d = mod_first_depth[mi];
+                         blk_objs[n_blk].x = od - (first_d >= 0 ? first_d : mod_ds[mi]);
                          blk_objs[n_blk].y = osy - mod_ys[mi] - 2;
                          blk_objs[n_blk].ii = hdr_idx;
                          n_blk++;
                      }
-                     /* Sort by depth then sy (matching LOADW output order) */
-                     for (int i = 0; i < n_blk - 1; i++)
-                         for (int j = i + 1; j < n_blk; j++)
-                             if (blk_objs[j].x < blk_objs[i].x ||
-                                 (blk_objs[j].x == blk_objs[i].x && blk_objs[j].y > blk_objs[i].y)) {
-                                 int tw = blk_objs[i].wx, tx = blk_objs[i].x, ty = blk_objs[i].y, tii = blk_objs[i].ii;
-                                 blk_objs[i].wx = blk_objs[j].wx; blk_objs[i].x = blk_objs[j].x;
-                                 blk_objs[i].y = blk_objs[j].y; blk_objs[i].ii = blk_objs[j].ii;
-                                 blk_objs[j].wx = tw; blk_objs[j].x = tx; blk_objs[j].y = ty; blk_objs[j].ii = tii;
-                             }
-                     for (int bi = 0; bi < n_blk; bi++) {
-                         if (bi == 0) {
-                             fprintf(g.bgnd_fp, "\t.word\t0%XH\t;flags\r\n", blk_objs[bi].wx);
-                             fprintf(g.bgnd_fp, "\t.word\t0%XH\t;pal5,pal4,hdr13-0\r\n", blk_objs[bi].ii);
-                         } else {
+                     /* Output in BDB file order (no sorting) */
+                      for (int bi = 0; bi < n_blk; bi++) {
+                          if (bi == 0) {
+                              fprintf(g.bgnd_fp, "\t.word\t0%XH\t;flags\r\n", blk_objs[bi].wx);
+                              fprintf(g.bgnd_fp, "\t.word\t%d,%d\t;x,y\r\n", blk_objs[bi].x, blk_objs[bi].y);
+                              fprintf(g.bgnd_fp, "\t.word\t0%XH\t;pal5,pal4,hdr13-0\r\n", blk_objs[bi].ii);
+                          } else {
                              fprintf(g.bgnd_fp, "\t.word\t0%XH,%d,%d,0%XH\r\n",
                                      blk_objs[bi].wx, blk_objs[bi].x, blk_objs[bi].y, blk_objs[bi].ii);
                          }
