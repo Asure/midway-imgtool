@@ -1,0 +1,7 @@
+	.globl	TIGRFYR_P
+	.globl	TIGERDK_P
+	.globl	BGPAL1_P
+	.globl	BSPEAR1_P
+	.globl	BGLO_P
+	.globl	BGSTONE_P
+	.globl	VOGEL_p

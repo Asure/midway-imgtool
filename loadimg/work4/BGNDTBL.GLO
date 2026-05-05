@@ -1,0 +1,338 @@
+	.globl	TYHDRS
+	.globl	mkcity1BLKS
+	.globl	mkcity2BLKS
+	.globl	mkcity3BLKS
+	.globl	mkcity4BLKS
+	.globl	mkcity5BLKS
+	.globl	mkcity1BMOD
+	.globl	mkcity2BMOD
+	.globl	mkcity3BMOD
+	.globl	mkcity4BMOD
+	.globl	mkcity5BMOD
+	.globl	BRAWHDRS
+	.globl	SUBWAY2BLKS
+	.globl	SUBWAY1BLKS
+	.globl	SUBWAY2BMOD
+	.globl	SUBWAY1BMOD
+	.globl	OULHDRS
+	.globl	SOUL1BLKS
+	.globl	SOUL2BLKS
+	.globl	SOUL3BLKS
+	.globl	SOUL4BLKS
+	.globl	SOUL5BLKS
+	.globl	SOUL1BMOD
+	.globl	SOUL2BMOD
+	.globl	SOUL3BMOD
+	.globl	SOUL4BMOD
+	.globl	SOUL5BMOD
+	.globl	NKHDRS
+	.globl	BANK1BLKS
+	.globl	BANK2BLKS
+	.globl	BANK1BMOD
+	.globl	BANK2BMOD
+	.globl	reetHDRS
+	.globl	street4BLKS
+	.globl	street3BLKS
+	.globl	street1BLKS
+	.globl	street2BLKS
+	.globl	street4BMOD
+	.globl	street3BMOD
+	.globl	street1BMOD
+	.globl	street2BMOD
+	.globl	IDGEHDRS
+	.globl	BRIDGE1BLKS
+	.globl	BRIDGE2BLKS
+	.globl	BRIDGE3BLKS
+	.globl	BRIDGE1BMOD
+	.globl	BRIDGE2BMOD
+	.globl	BRIDGE3BMOD
+	.globl	LLHDRS
+	.globl	MKBELL6BLKS
+	.globl	MKBELL1BLKS
+	.globl	MKBELL5BLKS
+	.globl	MKBELL4BLKS
+	.globl	MKBELL3BLKS
+	.globl	MKBELL2BLKS
+	.globl	MKBELL7BLKS
+	.globl	MKBELL6BMOD
+	.globl	MKBELL1BMOD
+	.globl	MKBELL5BMOD
+	.globl	MKBELL4BMOD
+	.globl	MKBELL3BMOD
+	.globl	MKBELL2BMOD
+	.globl	MKBELL7BMOD
+	.globl	LL2HDRS
+	.globl	MKTOWERBLKS
+	.globl	MKTOWERBMOD
+	.globl	MP2HDRS
+	.globl	temple4BLKS
+	.globl	temple1BLKS
+	.globl	temple2BLKS
+	.globl	temple3BLKS
+	.globl	temple0BLKS
+	.globl	temple4BMOD
+	.globl	temple1BMOD
+	.globl	temple2BMOD
+	.globl	temple3BMOD
+	.globl	temple0BMOD
+	.globl	AVEHDRS
+	.globl	GRAVE7BLKS
+	.globl	GRAVE6BLKS
+	.globl	GRAVE5BLKS
+	.globl	GRAVE4BLKS
+	.globl	GRAVE3BLKS
+	.globl	GRAVE2BLKS
+	.globl	GRAVE1BLKS
+	.globl	GRAVE0BLKS
+	.globl	GRAVE7BMOD
+	.globl	GRAVE6BMOD
+	.globl	GRAVE5BMOD
+	.globl	GRAVE4BMOD
+	.globl	GRAVE3BMOD
+	.globl	GRAVE2BMOD
+	.globl	GRAVE1BMOD
+	.globl	GRAVE0BMOD
+	.globl	RONEHDRS
+	.globl	MKPIT4BLKS
+	.globl	MKPIT3BLKS
+	.globl	MKPIT2BLKS
+	.globl	MKPIT1BLKS
+	.globl	MKPIT4BMOD
+	.globl	MKPIT3BMOD
+	.globl	MKPIT2BMOD
+	.globl	MKPIT1BMOD
+	.globl	LC2HDRS
+	.globl	BALCONY3BLKS
+	.globl	BALCONY4BLKS
+	.globl	BALCONY5BLKS
+	.globl	BALCONY1BLKS
+	.globl	BALCONY2BLKS
+	.globl	BALCONY3BMOD
+	.globl	BALCONY4BMOD
+	.globl	BALCONY5BMOD
+	.globl	BALCONY1BMOD
+	.globl	BALCONY2BMOD
+	.globl	DDENHDRS
+	.globl	HIDDEN1BLKS
+	.globl	HIDDEN2BLKS
+	.globl	HIDDEN1BMOD
+	.globl	HIDDEN2BMOD
+	.globl	AO1HDRS
+	.globl	TEXT1BLKS
+	.globl	TEXT1BMOD
+	.globl	AO2HDRS
+	.globl	TEXT2BLKS
+	.globl	TEXT2BMOD
+	.globl	XTHDRS
+	.globl	TEXTBLKS
+	.globl	TEXTBMOD
+	.globl	dderHDRS
+	.globl	LADDERBLKS
+	.globl	LADDERBMOD
+	.globl	LECTHDRS
+	.globl	MKSELECTBLKS
+	.globl	MKSELECTBMOD
+	.globl	LVSHDRS
+	.globl	STEELMODBLKS
+	.globl	STEELMODBMOD
+	.globl	yinHDRS
+	.globl	buyinbotBLKS
+	.globl	buyintopBLKS
+	.globl	buyinbotBMOD
+	.globl	buyintopBMOD
+	.globl	oinHDRS
+	.globl	coinmodBLKS
+	.globl	coinmodBMOD
+	.globl	IOHDRS
+	.globl	BIOMODBLKS
+	.globl	BIOMODBMOD
+	.globl	NDHDRS
+	.globl	ENDMODBLKS
+	.globl	ENDMODBMOD
+	.globl	BOXHDRS
+	.globl	WIDEMODBLKS
+	.globl	WIDEMODBMOD
+	.globl	SMGAR_P;	PAL ;#0
+	.globl	DKGOYL_P;	PAL #1
+	.globl	BIGGAR_P;	PAL #2
+	.globl	ROFWALL_P;	PAL #3
+	.globl	CITHAL_P;	PAL #4
+	.globl	SHATWR1_P;	PAL #5
+	.globl	SHATWR2_P;	PAL #6
+	.globl	FLATI_P;	PAL; #7
+	.globl	CHRYLR_P;	PAL #8
+	.globl	CITSKY2_P;	PAL #9
+	.globl	CITSKY1_P;	PAL #10
+	.globl	SKYLN3_P;	PAL #11
+	.globl	TRANAM_P;	PAL #12
+	.globl	TYPALS   ;
+	.globl	P_PILR1a;	PAL #0
+	.globl	WAL4_P;	PAL #1
+	.globl	PILR3_P;	PAL #2
+	.globl	P_LITE6	;PAL #3
+	.globl	P_DARK1	;PAL #4
+	.globl	P_FPLAT7b;	PAL #5
+	.globl	CAN_P	;PAL #6
+	.globl	P_LITE3	;PAL #7
+	.globl	P_LLITE	;PAL #8
+	.globl	P_LITE1	;PAL #9
+	.globl	P_WAL	;PAL #10
+	.globl	P_FPLATEF;	PAL #11
+	.globl	BRAWPALS  ;
+	.globl	SORAM_P;	PAL #0
+	.globl	SOEYES_P;	PAL #1
+	.globl	SOSAC_P;	PAL #2
+	.globl	SOMTH_P;	PAL #3
+	.globl	SOSDE1_P;	PAL #4
+	.globl	SOSDE2_P;	PAL #5
+	.globl	SOTOPS_P;	PAL #6
+	.globl	BKPIL_P;	PAL #7
+	.globl	SOPIL_P	;PAL #8
+	.globl	SOTEE_P	;PAL #9
+	.globl	OULPALS
+	.globl	BANK1_P;	PAL #0
+	.globl	BANK2_P;	PAL #1
+	.globl	BANK3_P;	PAL #2
+	.globl	BANK4_P;	PAL #3
+	.globl	BANK5_P;	PAL #4
+	.globl	BANK6_P;	PAL #5
+	.globl	BANK7_P;	PAL #6
+	.globl	CITY1_P;	PAL #7
+	.globl	CITY2_P;	PAL #8
+	.globl	CITY3_P;	PAL #9
+	.globl	CITY4_P;	PAL #10
+	.globl	CITY5_P;	PAL #11
+	.globl	CITY6_P;	PAL #12
+	.globl	STORM_P;	PAL #13
+	.globl	NKPALS
+	.globl	BUILD_P;	PAL #0
+	.globl	LAMP_P;	PAL #1
+	.globl	SUBSTR_P;	PAL #2
+	.globl	STREET_P;	PAL #3
+	.globl	STRLIT_P;	PAL #4
+	.globl	FALL3P;	PAL #5
+	.globl	FALL4P;	PAL #6
+	.globl	FALL1P;	PAL #7
+	.globl	FALL5P;	PAL #8
+	.globl	FALL2P;	PAL #9
+	.globl	reetPALS
+	.globl	ORGSKY_P;	PAL #0
+	.globl	GLASBLD_P;	PAL #1
+	.globl	BRCKBLD_P;	PAL #2
+	.globl	WHTBLDG_P;	PAL #3
+	.globl	BWALL1_P;	PAL #4
+	.globl	BRWAL2_P;	PAL #5
+	.globl	BRWAL3_P;	PAL #6
+	.globl	BRGEND1_P;	PAL #7
+	.globl	BARACDE_P;	PAL #8
+	.globl	BRGEND3_P;	PAL #9
+	.globl	BRGEND4_P;	PAL #10
+	.globl	RBEAM_P;	PAL #11
+	.globl	RBEAM2_P;	PAL #12
+	.globl	BRAIL_P;	PAL #13
+	.globl	LITPOST_P;	PAL #14
+	.globl	IDGEPALS  ;
+	.globl	BEMOON_P;	PAL #0
+	.globl	BELWAL_P;	PAL #1
+	.globl	BELPIL_P;	PAL #2
+	.globl	BELWL2_P;	PAL #3
+	.globl	BELSTR_P;	PAL #4
+	.globl	BELLS_P;	PAL #5
+	.globl	ROPE_P;	PAL #6
+	.globl	LLPALS ;
+	.globl	BELFLR_P;	PAL #0
+	.globl	TOWOOD_P;	PAL #1
+	.globl	BLUST_P	;PAL #2
+	.globl	BSTEP_P	;PAL #3
+	.globl	TOWAL_P	;PAL #4
+	.globl	LL2PALS;
+	.globl	TBKWAL_P;	PAL #0
+	.globl	STRAIL_P;	PAL #1
+	.globl	tempruf_p;	PAL #2
+	.globl	LTCAND_P;	PAL #3
+	.globl	NUALT_P;	PAL #4
+	.globl	SKULPIL4P;	PAL #5
+	.globl	SKULPL_P;	PAL #6
+	.globl	TCEIL1_P;	PAL #7
+	.globl	TWALL3P;	PAL #8
+	.globl	TCEIL2_P;	PAL #9
+	.globl	RCANDLE_P;	PAL #10
+	.globl	skulpil_p;	PAL #11
+	.globl	MP2PALS   ;
+	.globl	CEMGRD5_P;	PAL #0
+	.globl	SHOV1_P	;PAL #1
+	.globl	GSHV3_P	;PAL #2
+	.globl	SHOV2_P	;PAL #3
+	.globl	GRATRE_P;	PAL #4
+	.globl	GRAV1_P	;PAL #5
+	.globl	CEMA4_P	;PAL #6
+	.globl	CEMA3_P	;PAL #7
+	.globl	GRAV2_P	;PAL #8
+	.globl	CEMHILL_P;	PAL #9
+	.globl	CEMGRD2_P;	PAL #10
+	.globl	CME4_P	;PAL #11
+	.globl	SMTREE_P;	PAL #12
+	.globl	ZBRAN_P	;PAL #13
+	.globl	AVEPALS  ;
+	.globl	BIHD1_P	;PAL #0
+	.globl	BGHD3_P	;PAL #1
+	.globl	GRNLIT_P;	PAL #2
+	.globl	TPLAR1_P;	PAL #3
+	.globl	BHED2B_P;	PAL #4
+	.globl	BHED2C_P;	PAL #5
+	.globl	BHED2E_P;	PAL #6
+	.globl	BHED2D_P;	PAL #7
+	.globl	NUDOR_P;	PAL #8
+	.globl	BIGHD2_P;	PAL #9
+	.globl	PITWK1_P;	PAL #10
+	.globl	THRON2_P;	PAL #11
+	.globl	TPLAR2_P;	PAL #12
+	.globl	THRON1_P;	PAL #13
+	.globl	PITWAL_P;	PAL #14
+	.globl	THROWA_P;	PAL #15
+	.globl	PITWK2_P;	PAL #16
+	.globl	RONEPALS
+	.globl	BALC3_P;	PAL #0
+	.globl	CANDLE_P;	PAL #1
+	.globl	BALC01_P;	PAL #2
+	.globl	BALC02_P;	PAL #3
+	.globl	GRNWEL_P;	PAL #4
+	.globl	BALC06_P;	PAL #5
+	.globl	BALC03_P;	PAL #6
+	.globl	BALC04_P;	PAL #7
+	.globl	BROZF_P;	PAL #8
+	.globl	BATRIM_P;	PAL #9
+	.globl	BABFLR_P;	PAL #10
+	.globl	BALFIRE_P;	PAL #11
+	.globl	LC2PALS   ;
+	.globl	PORCEN_P;	PAL #0
+	.globl	PORGRD_P;	PAL #1
+	.globl	PORSKY_P;	PAL #2
+	.globl	MONO_P	;PAL #3
+	.globl	PORTWLK_P;	PAL #4
+	.globl	DDENPALS 
+	.globl	AO1PALS
+	.globl	AO2PALS
+	.globl	XTPALS
+	.globl	dderPALS
+	.globl	SEL_P1P;	PAL #0
+	.globl	SEL_P2P;	PAL #1
+	.globl	SEL_P3P;	PAL #2
+	.globl	SEL_P4P;	PAL #3
+	.globl	SEL_BEVP;	PAL #4
+	.globl	LECTPALS ;
+	.globl	BRMET_P;	PAL #0
+	.globl	LVSPALS ;
+	.globl	BUYIN_p;	PAL #0
+	.globl	yinPALS ;
+	.globl	CRUMP_P	;PAL #0
+	.globl	MORTKOM_P;	PAL #1
+	.globl	oinPALS  ;
+	.globl	MARBL_P	;PAL #0
+	.globl	BIOPOR_P;	PAL #1
+	.globl	IOPALS   ;
+	.globl	NDPALS    ;
+	.globl	DMARBL_P;	PAL #0
+	.globl	END_KAB_P;	PAL #1
+	.globl	BOXPALS   ;
+

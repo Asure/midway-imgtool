@@ -1,0 +1,14 @@
+	.globl	OLPALS
+	.globl	STEEL_P
+	.globl	GRID_P
+	.globl	DPOOL_P
+	.globl	NESS_P
+	.globl	DUSK2_P
+	.globl	DUSK3_P
+	.globl	DUSK1_P
+	.globl	DPUL6BMOD
+	.globl	DPUL1BMOD
+	.globl	DPUL2BMOD
+	.globl	DPUL3BMOD
+	.globl	DPUL4BMOD
+	.globl	DPUL5BMOD

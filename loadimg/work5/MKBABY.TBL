@@ -1,0 +1,82 @@
+	.DATA
+STBABE:
+	.word   32,48,0,0
+	.long   034bcc49H
+	.word   06480H
+	.long   BABYST_P
+RDBABE:
+	.word   32,48,0,0
+	.long   034be167H
+	.word   06080H
+	.long   BABYRD_P
+LKBABE:
+	.word   32,47,0,0
+	.long   034bfa2dH
+	.word   06480H
+	.long   BABYLK_P
+CAGEBABE:
+	.word   32,47,0,0
+	.long   034c0ee3H
+	.word   06080H
+	.long   BABYJC_P
+JXBABE:
+	.word   32,47,0,0
+	.long   034c250dH
+	.word   06480H
+	.long   BABYJX_P
+BKBABE:
+	.word   32,48,0,0
+	.long   034c39c9H
+	.word   06080H
+	.long   BABYBK_P
+MLBABE:
+	.word   32,49,0,0
+	.long   034c510fH
+	.word   06080H
+	.long   BABYML_P
+KTBABE:
+	.word   32,49,0,0
+	.long   034c6959H
+	.word   07080H
+	.long   BABYKT_P
+HHBABE:
+	.word   40,46,0,0
+	.long   034c846bH
+	.word   06480H
+	.long   BABYHH_P
+discoball1:
+	.word   48,33,25,-14
+	.long   034c9bc5H
+	.word   04180H
+	.long   disco_p
+NJBABE:
+	.word   28,44,0,0
+	.long   034cacd1H
+	.word   06080H
+discoball2:
+	.word   44,34,20,-13
+	.long   034cc1c3H
+	.word   04180H
+discoball3:
+	.word   40,33,19,-14
+	.long   034cd30fH
+	.word   04180H
+discoball4:
+	.word   40,33,19,-14
+	.long   034ce403H
+	.word   04180H
+discoball5:
+	.word   44,32,20,-15
+	.long   034cf4e7H
+	.word   04480H
+discoball6:
+	.word   44,32,21,-15
+	.long   034d05a7H
+	.word   04180H
+discopole:
+	.word   4,66,0,50
+	.long   034d1687H
+	.word   04000H
+	.long   disco_p
+	.TEXT
+

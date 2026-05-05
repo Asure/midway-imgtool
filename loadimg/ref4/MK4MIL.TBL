@@ -1,0 +1,7 @@
+	.DATA
+ENDMARKER:
+	.word   4,1,0,0
+	.long   0500867bH
+	.word   01000H
+	.TEXT
+

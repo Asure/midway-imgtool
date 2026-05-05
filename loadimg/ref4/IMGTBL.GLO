@@ -1,0 +1,17 @@
+	.globl	RDBLUD1_P
+	.globl	ELEC_P
+	.globl	SUB_P
+	.globl	REP_P
+	.globl	SCORP_P
+	.globl	BLOB_P
+	.globl	ROPE_P
+	.globl	REPHED_P
+	.globl	TUNG_P
+	.globl	SKULL_P
+	.globl	SCRBLD_P
+	.globl	ICE_P
+	.globl	ACID_P
+	.globl	JAXRED_P
+	.globl	PROX10
+	.globl	QUAKE_P
+	.globl	JXBLUD2_P

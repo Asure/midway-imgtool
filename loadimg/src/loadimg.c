@@ -1935,16 +1935,17 @@ static void process_lod(const char *lod_path) {
                          int od = gobjs[gi].dp, osy = gobjs[gi].sy;
                          if (od < mod_ds[mi] || od > mod_de[mi]) continue;
                          if (osy < mod_ys[mi] || osy > mod_ye[mi]) continue;
-                         int wx_blks = gobjs[gi].wx;
-                         int ii = gobjs[gi].ii;
-                         int hdr_idx = 0;
-                         for (int di = 0; di < n_bdds; di++) {
-                             if (bdds[di].idx == ii) {
-                                 wx_blks |= (img_cmp[di] << 7) | (img_lm[di] << 8) | (img_tm[di] << 10);
-                                 hdr_idx = di;
-                                 break;
-                             }
-                         }
+                          int wx_blks = gobjs[gi].wx;
+                          int ii = gobjs[gi].ii;
+                          int hdr_idx = 0;
+                          for (int di = 0; di < n_bdds; di++) {
+                              if (bdds[di].idx == ii) {
+                                  wx_blks = (wx_blks & 0xFFF0) | 0x0040 | (gobjs[gi].fl & 0x0F);
+                                  wx_blks = (wx_blks & ~0x0001) | (bdds[di].fl & 1);
+                                  hdr_idx = di;
+                                  break;
+                              }
+                          }
                          blk_objs[n_blk].wx = wx_blks;
                          blk_objs[n_blk].x = od - mod_ds[mi] - 1;
                          blk_objs[n_blk].y = osy - mod_ys[mi] - 2;

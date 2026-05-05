@@ -1,0 +1,10 @@
+	.DATA
+FL_ARM	.set	03000000h
+FL_TOW	.set	0306cfc0h
+FL_TOMB	.set	030f0d20h
+FL_FORST	.set	03158880h
+FL_BATTL	.set	0319d160h
+FL_PORT	.set	031ec300h
+FL_ARENA	.set	0323b4a0h
+	.TEXT
+

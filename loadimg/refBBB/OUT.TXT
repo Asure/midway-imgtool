@@ -1,0 +1,571 @@
+
+Copyright (C) Williams Electronics Games, Inc. 1993.
+GSP Image Loader - DMA 2 - Version 5/25/94
+Using a page of expanded memory.
+
+
+GSP is Memory Mapped at PC address C000:7000
+Loading images ...
+	from: C:\MKBBB.lod
+	to:   Table header files (written to directory C:\TMP\)
+	      GSP target system.
+	      C:\TMP\MKBBB.irw
+	      Padding images to multiple of 4 pixels
+
+SET new IRAM address = 2000000
+SET new IRAM address = 3000000
+Loading Background C:\NUPOOL
+
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 4
+
+
+
+leftover zeros for x1, 1635 leading, 710 trailing
+leftover zeros for x2, 1031 leading, 351 trailing
+leftover zeros for x4, 159 leading, 113 trailing
+leftover zeros for x8, 171 leading, 213 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 186 trailing
+leftover zeros for x4, 0 leading, 558 trailing
+leftover zeros for x8, 0 leading, 558 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 2 trailing
+leftover zeros for x2, 0 leading, 149 trailing
+leftover zeros for x4, 0 leading, 443 trailing
+leftover zeros for x8, 0 leading, 535 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 83 leading, 115 trailing
+leftover zeros for x2, 17 leading, 12 trailing
+leftover zeros for x4, 39 leading, 50 trailing
+leftover zeros for x8, 83 leading, 90 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 121 leading, 0 trailing
+leftover zeros for x2, 12 leading, 0 trailing
+leftover zeros for x4, 18 leading, 162 trailing
+leftover zeros for x8, 54 leading, 162 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 277 trailing
+leftover zeros for x2, 0 leading, 49 trailing
+leftover zeros for x4, 0 leading, 399 trailing
+leftover zeros for x8, 0 leading, 479 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 8
+
+
+
+leftover zeros for x1, 121 leading, 717 trailing
+leftover zeros for x2, 12 leading, 567 trailing
+leftover zeros for x4, 18 leading, 271 trailing
+leftover zeros for x8, 54 leading, 183 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 504 leading, 395 trailing
+leftover zeros for x2, 54 leading, 78 trailing
+leftover zeros for x4, 134 leading, 130 trailing
+leftover zeros for x8, 254 leading, 274 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 1 leading, 0 trailing
+leftover zeros for x4, 1 leading, 0 trailing
+leftover zeros for x8, 1 leading, 0 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 62 trailing
+leftover zeros for x2, 0 leading, 25 trailing
+leftover zeros for x4, 0 leading, 37 trailing
+leftover zeros for x8, 0 leading, 85 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 86 trailing
+leftover zeros for x8, 0 leading, 86 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 26 trailing
+leftover zeros for x8, 0 leading, 26 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 175 leading, 195 trailing
+leftover zeros for x2, 25 leading, 25 trailing
+leftover zeros for x4, 73 leading, 73 trailing
+leftover zeros for x8, 165 leading, 173 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 33 leading, 33 trailing
+leftover zeros for x4, 33 leading, 33 trailing
+leftover zeros for x8, 33 leading, 33 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 148 leading, 0 trailing
+leftover zeros for x2, 58 leading, 0 trailing
+leftover zeros for x4, 10 leading, 0 trailing
+leftover zeros for x8, 14 leading, 0 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 20 leading, 0 trailing
+leftover zeros for x2, 10 leading, 43 trailing
+leftover zeros for x4, 38 leading, 95 trailing
+leftover zeros for x8, 146 leading, 223 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 94 trailing
+leftover zeros for x8, 0 leading, 94 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 0 leading, 42 trailing
+leftover zeros for x2, 0 leading, 14 trailing
+leftover zeros for x4, 4 leading, 84 trailing
+leftover zeros for x8, 8 leading, 92 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 14 leading, 49 trailing
+leftover zeros for x4, 86 leading, 211 trailing
+leftover zeros for x8, 86 leading, 211 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 91 leading, 153 trailing
+leftover zeros for x2, 14 leading, 17 trailing
+leftover zeros for x4, 42 leading, 45 trailing
+leftover zeros for x8, 94 leading, 109 trailing
+
+
+
+Bogus X-size for compressing BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 4
+
+
+
+leftover zeros for x1, 33 leading, 812 trailing
+leftover zeros for x2, 18 leading, 306 trailing
+leftover zeros for x4, 0 leading, 62 trailing
+leftover zeros for x8, 0 leading, 150 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 4
+
+
+
+leftover zeros for x1, 0 leading, 844 trailing
+leftover zeros for x2, 0 leading, 323 trailing
+leftover zeros for x4, 0 leading, 65 trailing
+leftover zeros for x8, 0 leading, 157 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 282 leading, 0 trailing
+leftover zeros for x2, 82 leading, 103 trailing
+leftover zeros for x4, 122 leading, 103 trailing
+leftover zeros for x8, 274 leading, 103 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 812 leading, 0 trailing
+leftover zeros for x2, 368 leading, 0 trailing
+leftover zeros for x4, 124 leading, 0 trailing
+leftover zeros for x8, 212 leading, 0 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 844 leading, 0 trailing
+leftover zeros for x2, 323 leading, 99 trailing
+leftover zeros for x4, 61 leading, 99 trailing
+leftover zeros for x8, 149 leading, 99 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 25 leading, 26 trailing
+leftover zeros for x4, 45 leading, 42 trailing
+leftover zeros for x8, 81 leading, 158 trailing
+
+
+
+Bogus X-size for compressing BG block.
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 0 trailing
+leftover zeros for x4, 0 leading, 446 trailing
+leftover zeros for x8, 0 leading, 446 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 12 leading, 13 trailing
+leftover zeros for x4, 40 leading, 39 trailing
+leftover zeros for x8, 84 leading, 87 trailing
+
+
+
+Bogus X-size for compressing BG block.
+Bogus X-size for compressing BG block.
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 4
+
+
+
+leftover zeros for x1, 41 leading, 265 trailing
+leftover zeros for x2, 26 leading, 145 trailing
+leftover zeros for x4, 0 leading, 17 trailing
+leftover zeros for x8, 0 leading, 33 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 47 trailing
+leftover zeros for x4, 0 leading, 47 trailing
+leftover zeros for x8, 0 leading, 47 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 73 leading, 0 trailing
+leftover zeros for x2, 40 leading, 46 trailing
+leftover zeros for x4, 16 leading, 46 trailing
+leftover zeros for x8, 20 leading, 46 trailing
+
+
+
+Bogus X-size for compressing BG block.
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 85 leading, 0 trailing
+leftover zeros for x2, 70 leading, 0 trailing
+leftover zeros for x4, 106 leading, 66 trailing
+leftover zeros for x8, 70 leading, 66 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 168 leading, 0 trailing
+leftover zeros for x4, 168 leading, 0 trailing
+leftover zeros for x8, 168 leading, 0 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 1 leading, 1 trailing
+leftover zeros for x4, 1 leading, 131 trailing
+leftover zeros for x8, 1 leading, 131 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 2
+
+
+
+leftover zeros for x1, 350 leading, 151 trailing
+leftover zeros for x2, 90 leading, 29 trailing
+leftover zeros for x4, 38 leading, 43 trailing
+leftover zeros for x8, 66 leading, 99 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 0 leading, 33 trailing
+leftover zeros for x4, 0 leading, 33 trailing
+leftover zeros for x8, 0 leading, 33 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 66 leading, 78 trailing
+leftover zeros for x2, 18 leading, 28 trailing
+leftover zeros for x4, 50 leading, 80 trailing
+leftover zeros for x8, 134 leading, 164 trailing
+
+
+
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 35 leading, 60 trailing
+leftover zeros for x4, 95 leading, 172 trailing
+leftover zeros for x8, 163 leading, 396 trailing
+
+
+
+
+Bytes Loaded...
+	IMAGE RAM               130060 dec	   1FC0C hex
+
+	TOTAL LOAD              130060 dec	   1FC0C hex
+
+Bytes Written to Raw File...
+	In IMAGE RAM records       130060 dec	   1FC0C hex
+
+	TOTAL bytes written        130060 dec	   1FC0C hex, in 2 records.
+
+Bytes Represented in Tables ... 130060 dec 1FC0C hex
+
+5 images were NOT zero-compressed because they are
+	smaller than 10 pixels wide.
+

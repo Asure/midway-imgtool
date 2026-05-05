@@ -1,0 +1,74 @@
+	.DATA
+biggoro1a:
+	.word   124,161,85,-24
+	.long   034d1aa7H
+	.word   0680H
+	.long   lggoro_p
+goroyell1:
+	.word   44,41,19,-6
+	.long   034f1edfH
+	.word   080H
+	.long   lggoro_p
+goroyell2:
+	.word   48,41,20,-8
+	.long   034f4827H
+	.word   080H
+	.long   lggoro_p
+biggoro1b:
+	.word   52,135,-37,-50
+	.long   034f7387H
+	.word   0480H
+biggoro2a:
+	.word   140,165,93,-20
+	.long   03501cefH
+	.word   0780H
+biggoro2b:
+	.word   56,149,-47,-36
+	.long   03526667H
+	.word   0480H
+biggoro3a:
+	.word   60,139,104,-25
+	.long   03530aa7H
+	.word   0680H
+biggoro3b:
+	.word   68,150,-43,-15
+	.long   0353b8cfH
+	.word   0a80H
+biggoro3c:
+	.word   96,174,46,-11
+	.long   03548b5fH
+	.word   0680H
+biggoro4a:
+	.word   48,158,124,5
+	.long   0356425fH
+	.word   0680H
+biggoro4b:
+	.word   52,157,-79,5
+	.long   0356cfefH
+	.word   0680H
+biggoro4c:
+	.word   156,178,76,-7
+	.long   035769a7H
+	.word   0a80H
+biggoro5a:
+	.word   64,105,138,33
+	.long   035a1377H
+	.word   0680H
+biggoro5b:
+	.word   52,50,135,-97
+	.long   035a7c9fH
+	.word   0580H
+biggoro5c:
+	.word   164,178,86,-6
+	.long   035ab76fH
+	.word   0a80H
+biggoro5d:
+	.word   72,96,-75,23
+	.long   035d619fH
+	.word   0a80H
+biggoro5e:
+	.word   76,49,-75,-88
+	.long   035dd27fH
+	.word   0680H
+	.TEXT
+

@@ -1,0 +1,123 @@
+	.DATA
+LKWALKLEG1A:
+	.word   44,72,27,-68
+	.long   041363f2H
+	.word   06480H
+LKWALKLEG2A:
+	.word   28,73,16,-68
+	.long   04139b0cH
+	.word   06080H
+LKWALKLEG3A:
+	.word   32,73,16,-67
+	.long   0413c028H
+	.word   06080H
+LKWALKLEG4A:
+	.word   32,73,16,-68
+	.long   0413e436H
+	.word   06080H
+LKWALKLEG5A:
+	.word   32,72,15,-68
+	.long   04140c6aH
+	.word   06080H
+LKWALKLEG6A:
+	.word   40,72,16,-68
+	.long   04143424H
+	.word   06480H
+LKWALKLEG7A:
+	.word   24,72,17,-68
+	.long   04145d58H
+	.word   06080H
+LKWALKLEG7B:
+	.word   24,65,-4,-68
+	.long   0414781cH
+	.word   06080H
+LKWALKLEG8A:
+	.word   20,71,17,-69
+	.long   04148d02H
+	.word   06080H
+LKWALKLEG8B:
+	.word   40,68,-1,-69
+	.long   0414a536H
+	.word   06580H
+LKWALKLEG9A:
+	.word   28,69,24,-71
+	.long   0414be1eH
+	.word   06480H
+LKWALKLEG9B:
+	.word   32,66,-3,-71
+	.long   0414d864H
+	.word   06480H
+LKWALKTORSO1A:
+	.word   44,65,30,-3
+	.long   0414ef86H
+	.word   06180H
+LKWALKTORSO1B:
+	.word   28,21,-12,-41
+	.long   04151e46H
+	.word   06480H
+LKWALKTORSO2A:
+	.word   44,65,30,-3
+	.long   0414ef86H
+	.word   06180H
+LKWALKTORSO2B:
+	.word   28,21,-12,-41
+	.long   04151e46H
+	.word   06480H
+LKWALKTORSO3A:
+	.word   44,65,30,-2
+	.long   0414ef86H
+	.word   06180H
+LKWALKTORSO3B:
+	.word   28,21,-12,-40
+	.long   04151e46H
+	.word   06480H
+LKWALKTORSO4A:
+	.word   44,65,30,-3
+	.long   0414ef86H
+	.word   06180H
+LKWALKTORSO4B:
+	.word   28,21,-12,-41
+	.long   04151e46H
+	.word   06480H
+LKWALKTORSO5A:
+	.word   44,65,30,-3
+	.long   0414ef86H
+	.word   06180H
+LKWALKTORSO5B:
+	.word   28,21,-12,-41
+	.long   04151e46H
+	.word   06480H
+LKWALKTORSO6A:
+	.word   44,65,30,-3
+	.long   0414ef86H
+	.word   06180H
+LKWALKTORSO6B:
+	.word   28,21,-12,-41
+	.long   04151e46H
+	.word   06480H
+LKWALKTORSO7A:
+	.word   44,65,30,-3
+	.long   0414ef86H
+	.word   06180H
+LKWALKTORSO7B:
+	.word   28,21,-12,-41
+	.long   04151e46H
+	.word   06480H
+LKWALKTORSO8A:
+	.word   44,65,30,-4
+	.long   0414ef86H
+	.word   06180H
+LKWALKTORSO8B:
+	.word   28,21,-12,-42
+	.long   04151e46H
+	.word   06480H
+LKWALKTORSO9A:
+	.word   44,65,30,-6
+	.long   0414ef86H
+	.word   06180H
+LKWALKTORSO9B:
+	.word   28,21,-12,-44
+	.long   04151e46H
+	.word   06480H
+	.TEXT
+
