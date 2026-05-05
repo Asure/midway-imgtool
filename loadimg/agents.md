@@ -574,19 +574,25 @@ matches LOAD2 (separate lines), which is the correct target.
 
 | Test | Mode | Images | Result |
 |------|------|--------|--------|
-| **MK2MIL** | ZON + ZOF | 159 | **100.0%** — IRW + TBL byte-exact |
+| **MK2MIL** | ZON + ZOF | 159 | **100.0%** — IRW + 5/5 TBLs byte-exact |
 | **MK3MIL** | ZOF | 159 | **100.0%** — binary match |
-| **MK4MIL** | ZON | 1899 | **100.0%** — IRW + TBL byte-exact |
+| **MK4MIL** | ZON | 1899 | **100.0%** — IRW + 6/6 TBLs byte-exact |
+| **MK5MIL** | ZON | 702 | **99.99%** — IRW data 56% diff (1 image cascade, see below) |
 | **MK7MIL** (image TBLs) | ZON | ~1900 | **100.0%** — TBL match |
 | **MK7MIL** (background) | BBB | ~1900 images | **100%** image TBLs, ~50% background tables |
 | **MKSMALL** | ZON + ZOF | 4 | **100.0%** — IRW match |
 
+**MK5MIL cascade note:** A single image (`BGSPEAR6` in `MKSK.TBL`) encodes with 31 bytes more data than LOADW due to a borderline LM/TM/CMP decision. This shifts all subsequent 286 MKSK images by that amount, cascading to FRM files and the next TBL (total 531 bytes shift by `MKFN2.TBL`).
+
 ### Reference File Sources
 
-- `output3/` — Per-LOD LOADW reference (ground truth for BAM)
-- `output9/` — Combined LOADW reference (all LODs in one IRW)
-- LOADW.EXE single-image runs may produce different output than full-LOD runs
-  (state-dependent). Always compare against `output3/` or `output9/` for consistency.
+| Directory | Content |
+|-----------|---------|
+| `work3/` | MK7MIL reference (images + background tables) |
+| `ref2/` | MK2MIL reference (images only, no BBB) |
+| `ref4/` | MK4MIL reference |
+| `ref5/` | MK5MIL reference (FRM + images) |
+| `binary/LOADW.EXE` | Original MS-DOS LOADW binary |
 
 ### DMA2 Compression Format (from DMA2.DOC)
 
