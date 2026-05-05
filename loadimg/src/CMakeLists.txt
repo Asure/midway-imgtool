@@ -16,3 +16,12 @@ if(UNIX)
 endif()
 
 install(TARGETS loadimg DESTINATION bin)
+
+# Test target — compares output against LOADW references
+set(TEST_SCRIPT "${CMAKE_SOURCE_DIR}/../test.sh")
+add_custom_target(test
+    COMMAND sh "${TEST_SCRIPT}"
+    WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/.."
+    COMMENT "Running loadimg test suite against ref directories"
+)
+add_dependencies(test loadimg)
