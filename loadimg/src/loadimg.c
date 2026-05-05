@@ -648,7 +648,7 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
         uint8_t *row = pix + y * stride;
         int lead = 0, trail = 0, lead_done = 0;
 
-        for (int x = 0; x < sizx; x++) {
+        for (int x = 0; x < rec->w; x++) {
             uint8_t px = row[x];
             if (!lead_done) {
                 if (lead == 120) {
@@ -660,12 +660,12 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
                 }
             }
             if (lead_done) {
-                if (sizx - 120 < x) {
-                    if (px == 0) trail++;
-                    else trail = 0;
-                }
+            if (sizx - 120 < x) {
+                if (px == 0) trail++;
+                else trail = 0;
             }
         }
+    }
 
     for (int m = 0; m < 4; m++) {
         int mult = 1 << m;
@@ -1195,7 +1195,7 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
                 int pstride = (rec->w + 3) & ~3;
                 uint32_t maxpx = 0;
                 for (int y = 0; y < rec->h; y++)
-                    for (int x = 0; x < rec->w; x++) {
+        for (int x = 0; x < sizx; x++) {
                         uint8_t px = pix[y * pstride + x];
                         if (px > maxpx) maxpx = px;
                     }
