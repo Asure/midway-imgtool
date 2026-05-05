@@ -648,7 +648,7 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
         uint8_t *row = pix + y * stride;
         int lead = 0, trail = 0, lead_done = 0;
 
-        for (int x = 0; x < rec->w; x++) {
+        for (int x = 0; x < sizx; x++) {
             uint8_t px = row[x];
             if (!lead_done) {
                 if (lead == 120) {
@@ -660,31 +660,31 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
                 }
             }
             if (lead_done) {
-            if (sizx - 120 < x) {
-                if (px == 0) trail++;
-                else trail = 0;
+                if (sizx - 120 < x) {
+                    if (px == 0) trail++;
+                    else trail = 0;
+                }
             }
         }
+
+        for (int m = 0; m < 4; m++) {
+            int mult = 1 << m;
+            int ln = lead / mult;
+            if (ln > 15) ln = 15;
+            lead_err[m] += lead - mult * ln;
+            int tn = trail / mult;
+            if (tn > 15) tn = 15;
+            trail_err[m] += trail - mult * tn;
+        }
+
+        if (y < la_window && lead < lookahead_lead_min)
+            lookahead_lead_min = lead;
     }
 
-    for (int m = 0; m < 4; m++) {
-        int mult = 1 << m;
-        int ln = lead / mult;
-        if (ln > 15) ln = 15;
-        lead_err[m] += lead - mult * ln;
-        int tn = trail / mult;
-        if (tn > 15) tn = 15;
-        trail_err[m] += trail - mult * tn;
-    }
+    if (lookahead_lead_min == 999) lookahead_lead_min = 0;
 
-    if (y < la_window && lead < lookahead_lead_min)
-        lookahead_lead_min = lead;
-}
-
-if (lookahead_lead_min == 999) lookahead_lead_min = 0;
-
-{
-    int best_lm = 0;
+    {
+        int best_lm = 0;
         for (int m = 1; m < 4; m++)
             if (lead_err[m] < lead_err[best_lm]) best_lm = m;
         int best_tm = 0;
@@ -1195,7 +1195,7 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
                 int pstride = (rec->w + 3) & ~3;
                 uint32_t maxpx = 0;
                 for (int y = 0; y < rec->h; y++)
-                    for (int x = 0; x < pstride; x++) {
+                    for (int x = 0; x < rec->w; x++) {
                         uint8_t px = pix[y * pstride + x];
                         if (px > maxpx) maxpx = px;
                     }
@@ -1211,6 +1211,143 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
         if (g.n_images >= MAX_IMAGES) die("too many images");
         ImageEntry *ie = &g.images[g.n_images++];
         memset(ie, 0, sizeof(*ie));
+        /* Use IMG record name (preserving case) for TBL label */
+        {
+            char n[MAX_NAME];
+            strncpy(n, rec->name, MAX_NAME-1);
+            n[MAX_NAME-1] = 0;
+            strncpy(ie->name, n, MAX_NAME-1);
+        }
+        ie->anix = rec->anix;
+        ie->aniy = rec->aniy;
+        ie->w = rec->w;
+        ie->h = rec->h;
+        ie->sizx = cp.sizx;
+        ie->sizy = cp.sizy;
+        ie->ctrl = cp.ctrl;
+        ie->n_scales = scale_n;
+        ie->pwrd1 = -1;
+        ie->pwrd2 = -1;
+        ie->pwrd3 = -1;
+        ie->pt3y = 0;
+
+        /* PT pairs from PTTBL fields or computed from box/CBOX geometry */
+        if (rec->pttblnum >= (int16_t)cur->imgfile->n_special && cur->imgfile->pttbls) {
+            int pt_idx = (int)rec->pttblnum - cur->imgfile->n_special;
+            if (pt_idx < cur->imgfile->n_pttbls) {
+                PTTBL *pt = &cur->imgfile->pttbls[pt_idx];
+                PTTBL *pt0 = &cur->imgfile->pttbls[0];
+                
+                /* Read stored PT fields */
+                ie->extra_pts[0] = pt->x1;
+                ie->extra_pts[1] = pt->x2;
+                ie->extra_pts[2] = pt->x3;
+                ie->extra_pts[3] = pt->x_anipt3;
+                ie->extra_pts[4] = pt->y_anipt3;
+                ie->extra_pts[5] = pt->z_anipt3;
+                ie->extra_pts[6] = 0;
+                ie->extra_pts[7] = 0;
+                ie->n_extra_pts = 6;
+                
+                /* If stored fields are zero, compute 4 PT pairs from geometry */
+                if (ie->extra_pts[0] == 0 && ie->extra_pts[1] == 0) {
+                    int cx = (int)((int8_t)pt->cbox[0].x);
+                    int cy = (int)((int8_t)pt->cbox[0].y);
+                    int cw = pt->cbox[0].w;
+                    int ch = pt->cbox[0].h;
+                    
+                    /* PT1 = (CBOX.X - ANIX + CBOX.W, CBOX.Y - ANIY + CBOX.H) */
+                    ie->extra_pts[0] = cx - ie->anix + cw;
+                    ie->extra_pts[1] = cy - ie->aniy + ch;
+                    
+                    /* PT2 from shared PTTBL[0] (!STAND2):
+                       (BOX[1].W + CBOX.W - CBOX.H - 1, BOX[1].Y - CBOX.W - 1) */
+                    ie->extra_pts[2] = pt0->box[1].w + pt0->cbox[0].w - pt0->cbox[0].h - 1;
+                    ie->extra_pts[3] = pt0->box[1].y - pt0->cbox[0].w - 1;
+                    
+                    /* PT3 = (BOX[2].X + 1, ANIY - BOX[1].H + shared_CBOX.H) */
+                    ie->extra_pts[4] = pt->box[2].x + 1;
+                    ie->extra_pts[5] = ie->aniy - pt->box[1].h + pt0->cbox[0].h;
+                    
+                    /* PT4 = (ANIX - BOX[1].W, ANIY - BOX[1].H) */
+                    ie->extra_pts[6] = ie->anix - pt->box[1].w;
+                    ie->extra_pts[7] = ie->aniy - pt->box[1].h;
+                    
+                    ie->n_extra_pts = 8;
+                }
+            }
+        }
+
+        /* Palette: stored palnum includes 3 defaults */
+        PAL_REC *prec = find_user_palette(cur->imgfile, rec->palnum);
+        if (prec && g.pon) {
+            char pname[PAL_NAME_LEN+1];
+            strncpy(pname, prec->name, PAL_NAME_LEN);
+            pname[PAL_NAME_LEN] = 0;
+            for (int j = PAL_NAME_LEN-1; j >= 0; j--) {
+                if (!isprint((unsigned char)pname[j]) || pname[j] == ' ') pname[j] = 0;
+                else break;
+            }
+            if (pname[0]) {
+                strncpy(ie->pal_name, pname, PAL_NAME_LEN-1);
+                int found = 0;
+                for (int pi = 0; pi < g.n_palettes; pi++) {
+                    if (!strcmp(g.palettes[pi].name, pname)) { found = 1; break; }
+                }
+                if (!found && g.n_palettes < MAX_PALETTES) {
+                    PaletteEntry *pe = &g.palettes[g.n_palettes++];
+                    memset(pe, 0, sizeof(*pe));
+                    strncpy(pe->name, pname, PAL_NAME_LEN-1);
+                    pe->numc = prec->numc;
+                    pe->bitspix = prec->bitspix;
+                    uint16_t *cols = img_pal_colors(cur->imgfile, prec);
+                    if (cols && pe->numc > 0) {
+                        pe->colors = (uint16_t*)malloc(pe->numc * sizeof(uint16_t));
+                        memcpy(pe->colors, cols, pe->numc * sizeof(uint16_t));
+                    }
+                    int pal_actual = rec->palnum;
+                    if (pal_actual >= NUMDEFPAL && pal_actual < cur->imgfile->n_palettes)
+                        pal_actual -= NUMDEFPAL;
+                    write_palette(pe, cur->imgfile, rec->palnum, pal_actual);
+                }
+            }
+        }
+
+        /* CON> dedup: check if identical image already encoded */
+        int dedup_idx = -1;
+        if (g.dedup) {
+            uint8_t *pix_data = img_pixels(cur->imgfile, rec);
+            int pstride = (rec->w + 3) & ~3;
+            uint32_t max_val;
+            uint32_t ck = loadw_checksum(pix_data, pstride, rec->w, rec->h, &max_val);
+            for (int di = 0; di < n_dedup; di++) {
+                if (dedup_table[di].sum == ck && dedup_table[di].max_val == max_val &&
+                    dedup_table[di].sizx == cp.sizx && dedup_table[di].sizy == cp.sizy &&
+                    dedup_table[di].ctrl == cp.ctrl) {
+                    dedup_idx = di; break;
+                }
+            }
+        }
+
+        if (dedup_idx >= 0) {
+            ie->sag = dedup_table[dedup_idx].sag;
+            if (g.verbose)
+                printf("  Checksum match on image [%s].\n", name);
+        } else {
+            ie->sag = encode_image(cur->imgfile, rec, &cp, bpp);
+            if (g.dedup && n_dedup < MAX_DEDUP) {
+                uint8_t *pix_data = img_pixels(cur->imgfile, rec);
+                int pstride = (rec->w + 3) & ~3;
+                uint32_t max_val;
+                dedup_table[n_dedup].sum = loadw_checksum(pix_data, pstride, rec->w, rec->h, &max_val);
+                dedup_table[n_dedup].max_val = max_val;
+                dedup_table[n_dedup].sizx = cp.sizx;
+                dedup_table[n_dedup].sizy = cp.sizy;
+                dedup_table[n_dedup].ctrl = cp.ctrl;
+                dedup_table[n_dedup].sag = ie->sag;
+                n_dedup++;
+            }
+        }
         ie->scale_sags[0] = ie->sag;
         ie->scale_ctrls[0] = cp.ctrl;
         for (int s = 1; s < scale_n; s++) {
