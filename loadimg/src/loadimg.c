@@ -1042,9 +1042,10 @@ static void write_image_tbl(FILE *fp, ImageEntry *ie) {
     }
 }
 
-static void write_global(const char *name) {
-    fprintf(g.glo_fp, "\t.globl\t%s\r\n", name);
-}
+        static void write_global(const char *name) {
+     fprintf(g.glo_fp, "\t.%s\t%s\r\n",
+             strcmp(name, "ENDMARKER") == 0 ? "global" : "globl", name);
+ }
 
 /* =========================================================================
  * LOD parser
@@ -1751,7 +1752,7 @@ static void process_lod(const char *lod_path) {
                         mod_ds[n_bmod] = gobjs[gi].wx;
                         mod_de[n_bmod] = gobjs[gi].dp;
                         mod_ys[n_bmod] = gobjs[gi].sy;
-                        mod_ye[n_bmod] = gobjs[gi].ii;
+                        mod_ye[n_bmod] = gobjs[gi].sy + gobjs[gi].ii;
                         n_bmod++;
                     }
                     continue;
@@ -1816,9 +1817,9 @@ static void process_lod(const char *lod_path) {
                                 int tn = trail / mult; if (tn > 15) tn = 15;
                                 lead_err[m] += lead - ln * mult;
                                 trail_err[m] += trail - tn * mult;
-                }
-                fprintf(g.bgnd_fp, "\r\n");
-            }
+                            }
+                        }
+
                         for (int m = 1; m < 4; m++) {
                             if (lead_err[m] < lead_err[best_lm]) best_lm = m;
                             if (trail_err[m] < trail_err[best_tm]) best_tm = m;
@@ -1923,28 +1924,56 @@ static void process_lod(const char *lod_path) {
 
             /* Phase 3: Output BLKS map layout data (after image entries, before BMOD) */
             if (g.bgnd_fp && n_bmod > 0) {
-                for (int mi = 0; mi < n_bmod; mi++) {
-                    const char *mn = bmod_list[mi];
-                    fprintf(g.bgnd_fp, "%sBLKS:\r\n", mn);
-                    int first_blk = 1;
-                    for (int gi = 0; gi < ng; gi++) {
-                        if (gobjs[gi].is_mod) continue;
-                        int od = gobjs[gi].dp, osy = gobjs[gi].sy;
-                        if (od < mod_ds[mi] || od > mod_de[mi]) continue;
-                        if (osy < mod_ys[mi] || osy > mod_ye[mi]) continue;
-                        if (first_blk) {
-                            fprintf(g.bgnd_fp, "\t.word\t0%xH\t;flags\r\n", gobjs[gi].wx);
-                            fprintf(g.bgnd_fp, "\t.word\t%d,%d\t;x,y\r\n", od, osy);
-                            fprintf(g.bgnd_fp, "\t.word\t0%xH\t;pal5,pal4,hdr13-0\r\n", gobjs[gi].ii);
-                            first_blk = 0;
-                        } else {
-                            fprintf(g.bgnd_fp, "\t.word\t0%xH,%d,%d,0%xH\r\n",
-                                    gobjs[gi].wx, od, osy, gobjs[gi].ii);
-                        }
-                    }
-                    fprintf(g.bgnd_fp, "\t.word\t0FFFFH\t;End Marker\r\n");
-                }
-            }
+                 for (int mi = 0; mi < n_bmod; mi++) {
+                     const char *mn = bmod_list[mi];
+                     fprintf(g.bgnd_fp, "%sBLKS:\r\n", mn);
+                     /* Collect objects for this module, convert to module-local coords */
+                     struct { int wx, x, y, ii; } blk_objs[2048];
+                     int n_blk = 0;
+                     for (int gi = 0; gi < ng; gi++) {
+                         if (gobjs[gi].is_mod) continue;
+                         int od = gobjs[gi].dp, osy = gobjs[gi].sy;
+                         if (od < mod_ds[mi] || od > mod_de[mi]) continue;
+                         if (osy < mod_ys[mi] || osy > mod_ye[mi]) continue;
+                         int wx_blks = gobjs[gi].wx;
+                         int ii = gobjs[gi].ii;
+                         int hdr_idx = 0;
+                         for (int di = 0; di < n_bdds; di++) {
+                             if (bdds[di].idx == ii) {
+                                 wx_blks |= (img_cmp[di] << 7) | (img_lm[di] << 8) | (img_tm[di] << 10);
+                                 hdr_idx = di;
+                                 break;
+                             }
+                         }
+                         blk_objs[n_blk].wx = wx_blks;
+                         blk_objs[n_blk].x = od - mod_ds[mi] - 1;
+                         blk_objs[n_blk].y = osy - mod_ys[mi] - 2;
+                         blk_objs[n_blk].ii = hdr_idx;
+                         n_blk++;
+                     }
+                     /* Sort by depth then sy (matching LOADW output order) */
+                     for (int i = 0; i < n_blk - 1; i++)
+                         for (int j = i + 1; j < n_blk; j++)
+                             if (blk_objs[j].x < blk_objs[i].x ||
+                                 (blk_objs[j].x == blk_objs[i].x && blk_objs[j].y > blk_objs[i].y)) {
+                                 int tw = blk_objs[i].wx, tx = blk_objs[i].x, ty = blk_objs[i].y, tii = blk_objs[i].ii;
+                                 blk_objs[i].wx = blk_objs[j].wx; blk_objs[i].x = blk_objs[j].x;
+                                 blk_objs[i].y = blk_objs[j].y; blk_objs[i].ii = blk_objs[j].ii;
+                                 blk_objs[j].wx = tw; blk_objs[j].x = tx; blk_objs[j].y = ty; blk_objs[j].ii = tii;
+                             }
+                     for (int bi = 0; bi < n_blk; bi++) {
+                         if (bi == 0) {
+                             fprintf(g.bgnd_fp, "\t.word\t0%xH\t;flags\r\n", blk_objs[bi].wx);
+                             fprintf(g.bgnd_fp, "\t.word\t%d,%d\t;x,y\r\n", blk_objs[bi].x, blk_objs[bi].y);
+                             fprintf(g.bgnd_fp, "\t.word\t0%xH\t;pal5,pal4,hdr13-0\r\n", blk_objs[bi].ii);
+                         } else {
+                             fprintf(g.bgnd_fp, "\t.word\t0%xH,%d,%d,0%xH\r\n",
+                                     blk_objs[bi].wx, blk_objs[bi].x, blk_objs[bi].y, blk_objs[bi].ii);
+                         }
+                     }
+                     fprintf(g.bgnd_fp, "\t.word\t0FFFFH\t;End Marker\r\n");
+                 }
+             }
 
             /* BMOD sections (after all BLKS sections) */
             if (g.verbose) {
@@ -2205,6 +2234,10 @@ int main(int argc, char *argv[]) {
     }
     if (g.glo_fp) fclose(g.glo_fp);
     if (g.pal_fp) fclose(g.pal_fp);
+    if (g.bgnd_fp) fclose(g.bgnd_fp);
+    if (g.bgndpal_fp) fclose(g.bgndpal_fp);
+    if (g.bgndequ_fp) fclose(g.bgndequ_fp);
+    if (g.bgndtbl_glo_fp) fclose(g.bgndtbl_glo_fp);
     free(g.irw_data);
 
     printf("Done. %d images processed.\n", g.n_images);
