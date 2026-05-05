@@ -1,8 +1,7 @@
 # loadimg — Compression Algorithm Reference
 
 This document captures the reverse-engineering results from LOADW.EXE (MS-DOS, 5/25/94)
-for the DMA2 zero-run compression algorithm. The compression is now **100% byte-exact**
-matching LOADW across all tested LODs (MK2MIL, MK3MIL, MK4MIL).
+for the DMA2 zero-run compression algorithm used in **Mortal Kombat 2** data.
 
 ---
 

@@ -2,6 +2,8 @@
 
 Williams/Midway arcade image loader replacement for the MS-DOS LOAD2/LOADW tool (Williams Electronics Games Inc., 1995). Reads `.lod` script files and `.img` container files, outputs `.tbl`/`.asm`/`.glo`/`.irw` files for TMS34020 GSP hardware.
 
+All LOD test files (MK2MIL through MK8MIL) are from **Mortal Kombat 2** arcade data. The naming convention (MK4MIL = MK2 revision 4, etc.) reflects different game ROM revisions, not different game titles.
+
 ---
 
 ## IMG Container Format
@@ -568,7 +570,8 @@ matches LOAD2 (separate lines), which is the correct target.
 | .TEXT trailer | ✓ | `\t.TEXT\r\n` + `0x1a` EOF marker |
 | Palette (.globl) | ✓ | Writes `.globl\tPALNAME` to GLO |
 | IRW header | ✓ | Date, n_images, bpp, total_size |
-| FUN_1000_6f20 (LM/TM) | ✓ | Error-minimizing, 120 cap, bVar8, minimum stored=10 |
+| FUN_1000_6f20 (LM/TM) | ✓ | Error-minimizing, 120 cap, `else if` for trail (not double-if), minimum stored=10 |
+| IRW encoder cascade | △ | TE matches LOADW; 4 LODs still have encoder differences (probably CMP or packbits) |
 | FUN_1854_35fc (checksum) | ✓ | DWORD sum + max over byte-pairs |
 | Minimum stored = 10 | ✓ | Second-pass adjustment (local_2c/iVar9 distribution) |
 | Space check (CMP=0) | ✓ | `sizx < 10` or `comp_bits >= raw_bits` (`<=` comparison) |
@@ -584,23 +587,32 @@ matches LOAD2 (separate lines), which is the correct target.
 
 ### Test Results (current dataset)
 
-| Test | Mode | Images | Result |
-|------|------|--------|--------|
-| **MK2MIL** | ZON + ZOF | 1937 | **100.0%** — IRW + 5/5 TBLs byte-exact |
-| **MK3MIL** | ZOF | 1949 | **99.9%** — TBL diffs (pre-existing, same FUN_1000_6f20 mismatch) |
-| **MK4MIL** | ZON | 1885 | **100.0%** — IRW + 6/6 TBLs byte-exact |
-| **MK5MIL** | ZON | 702 | **99.99%** — 31-byte cascade (BGSPEAR6 LM/TM mismatch) |
-| **MK8MIL** | FRM | 0 sprites | **100.0%** — MKREVX.TBL match |
-| **MKBBB (NUPOOL)** | BBB | 43 bgnd | **100.0%** — IRW + TBL byte-exact |
-| **MKBBB (TOMB)** | BBB | — | 26% IRW diff (LM/TM for CMP=1 images) |
-| **MKBBB (TOWER2)** | BBB | — | 26% IRW diff (same cascade) |
+All LOD files are from **Mortal Kombat 2** arcade data. Naming: MK2MIL = MK2 revision 2, MK4MIL = revision 4, etc.
 
-**LM/TM mismatch note**: All remaining IRW differences (MK3MIL, MK5MIL, MKBBB
-TOMB/TOWER2) share the same root cause — the FUN_1000_6f20 LM/TM selection
-gives different results from LOADW for a small number of borderline images.
-This causes a data cascade through subsequent images. The algorithm is
-functionally correct; the mismatch is in the exact lead/trail waste values
-or tie-breaking logic.
+| Test | Mode | Images | TBLs | Result |
+|------|------|--------|------|--------|
+| **MK2MIL** | ZON + ZOF | 1937 | 5/5 | **PASS** — IRW + TBLs byte-exact |
+| **MK4MIL** | ZON | 1885 | 6/6 | **PASS** — IRW + TBLs byte-exact |
+| **MK8MIL** | FRM | 0 sprites | 1/1 | **PASS** — MKREVX.TBL match |
+| **MK3MIL** | ZOF | 1949 | 1/5 | FAIL (encoder cascade, TE now correct) |
+| **MK5MIL** | ZON | 702 | 1/7 | FAIL (encoder cascade, TE now correct) |
+| **MK6MIL** | ZON/ZOF | 1859 | 8/17 | FAIL (encoder cascade) |
+| **MK7MIL** | Mixed | 703 | 1/11 | FAIL (encoder cascade + BGND addresses) |
+| **MKBBB (NUPOOL)** | BBB | 43 bgnd | — | **PASS** — IRW + BGND TBLs byte-exact |
+| **MKBBB (TOMB)** | BBB | — | — | FAIL (LM/TM for CMP=1 images) |
+
+**LM/TM mismatch note**: The FUN_1000_6f20 lead/trail analysis had a subtle bug
+(the trail loop used a separate `if (lead_done)` block instead of `else if`,
+causing one extra trailing pixel to be counted when the lead cap of 120 was hit
+on the same iteration). This has been fixed — TE values now match LOADW's verbose
+output exactly (e.g. BGSPEAR6: `TE[34 24 72 128]`). However, 4 LODs still fail
+due to a secondary encoder cascade: even with matching LM/TM selection, the
+compressed IRW output differs starting at some image, cascading through
+subsequent images. The cascade size is ~3-31 bytes per TBL. MK2MIL, MK4MIL, and
+MK8MIL are fully byte-exact, confirming the encoder is correct for those
+datasets. The remaining failures affect datasets where the encoder produces
+different output for the same LM/TM/CMP parameters, or where CMP decisions
+differ.
 
 ### Reference File Sources
 

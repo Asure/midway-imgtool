@@ -2,7 +2,7 @@
 
 The `BBB>` directive loads BLIMP background files composed of paired `.BDB`
 (object placement) and `.BDD` (image/palette container) files. These define
-the scrolling background layers used in Mortal Kombat 4 / MK7 arcade stages.
+the scrolling background layers in Mortal Kombat 2 arcade stages.
 
 ## File Formats
 

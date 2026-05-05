@@ -6,17 +6,14 @@
 
 ZOF mode is **byte-exact** with LOADW across all tested datasets:
 - MKSMALL (4 images): 100.0% (with and without `/P`)
-- MK3MIL (159 images, 4 IMG files, ZOF only): **100.0% binary match**
-- MK2MIL (159 images, CON/COF toggling): **100.0% binary match**
-- ZOF mode disables `encode_scaled()` — all scale SAGs point to scale 0
 - `/P` flag controls stride `(w+3)&~3` vs tight `w` packing in ZOF output
 
-### ZON (Compressed) Mode — Byte-Exact Match
+### ZON (Compressed) Mode — Partial Match
 
-- MK2MIL (159 images, ZON+/P): **100.0% byte-exact**, IRW + TBL match
-- MK4MIL (1899 images, ZON+/P): **100.0% byte-exact**, IRW + TBL match
-- MK7MIL (~1900 images, ZON+/P): **100.0% byte-exact** on image TBLs (BBB background tables ~50% WIP)
-- ZON mode implements FUN_1000_6f20 error-minimizing LM/TM selection
+- MK2MIL, MK4MIL, MK8MIL: **100.0% byte-exact** (IRW + all TBLs)
+- MK3MIL, MK5MIL, MK6MIL, MK7MIL: **partial** — LM/TM selection now matches LOADW
+  (FUN_1000_6f20 trail counting uses `else if`, not double-if, fixing TE values),
+  but an encoder cascade remains (~3-31 bytes per TBL per LOD)
 - Space check: CMP=0 when compressed size >= raw size (`<=` comparison)
 - Minimum stored=10 adjustment fully implemented (local_2c/iVar9 distribution)
 

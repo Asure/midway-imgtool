@@ -668,12 +668,9 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
                 } else {
                     lead_done = 1;
                 }
-            }
-            if (lead_done) {
-                if (sizx - 120 < x) {
-                    if (px == 0) trail++;
-                    else trail = 0;
-                }
+            } else if (sizx - 120 < x) {
+                if (px == 0) trail++;
+                else trail = 0;
             }
         }
 
