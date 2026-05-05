@@ -1,0 +1,685 @@
+	.DATA
+FIGHT:
+	.word   160,40,79,19
+	.long   026dac0bH
+	.word   06000H
+	.long   FIN_P
+FINISHHIM:
+	.word   288,40,143,19
+	.long   026e420bH
+	.word   06000H
+	.long   FIN_Y_P
+FINISHHER:
+	.word   288,40,143,19
+	.long   026f500bH
+	.word   06000H
+	.long   FIN_P
+mortaltxt:
+	.word   176,54,0,0
+	.long   02705e0bH
+	.word   06000H
+	.long   TITEXT_p
+kombatxt:
+	.word   200,54,0,0
+	.long   02713ccbH
+	.word   06000H
+	.long   TITEXT_p
+bigthund1:
+	.word   152,52,0,0
+	.long   027239ebH
+	.word   06000H
+	.long   KOMCLD1_p
+strike1:
+	.word   36,6,9,-10
+	.long   0272f32bH
+	.word   06000H
+	.long   BIG2_p
+thunder3a:
+	.word   20,19,-204,-58
+	.long   0272f83bH
+	.word   06000H
+	.long   KOMCLD2_p
+mk2logo1a:
+	.word   52,50,-16,-128
+	.long   02730123H
+	.word   06a80H
+mk2logo1b:
+	.word   24,128,-144,-48
+	.long   0273293bH
+	.word   06580H
+mk2logo1c:
+	.word   96,145,-51,-37
+	.long   027351b3H
+	.word   06680H
+mk2logo2a:
+	.word   36,68,-11,-32
+	.long   02744b27H
+	.word   06580H
+mk2logo2b:
+	.word   40,35,-127,-8
+	.long   027462d7H
+	.word   06480H
+mk2logo2c:
+	.word   84,93,-46,-6
+	.long   0274778dH
+	.word   06680H
+strike2:
+	.word   92,91,25,66
+	.long   0274e4a1H
+	.word   06b80H
+strike3:
+	.word   108,63,57,34
+	.long   027513d1H
+	.word   06780H
+strike4:
+	.word   92,61,56,13
+	.long   02753f8dH
+	.word   06380H
+strike5a:
+	.word   32,33,62,-5
+	.long   02757445H
+	.word   06480H
+strike5b:
+	.word   36,46,30,-5
+	.long   027583bdH
+	.word   06180H
+strike5c:
+	.word   36,89,-3,13
+	.long   027599afH
+	.word   06180H
+strike10:
+	.word   100,102,62,-6
+	.long   0275b8fdH
+	.word   06080H
+strike10b:
+	.word   40,42,152,-167
+	.long   0276850fH
+	.word   06680H
+strike11:
+	.word   96,101,61,-7
+	.long   027690f7H
+	.word   06080H
+strike12:
+	.word   96,99,62,-7
+	.long   0277571fH
+	.word   06080H
+strike13:
+	.word   88,92,58,-11
+	.long   02781893H
+	.word   06080H
+strike6a:
+	.word   40,63,62,-5
+	.long   0278b6b9H
+	.word   06480H
+strike6b:
+	.word   24,81,24,-5
+	.long   0278cf55H
+	.word   06080H
+strike6c:
+	.word   40,99,1,-5
+	.long   0278ef0bH
+	.word   06180H
+strike7:
+	.word   100,104,62,-5
+	.long   027911cdH
+	.word   06280H
+strike8:
+	.word   104,114,67,-5
+	.long   0279df9fH
+	.word   06c80H
+strike9:
+	.word   100,102,62,-6
+	.long   027abe05H
+	.word   06080H
+strike9b:
+	.word   68,74,152,-119
+	.long   027b8981H
+	.word   06a80H
+thunder1:
+	.word   72,62,0,0
+	.long   027ba299H
+	.word   06580H
+thunder2:
+	.word   120,69,0,0
+	.long   027bdc81H
+	.word   06680H
+thunder3b:
+	.word   52,38,-157,-70
+	.long   027c66bdH
+	.word   06680H
+thunder3c:
+	.word   52,45,-226,-44
+	.long   027c8455H
+	.word   06580H
+thunder4a:
+	.word   28,11,-27,-115
+	.long   027ca5a9H
+	.word   06080H
+thunder4b:
+	.word   40,20,-32,-165
+	.long   027caaabH
+	.word   06180H
+thunder4c:
+	.word   84,48,-31,-119
+	.long   027cb4c3H
+	.word   06280H
+thunder4d:
+	.word   64,40,-114,-121
+	.long   027cf42fH
+	.word   06580H
+scorpfire1:
+	.word   12,15,3,8
+	.long   027d21ebH
+	.word   06080H
+	.long   bonefir_p
+lgfirebone1:
+	.word   20,28,9,15
+	.long   027d25e7H
+	.word   06080H
+	.long   bonefir_p
+smfirebone1:
+	.word   16,5,7,3
+	.long   027d2df3H
+	.word   06080H
+	.long   bonefir_p
+fireskull:
+	.word   20,16,9,14
+	.long   027d2f89H
+	.word   06080H
+	.long   bonefir_p
+fireskelexpld:
+	.word   104,138,55,-24
+	.long   027d3573H
+	.word   06a80H
+lgfirebone2:
+	.word   32,14,15,8
+	.long   027dccf3H
+	.word   06180H
+lgfirebone3:
+	.word   20,30,8,14
+	.long   027dd3f3H
+	.word   06080H
+lgfirebone4:
+	.word   20,28,10,13
+	.long   027ddc21H
+	.word   06080H
+lgfirebone5:
+	.word   36,12,17,7
+	.long   027de3c1H
+	.word   06580H
+lgfirebone6:
+	.word   20,30,11,18
+	.long   027dea09H
+	.word   06080H
+smfirebone2:
+	.word   12,12,6,6
+	.long   027df201H
+	.word   06080H
+smfirebone3:
+	.word   12,14,4,7
+	.long   027df531H
+	.word   06080H
+smfirebone4:
+	.word   16,5,6,2
+	.long   027df8e9H
+	.word   06080H
+smfirebone5:
+	.word   12,12,5,6
+	.long   027dfa7fH
+	.word   06080H
+smfirebone6:
+	.word   12,14,4,7
+	.long   027df531H
+	.word   06080H
+scorpfire2:
+	.word   24,27,3,8
+	.long   027dfdafH
+	.word   06180H
+scorpfire3:
+	.word   64,63,-1,8
+	.long   027e0829H
+	.word   06a80H
+scorpfire4:
+	.word   84,72,-16,-12
+	.long   027e24d9H
+	.word   06b80H
+scorpfire5:
+	.word   92,62,-68,-54
+	.long   027e4879H
+	.word   06580H
+scorpfire6:
+	.word   48,93,-76,-24
+	.long   027eabe9H
+	.word   06180H
+scorpfire7:
+	.word   64,144,-61,27
+	.long   027f001fH
+	.word   06180H
+scorpfire8:
+	.word   60,164,-62,46
+	.long   027f9c07H
+	.word   06280H
+scorpfire9:
+	.word   60,167,-62,49
+	.long   02802671H
+	.word   06280H
+scorpfire10:
+	.word   68,167,-56,49
+	.long   0280a51dH
+	.word   06280H
+scorpfire11:
+	.word   68,127,-55,48
+	.long   028131c1H
+	.word   06a80H
+scorpfire12:
+	.word   68,84,-56,47
+	.long   02819139H
+	.word   06a80H
+NJBIGPOOF1:
+	.word   44,30,18,-110
+	.long   0283b029H
+	.word   06080H
+	.long   BIGPUF_P
+NJBIGPOOF2:
+	.word   52,48,20,-92
+	.long   0283c967H
+	.word   06480H
+NJBIGPOOF3:
+	.word   60,82,26,-57
+	.long   0283f3bbH
+	.word   06180H
+NJBIGPOOF4:
+	.word   68,115,28,-25
+	.long   028445efH
+	.word   06580H
+NJBIGPOOF5:
+	.word   56,122,21,-18
+	.long   0284af27H
+	.word   06580H
+NJBIGPOOF6:
+	.word   52,130,18,-10
+	.long   02850517H
+	.word   06580H
+NJBIGPOOF7:
+	.word   52,135,19,-5
+	.long   02854d73H
+	.word   06680H
+NJBIGPOOF8:
+	.word   48,139,17,-1
+	.long   028596b7H
+	.word   06680H
+NJBIGPOOF9:
+	.word   44,152,13,12
+	.long   0285dc4fH
+	.word   06680H
+NJBIGPOOF10:
+	.word   36,157,7,17
+	.long   02861ecbH
+	.word   06680H
+NJBIGPOOF11:
+	.word   28,32,6,21
+	.long   02865a5bH
+	.word   06080H
+NJBIGPOOF12:
+	.word   24,19,3,24
+	.long   028668b1H
+	.word   06080H
+PUFF1:
+	.word   20,21,9,11
+	.long   02867069H
+	.word   06080H
+	.long   PUFF_P
+PUFF2:
+	.word   24,29,10,14
+	.long   028677a1H
+	.word   06080H
+PUFF3:
+	.word   32,35,14,18
+	.long   02868465H
+	.word   06080H
+PUFF4:
+	.word   40,41,18,20
+	.long   028696bdH
+	.word   06580H
+PUFF5:
+	.word   44,47,20,23
+	.long   0286ae0dH
+	.word   06a80H
+MK2MORPH1A:
+	.word   332,35,0,0
+	.long   0286ca9dH
+	.word   06f80H
+	.long   TITLE1A_P
+MK2MORPH1B:
+	.word   316,38,0,-35
+	.long   028787adH
+	.word   06f80H
+	.long   TITLE1B_P
+MK2MORPH2A:
+	.word   332,37,0,0
+	.long   0288529dH
+	.word   06f80H
+	.long   TITLE2A_P
+MK2MORPH2B:
+	.word   316,36,0,-37
+	.long   02891e8dH
+	.word   06f80H
+	.long   TITLE2B_P
+MK2MORPH3A:
+	.word   332,37,0,0
+	.long   0289da9dH
+	.word   06f80H
+	.long   TITLE3A_P
+MK2MORPH3B:
+	.word   316,36,0,-37
+	.long   028aa68dH
+	.word   06f80H
+	.long   TITLE3B_P
+MK2MORPH4A:
+	.word   332,36,0,0
+	.long   028b629dH
+	.word   06f80H
+	.long   TITLE4A_P
+MK2MORPH4B:
+	.word   316,37,0,-36
+	.long   028c271dH
+	.word   06f80H
+	.long   TITLE4B_P
+MK2MORPH5A:
+	.word   332,38,0,0
+	.long   028cea9dH
+	.word   06f80H
+	.long   TITLE5A_P
+MK2MORPH5B:
+	.word   316,35,0,-38
+	.long   028dbdfdH
+	.word   06f80H
+	.long   TITLE5B_P
+SOULSUCKHAT1A:
+	.word   64,132,3,12
+	.long   028e729dH
+	.word   06a80H
+	.long   SOULTMB_P
+SOULSUCKHO1A:
+	.word   52,125,-2,5
+	.long   028ed1ddH
+	.word   06980H
+	.long   SOULLKB_P
+SOULSUCKJC1A:
+	.word   32,117,6,-2
+	.long   028f189dH
+	.word   06180H
+	.long   SOULJCB_P
+SOULSUCKUG1A:
+	.word   56,115,-1,0
+	.long   028f539bH
+	.word   06880H
+	.long   SOULUGB_P
+SOULSUCKKT1A:
+	.word   24,108,-1,-4
+	.long   028fa677H
+	.word   06080H
+	.long   SOULKTB_P
+SOULSUCKST1A:
+	.word   56,117,-1,0
+	.long   028fc97bH
+	.word   06880H
+	.long   SOULSTY_P
+SOULSUCKRAD1A:
+	.word   60,119,0,3
+	.long   029012fbH
+	.word   06980H
+	.long   SOULRDB_P
+SOULSUCKNIN1A:
+	.word   56,109,1,1
+	.long   02906933H
+	.word   06880H
+	.long   SOULSUB_P
+SOULSUCKJAX1A:
+	.word   52,120,0,0
+	.long   0290b147H
+	.word   06880H
+	.long   SOULJXR_P
+RAIDENHAT:
+	.word   20,34,-43,4
+	.long   0290f9adH
+	.word   06080H
+	.long   SOULHAT4
+TONYHAT:
+	.word   16,39,-43,8
+	.long   029102cdH
+	.word   06080H
+	.long   SOULHAT3
+CORPSE1A:
+	.word   52,108,-3,-1
+	.long   02910e85H
+	.word   06480H
+	.long   CORPSE_P
+LKSOULSUCK1:
+	.word   48,132,-3,8
+	.long   029153cdH
+	.word   06580H
+KTSOULSUCK1:
+	.word   60,112,0,-1
+	.long   02919a89H
+	.word   06980H
+UGSOULSUCK1:
+	.word   56,117,0,0
+	.long   0291eaadH
+	.word   06880H
+JCSOULSUCK1:
+	.word   60,121,9,-1
+	.long   02924183H
+	.word   06580H
+JXSOULSUCK1:
+	.word   52,128,0,0
+	.long   0292a1dfH
+	.word   06880H
+NJSOULSUCK1:
+	.word   60,111,3,2
+	.long   0292edb5H
+	.word   06880H
+STSOULSUCK1:
+	.word   56,123,-1,-1
+	.long   02933939H
+	.word   06880H
+TMSOULSUCK1:
+	.word   68,143,8,15
+	.long   029384f9H
+	.word   06a80H
+RDSOULSUCK1:
+	.word   60,121,0,3
+	.long   0293f049H
+	.word   06980H
+SOULSUCKHAT2A:
+	.word   60,126,1,10
+	.long   0294487dH
+	.word   06a80H
+SOULSUCKHAT3A:
+	.word   60,122,0,9
+	.long   0294a475H
+	.word   06a80H
+SOULSUCKHO2A:
+	.word   52,119,-2,3
+	.long   0294fc5dH
+	.word   06980H
+SOULSUCKHO3A:
+	.word   52,113,-3,1
+	.long   029541c1H
+	.word   06480H
+SOULSUCKJC1B:
+	.word   28,65,-26,-1
+	.long   029586e3H
+	.word   06480H
+SOULSUCKJC2A:
+	.word   28,112,1,-2
+	.long   02959e93H
+	.word   06080H
+SOULSUCKJC2B:
+	.word   28,64,-27,-1
+	.long   0295d1fbH
+	.word   06480H
+SOULSUCKJC3A:
+	.word   28,110,-2,-2
+	.long   0295e8bfH
+	.word   06080H
+SOULSUCKJC3B:
+	.word   28,64,-29,-1
+	.long   02961c95H
+	.word   06480H
+SOULSUCKUG2A:
+	.word   56,113,-2,-1
+	.long   0296334dH
+	.word   06880H
+SOULSUCKUG3A:
+	.word   56,110,-2,-1
+	.long   02967ff5H
+	.word   06880H
+SOULSUCKKT1B:
+	.word   36,64,-24,-1
+	.long   0296c9afH
+	.word   06480H
+SOULSUCKKT2A:
+	.word   28,108,-2,-2
+	.long   0296eac9H
+	.word   06080H
+SOULSUCKKT2B:
+	.word   32,64,-27,-1
+	.long   02970f7dH
+	.word   06480H
+SOULSUCKKT3A:
+	.word   56,109,-3,-1
+	.long   02972b9fH
+	.word   06880H
+SOULSUCKST2A:
+	.word   52,113,-2,-1
+	.long   029772c9H
+	.word   06480H
+SOULSUCKST3A:
+	.word   52,111,-3,-1
+	.long   0297b81bH
+	.word   06480H
+SOULSUCKRAD2A:
+	.word   60,117,-1,3
+	.long   0297fcdfH
+	.word   06980H
+SOULSUCKRAD3A:
+	.word   60,115,-2,4
+	.long   02984fb3H
+	.word   06980H
+SOULSUCKNIN2A:
+	.word   56,108,-1,0
+	.long   02989f53H
+	.word   06880H
+SOULSUCKNIN3A:
+	.word   56,107,-1,-2
+	.long   0298e4f5H
+	.word   06880H
+SOULSUCKJAX2A:
+	.word   52,116,-1,1
+	.long   02992a8fH
+	.word   06880H
+SOULSUCKJAX3A:
+	.word   52,112,-1,0
+	.long   029970a7H
+	.word   06480H
+SOUL1:
+	.word   76,128,12,6
+	.long   0299b753H
+	.word   06580H
+	.long   ENERGY
+SOUL2:
+	.word   76,127,10,4
+	.long   029a4ff7H
+	.word   06580H
+SOUL3:
+	.word   72,126,10,4
+	.long   029af2d7H
+	.word   06480H
+SOUL4:
+	.word   84,117,12,3
+	.long   029b8b59H
+	.word   06980H
+SOUL5:
+	.word   96,104,11,0
+	.long   029c1d5dH
+	.word   06980H
+SOUL6:
+	.word   104,86,7,0
+	.long   029ca9ddH
+	.word   06980H
+SOUL7:
+	.word   124,76,6,-1
+	.long   029d2a99H
+	.word   06d80H
+SOUL8:
+	.word   144,72,0,0
+	.long   029db231H
+	.word   06f80H
+SOUL9:
+	.word   120,65,-26,-8
+	.long   029e2f71H
+	.word   06f80H
+SOUL10:
+	.word   72,42,-80,-34
+	.long   029e87b9H
+	.word   06580H
+SOUL11:
+	.word   64,44,-89,-33
+	.long   029ebd29H
+	.word   06580H
+SOUL12:
+	.word   60,40,-90,-36
+	.long   029ef315H
+	.word   06580H
+SOUL13:
+	.word   48,35,-95,-38
+	.long   029f2011H
+	.word   06080H
+SOUL14:
+	.word   40,29,-98,-40
+	.long   029f4103H
+	.word   06080H
+SOUL15:
+	.word   32,24,-103,-43
+	.long   029f57ffH
+	.word   06080H
+SOUL16:
+	.word   24,18,-107,-45
+	.long   029f6765H
+	.word   06080H
+SOUL17:
+	.word   16,12,-112,-48
+	.long   029f6fb7H
+	.word   06080H
+SOUL18:
+	.word   12,8,0,0
+	.long   029f73f5H
+	.word   06080H
+fireskel1:
+	.word   72,139,49,-23
+	.long   029f7615H
+	.word   06680H
+	.long   bonefir_p
+fireskel2:
+	.word   72,141,52,-21
+	.long   029fc939H
+	.word   06680H
+fireskel3:
+	.word   68,137,46,-25
+	.long   02a01f91H
+	.word   06680H
+fireskel4:
+	.word   64,137,43,-25
+	.long   02a0722dH
+	.word   06680H
+fireskel5:
+	.word   64,134,42,-28
+	.long   02a0c63dH
+	.word   06680H
+fireskel6:
+	.word   68,137,45,-25
+	.long   02a11711H
+	.word   06680H
+	.TEXT
+

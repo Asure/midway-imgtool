@@ -1,0 +1,48 @@
+	.DATA
+BC_FATAL1:
+	.word   24,22,0,0
+	.long   021482cdH
+	.word   05080H
+	.long   BCSKULL_P
+BC_FATAL2:
+	.word   24,37,0,0
+	.long   02148ab2H
+	.word   04080H
+	.long   BIGSKULL
+BC_WIN1:
+	.word   24,21,0,0
+	.long   02149566H
+	.word   06080H
+	.long   WIN_P
+BC_WIN2:
+	.word   32,26,0,0
+	.long   0214a00aH
+	.word   06080H
+	.long   MKII
+BC_WIN3:
+	.word   32,27,0,0
+	.long   0214b112H
+	.word   06080H
+	.long   NUGOLD
+BC_HAPPY1:
+	.word   24,21,0,0
+	.long   0214c2dcH
+	.word   06080H
+	.long   SMILE_P
+BC_HAPPY2:
+	.word   24,21,0,0
+	.long   0214ccbaH
+	.word   06080H
+	.long   SMILE_P
+BC_HAPPY3:
+	.word   24,21,0,0
+	.long   0214d68cH
+	.word   06080H
+	.long   SMILE_P
+versus:
+	.word   40,36,0,0
+	.long   0214e05eH
+	.word   03180H
+	.long   vs_p
+	.TEXT
+
