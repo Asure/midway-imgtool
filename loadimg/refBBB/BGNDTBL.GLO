@@ -1,33 +1,3 @@
-	.globl	OLPALS
-	.globl	STEEL_P
-	.globl	GRID_P
-	.globl	DPOOL_P
-	.globl	NESS_P
-	.globl	DUSK2_P
-	.globl	DUSK3_P
-	.globl	DUSK1_P
-	.globl	DPUL6BMOD
-	.globl	DPUL1BMOD
-	.globl	DPUL2BMOD
-	.globl	DPUL3BMOD
-	.globl	DPUL4BMOD
-	.globl	DPUL5BMOD
-	.globl	fu7PALS
-	.globl	MOSSWAL3
-	.globl	BAKBRIK
-	.globl	NUTEST
-	.globl	DUNSKEL4
-	.globl	TILE1
-	.globl	MOSSWAL
-	.globl	BLUDWAL
-	.globl	dun1BMOD
-	.globl	dun2BMOD
-	.globl	dun3BMOD
-	.globl	dun4BMOD
-	.globl	dun5BMOD
-	.globl	dun8BMOD
-	.globl	dun9BMOD
-	.globl	dun10BMOD
 	.globl	AMPALS
 	.globl	ED_P
 	.globl	BLUSTUF_P
