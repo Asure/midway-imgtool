@@ -318,13 +318,13 @@ static void irw_ensure(size_t need_bytes) {
 /* LOADW FUN_1854_35fc checksum: sum + max over stride width */
 static uint32_t loadw_checksum(uint8_t *pix, int stride, int w, int h, uint32_t *out_max) {
     uint32_t sum = 0, max_val = 0;
-    int n_u32 = (stride * h) / 4;
-    uint32_t *dw = (uint32_t*)pix;
-    for (int i = 0; i < n_u32; i++) {
-        uint32_t v = dw[i];
+    int n_words = (stride * h) / 2;
+    uint16_t *wp = (uint16_t*)pix;
+    for (int i = 0; i < n_words; i++) {
+        uint16_t v = wp[i];
         sum += v;
-        uint32_t lo = v & 0xff;
-        uint32_t hi = (v >> 8) & 0xff;
+        uint8_t lo = (uint8_t)(v & 0xff);
+        uint8_t hi = (uint8_t)(v >> 8);
         if (lo > max_val) max_val = lo;
         if (hi > max_val) max_val = hi;
     }
