@@ -1980,7 +1980,7 @@ static void process_lod(const char *lod_path) {
                         mod_ds[n_bmod] = gobjs[gi].wx;
                         mod_de[n_bmod] = gobjs[gi].dp;
                         mod_ys[n_bmod] = gobjs[gi].sy;
-                        mod_ye[n_bmod] = gobjs[gi].sy + gobjs[gi].ii;
+                        mod_ye[n_bmod] = gobjs[gi].ii;
                         n_bmod++;
                     }
                     continue;
@@ -2240,7 +2240,7 @@ static void process_lod(const char *lod_path) {
                          /* Module-local coordinates: x relative to first object, y relative to sy_base */
                          int first_d = mod_first_depth[mi];
                          blk_objs[n_blk].x = od - (first_d >= 0 ? first_d : mod_ds[mi]);
-                         blk_objs[n_blk].y = osy - mod_ys[mi] - 2;
+                          blk_objs[n_blk].y = osy - mod_ys[mi] - 2;
                          blk_objs[n_blk].ii = hdr_idx;
                          n_blk++;
                      }
