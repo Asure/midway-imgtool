@@ -256,18 +256,18 @@ T5SWPU7:
 	.long   08efad15H
 	.word   07000H
 	.long   PLYRFIX_P
-	.word   11,40,-1,-1,-1,-1,-1,-1,-1
+	.word   11,40,-1,0,34,14,1,10,0
 T5SWPU8:
 	.word   77,95,47,89
 	.long   08f06c7dH
 	.word   07000H
 	.long   PLYRFIX_P
-	.word   21,44,-1,-1,-1,-1,-1,-1,-1
+	.word   21,44,-1,0,41,11,1,10,0
 T5SWPU9:
 	.word   98,90,63,84
 	.long   08f13482H
 	.word   07000H
 	.long   PLYRFIX_P
-	.word   86,48,10,-1,-1,-1,-1,-1,-1
+	.word   86,48,10,0,62,8,1,10,0
 	.TEXT
 

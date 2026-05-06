@@ -1,0 +1,223 @@
+	.DATA
+LIFEBOX:
+	.word   168,16,0,0
+	.long   0211df30H
+	.word   06000H
+	.long   SCORE_P
+INSERTCOIN:
+	.word   104,13,0,0
+	.long   02121e30H
+	.word   06000H
+	.long   SCORE_P
+PUSHSTART:
+	.word   108,13,0,0
+	.long   02123de0H
+	.word   06080H
+SHADWINS:
+	.word   40,12,0,0
+	.long   02125d8cH
+	.word   06000H
+SHADNUM1:
+	.word   4,12,0,0
+	.long   021268ccH
+	.word   06000H
+SHADNUM2:
+	.word   12,12,0,0
+	.long   021269ecH
+	.word   06080H
+SHADNUM3:
+	.word   12,12,0,0
+	.long   02126d1cH
+	.word   06080H
+SHADNUM4:
+	.word   12,12,0,0
+	.long   0212704cH
+	.word   06080H
+SHADNUM5:
+	.word   12,12,0,0
+	.long   0212737cH
+	.word   06080H
+SHADNUM6:
+	.word   12,12,0,0
+	.long   021276acH
+	.word   06080H
+SHADNUM7:
+	.word   12,12,0,0
+	.long   021279dcH
+	.word   06080H
+SHADNUM8:
+	.word   12,12,0,0
+	.long   02127d0cH
+	.word   06080H
+SHADNUM9:
+	.word   12,12,0,0
+	.long   0212803cH
+	.word   06080H
+SHADNUM0:
+	.word   12,12,0,0
+	.long   0212836cH
+	.word   06080H
+BAR_KANG:
+	.word   68,10,0,0
+	.long   0212869cH
+	.word   04080H
+BAR_SCORPION:
+	.word   68,10,0,0
+	.long   021290e8H
+	.word   04000H
+BAR_SUBZERO:
+	.word   72,10,0,0
+	.long   02129b88H
+	.word   04080H
+BAR_REPTILE:
+	.word   60,10,0,0
+	.long   0212a6c8H
+	.word   04080H
+BAR_RAIDEN:
+	.word   52,10,0,0
+	.long   0212afccH
+	.word   04080H
+BAR_SHANG:
+	.word   96,10,0,0
+	.long   0212b7d4H
+	.word   04080H
+BAR_CAGE:
+	.word   36,10,0,0
+	.long   0212c6c8H
+	.word   04000H
+REDFONT0:
+	.word   16,17,0,0
+	.long   0212cc68H
+	.word   06080H
+REDFONT1:
+	.word   12,17,0,0
+	.long   0212d200H
+	.word   06080H
+REDFONT2:
+	.word   16,17,0,0
+	.long   0212d684H
+	.word   06080H
+REDFONT3:
+	.word   16,17,0,0
+	.long   0212dbdaH
+	.word   06080H
+REDFONT4:
+	.word   16,17,0,0
+	.long   0212e10cH
+	.word   06080H
+REDFONT5:
+	.word   16,17,0,0
+	.long   0212e5f0H
+	.word   06080H
+REDFONT6:
+	.word   16,17,0,0
+	.long   0212eb40H
+	.word   06080H
+REDFONT7:
+	.word   16,17,0,0
+	.long   0212f0b4H
+	.word   06080H
+REDFONT8:
+	.word   16,17,0,0
+	.long   0212f5aaH
+	.word   06080H
+REDFONT9:
+	.word   16,17,0,0
+	.long   0212fb12H
+	.word   06080H
+BAR_KITANA:
+	.word   52,10,0,0
+	.long   02130086H
+	.word   04080H
+BAR_BARAKA:
+	.word   56,10,0,0
+	.long   0213087eH
+	.word   04000H
+BAR_KUNGLAO:
+	.word   72,10,0,0
+	.long   0213113eH
+	.word   04000H
+BAR_SMOKE:
+	.word   48,10,0,0
+	.long   02131c7eH
+	.word   04080H
+BAR_SHAOKAHN:
+	.word   80,10,0,0
+	.long   021323eeH
+	.word   04080H
+MKMEDAL2:
+	.word   16,15,0,0
+	.long   02133052H
+	.word   06080H
+BAR_JAX:
+	.word   32,10,0,0
+	.long   02133538H
+	.word   04080H
+BAR_MILEENA:
+	.word   64,10,0,0
+	.long   0213394cH
+	.word   04080H
+BAR_KINTARO:
+	.word   60,10,0,0
+	.long   02134344H
+	.word   04000H
+BAR_NOOB:
+	.word   100,11,0,0
+	.long   02134ca4H
+	.word   04380H
+BAR_SAIBOT:
+	.word   100,11,0,0
+	.long   02135c38H
+	.word   04a80H
+BADGE2:
+	.word   96,69,0,0
+	.long   02136c10H
+	.word   06a80H
+	.long   BADGE_P
+BATTLE:
+	.word   132,30,0,0
+	.long   0213dbe8H
+	.word   05480H
+	.long   BATTLE_P
+BATTLE1:
+	.word   12,30,-16,-89
+	.long   0214242cH
+	.word   05080H
+BATTLE2:
+	.word   20,30,-32,-89
+	.long   02142b11H
+	.word   05080H
+BATTLE3:
+	.word   20,30,-54,-89
+	.long   02143426H
+	.word   05080H
+BATTLE4:
+	.word   20,30,-75,-89
+	.long   02143e21H
+	.word   05080H
+BATTLE5:
+	.word   20,30,-95,-89
+	.long   0214465fH
+	.word   05080H
+BATTLE6:
+	.word   20,30,-119,-88
+	.long   02145064H
+	.word   05080H
+BATTLE7:
+	.word   20,30,-140,-88
+	.long   02145aebH
+	.word   05080H
+BATTLE8:
+	.word   20,30,-161,-88
+	.long   021462acH
+	.word   05080H
+BATTLE9:
+	.word   20,30,-183,-88
+	.long   02146d74H
+	.word   05080H
+BATTLE0:
+	.word   20,30,-204,-88
+	.long   021477fbH
+	.word   05080H
+	.TEXT
+
