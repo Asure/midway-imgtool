@@ -2049,11 +2049,17 @@ static void process_lod(const char *lod_path) {
                         int64_t lead_err[4] = {0}, trail_err[4] = {0};
                         for (int row = 0; row < h; row++) {
                             uint8_t *rp = pix + row * w;
-                            int lead = 0, trail = 0, d1 = 0;
+                            int lead = 0, trail = 0, lead_done = 0;
                             for (int x = 0; x < w; x++) {
                                 uint8_t px2 = rp[x];
-                                if (!d1 && lead < 120 && px2 == 0) lead++;
-                                else { d1 = 1; if (w - 120 < x) { if (px2 == 0) trail++; else trail = 0; } }
+                                if (!lead_done) {
+                                    if (lead == 120) { lead_done = 1; }
+                                    else if (px2 == 0) { lead++; }
+                                    else { lead_done = 1; }
+                                } else if (w - 120 < x) {
+                                    if (px2 == 0) trail++;
+                                    else trail = 0;
+                                }
                             }
                             for (int m = 0; m < 4; m++) {
                                 int mult = 1 << m;
@@ -2074,14 +2080,20 @@ static void process_lod(const char *lod_path) {
                         int64_t comp_bits = 0, raw_bits = (int64_t)h * w * per_bpp;
                             for (int row = 0; row < h; row++) {
                                 uint8_t *rp = pix + row * w;
-                                int lead = 0, trail = 0, d1 = 0;
-                                for (int x = 0; x < w; x++) {
-                                    uint8_t px2 = rp[x];
-                                    if (!d1 && lead < 120 && px2 == 0) lead++;
-                                    else { d1 = 1; if (w - 120 < x) { if (px2 == 0) trail++; else trail = 0; } }
-                                }
-                                int ln = lead / lmm; if (ln > 15) ln = 15;
-                            int tn = trail / tmm; if (tn > 15) tn = 15;
+                                 int lead = 0, trail = 0, lead_done2 = 0;
+                                 for (int x = 0; x < w; x++) {
+                                     uint8_t px2 = rp[x];
+                                     if (!lead_done2) {
+                                         if (lead == 120) { lead_done2 = 1; }
+                                         else if (px2 == 0) { lead++; }
+                                         else { lead_done2 = 1; }
+                                     } else if (w - 120 < x) {
+                                         if (px2 == 0) trail++;
+                                         else trail = 0;
+                                     }
+                                 }
+                                 int ln = lead / lmm; if (ln > 15) ln = 15;
+                             int tn = trail / tmm; if (tn > 15) tn = 15;
                             int lc = ln * lmm, tc = tn * tmm;
                             if (lc + tc > w) tc = w - lc;
                             int stored = w - lc - tc;
@@ -2135,15 +2147,21 @@ static void process_lod(const char *lod_path) {
                          } else {
 
                          if (do_cmp) {
-                         for (int row = 0; row < h; row++) {
-                             uint8_t *rp = pix + row * w;
-                             int lead = 0, trail = 0, d1 = 0;
-                             for (int x = 0; x < w; x++) {
-                                 uint8_t px2 = rp[x];
-                                 if (!d1 && lead < 120 && px2 == 0) lead++;
-                                 else { d1 = 1; if (w - 120 < x) { if (px2 == 0) trail++; else trail = 0; } }
-                             }
-                                int ln = lead / lmm; if (ln > 15) ln = 15;
+                          for (int row = 0; row < h; row++) {
+                              uint8_t *rp = pix + row * w;
+                              int lead = 0, trail = 0, lead_done3 = 0;
+                              for (int x = 0; x < w; x++) {
+                                  uint8_t px2 = rp[x];
+                                  if (!lead_done3) {
+                                      if (lead == 120) { lead_done3 = 1; }
+                                      else if (px2 == 0) { lead++; }
+                                      else { lead_done3 = 1; }
+                                  } else if (w - 120 < x) {
+                                      if (px2 == 0) trail++;
+                                      else trail = 0;
+                                  }
+                              }
+                                 int ln = lead / lmm; if (ln > 15) ln = 15;
                                 int tn = trail / tmm; if (tn > 15) tn = 15;
                                 int lc = ln * lmm, tc = tn * tmm;
                                 if (lc + tc > sizx_a) tc = sizx_a - lc;
