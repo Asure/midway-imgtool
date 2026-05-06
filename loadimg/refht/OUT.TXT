@@ -1,0 +1,2222 @@
+
+Copyright (C) Williams Electronics Games, Inc. 1993.
+GSP Image Loader - DMA 2 - Version 5/25/94
+Using a page of expanded memory.
+
+
+GSP is Memory Mapped at PC address C000:7000
+Loading images ...
+	from: C:\misc.lod
+	to:   Table header files (written to directory folder\)
+	      GSP target system.
+	      C:\misc.irw
+	      
+SET new IRAM address = 2000000 bank 0
+SET new IRAM address = 6000000 bank 1
+Loading Frames in C:\UGROUND2 at 6000000
+Loading Frames in C:\BLUFLOOR at 61ef900
+Loading Frames in C:\CHEERS at 63df200
+Loading Frames in C:\KOBE at 64727d0
+Loading Frames in C:\TITLE  at 6495fe0
+Opening img lib [C:\NBA_DNK4.IMG]         S3OASD01 ( 56 by 108) XO=16  YO=107
+ [S3OASD01] Auto pixel packing to 8 bits
+LOADED         S3OASD02 ( 59 by 121) XO=20  YO=122
+ [S3OASD02] Auto pixel packing to 8 bits
+LOADED         S3OASD03 ( 67 by 134) XO=24  YO=132
+ [S3OASD03] Auto pixel packing to 8 bits
+LOADED         S3OASD04 ( 76 by 136) XO=26  YO=131
+ [S3OASD04] Auto pixel packing to 8 bits
+LOADED         S3OASD05 ( 84 by 131) XO=28  YO=127
+ [S3OASD05] Auto pixel packing to 8 bits
+LOADED         S3OASD06 ( 91 by 124) XO=29  YO=121
+ [S3OASD06] Auto pixel packing to 8 bits
+LOADED         S3OASD07 ( 94 by 112) XO=30  YO=112
+ [S3OASD07] Auto pixel packing to 8 bits
+LOADED         S3OASD08 ( 93 by 109) XO=30  YO=111
+ [S3OASD08] Auto pixel packing to 8 bits
+LOADED         S3OASD09 (101 by 107) XO=46  YO=111
+ [S3OASD09] Auto pixel packing to 8 bits
+LOADED         S3OASD10 (109 by 106) XO=62  YO=110
+ [S3OASD10] Auto pixel packing to 8 bits
+LOADED         S3OASD11 (106 by 108) XO=66  YO=111
+ [S3OASD11] Auto pixel packing to 8 bits
+LOADED         S3OASD12 ( 98 by 128) XO=58  YO=129
+ [S3OASD12] Auto pixel packing to 8 bits
+LOADED         S3OASD13 ( 80 by 157) XO=35  YO=157
+ [S3OASD13] Auto pixel packing to 8 bits
+LOADED         S3OASD14 ( 63 by 165) XO=15  YO=163
+ [S3OASD14] Auto pixel packing to 8 bits
+LOADED         S3OASD15 ( 68 by 152) XO=16  YO=149
+ [S3OASD15] Auto pixel packing to 8 bits
+LOADED         S3OASD16 ( 81 by 133) XO=17  YO=130
+ [S3OASD16] Auto pixel packing to 8 bits
+LOADED         S3OASD17 ( 76 by 127) XO=18  YO=126
+ [S3OASD17] Auto pixel packing to 8 bits
+LOADED         S3OASD18 ( 60 by 154) XO=16  YO=150
+ [S3OASD18] Auto pixel packing to 8 bits
+LOADED         S3OASD19 ( 54 by 161) XO=15  YO=151
+ [S3OASD19] Auto pixel packing to 8 bits
+LOADED
+Opening img lib [C:\NBA_DNK6.IMG]         M8FLY201 ( 87 by 109) XO=22  YO=105
+ [M8FLY201] Auto pixel packing to 8 bits
+LOADED         M8FLY202 ( 88 by 121) XO=23  YO=117
+ [M8FLY202] Auto pixel packing to 8 bits
+LOADED         M8FLY203 ( 83 by 123) XO=36  YO=120
+ [M8FLY203] Auto pixel packing to 8 bits
+LOADED         M8FLY204 ( 78 by 122) XO=49  YO=117
+ [M8FLY204] Auto pixel packing to 8 bits
+LOADED         M8FLY205 ( 75 by 103) XO=54  YO=110
+ [M8FLY205] Auto pixel packing to 8 bits
+LOADED         M8FLY206 ( 86 by  83) XO=53  YO=105
+ [M8FLY206] Auto pixel packing to 8 bits
+LOADED         M8FLY207 ( 94 by  81) XO=47  YO=108
+ [M8FLY207] Auto pixel packing to 8 bits
+LOADED         M8FLY208 ( 97 by 118) XO=38  YO=131
+ [M8FLY208] Auto pixel packing to 8 bits
+LOADED         M8FLY209 ( 90 by 144) XO=30  YO=145
+ [M8FLY209] Auto pixel packing to 8 bits
+LOADED         M8FLY210 ( 79 by 143) XO=23  YO=141
+ [M8FLY210] Auto pixel packing to 8 bits
+LOADED         M8FLY211 ( 72 by 136) XO=18  YO=135
+ [M8FLY211] Auto pixel packing to 8 bits
+LOADED         M8FLY212 ( 70 by 136) XO=22  YO=133
+ [M8FLY212] Auto pixel packing to 8 bits
+LOADED         M8FLY213 ( 68 by 131) XO=27  YO=128
+ [M8FLY213] Auto pixel packing to 8 bits
+LOADED         M8OASD01 ( 51 by  99) XO=19  YO=97
+ [M8OASD01] Auto pixel packing to 8 bits
+LOADED         M8OASD02 ( 49 by 123) XO=14  YO=120
+ [M8OASD02] Auto pixel packing to 8 bits
+LOADED         M8OASD03 ( 52 by 130) XO=18  YO=122
+ [M8OASD03] Auto pixel packing to 8 bits
+LOADED         M8OASD04 ( 57 by 115) XO=23  YO=110
+ [M8OASD04] Auto pixel packing to 8 bits
+LOADED         M8OASD05 ( 59 by 102) XO=24  YO=103
+ [M8OASD05] Auto pixel packing to 8 bits
+LOADED         M8OASD06 ( 56 by  97) XO=26  YO=104
+ [M8OASD06] Auto pixel packing to 8 bits
+LOADED         M8OASD07 ( 59 by  90) XO=30  YO=103
+ [M8OASD07] Auto pixel packing to 8 bits
+LOADED         M8OASD08 ( 61 by  80) XO=33  YO=101
+ [M8OASD08] Auto pixel packing to 8 bits
+LOADED         M8OASD09 ( 61 by  76) XO=33  YO=99
+ [M8OASD09] Auto pixel packing to 8 bits
+LOADED         M8OASD10 ( 70 by  80) XO=43  YO=99
+ [M8OASD10] Auto pixel packing to 8 bits
+LOADED         M8OASD11 ( 70 by  86) XO=41  YO=99
+ [M8OASD11] Auto pixel packing to 8 bits
+LOADED         M8OASD12 ( 62 by 107) XO=32  YO=115
+ [M8OASD12] Auto pixel packing to 8 bits
+LOADED         M8OASD13 ( 67 by 124) XO=37  YO=130
+ [M8OASD13] Auto pixel packing to 8 bits
+LOADED         M8OASD14 ( 75 by 134) XO=43  YO=139
+ [M8OASD14] Auto pixel packing to 8 bits
+LOADED         M8OASD15 ( 88 by 126) XO=48  YO=132
+ [M8OASD15] Auto pixel packing to 8 bits
+LOADED         M8OASD16 (101 by 116) XO=53  YO=121
+ [M8OASD16] Auto pixel packing to 8 bits
+LOADED         M8OASD17 ( 94 by 116) XO=58  YO=117
+ [M8OASD17] Auto pixel packing to 8 bits
+LOADED         M8OASD18 ( 91 by 122) XO=61  YO=121
+ [M8OASD18] Auto pixel packing to 8 bits
+LOADED         M8OHM201 ( 77 by  90) XO=25  YO=87
+ [M8OHM201] Auto pixel packing to 8 bits
+LOADED         M8OHM202 ( 75 by 113) XO=22  YO=108
+ [M8OHM202] Auto pixel packing to 8 bits
+LOADED         M8OHM203 ( 69 by 133) XO=19  YO=125
+ [M8OHM203] Auto pixel packing to 8 bits
+LOADED         M8OHM204 ( 64 by 141) XO=18  YO=129
+ [M8OHM204] Auto pixel packing to 8 bits
+LOADED         M8OHM205 ( 62 by 141) XO=18  YO=131
+ [M8OHM205] Auto pixel packing to 8 bits
+LOADED         M8OHM206 ( 77 by 135) XO=23  YO=132
+ [M8OHM206] Auto pixel packing to 8 bits
+LOADED         M8OHM207 ( 82 by 121) XO=28  YO=130
+ [M8OHM207] Auto pixel packing to 8 bits
+LOADED         M8OHM208 ( 75 by 108) XO=32  YO=127
+ [M8OHM208] Auto pixel packing to 8 bits
+LOADED         M8OHM209 ( 72 by 112) XO=41  YO=122
+ [M8OHM209] Auto pixel packing to 8 bits
+LOADED         M8OHM210 ( 78 by 117) XO=53  YO=119
+ [M8OHM210] Auto pixel packing to 8 bits
+LOADED         M8OHM211 ( 86 by 112) XO=66  YO=112
+ [M8OHM211] Auto pixel packing to 8 bits
+LOADED         M8OHM212 ( 92 by 122) XO=74  YO=117
+ [M8OHM212] Auto pixel packing to 8 bits
+LOADED         M8OHM213 ( 90 by 137) XO=77  YO=131
+ [M8OHM213] Auto pixel packing to 8 bits
+LOADED         M8OHM214 ( 86 by 145) XO=73  YO=139
+ [M8OHM214] Auto pixel packing to 8 bits
+LOADED         M8OHM215 ( 79 by 149) XO=67  YO=143
+ [M8OHM215] Auto pixel packing to 8 bits
+LOADED         M8OHM216 ( 80 by 144) XO=52  YO=136
+ [M8OHM216] Auto pixel packing to 8 bits
+LOADED         M8OHM217 ( 74 by 135) XO=41  YO=128
+ [M8OHM217] Auto pixel packing to 8 bits
+LOADED         M8OHM218 ( 60 by 135) XO=33  YO=131
+ [M8OHM218] Auto pixel packing to 8 bits
+LOADED         M8OHM401 ( 81 by  94) XO=44  YO=89
+ [M8OHM401] Auto pixel packing to 8 bits
+LOADED         M8OHM402 (100 by 119) XO=51  YO=111
+ [M8OHM402] Auto pixel packing to 8 bits
+LOADED         M8OHM403 (107 by 129) XO=53  YO=116
+ [M8OHM403] Auto pixel packing to 8 bits
+LOADED         M8OHM404 (101 by 132) XO=56  YO=116
+ [M8OHM404] Auto pixel packing to 8 bits
+LOADED         M8OHM405 ( 75 by 129) XO=48  YO=116
+ [M8OHM405] Auto pixel packing to 8 bits
+LOADED         M8OHM406 ( 65 by 127) XO=30  YO=119
+ [M8OHM406] Auto pixel packing to 8 bits
+LOADED         M8OHM407 ( 67 by 121) XO=18  YO=121
+ [M8OHM407] Auto pixel packing to 8 bits
+LOADED         M8OHM408 ( 85 by 112) XO=24  YO=121
+ [M8OHM408] Auto pixel packing to 8 bits
+LOADED         M8OHM409 (105 by 111) XO=35  YO=122
+ [M8OHM409] Auto pixel packing to 8 bits
+LOADED         M8OHM410 (117 by 110) XO=43  YO=122
+ [M8OHM410] Auto pixel packing to 8 bits
+LOADED         M8OHM411 (121 by 109) XO=49  YO=121
+ [M8OHM411] Auto pixel packing to 8 bits
+LOADED         M8OHM412 (118 by 108) XO=48  YO=120
+ [M8OHM412] Auto pixel packing to 8 bits
+LOADED         M8OHM413 (113 by 121) XO=46  YO=130
+ [M8OHM413] Auto pixel packing to 8 bits
+LOADED         M8OHM414 ( 97 by 131) XO=39  YO=134
+ [M8OHM414] Auto pixel packing to 8 bits
+LOADED         M8OHM415 ( 79 by 128) XO=31  YO=124
+ [M8OHM415] Auto pixel packing to 8 bits
+LOADED         M8OHM416 ( 61 by 138) XO=28  YO=126
+ [M8OHM416] Auto pixel packing to 8 bits
+LOADED         M8OHM501 ( 55 by 109) XO=22  YO=103
+ [M8OHM501] Auto pixel packing to 8 bits
+LOADED         M8OHM502 ( 54 by 130) XO=23  YO=124
+ [M8OHM502] Auto pixel packing to 8 bits
+LOADED         M8OHM503 ( 55 by 146) XO=23  YO=138
+ [M8OHM503] Auto pixel packing to 8 bits
+LOADED         M8OHM504 ( 52 by 144) XO=25  YO=138
+ [M8OHM504] Auto pixel packing to 8 bits
+LOADED         M8OHM505 ( 57 by 133) XO=29  YO=133
+ [M8OHM505] Auto pixel packing to 8 bits
+LOADED         M8OHM506 ( 57 by 114) XO=29  YO=119
+ [M8OHM506] Auto pixel packing to 8 bits
+LOADED         M8OHM507 ( 47 by 103) XO=30  YO=114
+ [M8OHM507] Auto pixel packing to 8 bits
+LOADED         M8OHM508 ( 61 by  92) XO=29  YO=110
+ [M8OHM508] Auto pixel packing to 8 bits
+LOADED         M8OHM509 ( 59 by  82) XO=26  YO=104
+ [M8OHM509] Auto pixel packing to 8 bits
+LOADED         M8OHM510 ( 53 by  75) XO=23  YO=100
+ [M8OHM510] Auto pixel packing to 8 bits
+LOADED         M8OHM511 ( 52 by  76) XO=25  YO=98
+ [M8OHM511] Auto pixel packing to 8 bits
+LOADED         M8OHM512 ( 55 by  80) XO=28  YO=98
+ [M8OHM512] Auto pixel packing to 8 bits
+LOADED         M8OHM513 ( 61 by  79) XO=32  YO=98
+ [M8OHM513] Auto pixel packing to 8 bits
+LOADED         M8OHM514 ( 63 by  85) XO=33  YO=102
+ [M8OHM514] Auto pixel packing to 8 bits
+LOADED         M8OHM515 ( 72 by 109) XO=34  YO=121
+ [M8OHM515] Auto pixel packing to 8 bits
+LOADED         M8OHM516 ( 78 by 128) XO=31  YO=134
+ [M8OHM516] Auto pixel packing to 8 bits
+LOADED         M8OHM517 ( 84 by 135) XO=24  YO=134
+ [M8OHM517] Auto pixel packing to 8 bits
+LOADED         M8OHM518 ( 83 by 138) XO=20  YO=138
+ [M8OHM518] Auto pixel packing to 8 bits
+LOADED
+Opening img lib [C:\NBA_DNK7.IMG]         M8REVD01 ( 49 by 112) XO=21  YO=107
+ [M8REVD01] Auto pixel packing to 8 bits
+LOADED         M8REVD02 ( 47 by 122) XO=21  YO=117
+ [M8REVD02] Auto pixel packing to 8 bits
+LOADED         M8REVD03 ( 46 by 140) XO=30  YO=128
+ [M8REVD03] Auto pixel packing to 8 bits
+LOADED         M8REVD04 ( 46 by 137) XO=32  YO=128
+ [M8REVD04] Auto pixel packing to 8 bits
+LOADED         M8REVD05 ( 50 by 127) XO=34  YO=122
+ [M8REVD05] Auto pixel packing to 8 bits
+LOADED         M8REVD06 ( 47 by 109) XO=31  YO=110
+ [M8REVD06] Auto pixel packing to 8 bits
+LOADED         M8REVD07 ( 41 by  93) XO=25  YO=101
+ [M8REVD07] Auto pixel packing to 8 bits
+LOADED         M8REVD08 ( 48 by  87) XO=31  YO=100
+ [M8REVD08] Auto pixel packing to 8 bits
+LOADED         M8REVD09 ( 52 by  82) XO=35  YO=98
+ [M8REVD09] Auto pixel packing to 8 bits
+LOADED         M8REVD10 ( 52 by  78) XO=35  YO=97
+ [M8REVD10] Auto pixel packing to 8 bits
+LOADED         M8REVD11 ( 54 by  75) XO=34  YO=97
+ [M8REVD11] Auto pixel packing to 8 bits
+LOADED         M8REVD12 ( 57 by  75) XO=36  YO=98
+ [M8REVD12] Auto pixel packing to 8 bits
+LOADED         M8REVD13 ( 66 by  80) XO=45  YO=99
+ [M8REVD13] Auto pixel packing to 8 bits
+LOADED         M8REVD14 ( 71 by  85) XO=48  YO=101
+ [M8REVD14] Auto pixel packing to 8 bits
+LOADED         M8REVD15 ( 68 by 112) XO=42  YO=124
+ [M8REVD15] Auto pixel packing to 8 bits
+LOADED         M8REVD16 ( 59 by 130) XO=28  YO=140
+ [M8REVD16] Auto pixel packing to 8 bits
+LOADED         M8REVD17 ( 60 by 131) XO=26  YO=136
+ [M8REVD17] Auto pixel packing to 8 bits
+LOADED         M8REVD18 ( 52 by 120) XO=22  YO=122
+ [M8REVD18] Auto pixel packing to 8 bits
+LOADED         M8REVD19 ( 33 by 116) XO=16  YO=117
+ [M8REVD19] Auto pixel packing to 8 bits
+LOADED         M8REVD20 ( 54 by 101) XO=35  YO=102
+ [M8REVD20] Auto pixel packing to 8 bits
+LOADED         M8REVD21 ( 77 by  80) XO=56  YO=81
+ [M8REVD21] Auto pixel packing to 8 bits
+LOADED
+Opening img lib [C:\NBA_DEF3.IMG]         w2blokl5 ( 81 by 155) XO=11  YO=153
+ [w2blokl5] Auto pixel packing to 8 bits
+LOADED         w2blokl6 ( 74 by 149) XO=15  YO=142
+ [w2blokl6] Auto pixel packing to 8 bits
+LOADED         w2blokl7 ( 71 by 143) XO=22  YO=132
+ [w2blokl7] Auto pixel packing to 8 bits
+LOADED         w3blokl5 ( 67 by 156) XO=13  YO=147
+ [w3blokl5] Auto pixel packing to 8 bits
+LOADED         w3blokl6 ( 75 by 134) XO=16  YO=124
+ [w3blokl6] Auto pixel packing to 8 bits
+LOADED         w3blokl7 ( 76 by 117) XO=17  YO=107
+ [w3blokl7] Auto pixel packing to 8 bits
+LOADED         w4blokl5 ( 95 by 170) XO=60  YO=161
+ [w4blokl5] Auto pixel packing to 8 bits
+LOADED         w4blokl6 ( 99 by 174) XO=65  YO=163
+ [w4blokl6] Auto pixel packing to 8 bits
+LOADED         w4blokl7 ( 90 by 151) XO=56  YO=141
+ [w4blokl7] Auto pixel packing to 8 bits
+LOADED
+Opening img lib [C:\NBA_DEF1.IMG]          T1SWPU1 ( 96 by  92) XO=46  YO=86
+ [T1SWPU1] Auto pixel packing to 8 bits
+LOADED          T1SWPU2 (105 by  91) XO=42  YO=85
+ [T1SWPU2] Auto pixel packing to 8 bits
+LOADED          T1SWPU3 ( 87 by  96) XO=30  YO=90
+ [T1SWPU3] Auto pixel packing to 8 bits
+LOADED          T1SWPU4 ( 76 by 118) XO=30  YO=112
+ [T1SWPU4] Auto pixel packing to 8 bits
+LOADED          T1SWPU5 ( 67 by 112) XO=30  YO=107
+ [T1SWPU5] Auto pixel packing to 8 bits
+LOADED          T1SWPU6 ( 65 by  97) XO=30  YO=93
+ [T1SWPU6] Auto pixel packing to 8 bits
+LOADED          T1SWPU7 ( 67 by  94) XO=30  YO=90
+ [T1SWPU7] Auto pixel packing to 8 bits
+LOADED          T1SWPU8 ( 82 by  95) XO=30  YO=89
+ [T1SWPU8] Auto pixel packing to 8 bits
+LOADED          T1SWPU9 (107 by  93) XO=47  YO=87
+ [T1SWPU9] Auto pixel packing to 8 bits
+LOADED          T2SWPU1 (101 by  96) XO=27  YO=86
+ [T2SWPU1] Auto pixel packing to 8 bits
+LOADED          T2SWPU2 ( 68 by  97) XO=20  YO=87
+ [T2SWPU2] Auto pixel packing to 8 bits
+LOADED          T2SWPU3 ( 75 by 119) XO=20  YO=109
+ [T2SWPU3] Auto pixel packing to 8 bits
+LOADED          T2SWPU4 ( 57 by 122) XO=20  YO=112
+ [T2SWPU4] Auto pixel packing to 8 bits
+LOADED          T2SWPU5 ( 61 by 113) XO=21  YO=103
+ [T2SWPU5] Auto pixel packing to 8 bits
+LOADED          T2SWPU6 ( 64 by 105) XO=21  YO=95
+ [T2SWPU6] Auto pixel packing to 8 bits
+LOADED          T2SWPU7 ( 67 by 101) XO=21  YO=91
+ [T2SWPU7] Auto pixel packing to 8 bits
+LOADED          T2SWPU8 ( 67 by  99) XO=20  YO=89
+ [T2SWPU8] Auto pixel packing to 8 bits
+LOADED          T2SWPU9 ( 81 by  97) XO=20  YO=87
+ [T2SWPU9] Auto pixel packing to 8 bits
+LOADED          T3SWPU1 ( 85 by  90) XO=35  YO=78
+ [T3SWPU1] Auto pixel packing to 8 bits
+LOADED          T3SWPU2 ( 57 by  91) XO=17  YO=79
+ [T3SWPU2] Auto pixel packing to 8 bits
+LOADED          T3SWPU3 ( 81 by  93) XO=18  YO=81
+ [T3SWPU3] Auto pixel packing to 8 bits
+LOADED          T3SWPU4 ( 83 by  98) XO=19  YO=86
+ [T3SWPU4] Auto pixel packing to 8 bits
+LOADED          T3SWPU5 ( 69 by 102) XO=19  YO=90
+ [T3SWPU5] Auto pixel packing to 8 bits
+LOADED          T3SWPU6 ( 69 by  96) XO=22  YO=84
+ [T3SWPU6] Auto pixel packing to 8 bits
+LOADED          T3SWPU7 ( 68 by  96) XO=23  YO=84
+ [T3SWPU7] Auto pixel packing to 8 bits
+LOADED          T3SWPU8 ( 61 by  96) XO=21  YO=84
+ [T3SWPU8] Auto pixel packing to 8 bits
+LOADED          T3SWPU9 ( 50 by  94) XO=21  YO=82
+ [T3SWPU9] Auto pixel packing to 8 bits
+LOADED          T4SWPU1 ( 57 by  92) XO=28  YO=82
+ [T4SWPU1] Auto pixel packing to 8 bits
+LOADED          T4SWPU2 ( 98 by  96) XO=40  YO=86
+ [T4SWPU2] Auto pixel packing to 8 bits
+LOADED          T4SWPU3 (135 by 102) XO=48  YO=92
+ [T4SWPU3] Auto pixel packing to 8 bits
+LOADED          T4SWPU4 ( 99 by 105) XO=49  YO=95
+ [T4SWPU4] Auto pixel packing to 8 bits
+LOADED          T4SWPU5 ( 82 by 111) XO=48  YO=101
+ [T4SWPU5] Auto pixel packing to 8 bits
+LOADED          T4SWPU6 ( 81 by 106) XO=49  YO=96
+ [T4SWPU6] Auto pixel packing to 8 bits
+LOADED          T4SWPU7 ( 85 by 101) XO=51  YO=91
+ [T4SWPU7] Auto pixel packing to 8 bits
+LOADED          T4SWPU8 ( 99 by 100) XO=49  YO=90
+ [T4SWPU8] Auto pixel packing to 8 bits
+LOADED          T4SWPU9 ( 85 by  95) XO=21  YO=85
+ [T4SWPU9] Auto pixel packing to 8 bits
+LOADED          T5SWPU1 (118 by  87) XO=65  YO=81
+ [T5SWPU1] Auto pixel packing to 8 bits
+LOADED          T5SWPU2 (129 by  90) XO=64  YO=84
+ [T5SWPU2] Auto pixel packing to 8 bits
+LOADED          T5SWPU3 (115 by  98) XO=60  YO=92
+ [T5SWPU3] Auto pixel packing to 8 bits
+LOADED          T5SWPU4 ( 80 by 106) XO=50  YO=100
+ [T5SWPU4] Auto pixel packing to 8 bits
+LOADED          T5SWPU5 ( 72 by 109) XO=42  YO=103
+ [T5SWPU5] Auto pixel packing to 8 bits
+LOADED          T5SWPU6 ( 68 by 106) XO=38  YO=100
+ [T5SWPU6] Auto pixel packing to 8 bits
+LOADED          T5SWPU7 ( 70 by 100) XO=40  YO=94
+ [T5SWPU7] Auto pixel packing to 8 bits
+LOADED          T5SWPU8 ( 77 by  95) XO=47  YO=89
+ [T5SWPU8] Auto pixel packing to 8 bits
+LOADED          T5SWPU9 ( 98 by  90) XO=63  YO=84
+ [T5SWPU9] Auto pixel packing to 8 bits
+LOADED
+Opening img lib [C:\NBA_MSC1.IMG]           w1cow1 ( 90 by 100) XO=58  YO=93
+ [w1cow1] Auto pixel packing to 8 bits
+LOADED           w1cow2 ( 86 by 120) XO=61  YO=113
+ [w1cow2] Auto pixel packing to 8 bits
+LOADED           w1cow3 ( 74 by 131) XO=52  YO=127
+ [w1cow3] Auto pixel packing to 8 bits
+LOADED           w1cow4 ( 72 by 134) XO=49  YO=130
+ [w1cow4] Auto pixel packing to 8 bits
+LOADED           w1cow5 ( 78 by 134) XO=54  YO=130
+ [w1cow5] Auto pixel packing to 8 bits
+LOADED           w1cow6 ( 80 by 131) XO=60  YO=127
+ [w1cow6] Auto pixel packing to 8 bits
+LOADED           w1cow7 ( 79 by 125) XO=65  YO=122
+ [w1cow7] Auto pixel packing to 8 bits
+LOADED           w2cow1 (106 by 105) XO=42  YO=95
+ [w2cow1] Auto pixel packing to 8 bits
+LOADED           w2cow2 ( 99 by 118) XO=40  YO=110
+ [w2cow2] Auto pixel packing to 8 bits
+LOADED           w2cow3 ( 72 by 133) XO=37  YO=128
+ [w2cow3] Auto pixel packing to 8 bits
+LOADED           w2cow4 ( 60 by 129) XO=30  YO=129
+ [w2cow4] Auto pixel packing to 8 bits
+LOADED           w2cow5 ( 58 by 125) XO=27  YO=125
+ [w2cow5] Auto pixel packing to 8 bits
+LOADED           w2cow6 ( 62 by 120) XO=31  YO=120
+ [w2cow6] Auto pixel packing to 8 bits
+LOADED           w2cow7 ( 65 by 119) XO=37  YO=119
+ [w2cow7] Auto pixel packing to 8 bits
+LOADED           w3cow1 ( 73 by 104) XO=20  YO=94
+ [w3cow1] Auto pixel packing to 8 bits
+LOADED           w3cow2 ( 69 by 115) XO=17  YO=105
+ [w3cow2] Auto pixel packing to 8 bits
+LOADED           w3cow3 ( 54 by 122) XO=13  YO=112
+ [w3cow3] Auto pixel packing to 8 bits
+LOADED           w3cow4 ( 43 by 121) XO=13  YO=111
+ [w3cow4] Auto pixel packing to 8 bits
+LOADED           w3cow5 ( 44 by 119) XO=14  YO=109
+ [w3cow5] Auto pixel packing to 8 bits
+LOADED           w3cow6 ( 48 by 116) XO=16  YO=106
+ [w3cow6] Auto pixel packing to 8 bits
+LOADED           w3cow7 ( 50 by 114) XO=18  YO=104
+ [w3cow7] Auto pixel packing to 8 bits
+LOADED           w4cow1 ( 65 by 103) XO=30  YO=93
+ [w4cow1] Auto pixel packing to 8 bits
+LOADED           w4cow2 ( 69 by 115) XO=35  YO=105
+ [w4cow2] Auto pixel packing to 8 bits
+LOADED           w4cow3 ( 61 by 124) XO=34  YO=115
+ [w4cow3] Auto pixel packing to 8 bits
+LOADED           w4cow4 ( 60 by 129) XO=32  YO=120
+ [w4cow4] Auto pixel packing to 8 bits
+LOADED           w4cow5 ( 69 by 130) XO=37  YO=121
+ [w4cow5] Auto pixel packing to 8 bits
+LOADED           w4cow6 ( 78 by 130) XO=41  YO=121
+ [w4cow6] Auto pixel packing to 8 bits
+LOADED           w4cow7 ( 81 by 129) XO=44  YO=120
+ [w4cow7] Auto pixel packing to 8 bits
+LOADED           w5cow1 ( 64 by  97) XO=35  YO=91
+ [w5cow1] Auto pixel packing to 8 bits
+LOADED           w5cow2 ( 69 by 105) XO=43  YO=99
+ [w5cow2] Auto pixel packing to 8 bits
+LOADED           w5cow3 ( 63 by 118) XO=38  YO=112
+ [w5cow3] Auto pixel packing to 8 bits
+LOADED           w5cow4 ( 68 by 117) XO=39  YO=112
+ [w5cow4] Auto pixel packing to 8 bits
+LOADED           w5cow5 ( 80 by 119) XO=37  YO=113
+ [w5cow5] Auto pixel packing to 8 bits
+LOADED           w5cow6 ( 87 by 112) XO=44  YO=106
+ [w5cow6] Auto pixel packing to 8 bits
+LOADED           w5cow7 ( 93 by 104) XO=49  YO=98
+ [w5cow7] Auto pixel packing to 8 bits
+LOADED
+Opening img lib [C:\NBACROWD.IMG]          COACH02 (129 by  69) XO=0  YO=62
+ [COACH02] Auto pixel packing to 7 bits
+LOADED          COACH03 (129 by  68) XO=0  YO=61
+ [COACH03] Auto pixel packing to 7 bits
+LOADED          COACH04 (129 by  74) XO=0  YO=67
+ [COACH04] Auto pixel packing to 7 bits
+LOADED          COACH05 (129 by  89) XO=0  YO=82
+ [COACH05] Auto pixel packing to 7 bits
+LOADED          COACH06 (129 by  93) XO=0  YO=86
+ [COACH06] Auto pixel packing to 7 bits
+LOADED         BNCHPL02 (250 by  74) XO=13  YO=67
+ [BNCHPL02] Auto pixel packing to 7 bits
+LOADED         BNCHPL03 (250 by  74) XO=13  YO=67
+ [BNCHPL03] Auto pixel packing to 7 bits
+LOADED         BNCHPL04 (250 by  74) XO=13  YO=67
+ [BNCHPL04] Auto pixel packing to 7 bits
+LOADED         BNCHPL05 (250 by  78) XO=13  YO=71
+ [BNCHPL05] Auto pixel packing to 7 bits
+LOADED         BNCHPL06 (250 by  89) XO=13  YO=82
+ [BNCHPL06] Auto pixel packing to 7 bits
+LOADED         BNCHPL07 (252 by  93) XO=15  YO=86
+ [BNCHPL07] Auto pixel packing to 7 bits
+LOADED
+Opening img lib [C:\SHANG.IMG]          SHANG01 ( 40 by  79) XO=-2  YO=74
+ [SHANG01] Auto pixel packing to 8 bits
+LOADED          SHANG02 ( 40 by  79) XO=-2  YO=74
+ [SHANG02] Auto pixel packing to 8 bits
+LOADED          SHANG03 ( 40 by  79) XO=-2  YO=74
+ [SHANG03] Auto pixel packing to 8 bits
+LOADED          SHANG04 ( 40 by  79) XO=-2  YO=73
+ [SHANG04] Auto pixel packing to 8 bits
+LOADED          SHANG05 ( 39 by  79) XO=-2  YO=74
+ [SHANG05] Auto pixel packing to 8 bits
+LOADED          SHANG06 ( 40 by  79) XO=-2  YO=73
+ [SHANG06] Auto pixel packing to 8 bits
+LOADED          SHANG07 ( 40 by  79) XO=-2  YO=73
+ [SHANG07] Auto pixel packing to 8 bits
+LOADED          STCLAP1 ( 44 by  78) XO=-3  YO=73
+ [STCLAP1] Auto pixel packing to 8 bits
+LOADED          STCLAP2 ( 37 by  78) XO=-4  YO=73
+ [STCLAP2] Auto pixel packing to 8 bits
+LOADED          STCLAP3 ( 32 by  78) XO=-7  YO=73
+ [STCLAP3] Auto pixel packing to 8 bits
+LOADED
+Opening img lib [C:\OUTDOOR.IMG]          STORM02 (189 by  71) XO=-31  YO=-7
+ [STORM02] Auto pixel packing to 5 bits
+
+bits per pixel = 5
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 939 leading, 1604 trailing
+leftover zeros for x2, 606 leading, 957 trailing
+leftover zeros for x4, 306 leading, 307 trailing
+leftover zeros for x8, 210 leading, 247 trailing
+
+
+
+LOADED          STORM03 (189 by  72) XO=-20  YO=-6
+ [STORM03] Auto pixel packing to 5 bits
+
+bits per pixel = 5
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 1580 leading, 939 trailing
+leftover zeros for x2, 986 leading, 594 trailing
+leftover zeros for x4, 330 leading, 286 trailing
+leftover zeros for x8, 214 leading, 262 trailing
+
+
+
+LOADED          STORM04 (191 by  62) XO=-24  YO=-11
+ [STORM04] Auto pixel packing to 5 bits
+
+bits per pixel = 5
+leading factor = 8
+trailing factor = 4
+
+
+
+leftover zeros for x1, 719 leading, 636 trailing
+leftover zeros for x2, 485 leading, 329 trailing
+leftover zeros for x4, 293 leading, 103 trailing
+leftover zeros for x8, 213 leading, 211 trailing
+
+
+
+LOADED          STORM05 (216 by  63) XO=-12  YO=-12
+ [STORM05] Auto pixel packing to 5 bits
+
+bits per pixel = 5
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 1157 leading, 1623 trailing
+leftover zeros for x2, 698 leading, 1126 trailing
+leftover zeros for x4, 260 leading, 500 trailing
+leftover zeros for x8, 192 leading, 200 trailing
+
+
+
+LOADED          STORM06 (226 by  60) XO=0  YO=-9
+ [STORM06] Auto pixel packing to 5 bits
+
+bits per pixel = 5
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 1562 leading, 1321 trailing
+leftover zeros for x2, 952 leading, 817 trailing
+leftover zeros for x4, 356 leading, 303 trailing
+leftover zeros for x8, 196 leading, 223 trailing
+
+
+
+LOADED          STORM07 (203 by  60) XO=-9  YO=-11
+ [STORM07] Auto pixel packing to 5 bits
+
+bits per pixel = 5
+leading factor = 8
+trailing factor = 4
+
+
+
+leftover zeros for x1, 893 leading, 422 trailing
+leftover zeros for x2, 632 leading, 208 trailing
+leftover zeros for x4, 326 leading, 104 trailing
+leftover zeros for x8, 230 leading, 228 trailing
+
+
+
+LOADED          STORM08 (204 by  77) XO=-11  YO=0
+ [STORM08] Auto pixel packing to 5 bits
+
+bits per pixel = 5
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 1953 leading, 1742 trailing
+leftover zeros for x2, 1201 leading, 1164 trailing
+leftover zeros for x4, 457 leading, 528 trailing
+leftover zeros for x8, 253 leading, 248 trailing
+
+
+
+LOADED          STORM09 (194 by  76) XO=-26  YO=0
+ [STORM09] Auto pixel packing to 5 bits
+
+bits per pixel = 5
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 1562 leading, 1459 trailing
+leftover zeros for x2, 1071 leading, 838 trailing
+leftover zeros for x4, 495 leading, 280 trailing
+leftover zeros for x8, 251 leading, 264 trailing
+
+
+
+LOADED          STORM10 (191 by  63) XO=-30  YO=-9
+ [STORM10] Auto pixel packing to 5 bits
+
+bits per pixel = 5
+leading factor = 4
+trailing factor = 4
+
+
+
+leftover zeros for x1, 522 leading, 555 trailing
+leftover zeros for x2, 234 leading, 386 trailing
+leftover zeros for x4, 144 leading, 222 trailing
+leftover zeros for x8, 204 leading, 222 trailing
+
+
+
+LOADED          STORM11 (221 by  65) XO=-19  YO=-7
+ [STORM11] Auto pixel packing to 5 bits
+
+bits per pixel = 5
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 1553 leading, 1789 trailing
+leftover zeros for x2, 1094 leading, 1154 trailing
+leftover zeros for x4, 494 leading, 348 trailing
+leftover zeros for x8, 190 leading, 208 trailing
+
+
+
+LOADED          STORM12 (225 by  59) XO=-12  YO=-14
+ [STORM12] Auto pixel packing to 5 bits
+
+bits per pixel = 5
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 1364 leading, 1276 trailing
+leftover zeros for x2, 886 leading, 720 trailing
+leftover zeros for x4, 346 leading, 326 trailing
+leftover zeros for x8, 170 leading, 218 trailing
+
+
+
+LOADED            fence (186 by  72) XO=0  YO=0
+ [fence] Auto pixel packing to 6 bits
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 105 leading, 51 trailing
+leftover zeros for x2, 90 leading, 108 trailing
+leftover zeros for x4, 172 leading, 78 trailing
+leftover zeros for x8, 112 leading, 74 trailing
+
+
+
+LOADED
+Opening img lib [C:\MKSTREET.IMG]        FALL2_vda ( 88 by  95) XO=0  YO=0
+ [FALL2_vda] Auto pixel packing to 6 bits
+
+bits per pixel = 6
+leading factor = 4
+trailing factor = 4
+
+
+
+leftover zeros for x1, 568 leading, 564 trailing
+leftover zeros for x2, 187 leading, 197 trailing
+leftover zeros for x4, 147 leading, 157 trailing
+leftover zeros for x8, 323 leading, 289 trailing
+
+
+
+LOADED
+Opening img lib [C:\DCSLOGO.IMG]          dcslogo (186 by  88) XO=93  YO=44
+ [dcslogo] Auto pixel packing to 5 bits
+
+bits per pixel = 5
+leading factor = 8
+trailing factor = 1
+
+
+
+leftover zeros for x1, 105 leading, 51 trailing
+leftover zeros for x2, 90 leading, 124 trailing
+leftover zeros for x4, 60 leading, 94 trailing
+leftover zeros for x8, 0 leading, 90 trailing
+
+
+
+LOADED
+Opening img lib [C:\mkstreet.img]           TOASTY ( 97 by 100) XO=103  YO=0
+ [TOASTY] Auto pixel packing to 8 bits
+
+bits per pixel = 6
+leading factor = 2
+trailing factor = 4
+
+
+
+leftover zeros for x1, 777 leading, 286 trailing
+leftover zeros for x2, 143 leading, 112 trailing
+leftover zeros for x4, 227 leading, 40 trailing
+leftover zeros for x8, 363 leading, 68 trailing
+
+
+
+LOADED             KITZ (100 by 100) XO=103  YO=0
+ [KITZ] Auto pixel packing to 8 bits
+
+bits per pixel = 7
+leading factor = 8
+trailing factor = 4
+
+
+
+leftover zeros for x1, 1122 leading, 1178 trailing
+leftover zeros for x2, 312 leading, 319 trailing
+leftover zeros for x4, 260 leading, 107 trailing
+leftover zeros for x8, 252 leading, 179 trailing
+
+
+
+LOADED
+Opening img lib [C:\RAIDEN.IMG]         lighten1 (  6 by  12) XO=1  YO=10
+ [lighten1] Auto pixel packing to 3 bits
+Can't Zero-compress image [lighten1] (Need 10 non-zero pixels minimum.)
+LOADED         lighten2 ( 12 by  15) XO=-2  YO=20
+ [lighten2] Auto pixel packing to 3 bits
+
+bits per pixel = 3
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 10 leading, 7 trailing
+leftover zeros for x4, 20 leading, 23 trailing
+leftover zeros for x8, 36 leading, 35 trailing
+
+
+
+LOADED         lighten3 (  9 by  28) XO=-5  YO=37
+ [lighten3] Auto pixel packing to 3 bits
+Can't Zero-compress image [lighten3] (Need 10 non-zero pixels minimum.)
+LOADED         lighten4 ( 14 by  22) XO=2  YO=44
+ [lighten4] Auto pixel packing to 3 bits
+
+bits per pixel = 3
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 12 leading, 13 trailing
+leftover zeros for x4, 40 leading, 41 trailing
+leftover zeros for x8, 56 leading, 61 trailing
+
+
+
+LOADED         lighten5 (  9 by  21) XO=4  YO=56
+ [lighten5] Auto pixel packing to 3 bits
+Can't Zero-compress image [lighten5] (Need 10 non-zero pixels minimum.)
+LOADED         lighten6 ( 10 by  19) XO=4  YO=65
+ [lighten6] Auto pixel packing to 3 bits
+Can't Zero-compress image [lighten6] (Need 10 non-zero pixels minimum.)
+LOADED         lighten7 (  9 by  10) XO=-1  YO=69
+ [lighten7] Auto pixel packing to 3 bits
+Can't Zero-compress image [lighten7] (Need 10 non-zero pixels minimum.)
+LOADED
+Opening img lib [C:\ourhds3.img]         RAIDEN01 ( 56 by  43) XO=27  YO=39
+LOADED         RAIDEN02 ( 56 by  42) XO=23  YO=38
+LOADED         RAIDEN03 ( 56 by  41) XO=24  YO=37
+LOADED         RAIDEN04 ( 55 by  44) XO=21  YO=40
+LOADED         RAIDEN05 ( 55 by  43) XO=28  YO=40
+LOADED         RAIDEN06 ( 51 by  37) XO=39  YO=31
+LOADED         RAIDEN07 ( 55 by  38) XO=20  YO=32
+LOADED         RAIDEN08 ( 54 by  40) XO=13  YO=36
+LOADED         RAIDEN09 ( 57 by  40) XO=20  YO=35
+LOADED         RAIDEN10 ( 57 by  41) XO=27  YO=34
+LOADED         RAIDEN11 ( 58 by  57) XO=31  YO=39
+LOADED         RAIDEN12 ( 49 by  42) XO=26  YO=37
+LOADED         RAIDEN13 ( 38 by  42) XO=23  YO=35
+LOADED         RAIDEN14 ( 51 by  40) XO=24  YO=36
+LOADED         RAIDEN15 ( 54 by  39) XO=28  YO=34
+LOADED         RAIDEN16 ( 45 by  51) XO=43  YO=31
+LOADED
+Opening img lib [C:\ourhds2.img]         SCORPI01 ( 28 by  38) XO=13  YO=32
+LOADED         SCORPI02 ( 32 by  39) XO=15  YO=32
+LOADED         SCORPI03 ( 34 by  42) XO=13  YO=33
+LOADED         SCORPI04 ( 32 by  43) XO=13  YO=33
+LOADED         SCORPI05 ( 27 by  43) XO=13  YO=33
+LOADED         SCORPI16 ( 42 by  32) XO=34  YO=16
+LOADED         SUBZER01 ( 28 by  38) XO=13  YO=32
+LOADED         SUBZER02 ( 32 by  39) XO=15  YO=32
+LOADED         SUBZER03 ( 34 by  42) XO=13  YO=33
+LOADED         SUBZER04 ( 32 by  43) XO=13  YO=33
+LOADED         SUBZER05 ( 27 by  43) XO=13  YO=33
+LOADED         SUBZER16 ( 42 by  32) XO=34  YO=16
+LOADED         REPTIL01 ( 28 by  38) XO=13  YO=32
+block cksum match w:29, h:39, dma2:6000 add:737E9DD
+Checksum match on image [REPTIL01].         REPTIL02 ( 32 by  39) XO=15  YO=32
+block cksum match w:33, h:40, dma2:6000 add:738045F
+Checksum match on image [REPTIL02].         REPTIL03 ( 34 by  42) XO=13  YO=33
+block cksum match w:35, h:43, dma2:6000 add:738234F
+Checksum match on image [REPTIL03].         REPTIL04 ( 32 by  43) XO=13  YO=33
+block cksum match w:33, h:44, dma2:6000 add:7384695
+Checksum match on image [REPTIL04].         REPTIL05 ( 27 by  43) XO=13  YO=33
+block cksum match w:28, h:44, dma2:6000 add:738689D
+Checksum match on image [REPTIL05].         REPTIL16 ( 42 by  32) XO=34  YO=16
+block cksum match w:43, h:33, dma2:6000 add:738857D
+Checksum match on image [REPTIL16].
+Opening img lib [C:\ninjas.img]          SMOKH01 ( 28 by  38) XO=13  YO=32
+LOADED          SMOKH02 ( 32 by  39) XO=15  YO=32
+LOADED          SMOKH03 ( 32 by  42) XO=13  YO=33
+LOADED          SMOKH04 ( 32 by  43) XO=13  YO=33
+LOADED          SMOKH05 ( 27 by  41) XO=13  YO=33
+LOADED          SMOKH16 ( 41 by  32) XO=34  YO=16
+LOADED
+Opening img lib [C:\Jordan.img]          JORDAN1 ( 23 by  27) XO=10  YO=25
+Image JORDAN1 has 98 colors. Can't fit into 6 bits per pixel.
+LOADED          JORDAN2 ( 24 by  28) XO=13  YO=26
+Image JORDAN2 has 98 colors. Can't fit into 6 bits per pixel.
+LOADED          JORDAN3 ( 27 by  30) XO=6  YO=26
+Image JORDAN3 has 98 colors. Can't fit into 6 bits per pixel.
+LOADED          JORDAN4 ( 24 by  30) XO=8  YO=27
+Image JORDAN4 has 98 colors. Can't fit into 6 bits per pixel.
+LOADED          JORDAN5 ( 23 by  30) XO=12  YO=28
+Image JORDAN5 has 98 colors. Can't fit into 6 bits per pixel.
+LOADED          JORDAN6 ( 28 by  30) XO=19  YO=22
+Image JORDAN6 has 98 colors. Can't fit into 6 bits per pixel.
+LOADED          JORDAN7 ( 24 by  24) XO=4  YO=21
+Image JORDAN7 has 98 colors. Can't fit into 6 bits per pixel.
+LOADED          JORDAN8 ( 32 by  34) XO=2  YO=21
+Image JORDAN8 has 98 colors. Can't fit into 6 bits per pixel.
+LOADED          JORDAN9 ( 28 by  29) XO=4  YO=21
+Image JORDAN9 has 98 colors. Can't fit into 6 bits per pixel.
+LOADED         JORDAN10 ( 23 by  28) XO=9  YO=23
+Image JORDAN10 has 98 colors. Can't fit into 6 bits per pixel.
+LOADED         JORDAN11 ( 20 by  20) XO=10  YO=12
+Image JORDAN11 has 98 colors. Can't fit into 6 bits per pixel.
+LOADED         JORDAN12 ( 32 by  29) XO=18  YO=27
+Image JORDAN12 has 98 colors. Can't fit into 6 bits per pixel.
+LOADED         JORDAN13 ( 34 by  29) XO=23  YO=26
+Image JORDAN13 has 98 colors. Can't fit into 6 bits per pixel.
+LOADED         JORDAN14 ( 28 by  29) XO=15  YO=25
+Image JORDAN14 has 98 colors. Can't fit into 6 bits per pixel.
+LOADED         JORDAN15 ( 22 by  29) XO=12  YO=27
+Image JORDAN15 has 98 colors. Can't fit into 6 bits per pixel.
+LOADED         JORDAN16 ( 32 by  29) XO=29  YO=18
+Image JORDAN16 has 98 colors. Can't fit into 6 bits per pixel.
+LOADED            JORD1 ( 23 by  32) XO=11  YO=28
+Image JORD1 has 173 colors. Can't fit into 6 bits per pixel.
+LOADED            JORD2 ( 23 by  33) XO=11  YO=29
+Image JORD2 has 173 colors. Can't fit into 6 bits per pixel.
+LOADED            JORD3 ( 26 by  30) XO=8  YO=25
+Image JORD3 has 173 colors. Can't fit into 6 bits per pixel.
+LOADED            JORD4 ( 23 by  34) XO=9  YO=31
+Image JORD4 has 173 colors. Can't fit into 6 bits per pixel.
+LOADED            JORD5 ( 24 by  35) XO=11  YO=33
+Image JORD5 has 173 colors. Can't fit into 6 bits per pixel.
+LOADED            JORD6 ( 30 by  32) XO=23  YO=26
+Image JORD6 has 173 colors. Can't fit into 6 bits per pixel.
+LOADED            JORD7 ( 27 by  31) XO=7  YO=25
+Image JORD7 has 173 colors. Can't fit into 6 bits per pixel.
+LOADED            JORD8 ( 27 by  32) XO=3  YO=24
+Image JORD8 has 173 colors. Can't fit into 6 bits per pixel.
+LOADED            JORD9 ( 25 by  33) XO=5  YO=28
+Image JORD9 has 173 colors. Can't fit into 6 bits per pixel.
+LOADED           JORD10 ( 24 by  36) XO=11  YO=31
+Image JORD10 has 173 colors. Can't fit into 6 bits per pixel.
+LOADED           JORD11 ( 21 by  24) XO=10  YO=12
+Image JORD11 has 173 colors. Can't fit into 6 bits per pixel.
+LOADED           JORD12 ( 27 by  27) XO=18  YO=25
+Image JORD12 has 173 colors. Can't fit into 6 bits per pixel.
+LOADED           JORD13 ( 30 by  29) XO=20  YO=26
+Image JORD13 has 173 colors. Can't fit into 6 bits per pixel.
+LOADED           JORD14 ( 25 by  31) XO=15  YO=27
+Image JORD14 has 173 colors. Can't fit into 6 bits per pixel.
+LOADED           JORD15 ( 22 by  31) XO=11  YO=28
+Image JORD15 has 173 colors. Can't fit into 6 bits per pixel.
+LOADED           JORD16 ( 30 by  26) XO=27  YO=17
+Image JORD16 has 173 colors. Can't fit into 6 bits per pixel.
+LOADED           JORD17 ( 24 by  35) XO=11  YO=33
+Image JORD17 has 173 colors. Can't fit into 6 bits per pixel.
+LOADED
+Opening img lib [C:\Kobe.img]           KOBE01 ( 26 by  34) XO=12  YO=32
+Image KOBE01 has 67 colors. Can't fit into 6 bits per pixel.
+LOADED           KOBE02 ( 27 by  34) XO=13  YO=32
+Image KOBE02 has 67 colors. Can't fit into 6 bits per pixel.
+LOADED           KOBE03 ( 30 by  34) XO=13  YO=30
+Image KOBE03 has 67 colors. Can't fit into 6 bits per pixel.
+LOADED           KOBE04 ( 29 by  35) XO=9  YO=33
+Image KOBE04 has 67 colors. Can't fit into 6 bits per pixel.
+LOADED           KOBE05 ( 26 by  36) XO=13  YO=35
+Image KOBE05 has 67 colors. Can't fit into 6 bits per pixel.
+LOADED           KOBE16 ( 34 by  30) XO=34  YO=19
+Image KOBE16 has 67 colors. Can't fit into 6 bits per pixel.
+LOADED           KOBE17 ( 36 by  36) XO=13  YO=35
+Image KOBE17 has 67 colors. Can't fit into 6 bits per pixel.
+LOADED
+Opening img lib [C:\Shaq.img]          ONEAL01 ( 24 by  34) XO=11  YO=32
+LOADED          ONEAL02 ( 25 by  34) XO=10  YO=32
+LOADED          ONEAL03 ( 29 by  37) XO=12  YO=34
+LOADED          ONEAL04 ( 23 by  40) XO=10  YO=38
+LOADED          ONEAL05 ( 27 by  41) XO=14  YO=39
+LOADED          ONEAL16 ( 37 by  29) XO=35  YO=19
+LOADED
+Opening img lib [C:\Barkley.img]         BARKLEY1 ( 27 by  33) XO=14  YO=31
+LOADED         BARKLEY2 ( 28 by  34) XO=13  YO=31
+LOADED         BARKLEY3 ( 31 by  34) XO=12  YO=31
+LOADED         BARKLEY4 ( 26 by  35) XO=9  YO=35
+LOADED         BARKLEY5 ( 26 by  36) XO=13  YO=33
+LOADED        BARKLEY16 ( 34 by  31) XO=34  YO=24
+LOADED
+Opening img lib [C:\Magic.img]            MAG01 ( 25 by  34) XO=11  YO=32
+LOADED            MAG02 ( 27 by  34) XO=12  YO=31
+LOADED            MAG03 ( 31 by  35) XO=13  YO=33
+LOADED            MAG04 ( 27 by  35) XO=9  YO=33
+LOADED            MAG05 ( 24 by  36) XO=11  YO=33
+LOADED            MAG16 ( 33 by  29) XO=32  YO=20
+LOADED
+Opening img lib [C:\Bird.img]           BIRD01 ( 28 by  41) XO=14  YO=40
+LOADED           BIRD02 ( 30 by  34) XO=13  YO=32
+LOADED           BIRD03 ( 31 by  34) XO=14  YO=31
+LOADED           BIRD04 ( 29 by  35) XO=13  YO=34
+LOADED           BIRD05 ( 28 by  43) XO=14  YO=39
+LOADED           BIRD16 ( 34 by  31) XO=31  YO=22
+LOADED
+Opening img lib [C:\Arnold.img]         ARNOLD01 ( 27 by  34) XO=13  YO=32
+LOADED         ARNOLD02 ( 27 by  34) XO=11  YO=32
+LOADED         ARNOLD03 ( 26 by  37) XO=12  YO=34
+LOADED         ARNOLD04 ( 25 by  35) XO=11  YO=33
+LOADED         ARNOLD05 ( 26 by  41) XO=12  YO=40
+LOADED         ARNOLD16 ( 37 by  26) XO=34  YO=21
+LOADED
+Opening img lib [C:\Term.img]           TERM01 ( 27 by  36) XO=14  YO=34
+Image TERM01 has 69 colors. Can't fit into 6 bits per pixel.
+LOADED           TERM02 ( 27 by  33) XO=13  YO=32
+Image TERM02 has 69 colors. Can't fit into 6 bits per pixel.
+LOADED           TERM03 ( 32 by  39) XO=12  YO=35
+Image TERM03 has 69 colors. Can't fit into 6 bits per pixel.
+LOADED           TERM04 ( 28 by  36) XO=10  YO=34
+Image TERM04 has 69 colors. Can't fit into 6 bits per pixel.
+LOADED           TERM05 ( 26 by  42) XO=13  YO=40
+Image TERM05 has 69 colors. Can't fit into 6 bits per pixel.
+LOADED           TERM16 ( 34 by  28) XO=31  YO=19
+Image TERM16 has 69 colors. Can't fit into 6 bits per pixel.
+LOADED
+Opening img lib [C:\Walker.img]          WALKER1 ( 26 by  32) XO=12  YO=30
+LOADED          WALKER2 ( 25 by  32) XO=12  YO=29
+LOADED          WALKER3 ( 28 by  33) XO=6  YO=30
+LOADED          WALKER4 ( 23 by  33) XO=7  YO=29
+LOADED          WALKER5 ( 23 by  33) XO=11  YO=31
+LOADED          WALKER6 ( 30 by  30) XO=21  YO=27
+LOADED          WALKER7 ( 25 by  32) XO=3  YO=25
+LOADED          WALKER8 ( 32 by  33) XO=5  YO=24
+LOADED          WALKER9 ( 26 by  33) XO=4  YO=26
+LOADED         WALKER10 ( 25 by  31) XO=11  YO=26
+LOADED         WALKER11 ( 24 by  26) XO=11  YO=16
+LOADED         WALKER12 ( 30 by  27) XO=15  YO=26
+LOADED         WALKER13 ( 33 by  31) XO=20  YO=28
+LOADED         WALKER14 ( 26 by  27) XO=15  YO=26
+LOADED         WALKER15 ( 25 by  32) XO=13  YO=29
+LOADED         WALKER16 ( 33 by  28) XO=31  YO=21
+LOADED
+Opening img lib [C:\Ellis.img]           ELLIS1 ( 27 by  36) XO=13  YO=34
+Image ELLIS1 has 70 colors. Can't fit into 6 bits per pixel.
+LOADED           ELLIS2 ( 28 by  34) XO=10  YO=31
+Image ELLIS2 has 70 colors. Can't fit into 6 bits per pixel.
+LOADED           ELLIS3 ( 30 by  34) XO=11  YO=31
+Image ELLIS3 has 70 colors. Can't fit into 6 bits per pixel.
+LOADED           ELLIS4 ( 30 by  35) XO=12  YO=34
+Image ELLIS4 has 70 colors. Can't fit into 6 bits per pixel.
+LOADED           ELLIS5 ( 24 by  36) XO=12  YO=35
+Image ELLIS5 has 70 colors. Can't fit into 6 bits per pixel.
+LOADED          ELLIS16 ( 34 by  30) XO=28  YO=24
+Image ELLIS16 has 70 colors. Can't fit into 6 bits per pixel.
+LOADED
+Opening img lib [C:\smoke.img]          RAD_MK2 ( 72 by  63) XO=0  YO=63
+ [RAD_MK2] Auto pixel packing to 8 bits
+
+bits per pixel = 7
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 51 leading, 308 trailing
+leftover zeros for x2, 18 leading, 57 trailing
+leftover zeros for x4, 56 leading, 93 trailing
+leftover zeros for x8, 136 leading, 193 trailing
+
+
+
+LOADED          SMK_MUG ( 72 by  62) XO=0  YO=62
+ [SMK_MUG] Auto pixel packing to 8 bits
+
+bits per pixel = 8
+leading factor = 1
+trailing factor = 4
+
+
+
+leftover zeros for x1, 13 leading, 956 trailing
+leftover zeros for x2, 33 leading, 193 trailing
+leftover zeros for x4, 69 leading, 61 trailing
+leftover zeros for x8, 93 leading, 137 trailing
+
+
+
+LOADED
+Opening img lib [C:\nmugs.img]          SCO_MK2 ( 71 by  62) XO=0  YO=62
+ [SCO_MK2] Auto pixel packing to 7 bits
+
+bits per pixel = 7
+leading factor = 1
+trailing factor = 4
+
+
+
+leftover zeros for x1, 6 leading, 925 trailing
+leftover zeros for x2, 17 leading, 178 trailing
+leftover zeros for x4, 47 leading, 66 trailing
+leftover zeros for x8, 67 leading, 122 trailing
+
+
+
+LOADED          REP_MK2 ( 50 by  63) XO=0  YO=63
+ [REP_MK2] Auto pixel packing to 7 bits
+
+bits per pixel = 7
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 16 leading, 24 trailing
+leftover zeros for x2, 26 leading, 27 trailing
+leftover zeros for x4, 64 leading, 73 trailing
+leftover zeros for x8, 132 leading, 173 trailing
+
+
+
+LOADED          SUB_MK2 ( 46 by  63) XO=0  YO=63
+ [SUB_MK2] Auto pixel packing to 7 bits
+
+bits per pixel = 7
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 12 leading, 1 trailing
+leftover zeros for x2, 25 leading, 31 trailing
+leftover zeros for x4, 61 leading, 93 trailing
+leftover zeros for x8, 113 leading, 225 trailing
+
+
+
+LOADED
+Opening img lib [C:\Jordan.img]          JOR_MUG ( 67 by  62) XO=0  YO=62
+Image JOR_MUG has 68 colors. Can't fit into 1 bits per pixel.
+
+bits per pixel = 8
+leading factor = 4
+trailing factor = 2
+
+
+
+leftover zeros for x1, 218 leading, 157 trailing
+leftover zeros for x2, 87 leading, 32 trailing
+leftover zeros for x4, 79 leading, 106 trailing
+leftover zeros for x8, 155 leading, 186 trailing
+
+
+
+LOADED
+Opening img lib [C:\Shaq.img]          ONE_LAL ( 68 by  62) XO=0  YO=62
+Image ONE_LAL has 68 colors. Can't fit into 1 bits per pixel.
+
+bits per pixel = 8
+leading factor = 4
+trailing factor = 2
+
+
+
+leftover zeros for x1, 87 leading, 329 trailing
+leftover zeros for x2, 60 leading, 42 trailing
+leftover zeros for x4, 56 leading, 80 trailing
+leftover zeros for x8, 188 leading, 232 trailing
+
+
+
+LOADED
+Opening img lib [C:\Kobe.img]          KOB_MUG ( 63 by  62) XO=0  YO=62
+Image KOB_MUG has 68 colors. Can't fit into 1 bits per pixel.
+
+bits per pixel = 8
+leading factor = 1
+trailing factor = 2
+
+
+
+leftover zeros for x1, 23 leading, 216 trailing
+leftover zeros for x2, 28 leading, 47 trailing
+leftover zeros for x4, 74 leading, 73 trailing
+leftover zeros for x8, 170 leading, 185 trailing
+
+
+
+LOADED
+Opening img lib [C:\Barkley.img]         BARK_MUG ( 73 by  62) XO=0  YO=62
+Image BARK_MUG has 60 colors. Can't fit into 1 bits per pixel.
+
+bits per pixel = 8
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 211 leading, 255 trailing
+leftover zeros for x2, 35 leading, 30 trailing
+leftover zeros for x4, 79 leading, 78 trailing
+leftover zeros for x8, 171 leading, 166 trailing
+
+
+
+LOADED
+Opening img lib [C:\Magic.img]          MAG_MUG ( 68 by  62) XO=0  YO=62
+Image MAG_MUG has 73 colors. Can't fit into 1 bits per pixel.
+
+bits per pixel = 8
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 72 leading, 300 trailing
+leftover zeros for x2, 70 leading, 36 trailing
+leftover zeros for x4, 114 leading, 80 trailing
+leftover zeros for x8, 210 leading, 196 trailing
+
+
+
+LOADED
+Opening img lib [C:\Bird.img]          BRD_MUG ( 57 by  62) XO=0  YO=62
+Image BRD_MUG has 55 colors. Can't fit into 1 bits per pixel.
+
+bits per pixel = 8
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 1 leading, 5 trailing
+leftover zeros for x2, 23 leading, 32 trailing
+leftover zeros for x4, 83 leading, 110 trailing
+leftover zeros for x8, 191 leading, 218 trailing
+
+
+
+LOADED
+Opening img lib [C:\Arnold.img]          ARN_MUG ( 50 by  62) XO=0  YO=62
+Image ARN_MUG has 70 colors. Can't fit into 1 bits per pixel.
+
+bits per pixel = 8
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 3 trailing
+leftover zeros for x2, 48 leading, 24 trailing
+leftover zeros for x4, 66 leading, 36 trailing
+leftover zeros for x8, 218 leading, 104 trailing
+
+
+
+LOADED
+Opening img lib [C:\Term.img]          TRM_MUG ( 46 by  62) XO=0  YO=62
+Image TRM_MUG has 70 colors. Can't fit into 1 bits per pixel.
+
+bits per pixel = 8
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 16 leading, 20 trailing
+leftover zeros for x4, 96 leading, 80 trailing
+leftover zeros for x8, 208 leading, 188 trailing
+
+
+
+LOADED
+Opening img lib [C:\Walker.img]         WALK_MUG ( 67 by  62) XO=0  YO=62
+Image WALK_MUG has 68 colors. Can't fit into 1 bits per pixel.
+
+bits per pixel = 8
+leading factor = 2
+trailing factor = 2
+
+
+
+leftover zeros for x1, 63 leading, 32 trailing
+leftover zeros for x2, 22 leading, 25 trailing
+leftover zeros for x4, 78 leading, 77 trailing
+leftover zeros for x8, 218 leading, 105 trailing
+
+
+
+LOADED
+Opening img lib [C:\Ellis.img]          ELL_MUG ( 55 by  62) XO=0  YO=62
+Image ELL_MUG has 59 colors. Can't fit into 1 bits per pixel.
+
+bits per pixel = 8
+leading factor = 2
+trailing factor = 1
+
+
+
+leftover zeros for x1, 64 leading, 6 trailing
+leftover zeros for x2, 60 leading, 22 trailing
+leftover zeros for x4, 106 leading, 66 trailing
+leftover zeros for x8, 254 leading, 170 trailing
+
+
+
+LOADED
+Opening img lib [C:\TVSCORE.IMG]         TEAMZN30 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN29 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN28 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN27 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN26 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN25 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN24 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN23 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN22 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN21 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN20 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN19 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN18 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN17 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN16 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN15 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN14 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN13 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN12 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN11 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN10 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN09 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN08 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN07 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN06 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN05 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN04 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN03 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN02 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED         TEAMZN01 ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+LOADED       TEAMZN_01r ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+block cksum match w:67, h:7, dma2:6080 add:749091C
+Checksum match on image [TEAMZN_01r].       TEAMZN_01b ( 67 by   7) XO=0  YO=0
+
+bits per pixel = 6
+leading factor = 1
+trailing factor = 1
+
+
+
+leftover zeros for x1, 0 leading, 0 trailing
+leftover zeros for x2, 4 leading, 4 trailing
+leftover zeros for x4, 8 leading, 8 trailing
+leftover zeros for x8, 8 leading, 8 trailing
+
+
+
+block cksum match w:67, h:7, dma2:6080 add:749091C
+Checksum match on image [TEAMZN_01b].
+Opening img lib [COURT\UGROUND2.IMG]         SPIKETST (186 by  44) XO=0  YO=-6
+LOADED         UGRTEETH (246 by  99) XO=0  YO=0
+LOADED          UGRLAVA (147 by  62) XO=0  YO=0
+LOADED         UGRTEETS (114 by  44) XO=0  YO=0
+LOADED          UGRBKG1 (200 by 200) XO=0  YO=0
+LOADED          UGRBKG2 (200 by 200) XO=0  YO=0
+LOADED          UGRBKG3 (200 by 200) XO=0  YO=0
+LOADED
+Opening img lib [COURT\BLUCOURT.IMG]          BLUBAK1 (200 by 297) XO=0  YO=0
+LOADED          BLUBAK2 (200 by 297) XO=0  YO=0
+LOADED          BLUBAK3 (200 by 297) XO=0  YO=0
+LOADED         STEMPLEL (138 by 149) XO=0  YO=-1
+LOADED         STEMPLER (138 by 149) XO=0  YO=-1
+LOADED           TFENCE ( 67 by  36) XO=0  YO=0
+LOADED           NEWBOT ( 88 by 154) XO=0  YO=0
+LOADED           NEWTOP ( 88 by 237) XO=0  YO=237
+LOADED
+Opening img lib [C:\HOOPJAM.IMG]         shard1_1 (  3 by   1) XO=0  YO=0
+LOADED         shard1_2 (  3 by   2) XO=0  YO=0
+LOADED         shard1_3 (  3 by   2) XO=0  YO=0
+LOADED         shard1_4 (  3 by   2) XO=0  YO=0
+LOADED         shard1_5 (  3 by   1) XO=0  YO=0
+LOADED         shard1_6 (  3 by   2) XO=0  YO=0
+LOADED         shard1_7 (  3 by   2) XO=0  YO=0
+LOADED         shard1_8 (  3 by   2) XO=0  YO=0
+LOADED         shard2_1 (  3 by   2) XO=1  YO=0
+LOADED         shard2_2 (  3 by   3) XO=1  YO=1
+LOADED         shard2_3 (  3 by   3) XO=0  YO=1
+LOADED         shard2_4 (  3 by   3) XO=1  YO=1
+LOADED         shard2_5 (  3 by   2) XO=1  YO=0
+LOADED         shard2_6 (  3 by   3) XO=0  YO=1
+LOADED         shard2_7 (  3 by   3) XO=0  YO=1
+LOADED         shard2_8 (  3 by   3) XO=1  YO=1
+LOADED         shard3_1 (  4 by   4) XO=1  YO=1
+LOADED         shard3_2 (  4 by   4) XO=1  YO=1
+LOADED         shard3_3 (  4 by   4) XO=1  YO=1
+LOADED         shard3_4 (  4 by   2) XO=1  YO=0
+LOADED         shard3_5 (  4 by   1) XO=1  YO=0
+LOADED         shard3_6 (  3 by   3) XO=1  YO=1
+LOADED         shard3_7 (  4 by   4) XO=1  YO=1
+LOADED         shard3_8 (  4 by   4) XO=1  YO=1
+LOADED         shard3_9 (  4 by   4) XO=1  YO=1
+LOADED        shard3_10 (  3 by   1) XO=1  YO=0
+LOADED        shard3_11 (  4 by   1) XO=1  YO=0
+LOADED        shard3_12 (  3 by   3) XO=1  YO=1
+LOADED         shard4_1 (  6 by   4) XO=2  YO=1
+LOADED         shard4_2 (  7 by   5) XO=3  YO=2
+LOADED         shard4_3 (  5 by   5) XO=2  YO=2
+LOADED         shard4_4 (  3 by   4) XO=0  YO=1
+LOADED         shard4_5 (  3 by   4) XO=1  YO=1
+LOADED         shard4_6 (  6 by   4) XO=2  YO=1
+LOADED         shard4_7 (  7 by   5) XO=3  YO=2
+LOADED         shard4_8 (  5 by   5) XO=2  YO=2
+LOADED         shard4_9 (  3 by   5) XO=0  YO=2
+LOADED        shard4_10 (  3 by   4) XO=1  YO=1
+LOADED         shard5_1 (  4 by   4) XO=1  YO=1
+LOADED         shard5_2 (  5 by   3) XO=2  YO=1
+LOADED         shard5_3 (  4 by   4) XO=1  YO=1
+LOADED         shard5_4 (  3 by   5) XO=1  YO=2
+LOADED         shard5_5 (  4 by   4) XO=1  YO=1
+LOADED         shard5_6 (  5 by   3) XO=2  YO=1
+LOADED         shard5_7 (  4 by   4) XO=1  YO=1
+LOADED         shard5_8 (  3 by   5) XO=1  YO=2
+LOADED         shard6_1 (  3 by   2) XO=0  YO=0
+LOADED         shard6_2 (  3 by   3) XO=0  YO=1
+LOADED         shard6_3 (  3 by   3) XO=0  YO=1
+LOADED         shard6_4 (  3 by   3) XO=0  YO=1
+LOADED         shard6_5 (  3 by   3) XO=0  YO=1
+LOADED         shard6_6 (  3 by   3) XO=0  YO=1
+LOADED         shard6_7 (  3 by   3) XO=0  YO=1
+LOADED         shard6_8 (  3 by   3) XO=0  YO=1
+LOADED         shard7_1 (  5 by   5) XO=2  YO=2
+LOADED         shard7_2 (  5 by   5) XO=2  YO=2
+LOADED         shard7_3 (  3 by   4) XO=1  YO=1
+LOADED         shard7_4 (  3 by   4) XO=0  YO=1
+LOADED         shard7_5 (  3 by   5) XO=1  YO=2
+LOADED         shard7_6 (  5 by   5) XO=2  YO=2
+LOADED         shard7_7 (  5 by   6) XO=2  YO=2
+LOADED         shard7_8 (  3 by   6) XO=1  YO=2
+LOADED         shard7_9 (  3 by   6) XO=0  YO=2
+LOADED        shard7_10 (  3 by   6) XO=1  YO=2
+LOADED         shard8_1 (  3 by   2) XO=0  YO=0
+LOADED         shard8_2 (  3 by   2) XO=0  YO=0
+LOADED         shard8_3 (  3 by   1) XO=0  YO=0
+LOADED         shard8_4 (  3 by   1) XO=0  YO=0
+LOADED         shard8_5 (  3 by   1) XO=0  YO=0
+LOADED         shard8_6 (  3 by   1) XO=0  YO=0
+LOADED         shard8_7 (  3 by   2) XO=0  YO=0
+LOADED         shard8_8 (  3 by   2) XO=0  YO=0
+LOADED         shard8_9 (  3 by   2) XO=0  YO=0
+LOADED        shard8_10 (  3 by   2) XO=0  YO=0
+LOADED          shat1_1 ( 10 by   4) XO=4  YO=1
+LOADED          shat1_2 ( 15 by   5) XO=7  YO=2
+LOADED          shat1_3 ( 20 by   5) XO=9  YO=2
+LOADED          shat1_4 ( 30 by   7) XO=14  YO=3
+LOADED          shat1_5 ( 41 by   9) XO=20  YO=4
+LOADED          shat2_1 (  7 by   5) XO=3  YO=2
+LOADED          shat2_2 ( 10 by   5) XO=4  YO=2
+LOADED          shat2_3 ( 18 by   7) XO=8  YO=3
+LOADED          shat2_4 ( 27 by   8) XO=13  YO=3
+LOADED          shat2_5 ( 39 by   9) XO=19  YO=4
+LOADED          shat3_1 (  3 by   2) XO=1  YO=0
+LOADED          shat3_2 (  4 by   2) XO=1  YO=0
+LOADED          shat3_3 (  8 by   2) XO=3  YO=0
+LOADED          shat3_4 ( 12 by   4) XO=5  YO=1
+LOADED          shat3_5 ( 20 by   5) XO=9  YO=2
+LOADED          shat4_1 (  3 by   1) XO=0  YO=0
+LOADED          shat4_2 (  4 by   4) XO=1  YO=1
+LOADED          shat4_3 (  8 by   5) XO=3  YO=2
+LOADED          shat4_4 ( 14 by   5) XO=6  YO=2
+LOADED          shat4_5 ( 12 by   6) XO=5  YO=2
+LOADED
+Opening img lib [C:\HOOPHT.IMG]          BACK1BR ( 90 by  73) XO=-28  YO=181
+Image BACK1BR has 178 colors. Can't fit into 6 bits per pixel.
+
+bits per pixel = 8
+leading factor = 8
+trailing factor = 2
+
+
+
+leftover zeros for x1, 1617 leading, 57 trailing
+leftover zeros for x2, 932 leading, 39 trailing
+leftover zeros for x4, 196 leading, 117 trailing
+leftover zeros for x8, 188 leading, 161 trailing
+
+
+
+LOADED          BACK2BR ( 89 by  73) XO=-28  YO=181
+Image BACK2BR has 178 colors. Can't fit into 6 bits per pixel.
+
+bits per pixel = 8
+leading factor = 8
+trailing factor = 2
+
+
+
+leftover zeros for x1, 1656 leading, 45 trailing
+leftover zeros for x2, 963 leading, 39 trailing
+leftover zeros for x4, 199 leading, 115 trailing
+leftover zeros for x8, 187 leading, 163 trailing
+
+
+
+LOADED          BACK3BR ( 87 by  73) XO=-28  YO=181
+Image BACK3BR has 178 colors. Can't fit into 6 bits per pixel.
+
+bits per pixel = 8
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 1641 leading, 28 trailing
+leftover zeros for x2, 952 leading, 38 trailing
+leftover zeros for x4, 152 leading, 112 trailing
+leftover zeros for x8, 212 leading, 160 trailing
+
+
+
+LOADED          BACK4BR ( 86 by  73) XO=-28  YO=181
+Image BACK4BR has 178 colors. Can't fit into 6 bits per pixel.
+
+bits per pixel = 8
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 1637 leading, 21 trailing
+leftover zeros for x2, 950 leading, 39 trailing
+leftover zeros for x4, 148 leading, 115 trailing
+leftover zeros for x8, 216 leading, 155 trailing
+
+
+
+LOADED          BACK5BR ( 85 by  73) XO=-28  YO=181
+Image BACK5BR has 178 colors. Can't fit into 6 bits per pixel.
+
+bits per pixel = 8
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 1670 leading, 6 trailing
+leftover zeros for x2, 974 leading, 38 trailing
+leftover zeros for x4, 128 leading, 112 trailing
+leftover zeros for x8, 148 leading, 152 trailing
+
+
+
+LOADED          BACK6BR ( 83 by  73) XO=-28  YO=181
+Image BACK6BR has 178 colors. Can't fit into 6 bits per pixel.
+
+bits per pixel = 8
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 1665 leading, 0 trailing
+leftover zeros for x2, 970 leading, 39 trailing
+leftover zeros for x4, 138 leading, 113 trailing
+leftover zeros for x8, 174 leading, 149 trailing
+
+
+
+LOADED          BACK7BR ( 82 by  73) XO=-28  YO=181
+Image BACK7BR has 178 colors. Can't fit into 6 bits per pixel.
+
+bits per pixel = 8
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 1667 leading, 0 trailing
+leftover zeros for x2, 978 leading, 38 trailing
+leftover zeros for x4, 144 leading, 112 trailing
+leftover zeros for x8, 184 leading, 144 trailing
+
+
+
+LOADED          BACK8BR ( 79 by  73) XO=-28  YO=181
+Image BACK8BR has 178 colors. Can't fit into 6 bits per pixel.
+
+bits per pixel = 8
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 1657 leading, 0 trailing
+leftover zeros for x2, 970 leading, 40 trailing
+leftover zeros for x4, 98 leading, 114 trailing
+leftover zeros for x8, 206 leading, 166 trailing
+
+
+
+LOADED          BACK9BR ( 77 by  73) XO=-28  YO=181
+Image BACK9BR has 178 colors. Can't fit into 6 bits per pixel.
+
+bits per pixel = 8
+leading factor = 4
+trailing factor = 1
+
+
+
+leftover zeros for x1, 1660 leading, 0 trailing
+leftover zeros for x2, 971 leading, 39 trailing
+leftover zeros for x4, 111 leading, 115 trailing
+leftover zeros for x8, 227 leading, 131 trailing
+
+
+
+LOADED
+Opening img lib [C:\NBBD8.IMG]         nback1br (130 by  98) XO=14  YO=175
+Image nback1br has 252 colors. Can't fit into 6 bits per pixel.
+
+bits per pixel = 8
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 1292 leading, 2870 trailing
+leftover zeros for x2, 876 leading, 2428 trailing
+leftover zeros for x4, 454 leading, 1662 trailing
+leftover zeros for x8, 294 leading, 318 trailing
+
+
+
+LOADED         nback2br (129 by  98) XO=14  YO=175
+Image nback2br has 252 colors. Can't fit into 6 bits per pixel.
+
+bits per pixel = 8
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 1296 leading, 2846 trailing
+leftover zeros for x2, 880 leading, 2432 trailing
+leftover zeros for x4, 456 leading, 1672 trailing
+leftover zeros for x8, 300 leading, 324 trailing
+
+
+
+LOADED         nback3br (128 by  98) XO=14  YO=175
+Image nback3br has 252 colors. Can't fit into 6 bits per pixel.
+
+bits per pixel = 8
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 1302 leading, 2818 trailing
+leftover zeros for x2, 887 leading, 2436 trailing
+leftover zeros for x4, 463 leading, 1682 trailing
+leftover zeros for x8, 299 leading, 350 trailing
+
+
+
+LOADED         nback4br (126 by  98) XO=14  YO=175
+Image nback4br has 252 colors. Can't fit into 6 bits per pixel.
+
+bits per pixel = 8
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 1302 leading, 2783 trailing
+leftover zeros for x2, 886 leading, 2408 trailing
+leftover zeros for x4, 462 leading, 1636 trailing
+leftover zeros for x8, 298 leading, 304 trailing
+
+
+
+LOADED         nback5br (125 by  98) XO=14  YO=175
+Image nback5br has 252 colors. Can't fit into 6 bits per pixel.
+
+bits per pixel = 8
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 1311 leading, 2763 trailing
+leftover zeros for x2, 889 leading, 2393 trailing
+leftover zeros for x4, 467 leading, 1631 trailing
+leftover zeros for x8, 307 leading, 279 trailing
+
+
+
+LOADED         nback6br (123 by  98) XO=14  YO=175
+Image nback6br has 252 colors. Can't fit into 6 bits per pixel.
+
+bits per pixel = 8
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 1315 leading, 2719 trailing
+leftover zeros for x2, 891 leading, 2337 trailing
+leftover zeros for x4, 471 leading, 1559 trailing
+leftover zeros for x8, 303 leading, 159 trailing
+
+
+
+LOADED         nback7br (122 by  98) XO=14  YO=175
+Image nback7br has 252 colors. Can't fit into 6 bits per pixel.
+
+bits per pixel = 8
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 1313 leading, 2687 trailing
+leftover zeros for x2, 889 leading, 2317 trailing
+leftover zeros for x4, 473 leading, 1545 trailing
+leftover zeros for x8, 293 leading, 181 trailing
+
+
+
+LOADED         nback8br (121 by  98) XO=14  YO=175
+Image nback8br has 252 colors. Can't fit into 6 bits per pixel.
+
+bits per pixel = 8
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 1307 leading, 2659 trailing
+leftover zeros for x2, 884 leading, 2303 trailing
+leftover zeros for x4, 468 leading, 1541 trailing
+leftover zeros for x8, 284 leading, 229 trailing
+
+
+
+LOADED         nback9br (119 by  98) XO=14  YO=175
+Image nback9br has 252 colors. Can't fit into 6 bits per pixel.
+
+bits per pixel = 8
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 1306 leading, 2600 trailing
+leftover zeros for x2, 882 leading, 2223 trailing
+leftover zeros for x4, 472 leading, 1439 trailing
+leftover zeros for x8, 276 leading, 139 trailing
+
+
+
+LOADED        nback10br (118 by  98) XO=14  YO=175
+Image nback10br has 252 colors. Can't fit into 6 bits per pixel.
+
+bits per pixel = 8
+leading factor = 8
+trailing factor = 8
+
+
+
+leftover zeros for x1, 1305 leading, 2591 trailing
+leftover zeros for x2, 883 leading, 2234 trailing
+leftover zeros for x4, 477 leading, 1424 trailing
+leftover zeros for x8, 269 leading, 124 trailing
+
+
+
+LOADED
+Opening img lib [C:\pnames3.img]           RAIDEN ( 38 by   9) XO=17  YO=0
+ [RAIDEN] Auto pixel packing to 4 bits
+LOADED         SCORPION ( 52 by   9) XO=24  YO=0
+ [SCORPION] Auto pixel packing to 4 bits
+LOADED           SUBZER ( 52 by   9) XO=26  YO=0
+ [SUBZER] Auto pixel packing to 4 bits
+LOADED          REPTILE ( 42 by   9) XO=20  YO=0
+ [REPTILE] Auto pixel packing to 4 bits
+LOADED            SM0K3 ( 37 by   9) XO=17  YO=0
+ [SM0K3] Auto pixel packing to 4 bits
+LOADED           JORDAN ( 42 by   9) XO=20  YO=0
+ [JORDAN] Auto pixel packing to 4 bits
+LOADED           BRYANT ( 43 by   9) XO=21  YO=0
+ [BRYANT] Auto pixel packing to 4 bits
+LOADED            ONEAL ( 37 by   9) XO=17  YO=0
+ [ONEAL] Auto pixel packing to 4 bits
+LOADED             BIRD ( 24 by   9) XO=10  YO=0
+ [BIRD] Auto pixel packing to 4 bits
+LOADED       TERMINATOR ( 31 by   9) XO=16  YO=0
+ [TERMINATOR] Auto pixel packing to 4 bits
+LOADED           ARNOLD ( 42 by   9) XO=22  YO=0
+ [ARNOLD] Auto pixel packing to 4 bits
+LOADED           WALKER ( 44 by   9) XO=22  YO=0
+ [WALKER] Auto pixel packing to 4 bits
+LOADED            ELLIS ( 37 by   9) XO=17  YO=0
+ [ELLIS] Auto pixel packing to 4 bits
+LOADED          D_ELLIS ( 38 by   9) XO=16  YO=0
+ [D_ELLIS] Auto pixel packing to 4 bits
+LOADED
+Opening img lib [C:\pnames.img]          BARKLEY ( 49 by   9) XO=24  YO=0
+ [BARKLEY] Auto pixel packing to 4 bits
+LOADED           PORTER ( 41 by   9) XO=20  YO=0
+ [PORTER] Auto pixel packing to 4 bits
+LOADED          MAJERLE ( 48 by   9) XO=23  YO=0
+ [MAJERLE] Auto pixel packing to 4 bits
+LOADED          WILKINS ( 44 by   9) XO=21  YO=0
+ [WILKINS] Auto pixel packing to 4 bits
+LOADED        JOHNSON_M ( 48 by   9) XO=23  YO=0
+ [JOHNSON_M] Auto pixel packing to 4 bits
+LOADED
+
+Bytes Loaded...
+	IMAGE RAM              3229920 dec	  3148E0 hex
+
+	TOTAL LOAD             3229920 dec	  3148E0 hex
+
+Bytes Written to Raw File...
+	In IMAGE RAM records      3229920 dec	  3148E0 hex
+
+	TOTAL bytes written       3229920 dec	  3148E0 hex, in 2 records.
+
+Bytes Represented in Tables ... 3229919 dec 3148DF hex
+
+5 images were NOT zero-compressed because they are
+	smaller than 10 pixels wide.
+
+Skipped 6738 duplicate bytes in 8 foreground checksum matches.
+

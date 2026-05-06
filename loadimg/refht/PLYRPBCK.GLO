@@ -1,0 +1,10 @@
+	.globl	PLYRRCH_P
+	.global	w2blokl5
+	.global	w2blokl6
+	.global	w2blokl7
+	.global	w3blokl5
+	.global	w3blokl6
+	.global	w3blokl7
+	.global	w4blokl5
+	.global	w4blokl6
+	.global	w4blokl7

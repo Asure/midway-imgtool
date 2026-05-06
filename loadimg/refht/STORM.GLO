@@ -1,0 +1,15 @@
+	.global	STORM02
+	.global	STORM03
+	.global	STORM04
+	.global	STORM05
+	.global	STORM06
+	.global	STORM07
+	.global	STORM08
+	.global	STORM09
+	.global	STORM10
+	.global	STORM11
+	.global	STORM12
+	.globl	fence_p
+	.global	fence
+	.globl	FALL2P
+	.global	FALL2_vda

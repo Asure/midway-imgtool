@@ -1,0 +1,6 @@
+	.globl	DCLIQU3
+	.global	dcslogo
+	.globl	TOASTYPAL
+	.global	TOASTY
+	.globl	KITZPAL
+	.global	KITZ
