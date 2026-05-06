@@ -153,9 +153,8 @@ Each module gets one BLKS section. Format:
 The `wx` value written to BLKS is assembled from:
 - **High byte (bits 15-8)**: from BDB `WX_hex` (parallax scroll rate)
 - **CLP bit (bit 6)**: always set (clip enable for all background objects)
-- **OPS field (bits 3-0)**: from BDB `fl` field (palette index)
 - **Bits 5-4**: VFL/HFL from BDB `WX_hex`
-- **Bit 0**: from BDD `dma_bit0` field
+- **OPS field (bits 3-0)**: from BDB `fl` field (palette index)
 
 ### BMOD Section
 
@@ -186,12 +185,13 @@ The DMA CTRL word for each background image encodes compression parameters:
 Background images use the same FUN_1000_6f20 ZON compression algorithm
 as regular sprites:
 
-1. Determine bpp from max pixel value (`bpp_for_max(maxpx)`)
-2. Try all 16 LM/TM combinations (×1, ×2, ×4, ×8 each)
-3. For each combo: compute per-row lead/trail with 120 cap and bVar8
-4. Apply minimum stored=10 adjustment to each row
+1. Determine bpp: `g.ppp` respected when set; otherwise per-image from max pixel
+2. **Unique color bpp bump**: increases bpp when image has >64 unique colors
+3. Try all 16 LM/TM combinations (×1, ×2, ×4, ×8 each)
+4. For each combo: compute per-row lead/trail with 120 cap and minimum stored=10 adjustment
 5. Select LM/TM with smallest total compressed size
-6. If compressed >= raw size, use CMP=0 (raw pixels)
+6. CMP decision: `g.zon && comp_bits < raw_bits`; forced to 0 for w<10 or h<10
+7. **Dedup**: checksum-based via `loadw_checksum()` using the same shared `dedup_table` as sprites; controlled by `CON>` / `COF>` directives
 
 ## Implementation Details
 
@@ -200,8 +200,12 @@ as regular sprites:
 - **BDD read**: Loaded into malloc'd buffer; parsed with byte-level position
   tracking to handle binary pixel data containing 0x0a/0x0d bytes
 - **Image dedup**: Each BDD image is written to IRW only once (deduplicated
-  by BDD file position); all 43 images are written regardless of whether any
+  by BDD file position); all images are written regardless of whether any
   object references them
+- **Checksum dedup**: `CON>` / `COF>` directives enable/disable checksum-based
+  dedup. Uses `loadw_checksum()` (sum + max over stride width), same function
+  and shared `dedup_table` as sprite images. Background dedup hits are tracked
+  in `g.bgnd_dedup_bytes` and `g.bgnd_dedup_matches`.
 - **HDRS**: ALL BDD images in file order, not just referenced ones
 - **Palettes**: Written to BGNDPAL.ASM with names from the BDD file
 - **Linux path fix**: Flag parser checks `isalpha(a[1])` and short arg length
@@ -216,13 +220,15 @@ as regular sprites:
 | BGNDEQU.H | ✓ exact match |
 | BGNDPAL.ASM palette data | ✓ palette names and colors match |
 | BGNDTBL.ASM HDRS image data | ✓ all BDD images in file order |
-| BGNDTBL.ASM HDRS addresses/CTRL | ✓ match (bpp=0 for 8-bit, CMP=1 forced) |
-| BGNDTBL.ASM BLKS wx encoding | ✓ CLP+OPS+dma_bit0 correctly assembled |
+| BGNDTBL.ASM HDRS addresses/CTRL | ✓ match |
+| BGNDTBL.ASM BLKS wx encoding | ✓ CLP+OPS correctly assembled |
 | BGNDTBL.ASM BLKS coordinates | ✓ module-local, BDB file order |
 | BGNDTBL.ASM BLKS object counts | ✓ first-fit by file order |
 | BGNDTBL.ASM BMOD w/h | ✓ bounding box from objects |
 | Image encoding in IRW | ✓ FUN_1000_6f20 with LM/TM selection |
-| Background image dedup | ✓ checksum-based, shared dedup table |
+| Background image dedup | ✓ checksum-based (CON>/COF>), shared dedup table |
+| Checksum function | ✓ `loadw_checksum()` (sum + max, stride-width) |
+| CON>/COF> directives | ✓ g.dedup flag, reset per IMG library load |
 | Object-to-module assignment | ✓ first-fit by file order |
 | HDRS/PALS label derivation | ✓ DOS 8.3 suffix (chars 4-7) |
 | BGNDTBL.GLO ENDMARKER | ✓ `.global` for ENDMARKER |
@@ -232,6 +238,17 @@ as regular sprites:
 | BDD multi-newline handling | ✓ skips all consecutive newlines |
 | Unique color bpp bump | ✓ increases bpp when >64 colors |
 | Small image CMP=0 | ✓ width/height < 10 → no compression |
+
+## Test Results
+
+| LOD | Test | Result |
+|-----|------|--------|
+| MK7MIL (NUPOOL) | BGNDTBL.GLO | ✓ exact match |
+| MK7MIL (NUPOOL) | BGNDEQU.H | ✓ exact match |
+| MK7MIL (NUPOOL) | BGNDTBL.ASM | ✓ structural match |
+| MK7MIL (NUPOOL) | IRW | ✓ 100% byte-identical |
+| TOMB | IRW | ✗ LM/TM selection differs from LOADW |
+| TOWER2 | IRW | ✗ LM/TM selection differs from LOADW |
 
 ## Remaining Differences
 

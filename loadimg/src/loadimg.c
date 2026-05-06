@@ -318,17 +318,15 @@ static void irw_ensure(size_t need_bytes) {
 /* LOADW FUN_1854_35fc checksum: sum + max over stride width */
 static uint32_t loadw_checksum(uint8_t *pix, int stride, int w, int h, uint32_t *out_max) {
     uint32_t sum = 0, max_val = 0;
-    int rw = stride > w ? stride : w;
-    for (int y = 0; y < h; y++) {
-        uint32_t *dw = (uint32_t*)(pix + y * stride);
-        for (int x = 0; x < rw / 4; x++) {
-            uint32_t v = dw[x];
-            sum += v;
-            uint32_t lo = v & 0xff;
-            uint32_t hi = (v >> 8) & 0xff;
-            if (lo > max_val) max_val = lo;
-            if (hi > max_val) max_val = hi;
-        }
+    int n_u32 = (stride * h) / 4;
+    uint32_t *dw = (uint32_t*)pix;
+    for (int i = 0; i < n_u32; i++) {
+        uint32_t v = dw[i];
+        sum += v;
+        uint32_t lo = v & 0xff;
+        uint32_t hi = (v >> 8) & 0xff;
+        if (lo > max_val) max_val = lo;
+        if (hi > max_val) max_val = hi;
     }
     *out_max = max_val;
     return sum;
@@ -1342,6 +1340,43 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
         if (ie->sizx < 1) ie->sizx = 1;
         if (ie->sizy < 1) ie->sizy = 1;
         ie->ctrl = cp.ctrl;
+        if (g.verbose && (strcmp(name, "smfirebone3") == 0 || strcmp(name, "smfirebone6") == 0)) {
+            uint8_t *dpix = img_pixels(cur->imgfile, rec);
+            int dstride = IMG_STRIDE(rec->w);
+            int dsizx = cp.sizx;
+            fprintf(stderr, "\nDBG %s: sizx=%d sizy=%d bpp=%d ctrl=0x%04x lm=%d tm=%d\n",
+                    name, dsizx, rec->h, bpp, cp.ctrl, cp.lm, cp.tm);
+            int dlead_err[4]={0}, dtrail_err[4]={0};
+            for (int dy = 0; dy < cp.sizy; dy++) {
+                uint8_t *drow = (dy < rec->h) ? dpix + dy * dstride : NULL;
+                int dlead=0, dtrail=0, dlead_done=0;
+                for (int dx = 0; dx < dsizx; dx++) {
+                    uint8_t dpx = (drow && dx < dstride) ? drow[dx] : 0;
+                    if (!dlead_done) {
+                        if (dlead == 120) dlead_done = 1;
+                        else if (dpx == 0) dlead++;
+                        else dlead_done = 1;
+                    } else if (dsizx - 120 < dx) {
+                        if (dpx == 0) dtrail++;
+                        else dtrail = 0;
+                    }
+                }
+                for (int dm = 0; dm < 4; dm++) {
+                    int dmult = 1 << dm;
+                    int dln = dlead / dmult; if (dln > 15) dln = 15;
+                    dlead_err[dm] += dlead - dmult * dln;
+                    int dtn = dtrail / dmult; if (dtn > 15) dtn = 15;
+                    dtrail_err[dm] += dtrail - dmult * dtn;
+                }
+                if (dy < 3 || dy >= rec->h-1 || (dy >= rec->h && dy < rec->h+2))
+                    fprintf(stderr, "  row%3d: lead=%4d trail=%4d\n", dy, dlead, dtrail);
+            }
+            fprintf(stderr, "  LEAD_ERR: %d %d %d %d\n", dlead_err[0], dlead_err[1], dlead_err[2], dlead_err[3]);
+            fprintf(stderr, "  TRAIL_ERR: %d %d %d %d\n", dtrail_err[0], dtrail_err[1], dtrail_err[2], dtrail_err[3]);
+            int dblm=0; for(int dm=1;dm<4;dm++) if(dlead_err[dm]<dlead_err[dblm]) dblm=dm;
+            int dbtm=0; for(int dm=1;dm<4;dm++) if(!(dtrail_err[dbtm]<=dtrail_err[dm])) dbtm=dm;
+            fprintf(stderr, "  best_lm=%d best_tm=%d\n", dblm, dbtm);
+        }
         if (g.verbose && strcmp(name, "dcslogo") == 0) {
             uint8_t *pix = img_pixels(cur->imgfile, rec);
             int stride = IMG_STRIDE(rec->w);
@@ -1485,13 +1520,16 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
             }
         }
 
-        /* CON> dedup: check if identical image already encoded */
+         /* CON> dedup: check if identical image already encoded */
         int dedup_idx = -1;
         if (g.dedup) {
             uint8_t *pix_data = img_pixels(cur->imgfile, rec);
             int pstride = (rec->w + 3) & ~3;
             uint32_t max_val;
             uint32_t ck = loadw_checksum(pix_data, pstride, rec->w, rec->h, &max_val);
+            if (g.verbose && (strcmp(name, "smfirebone3") == 0 || strcmp(name, "smfirebone6") == 0))
+                fprintf(stderr, "DEDUP_CHK %s: ck=%u max=%u sizx=%d sizy=%d ctrl=0x%04x\n",
+                        name, ck, max_val, cp.sizx, cp.sizy, cp.ctrl);
             for (int di = 0; di < n_dedup; di++) {
                 if (dedup_table[di].sum == ck && dedup_table[di].max_val == max_val &&
                     dedup_table[di].sizx == cp.sizx && dedup_table[di].sizy == cp.sizy &&
@@ -1499,6 +1537,8 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
                     dedup_idx = di; break;
                 }
             }
+            if (g.verbose && dedup_idx >= 0 && (strcmp(name, "smfirebone3") == 0 || strcmp(name, "smfirebone6") == 0))
+                fprintf(stderr, "DEDUP_HIT %s: matched table[%d] sag=0x%x\n", name, dedup_idx, dedup_table[dedup_idx].sag);
         }
 
         if (dedup_idx >= 0) {
