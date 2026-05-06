@@ -185,6 +185,7 @@ typedef struct {
     int      verbose;
     int      build_tables;
     int      build_raw;
+    int      raw_headerless;    /* /R flag: omit IRW header */
     int      dual_bank;
     int      limit3scales;
     int      pad4bits;
@@ -2207,12 +2208,15 @@ static void write_irw(const char *path) {
 
     FILE *f = fopen(path, "wb");
     if (!f) die("cannot create IRW file: %s", path);
-    fwrite(hdr, 1, sizeof(hdr), f);
+    if (!g.raw_headerless)
+        fwrite(hdr, 1, sizeof(hdr), f);
     fwrite(g.irw_data, 1, data_bytes, f);
     fclose(f);
 
     if (g.verbose)
-        printf("Wrote IRW: %s (%u bytes data, %u bits)\n", path, data_bytes, g.irw_bit);
+        printf("Wrote IRW: %s (%u bytes data, %u bits)%s\n",
+               path, data_bytes, g.irw_bit,
+               g.raw_headerless ? " [headerless]" : "");
 }
 
 /* =========================================================================
@@ -2223,29 +2227,32 @@ static void print_usage(const char *arg) {
     printf("loadimg <lod_file> [flags]\n");
     printf("\n");
     printf("Flags:\n");
-    printf("  /X      Do not generate IRW file\n");
-    printf("  /T=DIR  Directory for table files (.tbl/.asm/.glo)\n");
-    printf("  /F=DIR  Directory and base for raw file (.irw)\n");
-    printf("  /I      Use IMGDIR environment variable for source images\n");
-    printf("  /D=DIR  Specify directory for .lod file\n");
-    printf("  /V      Verbose output\n");
-    printf("  /E      Dual-banked image memory (ED adjustment)\n");
-    printf("  /P      Pad output stride to 4-pixel boundary\n");
-    printf("  /L      Align to 16-bit boundary\n");
-    printf("  /B      bpp from palette size\n");
-    printf("  /3      Limit scales to 3\n");
-    printf("  /A      Append mode (don't overwrite existing tables)\n");
-    printf("  /H      This help\n");
+    printf("  /R[=PATH]  Headerless raw IRW (no 0x44-byte header)\n");
+    printf("  /X         Do not generate IRW file\n");
+    printf("  /T[=DIR]   Generate table files (.tbl/.asm/.glo)\n");
+    printf("  /F[=DIR]   Raw file output directory\n");
+    printf("  /I PATH    Image source directory\n");
+    printf("  /D=PATH    LOD file directory\n");
+    printf("  /V         Verbose output\n");
+    printf("  /E         Dual-banked image memory (ED adjustment)\n");
+    printf("  /P         Pad output stride to 4-pixel boundary\n");
+    printf("  /L         Align to 16-bit boundary\n");
+    printf("  /B         bpp from palette size\n");
+    printf("  /3         Limit scales to 3\n");
+    printf("  /A         Append mode (don't overwrite existing tables)\n");
+    printf("  /H         This help\n");
     printf("\n");
     if (arg) {
         printf("Unknown argument: %s\n", arg);
         printf("Did you mean one of these?\n");
-        printf("  /X, /T, /F, /I, /D, /V, /E, /P, /L, /B, /3, /A, /H\n");
+        printf("  /R, /X, /T, /F, /I, /D, /V, /E, /P, /L, /B, /3, /A, /H\n");
         printf("\n");
     }
     printf("Example:\n");
     printf("  loadimg MK2MIL /P /T=C:\\TMP\n");
     printf("  loadimg MK2MIL.LOD /P /T /V\n");
+    printf("  loadimg MK2MIL /R          (headerless raw)\n");
+    printf("  loadimg MK2MIL /R=/tmp/out (headerless raw to path)\n");
 }
 
 int main(int argc, char *argv[]) {
@@ -2285,6 +2292,11 @@ int main(int argc, char *argv[]) {
             case 'V': g.verbose = 1; break;
             case 'E': g.dual_bank = 1; break;
             case 'P': g.pad4bits = 1; break;
+            case 'R':
+                g.raw_headerless = 1;
+                g.build_raw = 1;
+                if (*val == '=') strncpy(raw_dir, val+1, MAX_PATH-1);
+                break;
             case 'L': g.align16 = 1; break;
             case 'B': g.bpp_from_pal = 1; break;
             case '3': g.limit3scales = 1; break;
