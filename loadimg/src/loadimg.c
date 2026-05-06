@@ -936,6 +936,10 @@ static uint32_t encode_image(ImgFile *img, IMG_REC *rec, CompParams *cp, int bpp
     return sag;
 }
 
+/* =========================================================================
+ * Encode one scaled-sub-image row to IRW bit stream
+ * ========================================================================= */
+
 static uint32_t encode_scaled(ImgFile *img, IMG_REC *rec, int bpp, int denom) {
     int sw = rec->w / denom;
     int sh = rec->h / denom;
@@ -1755,6 +1759,8 @@ static void process_lod(const char *lod_path) {
                 if (g.glo_fp) {
                     fprintf(g.glo_fp, "\t.globl\t%s\r\n", fname);
                 }
+                /* Byte-align before FRM data */
+                if (g.irw_bit & 7) irw_write_bits(0, 8 - (g.irw_bit & 7));
                 uint32_t sag = g.irw_bit;
                 uint8_t *buf = (uint8_t*)malloc(bsz);
                 if (buf) {
@@ -1764,7 +1770,7 @@ static void process_lod(const char *lod_path) {
                     free(buf);
                 }
                 fclose(bf);
-                /* Pad to 2-byte boundary after FRM data (LOADW word-aligns FRM entries) */
+                /* LOADW word-aligns FRM entries: pad to even byte after data if odd */
                 if ((g.irw_bit / 8) & 1) irw_write_byte(0);
                 if (g.verbose)
                     printf("  FRM %s at bit %u (%ld bytes)\n", fname, sag, bsz);
