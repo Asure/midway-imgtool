@@ -1753,14 +1753,16 @@ static void process_lod(const char *lod_path) {
                 fseek(bf, 0, SEEK_END);
                 long bsz = ftell(bf);
                 fseek(bf, 0, SEEK_SET);
+                /* FRM files always start on an even byte address (word-aligned).
+                 * First byte-align, then word-align to even byte boundary. */
+                if (g.irw_bit & 7) irw_write_bits(0, 8 - (g.irw_bit & 7));
+                if ((g.irw_bit / 8) & 1) irw_write_byte(0);
                 if (g.build_tables && g.asm_fp) {
                     fprintf(g.asm_fp, "%s\t.set\t0%xh\r\n", fname, g.base_addr + g.irw_bit);
                 }
                 if (g.glo_fp) {
                     fprintf(g.glo_fp, "\t.globl\t%s\r\n", fname);
                 }
-                /* Byte-align before FRM data */
-                if (g.irw_bit & 7) irw_write_bits(0, 8 - (g.irw_bit & 7));
                 uint32_t sag = g.irw_bit;
                 uint8_t *buf = (uint8_t*)malloc(bsz);
                 if (buf) {
