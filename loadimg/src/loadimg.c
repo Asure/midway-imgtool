@@ -232,6 +232,9 @@ typedef struct {
 
     int      global_bpp;
     int      global_max_pixel;
+    int      n_small_uncompressed;    /* images <10px not zero-compressed */
+    int      bgnd_dedup_bytes;        /* bytes saved by BGND checksum matches */
+    int      bgnd_dedup_matches;      /* count of BGND checksum matches */
 } State;
 
 static State g;
@@ -757,6 +760,7 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
         comp_bits += 8 + stored * bpp;
     }
     int do_cmp = (sizx >= 10 && comp_bits <= raw_bits) ? 1 : 0;
+    if (sizx < 10) g.n_small_uncompressed++;
 
     p.ctrl = compute_ctrl(bpp, p.lm, p.tm, do_cmp);
 
@@ -1925,7 +1929,7 @@ static void process_lod(const char *lod_path) {
                          }
                           do_cmp = (g.zon && raw_bits > comp_bits) ? 1 : 0;
                           /* Images smaller than 10 pixels wide/tall are never compressed */
-                          if (w < 10 || h < 10) do_cmp = 0;
+                          if (w < 10 || h < 10) { do_cmp = 0; g.n_small_uncompressed++; }
                           /* When not compressing, LM/TM are irrelevant — reset to 0 */
                           if (!do_cmp) { best_lm = 0; best_tm = 0; }
                           img_bpp[di] = per_bpp; img_cmp[di] = do_cmp;
@@ -1946,11 +1950,13 @@ static void process_lod(const char *lod_path) {
                              }
                          }
 
-                         if (bg_dedup_idx >= 0) {
-                             img_sags[di] = dedup_table[bg_dedup_idx].sag;
-                             if (g.verbose)
-                                 printf("  BGND 0x%02X (%dx%d) cksum match at bit=%u\n",
-                                        bdds[di].idx, w, h, dedup_table[bg_dedup_idx].sag);
+                          if (bg_dedup_idx >= 0) {
+                              img_sags[di] = dedup_table[bg_dedup_idx].sag;
+                              g.bgnd_dedup_bytes += (w * h * per_bpp + 7) / 8;
+                              g.bgnd_dedup_matches++;
+                              if (g.verbose)
+                                  printf("  BGND 0x%02X (%dx%d) cksum match at bit=%u\n",
+                                         bdds[di].idx, w, h, dedup_table[bg_dedup_idx].sag);
                          } else {
 
                          if (do_cmp) {
@@ -2351,6 +2357,24 @@ int main(int argc, char *argv[]) {
     if (g.bgndequ_fp) fclose(g.bgndequ_fp);
     if (g.bgndtbl_glo_fp) fclose(g.bgndtbl_glo_fp);
     free(g.irw_data);
+
+    if (g.verbose) {
+        uint32_t total_bytes = g.irw_bit ? ((g.irw_bit + 7) / 8) : 0;
+        printf("\nBytes Written to Raw File...\n");
+        printf("\tIn IMAGE RAM records        %u dec\t   %X hex\n", total_bytes, total_bytes);
+        printf("\n");
+        printf("\tTOTAL bytes written         %u dec\t   %X hex, in %d records.\n",
+               total_bytes, total_bytes, g.n_images > 0 ? g.n_images : 1);
+        printf("\n");
+        printf("Bytes Represented in Tables ... %u dec %X hex\n", total_bytes, total_bytes);
+        printf("\n");
+        if (g.n_small_uncompressed > 0)
+            printf("%d images were NOT zero-compressed because they are\n"
+                   "\tsmaller than 10 pixels wide.\n", g.n_small_uncompressed);
+        if (g.bgnd_dedup_matches > 0)
+            printf("Skipped %d duplicate bytes in %d background checksum matches.\n",
+                   g.bgnd_dedup_bytes, g.bgnd_dedup_matches);
+    }
 
     printf("Done. %d images processed.\n", g.n_images);
     return 0;
