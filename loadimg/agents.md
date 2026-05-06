@@ -559,6 +559,7 @@ matches LOAD2 (separate lines), which is the correct target.
 | PTTBL offset | ✓ | `pal_end + seqscr + 6 - n_special * sizeof(PTTBL)` |
 | SIZX (compression) | ✓ | `PTTBL[pttblnum - n_special].BOX[1].W + 1` |
 | SIZX (TBL output) | ✓ | `rec->w` (matches LOADW TBL format) |
+| XON>/XOF> | ✓ | Extra zero pixel mode: `g.xon` adds +1 to SIZX/SIZY in `analyze_image` and ZOF encoder width |
 | SIZY | ✓ | `rec->h` |
 | SAG format | ✓ | `base_addr + bank * 0x2000000 + bit_offset` |
 | Two-sub-block encoding | ✓ | BOX[1] + BOX[2] concatenated in IRW; scale 1 SAG = sub-block 1 start |
@@ -601,9 +602,10 @@ All LOD files are from **Mortal Kombat 2** arcade data. Naming: MK2MIL = MK2 rev
 | **MK4MIL** | ZON | 1885 | 6/6 | **PASS** — IRW + TBLs byte-exact |
 | **MK8MIL** | FRM | 0 sprites | 1/1 | **PASS** — MKREVX.TBL match |
 | **MK3MIL** | ZOF | 1949 | 5/5 | **PASS** — TE, duplicate, case, and encoder elif fixes |
-| **MK5MIL** | ZON | 702 | 1/7 | FAIL (252-bit BGSPEAR6 encoder cascade) |
-| **MK6MIL** | ZON/ZOF | 1859 | 9/17 | PASS 9: includes garbage-pixel bpp fix for pitblood1a |
-| **MK7MIL** | Mixed | 703 | 1/11 | FAIL (encoder cascade + BGND addresses) |
+| **MK5MIL** | ZON | 702 | 1/7 | FAIL (BGSPEAR6 encoder cascade) |
+| **MK6MIL** | ZON/ZOF | 1859 | 9/17 | FAIL (updated LOD from work5/) |
+| **MK7MIL** | Mixed | 703 | 9/11 | FAIL (2 TBL: MKCHUNKS formatting, MK7MIL cascade) |
+| **MISC** | Mixed | 588 | 9/21 | FAIL (NBA Jam/Hangtime, NAMES3 per-image sizes match) |
 | **MKBBB (NUPOOL)** | BBB | 43 bgnd | — | **PASS** — IRW + BGND TBLs byte-exact |
 | **MKBBB (TOMB)** | BBB | — | — | FAIL (LM/TM for CMP=1 images) |
 
@@ -631,6 +633,23 @@ Additional fixes:
 - **PWRD1/PWRD2/PWRD3**: Read from IMG_REC anix2/aniy2/aniz2 instead of PTTBL.
 - **seen_names reset**: Uses imgpath (string) comparison instead of ImgFile
   pointer (which could collide after free+realloc).
+- **XON>/XOF> (extra zero pixel mode)**: Adds +1 to SIZX/SIZY in `analyze_image`,
+  widens ZOF encoder output by 1 pixel, and includes the extra row in lead/trail
+  analysis (all three loops).
+- **FRM padding**: Word-alignment applied AFTER each FRM entry (was before),
+  matching LOADW's byte-exact IRW output.
+- **PTTBL 40-byte struct**: Restored full PTTBL structure with header fields
+  (flags, x1/x2/x3, X/Y/Z, id, box[0..4], cbox). PT fields in IHDR now read
+  from correct shared PTTBL entries (PT2X/PT2Y from pttblnum-2, PT0X from
+  pttblnum-3 cbox, PT3X/PT3Y/PT5X from pttblnum-2 X/Y/id).
+- **BPP overflow check**: When `PPP> N` forces bpp < palette color count,
+  CTRL bpp nibble is zeroed (preserving LM/TM/CMP bits).
+- **Auto pixel packing**: Only applies when `PPP=0` (auto mode). Not when
+  `PPP>0` forces a specific bpp.
+- **IMG DOS path handling**: Skips basename fallback when path has directory
+  separator (`\`, `/`, `:`), matching LOADW behavior. Prints warning on failure.
+- **PWRD1/PWRD2/PWRD3 from IMG_REC**: Set from `rec->anix2`/`aniy2`/`aniz2`
+  (was hardcoded to -1).
 
 Current cascade: BGSPEAR6 (BOSS3.IMG, w=138) is the first image whose encoded
 
@@ -708,6 +727,17 @@ Each row is encoded as 1 header byte + stored pixels bit-packed at `bpp` bits ea
 17. **PTTBL fix** — offset computation accounts for SEQ/SCR entries between palette records and PTTBL
 18. **ASM> append mode** — same TBL filename used multiple times appends rather than overwrites
 19. **DOS path basename** — extracts filename from `c:\path\to\file.IMG` paths
+20. **XON>/XOF> (extra zero pixel mode)** — adds +1 to SIZX/SIZY in `analyze_image` and widens ZOF encoder output by 1 pixel (matching LOADW's DMA scaling border)
+21. **FRM padding after data** — word-alignment applied AFTER each FRM entry (was before), matching LOADW's IRW layout
+22. **PTTBL 40-byte struct** — restored full PTTBL with header fields, box[5], cbox; PT fields read from correct shared entries
+23. **PT3Y/PT5X mapping** — PT3Y from shared PTTBL Y field, PT5X from shared id field
+24. **PT0X from pttblnum-3** — PT0X reads cbox from shared entry 3 back (not own entry)
+25. **XON extra row in analysis** — lead/trail analysis loops use `p.sizy` (includes XON +1) instead of `rec->h`
+26. **BPP overflow flag** — CTRL bpp nibble zeroed when `PPP> N` bpp < palette color count
+27. **Auto pixel packing gated** — only when PPP=0, not when PPP>0 forces specific bpp
+28. **IMG path has_dir_sep guard** — skips basename fallback for DOS paths with directory separators
+29. **PWRD from IMG_REC** — set pwrd1/2/3 from rec->anix2/aniy2/aniz2 (was hardcoded to -1)
+30. **TM selection `<=` fix** — TM comparison uses `<=` (matching Ghidra FUN_1000_6f20), LM uses `<`
 
 ### COF and CON Directives
 

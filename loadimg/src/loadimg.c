@@ -105,7 +105,12 @@ typedef struct {
 typedef struct { uint8_t x, y, w, h; } PTBOX;
 
 typedef struct {
-    PTBOX    box[3];         /* three 4-byte boxes = 12 bytes total */
+    uint16_t flags;
+    int16_t  x1, x2, x3;
+    int16_t  X, Y, Z;
+    uint16_t id;
+    PTBOX    box[5];
+    PTBOX    cbox;
 } PTTBL;
 #pragma pack(pop)
 
@@ -131,10 +136,12 @@ typedef struct {
 #define IHDR_PT3Y   15
 #define IHDR_PT4X   16
 #define IHDR_PT4Y   17
-#define IHDR_PWRD1  18
-#define IHDR_PWRD2  19
-#define IHDR_PWRD3  20
-#define IHDR_MAX    21
+#define IHDR_PT5X   18
+#define IHDR_PT5Y   19
+#define IHDR_PWRD1  20
+#define IHDR_PWRD2  21
+#define IHDR_PWRD3  22
+#define IHDR_MAX    23
 
 typedef enum { SZ_B=1, SZ_W=2, SZ_L=4 } FieldSize;
 
@@ -160,6 +167,9 @@ typedef struct {
     int      pt3y;
     int      extra_pts[8];
     int      n_extra_pts;
+    PTTBL   *pttbl;
+    PTTBL   *pttbl_shared;
+    PTTBL   *pttbl_pt0x;
     uint32_t scale_sags[4];
     uint16_t scale_ctrls[4];
     int      n_scales;
@@ -380,7 +390,12 @@ static ImgFile* img_load_try(const char *dir, const char *fname) {
     strncpy(lower, fname, MAX_PATH-1);
     for (int i = 0; lower[i]; i++) lower[i] = (char)tolower((unsigned char)lower[i]);
 
-    /* Extract basename from DOS-style paths (e.g. "c:\video\kombat2\img\FILE.IMG" -> "FILE.IMG") */
+    /* LOADW does NOT fall back to basename when DOS-style path has a directory
+     * separator — e.g. "COURT\UGROUND2.IMG" fails entirely in DOSBox. */
+    int has_dir_sep = 0;
+    for (const char *p = fname; *p; p++) {
+        if (*p == '\\' || *p == '/' || *p == ':') { has_dir_sep = 1; break; }
+    }
     const char *base = fname;
     for (const char *p = fname; *p; p++) {
         if (*p == '\\' || *p == '/' || *p == ':') base = p + 1;
@@ -397,22 +412,27 @@ static ImgFile* img_load_try(const char *dir, const char *fname) {
         path_cat(p1, dir, fname, MAX_PATH);  tries[n++] = p1;
         path_cat(p2, dir, upper, MAX_PATH);  tries[n++] = p2;
         path_cat(p3, dir, lower, MAX_PATH);  tries[n++] = p3;
-        path_cat(p4, dir, base, MAX_PATH);   tries[n++] = p4;
-        path_cat(p5, dir, base_upper, MAX_PATH); tries[n++] = p5;
-        path_cat(p6, dir, base_lower, MAX_PATH); tries[n++] = p6;
+        if (!has_dir_sep) {
+            path_cat(p4, dir, base, MAX_PATH);   tries[n++] = p4;
+            path_cat(p5, dir, base_upper, MAX_PATH); tries[n++] = p5;
+            path_cat(p6, dir, base_lower, MAX_PATH); tries[n++] = p6;
+        }
     }
     tries[n++] = fname;
     tries[n++] = upper;
     tries[n++] = lower;
-    tries[n++] = base;
-    tries[n++] = base_upper;
-    tries[n++] = base_lower;
+    if (!has_dir_sep) {
+        tries[n++] = base;
+        tries[n++] = base_upper;
+        tries[n++] = base_lower;
+    }
     (void)path;
 
     for (int i = 0; i < n; i++) {
         ImgFile *img = img_load(tries[i]);
         if (img) return img;
     }
+    fprintf(stderr, "WARNING: cannot open %s (tried %d paths)\n", fname, n);
     return NULL;
 }
 
@@ -499,14 +519,15 @@ static ImgFile* img_load(const char *path) {
     img->pals = (PAL_REC*)(img->data + pal_ofs);
     img->n_palettes = img->hdr.palcnt;
 
-    /* PTTBL offset: after palette records + sequences + scripts */
-    uint32_t pttbl_ofs = pal_ofs + (uint32_t)img->n_palettes * sizeof(PAL_REC);
+    /* PTTBL offset: after palette records + 6-byte gap + sequences/scripts, minus special records */
+    uint32_t pttbl_ofs = pal_ofs + (uint32_t)img->n_palettes * sizeof(PAL_REC) + 6;
     /* SEQSCR entries between palettes and PTTBL */
     int n_seqscr = (int)img->hdr.seqcnt + (int)img->hdr.scrcnt;
     if (n_seqscr > 0) {
         /* SEQSCR struct (pack 2): name[16] + flags(2) + num(2) + entry_t[16](dd=4*16) + startx(2) + starty(2) + dam[6] + spare1(2) + spare2(2) = 98 */
         pttbl_ofs += (uint32_t)n_seqscr * 98;
     }
+
 
     /* Compute max PTTBL index */
     int max_pttbl = -1;
@@ -592,9 +613,10 @@ static uint16_t compute_ctrl(int bpp, int lm, int tm, int cmp) {
 typedef struct {
     int lm, tm;
     int lm_mult, tm_mult;
-    int sizx, sizy;
+    int      sizx, sizy;
     uint16_t ctrl;
-    int running_lead;
+    int      ctrl_zero;
+    int      running_lead;
     int running_trail;
     int lookahead_lead;
     int lookahead_trail;
@@ -632,18 +654,23 @@ static int compute_content_sizy(ImgFile *img, IMG_REC *rec) {
 }
 
 static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_sizx) {
+    int real_bpp = bpp;
     CompParams p;
     memset(&p, 0, sizeof(p));
 
     p.sizx = pttbl_sizx > 0 ? pttbl_sizx : OUT_STRIDE(rec->w);
     p.sizy = rec->h;
+    if (g.xon) { p.sizx++; p.sizy++; }
     if (p.sizx < 1) p.sizx = 1;
     if (p.sizy < 1) p.sizy = 1;
+    p.ctrl_zero = (real_bpp & 0x100) ? 1 : 0;
+    bpp = real_bpp & 0xff;
 
     if (!g.zon) {
         p.lm = p.tm = 0;
         p.lm_mult = p.tm_mult = 1;
         p.ctrl = compute_ctrl(bpp, 0, 0, 0);
+        if (p.ctrl_zero) p.ctrl &= 0x0fff;
         return p;
     }
 
@@ -655,16 +682,17 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
     int stride = IMG_STRIDE(rec->w);
      int lead_err[4] = {0}, trail_err[4] = {0};
     int lookahead_lead_min = 999;
-    int rows = rec->h;
+    int rows = p.sizy;
+    if (rows < 1) rows = 1;
     int la_window = rows < 4 ? rows : 4;
     int sizx = p.sizx;
 
-    for (int y = 0; y < rec->h; y++) {
-        uint8_t *row = pix + y * stride;
+    for (int y = 0; y < rows; y++) {
+        uint8_t *row = (y < rec->h) ? pix + y * stride : NULL;
         int lead = 0, trail = 0, lead_done = 0;
 
         for (int x = 0; x < sizx; x++) {
-            uint8_t px = row[x];
+            uint8_t px = (row && x < stride) ? row[x] : 0;
             if (!lead_done) {
                 if (lead == 120) {
                     lead_done = 1;
@@ -714,13 +742,13 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
     p.lookahead_trail = 0;
 
     /* FUN_1000_6f20 space check: if compressed size >= raw size, CMP=0 */
-    int raw_bits = sizx * rec->h * bpp;
+    int raw_bits = sizx * rows * bpp;
     int comp_bits = 0;
-    for (int y = 0; y < rec->h; y++) {
-        uint8_t *row = pix + y * stride;
+    for (int y = 0; y < rows; y++) {
+        uint8_t *row = (y < rec->h) ? pix + y * stride : NULL;
         int lead = 0, trail = 0, lead_done = 0;
         for (int x = 0; x < sizx; x++) {
-            uint8_t px = row[x];
+            uint8_t px = (row && x < stride) ? row[x] : 0;
             if (!lead_done) {
                 if (lead == 120) { lead_done = 1; }
                 else if (px == 0) { lead++; }
@@ -765,6 +793,7 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
     if (sizx < 10) g.n_small_uncompressed++;
 
     p.ctrl = compute_ctrl(bpp, p.lm, p.tm, do_cmp);
+    if (p.ctrl_zero) p.ctrl &= 0x0fff;  /* zero the bpp nibble, preserve LM/TM/CMP */
 
     return p;
 }
@@ -870,13 +899,16 @@ static uint32_t encode_image(ImgFile *img, IMG_REC *rec, CompParams *cp, int bpp
     /* LOADW _do_sclpad: create internal buffer with stride = SIZX.
      * Pixel data copied from IMG buffer, zero-padded beyond rec->w. */
     int scl_stride = sizx;
+    int rows = cp->sizy;
+    if (rows < 1) rows = 1;
     uint8_t *scl_buf = NULL;
-    if (g.zon && rec->h > 0) {
-        scl_buf = (uint8_t*)calloc((size_t)scl_stride * rec->h, 1);
-        for (int y = 0; y < rec->h; y++) {
+    if (g.zon && rows > 0) {
+        scl_buf = (uint8_t*)calloc((size_t)scl_stride * rows, 1);
+        for (int y = 0; y < rows && y < rec->h; y++) {
             uint8_t *src = pix + y * img_stride;
             uint8_t *dst = scl_buf + y * scl_stride;
-            memcpy(dst, src, scl_stride);
+            int copy = scl_stride < img_stride ? scl_stride : img_stride;
+            memcpy(dst, src, copy);
         }
     }
 
@@ -886,12 +918,13 @@ static uint32_t encode_image(ImgFile *img, IMG_REC *rec, CompParams *cp, int bpp
      * where "Need 10 non-zero pixels minimum" fails. Use raw pixel mode in that case. */
     int do_cmp = (cp->ctrl & 0x80) ? 1 : 0;
 
-    for (int y = 0; y < rec->h; y++) {
+    for (int y = 0; y < rows; y++) {
         uint8_t *row = (g.zon && do_cmp) ? scl_buf + y * scl_stride : pix + y * img_stride;
         if (g.zon && do_cmp) {
             encode_row(row, scl_stride, scl_stride, bpp, cp->lm_mult, cp->tm_mult, &running_lead);
         } else {
-            int zw = g.pad4bits ? (rec->w + 3) & ~3 : rec->w;
+            int zw = g.pad4bits ? OUT_STRIDE(rec->w) : rec->w;
+            if (g.xon && (!g.zon || !do_cmp)) zw = rec->w + 1;
             if (zw < 1) zw = 1;
             for (int x = 0; x < zw; x++)
                 irw_write_bits(x < rec->w ? row[x] : 0, bpp);
@@ -980,7 +1013,12 @@ static int get_ihdr_word_value(ImageEntry *ie, int field, int denom) {
     case IHDR_PWRD1: return ie->pwrd1;
     case IHDR_PWRD2: return ie->pwrd2;
     case IHDR_PWRD3: return ie->pwrd3;
-    case IHDR_PT3Y:  return ie->pt3y;
+    case IHDR_PT0X: { PTTBL *p = ie->pttbl_pt0x ? ie->pttbl_pt0x : ie->pttbl; return p ? (int16_t)((uint16_t)(uint8_t)p->cbox.x | ((uint16_t)(uint8_t)p->cbox.y << 8)) : -1; }
+    case IHDR_PT2X: return ie->pttbl_shared ? (int)ie->pttbl_shared->x2 : (ie->pttbl ? (int)ie->pttbl->x2 : -1);
+    case IHDR_PT2Y: return ie->pttbl_shared ? (int)ie->pttbl_shared->x3 : (ie->pttbl ? (int)ie->pttbl->x3 : -1);
+    case IHDR_PT3X: return ie->pttbl_shared ? (int)ie->pttbl_shared->X : (ie->pttbl ? (int)ie->pttbl->X : -1);
+    case IHDR_PT3Y: return ie->pttbl_shared ? (int)ie->pttbl_shared->Y : (ie->pttbl ? (int)ie->pttbl->Y : -1);
+    case IHDR_PT5X: return ie->pttbl_shared ? (int)ie->pttbl_shared->id : (ie->pttbl ? (int)ie->pttbl->id : -1);
     default: return -1;
     }
 }
@@ -1098,7 +1136,7 @@ static void parse_ihdr(const char *line) {
         else if (!strncmp(fname, "PT", 2)) {
             int pt_idx = fname[2] - '0';
             int is_y = (fname[3] == 'Y');
-            if (pt_idx >= 0 && pt_idx <= 4)
+            if (pt_idx >= 0 && pt_idx <= 5)
                 f->field = IHDR_PT0X + pt_idx * 2 + (is_y ? 1 : 0);
             else
                 f->field = IHDR_PT0X;
@@ -1215,20 +1253,22 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
         int bpp;
         if (g.ppp > 0) {
             bpp = g.ppp;
-            /* Auto pixel packing: only for images with origin at (0,0)
-             * (fonts, UI elements — not animated sprites with offsets) */
-            uint8_t *pix = img_pixels(cur->imgfile, rec);
-            if (pix && rec->data_p != 0 && rec->anix == 0 && rec->aniy == 0) {
-                int pstride = IMG_STRIDE(rec->w);
-                uint32_t maxpx = 0;
-                for (int y = 0; y < rec->h; y++)
-                    for (int x = 0; x < rec->w; x++) {
-                        uint8_t px = pix[y * pstride + x];
-                        if (px > maxpx) maxpx = px;
-                    }
-                int per_bpp = bpp_for_max(maxpx);
-                if (per_bpp >= 1 && per_bpp < bpp) bpp = per_bpp;
+            /* Check if palette has more colors than 2^bpp can address.
+             * LOADW outputs CTRL=0 for bpp in TBL but still compresses with the
+             * forced bpp internally. The CTRL=0 is a flag that hardware ignores. */
+            int bpp_overflow = 0;
+            PAL_REC *pal_rec = find_user_palette(cur->imgfile, rec->palnum);
+            if (pal_rec && pal_rec->numc > 1 && pal_rec->numc <= 256 &&
+                (int)pal_rec->numc > (1 << bpp)) {
+                bpp_overflow = 1;
+                if (g.verbose)
+                    fprintf(stderr, "[%s] Can't fit into %d bits per pixel (palette has %d colors).\n",
+                            name, g.ppp, pal_rec->numc);
             }
+             /* Auto pixel packing: LOADW only reduces bpp below PPP when PPP=0 (auto mode).
+              * When PPP>0 forces a specific bpp, it is never reduced — only the
+              * bpp overflow check above applies. */
+            if (bpp_overflow) bpp |= 0x100;  /* flag for ctrl_zero */
         } else {
               /* Auto pixel packing: select bpp per image */
               uint8_t *pix = img_pixels(cur->imgfile, rec);
@@ -1278,10 +1318,47 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
         ie->sizx = cp.sizx;
         ie->sizy = cp.sizy;
         ie->ctrl = cp.ctrl;
+        if (g.verbose && strcmp(name, "dcslogo") == 0) {
+            uint8_t *pix = img_pixels(cur->imgfile, rec);
+            int stride = IMG_STRIDE(rec->w);
+            int sizx = cp.sizx;
+            fprintf(stderr, "\n=== dcslogo analyse ===\n");
+            int lead_err2[4]={0}, trail_err2[4]={0};
+            for (int y = 0; y < rec->h && y < 88; y++) {
+                uint8_t *row = pix + y * stride;
+                int lead=0, trail=0, lead_done=0;
+                for (int x=0; x < sizx; x++) {
+                    uint8_t px = (x < stride) ? row[x] : 0;
+                    if (!lead_done) {
+                        if (lead == 120) {lead_done=1;}
+                        else if (px==0) lead++;
+                        else lead_done=1;
+                    } else if (sizx-120 < x) {
+                        if (px==0) trail++;
+                        else trail=0;
+                    }
+                }
+                for (int m=0;m<4;m++) {
+                    int mult=1<<m;
+                    int ln = lead/mult; if(ln>15)ln=15;
+                    lead_err2[m] += lead - mult*ln;
+                    int tn = trail/mult; if(tn>15)tn=15;
+                    trail_err2[m] += trail - mult*tn;
+                }
+                fprintf(stderr, "row%3d: lead=%4d trail=%4d\n", y, lead, trail);
+            }
+            fprintf(stderr, "lead_err: %d %d %d %d\n", lead_err2[0],lead_err2[1],lead_err2[2],lead_err2[3]);
+            fprintf(stderr, "trail_err: %d %d %d %d\n", trail_err2[0],trail_err2[1],trail_err2[2],trail_err2[3]);
+            int best_lm=0;
+            for(int m=1;m<4;m++) if(lead_err2[m] < lead_err2[best_lm]) best_lm=m;
+            int best_tm=0;
+            for(int m=1;m<4;m++) if(trail_err2[m] < trail_err2[best_tm]) best_tm=m;
+            fprintf(stderr, "best_lm=%d best_tm=%d\n", best_lm, best_tm);
+        }
         ie->n_scales = scale_n;
-        ie->pwrd1 = -1;
-        ie->pwrd2 = -1;
-        ie->pwrd3 = -1;
+        ie->pwrd1 = rec->anix2;
+        ie->pwrd2 = rec->aniy2;
+        ie->pwrd3 = rec->aniz2;
         ie->pt3y = 0;
 
         /* PT pairs from PTTBL fields or computed from box geometry.
@@ -1293,19 +1370,17 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
         if (rec->pttblnum >= 0 && rec->pttblnum < cur->imgfile->n_pttbls && cur->imgfile->pttbls) {
             PTTBL *pt = &cur->imgfile->pttbls[rec->pttblnum];
             PTTBL *pt0 = &cur->imgfile->pttbls[0];
+            ie->pttbl = pt;
+            ie->pttbl_shared = (rec->pttblnum >= 2) ? &cur->imgfile->pttbls[rec->pttblnum - 2] : NULL;
+    ie->pttbl_pt0x = (rec->pttblnum >= 3) ? &cur->imgfile->pttbls[rec->pttblnum - 3] : (ie->pttbl_shared ? ie->pttbl_shared : ie->pttbl);
                 
-                /* Read stored PT fields: 12 bytes = 6 int16 values packed
-                 * in the three box structures (box[0].x|y, box[0].w|h, etc.) */
-                int16_t px1 = (int16_t)((uint16_t)pt->box[0].x | ((uint16_t)pt->box[0].y << 8));
-                int16_t px2 = (int16_t)((uint16_t)pt->box[0].w | ((uint16_t)pt->box[0].h << 8));
-                int16_t px3 = (int16_t)((uint16_t)pt->box[1].x | ((uint16_t)pt->box[1].y << 8));
-                int16_t pax3 = (int16_t)((uint16_t)pt->box[1].w | ((uint16_t)pt->box[1].h << 8));
-                int16_t pay3 = (int16_t)((uint16_t)pt->box[2].x | ((uint16_t)pt->box[2].y << 8));
-                int16_t paz3 = (int16_t)((uint16_t)pt->box[2].w | ((uint16_t)pt->box[2].h << 8));
-                
-                if (g.verbose && strcmp(name, "S3OASD01") == 0)
-                    fprintf(stderr, "PTTBL S3OASD01: px1=%d px2=%d px3=%d pax3=%d pay3=%d paz3=%d\n",
-                            px1, px2, px3, pax3, pay3, paz3);
+                /* Read stored PT fields from PTTBL header fields */
+                int16_t px1 = pt->x1;
+                int16_t px2 = pt->x2;
+                int16_t px3 = pt->x3;
+                int16_t pax3 = pt->X;
+                int16_t pay3 = pt->Y;
+                int16_t paz3 = pt->Z;
                 
                 ie->extra_pts[0] = px1;
                 ie->extra_pts[1] = px2;
@@ -1319,27 +1394,22 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
                 
                 /* If stored fields are zero, compute 4 PT pairs from geometry */
                 if (px1 == 0 && px2 == 0) {
-                    int cx = (int)((int8_t)pt->box[0].x);
-                    int cy = (int)((int8_t)pt->box[0].y);
-                    int cw = pt->box[0].w;
-                    int ch = pt->box[0].h;
-                    
-                    /* PT1 = (CBOX.X - ANIX + CBOX.W, CBOX.Y - ANIY + CBOX.H) */
-                    ie->extra_pts[0] = cx - ie->anix + cw;
-                    ie->extra_pts[1] = cy - ie->aniy + ch;
+                    /* PT1 from CBOX */
+                    ie->extra_pts[0] = (int)(int8_t)pt->cbox.x - ie->anix + pt->cbox.w;
+                    ie->extra_pts[1] = (int)(int8_t)pt->cbox.y - ie->aniy + pt->cbox.h;
                     
                     /* PT2 from shared PTTBL[0] (!STAND2):
                        (BOX[1].W + CBOX.W - CBOX.H - 1, BOX[1].Y - CBOX.W - 1) */
-                    ie->extra_pts[2] = pt0->box[1].w + pt0->box[0].w - pt0->box[0].h - 1;
-                    ie->extra_pts[3] = pt0->box[1].y - pt0->box[0].w - 1;
+                    ie->extra_pts[2] = pt0->box[0].w + pt0->cbox.w - pt0->cbox.h - 1;
+                    ie->extra_pts[3] = pt0->box[0].y - pt0->cbox.w - 1;
                     
                     /* PT3 = (BOX[2].X + 1, ANIY - BOX[1].H + shared_CBOX.H) */
-                    ie->extra_pts[4] = pt->box[2].x + 1;
-                    ie->extra_pts[5] = ie->aniy - pt->box[1].h + pt0->box[0].h;
+                    ie->extra_pts[4] = pt->box[1].x + 1;
+                    ie->extra_pts[5] = ie->aniy - pt->box[0].h + pt0->cbox.h;
                     
                     /* PT4 = (ANIX - BOX[1].W, ANIY - BOX[1].H) */
-                    ie->extra_pts[6] = ie->anix - pt->box[1].w;
-                    ie->extra_pts[7] = ie->aniy - pt->box[1].h;
+                    ie->extra_pts[6] = ie->anix - pt->box[0].w;
+                    ie->extra_pts[7] = ie->aniy - pt->box[0].h;
                     
                     ie->n_extra_pts = 8;
                 }
@@ -1401,7 +1471,7 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
             if (g.verbose)
                 printf("  Checksum match on image [%s].\n", name);
         } else {
-            ie->sag = encode_image(cur->imgfile, rec, &cp, bpp);
+            ie->sag = encode_image(cur->imgfile, rec, &cp, bpp & 0xff);
             if (g.dedup && n_dedup < MAX_DEDUP) {
                 uint8_t *pix_data = img_pixels(cur->imgfile, rec);
                 int pstride = IMG_STRIDE(rec->w);
@@ -1596,8 +1666,6 @@ static void process_lod(const char *lod_path) {
                 fseek(bf, 0, SEEK_END);
                 long bsz = ftell(bf);
                 fseek(bf, 0, SEEK_SET);
-                /* Pad to 2-byte boundary before FRM data (LOADW aligns FRM files to words) */
-                if ((g.irw_bit / 8) & 1) irw_write_byte(0);
                 if (g.build_tables && g.asm_fp) {
                     fprintf(g.asm_fp, "%s\t.set\t0%xh\r\n", fname, g.base_addr + g.irw_bit);
                 }
@@ -1613,6 +1681,8 @@ static void process_lod(const char *lod_path) {
                     free(buf);
                 }
                 fclose(bf);
+                /* Pad to 2-byte boundary after FRM data (LOADW word-aligns FRM entries) */
+                if ((g.irw_bit / 8) & 1) irw_write_byte(0);
                 if (g.verbose)
                     printf("  FRM %s at bit %u (%ld bytes)\n", fname, sag, bsz);
             } else {
