@@ -96,15 +96,16 @@ typedef struct {
 #pragma pack(pop)
 
 #pragma pack(push, 1)
+/* PTTBL: 12-byte entries stored after palette records.
+ * Layout (all fields are 1-based in LOADW docs, 0-based in code):
+ *   BOX[1] = box[0]: primary bounding box (w = compression width)
+ *   BOX[2] = box[1]: secondary bounding box
+ *   BOX[3] = box[2]: tertiary bounding box
+ * When x1 is non-zero, the first 6 bytes are x1/x2/x3 instead. */
 typedef struct { uint8_t x, y, w, h; } PTBOX;
 
 typedef struct {
-    uint16_t flags;
-    int16_t  x1, x2, x3;
-    int16_t  x_anipt3, y_anipt3, z_anipt3;
-    uint16_t id;
-    PTBOX    box[5];
-    PTBOX    cbox[1];
+    PTBOX    box[3];         /* three 4-byte boxes = 12 bytes total */
 } PTTBL;
 #pragma pack(pop)
 
@@ -1202,10 +1203,10 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
         /* Determine SIZX from PTTBL: SIZX = PTTBL[pttblnum - n_special].BOX[1].W */
         int pttbl_sizx = 0;
         if (rec->pttblnum >= 0 && cur->imgfile->pttbls) {
-            int pt_idx = (int)rec->pttblnum - (int)cur->imgfile->n_special;
-            if (pt_idx >= 0 && pt_idx < cur->imgfile->n_pttbls) {
-                PTTBL *pt = &cur->imgfile->pttbls[pt_idx];
-                int bw = pt->box[1].w;
+            if (rec->pttblnum >= 0 && rec->pttblnum < cur->imgfile->n_pttbls) {
+                PTTBL *pt = &cur->imgfile->pttbls[rec->pttblnum];
+                /* LOADW uses BOX[1].W (= box[0].w) as compression width */
+                int bw = pt->box[0].w;
                 if (bw > 0 && bw < rec->w)
                     pttbl_sizx = bw;
             }
@@ -1283,30 +1284,45 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
         ie->pwrd3 = -1;
         ie->pt3y = 0;
 
-        /* PT pairs from PTTBL fields or computed from box/CBOX geometry */
-        if (rec->pttblnum >= (int16_t)cur->imgfile->n_special && cur->imgfile->pttbls) {
-            int pt_idx = (int)rec->pttblnum - cur->imgfile->n_special;
-            if (pt_idx < cur->imgfile->n_pttbls) {
-                PTTBL *pt = &cur->imgfile->pttbls[pt_idx];
-                PTTBL *pt0 = &cur->imgfile->pttbls[0];
+        /* PT pairs from PTTBL fields or computed from box geometry.
+         * PTTBL entries are 12 bytes: three PTBOXes (box[0], box[1], box[2]).
+         * LOADW interprets the 12 bytes as 6 int16 fields (x1..z_anipt3)
+         * when non-zero, or falls back to box geometry when x1==x2==0.
+         * PTTBL index = pttblnum (not adjusted by n_special — the PTTBL
+         * array includes entries for all IMG records including !-prefixed). */
+        if (rec->pttblnum >= 0 && rec->pttblnum < cur->imgfile->n_pttbls && cur->imgfile->pttbls) {
+            PTTBL *pt = &cur->imgfile->pttbls[rec->pttblnum];
+            PTTBL *pt0 = &cur->imgfile->pttbls[0];
                 
-                /* Read stored PT fields */
-                ie->extra_pts[0] = pt->x1;
-                ie->extra_pts[1] = pt->x2;
-                ie->extra_pts[2] = pt->x3;
-                ie->extra_pts[3] = pt->x_anipt3;
-                ie->extra_pts[4] = pt->y_anipt3;
-                ie->extra_pts[5] = pt->z_anipt3;
+                /* Read stored PT fields: 12 bytes = 6 int16 values packed
+                 * in the three box structures (box[0].x|y, box[0].w|h, etc.) */
+                int16_t px1 = (int16_t)((uint16_t)pt->box[0].x | ((uint16_t)pt->box[0].y << 8));
+                int16_t px2 = (int16_t)((uint16_t)pt->box[0].w | ((uint16_t)pt->box[0].h << 8));
+                int16_t px3 = (int16_t)((uint16_t)pt->box[1].x | ((uint16_t)pt->box[1].y << 8));
+                int16_t pax3 = (int16_t)((uint16_t)pt->box[1].w | ((uint16_t)pt->box[1].h << 8));
+                int16_t pay3 = (int16_t)((uint16_t)pt->box[2].x | ((uint16_t)pt->box[2].y << 8));
+                int16_t paz3 = (int16_t)((uint16_t)pt->box[2].w | ((uint16_t)pt->box[2].h << 8));
+                
+                if (g.verbose && strcmp(name, "S3OASD01") == 0)
+                    fprintf(stderr, "PTTBL S3OASD01: px1=%d px2=%d px3=%d pax3=%d pay3=%d paz3=%d\n",
+                            px1, px2, px3, pax3, pay3, paz3);
+                
+                ie->extra_pts[0] = px1;
+                ie->extra_pts[1] = px2;
+                ie->extra_pts[2] = px3;
+                ie->extra_pts[3] = pax3;
+                ie->extra_pts[4] = pay3;
+                ie->extra_pts[5] = paz3;
                 ie->extra_pts[6] = 0;
                 ie->extra_pts[7] = 0;
                 ie->n_extra_pts = 6;
                 
                 /* If stored fields are zero, compute 4 PT pairs from geometry */
-                if (ie->extra_pts[0] == 0 && ie->extra_pts[1] == 0) {
-                    int cx = (int)((int8_t)pt->cbox[0].x);
-                    int cy = (int)((int8_t)pt->cbox[0].y);
-                    int cw = pt->cbox[0].w;
-                    int ch = pt->cbox[0].h;
+                if (px1 == 0 && px2 == 0) {
+                    int cx = (int)((int8_t)pt->box[0].x);
+                    int cy = (int)((int8_t)pt->box[0].y);
+                    int cw = pt->box[0].w;
+                    int ch = pt->box[0].h;
                     
                     /* PT1 = (CBOX.X - ANIX + CBOX.W, CBOX.Y - ANIY + CBOX.H) */
                     ie->extra_pts[0] = cx - ie->anix + cw;
@@ -1314,12 +1330,12 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
                     
                     /* PT2 from shared PTTBL[0] (!STAND2):
                        (BOX[1].W + CBOX.W - CBOX.H - 1, BOX[1].Y - CBOX.W - 1) */
-                    ie->extra_pts[2] = pt0->box[1].w + pt0->cbox[0].w - pt0->cbox[0].h - 1;
-                    ie->extra_pts[3] = pt0->box[1].y - pt0->cbox[0].w - 1;
+                    ie->extra_pts[2] = pt0->box[1].w + pt0->box[0].w - pt0->box[0].h - 1;
+                    ie->extra_pts[3] = pt0->box[1].y - pt0->box[0].w - 1;
                     
                     /* PT3 = (BOX[2].X + 1, ANIY - BOX[1].H + shared_CBOX.H) */
                     ie->extra_pts[4] = pt->box[2].x + 1;
-                    ie->extra_pts[5] = ie->aniy - pt->box[1].h + pt0->cbox[0].h;
+                    ie->extra_pts[5] = ie->aniy - pt->box[1].h + pt0->box[0].h;
                     
                     /* PT4 = (ANIX - BOX[1].W, ANIY - BOX[1].H) */
                     ie->extra_pts[6] = ie->anix - pt->box[1].w;
@@ -1328,7 +1344,6 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
                     ie->n_extra_pts = 8;
                 }
             }
-        }
 
         /* Palette: stored palnum includes 3 defaults */
         PAL_REC *prec = find_user_palette(cur->imgfile, rec->palnum);
