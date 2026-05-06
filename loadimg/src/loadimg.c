@@ -2066,7 +2066,7 @@ static void process_lod(const char *lod_path) {
 
                         for (int m = 1; m < 4; m++) {
                             if (lead_err[m] < lead_err[best_lm]) best_lm = m;
-                            if (trail_err[m] < trail_err[best_tm]) best_tm = m;
+                            if (!(trail_err[best_tm] <= trail_err[m])) best_tm = m;
                         }
 
                         /* Per-image CMP decision */
