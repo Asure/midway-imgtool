@@ -1,0 +1,98 @@
+	.DATA
+BACK1BR:
+	.word   90,73,-28,181
+	.long   094543d9H
+	.word   0780H
+	.long   HOOP_P
+BACK2BR:
+	.word   89,73,-28,181
+	.long   0945a2c1H
+	.word   0780H
+	.long   HOOP_P
+BACK3BR:
+	.word   87,73,-28,181
+	.long   0945ff57H
+	.word   0280H
+	.long   HOOP_P
+BACK4BR:
+	.word   86,73,-28,181
+	.long   09465899H
+	.word   0280H
+	.long   HOOP_P
+BACK5BR:
+	.word   85,73,-28,181
+	.long   0946b049H
+	.word   0280H
+	.long   HOOP_P
+BACK6BR:
+	.word   83,73,-28,181
+	.long   0947059bH
+	.word   0280H
+	.long   HOOP_P
+BACK7BR:
+	.word   82,73,-28,181
+	.long   0947591fH
+	.word   0280H
+	.long   HOOP_P
+BACK8BR:
+	.word   79,73,-28,181
+	.long   0947ab83H
+	.word   0280H
+	.long   HOOP_P
+BACK9BR:
+	.word   77,73,-28,181
+	.long   0947f8b9H
+	.word   0280H
+	.long   HOOP_P
+nback1br:
+	.word   130,98,14,175
+	.long   09484385H
+	.word   0f80H
+	.long   NHOOP_p
+nback2br:
+	.word   129,98,14,175
+	.long   0948f9bdH
+	.word   0f80H
+	.long   NHOOP_p
+nback3br:
+	.word   128,98,14,175
+	.long   0949ae39H
+	.word   0f80H
+	.long   NHOOP_p
+nback4br:
+	.word   126,98,14,175
+	.long   094a6129H
+	.word   0f80H
+	.long   NHOOP_p
+nback5br:
+	.word   125,98,14,175
+	.long   094b10d1H
+	.word   0f80H
+	.long   NHOOP_p
+nback6br:
+	.word   123,98,14,175
+	.long   094bbe5dH
+	.word   0f80H
+	.long   NHOOP_p
+nback7br:
+	.word   122,98,14,175
+	.long   094c66f1H
+	.word   0f80H
+	.long   NHOOP_p
+nback8br:
+	.word   121,98,14,175
+	.long   094d0ee9H
+	.word   0f80H
+	.long   NHOOP_p
+nback9br:
+	.word   119,98,14,175
+	.long   094dbaf5H
+	.word   0f80H
+	.long   NHOOP_p
+nback10br:
+	.word   118,98,14,175
+	.long   094e6299H
+	.word   0f80H
+	.long   NHOOP_p
+	.TEXT
+

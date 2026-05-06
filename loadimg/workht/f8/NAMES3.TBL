@@ -1,0 +1,98 @@
+	.DATA
+RAIDEN:
+	.word   39,10,17,0
+	.long   09564b66H
+	.word   03000H
+	.long   BAST_Y_P
+SCORPION:
+	.word   53,10,24,0
+	.long   09564ff8H
+	.word   03000H
+	.long   BAST_Y_P
+SUBZER:
+	.word   53,10,26,0
+	.long   0956562eH
+	.word   03000H
+	.long   BAST_Y_P
+REPTILE:
+	.word   43,10,20,0
+	.long   09565c64H
+	.word   03000H
+	.long   BAST_Y_P
+SM0K3:
+	.word   38,10,17,0
+	.long   0956616eH
+	.word   03000H
+	.long   BAST_Y_P
+JORDAN:
+	.word   43,10,20,0
+	.long   095665e2H
+	.word   03000H
+	.long   BAST_Y_P
+BRYANT:
+	.word   44,10,21,0
+	.long   09566aecH
+	.word   03000H
+	.long   BAST_Y_P
+ONEAL:
+	.word   38,10,17,0
+	.long   09567014H
+	.word   03000H
+	.long   BAST_Y_P
+BIRD:
+	.word   25,10,10,0
+	.long   09567488H
+	.word   03000H
+	.long   BAST_Y_P
+TERMINATOR:
+	.word   32,10,16,0
+	.long   09567776H
+	.word   03000H
+	.long   BAST_Y_P
+ARNOLD:
+	.word   43,10,22,0
+	.long   09567b36H
+	.word   03000H
+	.long   BAST_Y_P
+WALKER:
+	.word   45,10,22,0
+	.long   09568040H
+	.word   03000H
+	.long   BAST_Y_P
+ELLIS:
+	.word   38,10,17,0
+	.long   09568586H
+	.word   03000H
+	.long   BAST_Y_P
+D_ELLIS:
+	.word   39,10,16,0
+	.long   095689faH
+	.word   03000H
+	.long   BAST_Y_P
+BARKLEY:
+	.word   50,10,24,0
+	.long   09568e8cH
+	.word   03000H
+	.long   BAST_Y_P
+PORTER:
+	.word   42,10,20,0
+	.long   09569468H
+	.word   03000H
+	.long   BAST_Y_P
+MAJERLE:
+	.word   49,10,23,0
+	.long   09569954H
+	.word   03000H
+	.long   BAST_Y_P
+WILKINS:
+	.word   45,10,21,0
+	.long   09569f12H
+	.word   03000H
+	.long   BAST_Y_P
+JOHNSON_M:
+	.word   49,10,23,0
+	.long   0956a458H
+	.word   03000H
+	.long   BAST_Y_P
+	.TEXT
+

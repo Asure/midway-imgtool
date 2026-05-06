@@ -1,0 +1,38 @@
+byte fn147D_0000(selector ds)
+// stackDelta: 4; fpuStackDelta: 0; fpuMaxParam: -1
+// Called from:
+//      main
+// MayUse:  ds:[0..15]
+// LiveOut: al:[0..7]-main
+// Trashed: SCZO al dx Top
+// Preserved: di es sp
+fn147D_0000_entry:
+l147D_0000:
+	branch Mem0[ds:0x38C0<16>:word16] == 0<16> l147D_0017
+l147D_0007:
+	return Mem16[Mem16[ds:0x38C0<16>:selector]:Mem16[ds:0x3AC8<16>:word16]:byte]
+l147D_0017:
+	return __in<byte>(Mem0[ds:0x3AC8<16>:word16])
+fn147D_0000_exit:
+
+
+void fn147D_001D(selector ds, byte bArg04)
+// stackDelta: 4; fpuStackDelta: 0; fpuMaxParam: -1
+// Called from:
+//      main
+// MayUse:  ds:[0..15] Stack +0004:[0..7]
+// LiveOut:
+// Trashed: SCZO al dx Top
+// Preserved: bp di es sp
+fn147D_001D_entry:
+l147D_001D:
+	branch Mem7[ds:0x38C0<16>:word16] == 0<16> l147D_003C
+l147D_002B:
+	Mem25[Mem22[ds:0x38C0<16>:selector]:Mem22[ds:0x3AC8<16>:word16]:byte] = bArg04
+	return
+l147D_003C:
+	__out<byte>(Mem7[ds:0x3AC8<16>:word16], bArg04)
+	return
+fn147D_001D_exit:
+
+

@@ -1,0 +1,20 @@
+void fn1492_0008(selector ds, word16 wArg04)
+// stackDelta: 4; fpuStackDelta: 0; fpuMaxParam: -1
+// Called from:
+//      fn0800_0D60
+// MayUse:  ds:[0..15] Stack +0004:[0..15]
+// LiveOut:
+// Trashed: SCZO ax dx Top
+// Preserved: bp di es sp
+fn1492_0008_entry:
+l1492_0008:
+	branch Mem7[ds:0x38C0<16>:word16] == 0<16> l1492_0027
+l1492_0016:
+	Mem25[Mem22[ds:0x38C0<16>:selector]:Mem22[ds:0x38C2<16>:word16]:word16] = wArg04
+	return
+l1492_0027:
+	__out<word16>(Mem7[ds:0x38C2<16>:word16], wArg04)
+	return
+fn1492_0008_exit:
+
+

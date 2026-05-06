@@ -1,0 +1,11 @@
+	.globl	TMBLUE_P
+	.globl	TMHATS_P
+	.globl	TMBLOOD_P
+	.globl	AURA_P
+	.globl	LKRED_P
+	.globl	FIRE_P
+	.globl	LKBLUD1_P
+	.globl	CAGE_P
+	.globl	SNOT_P
+	.globl	JCBLUD1_P
+	.globl	UGRED_P

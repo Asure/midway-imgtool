@@ -1,0 +1,114 @@
+word16 fn1463_000C(selector ds)
+// stackDelta: 4; fpuStackDelta: 0; fpuMaxParam: -1
+// Called from:
+//      fn0800_0000
+//      fn0800_00A0
+// MayUse:  ds:[0..15]
+// LiveOut: ax:[0..15]-fn0800_00A0
+// Trashed: SCZDO ax bx cx es Top
+// Preserved: di si sp
+fn1463_000C_entry:
+l1463_000C:
+	ax_16 = 0<16>
+	branch memcmp(ds:0x30FE<16>, SLICE(msdos_get_interrupt_vector(0x67<8>), selector, 16):0xA<16>, 8<u32>) == 0<16> l1463_0025
+l1463_0024:
+	ax_16 = 0xFFFF<16>
+l1463_0025:
+	return ax_16
+fn1463_000C_exit:
+
+
+word16 fn1463_0028()
+// stackDelta: 4; fpuStackDelta: 0; fpuMaxParam: -1
+// Called from:
+//      fn0800_00A0
+//      fn1054_3721
+// MayUse: 
+// LiveOut: ax:[0..15]-fn0800_00A0
+// Trashed: SCZO ax bx dx Top
+// Preserved: sp
+fn1463_0028_entry:
+l1463_0028:
+	ah_6 = ems_get_number_of_pages(out bx_14, out dx_5)
+	branch ah_6 == 0<8> l1463_0034
+l1463_0030:
+	bx_14 = SEQ(0xFF<8>, ah_6) (alias)
+l1463_0034:
+	return bx_14
+fn1463_0028_exit:
+
+
+word16 fn1463_0037(word16 wArg04)
+// stackDelta: 4; fpuStackDelta: 0; fpuMaxParam: -1
+// Called from:
+//      fn0800_00A0
+//      fn1054_3721
+// MayUse:  Stack +0004:[0..15]
+// LiveOut: ax:[0..15]-fn0800_00A0
+// Trashed: SCZO ax bx dx Top
+// Preserved: bp sp
+fn1463_0037_entry:
+l1463_0037:
+	ah_11 = ems_get_handle_and_allocate_memory(wArg04, out dx_10)
+	branch ah_11 == 0<8> l1463_004A
+l1463_0046:
+	dx_10 = SEQ(0xFF<8>, ah_11) (alias)
+l1463_004A:
+	return dx_10
+fn1463_0037_exit:
+
+
+void fn1463_004E(word16 wArg04, word16 wArg06)
+// stackDelta: 4; fpuStackDelta: 0; fpuMaxParam: -1
+// Called from:
+//      fn0800_0040
+//      fn1054_3691
+// MayUse:  Stack +0004:[0..15] Stack +0006:[0..15]
+// LiveOut:
+// Trashed: SCZO ax bx dx Top
+// Preserved: bp sp
+fn1463_004E_entry:
+l1463_004E:
+	branch ems_map_memory(SLICE(wArg04, byte, 8), CONVERT(SLICE(wArg04, byte, 0), uint8, uint16), wArg06) == 0<8> l1463_0069
+l1463_0065:
+l1463_0069:
+	return
+fn1463_004E_exit:
+
+
+word16 fn1463_006B()
+// stackDelta: 4; fpuStackDelta: 0; fpuMaxParam: -1
+// Called from:
+//      fn0800_00A0
+//      fn1054_3721
+// MayUse: 
+// LiveOut: ax:[0..15]-fn0800_00A0
+// Trashed: SCZO ax bx Top
+// Preserved: sp
+fn1463_006B_entry:
+l1463_006B:
+	branch ems_get_page_frame_segment(out bx_4) == 0<8> l1463_0079
+l1463_0075:
+l1463_0079:
+	return bx_4
+fn1463_006B_exit:
+
+
+void fn1463_007C(word16 wArg04)
+// stackDelta: 4; fpuStackDelta: 0; fpuMaxParam: -1
+// Called from:
+//      fn0800_0000
+//      fn1054_39D9
+// MayUse:  Stack +0004:[0..15]
+// LiveOut:
+// Trashed: SCZO ah al dx Top
+// Preserved: bp sp
+fn1463_007C_entry:
+l1463_007C:
+	branch ems_release_memory(wArg04) == 0<8> l1463_0091
+l1463_008D:
+l1463_0091:
+	return
+fn1463_007C_exit:
+
+

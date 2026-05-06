@@ -1,0 +1,25 @@
+call makestil.bat END_BKH
+call makestil.bat END_BKV
+call makestil.bat END_JCH
+call makestil.bat END_JCV
+call makestil.bat END_JXH
+call makestil.bat END_JXV
+call makestil.bat END_KLH
+call makestil.bat END_KLV
+call makestil.bat END_KTH
+call makestil.bat END_KTV
+call makestil.bat END_LKH
+call makestil.bat END_LKV
+call makestil.bat END_MLH
+call makestil.bat END_MLV
+call makestil.bat END_RDH
+call makestil.bat END_RDV
+call makestil.bat END_RPH
+call makestil.bat END_RPV
+call makestil.bat END_SCH
+call makestil.bat END_SCV
+call makestil.bat END_STH
+call makestil.bat END_STV
+call makestil.bat END_SZH
+call makestil.bat END_SZV
+

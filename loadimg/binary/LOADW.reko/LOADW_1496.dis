@@ -1,0 +1,42 @@
+void fn1496_000C(selector ds, segptr32 ptrArg04, word16 wArg08)
+// stackDelta: 4; fpuStackDelta: 0; fpuMaxParam: -1
+// Called from:
+//      fn0800_7DD1
+//      fn0800_8095
+// MayUse:  ds:[0..15] Stack +0004:[0..31] Stack +0008:[0..15]
+// LiveOut:
+// Trashed: SCZDO ax cx dx Top
+// Preserved: bp di ds es si sp
+fn1496_000C_entry:
+l1496_000C:
+	cx_15 = wArg08
+	branch wArg08 == 0<16> l1496_0034
+l1496_0017:
+	branch Mem14[ds:0x38C0<16>:word16] == 0<16> l1496_0038
+l1496_001F:
+	es_44 = Mem43[ds:0x38C0<16>:selector]
+	di_45 = Mem43[ds:0x38C2<16>:word16]
+	ds_76 = SLICE(ptrArg04, selector, 16) (alias)
+	si_48 = SLICE(ptrArg04, word16, 0) (alias)
+l1496_002C:
+	Mem54[es_44:di_45:word16] = Mem49[ds_76:si_48:word16]
+	si_48 = si_48 + 2<i16>
+	cx_15 = cx_15 - 1<16>
+	branch cx_15 != 0<16> l1496_002C
+l1496_0032:
+l1496_0034:
+	return
+l1496_0038:
+	dx_19 = Mem14[ds:0x38C2<16>:word16]
+	ds_74 = SLICE(ptrArg04, selector, 16) (alias)
+	si_22 = SLICE(ptrArg04, word16, 0) (alias)
+l1496_003F:
+	__out<word16>(dx_19, Mem14[ds_74:si_22:word16])
+	si_22 = si_22 + 2<i16>
+	cx_15 = cx_15 - 1<16>
+	branch cx_15 != 0<16> l1496_003F
+l1496_0043:
+	return
+fn1496_000C_exit:
+
+

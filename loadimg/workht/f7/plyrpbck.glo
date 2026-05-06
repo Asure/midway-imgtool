@@ -1,0 +1,9 @@
+	.globl	w2blokl5
+	.globl	w2blokl6
+	.globl	w2blokl7
+	.globl	w3blokl5
+	.globl	w3blokl6
+	.globl	w3blokl7
+	.globl	w4blokl5
+	.globl	w4blokl6
+	.globl	w4blokl7

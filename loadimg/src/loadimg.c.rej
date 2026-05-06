@@ -1,0 +1,10 @@
+--- src/loadimg.c
++++ src/loadimg.c
+@@ -1280,6 +1280,7 @@
+         ie->sizx = cp.sizx;
+         ie->sizy = cp.sizy;
++        fprintf(stderr, "DEBUG %s: sizx=%d sizy=%d g.xon=%d g.zon=%d rec->w=%d\n", name, ie->sizx, ie->sizy, g.xon, g.zon, rec->w);
+         ie->ctrl = cp.ctrl;
+ 
+ 
+ 

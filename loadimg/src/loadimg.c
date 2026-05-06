@@ -538,8 +538,8 @@ static ImgFile* img_load(const char *path) {
     }
     img->n_pttbls = (max_pttbl >= 0) ? max_pttbl + 1 : 0;
 
-    /* Clamp to what fits in the file */
-    int max_fit = (int)((img->size - pttbl_ofs) / sizeof(PTTBL));
+    /* Clamp to what fits in the file (allow 2 extra for shared entry access past boundary) */
+    int max_fit = (int)((img->size - pttbl_ofs) / sizeof(PTTBL)) + 2;
     if (img->n_pttbls > max_fit) img->n_pttbls = max_fit;
 
     if (img->n_pttbls > 0)
@@ -1391,14 +1391,25 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
          * when non-zero, or falls back to box geometry when x1==x2==0.
          * PTTBL index = pttblnum (not adjusted by n_special — the PTTBL
          * array includes entries for all IMG records including !-prefixed). */
-        if (rec->pttblnum >= 0 && rec->pttblnum < cur->imgfile->n_pttbls && cur->imgfile->pttbls) {
-            PTTBL *pt = &cur->imgfile->pttbls[rec->pttblnum];
-            PTTBL *pt0 = &cur->imgfile->pttbls[0];
-            ie->pttbl = pt;
-            ie->pttbl_shared = (rec->pttblnum >= 2) ? &cur->imgfile->pttbls[rec->pttblnum - 2] : NULL;
-    ie->pttbl_pt0x = (rec->pttblnum >= 3) ? &cur->imgfile->pttbls[rec->pttblnum - 3] : (ie->pttbl_shared ? ie->pttbl_shared : ie->pttbl);
-                
-                /* Read stored PT fields from PTTBL header fields */
+        /* Set PTTBL pointers: own entry, shared entries for PT2 and PT0 fields.
+         * LOADW allows shared entries even when the own entry is out of bounds
+         * (e.g. PTTBL count doesn't include trailing entries past file limit). */
+        if (cur->imgfile->pttbls) {
+            if (rec->pttblnum >= 0 && rec->pttblnum < cur->imgfile->n_pttbls) {
+                ie->pttbl = &cur->imgfile->pttbls[rec->pttblnum];
+            }
+            if (rec->pttblnum >= 2 && rec->pttblnum - 2 < cur->imgfile->n_pttbls) {
+                ie->pttbl_shared = &cur->imgfile->pttbls[rec->pttblnum - 2];
+            }
+            if (rec->pttblnum >= 3 && rec->pttblnum - 3 < cur->imgfile->n_pttbls) {
+                ie->pttbl_pt0x = &cur->imgfile->pttbls[rec->pttblnum - 3];
+            }
+            if (!ie->pttbl_pt0x) ie->pttbl_pt0x = ie->pttbl_shared ? ie->pttbl_shared : ie->pttbl;
+        }
+        if (ie->pttbl) {
+            PTTBL *pt = ie->pttbl;
+            PTTBL *pt0 = cur->imgfile->pttbls ? &cur->imgfile->pttbls[0] : NULL;
+            /* Read stored PT fields from PTTBL header fields */
                 int16_t px1 = pt->x1;
                 int16_t px2 = pt->x2;
                 int16_t px3 = pt->x3;
