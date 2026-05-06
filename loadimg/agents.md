@@ -601,13 +601,11 @@ All LOD files are from **Mortal Kombat 2** arcade data. Naming: MK2MIL = MK2 rev
 | **MK2MIL** | ZON + ZOF | 1937 | 5/5 | **PASS** — IRW + TBLs byte-exact |
 | **MK4MIL** | ZON | 1885 | 6/6 | **PASS** — IRW + TBLs byte-exact |
 | **MK8MIL** | FRM | 0 sprites | 1/1 | **PASS** — MKREVX.TBL match |
-| **MK3MIL** | ZOF | 1949 | 5/5 | **PASS** — TE, duplicate, case, and encoder elif fixes |
+| **MK3MIL** | ZOF | 1949 | 5/5 | **PASS** — IRW + TBLs byte-exact |
 | **MK5MIL** | ZON | 702 | 1/7 | FAIL (BGSPEAR6 encoder cascade) |
-| **MK6MIL** | ZON/ZOF | 1859 | 9/17 | FAIL (updated LOD from work5/) |
-| **MK7MIL** | Mixed | 703 | 9/11 | FAIL (2 TBL: MKCHUNKS formatting, MK7MIL cascade) |
-| **MISC** | Mixed | 588 | 9/21 | FAIL (NBA Jam/Hangtime, NAMES3 per-image sizes match) |
-| **MKBBB (NUPOOL)** | BBB | 43 bgnd | — | **PASS** — IRW + BGND TBLs byte-exact |
-| **MKBBB (TOMB)** | BBB | — | — | FAIL (LM/TM for CMP=1 images) |
+| **MK6MIL** | ZON/ZOF | 1859 | 9/17 | FAIL |
+| **MK7MIL** | Mixed | 703 | 9/11 | FAIL (MKCHUNKS formatting, MK7MIL cascade) |
+| **MISC** | Mixed | 573 | 18/18 | **PASS** — all TBLs with LOADW refs byte-exact (NBA Jam/Hangtime) |
 
 **LM/TM mismatch note**: The FUN_1000_6f20 lead/trail analysis had a subtle bug
 (the trail loop used a separate `if (lead_done)` block instead of `else if`,
