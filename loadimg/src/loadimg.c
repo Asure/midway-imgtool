@@ -2228,7 +2228,6 @@ static void print_usage(const char *arg) {
     printf("\n");
     printf("Flags:\n");
     printf("  /R[=PATH]  Headerless raw IRW (no 0x44-byte header)\n");
-    printf("  /X         Do not generate IRW file\n");
     printf("  /T[=DIR]   Generate table files (.tbl/.asm/.glo)\n");
     printf("  /F[=DIR]   Raw file output directory\n");
     printf("  /I PATH    Image source directory\n");
@@ -2245,7 +2244,7 @@ static void print_usage(const char *arg) {
     if (arg) {
         printf("Unknown argument: %s\n", arg);
         printf("Did you mean one of these?\n");
-        printf("  /R, /X, /T, /F, /I, /D, /V, /E, /P, /L, /B, /3, /A, /H\n");
+        printf("  /R, /T, /F, /I, /D, /V, /E, /P, /L, /B, /3, /A, /H\n");
         printf("\n");
     }
     printf("Example:\n");
@@ -2275,7 +2274,6 @@ int main(int argc, char *argv[]) {
             char *val = a + 2;
 
             switch (flag) {
-            case 'X': g.build_raw = 0; break;
             case 'T':
                 g.build_tables = 1;
                 if (*val == '=') strncpy(tbl_dir, val+1, MAX_PATH-1);
