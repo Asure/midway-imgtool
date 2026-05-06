@@ -2219,24 +2219,37 @@ static void write_irw(const char *path) {
  * Command line
  * ========================================================================= */
 
-static void print_usage(void) {
+static void print_usage(const char *arg) {
     printf("loadimg <lod_file> [flags]\n");
-    printf("  /X  - do not generate IRW file\n");
-    printf("  /T= - directory for table files (.tbl/.asm/.glo)\n");
-    printf("  /F= - directory and base for raw file (.irw)\n");
-    printf("  /I  - use IMGDIR for source images\n");
-    printf("  /D= - specify directory for .lod file\n");
-    printf("  /V  - verbose\n");
-    printf("  /E  - dual-banked image memory (ED adjustment)\n");
-    printf("  /P  - pad to 4-bit boundary\n");
-    printf("  /L  - align to 16-bit boundary\n");
-    printf("  /B  - bpp from palette size\n");
-    printf("  /3  - limit scales to 3\n");
-    printf("  /A  - append mode\n");
+    printf("\n");
+    printf("Flags:\n");
+    printf("  /X      Do not generate IRW file\n");
+    printf("  /T=DIR  Directory for table files (.tbl/.asm/.glo)\n");
+    printf("  /F=DIR  Directory and base for raw file (.irw)\n");
+    printf("  /I      Use IMGDIR environment variable for source images\n");
+    printf("  /D=DIR  Specify directory for .lod file\n");
+    printf("  /V      Verbose output\n");
+    printf("  /E      Dual-banked image memory (ED adjustment)\n");
+    printf("  /P      Pad output stride to 4-pixel boundary\n");
+    printf("  /L      Align to 16-bit boundary\n");
+    printf("  /B      bpp from palette size\n");
+    printf("  /3      Limit scales to 3\n");
+    printf("  /A      Append mode (don't overwrite existing tables)\n");
+    printf("  /H      This help\n");
+    printf("\n");
+    if (arg) {
+        printf("Unknown argument: %s\n", arg);
+        printf("Did you mean one of these?\n");
+        printf("  /X, /T, /F, /I, /D, /V, /E, /P, /L, /B, /3, /A, /H\n");
+        printf("\n");
+    }
+    printf("Example:\n");
+    printf("  loadimg MK2MIL /P /T=C:\\TMP\n");
+    printf("  loadimg MK2MIL.LOD /P /T /V\n");
 }
 
 int main(int argc, char *argv[]) {
-    if (argc < 2) { print_usage(); return 1; }
+    if (argc < 2) { print_usage(NULL); return 1; }
 
     memset(&g, 0, sizeof(g));
     g.dedup = 1;  /* CON> (checksums ON) by default, matching LOADW */
@@ -2276,8 +2289,11 @@ int main(int argc, char *argv[]) {
             case 'B': g.bpp_from_pal = 1; break;
             case '3': g.limit3scales = 1; break;
             case 'A': g.append = 1; break;
-            case 'H': print_usage(); return 0;
-            default: fprintf(stderr, "Unknown flag: %s\n", a); break;
+            case 'H': print_usage(NULL); return 0;
+            default:
+                fprintf(stderr, "Unknown flag: %s\n", a);
+                print_usage(a);
+                return 1;
             }
         } else {
             strncpy(lod_file, a, MAX_PATH-1);
