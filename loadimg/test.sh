@@ -52,6 +52,45 @@ test_lod work5 ref6 MK6MIL "MK6MIL MKARMS MKBGANI MKBLOOD MKBONUS MKCOPY MKFALL 
 test_lod work2 ref7 MK7MIL "MK7MIL MKBABY MKBOLTS MKCHUNKS MKFATAL MKFLOORS MKFRND2 MKHUGE MKMK3 MKROCKS MKTC"
 test_lod work2 ref8 MK8MIL "MK8MIL MKREVX"
 
+# workht: misc.lod from NBA Jam/Hangtime (headerless, dual-bank)
+test_lod_workht() {
+    local REFDIR="refht" LODNAME="misc"
+    cd "$BASE/workht" 2>/dev/null || { echo "  SKIP MISC: no workht"; return; }
+
+    rm -rf folder "$LODNAME.IRW" 2>/dev/null
+    mkdir -p folder
+    if ! timeout 180 "$TOOL" "$LODNAME.lod" /T=folder /F /E 2>/dev/null; then
+        echo "  FAIL MISC: tool error"; ALL_FAIL=$((ALL_FAIL + 1)); return
+    fi
+
+    PASS=0; FAIL=0
+    for tbl in BBVDA COWERING CROWD2 DCS HOOP2 LIGHTEN NAMES3 NEWHEADS NEWMUGS \
+               PLYRDSQ3 PLYRPBCK SHANG SHATTER STEALUP STORM TEAMZONE UGROUND UGROUND1; do
+        if diff "$BASE/$REFDIR/${tbl}.TBL" "folder/${tbl}.TBL" >/dev/null 2>&1; then
+            PASS=$((PASS + 1))
+        else
+            FAIL=$((FAIL + 1))
+        fi
+    done
+    # Also check global tables
+    for f in IMGTBL.ASM IMGPAL.ASM IMGTBL.GLO; do
+        if diff "$BASE/$REFDIR/$f" "folder/$f" >/dev/null 2>&1; then
+            PASS=$((PASS + 1))
+        else
+            FAIL=$((FAIL + 1))
+        fi
+    done
+
+    if [ $FAIL -eq 0 ]; then
+        echo "  PASS MISC: $PASS/$((PASS+FAIL)) files"
+        ALL_PASS=$((ALL_PASS + 1))
+    else
+        echo "  FAIL MISC: $PASS/$((PASS+FAIL)) files"
+        ALL_FAIL=$((ALL_FAIL + 1))
+    fi
+}
+test_lod_workht
+
 echo ""
 echo "=== $ALL_PASS pass, $ALL_FAIL fail ==="
 exit $ALL_FAIL
