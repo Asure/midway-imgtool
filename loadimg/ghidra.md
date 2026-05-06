@@ -11,12 +11,12 @@ ZOF mode is **byte-exact** with LOADW across all tested datasets:
 ### ZON (Compressed) Mode — Partial Match
 
 - MK2MIL, MK4MIL, MK8MIL: **100.0% byte-exact** (IRW + all TBLs)
-- MK3MIL, MK5MIL, MK6MIL, MK7MIL: **partial** — LM/TM selection now matches LOADW
-  (FUN_1000_6f20 trail counting uses `else if` in all three code paths).
-  MK3MIL now passes fully (5/5). MK6MIL passes 9/17 (auto-bpp garbage pixel
-  fix for pitblood1a). Remaining encoder cascade affects MK5MIL, MK6MIL, MK7MIL.
+- MK3MIL: **100.0% byte-exact** (TE elif fix + PTTBL struct fix + case-sensitive lookup)
+- MK6MIL: **9/17 pass** (auto-bpp garbage pixel fix for pitblood1a + ELIF fixes)
+- MK5MIL, MK7MIL: **partial** — remaining encoder cascade (BGSPEAR6 252-bit diff)
+- BBB backgrounds (MKBBB): BGNDTBL.GLO, IMGTBL.GLO, IMGPAL.ASM byte-exact; BGNDTBL.ASM, BGNDEQU.H, BGNDPAL.ASM have LM/TM differences
+- MISC (NBA Jam testdata): 1/21 pass; PTTBL struct fixed (12 bytes); PWRD1-3 match ref from anix2/aniy2/aniz2; remaining 6 PT fields and +1 SIZX rule still WIP
 - Space check: CMP=0 when compressed size >= raw size (`<=` comparison)
-- Minimum stored=10 adjustment fully implemented (local_2c/iVar9 distribution)
 
 ## Ghidra Setup & Usage
 
@@ -36,19 +36,19 @@ JAVA_HOME=/snap/ghidra/35/usr/lib/jvm/java-21-openjdk-amd64 \
 /snap/ghidra/35/ghidra_12.0_PUBLIC/support/analyzeHeadless \
   /tmp/ghidra_proj3 LOADW \
   -process LOADW.EXE \
-  -postScript ScriptName.java \
+  -postScript ScriptName.class \
   -scriptPath /tmp/ghidra_scripts2
 ```
 
 Key points:
 - Use `support/analyzeHeadless` NOT the snap wrapper
 - Set `JAVA_HOME` to Ghidra's bundled JDK
-- `-postScript` takes script name **with `.java` extension**
+- `-postScript` takes a **compiled `.class` file** (not `.java` — headless may fail to compile)
 - `-scriptPath` adds directories to search
 
 ### Compiling Java Scripts
 
-Scripts must be compiled before use (Ghidra's headless compiler may not find all dependencies):
+Scripts must be compiled before use because the headless analyzer may not find all Ghidra API dependencies:
 
 ```bash
 GHIDRA_JARS=$(find /snap/ghidra/35/ghidra_12.0_PUBLIC -name '*.jar' | tr '\n' ':')
@@ -56,6 +56,47 @@ JAVA_HOME=/snap/ghidra/35/usr/lib/jvm/java-21-openjdk-amd64
 cd /tmp/ghidra_scripts2
 $JAVA_HOME/bin/javac -cp "$GHIDRA_JARS" -d . ScriptName.java
 ```
+
+### Dumping Ghidra Symbols
+
+To list all labels/functions known to Ghidra (includes COFF debug symbols if present):
+
+```java
+/*@category LOADW*/
+import ghidra.program.model.listing.*;
+import ghidra.program.model.symbol.*;
+import ghidra.program.model.address.*;
+import java.io.*;
+
+public class DumpLabels extends ghidra.app.script.GhidraScript {
+    @Override
+    protected void run() throws Exception {
+        PrintWriter out = new PrintWriter(new FileWriter("/tmp/ghidra_labels.txt"));
+        var iter = currentProgram.getSymbolTable().getAllSymbols(false);
+        int count = 0;
+        while (iter.hasNext() && count < 5000) {
+            var sym = iter.next();
+            String name = sym.getName();
+            Address addr = sym.getAddress();
+            out.println(name + "|" + addr + "|" + sym.getSymbolType());
+            count++;
+        }
+        out.close();
+        println("Dumped " + count + " symbols to /tmp/ghidra_labels.txt");
+    }
+}
+```
+
+Usage:
+```bash
+JAVA_HOME=/snap/ghidra/35/usr/lib/jvm/java-21-openjdk-amd64 \
+/snap/ghidra/35/ghidra_12.0_PUBLIC/support/analyzeHeadless \
+  /tmp/ghidra_proj3 LOADW -process LOADW.EXE \
+  -postScript DumpLabels.class -scriptPath /tmp/ghidra_scripts2
+```
+
+Known symbols found in Ghidra: `_packbits @ 1000:5b64`, `_do_zcom @ 1c9a:3102`.
+COFF debug info in the binary also contains `_do_sclpad`, `_do_pad`, `_dataword`, `_do_table`, `_ctrl_word`, `_zero_pad`, `_do_align0`, `_do_cksum` and others, but Ghidra may not import all of them automatically.
 
 ### Script Template
 
@@ -68,7 +109,7 @@ import ghidra.util.task.ConsoleTaskMonitor;
 import ghidra.program.model.listing.Function;
 import ghidra.program.model.address.Address;
 
-public class DumpFunc extends GhidraScript {
+public class DumpFunc extends ghidra.app.script.GhidraScript {
     @Override
     protected void run() throws Exception {
         DecompInterface decomp = new DecompInterface();
@@ -90,7 +131,7 @@ public class DumpFunc extends GhidraScript {
 }
 ```
 
-Python scripts also work (Jython), placed in the same script path.
+Python scripts (Jython) also work when placed in the script path, but Ghidra must be started with PyGhidra support (not available in headless mode by default).
 
 ## Key Functions
 
@@ -108,6 +149,8 @@ Python scripts also work (Jython), placed in the same script path.
 | `1000:7505` | `FUN_1000_7505` | Per-row lead/trail encoder |
 | `1000:757c` | `FUN_1000_757c` | Lead computation helper |
 | `1000:7727` | `FUN_1000_7727` | Row dispatch |
+| `1c9a:3102` | `_do_zcom` | Zero-compression routine |
+| `1854:1a49` | `FUN_1854_1a49` | BDD/BDB background processor (references SIZX/SIZY/PWRD format strings) |
 
 ## Internal Table Layout
 
@@ -146,8 +189,11 @@ FUN_1000_6f20 uses a per-row table at `param_3 + 0x234`:
 
 - The snap wrapper (`/snap/bin/ghidra.analyzeHeadless`) cannot find scripts; use the direct `support/analyzeHeadless` with `JAVA_HOME` set instead
 - Java scripts must be pre-compiled with `javac`; the headless compiler may fail on scripts with complex dependencies
-- 16-bit far real-mode decompilation has limitations: pointer arithmetic (`CONCAT22`) may be opaque, and switch jump tables are often unreachable
+- `-postScript` takes `.class` (compiled), not `.java` — the headless analyzer's built-in compiler may not find all Ghidra API dependencies
+- 16-bit far real-mode decompilation has limitations: pointer arithmetic (`CONCAT22`) may be opaque, switch jump tables are often unreachable
 - Decompiler may strip loop bodies when it can't track loop variable bounds
+- Cross-segment string references (format strings in `45e8` segment, code in `1000`/`1854`/`1c9a`) are not resolved, so literal content search won't find them
+- COFF debug symbols from the Borland C++ 4.5 toolchain (e.g. `_do_sclpad`, `_do_pad`, `_dataword`, `_do_table`) exist in the binary but Ghidra may not import them all. Only `_packbits` (1000:5b64) and `_do_zcom` (1c9a:3102) are auto-imported.
 
 ## Files
 

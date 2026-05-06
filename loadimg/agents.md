@@ -571,8 +571,11 @@ matches LOAD2 (separate lines), which is the correct target.
 | Palette (.globl) | ✓ | Writes `.globl\tPALNAME` to GLO |
 | IRW header | ✓ | Date, n_images, bpp, total_size |
 | FUN_1000_6f20 (LM/TM) | ✓ | Error-minimizing, 120 cap, `else if` for trail (not double-if), minimum stored=10 |
+| PTTBL struct | ✓ | 12 bytes per entry (3 PTBOXes), box[0].w for compression width, direct pttblnum indexing |
 | IMG record duplicate handling | ✓ | Last-wins for new-format IMG (0x63c/0x64e), first-wins for old (0x634) |
 | IMG record name comparison | ✓ | Case-sensitive strcmp (vfontA ≠ vfonta) |
+| PWRD1/PWRD2/PWRD3 | ✓ | From IMG_REC anix2/aniy2/aniz2 (not PTTBL) |
+| Geo PT fields (PT0X..PT5X) | △ | Geometry formulas from MK2; NBA Jam empty PTTBL entries still WIP |
 | Auto bpp (PPP=0) | ✓ | Palette bitspix cap for maxpx>127 (garbage pixel detection) |
 | IRW encoder cascade | △ | MK5MIL BGSPEAR6 252-bit encoder diff; MK6MIL 9/17 pass |
 | FUN_1854_35fc (checksum) | ✓ | DWORD sum + max over byte-pairs |
@@ -611,7 +614,7 @@ on the same iteration). This has been fixed in all three code paths (analyze_ima
 encode_row, second-pass comp_bits) — TE values now match LOADW's verbose output
 exactly (e.g. BGSPEAR6: `TE[34 24 72 128]`).
 
-Additional fixes applied:
+Additional fixes:
 - **Duplicate IMG record handling**: LOADW uses the LAST record when two IMG
   records share the same name (hash-table overwrite). Fixed by continuing the
   scan for new-format IMG files instead of breaking on first match.
@@ -621,6 +624,13 @@ Additional fixes applied:
 - **Auto-bpp garbage pixel detection**: When maxpx > 127 and exceeds palette
   range, cap to palette bitspix (fixes pitblood1a where pixel data has garbage
   byte values 255 despite having only 15 colors).
+- **PTTBL struct fix**: Changed from 40 bytes (struct with flags, x1..z_anipt3,
+  box[5], cbox[1]) to 12 bytes (3 PTBOXes). Compression width from box[0].w
+  (was box[1].w — 1-based index). PTTBL indexing uses pttblnum directly,
+  not adjusted by n_special (the PTTBL array includes all IMG records).
+- **PWRD1/PWRD2/PWRD3**: Read from IMG_REC anix2/aniy2/aniz2 instead of PTTBL.
+- **seen_names reset**: Uses imgpath (string) comparison instead of ImgFile
+  pointer (which could collide after free+realloc).
 
 Current cascade: BGSPEAR6 (BOSS3.IMG, w=138) is the first image whose encoded
 
