@@ -2071,7 +2071,7 @@ static void process_lod(const char *lod_path) {
 
                         /* Per-image CMP decision */
                         lmm = 1 << best_lm; tmm = 1 << best_tm;
-                        int64_t comp_bits = 0, raw_bits = h * w * per_bpp;
+                        int64_t comp_bits = 0, raw_bits = (int64_t)h * w * per_bpp;
                             for (int row = 0; row < h; row++) {
                                 uint8_t *rp = pix + row * w;
                                 int lead = 0, trail = 0, d1 = 0;
@@ -2102,7 +2102,7 @@ static void process_lod(const char *lod_path) {
                             }
                              comp_bits += 8 + stored * per_bpp;
                          }
-                          do_cmp = (g.zon && raw_bits > comp_bits) ? 1 : 0;
+                           do_cmp = (g.zon && sizx_a >= 10 && comp_bits <= raw_bits) ? 1 : 0;
                           /* Images smaller than 10 pixels wide/tall are never compressed */
                           if (w < 10 || h < 10) { do_cmp = 0; g.n_small_uncompressed++; }
                           /* When not compressing, LM/TM are irrelevant — reset to 0 */
