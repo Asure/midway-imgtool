@@ -1,0 +1,11 @@
+	.DATA
+NEWSONYA1A:
+	.word   80,51,63,-31
+	.long   058227a6H
+	.word   06280H
+NEWSONYA1B:
+	.word   80,37,-17,-25
+	.long   0582597aH
+	.word   06880H
+	.TEXT
+

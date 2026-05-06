@@ -218,6 +218,9 @@ typedef struct {
     int      n_ihdr;
 
     char     asm_file[MAX_PATH];
+    char     asm_path[MAX_PATH];      /* current TBL file path for append matching */
+    char     tbl_files[32][MAX_PATH]; /* all opened TBL files for final .TEXT write */
+    int      n_tbl_files;
     char     glo_file[MAX_PATH];
     char     pal_file[MAX_PATH];
     char     raw_file[MAX_PATH];
@@ -1674,31 +1677,36 @@ static void process_lod(const char *lod_path) {
             char *comma = strchr(fname, ',');
             if (comma) *comma = 0;
             upcase(fname);  /* DOS filenames are case-insensitive */
-             if (g.build_tables) {
-                /* Finalize previous TBL file before opening a new one */
-                if (g.asm_fp) {
-                    fprintf(g.asm_fp, "\t.TEXT\r\n");
-                    fputc(0x1a, g.asm_fp);
-                    fclose(g.asm_fp);
-                    g.asm_fp = NULL;
-                }
-                char full[MAX_PATH];
-                if (g.tbldir[0]) path_cat(full, g.tbldir, fname, MAX_PATH);
-                else strncpy(full, fname, MAX_PATH-1);
-                /* LOADW appends to existing TBL files (ASM> can be used
-                 * multiple times for the same table) */
-                g.asm_fp = fopen(full, "a");
-                if (!g.asm_fp) die("cannot create %s", full);
-                fseek(g.asm_fp, 0, SEEK_END);
-                if (ftell(g.asm_fp) == 0) {
-                    write_tbl_header(g.asm_fp);
-                } else {
-                    /* Existing file: write .TEXT/^Z separator before appending */
-                    fprintf(g.asm_fp, "\t.TEXT\r\n");
-                    fputc(0x1a, g.asm_fp);
-                    write_tbl_header(g.asm_fp);
-                }
-            }
+              if (g.build_tables) {
+                 char full[MAX_PATH];
+                 if (g.tbldir[0]) path_cat(full, g.tbldir, fname, MAX_PATH);
+                 else strncpy(full, fname, MAX_PATH-1);
+                 /* Check if same file — LOADW appends without .DATA/.TEXT separators */
+                 if (g.asm_fp) {
+                     /* Simple filename comparison */
+                     if (strcmp(g.asm_path, full) != 0) {
+                         /* Different file: close old WITHOUT trailer (written at end) */
+                         fclose(g.asm_fp);
+                         g.asm_fp = NULL;
+                     }
+                 }
+                 if (!g.asm_fp) {
+                     g.asm_fp = fopen(full, "a");
+                     if (!g.asm_fp) die("cannot create %s", full);
+                     strncpy(g.asm_path, full, MAX_PATH-1);
+                     fseek(g.asm_fp, 0, SEEK_END);
+                     if (ftell(g.asm_fp) == 0)
+                         write_tbl_header(g.asm_fp);
+                     /* Track file for final .TEXT write */
+                     if (g.n_tbl_files < 32) {
+                         int found = 0;
+                         for (int ft = 0; ft < g.n_tbl_files; ft++)
+                             if (strcmp(g.tbl_files[ft], full) == 0) { found = 1; break; }
+                         if (!found)
+                             strncpy(g.tbl_files[g.n_tbl_files++], full, MAX_PATH-1);
+                     }
+                 }
+             }
         }
         else if (!strncmp(upper, "GLO>", 4)) {
             char fname[MAX_PATH];
@@ -2348,6 +2356,18 @@ else if (!strncmp(upper, "MON>", 4)) { }
     }
 
     fclose(f);
+    if (g.asm_fp) { fclose(g.asm_fp); g.asm_fp = NULL; }
+    /* Write .TEXT/^Z trailer to all opened TBL files (LOADW writes trailer only at end) */
+    for (int ft = 0; ft < g.n_tbl_files; ft++) {
+        FILE *tf = fopen(g.tbl_files[ft], "r+");
+        if (tf) {
+            fseek(tf, 0, SEEK_END);
+            fprintf(tf, "\t.TEXT\r\n");
+            fputc(0x1a, tf);
+            fclose(tf);
+        }
+    }
+    g.n_tbl_files = 0;
     if (cur.imgfile) { free(cur.imgfile->norm_images); free(cur.imgfile->data); free(cur.imgfile); }
 }
 

@@ -1,0 +1,45 @@
+	.DATA
+VS_HH	.set	0589704eh
+VS_LK	.set	058adbe6h
+VS_JC	.set	058c3226h
+VS_JCN	.set	058dc8e6h
+VS_SA	.set	058f5136h
+VS_FNA	.set	0590f086h
+VS_FNB	.set	05927476h
+VS_ST	.set	059401e6h
+VS_RD	.set	0595d4a6h
+VS_SZ	.set	059785a6h
+VS_RP	.set	05991e66h
+VS_SC	.set	059adb86h
+VS_JX	.set	059c65b6h
+END_BKH	.set	059e2bd6h
+END_BKV	.set	05a008d6h
+END_JCH	.set	05a1a816h
+END_JCV	.set	05a36f16h
+END_JXH	.set	05a48046h
+END_JXV	.set	05a6bfe6h
+END_KLH	.set	05a85b86h
+END_KLV	.set	05aa7746h
+END_KTH	.set	05ac0326h
+END_KTV	.set	05ae4406h
+END_LKH	.set	05afa536h
+END_LKV	.set	05b236d6h
+END_MLH	.set	05b398a6h
+END_MLV	.set	05b61806h
+END_RDH	.set	05b76b76h
+END_RDV	.set	05b95926h
+END_RPH	.set	05bad4a6h
+END_RPV	.set	05bd92b6h
+END_SCH	.set	05bf3b06h
+END_SCV	.set	05c1b226h
+END_STH	.set	05c33f66h
+END_STV	.set	05c5dc36h
+END_SZH	.set	05c77d46h
+END_SZV	.set	05ca3a16h
+KINT	.set	05cbadd6h
+ABACKA	.set	05cd26d6h
+ABACKB	.set	05ce8da6h
+ABACKC	.set	05d0a556h
+ABACKD	.set	05d229f6h
+	.TEXT
+

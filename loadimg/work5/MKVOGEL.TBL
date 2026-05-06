@@ -1,0 +1,8 @@
+	.DATA
+vogsun:
+	.word   104,194,0,0
+	.long   05828358H
+	.word   080H
+	.long   VOGEL_p
+	.TEXT
+
