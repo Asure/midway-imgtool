@@ -1276,7 +1276,16 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
         ie->w = OUT_STRIDE(rec->w);
         ie->h = rec->h;
         ie->sizx = cp.sizx;
-        ie->sizy = cp.sizy;
+        /* Without /P, LOADW adds 1 to SIZX/SIZY for images without a
+         * PTTBL entry (the extra row/column accounts for alignment padding
+         * in the uncompressed pixel data). Images with PTTBL get their
+         * dimensions from the PTTBL box which already includes alignment. */
+        if (!g.pad4bits && rec->pttblnum < 0) {
+            ie->sizx++;
+            ie->sizy = cp.sizy + 1;
+        } else {
+            ie->sizy = cp.sizy;
+        }
         ie->ctrl = cp.ctrl;
         ie->n_scales = scale_n;
         ie->pwrd1 = -1;
