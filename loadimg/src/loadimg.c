@@ -1192,11 +1192,6 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
              fprintf(stderr, "WARNING: image %s not found in %s\n", name, cur->imgpath);
              continue;
          }
-         /* Debug: check IMG file identity for thunder3a */
-         if (strcmp(name, "thunder3a") == 0 && g.verbose) {
-             fprintf(stderr, "THUNDER3A rec=%p imgfile=%p n_seen=%d dup=%d\n",
-                     (void*)rec, (void*)cur->imgfile, n_seen, dup);
-         }
 
         /* Determine SIZX from PTTBL: SIZX = PTTBL[pttblnum - n_special].BOX[1].W */
         int pttbl_sizx = 0;
@@ -1406,12 +1401,10 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
             ie->scale_ctrls[s] = cp.ctrl;
         }
 
-         if (g.build_tables && g.asm_fp)
-             write_image_tbl(g.asm_fp, ie);
-         else if (g.verbose && strcmp(name, "thunder3a") == 0)
-             fprintf(stderr, "THUNDER3A NO_TBL: build_tables=%d asm_fp=%p\n", g.build_tables, (void*)g.asm_fp);
+          if (g.build_tables && g.asm_fp)
+              write_image_tbl(g.asm_fp, ie);
 
-        if (g.glo_fp)
+         if (g.glo_fp)
             write_global(name);
     }
 }
@@ -2358,7 +2351,7 @@ int main(int argc, char *argv[]) {
     if (g.bgndtbl_glo_fp) fclose(g.bgndtbl_glo_fp);
     free(g.irw_data);
 
-    if (g.verbose) {
+    {
         uint32_t total_bytes = g.irw_bit ? ((g.irw_bit + 7) / 8) : 0;
         printf("\nBytes Written to Raw File...\n");
         printf("\tIn IMAGE RAM records        %u dec\t   %X hex\n", total_bytes, total_bytes);
