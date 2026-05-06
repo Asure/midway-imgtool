@@ -1013,12 +1013,30 @@ static int get_ihdr_word_value(ImageEntry *ie, int field, int denom) {
     case IHDR_PWRD1: return ie->pwrd1;
     case IHDR_PWRD2: return ie->pwrd2;
     case IHDR_PWRD3: return ie->pwrd3;
+    /* PT IHDR fields: LOADW tries shared PTTBL header fields first, then own entry's
+     * box[0]/box[1] fields as fallback (when header fields are all zero). */
     case IHDR_PT0X: { PTTBL *p = ie->pttbl_pt0x ? ie->pttbl_pt0x : ie->pttbl; return p ? (int16_t)((uint16_t)(uint8_t)p->cbox.x | ((uint16_t)(uint8_t)p->cbox.y << 8)) : -1; }
-    case IHDR_PT2X: return ie->pttbl_shared ? (int)ie->pttbl_shared->x2 : (ie->pttbl ? (int)ie->pttbl->x2 : -1);
-    case IHDR_PT2Y: return ie->pttbl_shared ? (int)ie->pttbl_shared->x3 : (ie->pttbl ? (int)ie->pttbl->x3 : -1);
-    case IHDR_PT3X: return ie->pttbl_shared ? (int)ie->pttbl_shared->X : (ie->pttbl ? (int)ie->pttbl->X : -1);
-    case IHDR_PT3Y: return ie->pttbl_shared ? (int)ie->pttbl_shared->Y : (ie->pttbl ? (int)ie->pttbl->Y : -1);
-    case IHDR_PT5X: return ie->pttbl_shared ? (int)ie->pttbl_shared->id : (ie->pttbl ? (int)ie->pttbl->id : -1);
+    case IHDR_PT2X: {
+        if (ie->pttbl_shared && ie->pttbl_shared->x2) return (int)ie->pttbl_shared->x2;
+        if (ie->pttbl) return (int)ie->pttbl->id;
+        return -1;
+    }
+    case IHDR_PT2Y: {
+        if (ie->pttbl_shared && ie->pttbl_shared->x3) return (int)ie->pttbl_shared->x3;
+        if (ie->pttbl) return (int)(int8_t)ie->pttbl->box[0].x;
+        return -1;
+    }
+    case IHDR_PT3X: {
+        if (ie->pttbl_shared && ie->pttbl_shared->X) return (int)ie->pttbl_shared->X;
+        if (ie->pttbl) return (int)(int8_t)ie->pttbl->box[0].w;
+        return -1;
+    }
+    case IHDR_PT3Y: {
+        if (ie->pttbl_shared && ie->pttbl_shared->Y) return (int)ie->pttbl_shared->Y;
+        if (ie->pttbl) return (int)(int8_t)ie->pttbl->box[1].x;
+        return -1;
+    }
+    case IHDR_PT5X: return 0;
     default: return -1;
     }
 }
@@ -1254,13 +1272,15 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
         if (g.ppp > 0) {
             bpp = g.ppp;
             /* Check if palette has more colors than 2^bpp can address.
-             * LOADW outputs CTRL=0 for bpp in TBL but still compresses with the
-             * forced bpp internally. The CTRL=0 is a flag that hardware ignores. */
+             * LOADW outputs CTRL=0 for bpp in TBL but still compresses using
+             * the palette's bitspix (not the forced PP bpp). */
             int bpp_overflow = 0;
             PAL_REC *pal_rec = find_user_palette(cur->imgfile, rec->palnum);
             if (pal_rec && pal_rec->numc > 1 && pal_rec->numc <= 256 &&
                 (int)pal_rec->numc > (1 << bpp)) {
                 bpp_overflow = 1;
+                if (pal_rec->bitspix >= 1 && pal_rec->bitspix <= 8 && pal_rec->bitspix > bpp)
+                    bpp = pal_rec->bitspix;  /* use palette bitspix for compression, not forced bpp */
                 if (g.verbose)
                     fprintf(stderr, "[%s] Can't fit into %d bits per pixel (palette has %d colors).\n",
                             name, g.ppp, pal_rec->numc);
@@ -1315,8 +1335,12 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
         ie->aniy = rec->aniy;
         ie->w = OUT_STRIDE(rec->w);
         ie->h = rec->h;
-        ie->sizx = cp.sizx;
-        ie->sizy = cp.sizy;
+        /* TBL SIZX/SIZY: LOADW outputs rec->w/rec->h (with XON) regardless of PTTBL compression width */
+        ie->sizx = OUT_STRIDE(rec->w);
+        ie->sizy = rec->h;
+        if (g.xon) { ie->sizx++; ie->sizy++; }
+        if (ie->sizx < 1) ie->sizx = 1;
+        if (ie->sizy < 1) ie->sizy = 1;
         ie->ctrl = cp.ctrl;
         if (g.verbose && strcmp(name, "dcslogo") == 0) {
             uint8_t *pix = img_pixels(cur->imgfile, rec);
