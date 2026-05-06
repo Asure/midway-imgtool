@@ -1011,7 +1011,11 @@ static void write_image_tbl(FILE *fp, ImageEntry *ie) {
             }
             if (f == IHDR_SAG) {
                 uint32_t base = g.base_addr;
-                if (g.dual_bank) base += (uint32_t)g.bank * 0x2000000;
+                if (g.dual_bank) {
+                    /* Dual-bank: bank = (base - 0x2000000) / 0x4000000 */
+                    int dbank = g.base_addr >= 0x2000000 ? (int)((g.base_addr - 0x2000000) / 0x4000000) : 0;
+                    base += (uint32_t)dbank * 0x2000000;
+                }
                 fprintf(fp, "\t.long   0%xH\r\n", base + ie->sag);
             } else if (f == IHDR_PAL) {
                 if (have_pal)
@@ -1580,9 +1584,7 @@ static void process_lod(const char *lod_path) {
                 /* Pad to 2-byte boundary before FRM data (LOADW aligns FRM files to words) */
                 if ((g.irw_bit / 8) & 1) irw_write_byte(0);
                 if (g.build_tables && g.asm_fp) {
-                    uint32_t frm_base = g.base_addr;
-                    if (g.dual_bank) frm_base += (uint32_t)g.bank * 0x2000000;
-                    fprintf(g.asm_fp, "%s\t.set\t0%xh\r\n", fname, frm_base + g.irw_bit);
+                    fprintf(g.asm_fp, "%s\t.set\t0%xh\r\n", fname, g.base_addr + g.irw_bit);
                 }
                 if (g.glo_fp) {
                     fprintf(g.glo_fp, "\t.globl\t%s\r\n", fname);
