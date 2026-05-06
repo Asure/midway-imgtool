@@ -602,7 +602,7 @@ All LOD files are from **Mortal Kombat 2** arcade data. Naming: MK2MIL = MK2 rev
 | **MK4MIL** | ZON | 1885 | 6/6 | **PASS** — IRW + TBLs byte-exact |
 | **MK8MIL** | FRM | 0 sprites | 1/1 | **PASS** — MKREVX.TBL match |
 | **MK3MIL** | ZOF | 1949 | 5/5 | **PASS** — IRW + TBLs byte-exact |
-| **MK5MIL** | ZON | 702 | 5/7 | FAIL (formatting: repeated .TEXT/.DATA in 2 TBLs) |
+| **MK5MIL** | ZON | 702 | 7/7 | **PASS** — all TBLs byte-exact |
 | **MK6MIL** | ZON/ZOF | 1859 | 17/17 | **PASS** — all TBLs byte-exact |
 | **MK7MIL** | Mixed | 703 | 9/11 | FAIL (formatting: MKCHUNKS .TEXT/.DATA issue) |
 | **MISC** | Mixed | 573 | 18/18 | **PASS** — all TBLs with LOADW refs byte-exact (NBA Jam/Hangtime) |
