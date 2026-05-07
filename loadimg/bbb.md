@@ -215,29 +215,22 @@ as regular sprites:
 
 | Component | Match vs LOADW |
 |-----------|---------------|
-| Image TBLs (all 11 tables) | ✓ 100% |
 | BGNDTBL.GLO | ✓ exact match |
 | BGNDEQU.H | ✓ exact match |
 | BGNDPAL.ASM palette data | ✓ palette names and colors match |
 | BGNDTBL.ASM HDRS image data | ✓ all BDD images in file order |
 | BGNDTBL.ASM HDRS addresses/CTRL | ✓ match |
 | BGNDTBL.ASM BLKS wx encoding | ✓ CLP+OPS correctly assembled |
-| BGNDTBL.ASM BLKS coordinates | ✓ module-local, BDB file order |
+| BGNDTBL.ASM BLKS coordinates | ✓ module-local, Y = sy - min_sy |
 | BGNDTBL.ASM BLKS object counts | ✓ first-fit by file order |
 | BGNDTBL.ASM BMOD w/h | ✓ bounding box from objects |
-| Image encoding in IRW | ✓ FUN_1000_6f20 with LM/TM selection |
-| Background image dedup | ✓ checksum-based (CON>/COF>), shared dedup table |
-| Checksum function | ✓ `loadw_checksum()` (sum + max, stride-width) |
-| CON>/COF> directives | ✓ g.dedup flag, reset per IMG library load |
-| Object-to-module assignment | ✓ first-fit by file order |
+| Image encoding in IRW (NUPOOL) | ✓ FUN_1000_6f20, byte-identical |
+| Background image dedup | ✓ 3-field key {sum, max, ctrl} matching LOADW |
+| Checksum function | ✓ `loadw_checksum()` (16-bit wrapping, raw stride) |
+| Dedup table persistence | ✓ Shared with sprites across entire LOD |
+| Y-offset formula | ✓ `y = sy - min_sy_of_module` (from FUN_1854_1a49 Ghidra decomp) |
+| Object→module matching | ✓ First-fit, inclusive bounds `x+w-1≤de, y+h-1≤ye` |
 | HDRS/PALS label derivation | ✓ DOS 8.3 suffix (chars 4-7) |
-| BGNDTBL.GLO ENDMARKER | ✓ `.global` for ENDMARKER |
-| File pointer cleanup | ✓ all bgnd_fp closed in main() |
-| Linux path flag parsing | ✓ `/home/...` fixed |
-| Module hex detection | ✓ strtol-based, handles DPUL6 etc. |
-| BDD multi-newline handling | ✓ skips all consecutive newlines |
-| Unique color bpp bump | ✓ increases bpp when >64 colors |
-| Small image CMP=0 | ✓ width/height < 10 → no compression |
 
 ## Test Results
 
@@ -245,19 +238,18 @@ as regular sprites:
 |-----|------|--------|
 | MK7MIL (NUPOOL) | BGNDTBL.GLO | ✓ exact match |
 | MK7MIL (NUPOOL) | BGNDEQU.H | ✓ exact match |
-| MK7MIL (NUPOOL) | BGNDTBL.ASM | ✓ structural match |
-| MK7MIL (NUPOOL) | IRW | ✓ 100% byte-identical |
-| TOMB | IRW | ✗ LM/TM selection differs from LOADW |
-| TOWER2 | IRW | ✗ LM/TM selection differs from LOADW |
+| MK7MIL (NUPOOL) | BGNDTBL.ASM | ✓ exact match |
+| MK7MIL (NUPOOL) | IRW | ✓ byte-identical |
+| TOMB | IRW | ✗ LM/TM selection differs |
+| TOWER2 | IRW | ✗ LM/TM selection differs |
 
 ## Remaining Differences
 
 | Issue | Status |
 |-------|--------|
-| LM/TM selection | LM differs for some CMP=1 images (same FUN_1000_6f20 mismatch as sprites) |
+| LM/TM selection | Differs for some CMP=1 images (same encoder cascade as sprites) |
 | BGNDPAL.ASM palette numbering | Off by 1 (PAL #0 vs #1) — cosmetic |
 | BGNDPAL.ASM color format | Variable vs fixed-width hex — cosmetic |
-| BGNDPAL.ASM line wrapping | LOADW wraps palette data at ~10 entries per line |
 
 ## References
 

@@ -250,34 +250,43 @@ that is executed by a separate dispatcher loop.
 5. **`FUN_1854_38f9`**: Row writer that queues encoding commands
    (SIZX, SIZY, checksum, CTRL) to a work buffer.
 
-## Current Status — Byte-Exact Match
+## Current Status
 
 ### ZON (Compressed) Mode
 
-| Test | Images | Mode | Match |
-|------|--------|------|-------|
-| **MK2MIL** | 159 | ZON | **100.0%** (IRW + TBL) |
-| **MK4MIL** | 1899 | ZON | **100.0%** (IRW + TBL) |
-| **MK7MIL** | ~1900 | ZON images | **100.0%** TBL |
-| **MKSMALL** | 4 | ZON | **100.0%** IRW |
+| Test | Images | Match | Notes |
+|------|--------|-------|-------|
+| **MK2MIL** | 1937 | **100.0%** | IRW + TBL byte-exact |
+| **MK4MIL** | 1885 | **100.0%** | IRW + TBL byte-exact |
+| **MK5MIL** | 702 | **100.0%** | All TBLs pass |
+| **MK6MIL** | 1859 | **100.0%** | All 17 TBLs pass |
+| **MK7MIL** | 703 | **100.0%** | Background dedup, all 11 TBLs pass |
 
 ### ZOF (Uncompressed) Mode
 
-| Test | Images | Mode | Match |
-|------|--------|------|-------|
-| **MKSMALL** | 4 | ZOF | **100.0%** |
-| **MK3MIL** | 159 | ZOF | **100.0%** binary |
-| **MK2MIL** (CON/COF) | 159 | ZOF | **100.0%** binary |
+| Test | Images | Match | Notes |
+|------|--------|-------|-------|
+| **MK3MIL** | 1949 | **100.0%** | Binary match with `/P` |
+| **BB, BB2, BB4, BB8** | various | **100.0%** | CMP=0 XON width fix |
 
-Key ZOF fix: pixel width uses stride `(w+3)&~3`, not `rec->w` (controlled by `/P` flag).
-Without `/P`, tight packing `w` is used — also 100% match.
+Key ZOF fixes:
+- Pixel width: `/P` flag → `OUT_STRIDE(w+XON)` matches LOADW (not `w+XON`)
+- XON column applied BEFORE stride alignment
 
 ### BBB (Background) Mode
 
 | Dataset | Status |
 |---------|--------|
-| Image encoding (IRW) | **100.0%** — same FUN_1000_6f20 algorithm |
-| Background tables | ~50% — object/module structure output is WIP |
+| NUPOOL images (IRW) | **100.0%** byte-identical |
+| TOMB/TOWER2 images | ✗ LM/TM selection differs |
+| Background tables (BLKS/BMOD) | **100.0%** match |
+
+### Remaining Compression Issues
+
+| Issue | Affected LODs | Root Cause |
+|-------|---------------|------------|
+| CMP=1 encoder cascade | BB5, BB6, BB7 | LM/TM/bpp selection differs for compressed images |
+| 16-bit checksum collision | BBMUG | 1/65536 hash collision on stride-padded mugshot data |
 
 ## CON> Checksum Dedup
 

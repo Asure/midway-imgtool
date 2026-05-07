@@ -556,56 +556,79 @@ matches LOAD2 (separate lines), which is the correct target.
 
 | Feature | Status | Notes |
 |---------|--------|-------|
-| PTTBL offset | ✓ | `pal_end + seqscr + 6 - n_special * sizeof(PTTBL)` |
-| SIZX (compression) | ✓ | `PTTBL[pttblnum - n_special].BOX[1].W + 1` |
-| SIZX (TBL output) | ✓ | `rec->w` (matches LOADW TBL format) |
-| XON>/XOF> | ✓ | Extra zero pixel mode: `g.xon` adds +1 to SIZX/SIZY in `analyze_image` and ZOF encoder width |
-| SIZY | ✓ | `rec->h` |
+| PTTBL offset | ✓ | `pal_end + seqscr + 6` (no n_special shift — pttblnum directly indexes) |
+| SIZX (compression) | ✓ | `pttbl_sizx : OUT_STRIDE(w)` with XON-before-stride |
+| SIZX (TBL output) | ✓ | `OUT_STRIDE(w + XON)` matches LOADW |
+| XON>/XOF> | ✓ | Extra zero pixel column, applied BEFORE stride alignment |
+| SIZY | ✓ | `rec->h` plus XON |
 | SAG format | ✓ | `base_addr + bank * 0x2000000 + bit_offset` |
 | Two-sub-block encoding | ✓ | BOX[1] + BOX[2] concatenated in IRW; scale 1 SAG = sub-block 1 start |
 | Per-row encoding | ✓ | Byte-exact — matches FUN_1000_6f20 |
 | PAL | ✓ | Palette label name (e.g. `YOKRED_P`) |
-| PWRD | ✓ | `-1,-1,-1,0` on same line as CTRL |
-| PT pairs | ✓ | Computed from geometry when stored fields are zero; stored values used otherwise |
+| PWRD | ✓ | From IMG_REC anix2/aniy2/aniz2 |
+| PT pairs | ✓ | Computed from geometry when stored fields zero; stored values used otherwise |
 | Scale format | ✓ | SAG:L + CTRL:W only |
 | .TEXT trailer | ✓ | `\t.TEXT\r\n` + `0x1a` EOF marker |
-| Palette (.globl) | ✓ | Writes `.globl\tPALNAME` to GLO |
+| Palette (.globl) | ✓ | `main_glo_fp` for IMGTBL.GLO (never redirected) |
 | IRW header | ✓ | Date, n_images, bpp, total_size |
-| FUN_1000_6f20 (LM/TM) | ✓ | Error-minimizing, 120 cap, `else if` for trail (not double-if), minimum stored=10 |
-| PTTBL struct | ✓ | 12 bytes per entry (3 PTBOXes), box[0].w for compression width, direct pttblnum indexing |
-| IMG record duplicate handling | ✓ | Last-wins for new-format IMG (0x63c/0x64e), first-wins for old (0x634) |
+| FUN_1000_6f20 (LM/TM) | ✓ | Error-minimizing, 120 cap, `else if` for trail, minimum stored=10 |
+| PTTBL struct | ✓ | 40-byte struct at 40-byte stride from 12-byte dense file data |
+| IMG record duplicate handling | ✓ | Last-wins for new-format (0x63c/0x64e), first-wins for old (0x634) |
 | IMG record name comparison | ✓ | Case-sensitive strcmp (vfontA ≠ vfonta) |
-| PWRD1/PWRD2/PWRD3 | ✓ | From IMG_REC anix2/aniy2/aniz2 (not PTTBL) |
-| Geo PT fields (PT0X..PT5X) | △ | Geometry formulas from MK2; NBA Jam empty PTTBL entries still WIP |
-| Auto bpp (PPP=0) | ✓ | Palette bitspix cap for maxpx>127 (garbage pixel detection) |
-| IRW encoder cascade | △ | MK5MIL BGSPEAR6 252-bit encoder diff; MK6MIL 9/17 pass |
-| FUN_1854_35fc (checksum) | ✓ | DWORD sum + max over byte-pairs |
-| Minimum stored = 10 | ✓ | Second-pass adjustment (local_2c/iVar9 distribution) |
+| PWRD1/PWRD2/PWRD3 | ✓ | From IMG_REC anix2/aniy2/aniz2 |
+| Geo PT fields (PT0X..PT5X) | ✓ | From PTTBL header fields with box geometry fallback |
+| Auto bpp (PPP=0) | ✓ | Per-image from max pixel value |
+| FUN_1854_35fc (checksum) | ✓ | 16-bit wrapping sum + max over byte-pairs; stride-padded for sprites |
+| Minimum stored = 10 | ✓ | Exact Ghidra-decompiled FUN_1000_6f20 second pass |
 | Space check (CMP=0) | ✓ | `sizx < 10` or `comp_bits >= raw_bits` (`<=` comparison) |
-| Per-image bpp | ✓ | Auto pixel packing when PPP> not set |
+| CMP=0 XON width | ✓ | `OUT_STRIDE(w + XON)` matches LOADW |
+| Dedup (sprite) | ✓ | 5-field key {sum, max, sizx, sizy, ctrl}, stride-padded cksum |
+| Dedup (background) | ✓ | 3-field key {sum, max, ctrl}, raw pixel cksum |
+| Dedup table persistence | ✓ | Not reset per IMG (persists across entire LOD) |
+| BBB Y-offset | ✓ | `y = sy - min_sy_of_module` from FUN_1854_1a49 |
+| BBB object matching | ✓ | First-fit by BDB order, inclusive bounds `x+w-1 ≤ de` |
+| BBB BLKS/BMOD output | ✓ | Exact match with LOADW reference |
 | FRM> directive | ✓ | Loads .BIN files, writes raw to IRW with .set TBL entries |
-| BBB handler (images) | ✓ | Compression, BDD/BDB parsing, byte-level offsets |
-| BBB handler (tables) | ✓ | Object/module assignment, BLKS/BMOD output, dedup |
-| BBB handler (GLO/EQU) | ✓ | Exact match with LOADW |
-| CON>/COF> dedup | ✓ | DWORD checksum, table reset on IMG change |
+| IMGTBL.ASM generation | ✓ | Wrapper including all GLO> files |
+| IMGPAL.ASM formatting | ✓ | Header, `%3d` count, conditional hex width |
+| CON>/COF> dedup | ✓ | 16-bit checksum, shared dedup_table |
 | ASM> append mode | ✓ | Same TBL filename appends via `/A` flag |
 | DOS path basename | ✓ | Extracts filename from `c:\path\to\file.IMG` |
+| make regen | ✓ | DOSBox-based reference regeneration |
 | Cross-platform | ✓ | Linux + Windows (MinGW) |
+
+### Remaining Issues
+
+| Issue | LODs | Root Cause |
+|-------|------|------------|
+| CMP=1 encoder cascade | BB5, BB6, BB7 | LM/TM/bpp selection differs from LOADW for compressed images |
+| 16-bit cksum collision | BBMUG | 1/65536 stride-padded checksum collision on mugshot images |
 
 ### Test Results (current dataset)
 
 All LOD files are from **Mortal Kombat 2** arcade data. Naming: MK2MIL = MK2 revision 2, MK4MIL = revision 4, etc.
+BB* LODs are from **NBA Jam / Hangtime** arcade data.
 
-| Test | Mode | Images | TBLs | Result |
-|------|------|--------|------|--------|
-| **MK2MIL** | ZON + ZOF | 1937 | 5/5 | **PASS** — IRW + TBLs byte-exact |
-| **MK4MIL** | ZON | 1885 | 6/6 | **PASS** — IRW + TBLs byte-exact |
-| **MK8MIL** | FRM | 0 sprites | 1/1 | **PASS** — MKREVX.TBL match |
-| **MK3MIL** | ZOF | 1949 | 5/5 | **PASS** — IRW + TBLs byte-exact |
-| **MK5MIL** | ZON | 702 | 7/7 | **PASS** — all TBLs byte-exact |
-| **MK6MIL** | ZON/ZOF | 1859 | 17/17 | **PASS** — all TBLs byte-exact |
-| **MK7MIL** | Mixed | 703 | 9/11 | FAIL (formatting: MKCHUNKS .TEXT/.DATA issue) |
-| **MISC** | Mixed | 573 | 18/18 | **PASS** — all TBLs with LOADW refs byte-exact (NBA Jam/Hangtime) |
+| Test | Mode | TBLs | Result | Notes |
+|------|------|------|--------|-------|
+| **MK2MIL** | ZON + ZOF | 5/5 | **PASS** | IRW + TBLs byte-exact |
+| **MK3MIL** | ZOF | 5/5 | **PASS** | IRW + TBLs byte-exact |
+| **MK4MIL** | ZON | 6/6 | **PASS** | IRW + TBLs byte-exact |
+| **MK5MIL** | ZON | 7/7 | **PASS** | IRW + TBLs byte-exact |
+| **MK6MIL** | ZON/ZOF | 17/17 | **PASS** | All TBLs byte-exact |
+| **MK7MIL** | Mixed | 11/11 | **PASS** | Background dedup fixed |
+| **MK8MIL** | FRM | 1/1 | **PASS** | MKREVX.TBL match |
+| **BB** | ZOF+XON | 2/2 | **PASS** | CMP=0 XON width fix |
+| **BB2** | ZOF+XON | 3/3 | **PASS** | |
+| **BB3** | ZOF+PT | 2/2 | **PASS** | PTTBL 16-byte header bounds |
+| **BB4** | ZOF+XON | 1/1 | **PASS** | |
+| **BB5** | Mixed | 3/7 | FAIL | CMP=1 encoder cascade |
+| **BB6** | Mixed | 3/6 | FAIL | CMP=1 encoder cascade |
+| **BB7** | Mixed | 8/16 | FAIL | CMP=1 encoder cascade |
+| **BB8** | XON | 3/3 | **PASS** | |
+| **BBMUG** | ZOF+XON | 1/2 | FAIL | 16-bit cksum collision |
+| **BBVDA** | VDA | 1/1 | **PASS** | |
+| **MISC** | Mixed | 21/21 | **PASS** | NBA Jam/Hangtime |
 
 **LM/TM mismatch note**: The FUN_1000_6f20 lead/trail analysis had a subtle bug
 (the trail loop used a separate `if (lead_done)` block instead of `else if`,

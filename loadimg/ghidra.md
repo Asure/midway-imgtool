@@ -8,15 +8,20 @@ ZOF mode is **byte-exact** with LOADW across all tested datasets:
 - MKSMALL (4 images): 100.0% (with and without `/P`)
 - `/P` flag controls stride `(w+3)&~3` vs tight `w` packing in ZOF output
 
-### ZON (Compressed) Mode — Partial Match
+### ZON (Compressed) Mode
 
-- MK2MIL, MK4MIL, MK8MIL: **100.0% byte-exact** (IRW + all TBLs)
-- MK3MIL: **100.0% byte-exact** (TE elif fix + PTTBL struct fix + case-sensitive lookup)
-- MK6MIL: **9/17 pass** (auto-bpp garbage pixel fix for pitblood1a + ELIF fixes)
-- MK5MIL, MK7MIL: **partial** — remaining encoder cascade (BGSPEAR6 252-bit diff)
-- BBB backgrounds (MKBBB): BGNDTBL.GLO, IMGTBL.GLO, IMGPAL.ASM byte-exact; BGNDTBL.ASM, BGNDEQU.H, BGNDPAL.ASM have LM/TM differences
-- MISC (NBA Jam testdata): 1/21 pass; PTTBL struct fixed (12 bytes); PWRD1-3 match ref from anix2/aniy2/aniz2; remaining 6 PT fields and +1 SIZX rule still WIP
-- Space check: CMP=0 when compressed size >= raw size (`<=` comparison)
+- MK2MIL, MK3MIL, MK4MIL: **100.0% byte-exact**
+- MK5MIL, MK6MIL: **100.0% byte-exact** (checksum + encoder cascade fixes)
+- MK7MIL: **100.0%** (background dedup + Y-offset + all 11 TBLs)
+- BBB backgrounds (NUPOOL): **100.0% byte-exact**
+- BBB backgrounds (TOMB/TOWER2): LM/TM selection differs
+
+### Remaining Issues
+
+| Issue | LODs | Status |
+|-------|------|--------|
+| CMP=1 encoder LM/TM selection | BB5, BB6, BB7 | Differs from LOADW for some compressed images |
+| 16-bit checksum collision | BBMUG | 1/65536 collision on mugshot images |
 
 ## Ghidra Setup & Usage
 
@@ -164,7 +169,7 @@ Python scripts (Jython) also work when placed in the script path, but Ghidra mus
 | `1000:757c` | `FUN_1000_757c` | Lead computation helper |
 | `1000:7727` | `FUN_1000_7727` | Row dispatch |
 | `1c9a:3102` | `_do_zcom` | Zero-compression routine |
-| `1854:1a49` | `FUN_1854_1a49` | BDD/BDB background processor (~3070 lines, decompiles to ~2100 lines). Handles object-module matching with inclusive extents (`x+w-1`, `y+h-1`), generates BGNDTBL.ASM output. Decomp verified: `-2` Y-offset formula, `mod_ye = ii` (4th BDB field is end Y). See `/tmp/ghidra_bbb_decomp.txt`. |
+| `1854:1a49` | `FUN_1854_1a49` | BDD/BDB background processor (~3070 lines, decompiles to ~2100 lines). Handles object-module matching with inclusive extents (`x+w-1`, `y+h-1`), adjusts module ys to min object sy for Y-offset formula. See `/tmp/ghidra_bbb_decomp.txt`. |
 
 ## Internal Table Layout
 
