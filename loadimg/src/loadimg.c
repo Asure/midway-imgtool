@@ -1,8 +1,16 @@
 /*
- * loadimg - Williams/Midway arcade image loader replacement
- * Reads a .lod file + .img containers, outputs .tbl/.asm/.glo/.irw files
+ * loadimg — Williams/Midway arcade image loader replacement
+ * Reads .lod scripts + .img containers, outputs .tbl/.asm/.glo/.irw files
+ * for TMS34020 GSP DMA2 hardware (Mortal Kombat, NBA Jam, etc.)
  *
- * Compatible with LOAD2 / LOADW tool output (Williams Electronics, 1992-1995)
+ * Reverse-engineered from LOADW.EXE (5/25/94, Borland C++ 4.5).
+ * Targets byte-exact match with LOADW output for all test datasets.
+ *
+ * Key reverse-engineering sources:
+ *   - Ghidra decompilation of LOADW.EXE (16-bit segmented x86)
+ *   - DMA2.DOC hardware spec (Keep Enterprises, Jan 1992)
+ *   - IT/wmpstruc.inc — Midway asset struct definitions
+ *   - COFF debug symbols: _packbits, _do_zcom, _create_point_table, etc.
  */
 
 #include <stdio.h>
@@ -23,6 +31,11 @@
 
 /* =========================================================================
  * Constants
+ *
+ * MAX_IMAGES — must be large enough for the biggest LOD (BBMUG.LOD ~2790)
+ * IRW_HDR_SIZE — 0x44-byte IRW file header (date, image count, bpp, flags, size)
+ * IRW_DATE_STR — "03/14/95" (date of this tool; LOADW uses "5/25/94")
+ * NUMDEFPAL — 3 default hardware palettes skipped when indexing into IMG palette table
  * ========================================================================= */
 
 #define MAX_IMAGES      4096
@@ -37,6 +50,25 @@
 
 /* =========================================================================
  * IMG container format structures
+ *
+ * LIB_HDR (28 bytes, pack(2)): file header for .IMG containers
+ *   oset — offset from start of file to IMAGE record array
+ *   version — 0x634 (old), 0x63e, 0x64e (new); temp=0xabcd marks new format
+ *   The data section (pixels/palettes) precedes the IMAGE records.
+ *
+ * IMG_REC (42 bytes old / 50 bytes new): each IMAGE record
+ *   name — 16-byte space-padded name. '!' prefix = special record (palette stand-in)
+ *   pttblnum — index into PTTBL array; -1 = no point table
+ *   LOADW uses the LAST record when two share the same name (hash-table overwrite).
+ *
+ * PAL_REC (26 bytes): palette record (10-byte name + flags + bpp + colors + oset)
+ *   colors stored inline at pal->oset as RGB565 16-bit values.
+ *
+ * PTTBL (12-byte file entries, read as 40-byte structs at 40-byte stride):
+ *   Stored densely in the file as 6 int16 fields (flags, x1, x2, X, Y, Z).
+ *   LOADW reads them as 40-byte structs at 40-byte intervals — the overlapping
+ *   12-byte data happens to produce correct field values at 40-byte alignment.
+ *   See bbb.md / bdd.md / agents.md for full field documentation.
  * ========================================================================= */
 
 #pragma pack(push, 2)
@@ -151,7 +183,19 @@ typedef struct {
 } IhdrField;
 
 /* =========================================================================
- * Image entry
+ * Image entry (per-image state)
+ *
+ * Each image processed from a ---- directive creates one ImageEntry.
+ * sizx/sizy — TBL output SIZX/SIZY (from rec->w/h or PTTBL BOX[1].W+1)
+ * sag — bit offset in IRW stream (base_addr + bank*0x2000000 + sag)
+ * ctrl — DMA2 CTRL word: [bpp:12][TM:10][LM:8][CMP:7][CLP:6][VFL:5][HFL:4][OPS:3-0]
+ * pwrd1/2/3 — from IMG_REC anix2/aniy2/aniz2 (Power Words)
+ * pt3y — fallback value for PT3Y field
+ * extra_pts[8] — 4 animation point pairs (PT1..PT4) from PTTBL or geometry
+ * pttbl/pttbl_shared/pttbl_pt0x — PTTBL pointers for own entry and shared entries
+ *
+ * FUN_1000_6f20 (LM/TM selection) per-row results are stored transiently in
+ * CompParams during analyze_image(), not persisted per-image.
  * ========================================================================= */
 
 typedef struct {
@@ -185,7 +229,22 @@ typedef struct {
 } PaletteEntry;
 
 /* =========================================================================
- * Global state
+ * Config (global runtime state)
+ *
+ * Most fields correspond to LOADW state at known global addresses:
+ *   dedup  — 0x5b60 (CON>/COF> flag, default ON = 1)
+ *   zon    — ZON>/ZOF> compression toggle
+ *   xon    — XON>/XOF> extra zero pixel column toggle
+ *   pon    — PON>/POF> palette output toggle
+ *   ppp    — PPP> bits-per-pixel override
+ *   base_addr / bank — ***> address
+ *
+ * File pointers:
+ *   asm_fp  — current TBL assembly output (redirected by ASM>)
+ *   glo_fp  — current GLO output (redirected by GLO>)
+ *   pal_fp  — IMGPAL.ASM (always the main palette file)
+ *   main_glo_fp — IMGTBL.GLO (never redirected — holds palette .globl)
+ *   bgnd_fp / bgndpal_fp / bgndequ_fp — BGNDTBL/PAL/EQU (BBB> output)
  * ========================================================================= */
 
 typedef struct {
@@ -310,6 +369,13 @@ static void change_ext(char *dst, const char *src, const char *ext, size_t dstsz
 
 /* =========================================================================
  * IRW bit stream writer
+ *
+ * LOADW's _load_bits (0x1000:737c) uses LSB-first packing:
+ *   irw_write_bits(val, nbits) appends nbits of val to the bit stream.
+ *   The stream is byte-oriented: bytes are packed MSB-to-LSB within each byte.
+ *
+ * SAG values in the TBL are BIT offsets from the IRAM base address
+ * (data section start at offset 0x44 in the IRW file).
  * ========================================================================= */
 
 static void irw_ensure(size_t need_bytes) {
@@ -321,7 +387,20 @@ static void irw_ensure(size_t need_bytes) {
     }
 }
 
-/* LOADW FUN_1854_35fc checksum: sum + max over stride width */
+/*
+ * LOADW FUN_1854_35fc — 16-bit wrapping checksum.
+ *
+ * Matches LOADW's Borland C 16-bit int addition.
+ * sum wraps at 65536, matching LOADW's `int sum` on 16-bit x86.
+ * max_val tracks the maximum byte value across all bytes (both lo and hi
+ * of each 16-bit word).
+ *
+ * Dedup key (FUN_1854_37dd) checks 3 fields: {sum, max_val, ctrl}.
+ * Unlike sprite dedup, background dedup does NOT check sizx/sizy —
+ * LOADW's 40-byte struct stride means different image sizes with same
+ * pixel data can match. The dedup table persists across the ENTIRE LOD
+ * (not reset per IMG — confirmed by cross-IMG dedup in V5 logs).
+ */
 static uint16_t loadw_checksum(uint8_t *pix, int stride, int w, int h, uint16_t *out_max) {
     uint16_t sum = 0, max_val = 0;
     int n_words = (stride * h) / 2;
@@ -523,7 +602,25 @@ static ImgFile* img_load(const char *path) {
     img->pals = (PAL_REC*)(img->data + pal_ofs);
     img->n_palettes = img->hdr.palcnt;
 
-    /* PTTBL offset: after palette records + 6-byte gap + sequences/scripts, minus special records */
+    /*
+     * PTTBL offset: after palette records + 6-byte gap + sequences/scripts.
+     *
+     * PTTBL entries are stored in the file as 12-byte dense entries (6 int16 fields:
+     * flags, x1, x2, X, Y, Z). However, LOADW reads them as 40-byte structs at
+     * 40-byte stride — reading across 12-byte entry boundaries. The overlapping data
+     * at 40-byte alignment happens to produce the correct field values (the file format
+     * is DESIGNED for 40-byte stride access over the 12-byte dense data).
+     *
+     * The +2 fudge factor in max_fit allows LOADW's boundary entry access (entries
+     * whose 40-byte read extends slightly past the file). This is needed because
+     * some IMG files have images referencing PTTBL entries at the exact boundary.
+     * Reading past the file reads uninitialized malloc memory and is undefined
+     * behavior — but LOADW on DOS memory layout happens to produce useful values.
+     *
+     * n_pttbls is capped to max_pttbl + 1 (the highest referenced entry index).
+     * The shared entry (pttblnum - 2) and pt0x entry (pttblnum - 3) are used for
+     * PT field computation (PT2X/PT2Y and PT0X respectively).
+     */
     uint32_t pttbl_ofs = pal_ofs + (uint32_t)img->n_palettes * sizeof(PAL_REC) + 6;
     /* SEQSCR entries between palettes and PTTBL */
     int n_seqscr = (int)img->hdr.seqcnt + (int)img->hdr.scrcnt;
@@ -589,7 +686,21 @@ static int bpp_for_max(int max_val) {
 }
 
 /* =========================================================================
- * DMA2 CTRL word computation
+ * DMA2 CTRL word bit layout (from DMA2.DOC — Keep Enterprises, Jan 1992)
+ *
+ * Bit [15]    DGO  — DMA Go (always 0 in TBL)
+ * Bits[14-12] PIX — pixel size (0=8bpp, 1-7=bpp value)
+ * Bits[11-10] TM  — trailing-zero multiplier (0=x1, 1=x2, 2=x4, 3=x8)
+ * Bits[9-8]   LM  — leading-zero multiplier (0=x1, 1=x2, 2=x4, 3=x8)
+ * Bit [7]     CMP — compression enable (1=ZON, 0=ZOF)
+ * Bit [6]     CLP — clip enable
+ * Bits[5-4]   VFL/HFL — vertical/horizontal flip
+ * Bits[3-0]   OPS — pixel ops
+ *
+ * Per-row header byte (ZON mode): [trail_n:4][lead_n:4]
+ *   lead_c = lead_n * lm_mult    — leading zero pixels skipped
+ *   trail_c = trail_n * tm_mult  — trailing zero pixels skipped
+ *   stored = sizx - lead_c - trail_c  — pixels in bitstream
  * ========================================================================= */
 
 static int choose_mult(int max_zeros) {
@@ -677,10 +788,27 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
         return p;
     }
 
-    /* FUN_1000_6f20 error-minimizing LM/TM selection.
-     * For each row, count lead (120 cap, bVar8) and trail (only after lead finishes).
-     * Then accumulate waste per multiplier: waste = sum(mult*lead_n - lead) across rows.
-     * Select LM/TM with minimum total waste. */
+    /*
+     * FUN_1000_6f20 error-minimizing LM/TM selection (Ghidra decomp verified).
+     *
+     * Lead counting (per-row, independent — no running minimum):
+     *   Capped at 120 (0x78). Once lead hits 120 OR a non-zero pixel is found,
+     *   lead_done is set and trail counting begins.
+     *
+     * Trail counting (per-row):
+     *   Only counts after lead finishes, only when `sizx - 120 < x`
+     *   (always true for sizx ≤ 120). Resets to 0 on non-zero pixel.
+     *
+     * Error accumulation:
+     *   For each multiplier m (×1,×2,×4,×8):
+     *     lead_waste += lead - min(lead/mult, 15)*mult
+     *     trail_waste += trail - min(trail/mult, 15)*mult
+     *
+     * Selection:
+     *   LM = m where lead_waste[m] is MINIMUM (< comparison, lower index on tie)
+     *   TM = m where trail_waste[m] is MINIMUM (< comparison, lower index on tie)
+     *   Note: sprite dedup uses <= for TM (keeps current on tie), background uses <.
+     */
     uint8_t *pix = img_pixels(img, rec);
     int stride = IMG_STRIDE(rec->w);
      int lead_err[4] = {0}, trail_err[4] = {0};
@@ -744,7 +872,18 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
     p.lookahead_lead = lookahead_lead_min;
     p.lookahead_trail = 0;
 
-    /* FUN_1000_6f20 space check: if compressed size >= raw size, CMP=0 */
+    /*
+     * FUN_1000_6f20 space check: if compressed size >= raw size, CMP=0.
+     * Two conditions must both hold for CMP=1:
+     *   1. sizx >= 10 — "Need 10 non-zero pixels minimum"; images narrower
+     *      than 10 pixels have the min_stored=10 adjustment consume the row.
+     *   2. comp_bits < raw_bits — strict less-than (<= comparison). If equal,
+     *      compression is disabled (not worth encoding).
+     *
+     * Second pass: after LM/TM selection, compute per-row header bytes with
+     * minimum stored = 10 adjustment (see encode_row for the exact FUN_1000_6f20
+     * algorithm). Accumulates comp_bits from the adjusted header+stored values.
+     */
     int raw_bits = sizx * rows * bpp;
     int comp_bits = 0;
     for (int y = 0; y < rows; y++) {
@@ -828,8 +967,16 @@ static void encode_row(uint8_t *row, int w, int sizx, int bpp,
             }
     }
 
-    /* LOADW _packbits: per-row lead, no running minimum.
-     * FUN_1000_6f20 second pass computes each row's lead_n directly. */
+    /*
+     * LOADW _packbits: per-row lead, no running minimum.
+     * FUN_1000_6f20 second pass computes each row's lead_n directly.
+     *
+     * lead_n = min(lead / lm_mult, 15)
+     * trail_n = min(trail / tm_mult, 15)
+     * lead_c = lead_n * lm_mult (clamped to sizx)
+     * trail_c = trail_n * tm_mult (clipped if lead_c+trail_c > sizx)
+     * stored = max(0, sizx - lead_c - trail_c)
+     */
     int lead_n = lead / lm_mult;
     if (lead_n > 15) lead_n = 15;
     int lead_c = lead_n * lm_mult;
@@ -917,8 +1064,20 @@ static uint32_t encode_image(ImgFile *img, IMG_REC *rec, CompParams *cp, int bpp
 
     int running_lead = cp->lookahead_lead;
 
-    /* Check CMP bit in CTRL: LOADW disables compression (CMP=0) for small images
-     * where "Need 10 non-zero pixels minimum" fails. Use raw pixel mode in that case. */
+    /*
+     * CMP=0 raw pixel mode:
+     *  - /P flag: uses OUT_STRIDE(w) (4-byte aligned stride)
+     *  - Without /P: uses rec->w (tight packing)
+     *  - XON mode: BOTH CMP=0 and CMP=1 use OUT_STRIDE(w + XON) as the output width.
+     *    This matches LOADW's behavior (confirmed via BB.LOD SAG cascade fix).
+     *    LOADW tests: ewing1 (w=24, XON) CMP=0 output = 28 * 34 * 6 bits.
+     *    Without OUT_STRIDE: would be 25 * 34 * 6 bits (wrong — SAG cascade).
+     *
+     * For CMP=1 compressed mode:
+     *   encode_row uses sizx = scl_stride = cp->sizx, which for XON mode is
+     *   OUT_STRIDE(OUT_STRIDE(w) + 1) = OUT_STRIDE(w + 1) for stride-aligned widths.
+     *   (XON applied BEFORE stride alignment.)
+     */
     int do_cmp = (cp->ctrl & 0x80) ? 1 : 0;
 
     for (int y = 0; y < rows; y++) {
@@ -1992,7 +2151,22 @@ static void process_lod(const char *lod_path) {
             int mod_first_depth[64]; /* depth of first object in BDB file order */
             for (int i = 0; i < 64; i++) mod_first_depth[i] = -1;
 
-            /* Phase 1: Output module BLKS labels and build module list */
+            /*
+             * Phase 1: Output module BLKS labels and build module list.
+             *
+             * Objects are assigned to modules using FIRST-FIT by BDB file order.
+             * Each module defines a rectangle [DEPTH_BASE, SCROLL_X] × [SY_BASE, SY_BASE+SY_SPAN].
+             * An object belongs to the FIRST module whose rectangle contains (DEPTH, SY).
+             *
+             * LOADW's FUN_1854_1a49 uses INCLUSIVE bounds for matching:
+             *   ds <= dp && ys <= sy && dp + w - 1 <= de && sy + h - 1 <= ye
+             * (confirmed from Ghidra decompilation, lines 442-450 of FUN_1854_1a49).
+             *
+             * Module ys is ADJUSTED to the minimum sy of all matching objects
+             * (first loop in FUN_1854_1a49, lines 434-475). The Y offset formula is:
+             *   y = sy - adjusted_ys
+             * (not y = sy - original_ys - K). Verified against reference BGNDTBL.ASM.
+             */
             for (int gi = 0; gi < ng; gi++) {
                 if (gobjs[gi].is_mod) {
                     const char *mn = gobjs[gi].name;
@@ -2026,7 +2200,22 @@ static void process_lod(const char *lod_path) {
                 }
             }
 
-            /* Phase 2: Process BDD images in FILE ORDER (only GOBJ-referenced) */
+            /*
+             * Phase 2: Process BDD images in FILE ORDER (only GOBJ-referenced).
+             *
+             * Each BDD image is compressed using the same FUN_1000_6f20 algorithm
+             * as regular sprites. Background compression differs from sprites in
+             * a few ways:
+             *   - No PTTBL (compression width = OUT_STRIDE(w), not BOX[1].W+1)
+             *   - Per-image auto bpp from max pixel (or g.ppp override)
+             *   - Unique-color bpp bump: increases bpp when >64 unique colors
+             *   - Dedup uses shared dedup_table with sprites (persistent across LOD)
+             *   - Checksum dedup matches on {sum, max_val, ctrl} only (no sizx/sizy)
+             *
+             * The LOADW per-row lead/trail loop for backgrounds uses the RAW width w
+             * (not sizx_a), matching FUN_1854_1a49's lead/trail counting. The
+             * minimum-stored=10 adjustment formula matches the sprite encode_row path.
+             */
             int bgnd_count = 0;
             for (int di = 0; di < n_bdds; di++) {
                 if (img_module[di] < 0) continue;
@@ -2255,7 +2444,24 @@ static void process_lod(const char *lod_path) {
                 }
             }
 
-            /* Phase 3: Output BLKS map layout data (after image entries, before BMOD) */
+            /*
+             * Phase 3: Output BLKS map layout (after image entries, before BMOD).
+             *
+             * First pass: compute min_sy per module (LOADW adjusts module ys to
+             * the minimum sy of all matching objects — confirmed from FUN_1854_1a49
+             * Ghidra decomp, first loop lines 434-475). Then use adjusted ys for
+             * the Y offset formula: y = osy - mod_min_sy[mi].
+             *
+             * Object-to-module matching uses first-fit by BDB file order (not
+             * spatial partition). Inclusive bounds check using image dimensions:
+             *   od + w - 1 <= de  &&  osy + h - 1 <= ye
+             *
+             * BLKS wx encoding:
+             *   High byte: from BDB WX_hex (parallax scroll rate)
+             *   Bit 6 (CLP): always set
+             *   Bits 5-4: VFL/HFL from BDB WX_hex
+             *   Bits 3-0 (OPS): from BDB fl field (palette index)
+             */
             if (g.bgnd_fp && n_bmod > 0) {
                   /* First pass: compute min_sy per module (LOUDW adjusts ys to min sy of matching objects) */
                   int mod_min_sy[64];

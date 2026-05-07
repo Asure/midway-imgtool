@@ -1,8 +1,0 @@
-	.globl	ligtn_p
-	.globl	lighten1
-	.globl	lighten2
-	.globl	lighten3
-	.globl	lighten4
-	.globl	lighten5
-	.globl	lighten6
-	.globl	lighten7
