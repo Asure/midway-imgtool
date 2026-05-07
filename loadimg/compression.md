@@ -261,6 +261,7 @@ that is executed by a separate dispatcher loop.
 | **MK5MIL** | 702 | **100.0%** | All TBLs pass |
 | **MK6MIL** | 1859 | **100.0%** | All 17 TBLs pass |
 | **MK7MIL** | 703 | **100.0%** | Background dedup, all 11 TBLs pass |
+| **BBMUG** | 2610 | **100.0%** | Dual-hash dedup fixes 16-bit collision |
 
 ### ZOF (Uncompressed) Mode
 
@@ -268,6 +269,7 @@ that is executed by a separate dispatcher loop.
 |------|--------|-------|-------|
 | **MK3MIL** | 1949 | **100.0%** | Binary match with `/P` |
 | **BB, BB2, BB4, BB8** | various | **100.0%** | CMP=0 XON width fix |
+| **BB6 CHEER** | — | **100.0%** | Stride-width bpp scan fixed HOTred bpp (4→7) |
 
 Key ZOF fixes:
 - Pixel width: `/P` flag → `OUT_STRIDE(w+XON)` matches LOADW (not `w+XON`)
@@ -286,7 +288,7 @@ Key ZOF fixes:
 | Issue | Affected LODs | Root Cause |
 |-------|---------------|------------|
 | CMP=1 encoder cascade | BB5, BB6, BB7 | LM/TM/bpp selection differs for compressed images |
-| 16-bit checksum collision | BBMUG | 1/65536 hash collision on stride-padded mugshot data |
+| PLYRDSQ2 PT field computation | BB6 | PTTBL 40-byte stride aliasing prevents geometry fallback |
 
 ## CON> Checksum Dedup
 

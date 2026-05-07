@@ -602,7 +602,7 @@ matches LOAD2 (separate lines), which is the correct target.
 | Issue | LODs | Root Cause |
 |-------|------|------------|
 | CMP=1 encoder cascade | BB5, BB6, BB7 | LM/TM/bpp selection differs from LOADW for compressed images |
-| 16-bit cksum collision | BBMUG | 1/65536 stride-padded checksum collision on mugshot images |
+| PLYRDSQ2 PT fields | BB6 | PTTBL 40-byte stride aliasing reads pixel data for x1, preventing geometry-based PT pair computation |
 
 ### Test Results (current dataset)
 
@@ -623,10 +623,10 @@ BB* LODs are from **NBA Jam / Hangtime** arcade data.
 | **BB3** | ZOF+PT | 2/2 | **PASS** | PTTBL 16-byte header bounds |
 | **BB4** | ZOF+XON | 1/1 | **PASS** | |
 | **BB5** | Mixed | 3/7 | FAIL | CMP=1 encoder cascade |
-| **BB6** | Mixed | 3/6 | FAIL | CMP=1 encoder cascade |
+| **BB6** | Mixed | 5/6 | FAIL | CMP=1 cascade + PLYRDSQ2 PT fields |
 | **BB7** | Mixed | 8/16 | FAIL | CMP=1 encoder cascade |
 | **BB8** | XON | 3/3 | **PASS** | |
-| **BBMUG** | ZOF+XON | 1/2 | FAIL | 16-bit cksum collision |
+| **BBMUG** | ZOF+XON | 2/2 | **PASS** | Dual-hash dedup (byte-sum disambiguation) |
 | **BBVDA** | VDA | 1/1 | **PASS** | |
 | **MISC** | Mixed | 21/21 | **PASS** | NBA Jam/Hangtime |
 
@@ -759,6 +759,9 @@ Each row is encoded as 1 header byte + stored pixels bit-packed at `bpp` bits ea
 28. **IMG path has_dir_sep guard** — skips basename fallback for DOS paths with directory separators
 29. **PWRD from IMG_REC** — set pwrd1/2/3 from rec->anix2/aniy2/aniz2 (was hardcoded to -1)
 30. **TM selection `<=` fix** — TM comparison uses `<=` (matching Ghidra FUN_1000_6f20), LM uses `<`
+31. **Dedup byte-sum hash** — Added `sum2` field (byte-sum of pixel data) to `DedupEntry` to disambiguate 16-bit word-sum collisions. The word-sum (`loadw_checksum`) misses the last byte of odd-length buffers; the byte-sum covers all bytes. Together they form a ~32-bit effective hash, fixing BBMUG (1/2 → 2/2).
+32. **Stride-width bpp scanning** — Changed `img_max_pixel()` and per-image auto bpp scan to iterate over stride pixels per row (not `rec->w`). Matches LOADW's `_compute_bpp`. Fixes BB6 CHEER images where stride padding held artifact pixel 96 (bpp: 4→7). BB6: 3/6 → 5/6.
+33. **Remove debug dedup prints** — Removed `smfirebone3`/`smfirebone6`/`w==8`/`h==21` debug-specific verbose conditions from dedup lookup.
 
 ### COF and CON Directives
 
