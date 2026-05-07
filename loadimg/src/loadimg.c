@@ -1885,10 +1885,11 @@ static void process_lod(const char *lod_path) {
                  char full[MAX_PATH];
                  if (g.tbldir[0]) path_cat(full, g.tbldir, fname, MAX_PATH);
                  else strncpy(full, fname, MAX_PATH-1);
-                 /* Check if same file — LOADW appends without .DATA/.TEXT separators */
-                 if (g.asm_fp) {
-                     /* Simple filename comparison */
-                     if (strcmp(g.asm_path, full) != 0) {
+                  /* Check if same file — LOADW appends without .DATA/.TEXT separators */
+                  if (g.asm_fp) {
+                      /* Simple filename comparison */
+                      if (strcmp(g.asm_path, full) != 0) {
+                          /* Different file: close old WITHOUT trailer (written at end) */
                          /* Different file: close old WITHOUT trailer (written at end) */
                          fclose(g.asm_fp);
                          g.asm_fp = NULL;

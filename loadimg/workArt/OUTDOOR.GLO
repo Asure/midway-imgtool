@@ -38,3 +38,6 @@
 	.globl	OUTDOOR
 	.globl	OUTDOOR
 	.globl	OUTDOOR
+	.globl	OUTDOOR
+	.globl	OUTDOOR
+	.globl	OUTDOOR
