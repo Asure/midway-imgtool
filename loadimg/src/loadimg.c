@@ -310,6 +310,7 @@ typedef struct {
     int      n_small_uncompressed;    /* images <10px not zero-compressed */
     int      bgnd_dedup_bytes;        /* bytes saved by BGND checksum matches */
     int      bgnd_dedup_matches;      /* count of BGND checksum matches */
+    int      has_bbb;                 /* 1 if LOD has BBB> directives (preserve dedup across IMGs) */
     int      n_glo_files;
     char     glo_files[64][64];
 } State;
@@ -1841,6 +1842,20 @@ static void scan_bpp(const char *lod_path) {
         printf("Global max pixel=%d, bpp=%d\n", g.global_max_pixel, g.global_bpp);
 }
 
+/* Pre-scan: determine if LOD has BBB> directives (preserves dedup across IMG changes) */
+static void scan_for_bbb(const char *lod_path) {
+    FILE *f = fopen(lod_path, "r");
+    if (!f) return;
+    char line[1024];
+    while (fgets(line, sizeof(line), f)) {
+        char upper[1024];
+        strncpy(upper, line, sizeof(upper)-1);
+        for (int i = 0; upper[i]; i++) upper[i] = (char)toupper((unsigned char)upper[i]);
+        if (strstr(upper, "BBB>")) { g.has_bbb = 1; break; }
+    }
+    fclose(f);
+}
+
 /* Main LOD processing pass */
 static void process_lod(const char *lod_path) {
     FILE *f = fopen(lod_path, "r");
@@ -2850,6 +2865,7 @@ int main(int argc, char *argv[]) {
     g.irw_bit = 0;
 
     scan_bpp(lod_file);
+    scan_for_bbb(lod_file);
     process_lod(lod_file);
 
     if (g.build_raw) write_irw(irw_path);
