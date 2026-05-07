@@ -672,15 +672,11 @@ Additional fixes:
 - **PWRD1/PWRD2/PWRD3 from IMG_REC**: Set from `rec->anix2`/`aniy2`/`aniz2`
   (was hardcoded to -1).
 
-Current cascade: BGSPEAR6 (BOSS3.IMG, w=138) is the first image whose encoded
-
-Current cascade: BGSPEAR6 (BOSS3.IMG, w=138) is the first image whose encoded
-size differs from LOADW (by 252 bits) despite matching LM=3, TM=1, CMP=1, bpp=6.
-The encoder (`encode_row`) produces different output for the same lead/trail
-parameters, suggesting a subtle difference in the per-row stored-pixel calculation
-or the minimum-10 adjustment path. MK3MIL now passes fully; MK2MIL, MK4MIL, MK8MIL
-remain byte-exact.
-compressed IRW output differs starting at some image, cascading through
+The BB5/BB6/BB7 encoder cascade (CMP=1) differs from LOADW for compressed images
+in the NBA Jam/Hangtime datasets. The specific BGSPEAR6 LM/TM mismatch was fixed
+(the `if`/`else if` trail loop and 120-cap logic now match FUN_1000_6f20 exactly),
+but the broader encoder cascade for BB5/BB6/BB7 compressed images remains:
+the compressed IRW output differs starting at some image, cascading through
 subsequent images. The cascade size is ~3-31 bytes per TBL. MK2MIL, MK4MIL, and
 MK8MIL are fully byte-exact, confirming the encoder is correct for those
 datasets. The remaining failures affect datasets where the encoder produces
