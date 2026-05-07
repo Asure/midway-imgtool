@@ -261,3 +261,4 @@
 	.globl	STONE3
 	.globl	VS_RD
 	.globl	STORYMODBMOD
+	.global	ENDMARKER

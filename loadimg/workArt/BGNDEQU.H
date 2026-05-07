@@ -1,0 +1,10 @@
+Wmaxim .EQU	400
+Hmaxim .EQU	256
+Whangtime .EQU	400
+Hhangtime .EQU	256
+WVSSCR .EQU	400
+HVSSCR .EQU	172
+Wteamstat .EQU	402
+Hteamstat .EQU	257
+Wfinalres .EQU	402
+Hfinalres .EQU	257

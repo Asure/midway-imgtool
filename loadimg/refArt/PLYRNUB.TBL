@@ -1,0 +1,48 @@
+	.DATA
+PLYRNUB1:
+	.word   16,20,0,20
+	.long   0397ca88H
+	.word   06000H
+	.long   NUB_B_P
+PLYRNUB2:
+	.word   16,20,0,20
+	.long   0397d208H
+	.word   06000H
+	.long   NUB_G_P
+PLYRNUB3:
+	.word   16,20,0,20
+	.long   0397d988H
+	.word   06000H
+	.long   NUB_Y_P
+PLYRNUB4:
+	.word   16,20,0,20
+	.long   0397e108H
+	.word   06000H
+	.long   NUB_R_P
+CUST6:
+	.word   68,9,0,0
+	.long   0397e888H
+	.word   03000H
+	.long   BAST_W_P2
+CUST7:
+	.word   68,9,0,0
+	.long   0397efb4H
+	.word   03000H
+	.long   BAST_W_P2
+CUST8:
+	.word   68,9,0,0
+	.long   0397f6e0H
+	.word   03000H
+	.long   BAST_W_P2
+CUST9:
+	.word   68,9,0,0
+	.long   0397fe0cH
+	.word   03000H
+	.long   BAST_W_P2
+CUST10:
+	.word   68,9,0,0
+	.long   03980538H
+	.word   03000H
+	.long   BAST_W_P2
+	.TEXT
+

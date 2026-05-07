@@ -1,7 +1,7 @@
 	.DATA
 ENDMARKER:
 	.word   4,1,0,0
-	.long   03f185a0H
+	.long   03f0be03H
 	.word   01000H
 	.TEXT
 

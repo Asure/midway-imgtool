@@ -1,0 +1,118 @@
+	.DATA
+shadow1:
+	.word   60,9,29,4
+	.long   03486b80H
+	.word   01000H
+	.long   shad_p
+shadow2:
+	.word   56,7,27,3
+	.long   03486d9cH
+	.word   01000H
+	.long   shad_p
+shadow3:
+	.word   52,7,25,3
+	.long   03486f24H
+	.word   01000H
+	.long   shad_p
+shadow4:
+	.word   52,7,24,3
+	.long   03487090H
+	.word   01000H
+	.long   shad_p
+shadow5:
+	.word   48,7,23,3
+	.long   034871fcH
+	.word   01000H
+	.long   shad_p
+shadow6:
+	.word   48,7,22,3
+	.long   0348734cH
+	.word   01000H
+	.long   shad_p
+shadow7:
+	.word   44,6,21,2
+	.long   0348749cH
+	.word   01000H
+	.long   shad_p
+shadow8:
+	.word   44,5,21,2
+	.long   034875a4H
+	.word   01000H
+	.long   shad_p
+shadow9:
+	.word   40,5,19,2
+	.long   03487680H
+	.word   01000H
+	.long   shad_p
+shadow10:
+	.word   40,5,18,2
+	.long   03487748H
+	.word   01000H
+	.long   shad_p
+shadow11:
+	.word   36,5,17,2
+	.long   03487810H
+	.word   01000H
+	.long   shad_p
+shadow12:
+	.word   32,5,15,2
+	.long   034878c4H
+	.word   01000H
+	.long   shad_p
+shadow13:
+	.word   32,5,15,2
+	.long   03487964H
+	.word   01000H
+	.long   shad_p
+shadow14:
+	.word   28,5,14,2
+	.long   03487a04H
+	.word   01000H
+	.long   shad_p
+shadow15:
+	.word   28,5,13,2
+	.long   03487a90H
+	.word   01000H
+	.long   shad_p
+shadow16:
+	.word   24,5,11,2
+	.long   03487b1cH
+	.word   01000H
+	.long   shad_p
+shadow17:
+	.word   24,5,10,2
+	.long   03487b94H
+	.word   01000H
+	.long   shad_p
+shadow18:
+	.word   20,5,9,2
+	.long   03487c0cH
+	.word   01000H
+	.long   shad_p
+ballshad5:
+	.word   16,4,7,2
+	.long   03487c70H
+	.word   01000H
+	.long   shad_p
+ballshad2:
+	.word   20,5,8,2
+	.long   03487cb0H
+	.word   01000H
+ballshad3:
+	.word   16,5,7,2
+	.long   03487d14H
+	.word   01000H
+ballshad4:
+	.word   16,5,7,2
+	.long   03487d64H
+	.word   01000H
+ballshad6:
+	.word   16,3,6,2
+	.long   03487db4H
+	.word   01000H
+ballshad7:
+	.word   12,3,5,2
+	.long   03487de4H
+	.word   01000H
+	.TEXT
+

@@ -1,0 +1,1133 @@
+	.DATA
+AUG_ATL:
+	.word   68,64,0,64
+	.long   02f759b0H
+	.word   0480H
+	.long   ATL_AUGP
+DIV_LAK:
+	.word   64,63,0,63
+	.long   02f7ab18H
+	.word   0580H
+	.long   LAK_DIVP
+EWG_NEY:
+	.word   72,65,0,65
+	.long   02f7f9d0H
+	.word   0580H
+	.long   EWG_NEYP
+HRD_MIA:
+	.word   68,62,0,62
+	.long   02f853c8H
+	.word   0480H
+	.long   GLD_HARP
+JON_CHA:
+	.word   68,59,0,59
+	.long   02f8a628H
+	.word   0480H
+	.long   CHA_JOHP
+KMP_SEA:
+	.word   56,60,0,60
+	.long   02f8f178H
+	.word   080H
+	.long   KMP_SEAP
+MIL_IND:
+	.word   68,62,0,62
+	.long   02f93948H
+	.word   0480H
+	.long   IND_MILP
+MLN_UTA:
+	.word   80,63,0,63
+	.long   02f98758H
+	.word   0980H
+	.long   MLN_UTAP
+MUT_DEN:
+	.word   60,62,0,62
+	.long   02f9db90H
+	.word   0480H
+	.long   DEN_MUTP
+OAK_NEY:
+	.word   72,65,0,65
+	.long   02fa29c8H
+	.word   0480H
+	.long   OAK_NEYP
+OLA_HOU:
+	.word   76,62,0,62
+	.long   02fa8578H
+	.word   0480H
+	.long   HOU_OLAP
+PIP_CHI:
+	.word   64,62,0,62
+	.long   02fad770H
+	.word   0480H
+	.long   CHI_PIPP
+RAD_MK2:
+	.word   68,63,0,63
+	.long   02fb2788H
+	.word   0580H
+	.long   RAD_MK2P
+ROB_SAN:
+	.word   56,63,0,63
+	.long   02fb88f0H
+	.word   080H
+	.long   ROB_SANP
+SAL_DIVM:
+	.word   68,63,0,63
+	.long   02fbd530H
+	.word   0580H
+	.long   SAL_DIVP
+SCH_SEA:
+	.word   60,66,0,66
+	.long   02fc2cc8H
+	.word   0480H
+	.long   SCH_SEAP
+SMT_HOU:
+	.word   68,62,0,62
+	.long   02fc7c20H
+	.word   0480H
+	.long   HOU_SMIP
+STK_UTA:
+	.word   68,65,0,65
+	.long   02fcc7a0H
+	.word   0480H
+	.long   STK_UTAP
+AND_CHA:
+	.word   76,62,0,62
+	.long   02fd1f38H
+	.word   0480H
+	.long   AND_CHA_P
+AND_ORL:
+	.word   64,62,0,62
+	.long   02fd7710H
+	.word   0580H
+	.long   AND_ORLP
+BAK_MLW:
+	.word   80,62,0,62
+	.long   02fdc4d0H
+	.word   0880H
+	.long   MIL_BAKP
+BEN_UTA:
+	.word   72,63,0,63
+	.long   02fe18b0H
+	.word   0580H
+	.long   BEN_UTAP
+BRO_BOS:
+	.word   64,59,0,59
+	.long   02fe6ac8H
+	.word   0480H
+	.long   BOS_BROP
+CAM_LAK:
+	.word   60,62,0,62
+	.long   02feb428H
+	.word   0480H
+	.long   LAK_CAMP
+CHE_WAS:
+	.word   60,60,0,60
+	.long   02feff48H
+	.word   0480H
+	.long   CHE_WASP
+DUM_DET:
+	.word   72,62,0,62
+	.long   02ff4540H
+	.word   0480H
+	.long   DET_DUMP
+HAR_ORL:
+	.word   72,63,0,63
+	.long   02ff9830H
+	.word   0580H
+	.long   HAR_ORLP
+HOR_HOU:
+	.word   64,62,0,62
+	.long   02ffe5e8H
+	.word   0480H
+	.long   HOU_HORP
+JAC_DAL:
+	.word   68,63,0,63
+	.long   030035e0H
+	.word   0580H
+	.long   DAL_JACP
+JOH_PHX:
+	.word   68,64,0,64
+	.long   03008828H
+	.word   0480H
+	.long   JOH_PHXP
+KUK_CHI:
+	.word   60,62,0,62
+	.long   0300d570H
+	.word   0580H
+	.long   CHI_KUKP
+MAS_DAL:
+	.word   80,61,0,61
+	.long   030125a0H
+	.word   0880H
+	.long   DAL_MASP
+MAS_NEY:
+	.word   76,65,0,65
+	.long   03017c78H
+	.word   0580H
+	.long   MAS_NEYP
+PAY_SEA:
+	.word   56,61,0,61
+	.long   0301d360H
+	.word   080H
+	.long   PAY_SEAP
+RIC_SAC:
+	.word   56,63,0,63
+	.long   03021e20H
+	.word   080H
+	.long   RIC_SACP
+RID_MIN:
+	.word   64,62,0,62
+	.long   030269a0H
+	.word   0580H
+	.long   RID_MINP
+ROB_PRT:
+	.word   60,61,0,61
+	.long   0302b240H
+	.word   0480H
+	.long   ROB_PRTP
+SMI_IND:
+	.word   56,62,0,62
+	.long   0302fd00H
+	.word   080H
+	.long   SMI_INDP
+STA_NEY:
+	.word   72,65,0,65
+	.long   030347a0H
+	.word   0480H
+	.long   STA_NEYP
+WEA_PHL:
+	.word   56,60,0,60
+	.long   03039f40H
+	.word   0180H
+	.long   WEA_PHLP
+ANT_VAN:
+	.word   52,63,0,63
+	.long   0303e7f8H
+	.word   080H
+	.long   ANT_VANP
+BAR_BOS:
+	.word   52,62,0,62
+	.long   03043058H
+	.word   080H
+	.long   BOS_BARP
+BAR_CLP:
+	.word   64,64,0,64
+	.long   03047fe8H
+	.word   0580H
+	.long   LAC_BARP
+BEN_MLW:
+	.word   56,62,0,62
+	.long   0304cc38H
+	.word   080H
+	.long   MIL_BENP
+BLY_ATL:
+	.word   72,64,0,64
+	.long   03051800H
+	.word   0480H
+	.long   ATL_BLAP
+BRA_CLE:
+	.word   60,62,0,62
+	.long   03056d38H
+	.word   0480H
+	.long   CLE_BRAP
+BRA_NEJ:
+	.word   56,64,0,64
+	.long   0305bca0H
+	.word   080H
+	.long   BRA_NEJP
+CAS_HOU:
+	.word   68,63,0,63
+	.long   03060840H
+	.word   0480H
+	.long   HOU_CASP
+CEB_LAK:
+	.word   68,63,0,63
+	.long   03065580H
+	.word   0480H
+	.long   LAK_CEBP
+CHI_PRT:
+	.word   52,62,0,62
+	.long   0306aa80H
+	.word   080H
+	.long   CHI_PRTP
+COL_PHL:
+	.word   64,63,0,63
+	.long   0306f740H
+	.word   0480H
+	.long   COL_PHLP
+CUR_CHA:
+	.word   72,63,0,63
+	.long   03074400H
+	.word   0480H
+	.long   CHA_CURP
+DAN_MIA:
+	.word   60,64,0,64
+	.long   03079630H
+	.word   0480H
+	.long   MIA_DANP
+DAV_IND:
+	.word   68,63,0,63
+	.long   0307e780H
+	.word   0480H
+	.long   IND_DAVP
+DEL_SAN:
+	.word   56,65,0,65
+	.long   03083890H
+	.word   080H
+	.long   DEL_SANP
+DOU_MLW:
+	.word   64,60,0,60
+	.long   03088c58H
+	.word   0480H
+	.long   MIL_DOUP
+DRX_HOU:
+	.word   72,63,0,63
+	.long   0308de30H
+	.word   0480H
+	.long   HOU_DREP
+EDN_SAC:
+	.word   56,63,0,63
+	.long   03093330H
+	.word   080H
+	.long   EDN_SACP
+EDW_NEJ:
+	.word   64,63,0,63
+	.long   03098198H
+	.word   0580H
+	.long   EDW_NEJP
+EDW_VAN:
+	.word   56,63,0,63
+	.long   0309cee0H
+	.word   0180H
+	.long   EDW_VANP
+ELL_DEN:
+	.word   56,62,0,62
+	.long   030a1a08H
+	.word   080H
+	.long   DEN_ELLP
+ELL_SAN:
+	.word   64,63,0,63
+	.long   030a63e8H
+	.word   0580H
+	.long   ELL_SANP
+FER_CLE:
+	.word   56,62,0,62
+	.long   030ab2c0H
+	.word   080H
+	.long   CLE_FERP
+FIN_PHX:
+	.word   64,63,0,63
+	.long   030afce8H
+	.word   0580H
+	.long   FIN_PHXP
+FOR_SEA:
+	.word   68,62,0,62
+	.long   030b4d50H
+	.word   0480H
+	.long   FOR_SEAP
+FOX_BOS:
+	.word   52,63,0,63
+	.long   030b9ab0H
+	.word   080H
+	.long   BOS_FOXP
+GAR_MIN:
+	.word   64,62,0,62
+	.long   030be5c8H
+	.word   0480H
+	.long   GAR_MINP
+GLL_NEJ:
+	.word   72,65,0,65
+	.long   030c3300H
+	.word   0480H
+	.long   GLL_NEJP_
+GIL_NEJ:
+	.word   60,64,0,64
+	.long   030c8c60H
+	.word   0480H
+	.long   GIL_NEJP
+GRA_SAC:
+	.word   52,62,0,62
+	.long   030cdaa8H
+	.word   0180H
+	.long   GRA_SACP
+GRT_ORL:
+	.word   68,63,0,63
+	.long   030d22c8H
+	.word   0480H
+	.long   GRT_ORLP
+GUG_MIN:
+	.word   60,65,0,65
+	.long   030d7558H
+	.word   0480H
+	.long   GUG_MINP
+HIL_CLE:
+	.word   64,61,0,61
+	.long   030dc610H
+	.word   0480H
+	.long   CLE_HILP
+HIL_DET:
+	.word   68,61,0,61
+	.long   030e13e0H
+	.word   0480H
+	.long   DET_HILP
+HOU_DET:
+	.word   72,63,0,63
+	.long   030e62e8H
+	.word   0480H
+	.long   DET_HOUP
+HPR_NEY:
+	.word   72,63,0,63
+	.long   030eb380H
+	.word   0580H
+	.long   HPR_NEYP
+HRN_UTA:
+	.word   76,65,0,65
+	.long   030f0688H
+	.word   0580H
+	.long   HOR_UTAP
+HWD_WAS:
+	.word   60,63,0,63
+	.long   030f62f0H
+	.word   0580H
+	.long   HWD_WASP
+HWK_SEA:
+	.word   64,63,0,63
+	.long   030facb8H
+	.word   0580H
+	.long   HWK_SEAP
+JAC_IND:
+	.word   64,61,0,61
+	.long   030ff850H
+	.word   0480H
+	.long   IND_JACP
+JON_DAL:
+	.word   72,61,0,61
+	.long   031048f0H
+	.word   0480H
+	.long   DAL_JONP
+JON_LAK:
+	.word   60,62,0,62
+	.long   03109a28H
+	.word   0480H
+	.long   LAK_JONP
+JON_SAN:
+	.word   60,63,0,63
+	.long   0310e708H
+	.word   0480H
+	.long   JON_SANP
+KER_CHI:
+	.word   48,66,0,66
+	.long   03113480H
+	.word   080H
+	.long   CHI_KERP
+KID_DAL:
+	.word   64,63,0,63
+	.long   03118210H
+	.word   0480H
+	.long   DAL_KIDP
+KON_ORL:
+	.word   72,65,0,65
+	.long   0311d508H
+	.word   0480H
+	.long   KON_ORLP
+LAE_ATL:
+	.word   68,65,0,65
+	.long   03122860H
+	.word   0480H
+	.long   LAE_MINP
+LON_CHI:
+	.word   64,62,0,62
+	.long   03127a60H
+	.word   0480H
+	.long   CHI_LONP
+MAN_PHX:
+	.word   68,62,0,62
+	.long   0312c798H
+	.word   0580H
+	.long   MAN_PHXP
+MAR_SAC:
+	.word   52,65,0,65
+	.long   03130d68H
+	.word   080H
+	.long   MAR_SACP
+MAX_PHL:
+	.word   72,65,0,65
+	.long   03135ab8H
+	.word   0480H
+	.long   MAX_PHLP
+MCC_DAL:
+	.word   60,60,0,60
+	.long   0313b1f0H
+	.word   0480H
+	.long   DAL_MCCP
+MCD_DEN:
+	.word   56,63,0,63
+	.long   03140008H
+	.word   080H
+	.long   DEN_MCDP
+MCK_IND:
+	.word   60,60,0,60
+	.long   03144e90H
+	.word   0480H
+	.long   IND_MCKP
+MIL_CLE:
+	.word   60,62,0,62
+	.long   03149870H
+	.word   0480H
+	.long   CLE_MILP
+MIL_TOR:
+	.word   72,62,0,62
+	.long   0314e6d8H
+	.word   0580H
+	.long   MIL_TORP
+MLS_DET:
+	.word   84,61,0,61
+	.long   031536f8H
+	.word   0880H
+	.long   DET_MILP
+MON_BOS:
+	.word   60,63,0,63
+	.long   03159348H
+	.word   0480H
+	.long   BOS_MONP
+MOR_UTA:
+	.word   64,63,0,63
+	.long   0315e300H
+	.word   0480H
+	.long   MOR_UTAP
+MOU_MIA:
+	.word   64,62,0,62
+	.long   031631d8H
+	.word   0480H
+	.long   CHA_MOUP
+MUL_GLD:
+	.word   68,63,0,63
+	.long   03167e48H
+	.word   0480H
+	.long   GLD_MULP
+MUR_CLP:
+	.word   72,60,0,60
+	.long   0316cff0H
+	.word   0480H
+	.long   LAC_MURP
+MUR_TOR:
+	.word   64,61,0,61
+	.long   03171df8H
+	.word   0480H
+	.long   MUR_TORP
+MUR_VAN:
+	.word   60,64,0,64
+	.long   03176728H
+	.word   0480H
+	.long   MUR_VANP
+MUR_WAS:
+	.word   56,64,0,64
+	.long   0317b208H
+	.word   0480H
+	.long   MUR_WASP
+NOR_ATL:
+	.word   72,63,0,63
+	.long   03180088H
+	.word   0580H
+	.long   ATL_NORP
+OBA_NEJ:
+	.word   64,64,0,64
+	.long   031853c0H
+	.word   0580H
+	.long   OBA_NEJP
+OWE_SAC:
+	.word   48,62,0,62
+	.long   03189e70H
+	.word   080H
+	.long   MIA_OWEP
+PAC_WAS:
+	.word   60,65,0,65
+	.long   0318e628H
+	.word   0480H
+	.long   PAC_WASP
+PER_PHX:
+	.word   68,62,0,62
+	.long   03193288H
+	.word   0580H
+	.long   PER_PHXP
+PHL_CLE:
+	.word   64,60,0,60
+	.long   03197c08H
+	.word   0480H
+	.long   CLE_PHIP
+PRS_SAN:
+	.word   56,63,0,63
+	.long   0319ca40H
+	.word   0180H
+	.long   PRS_SANP
+RAD_BOS:
+	.word   52,63,0,63
+	.long   031a14a8H
+	.word   0180H
+	.long   BOS_RADP
+RAF_DEN:
+	.word   64,65,0,65
+	.long   031a5e48H
+	.word   0480H
+	.long   DEN_RAUP
+RCE_CHA:
+	.word   56,60,0,60
+	.long   031aafc8H
+	.word   0480H
+	.long   MIA_RICP
+RCH_CLP:
+	.word   72,62,0,62
+	.long   031af450H
+	.word   0480H
+	.long   LAC_RICP
+RES_MLW:
+	.word   68,62,0,62
+	.long   031b4798H
+	.word   0480H
+	.long   MIL_RESP
+REV_VAN:
+	.word   56,65,0,65
+	.long   031b9528H
+	.word   080H
+	.long   REV_VANP
+ROB_MLW:
+	.word   68,62,0,62
+	.long   031be660H
+	.word   0480H
+	.long   MIL_ROBP
+ROD_CHI:
+	.word   68,62,0,62
+	.long   031c35c0H
+	.word   0480H
+	.long   CHI_RODGP
+ROG_CLP:
+	.word   68,59,0,59
+	.long   031c8328H
+	.word   0480H
+	.long   LAC_ROGP
+ROG_TOR:
+	.word   80,65,0,65
+	.long   031cca68H
+	.word   0980H
+	.long   ROG_TORP
+ROS_DEN:
+	.word   64,59,0,59
+	.long   031d2100H
+	.word   0480H
+	.long   DEN_ROSP
+SAB_PRT:
+	.word   48,65,0,65
+	.long   031d6af0H
+	.word   080H
+	.long   SAB_PRTP
+SCO_ORL:
+	.word   76,64,0,64
+	.long   031db9e0H
+	.word   0480H
+	.long   SCO_ORLP
+SKL_GLD:
+	.word   64,66,0,66
+	.long   031e0cd8H
+	.word   0480H
+	.long   GLD_SEIP
+SMI_ATL:
+	.word   72,63,0,63
+	.long   031e6108H
+	.word   0480H
+	.long   ATL_SMIP
+SMI_GLD:
+	.word   64,61,0,61
+	.long   031eb600H
+	.word   0480H
+	.long   GLD_SMIP
+SPR_GLD:
+	.word   68,63,0,63
+	.long   031f01b0H
+	.word   0480H
+	.long   GLD_SPRP
+STA_PHL:
+	.word   64,61,0,61
+	.long   031f4f68H
+	.word   0480H
+	.long   STA_PHLP
+STO_TOR:
+	.word   68,63,0,63
+	.long   031f9cc0H
+	.word   0580H
+	.long   STO_TORP
+STR_PRT:
+	.word   56,62,0,62
+	.long   031fed28H
+	.word   080H
+	.long   STR_PRTP
+THR_DET:
+	.word   68,62,0,62
+	.long   03203580H
+	.word   0480H
+	.long   DET_THOP
+TIS_PHX:
+	.word   68,63,0,63
+	.long   032085d0H
+	.word   0580H
+	.long   TIS_PHXP
+VAN_LAK:
+	.word   72,63,0,63
+	.long   0320d598H
+	.word   0480H
+	.long   LAK_VANP
+VAU_CLP:
+	.word   72,61,0,61
+	.long   03212a10H
+	.word   0480H
+	.long   LAC_VAUP
+WEB_WAS:
+	.word   60,63,0,63
+	.long   032177f8H
+	.word   0480H
+	.long   WEB_WASP
+WIL_PRT:
+	.word   60,62,0,62
+	.long   0321c1f8H
+	.word   080H
+	.long   WIL_PRTP
+WIL_MIA:
+	.word   64,62,0,62
+	.long   03220f50H
+	.word   0480H
+	.long   WIL_SACP
+WLS_GLD:
+	.word   64,62,0,62
+	.long   03225e90H
+	.word   0480H
+	.long   MIA_WILP
+ZID_CHA:
+	.word   64,62,0,62
+	.long   0322b0a8H
+	.word   0480H
+	.long   CHA_ZIDP
+RODBLK:
+	.word   68,62,0,0
+	.long   031c35c0H
+	.word   0480H
+	.long   CHI_RODKP
+RODBLU:
+	.word   68,62,0,0
+	.long   031c35c0H
+	.word   0480H
+	.long   CHI_RODBP
+RODORG:
+	.word   68,62,0,0
+	.long   031c35c0H
+	.word   0480H
+	.long   CHI_RODOP
+RODPRP:
+	.word   68,62,0,0
+	.long   031c35c0H
+	.word   0480H
+	.long   CHI_RODPP
+RODRED:
+	.word   68,62,0,0
+	.long   031c35c0H
+	.word   0480H
+	.long   CHI_RODRP
+RODWHT:
+	.word   68,62,0,0
+	.long   031c35c0H
+	.word   0480H
+	.long   CHI_RODWP
+RODYEL:
+	.word   68,62,0,0
+	.long   031c35c0H
+	.word   0480H
+	.long   CHI_RODYP
+RODGRN:
+	.word   68,62,0,0
+	.long   031c35c0H
+	.word   0480H
+	.long   CHI_RODGP
+SCO_VAN:
+	.word   60,66,0,66
+	.long   0322fd08H
+	.word   0480H
+	.long   SCO_VANP
+ROB_TOR:
+	.word   64,62,0,62
+	.long   03234de0H
+	.word   0480H
+	.long   ROB_TOR_P
+CHP_MIA:
+	.word   56,62,0,62
+	.long   03239e20H
+	.word   0480H
+	.long   MIA_CHAP
+WEB_MIN:
+	.word   64,64,0,64
+	.long   0323eb68H
+	.word   0480H
+	.long   WEB_MINP
+LNG_MIN:
+	.word   72,62,0,62
+	.long   03243bd8H
+	.word   0480H
+	.long   AND_MIN_P
+RUF_PHL:
+	.word   64,61,0,61
+	.long   03249158H
+	.word   0480H
+	.long   RUF_PHLP
+COW:
+	.word   84,64,12,64
+	.long   0324dee8H
+	.word   0580H
+	.long   M_COW_P
+ALIEN:
+	.word   76,63,0,63
+	.long   032559a8H
+	.word   0480H
+	.long   M_ALIEN_P
+GUIDO:
+	.word   72,66,0,66
+	.long   0325b230H
+	.word   0580H
+	.long   M_GUIDO_P
+ANG:
+	.word   56,64,0,64
+	.long   03261d20H
+	.word   080H
+	.long   M_ANG_P
+LIS:
+	.word   72,64,0,64
+	.long   03266908H
+	.word   0580H
+	.long   M_LIS_P
+MEL:
+	.word   64,65,0,65
+	.long   0326dbc8H
+	.word   0480H
+	.long   M_MEL_P
+MIK:
+	.word   72,63,0,63
+	.long   032741c0H
+	.word   0480H
+	.long   M_MIK_P
+JOE:
+	.word   68,65,0,65
+	.long   032799a0H
+	.word   0480H
+	.long   M_JOE_P
+BER:
+	.word   92,66,0,66
+	.long   0327eff0H
+	.word   0880H
+	.long   M_BER_P
+CHK:
+	.word   72,67,0,67
+	.long   03287230H
+	.word   0880H
+	.long   M_CHK_P
+FAT:
+	.word   96,63,0,63
+	.long   0328db10H
+	.word   0980H
+	.long   M_FAT_P
+FRA:
+	.word   84,57,0,57
+	.long   03295488H
+	.word   0980H
+	.long   M_FRA_P
+GOR:
+	.word   100,66,11,66
+	.long   0329b670H
+	.word   0980H
+	.long   M_GOR_P
+GRE:
+	.word   68,59,0,59
+	.long   032a3ee0H
+	.word   0480H
+	.long   M_GRE_P
+OLD:
+	.word   96,65,7,65
+	.long   032aa078H
+	.word   0580H
+	.long   M_OLD_P
+PIG:
+	.word   84,67,0,67
+	.long   032b3560H
+	.word   0880H
+	.long   M_PIG_P
+WIZ:
+	.word   60,84,0,84
+	.long   032ba130H
+	.word   0480H
+	.long   M_WIZ_P
+ERI_MUG:
+	.word   64,63,0,63
+	.long   032c0d88H
+	.word   0480H
+	.long   ERI_MP
+KIM_MUG:
+	.word   60,62,0,62
+	.long   032c5e10H
+	.word   0180H
+	.long   KIM_MP
+MAR_MUG:
+	.word   60,63,0,63
+	.long   032cc638H
+	.word   080H
+	.long   MAR_MP
+ROH_MUG:
+	.word   72,65,0,65
+	.long   032d2a30H
+	.word   0480H
+	.long   ROH_MP
+SEA_MUG:
+	.word   68,63,0,63
+	.long   032d8318H
+	.word   0480H
+	.long   SEA_MP
+BEA_MUG:
+	.word   56,65,0,65
+	.long   032dd678H
+	.word   080H
+	.long   M_BEAST_P
+CHE_MUG:
+	.word   64,68,0,68
+	.long   032e2818H
+	.word   0480H
+	.long   M_CHEE_P
+CLO_MUG:
+	.word   68,68,3,68
+	.long   032e8690H
+	.word   0580H
+	.long   M_CLN_P
+JAB_MUG:
+	.word   64,65,0,65
+	.long   032ef0f0H
+	.word   0480H
+	.long   M_JAB_P
+BAL_MUG:
+	.word   64,68,0,68
+	.long   032f4b10H
+	.word   0580H
+	.long   M_MAD_P
+MDOC_MUG:
+	.word   56,65,0,65
+	.long   032fb240H
+	.word   080H
+	.long   M_MDOC_P
+VIK_MUG:
+	.word   96,91,9,91
+	.long   03300688H
+	.word   0580H
+	.long   M_VAPE_P
+MUN_MUG:
+	.word   76,84,0,84
+	.long   0330cab0H
+	.word   0880H
+	.long   M_MUND_P
+AMR_MUG:
+	.word   84,86,14,86
+	.long   033144e0H
+	.word   0980H
+	.long   M_AMR_P
+BAR_MUG:
+	.word   64,63,0,63
+	.long   0331c370H
+	.word   0480H
+	.long   M_BAR_P
+DIM_MUG:
+	.word   60,62,0,62
+	.long   033210f0H
+	.word   080H
+	.long   M_DIM_P
+JAC_MUG:
+	.word   68,64,0,64
+	.long   03326518H
+	.word   0480H
+	.long   M_JCKJR_P
+JIG_MUG:
+	.word   76,61,0,61
+	.long   0332c0e8H
+	.word   0480H
+	.long   M_JIGET_P
+JON_MUG:
+	.word   64,65,0,65
+	.long   03331b38H
+	.word   0580H
+	.long   M_JON_P
+MIK_MUG:
+	.word   60,62,0,62
+	.long   033373f0H
+	.word   0580H
+	.long   M_MIKE_P
+MIN_MUG:
+	.word   56,63,0,63
+	.long   0333c670H
+	.word   080H
+	.long   M_MIN_P
+MXV_MUG:
+	.word   56,63,0,63
+	.long   03341308H
+	.word   080H
+	.long   M_MXV_P
+WIL_MUG:
+	.word   76,62,0,62
+	.long   03346408H
+	.word   0480H
+	.long   M_WIL_P
+NOR_MUG:
+	.word   56,67,0,67
+	.long   0334b888H
+	.word   080H
+	.long   M_NORTH_P
+CAR_MUG:
+	.word   64,65,0,65
+	.long   03350da8H
+	.word   0480H
+	.long   M_CAR_P
+DAN_MUG:
+	.word   52,71,0,71
+	.long   03356b88H
+	.word   080H
+	.long   M_DAN_P
+EDD_MUG:
+	.word   64,64,0,64
+	.long   0335c980H
+	.word   0480H
+	.long   M_EDD_P
+EUG_MUG:
+	.word   60,65,0,65
+	.long   033624e0H
+	.word   080H
+	.long   M_EUG_P
+JEF_MUG:
+	.word   60,64,0,64
+	.long   03367e30H
+	.word   0480H
+	.long   M_JEF_P
+SHN_MUG:
+	.word   68,65,0,65
+	.long   0336d598H
+	.word   0480H
+	.long   M_SHN_P
+JAM_MUG:
+	.word   68,69,6,69
+	.long   03372780H
+	.word   0580H
+	.long   M_JAM_P
+TUR_MUG:
+	.word   68,70,0,70
+	.long   033792e8H
+	.word   0580H
+	.long   M_TUR_P
+BUD_MUG:
+	.word   56,63,0,63
+	.long   03381418H
+	.word   080H
+	.long   M_BUD_P
+HEY_MUG:
+	.word   52,65,0,65
+	.long   03386408H
+	.word   080H
+	.long   M_HEY_P
+JEN_MUG:
+	.word   76,65,0,65
+	.long   0338b4d8H
+	.word   0580H
+	.long   M_JEN_P
+JMC_MUG:
+	.word   64,64,0,64
+	.long   03392b70H
+	.word   0480H
+	.long   M_JMC_P
+NIK_MUG:
+	.word   64,64,0,64
+	.long   033988c8H
+	.word   0480H
+	.long   M_NIK_P
+ROT_MUG:
+	.word   60,65,0,65
+	.long   0339e2a0H
+	.word   0580H
+	.long   M_ROT_P
+SAL_MUG:
+	.word   64,65,0,65
+	.long   033a43c8H
+	.word   0580H
+	.long   M_SAL_P
+PAT_MUG:
+	.word   60,64,0,64
+	.long   033aa6f0H
+	.word   080H
+	.long   M_PAT_P
+NEI_MUG:
+	.word   56,63,0,63
+	.long   033afe50H
+	.word   080H
+	.long   M_NEI_P
+PER_MUG:
+	.word   84,68,0,68
+	.long   033b4e98H
+	.word   0880H
+	.long   M_PER_P
+ALL_COL:
+	.word   64,65,0,65
+	.long   033bbd08H
+	.word   0480H
+	.long   M_ALLEN_P
+CAM_COL:
+	.word   72,64,0,64
+	.long   033c1900H
+	.word   0480H
+	.long   M_CAMB_P
+DAM_COL:
+	.word   64,63,0,63
+	.long   033c7108H
+	.word   0480H
+	.long   M_DAMP_P
+DUN_COL:
+	.word   56,60,0,60
+	.long   033cc1d8H
+	.word   080H
+	.long   M_DUNC_P
+HAM_COL:
+	.word   56,64,0,64
+	.long   033d1228H
+	.word   0480H
+	.long   M_HAMR_P
+HAR_COL:
+	.word   68,61,0,61
+	.long   033d5ca8H
+	.word   0580H
+	.long   M_HAR_P
+IVE_COL:
+	.word   68,65,0,65
+	.long   033db0b0H
+	.word   0480H
+	.long   M_IVER_P
+KIT_COL:
+	.word   56,65,0,65
+	.long   033e0c18H
+	.word   080H
+	.long   M_KITT_P
+MAR_COL:
+	.word   60,65,0,65
+	.long   033e6018H
+	.word   080H
+	.long   M_MARBY_P
+MIN_COL:
+	.word   64,64,0,64
+	.long   033eb378H
+	.word   0480H
+	.long   M_MIN_P
+RIL_COL:
+	.word   52,64,0,64
+	.long   033f0c28H
+	.word   080H
+	.long   M_RILY_P
+WAL_COL:
+	.word   60,64,0,64
+	.long   033f5b10H
+	.word   0480H
+	.long   M_WALL_P
+	.TEXT
+

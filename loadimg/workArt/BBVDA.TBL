@@ -1,0 +1,4 @@
+	.DATA
+TROPHY	.set	0fff90530h
+	.TEXT
+

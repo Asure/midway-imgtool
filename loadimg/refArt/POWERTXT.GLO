@@ -1,0 +1,9 @@
+	.globl	MESSP_D_P
+	.global	TOURMODE2
+	.globl	MESSP_Y_P
+	.global	NOCPU2
+	.global	SECRETS2
+	.global	ASISTOFF2
+	.global	SHOTPERC2
+	.global	BABYPLAY2
+	.global	BRSH20APO

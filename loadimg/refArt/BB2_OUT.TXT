@@ -1,0 +1,606 @@
+
+Copyright (C) Williams Electronics Games, Inc. 1993.
+GSP Image Loader - DMA 2 - Version 5/25/94
+Using a page of expanded memory.
+
+
+GSP is Memory Mapped at PC address C000:7000
+Loading images ...
+	from: C:\BB2.lod
+	to:   Table header files (written to directory C:\TMP\)
+	      GSP target system.
+	      C:\TMP\BB2.irw
+	      Padding images to multiple of 4 pixels
+
+SET new IRAM address = 2000000
+SET new IRAM address = 3EDA390
+Opening img lib [C:\nbacrowd.img]         CR4THD02 (128 by  42) XO=0  YO=66
+ [CR4THD02] Auto pixel packing to 8 bits
+LOADED         CR4THD03 (140 by  51) XO=4  YO=75
+ [CR4THD03] Auto pixel packing to 8 bits
+LOADED         CR4THD04 (142 by  63) XO=4  YO=87
+ [CR4THD04] Auto pixel packing to 8 bits
+LOADED         CR4THD05 (138 by  59) XO=3  YO=83
+ [CR4THD05] Auto pixel packing to 8 bits
+LOADED
+Opening img lib [C:\tvtext.img]       BST_DEFred ( 88 by  49) XO=0  YO=0
+ [BST_DEFred] Auto pixel packing to 6 bits
+LOADED       BST_STKred ( 88 by  49) XO=0  YO=0
+ [BST_STKred] Auto pixel packing to 6 bits
+LOADED       BST_RNKred ( 88 by  49) XO=0  YO=0
+ [BST_RNKred] Auto pixel packing to 6 bits
+LOADED       BST_OFFred ( 88 by  49) XO=0  YO=0
+ [BST_OFFred] Auto pixel packing to 6 bits
+LOADED
+Opening img lib [C:\nba_pas1.img]            w1cp1 ( 59 by 105) XO=32  YO=92
+ [w1cp1] Auto pixel packing to 8 bits
+LOADED            w1cp2 ( 68 by 106) XO=37  YO=93
+ [w1cp2] Auto pixel packing to 8 bits
+LOADED            w1cp3 ( 67 by 107) XO=35  YO=94
+ [w1cp3] Auto pixel packing to 8 bits
+LOADED            w1cp4 ( 57 by 107) XO=30  YO=96
+ [w1cp4] Auto pixel packing to 8 bits
+LOADED            w1cp5 ( 36 by 112) XO=17  YO=106
+ [w1cp5] Auto pixel packing to 8 bits
+LOADED            w1cp6 ( 38 by 113) XO=18  YO=107
+ [w1cp6] Auto pixel packing to 8 bits
+LOADED            w2cp1 ( 51 by 100) XO=18  YO=92
+ [w2cp1] Auto pixel packing to 8 bits
+LOADED            w2cp2 ( 57 by 100) XO=18  YO=93
+ [w2cp2] Auto pixel packing to 8 bits
+LOADED            w2cp3 ( 56 by  99) XO=17  YO=93
+ [w2cp3] Auto pixel packing to 8 bits
+LOADED            w2cp4 ( 60 by  95) XO=16  YO=92
+ [w2cp4] Auto pixel packing to 8 bits
+LOADED            w2cp5 ( 75 by  97) XO=11  YO=94
+ [w2cp5] Auto pixel packing to 8 bits
+LOADED            w2cp6 ( 81 by 106) XO=9  YO=104
+ [w2cp6] Auto pixel packing to 8 bits
+LOADED            w3cp1 ( 58 by 103) XO=22  YO=89
+ [w3cp1] Auto pixel packing to 8 bits
+LOADED            w3cp2 ( 57 by  99) XO=19  YO=89
+ [w3cp2] Auto pixel packing to 8 bits
+LOADED            w3cp3 ( 58 by  97) XO=16  YO=89
+ [w3cp3] Auto pixel packing to 8 bits
+LOADED            w3cp4 ( 64 by  97) XO=16  YO=88
+ [w3cp4] Auto pixel packing to 8 bits
+LOADED            w3cp5 ( 90 by  95) XO=12  YO=86
+ [w3cp5] Auto pixel packing to 8 bits
+LOADED            w3cp6 ( 96 by 102) XO=8  YO=93
+ [w3cp6] Auto pixel packing to 8 bits
+LOADED            w4cp1 ( 56 by 100) XO=24  YO=89
+ [w4cp1] Auto pixel packing to 8 bits
+LOADED            w4cp2 ( 51 by 101) XO=20  YO=89
+ [w4cp2] Auto pixel packing to 8 bits
+LOADED            w4cp3 ( 50 by 103) XO=19  YO=89
+ [w4cp3] Auto pixel packing to 8 bits
+LOADED            w4cp4 ( 57 by 104) XO=17  YO=88
+ [w4cp4] Auto pixel packing to 8 bits
+LOADED            w4cp5 ( 89 by 103) XO=14  YO=87
+ [w4cp5] Auto pixel packing to 8 bits
+LOADED            w4cp6 ( 89 by 102) XO=13  YO=86
+ [w4cp6] Auto pixel packing to 8 bits
+LOADED            w5cp1 ( 54 by  97) XO=32  YO=90
+ [w5cp1] Auto pixel packing to 8 bits
+LOADED            w5cp2 ( 56 by 103) XO=29  YO=89
+ [w5cp2] Auto pixel packing to 8 bits
+LOADED            w5cp3 ( 62 by 105) XO=34  YO=87
+ [w5cp3] Auto pixel packing to 8 bits
+LOADED            w5cp4 ( 61 by 104) XO=35  YO=86
+ [w5cp4] Auto pixel packing to 8 bits
+LOADED            w5cp5 ( 45 by 104) XO=28  YO=86
+ [w5cp5] Auto pixel packing to 8 bits
+LOADED            w5cp6 ( 46 by 102) XO=29  YO=84
+ [w5cp6] Auto pixel packing to 8 bits
+LOADED           w1ohp1 ( 59 by 104) XO=31  YO=97
+ [w1ohp1] Auto pixel packing to 8 bits
+LOADED           w1ohp2 ( 67 by 119) XO=34  YO=112
+ [w1ohp2] Auto pixel packing to 8 bits
+LOADED           w1ohp3 ( 66 by 130) XO=31  YO=125
+ [w1ohp3] Auto pixel packing to 8 bits
+LOADED           w1ohp4 ( 65 by 135) XO=29  YO=130
+ [w1ohp4] Auto pixel packing to 8 bits
+LOADED           w1ohp5 ( 64 by 130) XO=30  YO=125
+ [w1ohp5] Auto pixel packing to 8 bits
+LOADED           w1ohp6 ( 53 by 125) XO=30  YO=120
+ [w1ohp6] Auto pixel packing to 8 bits
+LOADED           w1ohp7 ( 47 by 133) XO=25  YO=130
+ [w1ohp7] Auto pixel packing to 8 bits
+LOADED           w1ohp8 ( 45 by 116) XO=24  YO=112
+ [w1ohp8] Auto pixel packing to 8 bits
+LOADED           w1ohp9 ( 47 by 112) XO=25  YO=107
+ [w1ohp9] Auto pixel packing to 8 bits
+LOADED          w1ohp10 ( 50 by 109) XO=29  YO=104
+ [w1ohp10] Auto pixel packing to 8 bits
+LOADED          w1ohp11 ( 52 by 107) XO=29  YO=101
+ [w1ohp11] Auto pixel packing to 8 bits
+LOADED           w2ohp1 ( 65 by 107) XO=15  YO=97
+ [w2ohp1] Auto pixel packing to 8 bits
+LOADED           w2ohp2 ( 58 by 127) XO=0  YO=117
+ [w2ohp2] Auto pixel packing to 8 bits
+LOADED           w2ohp3 ( 57 by 138) XO=-2  YO=128
+ [w2ohp3] Auto pixel packing to 8 bits
+LOADED           w2ohp4 ( 51 by 136) XO=-5  YO=129
+ [w2ohp4] Auto pixel packing to 8 bits
+LOADED           w2ohp5 ( 44 by 131) XO=-12  YO=124
+ [w2ohp5] Auto pixel packing to 8 bits
+LOADED           w2ohp6 ( 53 by 131) XO=-14  YO=126
+ [w2ohp6] Auto pixel packing to 8 bits
+LOADED           w2ohp7 ( 67 by 128) XO=-13  YO=124
+ [w2ohp7] Auto pixel packing to 8 bits
+LOADED           w2ohp8 ( 71 by 123) XO=-9  YO=116
+ [w2ohp8] Auto pixel packing to 8 bits
+LOADED           w2ohp9 ( 73 by 121) XO=-6  YO=112
+ [w2ohp9] Auto pixel packing to 8 bits
+LOADED          w2ohp10 ( 70 by 115) XO=-1  YO=105
+ [w2ohp10] Auto pixel packing to 8 bits
+LOADED          w2ohp11 ( 76 by 109) XO=17  YO=99
+ [w2ohp11] Auto pixel packing to 8 bits
+LOADED           w3ohp1 ( 65 by 101) XO=16  YO=91
+ [w3ohp1] Auto pixel packing to 8 bits
+LOADED           w3ohp2 ( 56 by 115) XO=10  YO=105
+ [w3ohp2] Auto pixel packing to 8 bits
+LOADED           w3ohp3 ( 59 by 131) XO=6  YO=121
+ [w3ohp3] Auto pixel packing to 8 bits
+LOADED           w3ohp4 ( 69 by 129) XO=6  YO=120
+ [w3ohp4] Auto pixel packing to 8 bits
+LOADED           w3ohp5 ( 66 by 131) XO=2  YO=122
+ [w3ohp5] Auto pixel packing to 8 bits
+LOADED           w3ohp6 ( 63 by 138) XO=-1  YO=130
+ [w3ohp6] Auto pixel packing to 8 bits
+LOADED           w3ohp7 ( 86 by 136) XO=-3  YO=128
+ [w3ohp7] Auto pixel packing to 8 bits
+LOADED           w3ohp8 ( 91 by 130) XO=2  YO=120
+ [w3ohp8] Auto pixel packing to 8 bits
+LOADED           w3ohp9 ( 93 by 124) XO=7  YO=114
+ [w3ohp9] Auto pixel packing to 8 bits
+LOADED          w3ohp10 ( 84 by 113) XO=6  YO=103
+ [w3ohp10] Auto pixel packing to 8 bits
+LOADED          w3ohp11 ( 72 by 104) XO=8  YO=94
+ [w3ohp11] Auto pixel packing to 8 bits
+LOADED           w4ohp1 ( 57 by 104) XO=24  YO=95
+ [w4ohp1] Auto pixel packing to 8 bits
+LOADED           w4ohp2 ( 55 by 122) XO=23  YO=113
+ [w4ohp2] Auto pixel packing to 8 bits
+LOADED           w4ohp3 ( 55 by 133) XO=21  YO=124
+ [w4ohp3] Auto pixel packing to 8 bits
+LOADED           w4ohp4 ( 69 by 138) XO=19  YO=125
+ [w4ohp4] Auto pixel packing to 8 bits
+LOADED           w4ohp5 ( 69 by 138) XO=19  YO=122
+ [w4ohp5] Auto pixel packing to 8 bits
+LOADED           w4ohp6 ( 67 by 127) XO=17  YO=111
+ [w4ohp6] Auto pixel packing to 8 bits
+LOADED           w4ohp7 ( 72 by 133) XO=15  YO=117
+ [w4ohp7] Auto pixel packing to 8 bits
+LOADED           w4ohp8 (107 by 112) XO=13  YO=96
+ [w4ohp8] Auto pixel packing to 8 bits
+LOADED           w4ohp9 (106 by 104) XO=17  YO=88
+ [w4ohp9] Auto pixel packing to 8 bits
+LOADED          w4ohp10 ( 93 by 102) XO=20  YO=89
+ [w4ohp10] Auto pixel packing to 8 bits
+LOADED          w4ohp11 ( 79 by  99) XO=20  YO=90
+ [w4ohp11] Auto pixel packing to 8 bits
+LOADED           w5ohp1 ( 60 by  93) XO=28  YO=87
+ [w5ohp1] Auto pixel packing to 8 bits
+LOADED           w5ohp2 ( 76 by  95) XO=34  YO=89
+ [w5ohp2] Auto pixel packing to 8 bits
+LOADED           w5ohp3 ( 74 by 123) XO=33  YO=111
+ [w5ohp3] Auto pixel packing to 8 bits
+LOADED           w5ohp4 ( 65 by 139) XO=30  YO=121
+ [w5ohp4] Auto pixel packing to 8 bits
+LOADED           w5ohp5 ( 63 by 139) XO=31  YO=117
+ [w5ohp5] Auto pixel packing to 8 bits
+LOADED           w5ohp6 ( 65 by 127) XO=32  YO=105
+ [w5ohp6] Auto pixel packing to 8 bits
+LOADED           w5ohp7 ( 61 by 122) XO=29  YO=100
+ [w5ohp7] Auto pixel packing to 8 bits
+LOADED           w5ohp8 ( 52 by 127) XO=24  YO=105
+ [w5ohp8] Auto pixel packing to 8 bits
+LOADED           w5ohp9 ( 46 by 107) XO=21  YO=85
+ [w5ohp9] Auto pixel packing to 8 bits
+LOADED          w5ohp10 ( 46 by 103) XO=19  YO=87
+ [w5ohp10] Auto pixel packing to 8 bits
+LOADED          w5ohp11 ( 54 by  96) XO=26  YO=90
+ [w5ohp11] Auto pixel packing to 8 bits
+LOADED
+Opening img lib [C:\nba_msc2.img]          w1push1 ( 62 by 111) XO=36  YO=99
+ [w1push1] Auto pixel packing to 8 bits
+LOADED          w1push2 ( 61 by 112) XO=40  YO=100
+ [w1push2] Auto pixel packing to 8 bits
+LOADED          w1push3 ( 61 by 112) XO=36  YO=99
+ [w1push3] Auto pixel packing to 8 bits
+LOADED          w1push4 ( 48 by 117) XO=25  YO=103
+ [w1push4] Auto pixel packing to 8 bits
+LOADED          w1push5 ( 50 by 122) XO=25  YO=107
+ [w1push5] Auto pixel packing to 8 bits
+LOADED          w1push6 ( 53 by 121) XO=26  YO=107
+ [w1push6] Auto pixel packing to 8 bits
+LOADED          w1push7 ( 57 by 112) XO=28  YO=99
+ [w1push7] Auto pixel packing to 8 bits
+LOADED          w1push8 ( 61 by 110) XO=32  YO=97
+ [w1push8] Auto pixel packing to 8 bits
+LOADED          w1push9 ( 68 by 109) XO=39  YO=94
+ [w1push9] Auto pixel packing to 8 bits
+LOADED         w1push10 ( 85 by 113) XO=48  YO=95
+ [w1push10] Auto pixel packing to 8 bits
+LOADED         w1push11 ( 82 by 111) XO=45  YO=95
+ [w1push11] Auto pixel packing to 8 bits
+LOADED          w2push1 ( 70 by 110) XO=22  YO=95
+ [w2push1] Auto pixel packing to 8 bits
+LOADED          w2push2 ( 69 by 109) XO=19  YO=97
+ [w2push2] Auto pixel packing to 8 bits
+LOADED          w2push3 ( 78 by 108) XO=21  YO=96
+ [w2push3] Auto pixel packing to 8 bits
+LOADED          w2push4 ( 83 by 109) XO=19  YO=97
+ [w2push4] Auto pixel packing to 8 bits
+LOADED          w2push5 ( 85 by 117) XO=17  YO=105
+ [w2push5] Auto pixel packing to 8 bits
+LOADED          w2push6 ( 87 by 122) XO=17  YO=110
+ [w2push6] Auto pixel packing to 8 bits
+LOADED          w2push7 ( 77 by 130) XO=10  YO=116
+ [w2push7] Auto pixel packing to 8 bits
+LOADED          w2push8 ( 79 by 124) XO=12  YO=109
+ [w2push8] Auto pixel packing to 8 bits
+LOADED          w2push9 ( 70 by 112) XO=10  YO=99
+ [w2push9] Auto pixel packing to 8 bits
+LOADED         w2push10 ( 48 by 110) XO=12  YO=98
+ [w2push10] Auto pixel packing to 8 bits
+LOADED         w2push11 ( 61 by 109) XO=25  YO=96
+ [w2push11] Auto pixel packing to 8 bits
+LOADED          w3push1 ( 49 by 106) XO=23  YO=96
+ [w3push1] Auto pixel packing to 8 bits
+LOADED          w3push2 ( 61 by 106) XO=23  YO=96
+ [w3push2] Auto pixel packing to 8 bits
+LOADED          w3push3 ( 65 by 108) XO=23  YO=98
+ [w3push3] Auto pixel packing to 8 bits
+LOADED          w3push4 (141 by 114) XO=21  YO=104
+ [w3push4] Auto pixel packing to 8 bits
+LOADED          w3push5 (151 by 100) XO=33  YO=96
+ [w3push5] Auto pixel packing to 8 bits
+LOADED          w3push6 (152 by  97) XO=33  YO=94
+ [w3push6] Auto pixel packing to 8 bits
+LOADED          w3push7 (144 by  96) XO=29  YO=93
+ [w3push7] Auto pixel packing to 8 bits
+LOADED          w3push8 (128 by 100) XO=20  YO=92
+ [w3push8] Auto pixel packing to 8 bits
+LOADED          w3push9 (100 by 105) XO=3  YO=95
+ [w3push9] Auto pixel packing to 8 bits
+LOADED         w3push10 ( 90 by 105) XO=6  YO=95
+ [w3push10] Auto pixel packing to 8 bits
+LOADED         w3push11 ( 69 by 106) XO=6  YO=96
+ [w3push11] Auto pixel packing to 8 bits
+LOADED          w4push1 ( 59 by 106) XO=35  YO=99
+ [w4push1] Auto pixel packing to 8 bits
+LOADED          w4push2 ( 59 by 114) XO=30  YO=102
+ [w4push2] Auto pixel packing to 8 bits
+LOADED          w4push3 ( 74 by 113) XO=28  YO=101
+ [w4push3] Auto pixel packing to 8 bits
+LOADED          w4push4 (126 by 103) XO=33  YO=91
+ [w4push4] Auto pixel packing to 8 bits
+LOADED          w4push5 (119 by 100) XO=48  YO=88
+ [w4push5] Auto pixel packing to 8 bits
+LOADED          w4push6 (110 by  96) XO=59  YO=84
+ [w4push6] Auto pixel packing to 8 bits
+LOADED          w4push7 (107 by  92) XO=65  YO=80
+ [w4push7] Auto pixel packing to 8 bits
+LOADED          w4push8 (104 by  92) XO=61  YO=80
+ [w4push8] Auto pixel packing to 8 bits
+LOADED          w4push9 (104 by  96) XO=43  YO=84
+ [w4push9] Auto pixel packing to 8 bits
+LOADED         w4push10 ( 82 by 101) XO=27  YO=89
+ [w4push10] Auto pixel packing to 8 bits
+LOADED         w4push11 ( 72 by 101) XO=21  YO=91
+ [w4push11] Auto pixel packing to 8 bits
+LOADED          w5push1 ( 66 by  97) XO=37  YO=90
+ [w5push1] Auto pixel packing to 8 bits
+LOADED          w5push2 ( 75 by 111) XO=38  YO=90
+ [w5push2] Auto pixel packing to 8 bits
+LOADED          w5push3 ( 72 by 109) XO=36  YO=88
+ [w5push3] Auto pixel packing to 8 bits
+LOADED          w5push4 ( 53 by 111) XO=19  YO=90
+ [w5push4] Auto pixel packing to 8 bits
+LOADED          w5push5 ( 40 by 110) XO=20  YO=89
+ [w5push5] Auto pixel packing to 8 bits
+LOADED          w5push6 ( 49 by 110) XO=20  YO=89
+ [w5push6] Auto pixel packing to 8 bits
+LOADED          w5push7 ( 40 by 108) XO=19  YO=87
+ [w5push7] Auto pixel packing to 8 bits
+LOADED          w5push8 ( 42 by 106) XO=19  YO=86
+ [w5push8] Auto pixel packing to 8 bits
+LOADED          w5push9 ( 55 by 104) XO=26  YO=85
+ [w5push9] Auto pixel packing to 8 bits
+LOADED         w5push10 ( 63 by 101) XO=37  YO=89
+ [w5push10] Auto pixel packing to 8 bits
+LOADED         w5push11 ( 63 by  98) XO=39  YO=92
+ [w5push11] Auto pixel packing to 8 bits
+LOADED
+Opening img lib [C:\nba_def1.img]          T1SWPE1 (123 by  89) XO=70  YO=82
+ [T1SWPE1] Auto pixel packing to 8 bits
+LOADED          T1SWPE2 (116 by  89) XO=60  YO=82
+ [T1SWPE2] Auto pixel packing to 8 bits
+LOADED          T1SWPE3 (115 by  89) XO=58  YO=82
+ [T1SWPE3] Auto pixel packing to 8 bits
+LOADED          T1SWPE4 (106 by  89) XO=50  YO=82
+ [T1SWPE4] Auto pixel packing to 8 bits
+LOADED          T1SWPE5 ( 89 by  89) XO=32  YO=82
+ [T1SWPE5] Auto pixel packing to 8 bits
+LOADED          T1SWPE6 ( 84 by  88) XO=28  YO=81
+ [T1SWPE6] Auto pixel packing to 8 bits
+LOADED          T1SWPE7 ( 80 by  88) XO=28  YO=81
+ [T1SWPE7] Auto pixel packing to 8 bits
+LOADED          T1SWPE8 ( 79 by  88) XO=28  YO=81
+ [T1SWPE8] Auto pixel packing to 8 bits
+LOADED          T1SWPE9 ( 80 by  88) XO=28  YO=81
+ [T1SWPE9] Auto pixel packing to 8 bits
+LOADED         T1SWPE10 ( 85 by  87) XO=27  YO=81
+ [T1SWPE10] Auto pixel packing to 8 bits
+LOADED         T1SWPE11 ( 84 by  88) XO=27  YO=82
+ [T1SWPE11] Auto pixel packing to 8 bits
+LOADED         T1SWPE12 ( 82 by  87) XO=27  YO=81
+ [T1SWPE12] Auto pixel packing to 8 bits
+LOADED          T2SWPE1 ( 83 by  89) XO=32  YO=80
+ [T2SWPE1] Auto pixel packing to 8 bits
+LOADED          T2SWPE2 ( 90 by  89) XO=30  YO=80
+ [T2SWPE2] Auto pixel packing to 8 bits
+LOADED          T2SWPE3 (101 by  88) XO=26  YO=79
+ [T2SWPE3] Auto pixel packing to 8 bits
+LOADED          T2SWPE4 (108 by  91) XO=26  YO=82
+ [T2SWPE4] Auto pixel packing to 8 bits
+LOADED          T2SWPE5 (104 by  93) XO=27  YO=84
+ [T2SWPE5] Auto pixel packing to 8 bits
+LOADED          T2SWPE6 ( 80 by  93) XO=27  YO=84
+ [T2SWPE6] Auto pixel packing to 8 bits
+LOADED          T2SWPE7 ( 69 by  94) XO=27  YO=85
+ [T2SWPE7] Auto pixel packing to 8 bits
+LOADED          T2SWPE8 ( 60 by  93) XO=26  YO=84
+ [T2SWPE8] Auto pixel packing to 8 bits
+LOADED          T2SWPE9 ( 59 by  93) XO=25  YO=84
+ [T2SWPE9] Auto pixel packing to 8 bits
+LOADED         T2SWPE10 ( 58 by  91) XO=24  YO=82
+ [T2SWPE10] Auto pixel packing to 8 bits
+LOADED         T2SWPE11 ( 57 by  90) XO=23  YO=81
+ [T2SWPE11] Auto pixel packing to 8 bits
+LOADED         T2SWPE12 ( 59 by  88) XO=25  YO=80
+ [T2SWPE12] Auto pixel packing to 8 bits
+LOADED          T3SWPE1 ( 67 by  86) XO=39  YO=76
+ [T3SWPE1] Auto pixel packing to 8 bits
+LOADED          T3SWPE2 ( 63 by  87) XO=35  YO=77
+ [T3SWPE2] Auto pixel packing to 8 bits
+LOADED          T3SWPE3 ( 48 by  88) XO=20  YO=78
+ [T3SWPE3] Auto pixel packing to 8 bits
+LOADED          T3SWPE4 ( 50 by  89) XO=21  YO=79
+ [T3SWPE4] Auto pixel packing to 8 bits
+LOADED          T3SWPE5 ( 67 by  89) XO=22  YO=79
+ [T3SWPE5] Auto pixel packing to 8 bits
+LOADED          T3SWPE6 ( 81 by  89) XO=23  YO=79
+ [T3SWPE6] Auto pixel packing to 8 bits
+LOADED          T3SWPE7 ( 93 by  89) XO=24  YO=79
+ [T3SWPE7] Auto pixel packing to 8 bits
+LOADED          T3SWPE8 (104 by  89) XO=25  YO=79
+ [T3SWPE8] Auto pixel packing to 8 bits
+LOADED          T3SWPE9 (103 by  88) XO=25  YO=78
+ [T3SWPE9] Auto pixel packing to 8 bits
+LOADED         T3SWPE10 ( 88 by  88) XO=25  YO=78
+ [T3SWPE10] Auto pixel packing to 8 bits
+LOADED         T3SWPE11 ( 72 by  88) XO=25  YO=78
+ [T3SWPE11] Auto pixel packing to 8 bits
+LOADED         T3SWPE12 ( 63 by  88) XO=25  YO=78
+ [T3SWPE12] Auto pixel packing to 8 bits
+LOADED          T4SWPE1 ( 99 by  85) XO=52  YO=75
+ [T4SWPE1] Auto pixel packing to 8 bits
+LOADED          T4SWPE2 ( 90 by  86) XO=49  YO=76
+ [T4SWPE2] Auto pixel packing to 8 bits
+LOADED          T4SWPE3 ( 75 by  87) XO=41  YO=77
+ [T4SWPE3] Auto pixel packing to 8 bits
+LOADED          T4SWPE4 ( 52 by  89) XO=24  YO=79
+ [T4SWPE4] Auto pixel packing to 8 bits
+LOADED          T4SWPE6 ( 62 by  88) XO=23  YO=78
+ [T4SWPE6] Auto pixel packing to 8 bits
+LOADED          T4SWPE5 ( 51 by  89) XO=23  YO=79
+ [T4SWPE5] Auto pixel packing to 8 bits
+LOADED          T4SWPE7 ( 75 by  88) XO=23  YO=77
+ [T4SWPE7] Auto pixel packing to 8 bits
+LOADED          T4SWPE8 ( 98 by  88) XO=23  YO=77
+ [T4SWPE8] Auto pixel packing to 8 bits
+LOADED          T4SWPE9 (104 by  88) XO=23  YO=77
+ [T4SWPE9] Auto pixel packing to 8 bits
+LOADED         T4SWPE10 ( 93 by  88) XO=23  YO=77
+ [T4SWPE10] Auto pixel packing to 8 bits
+LOADED         T4SWPE11 ( 80 by  88) XO=23  YO=77
+ [T4SWPE11] Auto pixel packing to 8 bits
+LOADED         T4SWPE12 ( 72 by  89) XO=22  YO=78
+ [T4SWPE12] Auto pixel packing to 8 bits
+LOADED          T5SWPE1 (126 by  88) XO=65  YO=82
+ [T5SWPE1] Auto pixel packing to 8 bits
+LOADED          T5SWPE2 (129 by  89) XO=64  YO=83
+ [T5SWPE2] Auto pixel packing to 8 bits
+LOADED          T5SWPE3 (129 by  92) XO=62  YO=86
+ [T5SWPE3] Auto pixel packing to 8 bits
+LOADED          T5SWPE4 (115 by  98) XO=60  YO=92
+ [T5SWPE4] Auto pixel packing to 8 bits
+LOADED          T5SWPE6 ( 88 by 102) XO=55  YO=96
+ [T5SWPE6] Auto pixel packing to 8 bits
+LOADED          T5SWPE5 ( 99 by 101) XO=57  YO=95
+ [T5SWPE5] Auto pixel packing to 8 bits
+LOADED          T5SWPE7 ( 84 by 104) XO=54  YO=98
+ [T5SWPE7] Auto pixel packing to 8 bits
+LOADED          T5SWPE8 ( 80 by 106) XO=50  YO=100
+ [T5SWPE8] Auto pixel packing to 8 bits
+LOADED          T5SWPE9 ( 77 by 108) XO=47  YO=102
+ [T5SWPE9] Auto pixel packing to 8 bits
+LOADED         T5SWPE10 ( 74 by 109) XO=44  YO=103
+ [T5SWPE10] Auto pixel packing to 8 bits
+LOADED         T5SWPE11 ( 72 by 109) XO=42  YO=103
+ [T5SWPE11] Auto pixel packing to 8 bits
+LOADED         T5SWPE12 ( 70 by 108) XO=40  YO=102
+ [T5SWPE12] Auto pixel packing to 8 bits
+LOADED
+Opening img lib [C:\nba_def3.img]           w1reb5 ( 59 by 157) XO=39  YO=157
+ [w1reb5] Auto pixel packing to 8 bits
+LOADED           w1reb7 ( 50 by 153) XO=31  YO=151
+ [w1reb7] Auto pixel packing to 8 bits
+LOADED           w1reb8 ( 58 by 145) XO=36  YO=139
+ [w1reb8] Auto pixel packing to 8 bits
+LOADED           w1reb9 ( 74 by 118) XO=47  YO=111
+ [w1reb9] Auto pixel packing to 8 bits
+LOADED          w1reb10 ( 69 by  95) XO=41  YO=89
+ [w1reb10] Auto pixel packing to 8 bits
+LOADED           w2reb1 ( 70 by 128) XO=26  YO=121
+ [w2reb1] Auto pixel packing to 8 bits
+LOADED           w2reb2 ( 68 by 161) XO=26  YO=155
+ [w2reb2] Auto pixel packing to 8 bits
+LOADED           w2reb3 ( 67 by 169) XO=22  YO=164
+ [w2reb3] Auto pixel packing to 8 bits
+LOADED           w2reb5 ( 55 by 165) XO=23  YO=163
+ [w2reb5] Auto pixel packing to 8 bits
+LOADED           w2reb6 ( 48 by 161) XO=19  YO=159
+ [w2reb6] Auto pixel packing to 8 bits
+LOADED           w2reb7 ( 46 by 161) XO=18  YO=154
+ [w2reb7] Auto pixel packing to 8 bits
+LOADED           w2reb8 ( 49 by 144) XO=21  YO=136
+ [w2reb8] Auto pixel packing to 8 bits
+LOADED           w2reb9 ( 58 by 122) XO=21  YO=114
+ [w2reb9] Auto pixel packing to 8 bits
+LOADED          w2reb10 ( 58 by 105) XO=21  YO=97
+ [w2reb10] Auto pixel packing to 8 bits
+LOADED           w4reb4 ( 92 by 165) XO=25  YO=159
+ [w4reb4] Auto pixel packing to 8 bits
+LOADED           w4reb5 ( 73 by 169) XO=16  YO=159
+ [w4reb5] Auto pixel packing to 8 bits
+LOADED           w4reb7 ( 52 by 170) XO=12  YO=157
+ [w4reb7] Auto pixel packing to 8 bits
+LOADED           w4reb8 ( 62 by 166) XO=19  YO=151
+ [w4reb8] Auto pixel packing to 8 bits
+LOADED           w4reb9 ( 70 by 137) XO=26  YO=126
+ [w4reb9] Auto pixel packing to 8 bits
+LOADED          w4reb10 ( 74 by 104) XO=27  YO=93
+ [w4reb10] Auto pixel packing to 8 bits
+LOADED           w5reb5 ( 65 by 168) XO=29  YO=162
+ [w5reb5] Auto pixel packing to 8 bits
+LOADED           w5reb7 ( 63 by 162) XO=33  YO=154
+ [w5reb7] Auto pixel packing to 8 bits
+LOADED           w5reb8 ( 67 by 142) XO=35  YO=136
+ [w5reb8] Auto pixel packing to 8 bits
+LOADED           w5reb9 ( 73 by  98) XO=36  YO=92
+ [w5reb9] Auto pixel packing to 8 bits
+LOADED         w1blokl1 ( 82 by 105) XO=41  YO=99
+ [w1blokl1] Auto pixel packing to 8 bits
+LOADED         w1blokl2 ( 83 by 136) XO=37  YO=130
+ [w1blokl2] Auto pixel packing to 8 bits
+LOADED         w1blokl3 ( 95 by 161) XO=30  YO=154
+ [w1blokl3] Auto pixel packing to 8 bits
+LOADED         w1blokl4 ( 99 by 166) XO=29  YO=161
+ [w1blokl4] Auto pixel packing to 8 bits
+LOADED         w2blokl1 ( 88 by 100) XO=22  YO=93
+ [w2blokl1] Auto pixel packing to 8 bits
+LOADED         w2blokl2 ( 76 by 143) XO=25  YO=135
+ [w2blokl2] Auto pixel packing to 8 bits
+LOADED         w2blokl3 ( 82 by 163) XO=23  YO=158
+ [w2blokl3] Auto pixel packing to 8 bits
+LOADED         w2blokl4 ( 84 by 172) XO=14  YO=168
+ [w2blokl4] Auto pixel packing to 8 bits
+LOADED         w3blokl1 ( 70 by 121) XO=14  YO=111
+ [w3blokl1] Auto pixel packing to 8 bits
+LOADED         w3blokl2 ( 51 by 154) XO=12  YO=144
+ [w3blokl2] Auto pixel packing to 8 bits
+LOADED         w3blokl3 ( 52 by 175) XO=13  YO=165
+ [w3blokl3] Auto pixel packing to 8 bits
+LOADED         w3blokl4 ( 45 by 179) XO=13  YO=169
+ [w3blokl4] Auto pixel packing to 8 bits
+LOADED         w4blokl1 ( 72 by 111) XO=22  YO=102
+ [w4blokl1] Auto pixel packing to 8 bits
+LOADED         w4blokl2 ( 67 by 141) XO=22  YO=132
+ [w4blokl2] Auto pixel packing to 8 bits
+LOADED         w4blokl3 ( 58 by 174) XO=21  YO=165
+ [w4blokl3] Auto pixel packing to 8 bits
+LOADED         w4blokl4 ( 85 by 177) XO=48  YO=169
+ [w4blokl4] Auto pixel packing to 8 bits
+LOADED         w5blokl1 ( 63 by 106) XO=29  YO=100
+ [w5blokl1] Auto pixel packing to 8 bits
+LOADED         w5blokl2 ( 61 by 143) XO=31  YO=137
+ [w5blokl2] Auto pixel packing to 8 bits
+LOADED         w5blokl3 ( 67 by 168) XO=38  YO=162
+ [w5blokl3] Auto pixel packing to 8 bits
+LOADED         w5blokl4 ( 97 by 181) XO=69  YO=175
+ [w5blokl4] Auto pixel packing to 8 bits
+LOADED
+Opening img lib [C:\nba_def4.img]           w1rej1 ( 63 by 149) XO=35  YO=143
+ [w1rej1] Auto pixel packing to 8 bits
+LOADED           w1rej2 ( 67 by 150) XO=42  YO=144
+ [w1rej2] Auto pixel packing to 8 bits
+LOADED           w1rej3 ( 91 by 127) XO=61  YO=122
+ [w1rej3] Auto pixel packing to 8 bits
+LOADED           w1rej4 ( 90 by 127) XO=60  YO=125
+ [w1rej4] Auto pixel packing to 8 bits
+LOADED           w1rej5 ( 79 by 134) XO=54  YO=135
+ [w1rej5] Auto pixel packing to 8 bits
+LOADED           w1rej6 ( 58 by 145) XO=45  YO=149
+ [w1rej6] Auto pixel packing to 8 bits
+LOADED           w1rej7 ( 54 by 118) XO=41  YO=126
+ [w1rej7] Auto pixel packing to 8 bits
+LOADED           w1rej8 ( 52 by 108) XO=39  YO=114
+ [w1rej8] Auto pixel packing to 8 bits
+LOADED           w1rej9 ( 55 by 115) XO=43  YO=114
+ [w1rej9] Auto pixel packing to 8 bits
+LOADED          w1rej10 ( 49 by 127) XO=42  YO=118
+ [w1rej10] Auto pixel packing to 8 bits
+LOADED          w1rej11 ( 57 by  81) XO=40  YO=72
+ [w1rej11] Auto pixel packing to 8 bits
+LOADED           w2rej1 ( 76 by 132) XO=33  YO=124
+ [w2rej1] Auto pixel packing to 8 bits
+LOADED           w2rej2 ( 79 by 158) XO=58  YO=151
+ [w2rej2] Auto pixel packing to 8 bits
+LOADED           w2rej3 ( 65 by 136) XO=50  YO=134
+ [w2rej3] Auto pixel packing to 8 bits
+LOADED           w2rej4 ( 57 by 130) XO=42  YO=129
+ [w2rej4] Auto pixel packing to 8 bits
+LOADED           w2rej5 ( 47 by 129) XO=32  YO=132
+ [w2rej5] Auto pixel packing to 8 bits
+LOADED           w2rej6 ( 44 by 147) XO=24  YO=150
+ [w2rej6] Auto pixel packing to 8 bits
+LOADED           w2rej7 ( 57 by 133) XO=23  YO=133
+ [w2rej7] Auto pixel packing to 8 bits
+LOADED           w2rej8 ( 64 by 117) XO=22  YO=113
+ [w2rej8] Auto pixel packing to 8 bits
+LOADED           w2rej9 ( 73 by 117) XO=22  YO=109
+ [w2rej9] Auto pixel packing to 8 bits
+LOADED          w2rej10 ( 82 by 108) XO=27  YO=104
+ [w2rej10] Auto pixel packing to 8 bits
+LOADED          w2rej11 ( 89 by  92) XO=47  YO=86
+ [w2rej11] Auto pixel packing to 8 bits
+LOADED           w4rej1 (113 by 133) XO=76  YO=127
+ [w4rej1] Auto pixel packing to 8 bits
+LOADED           w4rej2 (128 by 146) XO=73  YO=138
+ [w4rej2] Auto pixel packing to 8 bits
+LOADED           w4rej3 (111 by 123) XO=63  YO=122
+ [w4rej3] Auto pixel packing to 8 bits
+LOADED           w4rej4 (114 by 130) XO=60  YO=134
+ [w4rej4] Auto pixel packing to 8 bits
+LOADED           w4rej5 (103 by 140) XO=43  YO=148
+ [w4rej5] Auto pixel packing to 8 bits
+LOADED           w4rej6 ( 80 by 153) XO=20  YO=157
+ [w4rej6] Auto pixel packing to 8 bits
+LOADED           w4rej7 ( 80 by 120) XO=21  YO=120
+ [w4rej7] Auto pixel packing to 8 bits
+LOADED           w4rej8 ( 63 by 120) XO=20  YO=115
+ [w4rej8] Auto pixel packing to 8 bits
+LOADED           w4rej9 ( 52 by 123) XO=19  YO=116
+ [w4rej9] Auto pixel packing to 8 bits
+LOADED          w4rej10 ( 53 by 128) XO=21  YO=119
+ [w4rej10] Auto pixel packing to 8 bits
+LOADED          w4rej11 ( 50 by  97) XO=25  YO=88
+ [w4rej11] Auto pixel packing to 8 bits
+LOADED
+
+Bytes Loaded...
+	IMAGE RAM              2079420 dec	  1FBABC hex
+
+	TOTAL LOAD             2079420 dec	  1FBABC hex
+
+Bytes Written to Raw File...
+	In IMAGE RAM records      2079420 dec	  1FBABC hex
+
+	TOTAL bytes written       2079420 dec	  1FBABC hex, in 2 records.
+
+Bytes Represented in Tables ... 2079420 dec 1FBABC hex
+

@@ -1,0 +1,293 @@
+	.DATA
+CRTPC1:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_ATL_p
+CRTPC2:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_BOS_p
+CRTPC3:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_CHA_p
+CRTPC4:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_CLE_p
+CRTPC5:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_CHI_p
+CRTPC6:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_DAL_p
+CRTPC7:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_DEN_p
+CRTPC8:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_DET_p
+CRTPC9:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_GLD_p
+CRTPC10:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_HOU_p
+CRTPC11:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_IND_p
+CRTPC12:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_LAC_p
+CRTPC13:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_LAL_p
+CRTPC14:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_MIA_p
+CRTPC15:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_MIL_p
+CRTPC16:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_MIN_p
+CRTPC17:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_NEJ_p
+CRTPC18:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_NEY_p
+CRTPC19:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_ORL_p
+CRTPC20:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_PHI_p
+CRTPC21:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_PHO_p
+CRTPC22:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_POR_p
+CRTPC23:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_SAC_p
+CRTPC24:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_SAN_p
+CRTPC25:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_SEA_p
+CRTPC26:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_TOR_p
+CRTPC27:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_UTA_p
+CRTPC28:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_VAN_p
+CRTPC29:
+	.word   12,8,0,0
+	.long   03907dfcH
+	.word   07000H
+	.long   CRT_WAS_p
+bk_flr1:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_ATL_P
+bk_flr2:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_BOS_P
+bk_flr3:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_CHA_P
+bk_flr4:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_CHI_P
+bk_flr5:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_CLE_P
+bk_flr6:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_DAL_P
+bk_flr7:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_DEN_P
+bk_flr8:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_GLD_P
+bk_flr9:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_HOU_P
+bk_flr10:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_IND_P
+bk_flr11:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_LAC_P
+bk_flr12:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_LAL_P
+bk_flr13:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_MIA_P
+bk_flr14:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_MIL_P
+bk_flr15:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_MIN_P
+bk_flr16:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_NEJ_P
+bk_flr17:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_NEY_P
+bk_flr18:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_ORL_P
+bk_flr19:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_PHI_P
+bk_flr20:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_PHO_P
+bk_flr21:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_POR_P
+bk_flr22:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_SAC_P
+bk_flr23:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_SAN_P
+bk_flr24:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_SEA_P
+bk_flr25:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_TOR_P
+bk_flr26:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_UTA_P
+bk_flr27:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_VAN_P
+bk_flr28:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_WAS_P
+bk_flr29:
+	.word   72,20,0,13
+	.long   0390809cH
+	.word   04000H
+	.long   BK_DET_P
+	.TEXT
+

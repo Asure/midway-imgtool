@@ -25,7 +25,7 @@
  * Constants
  * ========================================================================= */
 
-#define MAX_IMAGES      2000
+#define MAX_IMAGES      4096
 #define MAX_PALETTES    2000
 #define MAX_IMGFILES    64
 #define MAX_PATH        512
@@ -227,6 +227,7 @@ typedef struct {
 
     FILE     *asm_fp;
     FILE     *glo_fp;
+    FILE     *main_glo_fp;  /* IMGTBL.GLO (never redirected) */
     FILE     *pal_fp;
     FILE     *bgnd_fp;     /* BGNDTBL.ASM */
     FILE     *bgndpal_fp;  /* BGNDPAL.ASM */
@@ -250,6 +251,8 @@ typedef struct {
     int      n_small_uncompressed;    /* images <10px not zero-compressed */
     int      bgnd_dedup_bytes;        /* bytes saved by BGND checksum matches */
     int      bgnd_dedup_matches;      /* count of BGND checksum matches */
+    int      n_glo_files;
+    char     glo_files[64][64];
 } State;
 
 static State g;
@@ -319,13 +322,13 @@ static void irw_ensure(size_t need_bytes) {
 }
 
 /* LOADW FUN_1854_35fc checksum: sum + max over stride width */
-static uint32_t loadw_checksum(uint8_t *pix, int stride, int w, int h, uint32_t *out_max) {
-    uint32_t sum = 0, max_val = 0;
+static uint16_t loadw_checksum(uint8_t *pix, int stride, int w, int h, uint16_t *out_max) {
+    uint16_t sum = 0, max_val = 0;
     int n_words = (stride * h) / 2;
     uint16_t *wp = (uint16_t*)pix;
     for (int i = 0; i < n_words; i++) {
         uint16_t v = wp[i];
-        sum += v;
+        sum = (uint16_t)(sum + v);
         uint8_t lo = (uint8_t)(v & 0xff);
         uint8_t hi = (uint8_t)(v >> 8);
         if (lo > max_val) max_val = lo;
@@ -336,7 +339,7 @@ static uint32_t loadw_checksum(uint8_t *pix, int stride, int w, int h, uint32_t 
 }
 
 #define MAX_DEDUP 4096
-typedef struct { uint32_t sum, max_val; int sizx, sizy; uint16_t ctrl; uint32_t sag; } DedupEntry;
+typedef struct { uint16_t sum, max_val; int sizx, sizy; uint16_t ctrl; uint32_t sag; int sag_idx; } DedupEntry;
 static DedupEntry dedup_table[MAX_DEDUP];
 static int n_dedup = 0;
 
@@ -542,7 +545,6 @@ static ImgFile* img_load(const char *path) {
     /* Clamp to what fits in the file (allow 2 extra for shared entry access past boundary) */
     int max_fit = (int)((img->size - pttbl_ofs) / sizeof(PTTBL)) + 2;
     if (img->n_pttbls > max_fit) img->n_pttbls = max_fit;
-
     if (img->n_pttbls > 0)
         img->pttbls = (PTTBL*)(img->data + pttbl_ofs);
     else
@@ -661,7 +663,7 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
 
     p.sizx = pttbl_sizx > 0 ? pttbl_sizx : OUT_STRIDE(rec->w);
     p.sizy = rec->h;
-    if (g.xon) { p.sizx++; p.sizy++; }
+    if (g.xon) { p.sizx = OUT_STRIDE(p.sizx + 1); p.sizy++; }
     if (p.sizx < 1) p.sizx = 1;
     if (p.sizy < 1) p.sizy = 1;
     p.ctrl_zero = (real_bpp & 0x100) ? 1 : 0;
@@ -925,7 +927,7 @@ static uint32_t encode_image(ImgFile *img, IMG_REC *rec, CompParams *cp, int bpp
             encode_row(row, scl_stride, scl_stride, bpp, cp->lm_mult, cp->tm_mult, &running_lead);
         } else {
             int zw = g.pad4bits ? OUT_STRIDE(rec->w) : rec->w;
-            if (g.xon && (!g.zon || !do_cmp)) zw = rec->w + 1;
+            if (g.xon && (!g.zon || !do_cmp)) zw = OUT_STRIDE(rec->w + 1);
             if (zw < 1) zw = 1;
             for (int x = 0; x < zw; x++)
                 irw_write_bits(x < rec->w ? row[x] : 0, bpp);
@@ -985,21 +987,32 @@ static void write_palette(PaletteEntry *pe, ImgFile *img, int palnum, int actual
     FILE *fp = g.pal_fp;
     if (!fp) return;
     fprintf(fp, "%s:\r\n", pe->name);
-    fprintf(fp, "\t.word\t\t%d\r\n", pe->numc);
+    fprintf(fp, "\t.word\t%3d\r\n", pe->numc);
 
     int per_line = 8;
     for (int i = 0; i < pe->numc; i++) {
-        if (i % per_line == 0) fprintf(fp, "\t.word\t\t");
-        fprintf(fp, "%04XH", colors[i]);
+        if (i % per_line == 0) fprintf(fp, "\t.word\t");
+        uint16_t v = colors[i];
+        if (v < 0x10)
+            fprintf(fp, "%02XH", v);
+        else if (v < 0x100)
+            fprintf(fp, "%03XH", v);
+        else if (v < 0x1000)
+            fprintf(fp, "%04XH", v);
+        else
+            fprintf(fp, "%05XH", v);
         if (i % per_line == per_line-1 || i == pe->numc-1)
             fprintf(fp, "\r\n");
         else
             fprintf(fp, ",");
     }
-    fprintf(fp, "\r\n");
 
-    if (g.glo_fp) {
-        fprintf(g.glo_fp, "\t.globl\t%s\r\n", pe->name);
+    /* Palette file blank line separator between entries */
+    if (g.pal_fp)
+        fprintf(g.pal_fp, "\r\n");
+
+    if (g.main_glo_fp) {
+        fprintf(g.main_glo_fp, "\t.globl\t%s\r\n", pe->name);
     }
 }
 
@@ -1034,12 +1047,12 @@ static int get_ihdr_word_value(ImageEntry *ie, int field, int denom) {
     case IHDR_PT3X: {
         if (ie->pttbl_shared && ie->pttbl_shared->X) return (int)ie->pttbl_shared->X;
         if (ie->pttbl) return (int)(int8_t)ie->pttbl->box[0].w;
-        return -1;
+        return 0;
     }
     case IHDR_PT3Y: {
         if (ie->pttbl_shared && ie->pttbl_shared->Y) return (int)ie->pttbl_shared->Y;
         if (ie->pttbl) return (int)(int8_t)ie->pttbl->box[1].x;
-        return -1;
+        return 0;
     }
     case IHDR_PT5X: return 0;
     default: return -1;
@@ -1343,7 +1356,7 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
         /* TBL SIZX/SIZY: LOADW outputs rec->w/rec->h (with XON) regardless of PTTBL compression width */
         ie->sizx = OUT_STRIDE(rec->w);
         ie->sizy = rec->h;
-        if (g.xon) { ie->sizx++; ie->sizy++; }
+        if (g.xon) { ie->sizx = OUT_STRIDE(rec->w + 1); ie->sizy++; }
         if (ie->sizx < 1) ie->sizx = 1;
         if (ie->sizy < 1) ie->sizy = 1;
         ie->ctrl = cp.ctrl;
@@ -1434,20 +1447,20 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
          * PTTBL index = pttblnum (not adjusted by n_special — the PTTBL
          * array includes entries for all IMG records including !-prefixed). */
         /* Set PTTBL pointers: own entry, shared entries for PT2 and PT0 fields.
-         * LOADW allows shared entries even when the own entry is out of bounds
-         * (e.g. PTTBL count doesn't include trailing entries past file limit). */
-        if (cur->imgfile->pttbls) {
-            if (rec->pttblnum >= 0 && rec->pttblnum < cur->imgfile->n_pttbls) {
-                ie->pttbl = &cur->imgfile->pttbls[rec->pttblnum];
-            }
-            if (rec->pttblnum >= 2 && rec->pttblnum - 2 < cur->imgfile->n_pttbls) {
-                ie->pttbl_shared = &cur->imgfile->pttbls[rec->pttblnum - 2];
-            }
-            if (rec->pttblnum >= 3 && rec->pttblnum - 3 < cur->imgfile->n_pttbls) {
-                ie->pttbl_pt0x = &cur->imgfile->pttbls[rec->pttblnum - 3];
-            }
-            if (!ie->pttbl_pt0x) ie->pttbl_pt0x = ie->pttbl_shared ? ie->pttbl_shared : ie->pttbl;
-        }
+          * LOADW allows shared entries even when the own entry is out of bounds
+          * (e.g. PTTBL count doesn't include trailing entries past file limit). */
+          if (cur->imgfile->pttbls) {
+              if (rec->pttblnum >= 0 && rec->pttblnum < cur->imgfile->n_pttbls) {
+                  ie->pttbl = &cur->imgfile->pttbls[rec->pttblnum];
+              }
+              if (rec->pttblnum >= 2 && rec->pttblnum - 2 < cur->imgfile->n_pttbls) {
+                  ie->pttbl_shared = &cur->imgfile->pttbls[rec->pttblnum - 2];
+              }
+              if (rec->pttblnum >= 3 && rec->pttblnum - 3 < cur->imgfile->n_pttbls) {
+                  ie->pttbl_pt0x = &cur->imgfile->pttbls[rec->pttblnum - 3];
+              }
+              if (!ie->pttbl_pt0x) ie->pttbl_pt0x = ie->pttbl_shared ? ie->pttbl_shared : ie->pttbl;
+          }
         if (ie->pttbl) {
             PTTBL *pt = ie->pttbl;
             PTTBL *pt0 = cur->imgfile->pttbls ? &cur->imgfile->pttbls[0] : NULL;
@@ -1532,9 +1545,10 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
         if (g.dedup) {
             uint8_t *pix_data = img_pixels(cur->imgfile, rec);
             int pstride = (rec->w + 3) & ~3;
-            uint32_t max_val;
-            uint32_t ck = loadw_checksum(pix_data, pstride, rec->w, rec->h, &max_val);
-            if (g.verbose && (strcmp(name, "smfirebone3") == 0 || strcmp(name, "smfirebone6") == 0))
+            uint16_t max_val;
+            uint16_t ck = loadw_checksum(pix_data, pstride, rec->w, rec->h, &max_val);
+            if (g.verbose && (strcmp(name, "smfirebone3") == 0 || strcmp(name, "smfirebone6") == 0 ||
+                              rec->w == 8 || rec->h == 21))
                 fprintf(stderr, "DEDUP_CHK %s: ck=%u max=%u sizx=%d sizy=%d ctrl=0x%04x\n",
                         name, ck, max_val, cp.sizx, cp.sizy, cp.ctrl);
             for (int di = 0; di < n_dedup; di++) {
@@ -1554,16 +1568,17 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
                 printf("  Checksum match on image [%s].\n", name);
         } else {
             ie->sag = encode_image(cur->imgfile, rec, &cp, bpp & 0xff);
-            if (g.dedup && n_dedup < MAX_DEDUP) {
+             if (g.dedup && n_dedup < MAX_DEDUP) {
                 uint8_t *pix_data = img_pixels(cur->imgfile, rec);
                 int pstride = IMG_STRIDE(rec->w);
-                uint32_t max_val;
+                uint16_t max_val;
                 dedup_table[n_dedup].sum = loadw_checksum(pix_data, pstride, rec->w, rec->h, &max_val);
                 dedup_table[n_dedup].max_val = max_val;
                 dedup_table[n_dedup].sizx = cp.sizx;
                 dedup_table[n_dedup].sizy = cp.sizy;
                 dedup_table[n_dedup].ctrl = cp.ctrl;
                 dedup_table[n_dedup].sag = ie->sag;
+                dedup_table[n_dedup].sag_idx = -1;
                 n_dedup++;
             }
         }
@@ -1577,7 +1592,8 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
           if (g.build_tables && g.asm_fp)
               write_image_tbl(g.asm_fp, ie);
 
-         if (g.glo_fp)
+         /* Only write .globl for ENDMARKER and special symbols, not every image */
+         if (g.glo_fp && strcmp(name, "ENDMARKER") == 0)
             write_global(name);
     }
 }
@@ -1612,7 +1628,6 @@ static void scan_bpp(const char *lod_path) {
             sscanf(line, "%s", fname);
             if (cur.imgfile) { free(cur.imgfile->norm_images); free(cur.imgfile->data); free(cur.imgfile); }
             cur.imgfile = img_load_try(imgdir, fname);
-            n_dedup = 0;  /* LOADW resets dedup table per IMG library */
         }
         else if (!strncmp(upper, "--->", 4) && cur.imgfile) {
             const char *s = line + 5;
@@ -1722,6 +1737,12 @@ static void process_lod(const char *lod_path) {
                 else strncpy(full, fname, MAX_PATH-1);
                 g.glo_fp = fopen(full, "a");
                 if (!g.glo_fp) die("cannot create %s", full);
+                /* Track GLO filename for IMGTBL.ASM generation */
+                if (g.n_glo_files < 64) {
+                    strncpy(g.glo_files[g.n_glo_files], fname, 63);
+                    g.glo_files[g.n_glo_files][63] = 0;
+                    g.n_glo_files++;
+                }
             }
         }
         else if (!strncmp(upper, "***>", 4)) parse_addr(line);
@@ -2123,27 +2144,37 @@ static void process_lod(const char *lod_path) {
                           img_lm[di] = best_lm; img_tm[di] = best_tm;
 
                          /* Dedup check before encoding */
-                         if (g.dedup && pix && w > 0 && h > 0) {
-                             uint32_t max_val;
-                             uint32_t ck = loadw_checksum(pix, w, w, h, &max_val);
-                             uint16_t bg_ctrl = (uint16_t)((per_bpp << 12) | (best_tm << 10) |
-                                                           (best_lm << 8) | (do_cmp ? 0x80 : 0));
-                             for (int di2 = 0; di2 < n_dedup; di2++) {
-                                 if (dedup_table[di2].sum == ck && dedup_table[di2].max_val == max_val &&
-                                     dedup_table[di2].sizx == sizx_a && dedup_table[di2].sizy == h &&
-                                     dedup_table[di2].ctrl == bg_ctrl) {
-                                     bg_dedup_idx = di2; break;
-                                 }
-                             }
-                         }
-
-                          if (bg_dedup_idx >= 0) {
-                              img_sags[di] = dedup_table[bg_dedup_idx].sag;
-                              g.bgnd_dedup_bytes += (w * h * per_bpp + 7) / 8;
-                              g.bgnd_dedup_matches++;
+                          if (g.dedup && pix && w > 0 && h > 0) {
+                              uint16_t max_val;
+                              uint16_t ck = loadw_checksum(pix, w, w, h, &max_val);
+                              uint16_t bg_ctrl = (uint16_t)((per_bpp << 12) | (best_tm << 10) |
+                                                            (best_lm << 8) | (do_cmp ? 0x80 : 0));
+                              for (int di2 = 0; di2 < n_dedup; di2++) {
+                                  if (dedup_table[di2].sum == ck && dedup_table[di2].max_val == max_val &&
+                                      dedup_table[di2].ctrl == bg_ctrl) {
+                                      bg_dedup_idx = di2; break;
+                                  }
+                              }
                               if (g.verbose)
-                                  printf("  BGND 0x%02X (%dx%d) cksum match at bit=%u\n",
-                                         bdds[di].idx, w, h, dedup_table[bg_dedup_idx].sag);
+                                  printf("  BGND %s/0x%02X (%dx%d) ck=%u max=%u ctrl=0x%04x dedup=%s",
+                                         bdb_name, bdds[di].idx, w, h, ck, max_val, bg_ctrl,
+                                         bg_dedup_idx >= 0 ? "HIT" : "MISS");
+                              if (g.verbose && bg_dedup_idx < 0 && ck == 39578)
+                                  for (int di2 = 0; di2 < n_dedup; di2++)
+                                      printf(" [tbl[%d]: ck=%u max=%u ctrl=0x%04x sag=%u]",
+                                             di2, dedup_table[di2].sum, dedup_table[di2].max_val,
+                                             dedup_table[di2].ctrl, dedup_table[di2].sag);
+                              if (g.verbose) printf("\n");
+                          }
+
+                           if (bg_dedup_idx >= 0) {
+                               img_sags[di] = dedup_table[bg_dedup_idx].sag;
+                               g.bgnd_dedup_bytes += (w * h * per_bpp + 7) / 8;
+                               g.bgnd_dedup_matches++;
+                               if (g.verbose)
+                                   printf("  BGND %s/0x%02X (%dx%d) cksum match at bit=%u (orig BDD 0x%02X)\n",
+                                          bdb_name, bdds[di].idx, w, h, dedup_table[bg_dedup_idx].sag,
+                                          dedup_table[bg_dedup_idx].sag_idx);
                          } else {
 
                          if (do_cmp) {
@@ -2195,9 +2226,9 @@ static void process_lod(const char *lod_path) {
                      }
                      }
                      /* Add to dedup table */
-                     if (g.dedup && bg_dedup_idx < 0 && n_dedup < MAX_DEDUP) {
-                         uint32_t max_val;
-                         uint32_t ck = loadw_checksum(pix, w, w, h, &max_val);
+                      if (g.dedup && bg_dedup_idx < 0 && n_dedup < MAX_DEDUP) {
+                          uint16_t max_val;
+                          uint16_t ck = loadw_checksum(pix, w, w, h, &max_val);
                          uint16_t bg_ctrl = (uint16_t)((per_bpp << 12) | (best_tm << 10) |
                                                        (best_lm << 8) | (do_cmp ? 0x80 : 0));
                          dedup_table[n_dedup].sum = ck;
@@ -2206,6 +2237,7 @@ static void process_lod(const char *lod_path) {
                          dedup_table[n_dedup].sizy = h;
                          dedup_table[n_dedup].ctrl = bg_ctrl;
                          dedup_table[n_dedup].sag = img_sags[di];
+                         dedup_table[n_dedup].sag_idx = bdds[di].idx;
                          n_dedup++;
                      }
                      if (g.verbose) printf("  BGND 0x%02X (%dx%d) bit=%u bpp=%d LM=%d TM=%d CMP=%d\n",
@@ -2225,6 +2257,27 @@ static void process_lod(const char *lod_path) {
 
             /* Phase 3: Output BLKS map layout data (after image entries, before BMOD) */
             if (g.bgnd_fp && n_bmod > 0) {
+                  /* First pass: compute min_sy per module (LOUDW adjusts ys to min sy of matching objects) */
+                  int mod_min_sy[64];
+                  for (int mi = 0; mi < n_bmod; mi++) {
+                      mod_min_sy[mi] = 99999;
+                      for (int gi = 0; gi < ng; gi++) {
+                          if (gobjs[gi].is_mod) continue;
+                          int od = gobjs[gi].dp, osy = gobjs[gi].sy;
+                          int ii = gobjs[gi].ii;
+                          int w = 0, h = 0;
+                          for (int di = 0; di < n_bdds; di++) {
+                              if (bdds[di].idx == ii) { w = bdds[di].w; h = bdds[di].h; break; }
+                          }
+                          if (od >= mod_ds[mi] && od <= mod_de[mi] &&
+                              osy >= mod_ys[mi] && osy <= mod_ye[mi] &&
+                              od + (w > 0 ? w - 1 : 0) <= mod_de[mi] &&
+                              osy + (h > 0 ? h - 1 : 0) <= mod_ye[mi]) {
+                              if (osy < mod_min_sy[mi]) mod_min_sy[mi] = osy;
+                          }
+                      }
+                      if (mod_min_sy[mi] == 99999) mod_min_sy[mi] = mod_ys[mi];
+                  }
                  for (int mi = 0; mi < n_bmod; mi++) {
                      const char *mn = bmod_list[mi];
                      fprintf(g.bgnd_fp, "%sBLKS:\r\n", mn);
@@ -2258,7 +2311,7 @@ static void process_lod(const char *lod_path) {
                          /* Module-local coordinates: x relative to first object, y relative to sy_base */
                          int first_d = mod_first_depth[mi];
                          blk_objs[n_blk].x = od - (first_d >= 0 ? first_d : mod_ds[mi]);
-                          blk_objs[n_blk].y = osy - mod_ys[mi] - 2;
+                          blk_objs[n_blk].y = osy - mod_min_sy[mi];
                          blk_objs[n_blk].ii = hdr_idx;
                          n_blk++;
                      }
@@ -2371,7 +2424,6 @@ else if (!strncmp(upper, "MON>", 4)) { }
             upcase(fname);
             if (cur.imgfile) { free(cur.imgfile->norm_images); free(cur.imgfile->data); free(cur.imgfile); }
             cur.imgfile = img_load_try(g.imgdir, fname);
-            n_dedup = 0;  /* LOADW resets dedup table per IMG library */
             if (!cur.imgfile)
                 fprintf(stderr, "WARNING: cannot load IMG file: %s\n", fname);
             else {
@@ -2561,8 +2613,18 @@ int main(int argc, char *argv[]) {
         write_tbl_header(g.asm_fp);
         g.glo_fp = fopen(glo_path, g.append ? "a" : "w");
         if (!g.glo_fp) die("cannot create: %s", glo_path);
-        g.pal_fp = fopen(pal_path, g.append ? "a" : "w");
+        g.main_glo_fp = fopen(glo_path, g.append ? "a" : "w");
+        if (!g.main_glo_fp) die("cannot create main GLO: %s", glo_path);
+        g.pal_fp = fopen(pal_path, g.append ? "a" : "w+");
         if (!g.pal_fp) die("cannot create: %s", pal_path);
+        if (!g.append) {
+            fprintf(g.pal_fp, "\t.FILE \"imgpal.asm\"\r\n");
+            fprintf(g.pal_fp, "\t.OPTION B,D,L,T\r\n");
+            fprintf(g.pal_fp, "\r\n");
+            fprintf(g.pal_fp, "\t.include imgtbl.glo\r\n");
+            fprintf(g.pal_fp, "\t.DATA\r\n");
+            fprintf(g.pal_fp, "\t.even\r\n\r\n");
+        }
     }
 
     g.irw_alloc = 1024 * 1024;
@@ -2575,13 +2637,63 @@ int main(int argc, char *argv[]) {
 
     if (g.build_raw) write_irw(irw_path);
 
+    /* Generate IMGTBL.ASM wrapper (includes all GLO files) */
+    if (g.build_tables && g.pal_fp) {
+        char imgasm_path[MAX_PATH];
+        if (g.tbldir[0])
+            path_cat(imgasm_path, g.tbldir, "IMGTBL.ASM", MAX_PATH);
+        else
+            strncpy(imgasm_path, "IMGTBL.ASM", MAX_PATH-1);
+        /* Check if already written (via ASM> directive) */
+        int need_write = 1;
+        if (g.asm_path[0]) {
+            char up_asm[64]; strncpy(up_asm, g.asm_path, 63); upcase(up_asm);
+            char up_img[64]; strncpy(up_img, "IMGTBL.ASM", 63); upcase(up_img);
+            if (strstr(up_asm, up_img)) need_write = 0;
+        }
+        if (need_write) {
+            FILE *imgasm_fp = fopen(imgasm_path, "w");
+            if (imgasm_fp) {
+                fprintf(imgasm_fp, "\t.FILE \"imgtbl.asm\"\r\n");
+                fprintf(imgasm_fp, "\t.OPTION B,D,L,T\r\n");
+                fprintf(imgasm_fp, "\r\n");
+                fprintf(imgasm_fp, "\t.include imgtbl.glo\r\n");
+                fprintf(imgasm_fp, "\t.DATA\r\n");
+                fprintf(imgasm_fp, "\t.even\r\n\r\n");
+                for (int gi = 0; gi < g.n_glo_files; gi++) {
+                    fprintf(imgasm_fp, "\t.include %s\r\n", g.glo_files[gi]);
+                    if (gi < g.n_glo_files - 1)
+                        fprintf(imgasm_fp, "\r\n");
+                }
+                fclose(imgasm_fp);
+            }
+        }
+    }
+
     if (g.asm_fp) {
         fprintf(g.asm_fp, "\t.TEXT\r\n");
         fputc(0x1a, g.asm_fp);
         fclose(g.asm_fp);
     }
     if (g.glo_fp) fclose(g.glo_fp);
-    if (g.pal_fp) fclose(g.pal_fp);
+    if (g.main_glo_fp) fclose(g.main_glo_fp);
+    if (g.pal_fp) {
+        fseek(g.pal_fp, 0, SEEK_END);
+        long pos = ftell(g.pal_fp);
+        fprintf(stderr, "PAL_TRUNC: pos=%ld\n", pos);
+        if (pos >= 2) {
+            fseek(g.pal_fp, pos - 2, SEEK_SET);
+            uint8_t last2[2];
+            if (fread(last2, 1, 2, g.pal_fp) == 2) {
+                fprintf(stderr, "PAL_TRUNC: last2=0x%02x%02x\n", last2[0], last2[1]);
+                if (last2[0] == 0x0d && last2[1] == 0x0a) {
+                    ftruncate(fileno(g.pal_fp), pos - 2);
+                    fprintf(stderr, "PAL_TRUNC: truncated to %ld\n", pos - 2);
+                }
+            }
+        }
+        fclose(g.pal_fp);
+    }
     if (g.bgnd_fp) fclose(g.bgnd_fp);
     if (g.bgndpal_fp) fclose(g.bgndpal_fp);
     if (g.bgndequ_fp) fclose(g.bgndequ_fp);

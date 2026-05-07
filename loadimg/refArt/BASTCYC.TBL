@@ -1,0 +1,518 @@
+	.DATA
+B8TCYC_A:
+	.word   8,9,0,0
+	.long   039767fcH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_B:
+	.word   8,9,0,0
+	.long   0397691cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_C:
+	.word   8,9,0,0
+	.long   03976a3cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_D:
+	.word   8,9,0,0
+	.long   03976b5cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_E:
+	.word   8,9,0,0
+	.long   03976c7cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_F:
+	.word   8,9,0,0
+	.long   03976d9cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_G:
+	.word   8,9,0,0
+	.long   03976ebcH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_H:
+	.word   8,9,0,0
+	.long   03976fdcH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_I:
+	.word   4,9,0,0
+	.long   039770fcH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_J:
+	.word   8,9,0,0
+	.long   0397718cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_K:
+	.word   8,9,0,0
+	.long   039772acH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_L:
+	.word   8,9,0,0
+	.long   039773ccH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_M:
+	.word   12,9,0,0
+	.long   039774ecH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_N:
+	.word   8,9,0,0
+	.long   0397769cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_O:
+	.word   8,9,0,0
+	.long   039777bcH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_P:
+	.word   8,9,0,0
+	.long   039778dcH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_Q:
+	.word   8,10,0,0
+	.long   039779fcH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_R:
+	.word   8,9,0,0
+	.long   03977b3cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_S:
+	.word   8,9,0,0
+	.long   03977c5cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_T:
+	.word   8,9,0,0
+	.long   03977d7cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_U:
+	.word   8,9,0,0
+	.long   03977e9cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_V:
+	.word   8,9,0,0
+	.long   03977fbcH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_W:
+	.word   12,9,0,0
+	.long   039780dcH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_X:
+	.word   8,9,0,0
+	.long   0397828cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_Y:
+	.word   8,9,0,0
+	.long   039783acH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_Z:
+	.word   8,9,0,0
+	.long   039784ccH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_0:
+	.word   8,9,0,0
+	.long   039777bcH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_1:
+	.word   4,9,0,0
+	.long   039785ecH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_2:
+	.word   8,9,0,0
+	.long   0397867cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_3:
+	.word   8,9,0,0
+	.long   0397879cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_4:
+	.word   8,9,0,0
+	.long   039788bcH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_5:
+	.word   8,9,0,0
+	.long   039789dcH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_6:
+	.word   8,9,0,0
+	.long   03978afcH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_7:
+	.word   8,9,0,0
+	.long   03978c1cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_8:
+	.word   8,9,0,0
+	.long   03978d3cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_9:
+	.word   8,9,0,0
+	.long   03978e5cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_COL:
+	.word   4,7,0,-1
+	.long   03978f7cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_NUM:
+	.word   8,9,0,0
+	.long   03978fecH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_DOL:
+	.word   8,13,0,2
+	.long   0397910cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_PCT:
+	.word   12,9,0,0
+	.long   039792acH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_AND:
+	.word   12,10,0,1
+	.long   0397945cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_PRL:
+	.word   8,11,0,1
+	.long   0397963cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_PRR:
+	.word   8,11,0,1
+	.long   0397979cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_PER:
+	.word   4,3,0,-3
+	.long   039798fcH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_COM:
+	.word   4,5,0,-6
+	.long   0397992cH
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_APO:
+	.word   4,5,0,0
+	.long   0397997cH
+	.word   03000H
+	.long   BASTC_W_P
+B8TCYC_PLS:
+	.word   8,7,0,-1
+	.long   039799b8H
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_QUE:
+	.word   8,9,0,0
+	.long   03979a98H
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_SEM:
+	.word   4,9,0,-2
+	.long   03979bb8H
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_SLS:
+	.word   8,9,0,0
+	.long   03979c48H
+	.word   04000H
+	.long   BASTC_W_P
+B8TCYC_EXC:
+	.word   4,9,0,0
+	.long   03979d68H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_A:
+	.word   8,8,0,0
+	.long   03979df8H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_B:
+	.word   8,8,0,0
+	.long   03979ef8H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_C:
+	.word   8,8,0,0
+	.long   03979ff8H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_D:
+	.word   8,8,0,0
+	.long   0397a0f8H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_E:
+	.word   8,8,0,0
+	.long   0397a1f8H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_F:
+	.word   8,8,0,0
+	.long   0397a2f8H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_G:
+	.word   8,8,0,0
+	.long   0397a3f8H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_H:
+	.word   8,8,0,0
+	.long   0397a4f8H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_I:
+	.word   4,8,0,0
+	.long   0397a5f8H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_J:
+	.word   8,8,0,0
+	.long   0397a678H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_K:
+	.word   8,8,0,0
+	.long   0397a778H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_L:
+	.word   8,8,0,0
+	.long   0397a878H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_M:
+	.word   8,8,0,0
+	.long   0397a978H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_N:
+	.word   8,8,0,0
+	.long   0397aa78H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_O:
+	.word   8,8,0,0
+	.long   0397ab78H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_P:
+	.word   8,8,0,0
+	.long   0397ac78H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_Q:
+	.word   8,8,0,0
+	.long   0397ad78H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_R:
+	.word   8,8,0,0
+	.long   0397ae78H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_S:
+	.word   8,8,0,0
+	.long   0397af78H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_T:
+	.word   8,8,0,0
+	.long   0397b078H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_U:
+	.word   8,8,0,0
+	.long   0397b178H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_V:
+	.word   8,8,0,0
+	.long   0397b278H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_W:
+	.word   8,8,0,0
+	.long   0397b378H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_X:
+	.word   8,8,0,0
+	.long   0397b478H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_Y:
+	.word   8,8,0,0
+	.long   0397b578H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_Z:
+	.word   8,8,0,0
+	.long   0397b678H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_0:
+	.word   8,8,0,0
+	.long   0397ab78H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_1:
+	.word   4,8,0,0
+	.long   0397b778H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_2:
+	.word   8,8,0,0
+	.long   0397b7f8H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_3:
+	.word   8,8,0,0
+	.long   0397b8f8H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_4:
+	.word   8,8,0,0
+	.long   0397b9f8H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_5:
+	.word   8,8,0,0
+	.long   0397baf8H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_6:
+	.word   8,8,0,0
+	.long   0397bbf8H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_7:
+	.word   8,8,0,0
+	.long   0397bcf8H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_8:
+	.word   8,8,0,0
+	.long   0397bdf8H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_9:
+	.word   8,8,0,0
+	.long   0397bef8H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_EXC:
+	.word   4,8,0,0
+	.long   0397bff8H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_NUM:
+	.word   8,8,0,0
+	.long   0397c078H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_DOL:
+	.word   8,8,0,0
+	.long   0397c178H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_AND:
+	.word   8,8,0,0
+	.long   0397c278H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_PCT:
+	.word   12,8,0,0
+	.long   0397c378H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_PRL:
+	.word   4,8,0,0
+	.long   0397c4f8H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_PRR:
+	.word   4,8,0,0
+	.long   0397c578H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_DSH:
+	.word   8,2,0,-3
+	.long   0397c5f8H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_PLS:
+	.word   8,6,0,-1
+	.long   0397c638H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_COM:
+	.word   4,4,0,-5
+	.long   0397c6f8H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_PER:
+	.word   4,3,0,-5
+	.long   0397c738H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_QUE:
+	.word   8,8,0,0
+	.long   0397c768H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_APO:
+	.word   4,4,0,0
+	.long   0397c868H
+	.word   03000H
+	.long   BASTC_W_P
+B7TCYC_COL:
+	.word   4,7,0,-1
+	.long   0397c898H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_SEM:
+	.word   4,8,0,-1
+	.long   0397c908H
+	.word   04000H
+	.long   BASTC_W_P
+B7TCYC_SLS:
+	.word   8,8,0,0
+	.long   0397c988H
+	.word   04000H
+	.long   BASTC_W_P
+	.TEXT
+

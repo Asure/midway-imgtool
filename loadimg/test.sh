@@ -52,6 +52,19 @@ test_lod work5 ref6 MK6MIL "MK6MIL MKARMS MKBGANI MKBLOOD MKBONUS MKCOPY MKFALL 
 test_lod work5 ref7 MK7MIL "MK7MIL MKBABY MKBOLTS MKCHUNKS MKFATAL MKFLOORS MKFRND2 MKHUGE MKMK3 MKROCKS MKTC"
 test_lod work5 ref8 MK8MIL "MK8MIL MKREVX"
 
+# workArt: BB* LODs from NBA Jam TE / Hangtime
+test_lod workArt refArt BB "PLYRHD PLYRHD2"
+test_lod workArt refArt BB2 "CROWD PLAQUES PLYRSEQ"
+test_lod workArt refArt BB3 "BEHIND PASS"
+test_lod workArt refArt BB4 "FLAIL"
+test_lod workArt refArt BB5 "PLYRDSP PLYRDSEQ STAND PLYRSEQ2 PLYRSEQ3 PLYRJSHT PLYRMAKE"
+test_lod workArt refArt BB6 "NAMES2 PLYRDSQ2 NCKNME PRIVLG CHEER PLYRHD6A"
+test_lod workArt refArt BB7 "ARROW MUGSHOT HOTSPOT BALLSHAD BALL LOGOS CREDTURB CREDIT HOOP COURTFLR HANGFONT BASTCYC PLYRNUB PRIZES POWERTXT OUTDOOR"
+test_lod workArt refArt BB8 "PLYRRSEQ PLYRHD6 MUGSHOT8"
+test_lod workArt refArt BBMUG "PLYRHD3 PLYRHD5"
+test_lod workArt refArt BBVDA "BBVDA"
+
+# BBPAL is palette-only (ASM> junkxxxx, no TBL output)
 # workht: misc.lod from NBA Jam/Hangtime (headerless, dual-bank)
 test_lod_workht() {
     local REFDIR="refht" LODNAME="misc"

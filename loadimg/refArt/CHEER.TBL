@@ -1,0 +1,118 @@
+	.DATA
+CHEERA01:
+	.word   80,41,45,39
+	.long   0527e404H
+	.word   07980H
+	.long   CHEERA_P
+CHEERA02:
+	.word   84,39,44,37
+	.long   052828acH
+	.word   07980H
+	.long   CHEERA_P
+CHEERA03:
+	.word   92,40,45,35
+	.long   05286e32H
+	.word   07a80H
+	.long   CHEERA_P
+CHEERA04:
+	.word   92,45,45,39
+	.long   0528b5aaH
+	.word   07a80H
+	.long   CHEERA_P
+CHEERA05:
+	.word   92,48,44,44
+	.long   052902faH
+	.word   07980H
+	.long   CHEERA_P
+CHEERA06:
+	.word   96,53,42,48
+	.long   05295b8aH
+	.word   07980H
+	.long   CHEERA_P
+CHEERA07:
+	.word   100,55,42,51
+	.long   0529be8aH
+	.word   07980H
+	.long   CHEERA_P
+CHEERA08:
+	.word   96,57,42,52
+	.long   052a2686H
+	.word   07980H
+	.long   CHEERA_P
+CHEERA09:
+	.word   84,64,38,53
+	.long   052a901aH
+	.word   07a80H
+	.long   CHEERA_P
+CHEERA10:
+	.word   72,66,32,53
+	.long   052afba6H
+	.word   07a80H
+	.long   CHEERA_P
+CHEERB01:
+	.word   68,47,33,45
+	.long   052b675eH
+	.word   07080H
+	.long   CHEERB_P
+CHEERB02:
+	.word   68,46,33,44
+	.long   052baf62H
+	.word   07180H
+	.long   CHEERB_P
+CHEERB03:
+	.word   68,46,34,43
+	.long   052bf5f9H
+	.word   07180H
+	.long   CHEERB_P
+CHEERB04:
+	.word   72,48,37,45
+	.long   052c3ac2H
+	.word   07280H
+	.long   CHEERB_P
+CHEERB05:
+	.word   80,51,39,48
+	.long   052c8425H
+	.word   07680H
+	.long   CHEERB_P
+CHEERB06:
+	.word   84,55,40,52
+	.long   052cd3abH
+	.word   07580H
+	.long   CHEERB_P
+CHEERB07:
+	.word   88,67,48,64
+	.long   052d2cffH
+	.word   07680H
+	.long   CHEERB_P
+CHEERB08:
+	.word   104,77,53,74
+	.long   052d986bH
+	.word   07580H
+	.long   CHEERB_P
+CHEERB09:
+	.word   108,76,50,72
+	.long   052e221fH
+	.word   07980H
+	.long   CHEERB_P
+HOTred:
+	.word   72,18,34,9
+	.long   052eaf67H
+	.word   07180H
+	.long   HOT_R_P
+HOTblu:
+	.word   72,18,34,9
+	.long   052eaf67H
+	.word   07180H
+	.long   HOT_B_P
+HOTgrn:
+	.word   72,18,34,9
+	.long   052eaf67H
+	.word   07180H
+	.long   HOT_G_P
+HOTyel:
+	.word   72,18,34,9
+	.long   052eaf67H
+	.word   07180H
+	.long   HOT_Y_P
+	.TEXT
+

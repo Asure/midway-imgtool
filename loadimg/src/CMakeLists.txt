@@ -25,3 +25,11 @@ add_custom_target(test
     COMMENT "Running loadimg test suite against ref directories"
 )
 add_dependencies(test loadimg)
+
+# Regen target — regenerates LOADW references via DOSBox
+set(REGEN_SCRIPT "${CMAKE_SOURCE_DIR}/../regen.sh")
+add_custom_target(regen
+    COMMAND sh "${REGEN_SCRIPT}"
+    WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/.."
+    COMMENT "Regenerating LOADW reference files via DOSBox"
+)

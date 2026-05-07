@@ -1,0 +1,193 @@
+	.DATA
+HANGF_A:
+	.word   40,38,0,0
+	.long   0390971cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_B:
+	.word   40,38,0,0
+	.long   0390c69cH
+	.word   00H
+	.long   HANGF_R_P
+HANGF_C:
+	.word   40,40,0,1
+	.long   0390f61cH
+	.word   00H
+	.long   HANGF_G_P
+HANGF_D:
+	.word   40,38,0,0
+	.long   0391281cH
+	.word   00H
+	.long   HANGF_B_P
+HANGF_E:
+	.word   40,38,0,0
+	.long   0391579cH
+	.word   00H
+	.long   HANGF_W_P
+HANGF_F:
+	.word   40,38,0,0
+	.long   0391871cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_G:
+	.word   40,40,0,1
+	.long   0391b69cH
+	.word   00H
+	.long   HANGF_B_P
+HANGF_H:
+	.word   44,38,0,0
+	.long   0391e89cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_I:
+	.word   24,38,0,0
+	.long   03921cdcH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_J:
+	.word   40,39,0,0
+	.long   0392395cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_K:
+	.word   48,38,0,0
+	.long   03926a1cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_L:
+	.word   32,38,0,0
+	.long   0392a31cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_M:
+	.word   56,38,0,0
+	.long   0392c91cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_N:
+	.word   48,38,0,0
+	.long   03930b9cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_O:
+	.word   40,40,0,1
+	.long   0393449cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_P:
+	.word   40,38,0,0
+	.long   0393769cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_Q:
+	.word   36,49,0,1
+	.long   0393a61cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_R:
+	.word   40,38,0,0
+	.long   0393dd3cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_S:
+	.word   40,40,0,1
+	.long   03940cbcH
+	.word   00H
+	.long   HANGF_B_P
+HANGF_T:
+	.word   32,38,0,0
+	.long   03943ebcH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_U:
+	.word   40,39,0,0
+	.long   039464bcH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_V:
+	.word   36,38,0,0
+	.long   0394957cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_W:
+	.word   56,38,0,0
+	.long   0394c03cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_X:
+	.word   48,38,0,0
+	.long   039502bcH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_Y:
+	.word   36,38,0,0
+	.long   03953bbcH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_Z:
+	.word   40,38,0,0
+	.long   0395667cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_0:
+	.word   36,39,0,0
+	.long   039595fcH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_1:
+	.word   24,37,0,-1
+	.long   0395c1dcH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_2:
+	.word   40,38,0,0
+	.long   0395dd9cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_3:
+	.word   40,39,0,0
+	.long   03960d1cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_4:
+	.word   36,37,0,-1
+	.long   03963ddcH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_5:
+	.word   36,38,0,-1
+	.long   0396677cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_6:
+	.word   36,39,0,0
+	.long   0396923cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_7:
+	.word   36,37,0,-1
+	.long   0396be1cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_8:
+	.word   40,39,0,0
+	.long   0396e7bcH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_9:
+	.word   36,39,0,0
+	.long   0397187cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_EXC:
+	.word   24,39,0,1
+	.long   0397445cH
+	.word   00H
+	.long   HANGF_Y_P
+HANGF_APO:
+	.word   12,17,0,0
+	.long   0397619cH
+	.word   00H
+	.long   HANGF_Y_P
+	.TEXT
+

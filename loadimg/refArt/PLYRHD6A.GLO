@@ -1,0 +1,12 @@
+	.globl	GrantG_F
+	.global	GrantG0
+	.globl	GRANTG_P
+	.global	GrantG1
+	.globl	Horna_f
+	.global	Horna0
+	.globl	HORNA_P
+	.global	Horna1
+	.globl	Manning_f
+	.global	Manning0
+	.globl	MANNING_P
+	.global	Manning1

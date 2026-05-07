@@ -1,0 +1,37 @@
+	.DATA
+TOURMODE2:
+	.word   144,20,71,9
+	.long   039a4c88H
+	.word   06000H
+	.long   MESSP_D_P
+NOCPU2:
+	.word   248,11,122,5
+	.long   039a9008H
+	.word   06000H
+	.long   MESSP_Y_P
+SECRETS2:
+	.word   176,11,87,5
+	.long   039acff8H
+	.word   06000H
+	.long   MESSP_Y_P
+ASISTOFF2:
+	.word   296,11,146,5
+	.long   039afd58H
+	.word   06000H
+	.long   MESSP_D_P
+SHOTPERC2:
+	.word   220,11,108,5
+	.long   039b49a8H
+	.word   06000H
+	.long   MESSP_D_P
+BABYPLAY2:
+	.word   176,11,87,5
+	.long   039b8260H
+	.word   06000H
+	.long   MESSP_D_P
+BRSH20APO:
+	.word   8,8,-2,2
+	.long   039bafc0H
+	.word   05000H
+	.TEXT
+

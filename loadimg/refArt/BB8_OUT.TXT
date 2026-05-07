@@ -1,0 +1,1113 @@
+
+Copyright (C) Williams Electronics Games, Inc. 1993.
+GSP Image Loader - DMA 2 - Version 5/25/94
+Using a page of expanded memory.
+
+
+GSP is Memory Mapped at PC address C000:7000
+Loading images ...
+	from: C:\BB8.lod
+	to:   Table header files (written to directory C:\TMP\)
+	      GSP target system.
+	      C:\TMP\BB8.irw
+	      Padding images to multiple of 4 pixels
+
+SET new IRAM address = 2000000
+SET new IRAM address = 4E66600
+Opening img lib [C:\nba_run1.img]         w1defst1 ( 64 by  84) XO=35  YO=77
+ [w1defst1] Auto pixel packing to 8 bits
+LOADED         w1defst2 ( 65 by  84) XO=34  YO=77
+ [w1defst2] Auto pixel packing to 8 bits
+LOADED         w1defst3 ( 67 by  85) XO=32  YO=78
+ [w1defst3] Auto pixel packing to 8 bits
+LOADED         w1defst4 ( 68 by  86) XO=30  YO=79
+ [w1defst4] Auto pixel packing to 8 bits
+LOADED         w2defst1 ( 93 by  90) XO=23  YO=82
+ [w2defst1] Auto pixel packing to 8 bits
+LOADED         w2defst2 ( 92 by  87) XO=23  YO=79
+ [w2defst2] Auto pixel packing to 8 bits
+LOADED         w2defst3 ( 92 by  86) XO=23  YO=77
+ [w2defst3] Auto pixel packing to 8 bits
+LOADED         w2defst4 ( 92 by  85) XO=23  YO=76
+ [w2defst4] Auto pixel packing to 8 bits
+LOADED         w3defst1 ( 68 by 100) XO=18  YO=88
+ [w3defst1] Auto pixel packing to 8 bits
+LOADED         w3defst2 ( 68 by  98) XO=17  YO=86
+ [w3defst2] Auto pixel packing to 8 bits
+LOADED         w3defst3 ( 70 by  96) XO=17  YO=84
+ [w3defst3] Auto pixel packing to 8 bits
+LOADED         w3defst4 ( 74 by  94) XO=17  YO=82
+ [w3defst4] Auto pixel packing to 8 bits
+LOADED         w4defst1 ( 75 by  88) XO=21  YO=78
+ [w4defst1] Auto pixel packing to 8 bits
+LOADED         w4defst2 ( 77 by  87) XO=21  YO=77
+ [w4defst2] Auto pixel packing to 8 bits
+LOADED         w4defst3 ( 78 by  87) XO=20  YO=77
+ [w4defst3] Auto pixel packing to 8 bits
+LOADED         w4defst4 ( 78 by  87) XO=20  YO=77
+ [w4defst4] Auto pixel packing to 8 bits
+LOADED         w5defst1 (103 by  81) XO=52  YO=76
+ [w5defst1] Auto pixel packing to 8 bits
+LOADED         w5defst2 (104 by  83) XO=51  YO=78
+ [w5defst2] Auto pixel packing to 8 bits
+LOADED         w5defst3 (104 by  86) XO=49  YO=81
+ [w5defst3] Auto pixel packing to 8 bits
+LOADED         w5defst4 (103 by  88) XO=47  YO=83
+ [w5defst4] Auto pixel packing to 8 bits
+LOADED           w1run1 ( 50 by 103) XO=26  YO=99
+ [w1run1] Auto pixel packing to 8 bits
+LOADED           w1run2 ( 51 by 110) XO=25  YO=102
+ [w1run2] Auto pixel packing to 8 bits
+LOADED           w1run3 ( 53 by 115) XO=27  YO=102
+ [w1run3] Auto pixel packing to 8 bits
+LOADED           w1run4 ( 54 by 119) XO=28  YO=103
+ [w1run4] Auto pixel packing to 8 bits
+LOADED           w1run5 ( 55 by 108) XO=29  YO=102
+ [w1run5] Auto pixel packing to 8 bits
+LOADED           w1run6 ( 53 by 102) XO=27  YO=101
+ [w1run6] Auto pixel packing to 8 bits
+LOADED           w1run7 ( 49 by 107) XO=26  YO=102
+ [w1run7] Auto pixel packing to 8 bits
+LOADED           w1run8 ( 46 by 113) XO=24  YO=104
+ [w1run8] Auto pixel packing to 8 bits
+LOADED           w1run9 ( 45 by 118) XO=23  YO=102
+ [w1run9] Auto pixel packing to 8 bits
+LOADED          w1run10 ( 46 by 116) XO=23  YO=102
+ [w1run10] Auto pixel packing to 8 bits
+LOADED          w1run11 ( 48 by 101) XO=26  YO=101
+ [w1run11] Auto pixel packing to 8 bits
+LOADED           w2run1 ( 49 by 105) XO=24  YO=101
+ [w2run1] Auto pixel packing to 8 bits
+LOADED           w2run2 ( 57 by 110) XO=29  YO=103
+ [w2run2] Auto pixel packing to 8 bits
+LOADED           w2run3 ( 67 by 116) XO=40  YO=104
+ [w2run3] Auto pixel packing to 8 bits
+LOADED           w2run4 ( 79 by 112) XO=46  YO=103
+ [w2run4] Auto pixel packing to 8 bits
+LOADED           w2run5 ( 68 by 104) XO=43  YO=101
+ [w2run5] Auto pixel packing to 8 bits
+LOADED           w2run6 ( 65 by 105) XO=32  YO=99
+ [w2run6] Auto pixel packing to 8 bits
+LOADED           w2run7 ( 63 by 109) XO=26  YO=101
+ [w2run7] Auto pixel packing to 8 bits
+LOADED           w2run8 ( 61 by 117) XO=28  YO=104
+ [w2run8] Auto pixel packing to 8 bits
+LOADED           w2run9 ( 66 by 122) XO=34  YO=105
+ [w2run9] Auto pixel packing to 8 bits
+LOADED          w2run10 ( 66 by 106) XO=36  YO=103
+ [w2run10] Auto pixel packing to 8 bits
+LOADED          w2run11 ( 56 by 102) XO=29  YO=101
+ [w2run11] Auto pixel packing to 8 bits
+LOADED           w3run1 ( 68 by  99) XO=31  YO=100
+ [w3run1] Auto pixel packing to 8 bits
+LOADED           w3run2 ( 72 by 101) XO=33  YO=103
+ [w3run2] Auto pixel packing to 8 bits
+LOADED           w3run3 ( 83 by 104) XO=46  YO=105
+ [w3run3] Auto pixel packing to 8 bits
+LOADED           w3run4 ( 96 by 108) XO=53  YO=107
+ [w3run4] Auto pixel packing to 8 bits
+LOADED           w3run5 ( 88 by 108) XO=52  YO=106
+ [w3run5] Auto pixel packing to 8 bits
+LOADED           w3run6 ( 75 by 105) XO=41  YO=103
+ [w3run6] Auto pixel packing to 8 bits
+LOADED           w3run7 ( 70 by 105) XO=25  YO=103
+ [w3run7] Auto pixel packing to 8 bits
+LOADED           w3run8 ( 82 by 111) XO=39  YO=109
+ [w3run8] Auto pixel packing to 8 bits
+LOADED           w3run9 ( 91 by 112) XO=50  YO=110
+ [w3run9] Auto pixel packing to 8 bits
+LOADED          w3run10 ( 93 by 105) XO=54  YO=107
+ [w3run10] Auto pixel packing to 8 bits
+LOADED          w3run11 ( 72 by 103) XO=47  YO=104
+ [w3run11] Auto pixel packing to 8 bits
+LOADED           w4run1 ( 66 by  96) XO=24  YO=97
+ [w4run1] Auto pixel packing to 8 bits
+LOADED           w4run2 ( 61 by  99) XO=23  YO=104
+ [w4run2] Auto pixel packing to 8 bits
+LOADED           w4run3 ( 64 by 110) XO=30  YO=105
+ [w4run3] Auto pixel packing to 8 bits
+LOADED           w4run4 ( 64 by 111) XO=33  YO=102
+ [w4run4] Auto pixel packing to 8 bits
+LOADED           w4run5 ( 57 by 108) XO=32  YO=99
+ [w4run5] Auto pixel packing to 8 bits
+LOADED           w4run6 ( 48 by 101) XO=23  YO=98
+ [w4run6] Auto pixel packing to 8 bits
+LOADED           w4run7 ( 50 by 104) XO=22  YO=105
+ [w4run7] Auto pixel packing to 8 bits
+LOADED           w4run8 ( 62 by 105) XO=34  YO=110
+ [w4run8] Auto pixel packing to 8 bits
+LOADED           w4run9 ( 71 by 112) XO=42  YO=108
+ [w4run9] Auto pixel packing to 8 bits
+LOADED          w4run10 ( 73 by 109) XO=43  YO=102
+ [w4run10] Auto pixel packing to 8 bits
+LOADED          w4run11 ( 69 by 102) XO=36  YO=99
+ [w4run11] Auto pixel packing to 8 bits
+LOADED           w5run1 ( 46 by 100) XO=24  YO=99
+ [w5run1] Auto pixel packing to 8 bits
+LOADED           w5run2 ( 50 by  96) XO=26  YO=100
+ [w5run2] Auto pixel packing to 8 bits
+LOADED           w5run3 ( 53 by 110) XO=25  YO=100
+ [w5run3] Auto pixel packing to 8 bits
+LOADED           w5run4 ( 53 by 118) XO=24  YO=103
+ [w5run4] Auto pixel packing to 8 bits
+LOADED           w5run5 ( 52 by 111) XO=25  YO=100
+ [w5run5] Auto pixel packing to 8 bits
+LOADED           w5run6 ( 51 by 102) XO=28  YO=98
+ [w5run6] Auto pixel packing to 8 bits
+LOADED           w5run7 ( 49 by  96) XO=26  YO=98
+ [w5run7] Auto pixel packing to 8 bits
+LOADED           w5run8 ( 48 by 101) XO=27  YO=101
+ [w5run8] Auto pixel packing to 8 bits
+LOADED           w5run9 ( 49 by 117) XO=29  YO=105
+ [w5run9] Auto pixel packing to 8 bits
+LOADED          w5run10 ( 50 by 118) XO=30  YO=103
+ [w5run10] Auto pixel packing to 8 bits
+LOADED          w5run11 ( 47 by 106) XO=26  YO=100
+ [w5run11] Auto pixel packing to 8 bits
+LOADED           w3spr1 ( 59 by  97) XO=36  YO=98
+ [w3spr1] Auto pixel packing to 8 bits
+LOADED           w3spr2 ( 75 by  99) XO=39  YO=100
+ [w3spr2] Auto pixel packing to 8 bits
+LOADED           w3spr3 ( 93 by 101) XO=55  YO=100
+ [w3spr3] Auto pixel packing to 8 bits
+LOADED           w3spr4 (115 by  99) XO=66  YO=100
+ [w3spr4] Auto pixel packing to 8 bits
+LOADED           w3spr5 (112 by 103) XO=70  YO=101
+ [w3spr5] Auto pixel packing to 8 bits
+LOADED           w3spr6 ( 77 by 101) XO=57  YO=99
+ [w3spr6] Auto pixel packing to 8 bits
+LOADED           w3spr7 ( 68 by 102) XO=35  YO=100
+ [w3spr7] Auto pixel packing to 8 bits
+LOADED           w3spr8 ( 82 by 103) XO=37  YO=101
+ [w3spr8] Auto pixel packing to 8 bits
+LOADED           w3spr9 (101 by 109) XO=55  YO=107
+ [w3spr9] Auto pixel packing to 8 bits
+LOADED          w3spr10 (109 by 103) XO=67  YO=109
+ [w3spr10] Auto pixel packing to 8 bits
+LOADED          w3spr11 (113 by 104) XO=70  YO=105
+ [w3spr11] Auto pixel packing to 8 bits
+LOADED           w4spr1 ( 61 by  93) XO=30  YO=95
+ [w4spr1] Auto pixel packing to 8 bits
+LOADED           w4spr2 ( 69 by  89) XO=29  YO=93
+ [w4spr2] Auto pixel packing to 8 bits
+LOADED           w4spr3 ( 74 by 102) XO=38  YO=97
+ [w4spr3] Auto pixel packing to 8 bits
+LOADED           w4spr4 ( 81 by 110) XO=42  YO=97
+ [w4spr4] Auto pixel packing to 8 bits
+LOADED           w4spr5 ( 68 by 105) XO=39  YO=95
+ [w4spr5] Auto pixel packing to 8 bits
+LOADED           w4spr6 ( 52 by  97) XO=30  YO=95
+ [w4spr6] Auto pixel packing to 8 bits
+LOADED           w4spr7 ( 50 by  93) XO=27  YO=95
+ [w4spr7] Auto pixel packing to 8 bits
+LOADED           w4spr8 ( 67 by  97) XO=41  YO=101
+ [w4spr8] Auto pixel packing to 8 bits
+LOADED           w4spr9 ( 86 by 110) XO=52  YO=103
+ [w4spr9] Auto pixel packing to 8 bits
+LOADED          w4spr10 ( 91 by 110) XO=56  YO=100
+ [w4spr10] Auto pixel packing to 8 bits
+LOADED          w4spr11 ( 67 by 100) XO=47  YO=96
+ [w4spr11] Auto pixel packing to 8 bits
+LOADED          w3dspr1 ( 69 by  97) XO=45  YO=96
+ [w3dspr1] Auto pixel packing to 8 bits
+LOADED          w3dspr2 ( 64 by  98) XO=34  YO=96
+ [w3dspr2] Auto pixel packing to 8 bits
+LOADED          w3dspr3 ( 84 by 101) XO=51  YO=96
+ [w3dspr3] Auto pixel packing to 8 bits
+LOADED          w3dspr4 (112 by  99) XO=65  YO=97
+ [w3dspr4] Auto pixel packing to 8 bits
+LOADED          w3dspr5 (111 by 104) XO=69  YO=98
+ [w3dspr5] Auto pixel packing to 8 bits
+LOADED          w3dspr6 ( 84 by  99) XO=56  YO=97
+ [w3dspr6] Auto pixel packing to 8 bits
+LOADED          w3dspr7 ( 67 by 100) XO=35  YO=97
+ [w3dspr7] Auto pixel packing to 8 bits
+LOADED          w3dspr8 ( 75 by 104) XO=45  YO=99
+ [w3dspr8] Auto pixel packing to 8 bits
+LOADED          w3dspr9 ( 90 by 104) XO=60  YO=99
+ [w3dspr9] Auto pixel packing to 8 bits
+LOADED         w3dspr10 (113 by  98) XO=69  YO=99
+ [w3dspr10] Auto pixel packing to 8 bits
+LOADED         w3dspr11 ( 97 by  99) XO=67  YO=98
+ [w3dspr11] Auto pixel packing to 8 bits
+LOADED          w4dspr1 ( 68 by  98) XO=40  YO=95
+ [w4dspr1] Auto pixel packing to 8 bits
+LOADED          w4dspr2 ( 57 by  91) XO=25  YO=94
+ [w4dspr2] Auto pixel packing to 8 bits
+LOADED          w4dspr3 ( 65 by  89) XO=33  YO=94
+ [w4dspr3] Auto pixel packing to 8 bits
+LOADED          w4dspr4 ( 78 by 101) XO=43  YO=95
+ [w4dspr4] Auto pixel packing to 8 bits
+LOADED          w4dspr5 ( 88 by 106) XO=49  YO=97
+ [w4dspr5] Auto pixel packing to 8 bits
+LOADED          w4dspr6 ( 71 by 101) XO=42  YO=95
+ [w4dspr6] Auto pixel packing to 8 bits
+LOADED          w4dspr7 ( 52 by  95) XO=25  YO=95
+ [w4dspr7] Auto pixel packing to 8 bits
+LOADED          w4dspr8 ( 63 by  93) XO=36  YO=95
+ [w4dspr8] Auto pixel packing to 8 bits
+LOADED          w4dspr9 ( 78 by 100) XO=46  YO=95
+ [w4dspr9] Auto pixel packing to 8 bits
+LOADED         w4dspr10 ( 97 by 104) XO=54  YO=96
+ [w4dspr10] Auto pixel packing to 8 bits
+LOADED         w4dspr11 ( 84 by 105) XO=54  YO=97
+ [w4dspr11] Auto pixel packing to 8 bits
+LOADED          w1drun1 ( 55 by 104) XO=23  YO=101
+ [w1drun1] Auto pixel packing to 8 bits
+LOADED          w1drun2 ( 61 by 109) XO=24  YO=102
+ [w1drun2] Auto pixel packing to 8 bits
+LOADED          w1drun3 ( 60 by 116) XO=26  YO=103
+ [w1drun3] Auto pixel packing to 8 bits
+LOADED          w1drun4 ( 59 by 121) XO=27  YO=104
+ [w1drun4] Auto pixel packing to 8 bits
+LOADED          w1drun5 ( 58 by 116) XO=27  YO=103
+ [w1drun5] Auto pixel packing to 8 bits
+LOADED          w1drun6 ( 59 by 102) XO=27  YO=103
+ [w1drun6] Auto pixel packing to 8 bits
+LOADED          w1drun7 ( 59 by 107) XO=24  YO=103
+ [w1drun7] Auto pixel packing to 8 bits
+LOADED          w1drun8 ( 50 by 113) XO=23  YO=103
+ [w1drun8] Auto pixel packing to 8 bits
+LOADED          w1drun9 ( 47 by 119) XO=21  YO=104
+ [w1drun9] Auto pixel packing to 8 bits
+LOADED         w1drun10 ( 47 by 119) XO=20  YO=103
+ [w1drun10] Auto pixel packing to 8 bits
+LOADED         w1drun11 ( 49 by 107) XO=20  YO=102
+ [w1drun11] Auto pixel packing to 8 bits
+LOADED          w2drun1 ( 63 by 106) XO=23  YO=102
+ [w2drun1] Auto pixel packing to 8 bits
+LOADED          w2drun2 ( 68 by 111) XO=30  YO=105
+ [w2drun2] Auto pixel packing to 8 bits
+LOADED          w2drun3 ( 74 by 116) XO=41  YO=106
+ [w2drun3] Auto pixel packing to 8 bits
+LOADED          w2drun4 ( 79 by 111) XO=45  YO=106
+ [w2drun4] Auto pixel packing to 8 bits
+LOADED          w2drun5 ( 79 by 105) XO=42  YO=104
+ [w2drun5] Auto pixel packing to 8 bits
+LOADED          w2drun6 ( 74 by 106) XO=32  YO=102
+ [w2drun6] Auto pixel packing to 8 bits
+LOADED          w2drun7 ( 62 by 111) XO=30  YO=105
+ [w2drun7] Auto pixel packing to 8 bits
+LOADED          w2drun8 ( 62 by 118) XO=32  YO=107
+ [w2drun8] Auto pixel packing to 8 bits
+LOADED          w2drun9 ( 62 by 117) XO=36  YO=107
+ [w2drun9] Auto pixel packing to 8 bits
+LOADED         w2drun10 ( 62 by 107) XO=36  YO=106
+ [w2drun10] Auto pixel packing to 8 bits
+LOADED         w2drun11 ( 63 by 103) XO=30  YO=104
+ [w2drun11] Auto pixel packing to 8 bits
+LOADED          w3drun1 ( 60 by 101) XO=27  YO=100
+ [w3drun1] Auto pixel packing to 8 bits
+LOADED          w3drun2 ( 68 by 104) XO=35  YO=103
+ [w3drun2] Auto pixel packing to 8 bits
+LOADED          w3drun3 ( 80 by 106) XO=48  YO=104
+ [w3drun3] Auto pixel packing to 8 bits
+LOADED          w3drun4 ( 99 by 107) XO=55  YO=107
+ [w3drun4] Auto pixel packing to 8 bits
+LOADED          w3drun5 ( 87 by 110) XO=53  YO=106
+ [w3drun5] Auto pixel packing to 8 bits
+LOADED          w3drun6 ( 79 by 105) XO=41  YO=101
+ [w3drun6] Auto pixel packing to 8 bits
+LOADED          w3drun7 ( 71 by 106) XO=26  YO=102
+ [w3drun7] Auto pixel packing to 8 bits
+LOADED          w3drun8 ( 73 by 110) XO=42  YO=105
+ [w3drun8] Auto pixel packing to 8 bits
+LOADED          w3drun9 ( 85 by 111) XO=51  YO=107
+ [w3drun9] Auto pixel packing to 8 bits
+LOADED         w3drun10 ( 91 by 106) XO=53  YO=106
+ [w3drun10] Auto pixel packing to 8 bits
+LOADED         w3drun11 ( 78 by 103) XO=43  YO=102
+ [w3drun11] Auto pixel packing to 8 bits
+LOADED          w4drun1 ( 50 by 102) XO=21  YO=102
+ [w4drun1] Auto pixel packing to 8 bits
+LOADED          w4drun2 ( 53 by 104) XO=26  YO=103
+ [w4drun2] Auto pixel packing to 8 bits
+LOADED          w4drun3 ( 64 by 116) XO=32  YO=107
+ [w4drun3] Auto pixel packing to 8 bits
+LOADED          w4drun4 ( 63 by 118) XO=32  YO=106
+ [w4drun4] Auto pixel packing to 8 bits
+LOADED          w4drun5 ( 52 by 111) XO=28  YO=105
+ [w4drun5] Auto pixel packing to 8 bits
+LOADED          w4drun6 ( 40 by 106) XO=18  YO=104
+ [w4drun6] Auto pixel packing to 8 bits
+LOADED          w4drun7 ( 55 by 106) XO=27  YO=107
+ [w4drun7] Auto pixel packing to 8 bits
+LOADED          w4drun8 ( 64 by 109) XO=36  YO=109
+ [w4drun8] Auto pixel packing to 8 bits
+LOADED          w4drun9 ( 78 by 115) XO=44  YO=109
+ [w4drun9] Auto pixel packing to 8 bits
+LOADED         w4drun10 ( 72 by 115) XO=43  YO=107
+ [w4drun10] Auto pixel packing to 8 bits
+LOADED         w4drun11 ( 58 by 108) XO=35  YO=104
+ [w4drun11] Auto pixel packing to 8 bits
+LOADED          w5drun1 ( 57 by  99) XO=33  YO=100
+ [w5drun1] Auto pixel packing to 8 bits
+LOADED          w5drun2 ( 56 by 101) XO=30  YO=100
+ [w5drun2] Auto pixel packing to 8 bits
+LOADED          w5drun3 ( 55 by 114) XO=27  YO=101
+ [w5drun3] Auto pixel packing to 8 bits
+LOADED          w5drun4 ( 55 by 118) XO=28  YO=103
+ [w5drun4] Auto pixel packing to 8 bits
+LOADED          w5drun5 ( 56 by 110) XO=31  YO=102
+ [w5drun5] Auto pixel packing to 8 bits
+LOADED          w5drun6 ( 54 by 104) XO=31  YO=101
+ [w5drun6] Auto pixel packing to 8 bits
+LOADED          w5drun7 ( 50 by 100) XO=27  YO=99
+ [w5drun7] Auto pixel packing to 8 bits
+LOADED          w5drun8 ( 50 by 107) XO=29  YO=100
+ [w5drun8] Auto pixel packing to 8 bits
+LOADED          w5drun9 ( 47 by 117) XO=27  YO=101
+ [w5drun9] Auto pixel packing to 8 bits
+LOADED         w5drun10 ( 48 by 119) XO=28  YO=103
+ [w5drun10] Auto pixel packing to 8 bits
+LOADED         w5drun11 ( 52 by 109) XO=31  YO=102
+ [w5drun11] Auto pixel packing to 8 bits
+LOADED
+Opening img lib [C:\nba_run2.img]          w1dfcr1 (115 by 102) XO=58  YO=94
+ [w1dfcr1] Auto pixel packing to 8 bits
+LOADED          w1dfcr2 (114 by 102) XO=57  YO=94
+ [w1dfcr2] Auto pixel packing to 8 bits
+LOADED          w1dfcr3 (112 by 101) XO=56  YO=94
+ [w1dfcr3] Auto pixel packing to 8 bits
+LOADED          w1dfcr4 (110 by 102) XO=56  YO=94
+ [w1dfcr4] Auto pixel packing to 8 bits
+LOADED          w1dfcr5 (110 by 101) XO=55  YO=93
+ [w1dfcr5] Auto pixel packing to 8 bits
+LOADED          w1dfcr6 (114 by 101) XO=56  YO=94
+ [w1dfcr6] Auto pixel packing to 8 bits
+LOADED          w2dfcr1 ( 82 by 102) XO=17  YO=90
+ [w2dfcr1] Auto pixel packing to 8 bits
+LOADED          w2dfcr2 ( 98 by 102) XO=28  YO=92
+ [w2dfcr2] Auto pixel packing to 8 bits
+LOADED          w2dfcr3 (100 by 105) XO=30  YO=93
+ [w2dfcr3] Auto pixel packing to 8 bits
+LOADED          w2dfcr4 ( 91 by 107) XO=24  YO=93
+ [w2dfcr4] Auto pixel packing to 8 bits
+LOADED          w2dfcr5 ( 81 by 104) XO=16  YO=92
+ [w2dfcr5] Auto pixel packing to 8 bits
+LOADED          w3dfcr1 ( 47 by 104) XO=19  YO=94
+ [w3dfcr1] Auto pixel packing to 8 bits
+LOADED          w3dfcr2 ( 50 by 107) XO=19  YO=95
+ [w3dfcr2] Auto pixel packing to 8 bits
+LOADED          w3dfcr3 ( 50 by 108) XO=18  YO=96
+ [w3dfcr3] Auto pixel packing to 8 bits
+LOADED          w3dfcr4 ( 52 by 109) XO=18  YO=96
+ [w3dfcr4] Auto pixel packing to 8 bits
+LOADED          w3dfcr5 ( 50 by 113) XO=17  YO=97
+ [w3dfcr5] Auto pixel packing to 8 bits
+LOADED          w3dfcr6 ( 46 by 117) XO=18  YO=99
+ [w3dfcr6] Auto pixel packing to 8 bits
+LOADED          w3dfcr7 ( 42 by 116) XO=18  YO=98
+ [w3dfcr7] Auto pixel packing to 8 bits
+LOADED          w3dfcr8 ( 41 by 111) XO=17  YO=97
+ [w3dfcr8] Auto pixel packing to 8 bits
+LOADED          w3dfcr9 ( 44 by 107) XO=18  YO=96
+ [w3dfcr9] Auto pixel packing to 8 bits
+LOADED          w4dfcr1 ( 79 by 102) XO=35  YO=89
+ [w4dfcr1] Auto pixel packing to 8 bits
+LOADED          w4dfcr2 ( 77 by 103) XO=35  YO=90
+ [w4dfcr2] Auto pixel packing to 8 bits
+LOADED          w4dfcr3 ( 76 by 104) XO=35  YO=90
+ [w4dfcr3] Auto pixel packing to 8 bits
+LOADED          w4dfcr4 ( 79 by 106) XO=36  YO=91
+ [w4dfcr4] Auto pixel packing to 8 bits
+LOADED          w4dfcr5 ( 82 by 108) XO=39  YO=91
+ [w4dfcr5] Auto pixel packing to 8 bits
+LOADED          w4dfcr6 ( 87 by 110) XO=43  YO=90
+ [w4dfcr6] Auto pixel packing to 8 bits
+LOADED          w4dfcr7 ( 87 by 108) XO=42  YO=90
+ [w4dfcr7] Auto pixel packing to 8 bits
+LOADED          w4dfcr8 ( 83 by 103) XO=38  YO=90
+ [w4dfcr8] Auto pixel packing to 8 bits
+LOADED          w4dfcr9 ( 81 by 101) XO=36  YO=90
+ [w4dfcr9] Auto pixel packing to 8 bits
+LOADED          w5dfcr1 ( 99 by 105) XO=53  YO=94
+ [w5dfcr1] Auto pixel packing to 8 bits
+LOADED          w5dfcr2 (101 by 102) XO=55  YO=94
+ [w5dfcr2] Auto pixel packing to 8 bits
+LOADED          w5dfcr3 (104 by 101) XO=57  YO=94
+ [w5dfcr3] Auto pixel packing to 8 bits
+LOADED          w5dfcr4 (106 by 101) XO=57  YO=94
+ [w5dfcr4] Auto pixel packing to 8 bits
+LOADED          w5dfcr5 (108 by 101) XO=58  YO=94
+ [w5dfcr5] Auto pixel packing to 8 bits
+LOADED          w5dfcr6 (109 by 101) XO=60  YO=94
+ [w5dfcr6] Auto pixel packing to 8 bits
+LOADED          w5dfcr7 (110 by 104) XO=60  YO=95
+ [w5dfcr7] Auto pixel packing to 8 bits
+LOADED          w5dfcr8 (106 by 107) XO=55  YO=96
+ [w5dfcr8] Auto pixel packing to 8 bits
+LOADED          w5dfcr9 (102 by 107) XO=53  YO=95
+ [w5dfcr9] Auto pixel packing to 8 bits
+LOADED
+Opening img lib [C:\colhds1.img]         MARBRY00 (  3 by   2) XO=0  YO=0
+LOADED         MARBRY01 ( 21 by  32) XO=9  YO=29
+LOADED         MARBRY02 ( 22 by  33) XO=11  YO=30
+LOADED         MARBRY03 ( 27 by  33) XO=8  YO=29
+LOADED         MARBRY04 ( 21 by  31) XO=5  YO=28
+LOADED         MARBRY05 ( 22 by  32) XO=9  YO=29
+LOADED         MARBRY06 ( 30 by  30) XO=22  YO=26
+LOADED         MARBRY07 ( 26 by  32) XO=2  YO=27
+LOADED         MARBRY08 ( 31 by  33) XO=2  YO=22
+LOADED         MARBRY09 ( 24 by  34) XO=2  YO=28
+LOADED         MARBRY10 ( 21 by  34) XO=10  YO=27
+LOADED         MARBRY11 ( 21 by  24) XO=10  YO=15
+LOADED         MARBRY12 ( 32 by  28) XO=19  YO=26
+LOADED         MARBRY13 ( 33 by  31) XO=24  YO=24
+LOADED         MARBRY14 ( 27 by  30) XO=14  YO=27
+LOADED         MARBRY15 ( 23 by  32) XO=12  YO=29
+LOADED         MARBRY16 ( 33 by  27) XO=30  YO=18
+LOADED          ALLEN00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [ALLEN00].          ALLEN01 ( 26 by  33) XO=13  YO=30
+LOADED          ALLEN02 ( 27 by  34) XO=11  YO=32
+LOADED          ALLEN03 ( 33 by  35) XO=10  YO=31
+LOADED          ALLEN04 ( 25 by  36) XO=7  YO=32
+LOADED          ALLEN05 ( 26 by  37) XO=13  YO=34
+LOADED          ALLEN06 ( 33 by  33) XO=23  YO=28
+LOADED          ALLEN07 ( 29 by  36) XO=3  YO=27
+LOADED          ALLEN08 ( 33 by  36) XO=1  YO=24
+LOADED          ALLEN09 ( 25 by  35) XO=3  YO=28
+LOADED          ALLEN10 ( 25 by  36) XO=13  YO=31
+LOADED          ALLEN11 ( 25 by  27) XO=12  YO=18
+LOADED          ALLEN12 ( 34 by  33) XO=19  YO=29
+LOADED          ALLEN13 ( 38 by  32) XO=26  YO=28
+LOADED          ALLEN14 ( 31 by  36) XO=15  YO=32
+LOADED          ALLEN15 ( 27 by  33) XO=12  YO=31
+LOADED          ALLEN16 ( 35 by  33) XO=33  YO=21
+LOADED           CAMB00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [CAMB00].           CAMB01 ( 21 by  33) XO=10  YO=31
+LOADED           CAMB02 ( 29 by  33) XO=14  YO=29
+LOADED           CAMB03 ( 33 by  35) XO=7  YO=31
+LOADED           CAMB04 ( 28 by  35) XO=8  YO=31
+LOADED           CAMB05 ( 27 by  36) XO=12  YO=33
+LOADED           CAMB06 ( 30 by  31) XO=22  YO=26
+LOADED           CAMB07 ( 26 by  34) XO=3  YO=29
+LOADED           CAMB08 ( 33 by  39) XO=1  YO=25
+LOADED           CAMB09 ( 35 by  35) XO=4  YO=25
+LOADED           CAMB10 ( 25 by  36) XO=12  YO=30
+LOADED           CAMB11 ( 23 by  24) XO=10  YO=15
+LOADED           CAMB12 ( 31 by  28) XO=16  YO=26
+LOADED           CAMB13 ( 38 by  33) XO=25  YO=30
+LOADED           CAMB14 ( 30 by  31) XO=12  YO=29
+LOADED           CAMB15 ( 28 by  30) XO=13  YO=28
+LOADED           CAMB16 ( 35 by  32) XO=33  YO=21
+LOADED           DAMP00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [DAMP00].           DAMP01 ( 25 by  31) XO=12  YO=29
+LOADED           DAMP02 ( 25 by  34) XO=13  YO=30
+LOADED           DAMP03 ( 34 by  34) XO=8  YO=30
+LOADED           DAMP04 ( 26 by  35) XO=8  YO=31
+LOADED           DAMP05 ( 25 by  36) XO=12  YO=33
+LOADED           DAMP06 ( 30 by  31) XO=21  YO=26
+LOADED           DAMP07 ( 25 by  32) XO=2  YO=28
+LOADED           DAMP08 ( 34 by  37) XO=2  YO=23
+LOADED           DAMP09 ( 27 by  37) XO=3  YO=29
+LOADED           DAMP10 ( 25 by  35) XO=11  YO=29
+LOADED           DAMP11 ( 25 by  25) XO=12  YO=16
+LOADED           DAMP12 ( 30 by  28) XO=16  YO=27
+LOADED           DAMP13 ( 37 by  34) XO=23  YO=29
+LOADED           DAMP14 ( 27 by  29) XO=12  YO=26
+LOADED           DAMP15 ( 24 by  32) XO=10  YO=29
+LOADED           DAMP16 ( 34 by  33) XO=32  YO=21
+LOADED            DUN00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [DUN00].            DUN01 ( 22 by  33) XO=11  YO=30
+LOADED            DUN02 ( 29 by  33) XO=11  YO=31
+LOADED            DUN03 ( 34 by  32) XO=8  YO=29
+LOADED            DUN04 ( 29 by  33) XO=8  YO=31
+LOADED            DUN05 ( 28 by  36) XO=14  YO=35
+LOADED            DUN06 ( 30 by  31) XO=22  YO=27
+LOADED            DUN07 ( 26 by  34) XO=3  YO=29
+LOADED            DUN08 ( 34 by  35) XO=3  YO=23
+LOADED            DUN09 ( 30 by  36) XO=3  YO=31
+LOADED            DUN10 ( 22 by  35) XO=10  YO=30
+LOADED            DUN11 ( 23 by  24) XO=11  YO=16
+LOADED            DUN12 ( 31 by  28) XO=17  YO=26
+LOADED            DUN13 ( 36 by  34) XO=25  YO=29
+LOADED            DUN14 ( 31 by  33) XO=13  YO=31
+LOADED            DUN15 ( 28 by  33) XO=13  YO=31
+LOADED            DUN16 ( 32 by  33) XO=30  YO=24
+LOADED            HAM00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [HAM00].            HAM01 ( 25 by  32) XO=12  YO=29
+LOADED            HAM02 ( 25 by  33) XO=10  YO=31
+LOADED            HAM03 ( 31 by  35) XO=10  YO=31
+LOADED            HAM04 ( 26 by  36) XO=8  YO=33
+LOADED            HAM05 ( 23 by  35) XO=11  YO=34
+LOADED            HAM06 ( 31 by  30) XO=22  YO=26
+LOADED            HAM07 ( 25 by  32) XO=3  YO=27
+LOADED            HAM08 ( 30 by  36) XO=3  YO=26
+LOADED            HAM09 ( 26 by  35) XO=2  YO=26
+LOADED            HAM10 ( 25 by  35) XO=12  YO=29
+LOADED            HAM11 ( 25 by  24) XO=13  YO=15
+LOADED            HAM12 ( 30 by  27) XO=15  YO=25
+LOADED            HAM13 ( 36 by  31) XO=25  YO=27
+LOADED            HAM14 ( 26 by  31) XO=10  YO=26
+LOADED            HAM15 ( 25 by  34) XO=12  YO=31
+LOADED            HAM16 ( 35 by  30) XO=32  YO=17
+LOADED           HARR00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [HARR00].           HARR01 ( 24 by  33) XO=10  YO=30
+LOADED           HARR02 ( 28 by  33) XO=10  YO=30
+LOADED           HARR03 ( 31 by  33) XO=8  YO=30
+LOADED           HARR04 ( 28 by  33) XO=7  YO=31
+LOADED           HARR05 ( 27 by  35) XO=13  YO=32
+LOADED           HARR06 ( 31 by  31) XO=22  YO=26
+LOADED           HARR07 ( 27 by  32) XO=3  YO=28
+LOADED           HARR08 ( 34 by  35) XO=2  YO=21
+LOADED           HARR09 ( 27 by  34) XO=2  YO=27
+LOADED           HARR10 ( 26 by  35) XO=10  YO=30
+LOADED           HARR11 ( 24 by  24) XO=10  YO=15
+LOADED           HARR12 ( 30 by  29) XO=15  YO=26
+LOADED           HARR13 ( 35 by  34) XO=23  YO=29
+LOADED           HARR14 ( 28 by  31) XO=12  YO=28
+LOADED           HARR15 ( 27 by  33) XO=13  YO=29
+LOADED           HARR16 ( 33 by  31) XO=31  YO=21
+LOADED           IVER00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [IVER00].           IVER01 ( 23 by  33) XO=12  YO=29
+LOADED           IVER02 ( 28 by  33) XO=9  YO=31
+LOADED           IVER03 ( 31 by  32) XO=8  YO=29
+LOADED           IVER04 ( 27 by  34) XO=7  YO=31
+LOADED           IVER05 ( 26 by  36) XO=13  YO=34
+LOADED           IVER06 ( 30 by  30) XO=22  YO=26
+LOADED           IVER07 ( 26 by  32) XO=3  YO=27
+LOADED           IVER08 ( 30 by  33) XO=1  YO=21
+LOADED           IVER09 ( 27 by  34) XO=3  YO=27
+LOADED           IVER10 ( 22 by  35) XO=10  YO=30
+LOADED           IVER11 ( 21 by  24) XO=10  YO=15
+LOADED           IVER12 ( 30 by  28) XO=15  YO=26
+LOADED           IVER13 ( 33 by  30) XO=23  YO=27
+LOADED           IVER14 ( 28 by  31) XO=12  YO=28
+LOADED           IVER15 ( 27 by  30) XO=13  YO=28
+LOADED           IVER16 ( 32 by  30) XO=30  YO=22
+LOADED            KIT00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [KIT00].            KIT01 ( 21 by  33) XO=10  YO=30
+LOADED            KIT02 ( 22 by  33) XO=8  YO=30
+LOADED            KIT03 ( 27 by  33) XO=8  YO=30
+LOADED            KIT04 ( 24 by  34) XO=8  YO=32
+LOADED            KIT05 ( 22 by  36) XO=11  YO=33
+LOADED            KIT06 ( 30 by  30) XO=22  YO=26
+LOADED            KIT07 ( 26 by  32) XO=3  YO=27
+LOADED            KIT08 ( 31 by  32) XO=2  YO=21
+LOADED            KIT09 ( 24 by  34) XO=2  YO=27
+LOADED            KIT10 ( 21 by  35) XO=10  YO=29
+LOADED            KIT11 ( 21 by  24) XO=10  YO=15
+LOADED            KIT12 ( 31 by  28) XO=16  YO=26
+LOADED            KIT13 ( 32 by  31) XO=17  YO=29
+LOADED            KIT14 ( 27 by  30) XO=14  YO=28
+LOADED            KIT15 ( 23 by  32) XO=11  YO=30
+LOADED            KIT16 ( 34 by  27) XO=32  YO=16
+LOADED           MINR00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [MINR00].           MINR01 ( 26 by  31) XO=13  YO=28
+LOADED           MINR02 ( 27 by  33) XO=11  YO=29
+LOADED           MINR03 ( 33 by  33) XO=9  YO=30
+LOADED           MINR04 ( 27 by  34) XO=8  YO=31
+LOADED           MINR05 ( 27 by  35) XO=14  YO=33
+LOADED           MINR06 ( 29 by  32) XO=19  YO=27
+LOADED           MINR07 ( 29 by  36) XO=3  YO=24
+LOADED           MINR08 ( 36 by  37) XO=3  YO=23
+LOADED           MINR09 ( 29 by  35) XO=3  YO=28
+LOADED           MINR10 ( 28 by  34) XO=13  YO=29
+LOADED           MINR11 ( 24 by  26) XO=12  YO=17
+LOADED           MINR12 ( 32 by  31) XO=17  YO=29
+LOADED           MINR13 ( 37 by  36) XO=23  YO=31
+LOADED           MINR14 ( 27 by  32) XO=13  YO=29
+LOADED           MINR15 ( 24 by  34) XO=11  YO=31
+LOADED           MINR16 ( 33 by  33) XO=31  YO=22
+LOADED           RILY00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [RILY00].           RILY01 ( 24 by  33) XO=12  YO=29
+LOADED           RILY02 ( 26 by  36) XO=11  YO=33
+LOADED           RILY03 ( 27 by  36) XO=9  YO=32
+LOADED           RILY04 ( 23 by  37) XO=7  YO=34
+LOADED           RILY05 ( 24 by  36) XO=12  YO=34
+LOADED           RILY06 ( 32 by  32) XO=23  YO=27
+LOADED           RILY07 ( 26 by  32) XO=3  YO=27
+LOADED           RILY08 ( 33 by  36) XO=2  YO=26
+LOADED           RILY09 ( 29 by  34) XO=3  YO=27
+LOADED           RILY10 ( 22 by  34) XO=11  YO=29
+LOADED           RILY11 ( 24 by  26) XO=12  YO=17
+LOADED           RILY12 ( 30 by  28) XO=15  YO=26
+LOADED           RILY13 ( 36 by  33) XO=26  YO=29
+LOADED           RILY14 ( 33 by  33) XO=16  YO=30
+LOADED           RILY15 ( 24 by  30) XO=11  YO=28
+LOADED           RILY16 ( 36 by  27) XO=33  YO=17
+LOADED            WAL00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [WAL00].            WAL01 ( 26 by  30) XO=12  YO=28
+LOADED            WAL02 ( 25 by  33) XO=9  YO=30
+LOADED            WAL03 ( 29 by  34) XO=10  YO=30
+LOADED            WAL04 ( 25 by  34) XO=7  YO=32
+LOADED            WAL05 ( 24 by  34) XO=11  YO=30
+LOADED            WAL06 ( 30 by  29) XO=21  YO=25
+LOADED            WAL07 ( 30 by  32) XO=3  YO=24
+LOADED            WAL08 ( 33 by  34) XO=3  YO=23
+LOADED            WAL09 ( 26 by  34) XO=3  YO=27
+LOADED            WAL10 ( 22 by  33) XO=11  YO=28
+LOADED            WAL11 ( 24 by  23) XO=12  YO=15
+LOADED            WAL12 ( 32 by  31) XO=18  YO=28
+LOADED            WAL13 ( 33 by  33) XO=19  YO=28
+LOADED            WAL14 ( 28 by  31) XO=15  YO=28
+LOADED            WAL15 ( 24 by  30) XO=11  YO=28
+LOADED            WAL16 ( 34 by  29) XO=31  YO=19
+LOADED
+Opening img lib [C:\hdsmsc6.img]           CARY00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [CARY00].           CARY01 ( 36 by  36) XO=17  YO=33
+LOADED           CARY02 ( 43 by  36) XO=22  YO=33
+LOADED           CARY03 ( 45 by  38) XO=19  YO=34
+LOADED           CARY04 ( 40 by  35) XO=16  YO=32
+LOADED           CARY05 ( 36 by  40) XO=19  YO=35
+LOADED           CARY16 ( 38 by  45) XO=34  YO=21
+LOADED            DAN00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [DAN00].            DAN01 ( 32 by  39) XO=17  YO=37
+LOADED            DAN02 ( 35 by  39) XO=19  YO=36
+LOADED            DAN03 ( 40 by  39) XO=18  YO=35
+LOADED            DAN04 ( 33 by  41) XO=14  YO=37
+LOADED            DAN05 ( 31 by  42) XO=15  YO=37
+LOADED            DAN06 ( 39 by  38) XO=28  YO=34
+LOADED            DAN07 ( 33 by  38) XO=5  YO=31
+LOADED            DAN08 ( 41 by  39) XO=3  YO=30
+LOADED            DAN09 ( 39 by  42) XO=5  YO=34
+LOADED            DAN10 ( 32 by  42) XO=15  YO=33
+LOADED            DAN11 ( 33 by  33) XO=15  YO=22
+LOADED            DAN12 ( 40 by  37) XO=25  YO=35
+LOADED            DAN13 ( 41 by  37) XO=24  YO=35
+LOADED            DAN14 ( 38 by  38) XO=22  YO=35
+LOADED            DAN15 ( 31 by  39) XO=15  YO=34
+LOADED            DAN16 ( 39 by  40) XO=35  YO=21
+LOADED          EDDIE00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [EDDIE00].          EDDIE01 ( 33 by  35) XO=16  YO=32
+LOADED          EDDIE02 ( 36 by  38) XO=20  YO=33
+LOADED          EDDIE03 ( 40 by  40) XO=15  YO=34
+LOADED          EDDIE04 ( 33 by  40) XO=11  YO=34
+LOADED          EDDIE05 ( 31 by  41) XO=14  YO=36
+LOADED          EDDIE06 ( 37 by  33) XO=25  YO=28
+LOADED          EDDIE07 ( 36 by  38) XO=7  YO=24
+LOADED          EDDIE08 ( 43 by  39) XO=3  YO=24
+LOADED          EDDIE09 ( 41 by  40) XO=5  YO=27
+LOADED          EDDIE10 ( 31 by  39) XO=15  YO=30
+LOADED          EDDIE11 ( 32 by  33) XO=16  YO=20
+LOADED          EDDIE12 ( 39 by  35) XO=21  YO=33
+LOADED          EDDIE13 ( 49 by  35) XO=34  YO=33
+LOADED          EDDIE14 ( 40 by  38) XO=23  YO=33
+LOADED          EDDIE15 ( 31 by  42) XO=15  YO=35
+LOADED          EDDIE16 ( 39 by  39) XO=34  YO=20
+LOADED           EUGG00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [EUGG00].           EUGG01 ( 32 by  39) XO=16  YO=37
+LOADED           EUGG02 ( 36 by  42) XO=16  YO=35
+LOADED           EUGG03 ( 37 by  42) XO=10  YO=34
+LOADED           EUGG04 ( 35 by  43) XO=13  YO=36
+LOADED           EUGG05 ( 32 by  42) XO=16  YO=37
+LOADED           EUGG06 ( 35 by  35) XO=25  YO=31
+LOADED           EUGG07 ( 43 by  40) XO=8  YO=30
+LOADED           EUGG08 ( 41 by  42) XO=4  YO=29
+LOADED           EUGG09 ( 42 by  39) XO=6  YO=32
+LOADED           EUGG10 ( 33 by  42) XO=15  YO=34
+LOADED           EUGG11 ( 33 by  35) XO=17  YO=22
+LOADED           EUGG12 ( 37 by  37) XO=21  YO=35
+LOADED           EUGG13 ( 44 by  37) XO=32  YO=36
+LOADED           EUGG14 ( 38 by  36) XO=22  YO=34
+LOADED           EUGG15 ( 32 by  37) XO=16  YO=33
+LOADED           EUGG16 ( 42 by  37) XO=37  YO=20
+LOADED           JEFF00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [JEFF00].           JEFF01 ( 29 by  34) XO=14  YO=32
+LOADED           JEFF02 ( 33 by  34) XO=12  YO=31
+LOADED           JEFF03 ( 37 by  37) XO=10  YO=32
+LOADED           JEFF04 ( 34 by  38) XO=9  YO=34
+LOADED           JEFF05 ( 31 by  41) XO=15  YO=34
+LOADED           JEFF06 ( 35 by  34) XO=25  YO=30
+LOADED           JEFF07 ( 38 by  35) XO=8  YO=27
+LOADED           JEFF08 ( 43 by  36) XO=5  YO=29
+LOADED           JEFF09 ( 39 by  39) XO=6  YO=31
+LOADED           JEFF10 ( 31 by  40) XO=16  YO=33
+LOADED           JEFF11 ( 28 by  35) XO=13  YO=22
+LOADED           JEFF12 ( 33 by  36) XO=21  YO=31
+LOADED           JEFF13 ( 42 by  36) XO=24  YO=32
+LOADED           JEFF14 ( 35 by  39) XO=18  YO=34
+LOADED           JEFF15 ( 32 by  39) XO=16  YO=33
+LOADED           JEFF16 ( 36 by  37) XO=33  YO=25
+LOADED          JAMIE00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [JAMIE00].          JAMIE01 ( 46 by  37) XO=23  YO=33
+LOADED          JAMIE02 ( 40 by  40) XO=15  YO=35
+LOADED          JAMIE03 ( 40 by  40) XO=14  YO=35
+LOADED          JAMIE04 ( 40 by  43) XO=13  YO=36
+LOADED          JAMIE05 ( 45 by  42) XO=21  YO=39
+LOADED          JAMIE06 ( 43 by  36) XO=27  YO=31
+LOADED          JAMIE07 ( 46 by  41) XO=10  YO=29
+LOADED          JAMIE08 ( 47 by  42) XO=6  YO=29
+LOADED          JAMIE09 ( 43 by  42) XO=10  YO=34
+LOADED          JAMIE10 ( 43 by  40) XO=21  YO=33
+LOADED          JAMIE11 ( 45 by  35) XO=23  YO=22
+LOADED          JAMIE12 ( 39 by  38) XO=21  YO=34
+LOADED          JAMIE13 ( 46 by  40) XO=31  YO=35
+LOADED          JAMIE14 ( 39 by  40) XO=21  YO=34
+LOADED          JAMIE15 ( 43 by  39) XO=22  YO=34
+LOADED          JAMIE16 ( 42 by  40) XO=38  YO=22
+LOADED         TURMEL00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [TURMEL00].         TURMEL01 ( 53 by  45) XO=27  YO=37
+LOADED         TURMEL02 ( 46 by  44) XO=23  YO=37
+LOADED         TURMEL03 ( 46 by  48) XO=23  YO=37
+LOADED         TURMEL04 ( 46 by  49) XO=26  YO=37
+LOADED         TURMEL05 ( 56 by  53) XO=27  YO=37
+LOADED         TURMEL06 ( 57 by  47) XO=28  YO=31
+LOADED         TURMEL07 ( 58 by  44) XO=19  YO=32
+LOADED         TURMEL08 ( 49 by  44) XO=17  YO=33
+LOADED         TURMEL09 ( 55 by  45) XO=27  YO=34
+LOADED         TURMEL10 ( 57 by  51) XO=26  YO=36
+LOADED         TURMEL11 ( 65 by  46) XO=31  YO=22
+LOADED         TURMEL12 ( 52 by  47) XO=29  YO=33
+LOADED         TURMEL13 ( 49 by  47) XO=32  YO=34
+LOADED         TURMEL14 ( 55 by  51) XO=29  YO=32
+LOADED         TURMEL15 ( 63 by  55) XO=31  YO=35
+LOADED         TURMEL16 ( 45 by  46) XO=37  YO=20
+LOADED
+Opening img lib [C:\hdsmsc7.img]            BUD00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [BUD00].            BUD01 ( 27 by  32) XO=13  YO=30
+LOADED            BUD02 ( 29 by  34) XO=12  YO=31
+LOADED            BUD03 ( 37 by  37) XO=13  YO=32
+LOADED            BUD04 ( 30 by  38) XO=12  YO=32
+LOADED            BUD05 ( 28 by  38) XO=14  YO=32
+LOADED            BUD06 ( 33 by  30) XO=23  YO=27
+LOADED            BUD07 ( 30 by  34) XO=6  YO=25
+LOADED            BUD08 ( 38 by  37) XO=5  YO=28
+LOADED            BUD09 ( 33 by  38) XO=7  YO=31
+LOADED            BUD10 ( 29 by  38) XO=14  YO=32
+LOADED            BUD11 ( 28 by  28) XO=13  YO=18
+LOADED            BUD12 ( 36 by  32) XO=18  YO=30
+LOADED            BUD13 ( 41 by  34) XO=22  YO=30
+LOADED            BUD14 ( 36 by  35) XO=19  YO=31
+LOADED            BUD15 ( 28 by  37) XO=13  YO=34
+LOADED            BUD16 ( 41 by  34) XO=37  YO=21
+LOADED            HEY00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [HEY00].            HEY01 ( 27 by  34) XO=13  YO=32
+LOADED            HEY02 ( 33 by  35) XO=16  YO=33
+LOADED            HEY03 ( 36 by  37) XO=14  YO=33
+LOADED            HEY04 ( 33 by  38) XO=12  YO=34
+LOADED            HEY05 ( 28 by  39) XO=13  YO=35
+LOADED            HEY06 ( 36 by  30) XO=26  YO=27
+LOADED            HEY07 ( 29 by  34) XO=5  YO=29
+LOADED            HEY08 ( 40 by  38) XO=6  YO=29
+LOADED            HEY09 ( 36 by  40) XO=5  YO=32
+LOADED            HEY10 ( 26 by  40) XO=10  YO=33
+LOADED            HEY11 ( 29 by  32) XO=14  YO=20
+LOADED            HEY12 ( 36 by  35) XO=20  YO=31
+LOADED            HEY13 ( 41 by  36) XO=23  YO=32
+LOADED            HEY14 ( 35 by  36) XO=19  YO=31
+LOADED            HEY15 ( 28 by  35) XO=13  YO=31
+LOADED            HEY16 ( 38 by  34) XO=35  YO=22
+LOADED            JEN00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [JEN00].            JEN01 ( 48 by  60) XO=25  YO=30
+LOADED            JEN02 ( 52 by  59) XO=31  YO=31
+LOADED            JEN03 ( 51 by  51) XO=27  YO=31
+LOADED            JEN04 ( 41 by  51) XO=20  YO=35
+LOADED            JEN05 ( 50 by  49) XO=24  YO=37
+LOADED            JEN06 ( 54 by  59) XO=26  YO=29
+LOADED            JEN07 ( 62 by  47) XO=31  YO=29
+LOADED            JEN08 ( 63 by  49) XO=32  YO=30
+LOADED            JEN09 ( 46 by  50) XO=17  YO=31
+LOADED            JEN10 ( 44 by  47) XO=21  YO=32
+LOADED            JEN11 ( 53 by  61) XO=25  YO=23
+LOADED            JEN12 ( 55 by  66) XO=28  YO=34
+LOADED            JEN13 ( 49 by  55) XO=29  YO=35
+LOADED            JEN14 ( 42 by  52) XO=26  YO=36
+LOADED            JEN15 ( 48 by  52) XO=23  YO=38
+LOADED            JEN16 ( 53 by  48) XO=33  YO=22
+LOADED          JOHNC00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [JOHNC00].          JOHNC01 ( 28 by  35) XO=13  YO=32
+LOADED          JOHNC02 ( 30 by  36) XO=14  YO=33
+LOADED          JOHNC03 ( 35 by  38) XO=12  YO=32
+LOADED          JOHNC04 ( 31 by  37) XO=12  YO=33
+LOADED          JOHNC05 ( 30 by  39) XO=14  YO=36
+LOADED          JOHNC06 ( 36 by  30) XO=28  YO=27
+LOADED          JOHNC07 ( 32 by  30) XO=7  YO=23
+LOADED          JOHNC08 ( 39 by  35) XO=7  YO=25
+LOADED          JOHNC09 ( 34 by  36) XO=5  YO=27
+LOADED          JOHNC10 ( 29 by  35) XO=14  YO=28
+LOADED          JOHNC11 ( 27 by  32) XO=12  YO=20
+LOADED          JOHNC12 ( 35 by  34) XO=19  YO=31
+LOADED          JOHNC13 ( 37 by  35) XO=22  YO=31
+LOADED          JOHNC14 ( 32 by  37) XO=17  YO=35
+LOADED          JOHNC15 ( 29 by  38) XO=14  YO=36
+LOADED          JOHNC16 ( 39 by  33) XO=36  YO=22
+LOADED            NIK00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [NIK00].            NIK01 ( 27 by  35) XO=13  YO=31
+LOADED            NIK02 ( 30 by  36) XO=14  YO=32
+LOADED            NIK03 ( 33 by  37) XO=11  YO=31
+LOADED            NIK04 ( 31 by  38) XO=12  YO=31
+LOADED            NIK05 ( 28 by  41) XO=13  YO=33
+LOADED            NIK16 ( 39 by  32) XO=35  YO=21
+LOADED           ROOT00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [ROOT00].           ROOT01 ( 27 by  48) XO=13  YO=30
+LOADED           ROOT02 ( 42 by  44) XO=28  YO=32
+LOADED           ROOT03 ( 53 by  43) XO=32  YO=31
+LOADED           ROOT04 ( 40 by  40) XO=23  YO=34
+LOADED           ROOT05 ( 27 by  39) XO=13  YO=35
+LOADED           ROOT06 ( 34 by  40) XO=23  YO=32
+LOADED           ROOT07 ( 36 by  38) XO=13  YO=28
+LOADED           ROOT08 ( 49 by  38) XO=19  YO=30
+LOADED           ROOT09 ( 43 by  40) XO=18  YO=32
+LOADED           ROOT10 ( 27 by  40) XO=13  YO=32
+LOADED           ROOT11 ( 28 by  64) XO=13  YO=20
+LOADED           ROOT12 ( 40 by  59) XO=24  YO=32
+LOADED           ROOT13 ( 54 by  53) XO=37  YO=32
+LOADED           ROOT14 ( 45 by  52) XO=30  YO=32
+LOADED           ROOT15 ( 27 by  37) XO=13  YO=32
+LOADED           ROOT16 ( 44 by  49) XO=34  YO=19
+LOADED          NEILF00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [NEILF00].          NEILF01 ( 29 by  33) XO=14  YO=30
+LOADED          NEILF02 ( 30 by  33) XO=14  YO=31
+LOADED          NEILF03 ( 37 by  36) XO=13  YO=32
+LOADED          NEILF04 ( 32 by  37) XO=13  YO=33
+LOADED          NEILF05 ( 29 by  37) XO=13  YO=33
+LOADED          NEILF16 ( 39 by  34) XO=33  YO=22
+LOADED            PAT00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [PAT00].            PAT01 ( 29 by  34) XO=14  YO=32
+LOADED            PAT02 ( 34 by  36) XO=16  YO=33
+LOADED            PAT03 ( 39 by  37) XO=18  YO=34
+LOADED            PAT04 ( 33 by  37) XO=15  YO=34
+LOADED            PAT05 ( 29 by  39) XO=14  YO=34
+LOADED            PAT06 ( 33 by  34) XO=25  YO=31
+LOADED            PAT07 ( 36 by  36) XO=11  YO=29
+LOADED            PAT08 ( 41 by  38) XO=10  YO=29
+LOADED            PAT09 ( 36 by  39) XO=9  YO=30
+LOADED            PAT10 ( 30 by  40) XO=14  YO=31
+LOADED            PAT11 ( 32 by  34) XO=15  YO=21
+LOADED            PAT12 ( 36 by  36) XO=23  YO=33
+LOADED            PAT13 ( 45 by  35) XO=28  YO=32
+LOADED            PAT14 ( 38 by  35) XO=22  YO=32
+LOADED            PAT15 ( 29 by  37) XO=14  YO=33
+LOADED            PAT16 ( 39 by  36) XO=35  YO=17
+LOADED          PERRY00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [PERRY00].          PERRY01 ( 30 by  38) XO=15  YO=35
+LOADED          PERRY02 ( 34 by  39) XO=17  YO=35
+LOADED          PERRY03 ( 36 by  39) XO=13  YO=34
+LOADED          PERRY04 ( 32 by  39) XO=14  YO=34
+LOADED          PERRY05 ( 30 by  42) XO=15  YO=36
+LOADED          PERRY06 ( 36 by  35) XO=27  YO=29
+LOADED          PERRY07 ( 35 by  38) XO=6  YO=33
+LOADED          PERRY08 ( 41 by  37) XO=2  YO=30
+LOADED          PERRY09 ( 35 by  39) XO=7  YO=32
+LOADED          PERRY10 ( 28 by  41) XO=13  YO=33
+LOADED          PERRY11 ( 32 by  30) XO=15  YO=18
+LOADED          PERRY12 ( 40 by  37) XO=25  YO=34
+LOADED          PERRY13 ( 41 by  37) XO=24  YO=34
+LOADED          PERRY14 ( 35 by  36) XO=18  YO=33
+LOADED          PERRY15 ( 28 by  39) XO=14  YO=36
+LOADED          PERRY16 ( 39 by  36) XO=37  YO=21
+LOADED            SAL00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [SAL00].            SAL01 ( 37 by  46) XO=18  YO=33
+LOADED            SAL02 ( 36 by  45) XO=20  YO=33
+LOADED            SAL03 ( 41 by  43) XO=21  YO=34
+LOADED            SAL04 ( 37 by  41) XO=18  YO=34
+LOADED            SAL05 ( 35 by  41) XO=16  YO=35
+LOADED            SAL06 ( 46 by  43) XO=24  YO=31
+LOADED            SAL07 ( 50 by  34) XO=19  YO=28
+LOADED            SAL08 ( 56 by  38) XO=18  YO=29
+LOADED            SAL09 ( 47 by  39) XO=16  YO=31
+LOADED            SAL10 ( 35 by  40) XO=17  YO=33
+LOADED            SAL11 ( 42 by  60) XO=20  YO=20
+LOADED            SAL12 ( 38 by  52) XO=23  YO=34
+LOADED            SAL13 ( 44 by  52) XO=26  YO=34
+LOADED            SAL14 ( 39 by  45) XO=23  YO=33
+LOADED            SAL15 ( 40 by  43) XO=18  YO=34
+LOADED            SAL16 ( 44 by  40) XO=34  YO=19
+LOADED
+Opening img lib [C:\hdsmsc8.img]           BOON00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [BOON00].           BOON01 ( 26 by  33) XO=13  YO=30
+LOADED           BOON02 ( 28 by  34) XO=13  YO=31
+LOADED           BOON03 ( 34 by  36) XO=14  YO=31
+LOADED           BOON04 ( 31 by  37) XO=12  YO=32
+LOADED           BOON05 ( 26 by  39) XO=12  YO=32
+LOADED           BOON06 ( 33 by  29) XO=24  YO=26
+LOADED           BOON07 ( 29 by  29) XO=6  YO=23
+LOADED           BOON08 ( 34 by  35) XO=4  YO=28
+LOADED           BOON09 ( 35 by  37) XO=5  YO=29
+LOADED           BOON10 ( 26 by  37) XO=12  YO=29
+LOADED           BOON11 ( 27 by  32) XO=13  YO=19
+LOADED           BOON12 ( 33 by  33) XO=18  YO=31
+LOADED           BOON13 ( 39 by  34) XO=25  YO=32
+LOADED           BOON14 ( 35 by  34) XO=19  YO=32
+LOADED           BOON15 ( 26 by  38) XO=13  YO=34
+LOADED           BOON16 ( 37 by  31) XO=33  YO=18
+LOADED         CARLOS00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [CARLOS00].         CARLOS01 ( 30 by  38) XO=13  YO=35
+LOADED         CARLOS02 ( 37 by  38) XO=18  YO=35
+LOADED         CARLOS03 ( 39 by  40) XO=15  YO=36
+LOADED         CARLOS04 ( 33 by  40) XO=13  YO=37
+LOADED         CARLOS05 ( 30 by  41) XO=15  YO=37
+LOADED         CARLOS16 ( 42 by  36) XO=37  YO=21
+LOADED           FIFI00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [FIFI00].           FIFI01 ( 44 by  42) XO=20  YO=29
+LOADED           FIFI02 ( 48 by  44) XO=24  YO=33
+LOADED           FIFI03 ( 63 by  47) XO=26  YO=35
+LOADED           FIFI04 ( 44 by  49) XO=18  YO=38
+LOADED           FIFI05 ( 48 by  46) XO=24  YO=37
+LOADED           FIFI06 ( 49 by  42) XO=32  YO=29
+LOADED           FIFI07 ( 47 by  51) XO=21  YO=37
+LOADED           FIFI08 ( 54 by  47) XO=24  YO=28
+LOADED           FIFI09 ( 53 by  54) XO=21  YO=35
+LOADED           FIFI10 ( 46 by  44) XO=22  YO=26
+LOADED           FIFI11 ( 49 by  51) XO=24  YO=25
+LOADED           FIFI12 ( 54 by  40) XO=33  YO=23
+LOADED           FIFI13 ( 54 by  50) XO=31  YO=27
+LOADED           FIFI14 ( 55 by  41) XO=30  YO=28
+LOADED           FIFI15 ( 47 by  36) XO=22  YO=25
+LOADED           FIFI16 ( 50 by  56) XO=38  YO=30
+LOADED          HEITH00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [HEITH00].          HEITH01 ( 28 by  34) XO=14  YO=32
+LOADED          HEITH02 ( 37 by  37) XO=19  YO=34
+LOADED          HEITH03 ( 38 by  38) XO=18  YO=34
+LOADED          HEITH04 ( 31 by  36) XO=13  YO=34
+LOADED          HEITH05 ( 29 by  37) XO=15  YO=34
+LOADED          HEITH16 ( 38 by  35) XO=34  YO=20
+LOADED          JASON00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [JASON00].          JASON01 ( 29 by  34) XO=14  YO=32
+LOADED          JASON02 ( 34 by  37) XO=17  YO=33
+LOADED          JASON03 ( 37 by  38) XO=14  YO=33
+LOADED          JASON04 ( 34 by  39) XO=13  YO=34
+LOADED          JASON05 ( 29 by  40) XO=14  YO=33
+LOADED          JASON16 ( 39 by  33) XO=36  YO=20
+LOADED           JOSH00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [JOSH00].           JOSH01 ( 38 by  40) XO=19  YO=38
+LOADED           JOSH02 ( 40 by  42) XO=19  YO=38
+LOADED           JOSH03 ( 45 by  43) XO=21  YO=38
+LOADED           JOSH04 ( 42 by  39) XO=20  YO=37
+LOADED           JOSH05 ( 38 by  39) XO=19  YO=37
+LOADED           JOSH16 ( 43 by  41) XO=38  YO=23
+LOADED          MARTY00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [MARTY00].          MARTY01 ( 31 by  34) XO=15  YO=31
+LOADED          MARTY02 ( 37 by  35) XO=18  YO=32
+LOADED          MARTY03 ( 38 by  34) XO=15  YO=30
+LOADED          MARTY04 ( 35 by  36) XO=14  YO=31
+LOADED          MARTY05 ( 30 by  36) XO=14  YO=32
+LOADED          MARTY16 ( 38 by  34) XO=34  YO=18
+LOADED           MATT00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [MATT00].           MATT01 ( 33 by  40) XO=15  YO=37
+LOADED           MATT02 ( 38 by  48) XO=18  YO=43
+LOADED           MATT03 ( 39 by  47) XO=18  YO=43
+LOADED           MATT04 ( 34 by  47) XO=15  YO=43
+LOADED           MATT05 ( 34 by  48) XO=17  YO=44
+LOADED           MATT16 ( 46 by  38) XO=43  YO=21
+LOADED          OURSL00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [OURSL00].          OURSL01 ( 37 by  37) XO=18  YO=37
+LOADED          OURSL02 ( 37 by  40) XO=18  YO=39
+LOADED          OURSL03 ( 39 by  41) XO=16  YO=39
+LOADED          OURSL04 ( 39 by  43) XO=19  YO=40
+LOADED          OURSL05 ( 38 by  45) XO=18  YO=41
+LOADED          OURSL06 ( 37 by  33) XO=25  YO=30
+LOADED          OURSL07 ( 37 by  35) XO=7  YO=30
+LOADED          OURSL08 ( 39 by  40) XO=6  YO=32
+LOADED          OURSL09 ( 40 by  43) XO=8  YO=35
+LOADED          OURSL10 ( 40 by  45) XO=19  YO=37
+LOADED          OURSL11 ( 38 by  35) XO=18  YO=19
+LOADED          OURSL12 ( 35 by  39) XO=18  YO=37
+LOADED          OURSL13 ( 41 by  40) XO=25  YO=36
+LOADED          OURSL14 ( 38 by  43) XO=22  YO=38
+LOADED          OURSL15 ( 40 by  42) XO=19  YO=36
+LOADED          OURSL16 ( 43 by  37) XO=38  YO=22
+LOADED          QUINN00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [QUINN00].          QUINN01 ( 29 by  36) XO=14  YO=33
+LOADED          QUINN02 ( 33 by  37) XO=17  YO=34
+LOADED          QUINN03 ( 38 by  38) XO=17  YO=34
+LOADED          QUINN04 ( 32 by  38) XO=14  YO=34
+LOADED          QUINN05 ( 28 by  40) XO=13  YO=35
+LOADED          QUINN06 ( 36 by  33) XO=26  YO=30
+LOADED          QUINN07 ( 36 by  35) XO=6  YO=28
+LOADED          QUINN08 ( 41 by  39) XO=4  YO=29
+LOADED          QUINN09 ( 35 by  40) XO=8  YO=32
+LOADED          QUINN10 ( 29 by  40) XO=14  YO=33
+LOADED          QUINN11 ( 28 by  36) XO=12  YO=23
+LOADED          QUINN12 ( 35 by  36) XO=21  YO=34
+LOADED          QUINN13 ( 43 by  37) XO=25  YO=35
+LOADED          QUINN14 ( 34 by  37) XO=18  YO=33
+LOADED          QUINN15 ( 28 by  40) XO=13  YO=36
+LOADED          QUINN16 ( 40 by  35) XO=37  YO=20
+LOADED         TOBIAS00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:2, dma2:6000 add:592307C
+Checksum match on image [TOBIAS00].         TOBIAS01 ( 28 by  40) XO=14  YO=36
+LOADED         TOBIAS02 ( 34 by  39) XO=18  YO=36
+LOADED         TOBIAS03 ( 38 by  40) XO=16  YO=36
+LOADED         TOBIAS04 ( 30 by  40) XO=12  YO=37
+LOADED         TOBIAS05 ( 27 by  42) XO=13  YO=37
+LOADED         TOBIAS06 ( 39 by  34) XO=30  YO=31
+LOADED         TOBIAS07 ( 34 by  35) XO=8  YO=30
+LOADED         TOBIAS08 ( 42 by  39) XO=6  YO=31
+LOADED         TOBIAS09 ( 38 by  39) XO=7  YO=31
+LOADED         TOBIAS10 ( 28 by  40) XO=12  YO=32
+LOADED         TOBIAS11 ( 28 by  35) XO=13  YO=22
+LOADED         TOBIAS12 ( 38 by  38) XO=21  YO=33
+LOADED         TOBIAS13 ( 43 by  38) XO=22  YO=33
+LOADED         TOBIAS14 ( 36 by  39) XO=19  YO=34
+LOADED         TOBIAS15 ( 27 by  40) XO=13  YO=35
+LOADED         TOBIAS16 ( 41 by  34) XO=36  YO=20
+LOADED
+Opening img lib [C:\mugsmsc8.img]         FIFI_MUG ( 76 by  71) XO=0  YO=71
+ [FIFI_MUG] Auto pixel packing to 8 bits
+LOADED          MAT_MUG ( 61 by  75) XO=0  YO=75
+ [MAT_MUG] Auto pixel packing to 8 bits
+LOADED          JOS_MUG ( 64 by  65) XO=0  YO=65
+ [JOS_MUG] Auto pixel packing to 8 bits
+LOADED          HEI_MUG ( 60 by  65) XO=0  YO=65
+ [HEI_MUG] Auto pixel packing to 8 bits
+LOADED         CARL_MUG ( 77 by  65) XO=0  YO=65
+ [CARL_MUG] Auto pixel packing to 8 bits
+LOADED        MARTY_MUG ( 87 by  62) XO=0  YO=62
+ [MARTY_MUG] Auto pixel packing to 8 bits
+LOADED          BOO_MUG ( 59 by  64) XO=0  YO=64
+ [BOO_MUG] Auto pixel packing to 8 bits
+LOADED          QUI_MUG ( 57 by  62) XO=0  YO=62
+ [QUI_MUG] Auto pixel packing to 8 bits
+LOADED          JAS_MUG ( 65 by  64) XO=0  YO=64
+ [JAS_MUG] Auto pixel packing to 8 bits
+LOADED          OUR_MUG ( 77 by  71) XO=1  YO=71
+ [OUR_MUG] Auto pixel packing to 8 bits
+LOADED          TOB_MUG ( 58 by  65) XO=0  YO=65
+ [TOB_MUG] Auto pixel packing to 8 bits
+LOADED
+
+Bytes Loaded...
+	IMAGE RAM              2022526 dec	  1EDC7E hex
+
+	TOTAL LOAD             2022526 dec	  1EDC7E hex
+
+Bytes Written to Raw File...
+	In IMAGE RAM records      2022526 dec	  1EDC7E hex
+
+	TOTAL bytes written       2022526 dec	  1EDC7E hex, in 2 records.
+
+Bytes Represented in Tables ... 2022526 dec 1EDC7E hex
+
+Skipped 234 duplicate bytes in 39 foreground checksum matches.
+

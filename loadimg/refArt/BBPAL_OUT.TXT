@@ -1,0 +1,731 @@
+
+Copyright (C) Williams Electronics Games, Inc. 1993.
+GSP Image Loader - DMA 2 - Version 5/25/94
+Using a page of expanded memory.
+
+
+GSP is Memory Mapped at PC address C000:7000
+Loading images ...
+	from: C:\BBPAL.lod
+	to:   Table header files (written to directory C:\TMP\)
+	      GSP target system.
+	      C:\TMP\BBPAL.irw
+	      Padding images to multiple of 4 pixels
+
+SET new IRAM address = 2000000
+Opening img lib [C:\anewp.img]            NPAL1 (  7 by   6) XO=0  YO=0
+ [NPAL1] Auto pixel packing to 6 bits
+LOADED           NPALW1 (  7 by   6) XO=0  YO=0
+ [NPALW1] Auto pixel packing to 6 bits
+block cksum match w:8, h:6, dma2:2000 add:2000000
+Checksum match on image [NPALW1].           XSPAL1 (  3 by   2) XO=0  YO=0
+ [XSPAL1] Auto pixel packing to 5 bits
+LOADED           XSPAL2 (  3 by   2) XO=0  YO=0
+ [XSPAL2] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL2].           XSPAL3 (  3 by   2) XO=0  YO=0
+ [XSPAL3] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL3].           XSPAL4 (  3 by   2) XO=0  YO=0
+ [XSPAL4] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL4].           XSPAL5 (  3 by   2) XO=0  YO=0
+ [XSPAL5] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL5].           XSPAL6 (  3 by   2) XO=0  YO=0
+ [XSPAL6] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL6].           XSPAL7 (  3 by   2) XO=0  YO=0
+ [XSPAL7] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL7].           XSPAL8 (  3 by   2) XO=0  YO=0
+ [XSPAL8] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL8].           XSPAL9 (  3 by   2) XO=0  YO=0
+ [XSPAL9] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL9].          XSPAL10 (  3 by   2) XO=0  YO=0
+ [XSPAL10] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL10].          XSPAL11 (  3 by   2) XO=0  YO=0
+ [XSPAL11] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL11].          XSPAL12 (  3 by   2) XO=0  YO=0
+ [XSPAL12] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL12].          XSPAL13 (  3 by   2) XO=0  YO=0
+ [XSPAL13] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL13].          XSPAL14 (  3 by   2) XO=0  YO=0
+ [XSPAL14] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL14].          XSPAL15 (  3 by   2) XO=0  YO=0
+ [XSPAL15] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL15].          XSPAL16 (  3 by   2) XO=0  YO=0
+ [XSPAL16] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL16].          XSPAL17 (  3 by   2) XO=0  YO=0
+ [XSPAL17] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL17].          XSPAL18 (  3 by   2) XO=0  YO=0
+ [XSPAL18] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL18].          XSPAL19 (  3 by   2) XO=0  YO=0
+ [XSPAL19] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL19].          XSPAL20 (  3 by   2) XO=0  YO=0
+ [XSPAL20] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL20].          XSPAL21 (  3 by   2) XO=0  YO=0
+ [XSPAL21] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL21].          XSPAL22 (  3 by   2) XO=0  YO=0
+ [XSPAL22] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL22].          XSPAL23 (  3 by   2) XO=0  YO=0
+ [XSPAL23] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL23].          XSPAL24 (  3 by   2) XO=0  YO=0
+ [XSPAL24] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL24].          XSPAL25 (  3 by   2) XO=0  YO=0
+ [XSPAL25] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL25].          XSPAL26 (  3 by   2) XO=0  YO=0
+ [XSPAL26] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL26].          XSPAL27 (  3 by   2) XO=0  YO=0
+ [XSPAL27] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL27].          XSPAL28 (  3 by   2) XO=0  YO=0
+ [XSPAL28] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL28].          XSPAL29 (  3 by   2) XO=0  YO=0
+ [XSPAL29] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL29].          XSPAL30 (  3 by   2) XO=0  YO=0
+ [XSPAL30] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL30].          XSPAL31 (  3 by   2) XO=0  YO=0
+ [XSPAL31] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL31].          XSPAL32 (  3 by   2) XO=0  YO=0
+ [XSPAL32] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL32].          XSPAL33 (  3 by   2) XO=0  YO=0
+ [XSPAL33] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL33].          XSPAL34 (  3 by   2) XO=0  YO=0
+ [XSPAL34] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL34].          XSPAL35 (  3 by   2) XO=0  YO=0
+ [XSPAL35] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL35].          XSPAL36 (  3 by   2) XO=0  YO=0
+ [XSPAL36] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL36].          XSPAL37 (  3 by   2) XO=0  YO=0
+ [XSPAL37] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL37].          XSPAL38 (  3 by   2) XO=0  YO=0
+ [XSPAL38] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL38].          XSPAL39 (  3 by   2) XO=0  YO=0
+ [XSPAL39] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL39].          XSPAL40 (  3 by   2) XO=0  YO=0
+ [XSPAL40] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL40].          XSPAL41 (  3 by   2) XO=0  YO=0
+ [XSPAL41] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL41].          XSPAL42 (  3 by   2) XO=0  YO=0
+ [XSPAL42] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL42].          XSPAL43 (  3 by   2) XO=0  YO=0
+ [XSPAL43] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL43].          XSPAL44 (  3 by   2) XO=0  YO=0
+ [XSPAL44] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL44].          XSPAL45 (  3 by   2) XO=0  YO=0
+ [XSPAL45] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL45].          XSPAL46 (  3 by   2) XO=0  YO=0
+ [XSPAL46] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL46].          XSPAL47 (  3 by   2) XO=0  YO=0
+ [XSPAL47] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL47].          XSPAL48 (  3 by   2) XO=0  YO=0
+ [XSPAL48] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL48].          XSPAL49 (  3 by   2) XO=0  YO=0
+ [XSPAL49] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL49].          XSPAL50 (  3 by   2) XO=0  YO=0
+ [XSPAL50] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL50].          XSPAL51 (  3 by   2) XO=0  YO=0
+ [XSPAL51] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL51].          XSPAL52 (  3 by   2) XO=0  YO=0
+ [XSPAL52] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL52].          XSPAL53 (  3 by   2) XO=0  YO=0
+ [XSPAL53] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL53].          XSPAL54 (  3 by   2) XO=0  YO=0
+ [XSPAL54] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL54].          XSPAL55 (  3 by   2) XO=0  YO=0
+ [XSPAL55] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL55].          XSPAL56 (  3 by   2) XO=0  YO=0
+ [XSPAL56] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL56].          XSPAL57 (  3 by   2) XO=0  YO=0
+ [XSPAL57] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL57].          XSPAL58 (  3 by   2) XO=0  YO=0
+ [XSPAL58] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL58].          XSPAL59 (  3 by   2) XO=0  YO=0
+ [XSPAL59] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL59].          XSPAL60 (  3 by   2) XO=0  YO=0
+ [XSPAL60] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL60].          XSPAL61 (  3 by   2) XO=0  YO=0
+ [XSPAL61] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL61].          XSPAL62 (  3 by   2) XO=0  YO=0
+ [XSPAL62] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL62].          XSPAL63 (  3 by   2) XO=0  YO=0
+ [XSPAL63] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL63].          XSPAL64 (  3 by   2) XO=0  YO=0
+ [XSPAL64] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL64].          XSPAL65 (  3 by   2) XO=0  YO=0
+ [XSPAL65] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL65].          XSPAL66 (  3 by   2) XO=0  YO=0
+ [XSPAL66] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL66].          XSPAL67 (  3 by   2) XO=0  YO=0
+ [XSPAL67] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL67].          XSPAL68 (  3 by   2) XO=0  YO=0
+ [XSPAL68] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL68].          XSPAL69 (  3 by   2) XO=0  YO=0
+ [XSPAL69] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL69].          XSPAL70 (  3 by   2) XO=0  YO=0
+ [XSPAL70] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL70].          XSPAL71 (  3 by   2) XO=0  YO=0
+ [XSPAL71] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL71].          XSPAL72 (  3 by   2) XO=0  YO=0
+ [XSPAL72] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL72].          XSPAL73 (  3 by   2) XO=0  YO=0
+ [XSPAL73] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL73].          XSPAL74 (  3 by   2) XO=0  YO=0
+ [XSPAL74] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL74].          XSPAL75 (  3 by   2) XO=0  YO=0
+ [XSPAL75] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL75].          XSPAL76 (  3 by   2) XO=0  YO=0
+ [XSPAL76] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL76].          XSPAL77 (  3 by   2) XO=0  YO=0
+ [XSPAL77] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL77].          XSPAL78 (  3 by   2) XO=0  YO=0
+ [XSPAL78] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL78].          XSPAL79 (  3 by   2) XO=0  YO=0
+ [XSPAL79] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL79].          XSPAL80 (  3 by   2) XO=0  YO=0
+ [XSPAL80] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL80].          XSPAL81 (  3 by   2) XO=0  YO=0
+ [XSPAL81] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL81].          XSPAL82 (  3 by   2) XO=0  YO=0
+ [XSPAL82] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL82].          XSPAL83 (  3 by   2) XO=0  YO=0
+ [XSPAL83] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL83].          XSPAL84 (  3 by   2) XO=0  YO=0
+ [XSPAL84] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL84].          XSPAL85 (  3 by   2) XO=0  YO=0
+ [XSPAL85] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL85].          XSPAL86 (  3 by   2) XO=0  YO=0
+ [XSPAL86] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL86].          XSPAL87 (  3 by   2) XO=0  YO=0
+ [XSPAL87] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL87].          XSPAL88 (  3 by   2) XO=0  YO=0
+ [XSPAL88] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL88].          XSPAL89 (  3 by   2) XO=0  YO=0
+ [XSPAL89] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL89].          XSPAL90 (  3 by   2) XO=0  YO=0
+ [XSPAL90] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL90].          XSPAL91 (  3 by   2) XO=0  YO=0
+ [XSPAL91] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL91].          XSPAL92 (  3 by   2) XO=0  YO=0
+ [XSPAL92] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL92].          XSPAL93 (  3 by   2) XO=0  YO=0
+ [XSPAL93] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL93].          XSPAL94 (  3 by   2) XO=0  YO=0
+ [XSPAL94] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL94].          XSPAL95 (  3 by   2) XO=0  YO=0
+ [XSPAL95] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL95].          XSPAL96 (  3 by   2) XO=0  YO=0
+ [XSPAL96] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL96].          XSPAL97 (  3 by   2) XO=0  YO=0
+ [XSPAL97] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL97].          XSPAL98 (  3 by   2) XO=0  YO=0
+ [XSPAL98] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL98].          XSPAL99 (  3 by   2) XO=0  YO=0
+ [XSPAL99] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL99].         XSPAL100 (  3 by   2) XO=0  YO=0
+ [XSPAL100] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL100].         XSPAL101 (  3 by   2) XO=0  YO=0
+ [XSPAL101] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL101].         XSPAL102 (  3 by   2) XO=0  YO=0
+ [XSPAL102] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL102].         XSPAL103 (  3 by   2) XO=0  YO=0
+ [XSPAL103] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL103].         XSPAL104 (  3 by   2) XO=0  YO=0
+ [XSPAL104] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL104].         XSPAL105 (  3 by   2) XO=0  YO=0
+ [XSPAL105] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL105].         XSPAL106 (  3 by   2) XO=0  YO=0
+ [XSPAL106] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL106].         XSPAL107 (  3 by   2) XO=0  YO=0
+ [XSPAL107] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL107].         XSPAL108 (  3 by   2) XO=0  YO=0
+ [XSPAL108] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL108].         XSPAL109 (  3 by   2) XO=0  YO=0
+ [XSPAL109] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL109].         XSPAL110 (  3 by   2) XO=0  YO=0
+ [XSPAL110] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL110].         XSPAL111 (  3 by   2) XO=0  YO=0
+ [XSPAL111] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL111].         XSPAL112 (  3 by   2) XO=0  YO=0
+ [XSPAL112] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL112].         XSPAL113 (  3 by   2) XO=0  YO=0
+ [XSPAL113] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL113].         XSPAL114 (  3 by   2) XO=0  YO=0
+ [XSPAL114] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL114].         XSPAL115 (  3 by   2) XO=0  YO=0
+ [XSPAL115] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL115].         XSPAL116 (  3 by   2) XO=0  YO=0
+ [XSPAL116] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL116].         XSPAL117 (  3 by   2) XO=0  YO=0
+ [XSPAL117] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL117].         XSPAL118 (  3 by   2) XO=0  YO=0
+ [XSPAL118] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL118].         XSPAL119 (  3 by   2) XO=0  YO=0
+ [XSPAL119] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL119].         XSPAL120 (  3 by   2) XO=0  YO=0
+ [XSPAL120] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL120].         XSPAL121 (  3 by   2) XO=0  YO=0
+ [XSPAL121] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL121].         XSPAL122 (  3 by   2) XO=0  YO=0
+ [XSPAL122] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL122].         XSPAL123 (  3 by   2) XO=0  YO=0
+ [XSPAL123] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL123].         XSPAL124 (  3 by   2) XO=0  YO=0
+ [XSPAL124] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL124].         XSPAL125 (  3 by   2) XO=0  YO=0
+ [XSPAL125] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL125].         XSPAL126 (  3 by   2) XO=0  YO=0
+ [XSPAL126] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL126].         XSPAL127 (  3 by   2) XO=0  YO=0
+ [XSPAL127] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL127].         XSPAL128 (  3 by   2) XO=0  YO=0
+ [XSPAL128] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL128].         XSPAL129 (  3 by   2) XO=0  YO=0
+ [XSPAL129] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL129].         XSPAL130 (  3 by   2) XO=0  YO=0
+ [XSPAL130] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL130].         XSPAL131 (  3 by   2) XO=0  YO=0
+ [XSPAL131] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL131].         XSPAL132 (  3 by   2) XO=0  YO=0
+ [XSPAL132] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL132].         XSPAL133 (  3 by   2) XO=0  YO=0
+ [XSPAL133] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL133].         XSPAL134 (  3 by   2) XO=0  YO=0
+ [XSPAL134] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL134].         XSPAL135 (  3 by   2) XO=0  YO=0
+ [XSPAL135] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL135].         XSPAL136 (  3 by   2) XO=0  YO=0
+ [XSPAL136] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL136].         XSPAL137 (  3 by   2) XO=0  YO=0
+ [XSPAL137] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL137].         XSPAL138 (  3 by   2) XO=0  YO=0
+ [XSPAL138] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL138].         XSPAL139 (  3 by   2) XO=0  YO=0
+ [XSPAL139] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL139].         XSPAL140 (  3 by   2) XO=0  YO=0
+ [XSPAL140] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL140].         XSPAL141 (  3 by   2) XO=0  YO=0
+ [XSPAL141] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL141].         XSPAL142 (  3 by   2) XO=0  YO=0
+ [XSPAL142] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL142].         XSPAL143 (  3 by   2) XO=0  YO=0
+ [XSPAL143] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL143].         XSPAL144 (  3 by   2) XO=0  YO=0
+ [XSPAL144] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL144].         XSPAL145 (  3 by   2) XO=0  YO=0
+ [XSPAL145] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL145].         XSPAL146 (  3 by   2) XO=0  YO=0
+ [XSPAL146] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL146].         XSPAL147 (  3 by   2) XO=0  YO=0
+ [XSPAL147] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL147].         XSPAL148 (  3 by   2) XO=0  YO=0
+ [XSPAL148] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL148].         XSPAL149 (  3 by   2) XO=0  YO=0
+ [XSPAL149] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL149].         XSPAL150 (  3 by   2) XO=0  YO=0
+ [XSPAL150] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL150].         XSPAL151 (  3 by   2) XO=0  YO=0
+ [XSPAL151] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL151].         XSPAL152 (  3 by   2) XO=0  YO=0
+ [XSPAL152] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL152].         XSPAL153 (  3 by   2) XO=0  YO=0
+ [XSPAL153] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL153].         XSPAL154 (  3 by   2) XO=0  YO=0
+ [XSPAL154] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL154].         XSPAL155 (  3 by   2) XO=0  YO=0
+ [XSPAL155] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL155].         XSPAL156 (  3 by   2) XO=0  YO=0
+ [XSPAL156] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL156].         XSPAL157 (  3 by   2) XO=0  YO=0
+ [XSPAL157] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL157].         XSPAL158 (  3 by   2) XO=0  YO=0
+ [XSPAL158] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL158].         XSPAL159 (  3 by   2) XO=0  YO=0
+ [XSPAL159] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL159].         XSPAL160 (  3 by   2) XO=0  YO=0
+ [XSPAL160] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL160].         XSPAL161 (  3 by   2) XO=0  YO=0
+ [XSPAL161] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL161].         XSPAL162 (  3 by   2) XO=0  YO=0
+ [XSPAL162] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL162].         XSPAL163 (  3 by   2) XO=0  YO=0
+ [XSPAL163] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL163].         XSPAL164 (  3 by   2) XO=0  YO=0
+ [XSPAL164] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL164].         XSPAL165 (  3 by   2) XO=0  YO=0
+ [XSPAL165] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL165].         XSPAL166 (  3 by   2) XO=0  YO=0
+ [XSPAL166] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL166].         XSPAL167 (  3 by   2) XO=0  YO=0
+ [XSPAL167] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL167].         XSPAL168 (  3 by   2) XO=0  YO=0
+ [XSPAL168] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL168].         XSPAL169 (  3 by   2) XO=0  YO=0
+ [XSPAL169] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL169].         XSPAL170 (  3 by   2) XO=0  YO=0
+ [XSPAL170] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL170].         XSPAL171 (  3 by   2) XO=0  YO=0
+ [XSPAL171] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL171].         XSPAL172 (  3 by   2) XO=0  YO=0
+ [XSPAL172] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL172].         XSPAL173 (  3 by   2) XO=0  YO=0
+ [XSPAL173] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL173].         XSPAL174 (  3 by   2) XO=0  YO=0
+ [XSPAL174] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL174].         XSPAL175 (  3 by   2) XO=0  YO=0
+ [XSPAL175] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL175].         XSPAL176 (  3 by   2) XO=0  YO=0
+ [XSPAL176] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL176].         XSPAL177 (  3 by   2) XO=0  YO=0
+ [XSPAL177] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL177].         XSPAL178 (  3 by   2) XO=0  YO=0
+ [XSPAL178] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL178].         XSPAL179 (  3 by   2) XO=0  YO=0
+ [XSPAL179] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL179].         XSPAL180 (  3 by   2) XO=0  YO=0
+ [XSPAL180] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL180].         XSPAL181 (  3 by   2) XO=0  YO=0
+ [XSPAL181] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL181].         XSPAL182 (  3 by   2) XO=0  YO=0
+ [XSPAL182] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL182].         XSPAL183 (  3 by   2) XO=0  YO=0
+ [XSPAL183] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL183].         XSPAL184 (  3 by   2) XO=0  YO=0
+ [XSPAL184] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL184].         XSPAL185 (  3 by   2) XO=0  YO=0
+ [XSPAL185] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL185].         XSPAL186 (  3 by   2) XO=0  YO=0
+ [XSPAL186] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL186].         XSPAL187 (  3 by   2) XO=0  YO=0
+ [XSPAL187] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL187].         XSPAL188 (  3 by   2) XO=0  YO=0
+ [XSPAL188] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL188].         XSPAL189 (  3 by   2) XO=0  YO=0
+ [XSPAL189] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL189].         XSPAL190 (  3 by   2) XO=0  YO=0
+ [XSPAL190] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL190].         XSPAL191 (  3 by   2) XO=0  YO=0
+ [XSPAL191] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL191].         XSPAL192 (  3 by   2) XO=0  YO=0
+ [XSPAL192] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL192].         XSPAL193 (  3 by   2) XO=0  YO=0
+ [XSPAL193] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL193].         XSPAL194 (  3 by   2) XO=0  YO=0
+ [XSPAL194] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL194].         XSPAL195 (  3 by   2) XO=0  YO=0
+ [XSPAL195] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL195].         XSPAL196 (  3 by   2) XO=0  YO=0
+ [XSPAL196] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL196].         XSPAL197 (  3 by   2) XO=0  YO=0
+ [XSPAL197] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL197].         XSPAL198 (  3 by   2) XO=0  YO=0
+ [XSPAL198] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL198].         XSPAL199 (  3 by   2) XO=0  YO=0
+ [XSPAL199] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL199].         XSPAL200 (  3 by   2) XO=0  YO=0
+ [XSPAL200] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL200].         XSPAL201 (  3 by   2) XO=0  YO=0
+ [XSPAL201] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL201].         XSPAL202 (  3 by   2) XO=0  YO=0
+ [XSPAL202] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL202].         XSPAL203 (  3 by   2) XO=0  YO=0
+ [XSPAL203] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL203].         XSPAL204 (  3 by   2) XO=0  YO=0
+ [XSPAL204] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL204].         XSPAL205 (  3 by   2) XO=0  YO=0
+ [XSPAL205] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL205].         XSPAL206 (  3 by   2) XO=0  YO=0
+ [XSPAL206] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL206].         XSPAL207 (  3 by   2) XO=0  YO=0
+ [XSPAL207] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL207].         XSPAL208 (  3 by   2) XO=0  YO=0
+ [XSPAL208] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL208].         XSPAL209 (  3 by   2) XO=0  YO=0
+ [XSPAL209] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL209].         XSPAL210 (  3 by   2) XO=0  YO=0
+ [XSPAL210] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL210].         XSPAL211 (  3 by   2) XO=0  YO=0
+ [XSPAL211] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL211].         XSPAL212 (  3 by   2) XO=0  YO=0
+ [XSPAL212] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL212].         XSPAL213 (  3 by   2) XO=0  YO=0
+ [XSPAL213] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL213].         XSPAL214 (  3 by   2) XO=0  YO=0
+ [XSPAL214] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL214].         XSPAL215 (  3 by   2) XO=0  YO=0
+ [XSPAL215] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL215].         XSPAL216 (  3 by   2) XO=0  YO=0
+ [XSPAL216] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL216].         XSPAL217 (  3 by   2) XO=0  YO=0
+ [XSPAL217] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL217].         XSPAL218 (  3 by   2) XO=0  YO=0
+ [XSPAL218] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL218].         XSPAL219 (  3 by   2) XO=0  YO=0
+ [XSPAL219] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL219].         XSPAL220 (  3 by   2) XO=0  YO=0
+ [XSPAL220] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL220].         XSPAL221 (  3 by   2) XO=0  YO=0
+ [XSPAL221] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL221].         XSPAL222 (  3 by   2) XO=0  YO=0
+ [XSPAL222] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL222].         XSPAL223 (  3 by   2) XO=0  YO=0
+ [XSPAL223] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL223].         XSPAL224 (  3 by   2) XO=0  YO=0
+ [XSPAL224] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL224].         XSPAL225 (  3 by   2) XO=0  YO=0
+ [XSPAL225] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL225].         XSPAL226 (  3 by   2) XO=0  YO=0
+ [XSPAL226] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL226].         XSPAL227 (  3 by   2) XO=0  YO=0
+ [XSPAL227] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL227].         XSPAL228 (  3 by   2) XO=0  YO=0
+ [XSPAL228] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL228].         XSPAL229 (  3 by   2) XO=0  YO=0
+ [XSPAL229] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL229].         XSPAL230 (  3 by   2) XO=0  YO=0
+ [XSPAL230] Auto pixel packing to 5 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL230].         XSPAL231 (  3 by   2) XO=0  YO=0
+ [XSPAL231] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL231].         XSPAL232 (  3 by   2) XO=0  YO=0
+ [XSPAL232] Auto pixel packing to 4 bits
+block cksum match w:4, h:2, dma2:1000 add:2000060
+Checksum match on image [XSPAL232].
+
+Bytes Loaded...
+	IMAGE RAM                   14 dec	       E hex
+
+	TOTAL LOAD                  14 dec	       E hex
+
+Bytes Written to Raw File...
+	In IMAGE RAM records           14 dec	       E hex
+
+	TOTAL bytes written            14 dec	       E hex, in 1 record.
+
+Bytes Represented in Tables ... 13 dec D hex
+
+Skipped 243 duplicate bytes in 232 foreground checksum matches.
+

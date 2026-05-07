@@ -1,0 +1,58 @@
+	.DATA
+FIFI_MUG:
+	.word   76,71,0,71
+	.long   05d722ccH
+	.word   00H
+	.long   M_FIF_P
+MAT_MUG:
+	.word   64,75,0,75
+	.long   05d7cb6cH
+	.word   00H
+	.long   M_MAT_P
+JOS_MUG:
+	.word   64,65,0,65
+	.long   05d8616cH
+	.word   00H
+	.long   M_JOS_P
+HEI_MUG:
+	.word   60,65,0,65
+	.long   05d8e36cH
+	.word   00H
+	.long   M_HEI_P
+CARL_MUG:
+	.word   80,65,0,65
+	.long   05d95d4cH
+	.word   00H
+	.long   M_CRL_P
+MARTY_MUG:
+	.word   88,62,0,62
+	.long   05d9ffccH
+	.word   00H
+	.long   M_MAR_P
+BOO_MUG:
+	.word   60,64,0,64
+	.long   05daaa4cH
+	.word   00H
+	.long   M_BOO_P
+QUI_MUG:
+	.word   60,62,0,62
+	.long   05db224cH
+	.word   00H
+	.long   M_QUI_P
+JAS_MUG:
+	.word   68,64,0,64
+	.long   05db968cH
+	.word   00H
+	.long   M_JAS_P
+OUR_MUG:
+	.word   80,71,1,71
+	.long   05dc1e8cH
+	.word   00H
+	.long   M_OUR_P
+TOB_MUG:
+	.word   60,65,0,65
+	.long   05dcd00cH
+	.word   00H
+	.long   M_TOB_P
+	.TEXT
+

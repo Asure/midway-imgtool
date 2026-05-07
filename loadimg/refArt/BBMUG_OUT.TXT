@@ -1,0 +1,2838 @@
+
+Copyright (C) Williams Electronics Games, Inc. 1993.
+GSP Image Loader - DMA 2 - Version 5/25/94
+Using a page of expanded memory.
+
+
+GSP is Memory Mapped at PC address C000:7000
+Loading images ...
+	from: C:\BBMUG.lod
+	to:   Table header files (written to directory C:\TMP\)
+	      GSP target system.
+	      C:\TMP\BBMUG.irw
+	      Padding images to multiple of 4 pixels
+
+SET new IRAM address = 2000000
+SET new IRAM address = 2000000
+Opening img lib [C:\hds8.img]          WILLIS0 (  3 by   2) XO=0  YO=0
+LOADED          WILLIS1 ( 24 by  30) XO=11  YO=28
+LOADED          WILLIS2 ( 28 by  34) XO=13  YO=30
+LOADED          WILLIS3 ( 28 by  35) XO=6  YO=31
+LOADED          WILLIS4 ( 23 by  35) XO=7  YO=31
+LOADED          WILLIS5 ( 23 by  35) XO=11  YO=32
+LOADED          WILLIS6 ( 30 by  30) XO=21  YO=26
+LOADED          WILLIS7 ( 30 by  32) XO=5  YO=27
+LOADED          WILLIS8 ( 32 by  35) XO=1  YO=23
+LOADED          WILLIS9 ( 27 by  34) XO=5  YO=26
+LOADED         WILLIS10 ( 24 by  31) XO=11  YO=26
+LOADED         WILLIS11 ( 22 by  24) XO=10  YO=16
+LOADED         WILLIS12 ( 30 by  28) XO=16  YO=28
+LOADED         WILLIS13 ( 36 by  32) XO=23  YO=30
+LOADED         WILLIS14 ( 28 by  30) XO=15  YO=29
+LOADED         WILLIS15 ( 25 by  30) XO=13  YO=27
+LOADED         WILLIS16 ( 35 by  28) XO=31  YO=20
+LOADED           BROWN0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [BROWN0].           BROWN1 ( 25 by  33) XO=12  YO=31
+LOADED           BROWN2 ( 27 by  33) XO=12  YO=29
+LOADED           BROWN3 ( 28 by  33) XO=7  YO=31
+LOADED           BROWN4 ( 25 by  33) XO=8  YO=29
+LOADED           BROWN5 ( 26 by  34) XO=12  YO=31
+LOADED           BROWN6 ( 31 by  30) XO=22  YO=27
+LOADED           BROWN7 ( 27 by  32) XO=5  YO=26
+LOADED           BROWN8 ( 31 by  32) XO=2  YO=22
+LOADED           BROWN9 ( 26 by  33) XO=4  YO=26
+LOADED          BROWN10 ( 23 by  33) XO=10  YO=28
+LOADED          BROWN11 ( 23 by  25) XO=11  YO=16
+LOADED          BROWN12 ( 32 by  27) XO=17  YO=27
+LOADED          BROWN13 ( 33 by  31) XO=19  YO=29
+LOADED          BROWN14 ( 27 by  28) XO=15  YO=27
+LOADED          BROWN15 ( 24 by  30) XO=12  YO=28
+LOADED          BROWN16 ( 33 by  28) XO=29  YO=19
+LOADED           MOURN0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MOURN0].           MOURN1 ( 24 by  32) XO=11  YO=30
+LOADED           MOURN2 ( 25 by  33) XO=12  YO=30
+LOADED           MOURN3 ( 27 by  33) XO=6  YO=30
+LOADED           MOURN4 ( 24 by  33) XO=8  YO=29
+LOADED           MOURN5 ( 22 by  35) XO=10  YO=30
+LOADED           MOURN6 ( 30 by  29) XO=21  YO=26
+LOADED           MOURN7 ( 30 by  32) XO=5  YO=27
+LOADED           MOURN8 ( 32 by  32) XO=1  YO=21
+LOADED           MOURN9 ( 27 by  34) XO=5  YO=26
+LOADED          MOURN10 ( 24 by  31) XO=10  YO=26
+LOADED          MOURN11 ( 22 by  24) XO=10  YO=15
+LOADED          MOURN12 ( 30 by  28) XO=16  YO=27
+LOADED          MOURN13 ( 33 by  32) XO=20  YO=30
+LOADED          MOURN14 ( 28 by  30) XO=15  YO=28
+LOADED          MOURN15 ( 25 by  30) XO=12  YO=27
+LOADED          MOURN16 ( 33 by  27) XO=30  YO=20
+LOADED           KUKOC0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [KUKOC0].           KUKOC1 ( 23 by  34) XO=10  YO=30
+LOADED           KUKOC2 ( 30 by  35) XO=11  YO=29
+LOADED           KUKOC3 ( 31 by  35) XO=11  YO=30
+LOADED           KUKOC4 ( 27 by  36) XO=9  YO=30
+LOADED           KUKOC5 ( 24 by  35) XO=12  YO=32
+LOADED           KUKOC6 ( 30 by  30) XO=21  YO=27
+LOADED           KUKOC7 ( 29 by  34) XO=4  YO=28
+LOADED           KUKOC8 ( 32 by  34) XO=2  YO=26
+LOADED           KUKOC9 ( 29 by  34) XO=5  YO=27
+LOADED          KUKOC10 ( 26 by  35) XO=13  YO=30
+LOADED          KUKOC11 ( 23 by  27) XO=11  YO=18
+LOADED          KUKOC12 ( 32 by  31) XO=17  YO=29
+LOADED          KUKOC13 ( 34 by  32) XO=24  YO=29
+LOADED          KUKOC14 ( 29 by  31) XO=15  YO=29
+LOADED          KUKOC15 ( 26 by  31) XO=12  YO=28
+LOADED          KUKOC16 ( 34 by  29) XO=31  YO=17
+LOADED            JACK0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [JACK0].            JACK1 ( 24 by  32) XO=11  YO=30
+LOADED            JACK2 ( 25 by  33) XO=12  YO=30
+LOADED            JACK3 ( 31 by  33) XO=9  YO=29
+LOADED            JACK4 ( 24 by  33) XO=8  YO=29
+LOADED            JACK5 ( 22 by  35) XO=11  YO=30
+LOADED            JACK6 ( 29 by  28) XO=21  YO=25
+LOADED            JACK7 ( 29 by  32) XO=4  YO=27
+LOADED            JACK8 ( 33 by  35) XO=3  YO=23
+LOADED            JACK9 ( 29 by  35) XO=5  YO=28
+LOADED           JACK10 ( 23 by  34) XO=10  YO=29
+LOADED           JACK11 ( 23 by  23) XO=11  YO=17
+LOADED           JACK12 ( 28 by  31) XO=16  YO=30
+LOADED           JACK13 ( 36 by  33) XO=23  YO=29
+LOADED           JACK14 ( 30 by  30) XO=16  YO=28
+LOADED           JACK15 ( 24 by  31) XO=11  YO=28
+LOADED           JACK16 ( 33 by  31) XO=30  YO=21
+LOADED            MASH0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MASH0].            MASH1 ( 24 by  30) XO=11  YO=28
+LOADED            MASH2 ( 25 by  31) XO=11  YO=27
+LOADED            MASH3 ( 28 by  32) XO=6  YO=28
+LOADED            MASH4 ( 24 by  32) XO=8  YO=28
+LOADED            MASH5 ( 24 by  32) XO=12  YO=30
+LOADED            MASH6 ( 28 by  28) XO=20  YO=25
+LOADED            MASH7 ( 27 by  32) XO=4  YO=26
+LOADED            MASH8 ( 30 by  32) XO=1  YO=21
+LOADED            MASH9 ( 26 by  33) XO=4  YO=26
+LOADED           MASH10 ( 23 by  33) XO=10  YO=28
+LOADED           MASH11 ( 23 by  24) XO=10  YO=17
+LOADED           MASH12 ( 32 by  27) XO=17  YO=27
+LOADED           MASH13 ( 33 by  30) XO=20  YO=28
+LOADED           MASH14 ( 27 by  28) XO=15  YO=27
+LOADED           MASH15 ( 24 by  30) XO=12  YO=27
+LOADED           MASH16 ( 32 by  28) XO=28  YO=22
+LOADED
+Opening img lib [C:\HDS9.IMG]          DUMARS0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [DUMARS0].          DUMARS1 ( 25 by  33) XO=12  YO=31
+LOADED          DUMARS2 ( 25 by  33) XO=11  YO=29
+LOADED          DUMARS3 ( 28 by  35) XO=7  YO=31
+LOADED          DUMARS4 ( 23 by  35) XO=8  YO=30
+LOADED          DUMARS5 ( 25 by  34) XO=12  YO=31
+LOADED          DUMARS6 ( 30 by  30) XO=23  YO=27
+LOADED          DUMARS7 ( 30 by  32) XO=4  YO=27
+LOADED          DUMARS8 ( 32 by  35) XO=3  YO=27
+LOADED          DUMARS9 ( 27 by  34) XO=4  YO=27
+LOADED         DUMARS10 ( 24 by  33) XO=10  YO=28
+LOADED         DUMARS11 ( 23 by  24) XO=11  YO=16
+LOADED         DUMARS12 ( 30 by  28) XO=15  YO=27
+LOADED         DUMARS13 ( 36 by  31) XO=25  YO=29
+LOADED         DUMARS14 ( 28 by  30) XO=15  YO=28
+LOADED         DUMARS15 ( 25 by  30) XO=12  YO=27
+LOADED         DUMARS16 ( 35 by  28) XO=31  YO=19
+LOADED          RODMAN0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [RODMAN0].          RODMAN1 ( 23 by  33) XO=11  YO=30
+LOADED          RODMAN2 ( 27 by  34) XO=11  YO=31
+LOADED          RODMAN3 ( 30 by  34) XO=10  YO=30
+LOADED          RODMAN4 ( 26 by  35) XO=10  YO=30
+LOADED          RODMAN5 ( 23 by  37) XO=10  YO=33
+LOADED          RODMAN6 ( 31 by  30) XO=24  YO=26
+LOADED          RODMAN7 ( 32 by  35) XO=5  YO=28
+LOADED          RODMAN8 ( 33 by  34) XO=3  YO=26
+LOADED          RODMAN9 ( 27 by  35) XO=4  YO=28
+LOADED         RODMAN10 ( 23 by  37) XO=10  YO=30
+LOADED         RODMAN11 ( 21 by  21) XO=10  YO=14
+LOADED         RODMAN12 ( 34 by  33) XO=20  YO=30
+LOADED         RODMAN13 ( 34 by  33) XO=22  YO=29
+LOADED         RODMAN14 ( 32 by  32) XO=19  YO=29
+LOADED         RODMAN15 ( 23 by  32) XO=10  YO=28
+LOADED         RODMAN16 ( 34 by  30) XO=30  YO=20
+LOADED          RODCLR1 ( 23 by  37) XO=0  YO=0
+block cksum match w:24, h:38, dma2:6000 add:20A6890
+Checksum match on image [RODCLR1].          RODCLR2 ( 23 by  37) XO=0  YO=0
+block cksum match w:24, h:38, dma2:6000 add:20A6890
+Checksum match on image [RODCLR2].          RODCLR3 ( 23 by  37) XO=0  YO=0
+block cksum match w:24, h:38, dma2:6000 add:20A6890
+Checksum match on image [RODCLR3].          RODCLR4 ( 23 by  37) XO=0  YO=0
+block cksum match w:24, h:38, dma2:6000 add:20A6890
+Checksum match on image [RODCLR4].          RODCLR5 ( 23 by  37) XO=0  YO=0
+block cksum match w:24, h:38, dma2:6000 add:20A6890
+Checksum match on image [RODCLR5].          RODCLR6 ( 23 by  37) XO=0  YO=0
+block cksum match w:24, h:38, dma2:6000 add:20A6890
+Checksum match on image [RODCLR6].          RODCLR7 ( 23 by  37) XO=0  YO=0
+block cksum match w:24, h:38, dma2:6000 add:20A6890
+Checksum match on image [RODCLR7].          RODCLR8 ( 23 by  37) XO=0  YO=0
+block cksum match w:24, h:38, dma2:6000 add:20A6890
+Checksum match on image [RODCLR8].          WEBBER0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [WEBBER0].          WEBBER1 ( 27 by  34) XO=13  YO=31
+LOADED          WEBBER2 ( 27 by  34) XO=13  YO=30
+LOADED          WEBBER3 ( 28 by  33) XO=7  YO=31
+LOADED          WEBBER4 ( 25 by  35) XO=7  YO=30
+LOADED          WEBBER5 ( 26 by  34) XO=13  YO=32
+LOADED          WEBBER6 ( 30 by  30) XO=21  YO=26
+LOADED          WEBBER7 ( 27 by  32) XO=4  YO=26
+LOADED          WEBBER8 ( 34 by  35) XO=4  YO=23
+LOADED          WEBBER9 ( 26 by  33) XO=4  YO=25
+LOADED         WEBBER10 ( 23 by  33) XO=10  YO=28
+LOADED         WEBBER11 ( 25 by  25) XO=12  YO=16
+LOADED         WEBBER12 ( 32 by  27) XO=17  YO=26
+LOADED         WEBBER13 ( 35 by  33) XO=22  YO=29
+LOADED         WEBBER14 ( 27 by  28) XO=15  YO=27
+LOADED         WEBBER15 ( 24 by  30) XO=12  YO=28
+LOADED         WEBBER16 ( 33 by  28) XO=31  YO=21
+LOADED           HORRY0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [HORRY0].           HORRY1 ( 24 by  30) XO=11  YO=28
+LOADED           HORRY2 ( 26 by  33) XO=12  YO=30
+LOADED           HORRY3 ( 29 by  34) XO=6  YO=30
+LOADED           HORRY4 ( 26 by  34) XO=9  YO=30
+LOADED           HORRY5 ( 25 by  35) XO=12  YO=32
+LOADED           HORRY6 ( 29 by  28) XO=21  YO=25
+LOADED           HORRY7 ( 30 by  32) XO=5  YO=27
+LOADED           HORRY8 ( 33 by  35) XO=1  YO=25
+LOADED           HORRY9 ( 27 by  34) XO=5  YO=26
+LOADED          HORRY10 ( 24 by  31) XO=10  YO=26
+LOADED          HORRY11 ( 23 by  27) XO=11  YO=17
+LOADED          HORRY12 ( 30 by  28) XO=15  YO=27
+LOADED          HORRY13 ( 35 by  32) XO=23  YO=30
+LOADED          HORRY14 ( 28 by  30) XO=15  YO=28
+LOADED          HORRY15 ( 25 by  30) XO=12  YO=27
+LOADED          HORRY16 ( 34 by  29) XO=31  YO=21
+LOADED           SMITS0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [SMITS0].           SMITS1 ( 25 by  33) XO=11  YO=31
+LOADED           SMITS2 ( 28 by  33) XO=15  YO=30
+LOADED           SMITS3 ( 31 by  33) XO=11  YO=29
+LOADED           SMITS4 ( 27 by  34) XO=10  YO=30
+LOADED           SMITS5 ( 24 by  36) XO=12  YO=32
+LOADED           SMITS6 ( 30 by  30) XO=22  YO=27
+LOADED           SMITS7 ( 28 by  35) XO=3  YO=30
+LOADED           SMITS8 ( 32 by  35) XO=2  YO=26
+LOADED           SMITS9 ( 30 by  35) XO=6  YO=27
+LOADED          SMITS10 ( 26 by  35) XO=12  YO=30
+LOADED          SMITS11 ( 25 by  27) XO=13  YO=17
+LOADED          SMITS12 ( 35 by  33) XO=19  YO=31
+LOADED          SMITS13 ( 36 by  33) XO=26  YO=28
+LOADED          SMITS14 ( 28 by  31) XO=16  YO=28
+LOADED          SMITS15 ( 29 by  30) XO=13  YO=28
+LOADED          SMITS16 ( 33 by  34) XO=29  YO=20
+LOADED
+Opening img lib [C:\HDS10.IMG]            CAMP0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [CAMP0].            CAMP1 ( 22 by  31) XO=11  YO=29
+LOADED            CAMP2 ( 25 by  31) XO=12  YO=28
+LOADED            CAMP3 ( 29 by  32) XO=8  YO=29
+LOADED            CAMP4 ( 23 by  33) XO=7  YO=29
+LOADED            CAMP5 ( 24 by  34) XO=12  YO=31
+LOADED            CAMP6 ( 30 by  29) XO=21  YO=25
+LOADED            CAMP7 ( 28 by  30) XO=3  YO=26
+LOADED            CAMP8 ( 30 by  33) XO=2  YO=24
+LOADED            CAMP9 ( 28 by  33) XO=5  YO=26
+LOADED           CAMP10 ( 23 by  34) XO=10  YO=29
+LOADED           CAMP11 ( 22 by  24) XO=11  YO=16
+LOADED           CAMP12 ( 27 by  29) XO=14  YO=27
+LOADED           CAMP13 ( 34 by  30) XO=24  YO=26
+LOADED           CAMP14 ( 29 by  29) XO=16  YO=28
+LOADED           CAMP15 ( 23 by  30) XO=11  YO=27
+LOADED           CAMP16 ( 32 by  29) XO=28  YO=19
+LOADED           BAKER0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [BAKER0].           BAKER1 ( 25 by  31) XO=12  YO=29
+LOADED           BAKER2 ( 24 by  31) XO=11  YO=29
+LOADED           BAKER3 ( 27 by  31) XO=7  YO=27
+LOADED           BAKER4 ( 21 by  32) XO=5  YO=28
+LOADED           BAKER5 ( 22 by  32) XO=11  YO=30
+LOADED           BAKER6 ( 30 by  29) XO=21  YO=26
+LOADED           BAKER7 ( 30 by  32) XO=5  YO=27
+LOADED           BAKER8 ( 29 by  32) XO=2  YO=22
+LOADED           BAKER9 ( 27 by  34) XO=5  YO=27
+LOADED          BAKER10 ( 24 by  31) XO=10  YO=26
+LOADED          BAKER11 ( 23 by  24) XO=11  YO=15
+LOADED          BAKER12 ( 30 by  28) XO=16  YO=28
+LOADED          BAKER13 ( 32 by  29) XO=21  YO=26
+LOADED          BAKER14 ( 28 by  30) XO=16  YO=29
+LOADED          BAKER15 ( 25 by  30) XO=12  YO=27
+LOADED          BAKER16 ( 32 by  27) XO=28  YO=20
+LOADED           RIDER0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [RIDER0].           RIDER1 ( 26 by  32) XO=12  YO=30
+LOADED           RIDER2 ( 25 by  33) XO=12  YO=30
+LOADED           RIDER3 ( 27 by  33) XO=8  YO=30
+LOADED           RIDER4 ( 26 by  36) XO=8  YO=31
+LOADED           RIDER5 ( 25 by  35) XO=12  YO=33
+LOADED           RIDER6 ( 29 by  29) XO=21  YO=26
+LOADED           RIDER7 ( 27 by  32) XO=4  YO=26
+LOADED           RIDER8 ( 31 by  36) XO=3  YO=23
+LOADED           RIDER9 ( 26 by  33) XO=4  YO=25
+LOADED          RIDER10 ( 23 by  33) XO=10  YO=28
+LOADED          RIDER11 ( 26 by  29) XO=12  YO=20
+LOADED          RIDER12 ( 32 by  27) XO=17  YO=26
+LOADED          RIDER13 ( 36 by  31) XO=22  YO=27
+LOADED          RIDER14 ( 27 by  28) XO=15  YO=26
+LOADED          RIDER15 ( 24 by  30) XO=12  YO=28
+LOADED          RIDER16 ( 33 by  27) XO=30  YO=18
+LOADED           K_AND0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [K_AND0].           K_AND1 ( 25 by  32) XO=12  YO=30
+LOADED           K_AND2 ( 25 by  34) XO=12  YO=31
+LOADED           K_AND3 ( 28 by  34) XO=7  YO=32
+LOADED           K_AND4 ( 24 by  34) XO=7  YO=30
+LOADED           K_AND5 ( 25 by  34) XO=12  YO=32
+LOADED           K_AND6 ( 30 by  30) XO=21  YO=26
+LOADED           K_AND7 ( 27 by  32) XO=5  YO=25
+LOADED           K_AND8 ( 31 by  36) XO=2  YO=25
+LOADED           K_AND9 ( 26 by  33) XO=4  YO=25
+LOADED          K_AND10 ( 23 by  33) XO=10  YO=28
+LOADED          K_AND11 ( 23 by  28) XO=12  YO=18
+LOADED          K_AND12 ( 32 by  27) XO=17  YO=26
+LOADED          K_AND13 ( 36 by  31) XO=25  YO=28
+LOADED          K_AND14 ( 27 by  28) XO=14  YO=27
+LOADED          K_AND15 ( 24 by  30) XO=12  YO=27
+LOADED          K_AND16 ( 34 by  28) XO=32  YO=21
+LOADED          MORRIS0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MORRIS0].          MORRIS1 ( 25 by  30) XO=12  YO=28
+LOADED          MORRIS2 ( 25 by  33) XO=12  YO=30
+LOADED          MORRIS3 ( 29 by  33) XO=5  YO=31
+LOADED          MORRIS4 ( 27 by  34) XO=9  YO=30
+LOADED          MORRIS5 ( 28 by  35) XO=13  YO=33
+LOADED          MORRIS6 ( 29 by  29) XO=21  YO=25
+LOADED          MORRIS7 ( 32 by  34) XO=6  YO=29
+LOADED          MORRIS8 ( 30 by  38) XO=4  YO=23
+LOADED          MORRIS9 ( 29 by  36) XO=6  YO=28
+LOADED         MORRIS10 ( 26 by  33) XO=11  YO=28
+LOADED         MORRIS11 ( 23 by  24) XO=11  YO=16
+LOADED         MORRIS12 ( 32 by  31) XO=17  YO=29
+LOADED         MORRIS13 ( 38 by  31) XO=23  YO=27
+LOADED         MORRIS14 ( 29 by  31) XO=15  YO=29
+LOADED         MORRIS15 ( 27 by  32) XO=13  YO=29
+LOADED         MORRIS16 ( 33 by  29) XO=31  YO=22
+LOADED           MASON0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MASON0].           MASON1 ( 24 by  32) XO=11  YO=28
+LOADED           MASON2 ( 25 by  34) XO=12  YO=30
+LOADED           MASON3 ( 27 by  33) XO=9  YO=30
+LOADED           MASON4 ( 24 by  33) XO=8  YO=29
+LOADED           MASON5 ( 24 by  35) XO=11  YO=31
+LOADED           MASON6 ( 30 by  30) XO=22  YO=27
+LOADED           MASON7 ( 28 by  31) XO=3  YO=27
+LOADED           MASON8 ( 30 by  33) XO=4  YO=24
+LOADED           MASON9 ( 29 by  34) XO=6  YO=27
+LOADED          MASON10 ( 26 by  31) XO=12  YO=27
+LOADED          MASON11 ( 23 by  25) XO=12  YO=21
+LOADED          MASON12 ( 29 by  29) XO=15  YO=28
+LOADED          MASON13 ( 33 by  30) XO=22  YO=26
+LOADED          MASON14 ( 28 by  30) XO=16  YO=28
+LOADED          MASON15 ( 26 by  29) XO=13  YO=26
+LOADED          MASON16 ( 33 by  27) XO=30  YO=20
+LOADED          STARKS0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [STARKS0].          STARKS1 ( 24 by  32) XO=11  YO=30
+LOADED          STARKS2 ( 25 by  34) XO=12  YO=31
+LOADED          STARKS3 ( 29 by  35) XO=10  YO=33
+LOADED          STARKS4 ( 25 by  36) XO=8  YO=31
+LOADED          STARKS5 ( 25 by  37) XO=12  YO=35
+LOADED          STARKS6 ( 30 by  30) XO=22  YO=27
+LOADED          STARKS7 ( 29 by  34) XO=4  YO=28
+LOADED          STARKS8 ( 34 by  37) XO=3  YO=27
+LOADED          STARKS9 ( 29 by  34) XO=5  YO=27
+LOADED         STARKS10 ( 26 by  35) XO=14  YO=30
+LOADED         STARKS11 ( 25 by  28) XO=12  YO=19
+LOADED         STARKS12 ( 32 by  31) XO=17  YO=30
+LOADED         STARKS13 ( 37 by  34) XO=26  YO=31
+LOADED         STARKS14 ( 29 by  31) XO=15  YO=29
+LOADED         STARKS15 ( 26 by  31) XO=12  YO=27
+LOADED         STARKS16 ( 35 by  29) XO=33  YO=18
+LOADED
+Opening img lib [C:\HDS11.IMG]          A_HARD0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [A_HARD0].          A_HARD1 ( 26 by  30) XO=12  YO=28
+LOADED          A_HARD2 ( 25 by  30) XO=12  YO=28
+LOADED          A_HARD3 ( 30 by  31) XO=9  YO=29
+LOADED          A_HARD4 ( 25 by  32) XO=8  YO=28
+LOADED          A_HARD5 ( 27 by  33) XO=13  YO=31
+LOADED          A_HARD6 ( 30 by  31) XO=21  YO=26
+LOADED          A_HARD7 ( 32 by  34) XO=6  YO=28
+LOADED          A_HARD8 ( 33 by  36) XO=3  YO=22
+LOADED          A_HARD9 ( 29 by  36) XO=6  YO=28
+LOADED         A_HARD10 ( 26 by  33) XO=11  YO=28
+LOADED         A_HARD11 ( 23 by  27) XO=11  YO=15
+LOADED         A_HARD12 ( 32 by  31) XO=18  YO=29
+LOADED         A_HARD13 ( 36 by  33) XO=23  YO=28
+LOADED         A_HARD14 ( 29 by  31) XO=15  YO=28
+LOADED         A_HARD15 ( 28 by  30) XO=13  YO=27
+LOADED         A_HARD16 ( 31 by  30) XO=29  YO=21
+LOADED           N_AND0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [N_AND0].           N_AND1 ( 24 by  32) XO=11  YO=30
+LOADED           N_AND2 ( 25 by  34) XO=13  YO=30
+LOADED           N_AND3 ( 32 by  35) XO=11  YO=33
+LOADED           N_AND4 ( 27 by  35) XO=9  YO=31
+LOADED           N_AND5 ( 25 by  35) XO=11  YO=33
+LOADED           N_AND6 ( 29 by  29) XO=19  YO=25
+LOADED           N_AND7 ( 32 by  34) XO=5  YO=29
+LOADED           N_AND8 ( 34 by  38) XO=4  YO=27
+LOADED           N_AND9 ( 29 by  36) XO=6  YO=28
+LOADED          N_AND10 ( 26 by  34) XO=11  YO=30
+LOADED          N_AND11 ( 25 by  27) XO=12  YO=18
+LOADED          N_AND12 ( 32 by  31) XO=17  YO=29
+LOADED          N_AND13 ( 38 by  34) XO=23  YO=30
+LOADED          N_AND14 ( 29 by  31) XO=16  YO=28
+LOADED          N_AND15 ( 28 by  30) XO=13  YO=28
+LOADED          N_AND16 ( 35 by  32) XO=32  YO=21
+LOADED           WEATH0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [WEATH0].           WEATH1 ( 24 by  30) XO=11  YO=28
+LOADED           WEATH2 ( 24 by  32) XO=11  YO=28
+LOADED           WEATH3 ( 27 by  33) XO=10  YO=31
+LOADED           WEATH4 ( 25 by  33) XO=6  YO=29
+LOADED           WEATH5 ( 26 by  34) XO=12  YO=32
+LOADED           WEATH6 ( 29 by  29) XO=21  YO=25
+LOADED           WEATH7 ( 32 by  34) XO=6  YO=29
+LOADED           WEATH8 ( 33 by  32) XO=5  YO=24
+LOADED           WEATH9 ( 29 by  36) XO=6  YO=28
+LOADED          WEATH10 ( 26 by  34) XO=11  YO=30
+LOADED          WEATH11 ( 23 by  25) XO=11  YO=16
+LOADED          WEATH12 ( 32 by  31) XO=17  YO=29
+LOADED          WEATH13 ( 32 by  32) XO=20  YO=28
+LOADED          WEATH14 ( 29 by  31) XO=16  YO=29
+LOADED          WEATH15 ( 28 by  30) XO=14  YO=27
+LOADED          WEATH16 ( 33 by  27) XO=31  YO=17
+LOADED            BRAD0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [BRAD0].            BRAD1 ( 24 by  35) XO=11  YO=32
+LOADED            BRAD2 ( 26 by  35) XO=13  YO=31
+LOADED            BRAD3 ( 28 by  36) XO=9  YO=33
+LOADED            BRAD4 ( 25 by  36) XO=8  YO=32
+LOADED            BRAD5 ( 25 by  37) XO=11  YO=34
+LOADED            BRAD6 ( 33 by  32) XO=23  YO=28
+LOADED            BRAD7 ( 28 by  35) XO=3  YO=29
+LOADED            BRAD8 ( 36 by  35) XO=3  YO=25
+LOADED            BRAD9 ( 30 by  35) XO=6  YO=27
+LOADED           BRAD10 ( 25 by  35) XO=12  YO=30
+LOADED           BRAD11 ( 23 by  30) XO=11  YO=17
+LOADED           BRAD12 ( 35 by  33) XO=21  YO=31
+LOADED           BRAD13 ( 35 by  36) XO=23  YO=31
+LOADED           BRAD14 ( 28 by  31) XO=14  YO=29
+LOADED           BRAD15 ( 27 by  30) XO=13  YO=28
+LOADED           BRAD16 ( 36 by  28) XO=34  YO=19
+LOADED          K_JOHN0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [K_JOHN0].          K_JOHN1 ( 25 by  35) XO=12  YO=32
+LOADED          K_JOHN2 ( 25 by  35) XO=12  YO=31
+LOADED          K_JOHN3 ( 30 by  35) XO=8  YO=32
+LOADED          K_JOHN4 ( 25 by  35) XO=9  YO=31
+LOADED          K_JOHN5 ( 24 by  36) XO=11  YO=34
+LOADED          K_JOHN6 ( 31 by  31) XO=23  YO=27
+LOADED          K_JOHN7 ( 32 by  34) XO=6  YO=28
+LOADED          K_JOHN8 ( 34 by  36) XO=3  YO=27
+LOADED          K_JOHN9 ( 27 by  33) XO=4  YO=26
+LOADED         K_JOHN10 ( 26 by  31) XO=12  YO=26
+LOADED         K_JOHN11 ( 25 by  26) XO=12  YO=16
+LOADED         K_JOHN12 ( 32 by  29) XO=17  YO=28
+LOADED         K_JOHN13 ( 36 by  34) XO=23  YO=29
+LOADED         K_JOHN14 ( 30 by  33) XO=16  YO=28
+LOADED         K_JOHN15 ( 28 by  34) XO=14  YO=31
+LOADED         K_JOHN16 ( 35 by  30) XO=33  YO=21
+LOADED           C_ROB0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [C_ROB0].           C_ROB1 ( 26 by  35) XO=12  YO=32
+LOADED           C_ROB2 ( 26 by  36) XO=12  YO=30
+LOADED           C_ROB3 ( 31 by  35) XO=10  YO=31
+LOADED           C_ROB4 ( 25 by  36) XO=8  YO=32
+LOADED           C_ROB5 ( 24 by  35) XO=11  YO=33
+LOADED           C_ROB6 ( 31 by  32) XO=21  YO=27
+LOADED           C_ROB7 ( 27 by  31) XO=4  YO=26
+LOADED           C_ROB8 ( 34 by  37) XO=4  YO=26
+LOADED           C_ROB9 ( 26 by  33) XO=4  YO=26
+LOADED          C_ROB10 ( 23 by  33) XO=10  YO=28
+LOADED          C_ROB11 ( 26 by  27) XO=12  YO=17
+LOADED          C_ROB12 ( 32 by  27) XO=17  YO=26
+LOADED          C_ROB13 ( 37 by  34) XO=21  YO=29
+LOADED          C_ROB14 ( 28 by  29) XO=15  YO=28
+LOADED          C_ROB15 ( 24 by  31) XO=11  YO=29
+LOADED          C_ROB16 ( 35 by  31) XO=32  YO=21
+LOADED            RICH0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [RICH0].            RICH1 ( 26 by  31) XO=12  YO=29
+LOADED            RICH2 ( 25 by  32) XO=12  YO=30
+LOADED            RICH3 ( 28 by  32) XO=7  YO=30
+LOADED            RICH4 ( 26 by  33) XO=7  YO=29
+LOADED            RICH5 ( 26 by  34) XO=12  YO=32
+LOADED            RICH6 ( 31 by  32) XO=22  YO=28
+LOADED            RICH7 ( 27 by  32) XO=4  YO=26
+LOADED            RICH8 ( 29 by  33) XO=2  YO=23
+LOADED            RICH9 ( 26 by  33) XO=4  YO=26
+LOADED           RICH10 ( 23 by  33) XO=10  YO=28
+LOADED           RICH11 ( 23 by  24) XO=11  YO=14
+LOADED           RICH12 ( 32 by  27) XO=17  YO=26
+LOADED           RICH13 ( 33 by  29) XO=19  YO=26
+LOADED           RICH14 ( 27 by  28) XO=14  YO=26
+LOADED           RICH15 ( 24 by  30) XO=12  YO=27
+LOADED           RICH16 ( 32 by  28) XO=29  YO=21
+LOADED
+Opening img lib [C:\HDS12.IMG]          PAYTON0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [PAYTON0].          PAYTON1 ( 27 by  34) XO=13  YO=31
+LOADED          PAYTON2 ( 27 by  34) XO=13  YO=31
+LOADED          PAYTON3 ( 31 by  34) XO=9  YO=32
+LOADED          PAYTON4 ( 25 by  35) XO=9  YO=31
+LOADED          PAYTON5 ( 26 by  36) XO=12  YO=33
+LOADED          PAYTON6 ( 29 by  29) XO=22  YO=26
+LOADED          PAYTON7 ( 29 by  34) XO=5  YO=28
+LOADED          PAYTON8 ( 31 by  35) XO=3  YO=24
+LOADED          PAYTON9 ( 28 by  35) XO=6  YO=27
+LOADED         PAYTON10 ( 24 by  35) XO=11  YO=30
+LOADED         PAYTON11 ( 24 by  24) XO=11  YO=15
+LOADED         PAYTON12 ( 34 by  29) XO=18  YO=28
+LOADED         PAYTON13 ( 35 by  30) XO=21  YO=28
+LOADED         PAYTON14 ( 29 by  30) XO=16  YO=28
+LOADED         PAYTON15 ( 26 by  32) XO=12  YO=29
+LOADED         PAYTON16 ( 34 by  31) XO=32  YO=21
+LOADED           MCKEY0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MCKEY0].           MCKEY1 ( 23 by  31) XO=11  YO=29
+LOADED           MCKEY2 ( 25 by  31) XO=12  YO=28
+LOADED           MCKEY3 ( 28 by  31) XO=8  YO=27
+LOADED           MCKEY4 ( 23 by  32) XO=7  YO=28
+LOADED           MCKEY5 ( 23 by  34) XO=11  YO=31
+LOADED           MCKEY6 ( 29 by  29) XO=21  YO=26
+LOADED           MCKEY7 ( 27 by  32) XO=4  YO=25
+LOADED           MCKEY8 ( 31 by  34) XO=2  YO=26
+LOADED           MCKEY9 ( 26 by  33) XO=4  YO=25
+LOADED          MCKEY10 ( 23 by  33) XO=10  YO=28
+LOADED          MCKEY11 ( 23 by  24) XO=11  YO=16
+LOADED          MCKEY12 ( 32 by  27) XO=17  YO=26
+LOADED          MCKEY13 ( 33 by  29) XO=23  YO=25
+LOADED          MCKEY14 ( 27 by  28) XO=16  YO=27
+LOADED          MCKEY15 ( 24 by  30) XO=12  YO=28
+LOADED          MCKEY16 ( 31 by  28) XO=27  YO=19
+LOADED          BENOIT0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [BENOIT0].          BENOIT1 ( 26 by  34) XO=12  YO=31
+LOADED          BENOIT2 ( 25 by  34) XO=12  YO=30
+LOADED          BENOIT3 ( 29 by  35) XO=10  YO=31
+LOADED          BENOIT4 ( 24 by  35) XO=8  YO=31
+LOADED          BENOIT5 ( 26 by  35) XO=12  YO=33
+LOADED          BENOIT6 ( 31 by  31) XO=22  YO=27
+LOADED          BENOIT7 ( 27 by  32) XO=4  YO=25
+LOADED          BENOIT8 ( 31 by  36) XO=4  YO=27
+LOADED          BENOIT9 ( 27 by  35) XO=4  YO=28
+LOADED         BENOIT10 ( 23 by  33) XO=10  YO=28
+LOADED         BENOIT11 ( 24 by  26) XO=11  YO=15
+LOADED         BENOIT12 ( 32 by  27) XO=16  YO=26
+LOADED         BENOIT13 ( 36 by  31) XO=24  YO=27
+LOADED         BENOIT14 ( 27 by  28) XO=15  YO=27
+LOADED         BENOIT15 ( 24 by  30) XO=11  YO=28
+LOADED         BENOIT16 ( 35 by  29) XO=31  YO=18
+LOADED           CHEAN0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [CHEAN0].           CHEAN1 ( 24 by  30) XO=11  YO=28
+LOADED           CHEAN2 ( 24 by  32) XO=11  YO=28
+LOADED           CHEAN3 ( 26 by  32) XO=6  YO=30
+LOADED           CHEAN4 ( 23 by  32) XO=7  YO=28
+LOADED           CHEAN5 ( 25 by  33) XO=12  YO=31
+LOADED           CHEAN6 ( 29 by  29) XO=21  YO=25
+LOADED           CHEAN7 ( 30 by  32) XO=5  YO=26
+LOADED           CHEAN8 ( 32 by  32) XO=5  YO=22
+LOADED           CHEAN9 ( 27 by  34) XO=5  YO=26
+LOADED          CHEAN10 ( 24 by  33) XO=10  YO=28
+LOADED          CHEAN11 ( 25 by  27) XO=12  YO=17
+LOADED          CHEAN12 ( 30 by  28) XO=16  YO=27
+LOADED          CHEAN13 ( 32 by  29) XO=20  YO=27
+LOADED          CHEAN14 ( 28 by  30) XO=16  YO=28
+LOADED          CHEAN15 ( 25 by  30) XO=12  YO=27
+LOADED          CHEAN16 ( 32 by  26) XO=29  YO=19
+LOADED
+Opening img lib [C:\hds13.img]          BLAYLO0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [BLAYLO0].          BLAYLO1 ( 25 by  33) XO=12  YO=31
+LOADED          BLAYLO2 ( 27 by  33) XO=11  YO=28
+LOADED          BLAYLO3 ( 29 by  34) XO=7  YO=30
+LOADED          BLAYLO4 ( 23 by  36) XO=7  YO=31
+LOADED          BLAYLO5 ( 24 by  36) XO=12  YO=31
+LOADED          BLAYLO6 ( 29 by  28) XO=20  YO=25
+LOADED          BLAYLO7 ( 27 by  32) XO=5  YO=26
+LOADED          BLAYLO8 ( 33 by  34) XO=2  YO=24
+LOADED          BLAYLO9 ( 26 by  33) XO=4  YO=25
+LOADED         BLAYLO10 ( 23 by  33) XO=10  YO=28
+LOADED         BLAYLO11 ( 23 by  24) XO=11  YO=16
+LOADED         BLAYLO12 ( 32 by  27) XO=17  YO=27
+LOADED         BLAYLO13 ( 35 by  33) XO=22  YO=30
+LOADED         BLAYLO14 ( 27 by  28) XO=14  YO=27
+LOADED         BLAYLO15 ( 24 by  30) XO=12  YO=28
+LOADED         BLAYLO16 ( 34 by  29) XO=30  YO=22
+LOADED          SSMITH0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [SSMITH0].          SSMITH1 ( 24 by  31) XO=11  YO=29
+LOADED          SSMITH2 ( 30 by  32) XO=11  YO=28
+LOADED          SSMITH3 ( 30 by  33) XO=8  YO=28
+LOADED          SSMITH4 ( 23 by  32) XO=8  YO=28
+LOADED          SSMITH5 ( 22 by  33) XO=11  YO=30
+LOADED          SSMITH6 ( 31 by  30) XO=22  YO=26
+LOADED          SSMITH7 ( 30 by  32) XO=5  YO=27
+LOADED          SSMITH8 ( 31 by  35) XO=2  YO=24
+LOADED          SSMITH9 ( 25 by  34) XO=4  YO=27
+LOADED         SSMITH10 ( 22 by  35) XO=10  YO=29
+LOADED         SSMITH11 ( 21 by  23) XO=10  YO=15
+LOADED         SSMITH12 ( 32 by  31) XO=17  YO=28
+LOADED         SSMITH13 ( 35 by  32) XO=23  YO=29
+LOADED         SSMITH14 ( 27 by  31) XO=15  YO=28
+LOADED         SSMITH15 ( 24 by  30) XO=12  YO=27
+LOADED         SSMITH16 ( 33 by  30) XO=28  YO=21
+LOADED          KNORMA0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [KNORMA0].          KNORMA1 ( 24 by  29) XO=11  YO=27
+LOADED          KNORMA2 ( 23 by  31) XO=12  YO=27
+LOADED          KNORMA3 ( 29 by  32) XO=7  YO=28
+LOADED          KNORMA4 ( 23 by  31) XO=7  YO=27
+LOADED          KNORMA5 ( 23 by  32) XO=11  YO=30
+LOADED          KNORMA6 ( 28 by  27) XO=20  YO=24
+LOADED          KNORMA7 ( 26 by  32) XO=4  YO=26
+LOADED          KNORMA8 ( 31 by  32) XO=1  YO=23
+LOADED          KNORMA9 ( 26 by  33) XO=5  YO=25
+LOADED         KNORMA10 ( 22 by  33) XO=10  YO=28
+LOADED         KNORMA11 ( 23 by  24) XO=11  YO=16
+LOADED         KNORMA12 ( 32 by  27) XO=15  YO=26
+LOADED         KNORMA13 ( 33 by  31) XO=22  YO=28
+LOADED         KNORMA14 ( 26 by  28) XO=14  YO=27
+LOADED         KNORMA15 ( 22 by  30) XO=11  YO=28
+LOADED         KNORMA16 ( 32 by  29) XO=28  YO=21
+LOADED          BARROS0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [BARROS0].          BARROS1 ( 25 by  31) XO=11  YO=29
+LOADED          BARROS2 ( 28 by  32) XO=12  YO=28
+LOADED          BARROS3 ( 28 by  33) XO=7  YO=29
+LOADED          BARROS4 ( 23 by  33) XO=7  YO=29
+LOADED          BARROS5 ( 24 by  35) XO=11  YO=30
+LOADED          BARROS6 ( 30 by  30) XO=21  YO=26
+LOADED          BARROS7 ( 27 by  32) XO=4  YO=26
+LOADED          BARROS8 ( 32 by  34) XO=2  YO=23
+LOADED          BARROS9 ( 26 by  33) XO=4  YO=25
+LOADED         BARROS10 ( 22 by  33) XO=10  YO=28
+LOADED         BARROS11 ( 24 by  24) XO=11  YO=16
+LOADED         BARROS12 ( 32 by  27) XO=17  YO=26
+LOADED         BARROS13 ( 34 by  31) XO=23  YO=29
+LOADED         BARROS14 ( 27 by  28) XO=14  YO=27
+LOADED         BARROS15 ( 23 by  30) XO=10  YO=27
+LOADED         BARROS16 ( 33 by  28) XO=29  YO=20
+LOADED          MONTRO0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MONTRO0].          MONTRO1 ( 24 by  31) XO=11  YO=29
+LOADED          MONTRO2 ( 26 by  33) XO=12  YO=28
+LOADED          MONTRO3 ( 31 by  34) XO=10  YO=29
+LOADED          MONTRO4 ( 24 by  35) XO=9  YO=30
+LOADED          MONTRO5 ( 25 by  35) XO=13  YO=31
+LOADED          MONTRO6 ( 28 by  28) XO=20  YO=25
+LOADED          MONTRO7 ( 30 by  32) XO=5  YO=27
+LOADED          MONTRO8 ( 32 by  36) XO=2  YO=26
+LOADED          MONTRO9 ( 27 by  35) XO=5  YO=28
+LOADED         MONTRO10 ( 23 by  35) XO=11  YO=31
+LOADED         MONTRO11 ( 25 by  26) XO=12  YO=17
+LOADED         MONTRO12 ( 32 by  31) XO=16  YO=28
+LOADED         MONTRO13 ( 36 by  32) XO=26  YO=29
+LOADED         MONTRO14 ( 27 by  31) XO=15  YO=28
+LOADED         MONTRO15 ( 25 by  30) XO=12  YO=27
+LOADED         MONTRO16 ( 34 by  31) XO=30  YO=21
+LOADED           RADJA0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [RADJA0].           RADJA1 ( 25 by  32) XO=11  YO=29
+LOADED           RADJA2 ( 28 by  33) XO=12  YO=28
+LOADED           RADJA3 ( 30 by  35) XO=8  YO=28
+LOADED           RADJA4 ( 26 by  34) XO=9  YO=30
+LOADED           RADJA5 ( 25 by  35) XO=11  YO=29
+LOADED           RADJA6 ( 30 by  29) XO=22  YO=25
+LOADED           RADJA7 ( 30 by  32) XO=5  YO=27
+LOADED           RADJA8 ( 29 by  32) XO=1  YO=23
+LOADED           RADJA9 ( 27 by  35) XO=6  YO=28
+LOADED          RADJA10 ( 23 by  35) XO=11  YO=29
+LOADED          RADJA11 ( 25 by  26) XO=12  YO=19
+LOADED          RADJA12 ( 32 by  31) XO=17  YO=29
+LOADED          RADJA13 ( 32 by  29) XO=23  YO=27
+LOADED          RADJA14 ( 27 by  31) XO=15  YO=28
+LOADED          RADJA15 ( 25 by  30) XO=12  YO=27
+LOADED          RADJA16 ( 33 by  27) XO=28  YO=20
+LOADED
+Opening img lib [C:\hds14.img]           CURRY0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [CURRY0].           CURRY1 ( 23 by  30) XO=11  YO=28
+LOADED           CURRY2 ( 28 by  31) XO=12  YO=27
+LOADED           CURRY3 ( 29 by  32) XO=9  YO=29
+LOADED           CURRY4 ( 24 by  33) XO=8  YO=29
+LOADED           CURRY5 ( 24 by  34) XO=11  YO=30
+LOADED           CURRY6 ( 30 by  29) XO=21  YO=25
+LOADED           CURRY7 ( 30 by  32) XO=5  YO=27
+LOADED           CURRY8 ( 31 by  34) XO=2  YO=25
+LOADED           CURRY9 ( 25 by  34) XO=4  YO=27
+LOADED          CURRY10 ( 22 by  35) XO=10  YO=29
+LOADED          CURRY11 ( 21 by  25) XO=10  YO=16
+LOADED          CURRY12 ( 32 by  31) XO=18  YO=28
+LOADED          CURRY13 ( 34 by  31) XO=24  YO=28
+LOADED          CURRY14 ( 27 by  31) XO=16  YO=29
+LOADED          CURRY15 ( 24 by  30) XO=12  YO=28
+LOADED          CURRY16 ( 32 by  29) XO=29  YO=19
+LOADED           ZIDEK0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [ZIDEK0].           ZIDEK1 ( 25 by  32) XO=11  YO=29
+LOADED           ZIDEK2 ( 29 by  32) XO=12  YO=29
+LOADED           ZIDEK3 ( 29 by  34) XO=9  YO=31
+LOADED           ZIDEK4 ( 26 by  35) XO=9  YO=30
+LOADED           ZIDEK5 ( 26 by  35) XO=13  YO=32
+LOADED           ZIDEK6 ( 29 by  29) XO=21  YO=25
+LOADED           ZIDEK7 ( 30 by  32) XO=5  YO=27
+LOADED           ZIDEK8 ( 32 by  34) XO=2  YO=24
+LOADED           ZIDEK9 ( 25 by  34) XO=4  YO=27
+LOADED          ZIDEK10 ( 22 by  35) XO=10  YO=30
+LOADED          ZIDEK11 ( 24 by  26) XO=12  YO=17
+LOADED          ZIDEK12 ( 32 by  31) XO=18  YO=29
+LOADED          ZIDEK13 ( 35 by  32) XO=24  YO=29
+LOADED          ZIDEK14 ( 27 by  31) XO=15  YO=28
+LOADED          ZIDEK15 ( 24 by  30) XO=11  YO=28
+LOADED          ZIDEK16 ( 34 by  29) XO=29  YO=21
+LOADED            KERR0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [KERR0].            KERR1 ( 23 by  32) XO=11  YO=30
+LOADED            KERR2 ( 26 by  33) XO=13  YO=29
+LOADED            KERR3 ( 27 by  35) XO=9  YO=30
+LOADED            KERR4 ( 26 by  36) XO=8  YO=31
+LOADED            KERR5 ( 23 by  36) XO=10  YO=31
+LOADED            KERR6 ( 31 by  30) XO=24  YO=27
+LOADED            KERR7 ( 30 by  32) XO=5  YO=26
+LOADED            KERR8 ( 34 by  33) XO=2  YO=24
+LOADED            KERR9 ( 27 by  35) XO=5  YO=28
+LOADED           KERR10 ( 23 by  35) XO=11  YO=30
+LOADED           KERR11 ( 24 by  26) XO=11  YO=18
+LOADED           KERR12 ( 32 by  31) XO=17  YO=29
+LOADED           KERR13 ( 33 by  33) XO=26  YO=31
+LOADED           KERR14 ( 28 by  31) XO=16  YO=28
+LOADED           KERR15 ( 25 by  30) XO=12  YO=28
+LOADED           KERR16 ( 36 by  27) XO=32  YO=19
+LOADED           THILL0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [THILL0].           THILL1 ( 24 by  32) XO=11  YO=30
+LOADED           THILL2 ( 27 by  33) XO=12  YO=28
+LOADED           THILL3 ( 31 by  33) XO=10  YO=28
+LOADED           THILL4 ( 25 by  34) XO=9  YO=29
+LOADED           THILL5 ( 24 by  32) XO=11  YO=29
+LOADED           THILL6 ( 29 by  28) XO=22  YO=25
+LOADED           THILL7 ( 27 by  32) XO=5  YO=25
+LOADED           THILL8 ( 30 by  34) XO=3  YO=26
+LOADED           THILL9 ( 26 by  33) XO=4  YO=26
+LOADED          THILL10 ( 23 by  33) XO=10  YO=29
+LOADED          THILL11 ( 23 by  24) XO=11  YO=16
+LOADED          THILL12 ( 32 by  27) XO=18  YO=27
+LOADED          THILL13 ( 34 by  29) XO=24  YO=27
+LOADED          THILL14 ( 25 by  28) XO=14  YO=27
+LOADED          THILL15 ( 24 by  30) XO=11  YO=28
+LOADED          THILL16 ( 33 by  30) XO=29  YO=19
+LOADED          CMILLS0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [CMILLS0].          CMILLS1 ( 23 by  33) XO=11  YO=31
+LOADED          CMILLS2 ( 28 by  33) XO=11  YO=29
+LOADED          CMILLS3 ( 29 by  34) XO=8  YO=30
+LOADED          CMILLS4 ( 22 by  35) XO=7  YO=31
+LOADED          CMILLS5 ( 23 by  34) XO=11  YO=31
+LOADED          CMILLS6 ( 30 by  29) XO=23  YO=26
+LOADED          CMILLS7 ( 30 by  32) XO=5  YO=26
+LOADED          CMILLS8 ( 31 by  34) XO=1  YO=25
+LOADED          CMILLS9 ( 25 by  34) XO=4  YO=27
+LOADED         CMILLS10 ( 22 by  35) XO=10  YO=30
+LOADED         CMILLS11 ( 23 by  26) XO=11  YO=17
+LOADED         CMILLS12 ( 32 by  31) XO=18  YO=29
+LOADED         CMILLS13 ( 35 by  31) XO=24  YO=28
+LOADED         CMILLS14 ( 27 by  31) XO=15  YO=28
+LOADED         CMILLS15 ( 24 by  30) XO=11  YO=28
+LOADED         CMILLS16 ( 34 by  29) XO=30  YO=21
+LOADED
+Opening img lib [C:\hds15.img]          PHILLS0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [PHILLS0].          PHILLS1 ( 24 by  32) XO=11  YO=30
+LOADED          PHILLS2 ( 28 by  34) XO=12  YO=29
+LOADED          PHILLS3 ( 29 by  35) XO=8  YO=30
+LOADED          PHILLS4 ( 24 by  35) XO=8  YO=29
+LOADED          PHILLS5 ( 24 by  36) XO=11  YO=31
+LOADED          PHILLS6 ( 30 by  29) XO=22  YO=26
+LOADED          PHILLS7 ( 30 by  32) XO=5  YO=27
+LOADED          PHILLS8 ( 33 by  33) XO=2  YO=23
+LOADED          PHILLS9 ( 25 by  34) XO=4  YO=27
+LOADED         PHILLS10 ( 22 by  35) XO=10  YO=31
+LOADED         PHILLS11 ( 22 by  24) XO=11  YO=16
+LOADED         PHILLS12 ( 32 by  31) XO=18  YO=29
+LOADED         PHILLS13 ( 33 by  32) XO=23  YO=30
+LOADED         PHILLS14 ( 27 by  31) XO=16  YO=29
+LOADED         PHILLS15 ( 24 by  30) XO=12  YO=28
+LOADED         PHILLS16 ( 34 by  28) XO=30  YO=19
+LOADED            KIDD0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [KIDD0].            KIDD1 ( 24 by  32) XO=11  YO=30
+LOADED            KIDD2 ( 29 by  32) XO=11  YO=28
+LOADED            KIDD3 ( 29 by  33) XO=8  YO=29
+LOADED            KIDD4 ( 24 by  35) XO=8  YO=31
+LOADED            KIDD5 ( 24 by  34) XO=12  YO=30
+LOADED            KIDD6 ( 29 by  29) XO=21  YO=26
+LOADED            KIDD7 ( 30 by  32) XO=5  YO=25
+LOADED            KIDD8 ( 32 by  32) XO=4  YO=25
+LOADED            KIDD9 ( 25 by  34) XO=4  YO=27
+LOADED           KIDD10 ( 22 by  35) XO=10  YO=29
+LOADED           KIDD11 ( 23 by  25) XO=11  YO=17
+LOADED           KIDD12 ( 32 by  31) XO=18  YO=29
+LOADED           KIDD13 ( 33 by  31) XO=24  YO=28
+LOADED           KIDD14 ( 27 by  31) XO=15  YO=28
+LOADED           KIDD15 ( 24 by  30) XO=11  YO=27
+LOADED           KIDD16 ( 33 by  29) XO=29  YO=20
+LOADED          PJONES0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [PJONES0].          PJONES1 ( 25 by  32) XO=12  YO=30
+LOADED          PJONES2 ( 25 by  30) XO=12  YO=27
+LOADED          PJONES3 ( 28 by  31) XO=8  YO=26
+LOADED          PJONES4 ( 23 by  34) XO=6  YO=28
+LOADED          PJONES5 ( 24 by  33) XO=11  YO=29
+LOADED          PJONES6 ( 30 by  28) XO=22  YO=25
+LOADED          PJONES7 ( 27 by  32) XO=4  YO=26
+LOADED          PJONES8 ( 29 by  33) XO=3  YO=24
+LOADED          PJONES9 ( 26 by  33) XO=4  YO=25
+LOADED         PJONES10 ( 23 by  31) XO=10  YO=27
+LOADED         PJONES11 ( 22 by  25) XO=10  YO=17
+LOADED         PJONES12 ( 32 by  27) XO=18  YO=27
+LOADED         PJONES13 ( 33 by  29) XO=23  YO=26
+LOADED         PJONES14 ( 25 by  28) XO=14  YO=27
+LOADED         PJONES15 ( 24 by  30) XO=12  YO=27
+LOADED         PJONES16 ( 31 by  28) XO=27  YO=20
+LOADED            RAUF0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [RAUF0].            RAUF1 ( 23 by  30) XO=11  YO=28
+LOADED            RAUF2 ( 28 by  32) XO=12  YO=29
+LOADED            RAUF3 ( 27 by  33) XO=8  YO=29
+LOADED            RAUF4 ( 24 by  33) XO=8  YO=29
+LOADED            RAUF5 ( 25 by  33) XO=12  YO=29
+LOADED            RAUF6 ( 29 by  27) XO=21  YO=24
+LOADED            RAUF7 ( 30 by  32) XO=5  YO=26
+LOADED            RAUF8 ( 31 by  33) XO=2  YO=24
+LOADED            RAUF9 ( 25 by  34) XO=4  YO=27
+LOADED           RAUF10 ( 22 by  35) XO=10  YO=29
+LOADED           RAUF11 ( 24 by  25) XO=12  YO=16
+LOADED           RAUF12 ( 32 by  31) XO=18  YO=29
+LOADED           RAUF13 ( 34 by  31) XO=24  YO=29
+LOADED           RAUF14 ( 27 by  31) XO=15  YO=27
+LOADED           RAUF15 ( 24 by  30) XO=12  YO=27
+LOADED           RAUF16 ( 33 by  27) XO=29  YO=19
+LOADED            PACK0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [PACK0].            PACK1 ( 24 by  32) XO=11  YO=30
+LOADED            PACK2 ( 25 by  34) XO=13  YO=30
+LOADED            PACK3 ( 30 by  34) XO=9  YO=31
+LOADED            PACK4 ( 25 by  34) XO=8  YO=30
+LOADED            PACK5 ( 24 by  35) XO=11  YO=33
+LOADED            PACK6 ( 29 by  30) XO=21  YO=26
+LOADED            PACK7 ( 30 by  32) XO=4  YO=27
+LOADED            PACK8 ( 33 by  37) XO=4  YO=26
+LOADED            PACK9 ( 25 by  34) XO=4  YO=27
+LOADED           PACK10 ( 22 by  34) XO=10  YO=29
+LOADED           PACK11 ( 24 by  25) XO=11  YO=16
+LOADED           PACK12 ( 32 by  31) XO=18  YO=29
+LOADED           PACK13 ( 37 by  33) XO=23  YO=29
+LOADED           PACK14 ( 28 by  31) XO=16  YO=28
+LOADED           PACK15 ( 24 by  30) XO=12  YO=27
+LOADED           PACK16 ( 34 by  30) XO=32  YO=21
+LOADED
+Opening img lib [C:\hds16.img]          MCDYES0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MCDYES0].          MCDYES1 ( 23 by  32) XO=11  YO=30
+LOADED          MCDYES2 ( 25 by  33) XO=12  YO=30
+LOADED          MCDYES3 ( 27 by  33) XO=7  YO=29
+LOADED          MCDYES4 ( 25 by  35) XO=8  YO=31
+LOADED          MCDYES5 ( 23 by  34) XO=11  YO=31
+LOADED          MCDYES6 ( 31 by  30) XO=22  YO=27
+LOADED          MCDYES7 ( 30 by  32) XO=5  YO=26
+LOADED          MCDYES8 ( 32 by  33) XO=3  YO=24
+LOADED          MCDYES9 ( 25 by  34) XO=4  YO=27
+LOADED         MCDYES10 ( 22 by  35) XO=10  YO=30
+LOADED         MCDYES11 ( 23 by  25) XO=11  YO=17
+LOADED         MCDYES12 ( 32 by  31) XO=17  YO=29
+LOADED         MCDYES13 ( 35 by  31) XO=22  YO=29
+LOADED         MCDYES14 ( 27 by  31) XO=15  YO=29
+LOADED         MCDYES15 ( 24 by  30) XO=12  YO=27
+LOADED         MCDYES16 ( 33 by  27) XO=30  YO=19
+LOADED           GHILL0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [GHILL0].           GHILL1 ( 26 by  33) XO=12  YO=31
+LOADED           GHILL2 ( 27 by  33) XO=12  YO=29
+LOADED           GHILL3 ( 29 by  32) XO=8  YO=28
+LOADED           GHILL4 ( 23 by  34) XO=7  YO=30
+LOADED           GHILL5 ( 27 by  34) XO=12  YO=29
+LOADED           GHILL6 ( 31 by  29) XO=22  YO=26
+LOADED           GHILL7 ( 27 by  32) XO=4  YO=25
+LOADED           GHILL8 ( 30 by  33) XO=2  YO=24
+LOADED           GHILL9 ( 26 by  33) XO=4  YO=25
+LOADED          GHILL10 ( 23 by  33) XO=10  YO=28
+LOADED          GHILL11 ( 23 by  24) XO=11  YO=16
+LOADED          GHILL12 ( 32 by  27) XO=16  YO=25
+LOADED          GHILL13 ( 35 by  30) XO=23  YO=28
+LOADED          GHILL14 ( 27 by  28) XO=14  YO=27
+LOADED          GHILL15 ( 24 by  30) XO=12  YO=28
+LOADED          GHILL16 ( 32 by  29) XO=29  YO=19
+LOADED          TMILLS0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [TMILLS0].          TMILLS1 ( 25 by  31) XO=11  YO=28
+LOADED          TMILLS2 ( 26 by  31) XO=12  YO=27
+LOADED          TMILLS3 ( 27 by  32) XO=6  YO=28
+LOADED          TMILLS4 ( 25 by  31) XO=8  YO=26
+LOADED          TMILLS5 ( 25 by  32) XO=12  YO=29
+LOADED          TMILLS6 ( 29 by  28) XO=21  YO=25
+LOADED          TMILLS7 ( 25 by  32) XO=3  YO=25
+LOADED          TMILLS8 ( 29 by  30) XO=1  YO=20
+LOADED          TMILLS9 ( 26 by  33) XO=4  YO=25
+LOADED         TMILLS10 ( 25 by  31) XO=11  YO=27
+LOADED         TMILLS11 ( 23 by  24) XO=11  YO=16
+LOADED         TMILLS12 ( 30 by  27) XO=16  YO=27
+LOADED         TMILLS13 ( 34 by  28) XO=21  YO=26
+LOADED         TMILLS14 ( 26 by  27) XO=14  YO=26
+LOADED         TMILLS15 ( 25 by  32) XO=12  YO=30
+LOADED         TMILLS16 ( 32 by  27) XO=27  YO=19
+LOADED          THORPE0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [THORPE0].          THORPE1 ( 24 by  31) XO=11  YO=29
+LOADED          THORPE2 ( 25 by  33) XO=12  YO=29
+LOADED          THORPE3 ( 28 by  33) XO=7  YO=30
+LOADED          THORPE4 ( 24 by  34) XO=8  YO=29
+LOADED          THORPE5 ( 24 by  35) XO=11  YO=31
+LOADED          THORPE6 ( 29 by  29) XO=21  YO=26
+LOADED          THORPE7 ( 30 by  32) XO=5  YO=26
+LOADED          THORPE8 ( 32 by  35) XO=1  YO=23
+LOADED          THORPE9 ( 25 by  34) XO=4  YO=26
+LOADED         THORPE10 ( 22 by  33) XO=10  YO=28
+LOADED         THORPE11 ( 23 by  24) XO=11  YO=17
+LOADED         THORPE12 ( 32 by  31) XO=17  YO=28
+LOADED         THORPE13 ( 35 by  32) XO=24  YO=30
+LOADED         THORPE14 ( 27 by  31) XO=15  YO=28
+LOADED         THORPE15 ( 24 by  30) XO=12  YO=28
+LOADED         THORPE16 ( 33 by  28) XO=30  YO=20
+LOADED          SPREWE0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [SPREWE0].          SPREWE1 ( 24 by  30) XO=11  YO=28
+LOADED          SPREWE2 ( 25 by  31) XO=12  YO=27
+LOADED          SPREWE3 ( 27 by  33) XO=7  YO=29
+LOADED          SPREWE4 ( 24 by  32) XO=8  YO=28
+LOADED          SPREWE5 ( 25 by  33) XO=12  YO=30
+LOADED          SPREWE6 ( 27 by  27) XO=20  YO=25
+LOADED          SPREWE7 ( 27 by  32) XO=5  YO=25
+LOADED          SPREWE8 ( 29 by  32) XO=1  YO=23
+LOADED          SPREWE9 ( 26 by  33) XO=4  YO=25
+LOADED         SPREWE10 ( 23 by  33) XO=10  YO=28
+LOADED         SPREWE11 ( 22 by  24) XO=11  YO=16
+LOADED         SPREWE12 ( 32 by  27) XO=18  YO=27
+LOADED         SPREWE13 ( 33 by  30) XO=22  YO=28
+LOADED         SPREWE14 ( 25 by  28) XO=14  YO=27
+LOADED         SPREWE15 ( 24 by  30) XO=12  YO=28
+LOADED         SPREWE16 ( 33 by  27) XO=28  YO=21
+LOADED
+Opening img lib [C:\hds17.img]          JSMITH0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [JSMITH0].          JSMITH1 ( 23 by  29) XO=11  YO=27
+LOADED          JSMITH2 ( 22 by  30) XO=11  YO=27
+LOADED          JSMITH3 ( 28 by  30) XO=8  YO=26
+LOADED          JSMITH4 ( 23 by  31) XO=7  YO=27
+LOADED          JSMITH5 ( 23 by  32) XO=11  YO=30
+LOADED          JSMITH6 ( 28 by  27) XO=19  YO=24
+LOADED          JSMITH7 ( 25 by  32) XO=3  YO=25
+LOADED          JSMITH8 ( 28 by  32) XO=1  YO=23
+LOADED          JSMITH9 ( 26 by  33) XO=5  YO=25
+LOADED         JSMITH10 ( 25 by  32) XO=11  YO=27
+LOADED         JSMITH11 ( 22 by  25) XO=11  YO=17
+LOADED         JSMITH12 ( 30 by  27) XO=16  YO=27
+LOADED         JSMITH13 ( 32 by  28) XO=21  YO=26
+LOADED         JSMITH14 ( 26 by  27) XO=14  YO=26
+LOADED         JSMITH15 ( 25 by  29) XO=12  YO=27
+LOADED         JSMITH16 ( 30 by  28) XO=26  YO=18
+LOADED          CASSEL0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [CASSEL0].          CASSEL1 ( 24 by  33) XO=12  YO=31
+LOADED          CASSEL2 ( 27 by  33) XO=11  YO=29
+LOADED          CASSEL3 ( 31 by  33) XO=7  YO=28
+LOADED          CASSEL4 ( 23 by  33) XO=7  YO=29
+LOADED          CASSEL5 ( 24 by  34) XO=11  YO=31
+LOADED          CASSEL6 ( 30 by  29) XO=22  YO=26
+LOADED          CASSEL7 ( 25 by  32) XO=3  YO=26
+LOADED          CASSEL8 ( 30 by  34) XO=1  YO=24
+LOADED          CASSEL9 ( 26 by  33) XO=4  YO=25
+LOADED         CASSEL10 ( 25 by  33) XO=11  YO=28
+LOADED         CASSEL11 ( 23 by  24) XO=11  YO=16
+LOADED         CASSEL12 ( 30 by  27) XO=16  YO=27
+LOADED         CASSEL13 ( 35 by  30) XO=23  YO=27
+LOADED         CASSEL14 ( 26 by  27) XO=14  YO=26
+LOADED         CASSEL15 ( 25 by  32) XO=13  YO=29
+LOADED         CASSEL16 ( 33 by  31) XO=29  YO=22
+LOADED          DDAVIS0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [DDAVIS0].          DDAVIS1 ( 24 by  30) XO=11  YO=27
+LOADED          DDAVIS2 ( 25 by  31) XO=11  YO=27
+LOADED          DDAVIS3 ( 28 by  31) XO=8  YO=27
+LOADED          DDAVIS4 ( 23 by  32) XO=7  YO=28
+LOADED          DDAVIS5 ( 22 by  32) XO=11  YO=30
+LOADED          DDAVIS6 ( 28 by  28) XO=21  YO=25
+LOADED          DDAVIS7 ( 27 by  32) XO=4  YO=25
+LOADED          DDAVIS8 ( 29 by  33) XO=3  YO=23
+LOADED          DDAVIS9 ( 26 by  33) XO=5  YO=25
+LOADED         DDAVIS10 ( 23 by  33) XO=11  YO=28
+LOADED         DDAVIS11 ( 22 by  24) XO=11  YO=16
+LOADED         DDAVIS12 ( 32 by  27) XO=17  YO=27
+LOADED         DDAVIS13 ( 33 by  29) XO=21  YO=26
+LOADED         DDAVIS14 ( 27 by  28) XO=15  YO=27
+LOADED         DDAVIS15 ( 24 by  30) XO=11  YO=28
+LOADED         DDAVIS16 ( 31 by  28) XO=27  YO=19
+LOADED           MCKEE0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MCKEE0].           MCKEE1 ( 23 by  31) XO=11  YO=29
+block cksum match w:24, h:32, dma2:6000 add:22649A8
+Checksum match on image [MCKEE1].           MCKEE2 ( 25 by  31) XO=11  YO=28
+block cksum match w:28, h:32, dma2:6000 add:2265BA8
+Checksum match on image [MCKEE2].           MCKEE3 ( 28 by  31) XO=8  YO=28
+block cksum match w:32, h:32, dma2:6000 add:22670A8
+Checksum match on image [MCKEE3].           MCKEE4 ( 23 by  32) XO=7  YO=28
+block cksum match w:24, h:33, dma2:6000 add:22688A8
+Checksum match on image [MCKEE4].           MCKEE5 ( 23 by  34) XO=12  YO=31
+block cksum match w:24, h:35, dma2:6000 add:2269B38
+Checksum match on image [MCKEE5].           MCKEE6 ( 29 by  29) XO=21  YO=26
+block cksum match w:32, h:30, dma2:6000 add:226AEE8
+Checksum match on image [MCKEE6].           MCKEE7 ( 30 by  32) XO=5  YO=26
+LOADED           MCKEE8 ( 31 by  34) XO=2  YO=26
+block cksum match w:32, h:35, dma2:6000 add:226DB10
+Checksum match on image [MCKEE8].           MCKEE9 ( 25 by  34) XO=4  YO=26
+LOADED          MCKEE10 ( 22 by  34) XO=10  YO=29
+LOADED          MCKEE11 ( 23 by  24) XO=11  YO=17
+block cksum match w:24, h:25, dma2:6000 add:2271EC0
+Checksum match on image [MCKEE11].          MCKEE12 ( 32 by  31) XO=18  YO=28
+LOADED          MCKEE13 ( 33 by  29) XO=22  YO=25
+block cksum match w:36, h:30, dma2:6000 add:2274470
+Checksum match on image [MCKEE13].          MCKEE14 ( 27 by  31) XO=16  YO=28
+LOADED          MCKEE15 ( 24 by  30) XO=11  YO=28
+LOADED          MCKEE16 ( 31 by  28) XO=27  YO=19
+block cksum match w:32, h:29, dma2:6000 add:2278520
+Checksum match on image [MCKEE16].          VAUGHT0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [VAUGHT0].          VAUGHT1 ( 23 by  32) XO=11  YO=29
+LOADED          VAUGHT2 ( 25 by  33) XO=11  YO=27
+LOADED          VAUGHT3 ( 29 by  32) XO=6  YO=27
+LOADED          VAUGHT4 ( 23 by  34) XO=7  YO=29
+LOADED          VAUGHT5 ( 23 by  34) XO=11  YO=31
+LOADED          VAUGHT6 ( 30 by  29) XO=22  YO=26
+LOADED          VAUGHT7 ( 30 by  32) XO=5  YO=27
+LOADED          VAUGHT8 ( 31 by  33) XO=2  YO=23
+LOADED          VAUGHT9 ( 25 by  34) XO=4  YO=26
+LOADED         VAUGHT10 ( 22 by  35) XO=10  YO=30
+LOADED         VAUGHT11 ( 23 by  24) XO=11  YO=16
+LOADED         VAUGHT12 ( 32 by  31) XO=18  YO=29
+LOADED         VAUGHT13 ( 34 by  30) XO=20  YO=27
+LOADED         VAUGHT14 ( 27 by  31) XO=15  YO=28
+LOADED         VAUGHT15 ( 24 by  30) XO=12  YO=28
+LOADED         VAUGHT16 ( 32 by  29) XO=27  YO=20
+LOADED          RROGER0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [RROGER0].          RROGER1 ( 23 by  30) XO=11  YO=28
+LOADED          RROGER2 ( 24 by  31) XO=11  YO=27
+LOADED          RROGER3 ( 28 by  33) XO=9  YO=28
+LOADED          RROGER4 ( 21 by  32) XO=6  YO=28
+LOADED          RROGER5 ( 23 by  34) XO=11  YO=29
+LOADED          RROGER6 ( 28 by  27) XO=21  YO=24
+LOADED          RROGER7 ( 30 by  32) XO=5  YO=26
+LOADED          RROGER8 ( 29 by  32) XO=2  YO=22
+LOADED          RROGER9 ( 25 by  34) XO=5  YO=27
+LOADED         RROGER10 ( 22 by  34) XO=10  YO=28
+LOADED         RROGER11 ( 21 by  23) XO=10  YO=16
+LOADED         RROGER12 ( 32 by  31) XO=17  YO=28
+LOADED         RROGER13 ( 32 by  29) XO=22  YO=26
+LOADED         RROGER14 ( 27 by  31) XO=16  YO=28
+LOADED         RROGER15 ( 24 by  30) XO=11  YO=27
+LOADED         RROGER16 ( 32 by  27) XO=28  YO=20
+LOADED
+Opening img lib [C:\hds18.img]          LMURRA0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [LMURRA0].          LMURRA1 ( 23 by  30) XO=11  YO=28
+LOADED          LMURRA2 ( 24 by  31) XO=11  YO=27
+LOADED          LMURRA3 ( 25 by  31) XO=6  YO=28
+LOADED          LMURRA4 ( 21 by  33) XO=6  YO=29
+LOADED          LMURRA5 ( 22 by  33) XO=11  YO=29
+LOADED          LMURRA6 ( 28 by  27) XO=20  YO=24
+LOADED          LMURRA7 ( 30 by  32) XO=5  YO=26
+LOADED          LMURRA8 ( 29 by  30) XO=1  YO=20
+LOADED          LMURRA9 ( 24 by  34) XO=3  YO=27
+LOADED         LMURRA10 ( 22 by  33) XO=10  YO=29
+LOADED         LMURRA11 ( 21 by  22) XO=10  YO=15
+LOADED         LMURRA12 ( 30 by  30) XO=16  YO=27
+LOADED         LMURRA13 ( 30 by  29) XO=20  YO=27
+LOADED         LMURRA14 ( 26 by  31) XO=15  YO=28
+LOADED         LMURRA15 ( 23 by  30) XO=11  YO=28
+LOADED         LMURRA16 ( 31 by  25) XO=28  YO=18
+LOADED          PRICHA0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [PRICHA0].          PRICHA1 ( 24 by  32) XO=11  YO=30
+LOADED          PRICHA2 ( 25 by  33) XO=12  YO=30
+LOADED          PRICHA3 ( 29 by  33) XO=7  YO=29
+LOADED          PRICHA4 ( 24 by  34) XO=8  YO=30
+LOADED          PRICHA5 ( 24 by  35) XO=11  YO=30
+LOADED          PRICHA6 ( 29 by  28) XO=22  YO=25
+LOADED          PRICHA7 ( 30 by  32) XO=5  YO=26
+LOADED          PRICHA8 ( 30 by  33) XO=2  YO=23
+LOADED          PRICHA9 ( 25 by  34) XO=4  YO=26
+LOADED         PRICHA10 ( 22 by  33) XO=10  YO=29
+LOADED         PRICHA11 ( 22 by  26) XO=10  YO=18
+LOADED         PRICHA12 ( 32 by  31) XO=18  YO=29
+LOADED         PRICHA13 ( 33 by  29) XO=22  YO=26
+LOADED         PRICHA14 ( 27 by  31) XO=16  YO=29
+LOADED         PRICHA15 ( 24 by  30) XO=11  YO=28
+LOADED         PRICHA16 ( 33 by  29) XO=29  YO=20
+LOADED          BBARRY0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [BBARRY0].          BBARRY1 ( 24 by  34) XO=11  YO=32
+LOADED          BBARRY2 ( 27 by  34) XO=13  YO=29
+LOADED          BBARRY3 ( 28 by  35) XO=9  YO=30
+LOADED          BBARRY4 ( 26 by  36) XO=10  YO=32
+LOADED          BBARRY5 ( 26 by  36) XO=13  YO=32
+LOADED          BBARRY6 ( 32 by  32) XO=24  YO=28
+LOADED          BBARRY7 ( 28 by  34) XO=3  YO=28
+LOADED          BBARRY8 ( 34 by  35) XO=1  YO=25
+LOADED          BBARRY9 ( 30 by  34) XO=6  YO=27
+LOADED         BBARRY10 ( 24 by  34) XO=11  YO=30
+LOADED         BBARRY11 ( 23 by  27) XO=11  YO=17
+LOADED         BBARRY12 ( 35 by  32) XO=18  YO=30
+LOADED         BBARRY13 ( 34 by  35) XO=24  YO=32
+LOADED         BBARRY14 ( 27 by  30) XO=14  YO=28
+LOADED         BBARRY15 ( 28 by  31) XO=13  YO=28
+LOADED         BBARRY16 ( 35 by  28) XO=31  YO=19
+LOADED            EXEL0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [EXEL0].            EXEL1 ( 24 by  29) XO=11  YO=27
+LOADED            EXEL2 ( 23 by  31) XO=12  YO=27
+LOADED            EXEL3 ( 27 by  31) XO=7  YO=28
+LOADED            EXEL4 ( 24 by  32) XO=7  YO=28
+LOADED            EXEL5 ( 23 by  32) XO=11  YO=30
+LOADED            EXEL6 ( 27 by  27) XO=19  YO=24
+LOADED            EXEL7 ( 25 by  32) XO=3  YO=26
+LOADED            EXEL8 ( 29 by  32) XO=1  YO=21
+LOADED            EXEL9 ( 26 by  33) XO=5  YO=25
+LOADED           EXEL10 ( 24 by  32) XO=11  YO=27
+LOADED           EXEL11 ( 22 by  24) XO=10  YO=16
+LOADED           EXEL12 ( 30 by  27) XO=15  YO=26
+LOADED           EXEL13 ( 33 by  29) XO=21  YO=27
+LOADED           EXEL14 ( 26 by  27) XO=15  YO=26
+LOADED           EXEL15 ( 25 by  31) XO=12  YO=28
+LOADED           EXEL16 ( 31 by  27) XO=28  YO=20
+LOADED          CEBALL0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [CEBALL0].          CEBALL1 ( 22 by  31) XO=10  YO=29
+LOADED          CEBALL2 ( 25 by  31) XO=12  YO=28
+LOADED          CEBALL3 ( 30 by  31) XO=9  YO=28
+LOADED          CEBALL4 ( 24 by  32) XO=8  YO=28
+LOADED          CEBALL5 ( 23 by  33) XO=11  YO=31
+LOADED          CEBALL6 ( 29 by  28) XO=22  YO=25
+LOADED          CEBALL7 ( 30 by  32) XO=5  YO=26
+LOADED          CEBALL8 ( 29 by  34) XO=2  YO=24
+LOADED          CEBALL9 ( 25 by  34) XO=4  YO=26
+LOADED         CEBALL10 ( 22 by  35) XO=10  YO=30
+LOADED         CEBALL11 ( 23 by  24) XO=11  YO=16
+LOADED         CEBALL12 ( 32 by  31) XO=17  YO=28
+LOADED         CEBALL13 ( 34 by  29) XO=22  YO=26
+LOADED         CEBALL14 ( 27 by  31) XO=15  YO=27
+LOADED         CEBALL15 ( 24 by  30) XO=12  YO=27
+LOADED         CEBALL16 ( 31 by  30) XO=27  YO=19
+LOADED          EJONES0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [EJONES0].          EJONES1 ( 22 by  32) XO=11  YO=30
+LOADED          EJONES2 ( 25 by  31) XO=12  YO=28
+LOADED          EJONES3 ( 28 by  33) XO=8  YO=29
+LOADED          EJONES4 ( 24 by  34) XO=7  YO=30
+LOADED          EJONES5 ( 23 by  35) XO=11  YO=31
+LOADED          EJONES6 ( 30 by  30) XO=22  YO=26
+LOADED          EJONES7 ( 30 by  32) XO=5  YO=27
+LOADED          EJONES8 ( 30 by  33) XO=1  YO=23
+LOADED          EJONES9 ( 25 by  34) XO=4  YO=27
+LOADED         EJONES10 ( 22 by  33) XO=10  YO=28
+LOADED         EJONES11 ( 23 by  24) XO=11  YO=16
+LOADED         EJONES12 ( 32 by  31) XO=18  YO=28
+LOADED         EJONES13 ( 34 by  31) XO=24  YO=28
+LOADED         EJONES14 ( 27 by  31) XO=16  YO=28
+LOADED         EJONES15 ( 24 by  30) XO=12  YO=28
+LOADED         EJONES16 ( 33 by  28) XO=30  YO=19
+LOADED          BOWENS0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [BOWENS0].          BOWENS1 ( 25 by  32) XO=12  YO=30
+LOADED          BOWENS2 ( 25 by  34) XO=12  YO=29
+LOADED          BOWENS3 ( 28 by  33) XO=7  YO=29
+LOADED          BOWENS4 ( 23 by  34) XO=7  YO=30
+LOADED          BOWENS5 ( 24 by  33) XO=11  YO=29
+LOADED          BOWENS6 ( 31 by  30) XO=22  YO=26
+LOADED          BOWENS7 ( 30 by  32) XO=5  YO=27
+LOADED          BOWENS8 ( 31 by  33) XO=2  YO=22
+LOADED          BOWENS9 ( 25 by  34) XO=4  YO=27
+LOADED         BOWENS10 ( 22 by  35) XO=10  YO=29
+LOADED         BOWENS11 ( 23 by  23) XO=11  YO=15
+LOADED         BOWENS12 ( 32 by  31) XO=18  YO=29
+LOADED         BOWENS13 ( 34 by  31) XO=21  YO=28
+LOADED         BOWENS14 ( 27 by  31) XO=16  YO=28
+LOADED         BOWENS15 ( 24 by  30) XO=12  YO=27
+LOADED         BOWENS16 ( 33 by  28) XO=30  YO=20
+LOADED
+Opening img lib [C:\hds19.img]          GROBIN0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [GROBIN0].          GROBIN1 ( 25 by  29) XO=11  YO=26
+LOADED          GROBIN2 ( 24 by  32) XO=12  YO=27
+LOADED          GROBIN3 ( 30 by  32) XO=9  YO=29
+LOADED          GROBIN4 ( 24 by  35) XO=8  YO=30
+LOADED          GROBIN5 ( 24 by  35) XO=11  YO=29
+LOADED          GROBIN6 ( 28 by  27) XO=20  YO=24
+LOADED          GROBIN7 ( 25 by  32) XO=3  YO=26
+LOADED          GROBIN8 ( 30 by  34) XO=3  YO=22
+LOADED          GROBIN9 ( 26 by  33) XO=4  YO=26
+LOADED         GROBIN10 ( 24 by  33) XO=11  YO=25
+LOADED         GROBIN11 ( 22 by  24) XO=10  YO=14
+LOADED         GROBIN12 ( 30 by  27) XO=16  YO=27
+LOADED         GROBIN13 ( 35 by  30) XO=24  YO=26
+LOADED         GROBIN14 ( 26 by  27) XO=14  YO=27
+LOADED         GROBIN15 ( 25 by  32) XO=11  YO=29
+LOADED         GROBIN16 ( 32 by  30) XO=32  YO=17
+LOADED           EMURD0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [EMURD0].           EMURD1 ( 25 by  35) XO=12  YO=32
+LOADED           EMURD2 ( 26 by  34) XO=11  YO=31
+LOADED           EMURD3 ( 31 by  35) XO=10  YO=32
+LOADED           EMURD4 ( 25 by  35) XO=7  YO=31
+LOADED           EMURD5 ( 24 by  35) XO=11  YO=33
+LOADED           EMURD6 ( 31 by  31) XO=23  YO=28
+LOADED           EMURD7 ( 30 by  32) XO=4  YO=26
+LOADED           EMURD8 ( 34 by  36) XO=6  YO=26
+LOADED           EMURD9 ( 26 by  34) XO=4  YO=27
+LOADED          EMURD10 ( 22 by  33) XO=10  YO=28
+LOADED          EMURD11 ( 25 by  25) XO=12  YO=15
+LOADED          EMURD12 ( 32 by  31) XO=17  YO=28
+LOADED          EMURD13 ( 36 by  34) XO=25  YO=29
+LOADED          EMURD14 ( 27 by  31) XO=16  YO=28
+LOADED          EMURD15 ( 24 by  30) XO=13  YO=28
+LOADED          EMURD16 ( 35 by  31) XO=33  YO=21
+LOADED          RESPER0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [RESPER0].          RESPER1 ( 25 by  29) XO=12  YO=27
+LOADED          RESPER2 ( 24 by  31) XO=12  YO=27
+LOADED          RESPER3 ( 29 by  33) XO=7  YO=30
+LOADED          RESPER4 ( 25 by  34) XO=8  YO=29
+LOADED          RESPER5 ( 24 by  34) XO=11  YO=30
+LOADED          RESPER6 ( 28 by  28) XO=20  YO=25
+LOADED          RESPER7 ( 25 by  32) XO=3  YO=26
+LOADED          RESPER8 ( 33 by  34) XO=3  YO=24
+LOADED          RESPER9 ( 26 by  33) XO=5  YO=25
+LOADED         RESPER10 ( 25 by  33) XO=12  YO=28
+LOADED         RESPER11 ( 23 by  25) XO=11  YO=17
+LOADED         RESPER12 ( 30 by  27) XO=16  YO=27
+LOADED         RESPER13 ( 34 by  33) XO=23  YO=29
+LOADED         RESPER14 ( 26 by  27) XO=14  YO=26
+LOADED         RESPER15 ( 25 by  32) XO=11  YO=29
+LOADED         RESPER16 ( 34 by  29) XO=30  YO=21
+LOADED
+Opening img lib [C:\hds20.img]          GARNET0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [GARNET0].          GARNET1 ( 27 by  34) XO=13  YO=31
+LOADED          GARNET2 ( 27 by  34) XO=13  YO=31
+LOADED          GARNET3 ( 31 by  35) XO=9  YO=33
+LOADED          GARNET4 ( 26 by  36) XO=10  YO=32
+LOADED          GARNET5 ( 27 by  37) XO=13  YO=35
+LOADED          GARNET6 ( 31 by  30) XO=23  YO=27
+LOADED          GARNET7 ( 29 by  34) XO=6  YO=27
+LOADED          GARNET8 ( 33 by  38) XO=5  YO=27
+LOADED          GARNET9 ( 28 by  35) XO=6  YO=27
+LOADED         GARNET10 ( 23 by  33) XO=10  YO=29
+LOADED         GARNET11 ( 27 by  29) XO=13  YO=18
+LOADED         GARNET12 ( 34 by  29) XO=17  YO=27
+LOADED         GARNET13 ( 38 by  33) XO=25  YO=29
+LOADED         GARNET14 ( 27 by  30) XO=15  YO=28
+LOADED         GARNET15 ( 24 by  30) XO=12  YO=28
+LOADED         GARNET16 ( 35 by  31) XO=31  YO=20
+LOADED          GILLIA0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [GILLIA0].          GILLIA1 ( 24 by  32) XO=11  YO=30
+LOADED          GILLIA2 ( 25 by  34) XO=12  YO=30
+LOADED          GILLIA3 ( 28 by  35) XO=8  YO=32
+LOADED          GILLIA4 ( 26 by  35) XO=9  YO=31
+LOADED          GILLIA5 ( 25 by  36) XO=12  YO=34
+LOADED          GILLIA6 ( 29 by  29) XO=22  YO=26
+LOADED          GILLIA7 ( 30 by  32) XO=5  YO=26
+LOADED          GILLIA8 ( 34 by  34) XO=4  YO=25
+LOADED          GILLIA9 ( 25 by  34) XO=4  YO=27
+LOADED         GILLIA10 ( 22 by  35) XO=10  YO=30
+LOADED         GILLIA11 ( 22 by  27) XO=10  YO=19
+LOADED         GILLIA12 ( 32 by  31) XO=18  YO=29
+LOADED         GILLIA13 ( 34 by  34) XO=23  YO=30
+LOADED         GILLIA14 ( 27 by  31) XO=15  YO=28
+LOADED         GILLIA15 ( 24 by  30) XO=12  YO=27
+LOADED         GILLIA16 ( 35 by  28) XO=33  YO=20
+LOADED           OBANN0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [OBANN0].           OBANN1 ( 26 by  31) XO=12  YO=29
+LOADED           OBANN2 ( 25 by  33) XO=12  YO=30
+LOADED           OBANN3 ( 28 by  33) XO=7  YO=30
+LOADED           OBANN4 ( 26 by  33) XO=8  YO=29
+LOADED           OBANN5 ( 23 by  34) XO=11  YO=32
+LOADED           OBANN6 ( 29 by  29) XO=21  YO=26
+LOADED           OBANN7 ( 25 by  32) XO=3  YO=25
+LOADED           OBANN8 ( 31 by  34) XO=4  YO=24
+LOADED           OBANN9 ( 26 by  33) XO=4  YO=25
+LOADED          OBANN10 ( 25 by  31) XO=11  YO=27
+LOADED          OBANN11 ( 24 by  27) XO=12  YO=20
+LOADED          OBANN12 ( 30 by  27) XO=15  YO=26
+LOADED          OBANN13 ( 34 by  30) XO=21  YO=27
+LOADED          OBANN14 ( 26 by  27) XO=15  YO=27
+LOADED          OBANN15 ( 25 by  32) XO=13  YO=29
+LOADED          OBANN16 ( 33 by  28) XO=31  YO=19
+LOADED          DSCOTT0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [DSCOTT0].          DSCOTT1 ( 24 by  30) XO=11  YO=28
+LOADED          DSCOTT2 ( 24 by  32) XO=11  YO=29
+LOADED          DSCOTT3 ( 28 by  32) XO=9  YO=30
+LOADED          DSCOTT4 ( 24 by  33) XO=8  YO=29
+LOADED          DSCOTT5 ( 25 by  33) XO=12  YO=31
+LOADED          DSCOTT6 ( 29 by  29) XO=21  YO=25
+LOADED          DSCOTT7 ( 25 by  32) XO=3  YO=26
+LOADED          DSCOTT8 ( 30 by  34) XO=3  YO=24
+LOADED          DSCOTT9 ( 26 by  33) XO=4  YO=25
+LOADED         DSCOTT10 ( 25 by  32) XO=12  YO=28
+LOADED         DSCOTT11 ( 24 by  27) XO=11  YO=17
+LOADED         DSCOTT12 ( 30 by  27) XO=15  YO=26
+LOADED         DSCOTT13 ( 34 by  30) XO=21  YO=26
+LOADED         DSCOTT14 ( 26 by  27) XO=14  YO=26
+LOADED         DSCOTT15 ( 25 by  32) XO=12  YO=28
+LOADED         DSCOTT16 ( 32 by  28) XO=30  YO=18
+LOADED          WRIGHT0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [WRIGHT0].          WRIGHT1 ( 26 by  32) XO=12  YO=30
+LOADED          WRIGHT2 ( 25 by  32) XO=12  YO=29
+LOADED          WRIGHT3 ( 28 by  33) XO=6  YO=30
+LOADED          WRIGHT4 ( 23 by  33) XO=7  YO=29
+LOADED          WRIGHT5 ( 23 by  33) XO=11  YO=31
+LOADED          WRIGHT6 ( 30 by  30) XO=21  YO=27
+LOADED          WRIGHT7 ( 25 by  32) XO=3  YO=25
+LOADED          WRIGHT8 ( 32 by  33) XO=5  YO=24
+LOADED          WRIGHT9 ( 26 by  33) XO=4  YO=26
+LOADED         WRIGHT10 ( 25 by  31) XO=11  YO=26
+LOADED         WRIGHT11 ( 24 by  26) XO=11  YO=16
+LOADED         WRIGHT12 ( 30 by  27) XO=15  YO=26
+LOADED         WRIGHT13 ( 33 by  31) XO=20  YO=28
+LOADED         WRIGHT14 ( 26 by  27) XO=15  YO=26
+LOADED         WRIGHT15 ( 25 by  32) XO=13  YO=29
+LOADED         WRIGHT16 ( 33 by  28) XO=31  YO=21
+LOADED
+Opening img lib [C:\hds21.img]           STACK0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [STACK0].           STACK1 ( 26 by  31) XO=12  YO=29
+LOADED           STACK2 ( 25 by  32) XO=12  YO=29
+LOADED           STACK3 ( 30 by  31) XO=10  YO=29
+LOADED           STACK4 ( 26 by  31) XO=9  YO=28
+LOADED           STACK5 ( 24 by  32) XO=11  YO=30
+LOADED           STACK6 ( 30 by  30) XO=20  YO=26
+LOADED           STACK7 ( 25 by  32) XO=3  YO=26
+LOADED           STACK8 ( 30 by  36) XO=4  YO=27
+LOADED           STACK9 ( 26 by  33) XO=5  YO=25
+LOADED          STACK10 ( 25 by  33) XO=11  YO=27
+LOADED          STACK11 ( 24 by  27) XO=11  YO=17
+LOADED          STACK12 ( 30 by  27) XO=15  YO=26
+LOADED          STACK13 ( 36 by  30) XO=22  YO=27
+LOADED          STACK14 ( 26 by  27) XO=14  YO=26
+LOADED          STACK15 ( 25 by  32) XO=11  YO=30
+LOADED          STACK16 ( 31 by  30) XO=29  YO=21
+LOADED           WPERS0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [WPERS0].           WPERS1 ( 24 by  30) XO=11  YO=28
+LOADED           WPERS2 ( 24 by  32) XO=12  YO=29
+LOADED           WPERS3 ( 28 by  33) XO=10  YO=31
+LOADED           WPERS4 ( 25 by  34) XO=9  YO=30
+LOADED           WPERS5 ( 25 by  34) XO=12  YO=32
+LOADED           WPERS6 ( 29 by  28) XO=21  YO=25
+LOADED           WPERS7 ( 30 by  32) XO=5  YO=26
+LOADED           WPERS8 ( 32 by  34) XO=5  YO=24
+LOADED           WPERS9 ( 25 by  35) XO=5  YO=27
+LOADED          WPERS10 ( 22 by  36) XO=10  YO=31
+LOADED          WPERS11 ( 23 by  25) XO=11  YO=16
+LOADED          WPERS12 ( 33 by  31) XO=18  YO=29
+LOADED          WPERS13 ( 34 by  32) XO=20  YO=28
+LOADED          WPERS14 ( 27 by  31) XO=16  YO=28
+LOADED          WPERS15 ( 24 by  29) XO=12  YO=26
+LOADED          WPERS16 ( 33 by  28) XO=31  YO=17
+LOADED          FINLEY0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [FINLEY0].          FINLEY1 ( 24 by  30) XO=11  YO=28
+LOADED          FINLEY2 ( 24 by  33) XO=12  YO=30
+LOADED          FINLEY3 ( 28 by  33) XO=9  YO=32
+LOADED          FINLEY4 ( 25 by  33) XO=8  YO=29
+LOADED          FINLEY5 ( 25 by  35) XO=12  YO=32
+LOADED          FINLEY6 ( 29 by  28) XO=21  YO=25
+LOADED          FINLEY7 ( 30 by  32) XO=5  YO=26
+LOADED          FINLEY8 ( 32 by  36) XO=5  YO=25
+LOADED          FINLEY9 ( 25 by  35) XO=4  YO=27
+LOADED         FINLEY10 ( 22 by  36) XO=10  YO=31
+LOADED         FINLEY11 ( 24 by  27) XO=11  YO=18
+LOADED         FINLEY12 ( 33 by  31) XO=18  YO=29
+LOADED         FINLEY13 ( 36 by  32) XO=23  YO=28
+LOADED         FINLEY14 ( 27 by  31) XO=16  YO=29
+LOADED         FINLEY15 ( 24 by  29) XO=12  YO=27
+LOADED         FINLEY16 ( 33 by  28) XO=31  YO=18
+LOADED          STRICK0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [STRICK0].          STRICK1 ( 24 by  32) XO=11  YO=30
+LOADED          STRICK2 ( 25 by  34) XO=13  YO=31
+LOADED          STRICK3 ( 27 by  34) XO=8  YO=30
+LOADED          STRICK4 ( 25 by  34) XO=8  YO=30
+LOADED          STRICK5 ( 23 by  36) XO=11  YO=33
+LOADED          STRICK6 ( 29 by  29) XO=21  YO=26
+LOADED          STRICK7 ( 30 by  32) XO=4  YO=26
+LOADED          STRICK8 ( 33 by  35) XO=4  YO=27
+LOADED          STRICK9 ( 26 by  35) XO=5  YO=27
+LOADED         STRICK10 ( 22 by  36) XO=10  YO=31
+LOADED         STRICK11 ( 23 by  25) XO=11  YO=16
+LOADED         STRICK12 ( 32 by  31) XO=18  YO=29
+LOADED         STRICK13 ( 35 by  33) XO=23  YO=28
+LOADED         STRICK14 ( 27 by  31) XO=16  YO=28
+LOADED         STRICK15 ( 24 by  30) XO=11  YO=27
+LOADED         STRICK16 ( 36 by  27) XO=33  YO=19
+LOADED          SABONI0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [SABONI0].          SABONI1 ( 24 by  34) XO=11  YO=32
+LOADED          SABONI2 ( 28 by  35) XO=13  YO=32
+LOADED          SABONI3 ( 28 by  35) XO=9  YO=30
+LOADED          SABONI4 ( 24 by  36) XO=8  YO=31
+LOADED          SABONI5 ( 24 by  35) XO=11  YO=33
+LOADED          SABONI6 ( 33 by  32) XO=24  YO=29
+LOADED          SABONI7 ( 32 by  32) XO=4  YO=26
+LOADED          SABONI8 ( 36 by  35) XO=4  YO=26
+LOADED          SABONI9 ( 30 by  34) XO=8  YO=27
+LOADED         SABONI10 ( 24 by  35) XO=11  YO=30
+LOADED         SABONI11 ( 24 by  25) XO=11  YO=16
+LOADED         SABONI12 ( 32 by  32) XO=17  YO=29
+LOADED         SABONI13 ( 35 by  36) XO=23  YO=30
+LOADED         SABONI14 ( 29 by  34) XO=17  YO=31
+LOADED         SABONI15 ( 26 by  32) XO=12  YO=30
+LOADED         SABONI16 ( 35 by  28) XO=33  YO=19
+LOADED          BWILLI0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [BWILLI0].          BWILLI1 ( 24 by  32) XO=11  YO=30
+LOADED          BWILLI2 ( 25 by  34) XO=13  YO=30
+LOADED          BWILLI3 ( 29 by  36) XO=9  YO=32
+LOADED          BWILLI4 ( 26 by  37) XO=10  YO=32
+LOADED          BWILLI5 ( 26 by  37) XO=12  YO=35
+LOADED          BWILLI6 ( 29 by  30) XO=22  YO=26
+LOADED          BWILLI7 ( 29 by  33) XO=4  YO=26
+LOADED          BWILLI8 ( 35 by  36) XO=5  YO=28
+LOADED          BWILLI9 ( 25 by  35) XO=4  YO=28
+LOADED         BWILLI10 ( 22 by  35) XO=10  YO=30
+LOADED         BWILLI11 ( 23 by  25) XO=11  YO=15
+LOADED         BWILLI12 ( 32 by  31) XO=18  YO=28
+LOADED         BWILLI13 ( 36 by  35) XO=24  YO=31
+LOADED         BWILLI14 ( 26 by  31) XO=14  YO=28
+LOADED         BWILLI15 ( 24 by  30) XO=11  YO=27
+LOADED         BWILLI16 ( 36 by  29) XO=32  YO=21
+LOADED
+Opening img lib [C:\hds22.img]           CHILD0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [CHILD0].           CHILD1 ( 26 by  32) XO=12  YO=29
+LOADED           CHILD2 ( 26 by  33) XO=12  YO=30
+LOADED           CHILD3 ( 30 by  33) XO=7  YO=30
+LOADED           CHILD4 ( 24 by  34) XO=8  YO=30
+LOADED           CHILD5 ( 25 by  34) XO=11  YO=31
+LOADED           CHILD6 ( 29 by  29) XO=21  YO=25
+LOADED           CHILD7 ( 25 by  32) XO=3  YO=26
+LOADED           CHILD8 ( 33 by  37) XO=3  YO=25
+LOADED           CHILD9 ( 26 by  33) XO=4  YO=26
+LOADED          CHILD10 ( 25 by  33) XO=11  YO=28
+LOADED          CHILD11 ( 24 by  25) XO=11  YO=16
+LOADED          CHILD12 ( 30 by  28) XO=16  YO=27
+LOADED          CHILD13 ( 37 by  33) XO=25  YO=29
+LOADED          CHILD14 ( 26 by  28) XO=14  YO=27
+LOADED          CHILD15 ( 25 by  32) XO=12  YO=28
+LOADED          CHILD16 ( 33 by  30) XO=31  YO=21
+LOADED          WWILLI0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [WWILLI0].          WWILLI1 ( 25 by  31) XO=12  YO=28
+LOADED          WWILLI2 ( 25 by  32) XO=12  YO=28
+LOADED          WWILLI3 ( 30 by  33) XO=9  YO=29
+LOADED          WWILLI4 ( 25 by  35) XO=8  YO=31
+LOADED          WWILLI5 ( 26 by  36) XO=12  YO=33
+LOADED          WWILLI6 ( 28 by  29) XO=21  YO=26
+LOADED          WWILLI7 ( 27 by  32) XO=5  YO=26
+LOADED          WWILLI8 ( 32 by  36) XO=3  YO=26
+LOADED          WWILLI9 ( 26 by  33) XO=4  YO=25
+LOADED         WWILLI10 ( 23 by  33) XO=10  YO=29
+LOADED         WWILLI11 ( 24 by  27) XO=11  YO=18
+LOADED         WWILLI12 ( 32 by  27) XO=16  YO=26
+LOADED         WWILLI13 ( 36 by  32) XO=24  YO=28
+LOADED         WWILLI14 ( 27 by  28) XO=15  YO=27
+LOADED         WWILLI15 ( 24 by  29) XO=12  YO=27
+LOADED         WWILLI16 ( 33 by  30) XO=30  YO=21
+LOADED          BGRANT0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [BGRANT0].          BGRANT1 ( 26 by  30) XO=12  YO=28
+LOADED          BGRANT2 ( 25 by  33) XO=12  YO=30
+LOADED          BGRANT3 ( 30 by  33) XO=9  YO=29
+LOADED          BGRANT4 ( 26 by  34) XO=9  YO=30
+LOADED          BGRANT5 ( 27 by  35) XO=13  YO=33
+LOADED          BGRANT6 ( 31 by  30) XO=22  YO=26
+LOADED          BGRANT7 ( 30 by  32) XO=5  YO=26
+LOADED          BGRANT8 ( 34 by  35) XO=4  YO=26
+LOADED          BGRANT9 ( 25 by  34) XO=4  YO=27
+LOADED         BGRANT10 ( 22 by  34) XO=10  YO=29
+LOADED         BGRANT11 ( 23 by  23) XO=11  YO=13
+LOADED         BGRANT12 ( 32 by  31) XO=18  YO=29
+LOADED         BGRANT13 ( 35 by  32) XO=23  YO=28
+LOADED         BGRANT14 ( 27 by  31) XO=15  YO=29
+LOADED         BGRANT15 ( 24 by  30) XO=12  YO=28
+LOADED         BGRANT16 ( 35 by  30) XO=32  YO=21
+LOADED          MARCIU0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MARCIU0].          MARCIU1 ( 22 by  33) XO=10  YO=31
+LOADED          MARCIU2 ( 28 by  33) XO=13  YO=30
+LOADED          MARCIU3 ( 29 by  34) XO=9  YO=29
+LOADED          MARCIU4 ( 24 by  34) XO=8  YO=30
+LOADED          MARCIU5 ( 23 by  34) XO=11  YO=31
+LOADED          MARCIU6 ( 33 by  32) XO=23  YO=28
+LOADED          MARCIU7 ( 32 by  32) XO=5  YO=27
+LOADED          MARCIU8 ( 36 by  34) XO=5  YO=25
+LOADED          MARCIU9 ( 29 by  34) XO=8  YO=27
+LOADED         MARCIU10 ( 24 by  35) XO=11  YO=30
+LOADED         MARCIU11 ( 23 by  24) XO=11  YO=15
+LOADED         MARCIU12 ( 32 by  32) XO=17  YO=29
+LOADED         MARCIU13 ( 34 by  36) XO=22  YO=31
+LOADED         MARCIU14 ( 29 by  34) XO=16  YO=30
+LOADED         MARCIU15 ( 26 by  32) XO=11  YO=29
+LOADED         MARCIU16 ( 34 by  29) XO=31  YO=20
+LOADED           AJOHN0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [AJOHN0].           AJOHN1 ( 25 by  32) XO=12  YO=30
+LOADED           AJOHN2 ( 25 by  33) XO=12  YO=30
+LOADED           AJOHN3 ( 28 by  34) XO=7  YO=29
+LOADED           AJOHN4 ( 26 by  35) XO=8  YO=31
+LOADED           AJOHN5 ( 25 by  35) XO=12  YO=32
+LOADED           AJOHN6 ( 31 by  30) XO=21  YO=26
+LOADED           AJOHN7 ( 25 by  32) XO=3  YO=25
+LOADED           AJOHN8 ( 32 by  36) XO=2  YO=26
+LOADED           AJOHN9 ( 26 by  33) XO=4  YO=26
+LOADED          AJOHN10 ( 25 by  32) XO=11  YO=28
+LOADED          AJOHN11 ( 25 by  24) XO=12  YO=15
+LOADED          AJOHN12 ( 30 by  27) XO=15  YO=26
+LOADED          AJOHN13 ( 36 by  32) XO=22  YO=28
+LOADED          AJOHN14 ( 26 by  28) XO=14  YO=27
+LOADED          AJOHN15 ( 25 by  32) XO=12  YO=28
+LOADED          AJOHN16 ( 34 by  28) XO=31  YO=19
+LOADED
+Opening img lib [C:\hds23.img]            FORD0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [FORD0].            FORD1 ( 26 by  34) XO=12  YO=31
+LOADED            FORD2 ( 25 by  34) XO=11  YO=29
+LOADED            FORD3 ( 26 by  34) XO=7  YO=29
+LOADED            FORD4 ( 27 by  34) XO=8  YO=30
+LOADED            FORD5 ( 25 by  35) XO=12  YO=32
+LOADED            FORD6 ( 31 by  31) XO=21  YO=27
+LOADED            FORD7 ( 25 by  32) XO=3  YO=25
+LOADED            FORD8 ( 30 by  33) XO=2  YO=24
+LOADED            FORD9 ( 26 by  33) XO=4  YO=25
+LOADED           FORD10 ( 25 by  32) XO=11  YO=28
+LOADED           FORD11 ( 24 by  26) XO=11  YO=16
+LOADED           FORD12 ( 30 by  27) XO=15  YO=26
+LOADED           FORD13 ( 33 by  30) XO=21  YO=26
+LOADED           FORD14 ( 26 by  27) XO=14  YO=27
+LOADED           FORD15 ( 25 by  32) XO=12  YO=30
+LOADED           FORD16 ( 34 by  26) XO=32  YO=17
+LOADED          CROGER0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [CROGER0].          CROGER1 ( 25 by  32) XO=12  YO=30
+LOADED          CROGER2 ( 25 by  33) XO=13  YO=29
+LOADED          CROGER3 ( 27 by  34) XO=7  YO=30
+LOADED          CROGER4 ( 25 by  36) XO=8  YO=32
+LOADED          CROGER5 ( 24 by  36) XO=11  YO=33
+LOADED          CROGER6 ( 29 by  29) XO=20  YO=25
+LOADED          CROGER7 ( 30 by  32) XO=5  YO=26
+LOADED          CROGER8 ( 29 by  33) XO=2  YO=23
+LOADED          CROGER9 ( 25 by  35) XO=4  YO=27
+LOADED         CROGER10 ( 22 by  36) XO=10  YO=31
+LOADED         CROGER11 ( 23 by  26) XO=11  YO=16
+LOADED         CROGER12 ( 33 by  31) XO=18  YO=28
+LOADED         CROGER13 ( 33 by  29) XO=21  YO=26
+LOADED         CROGER14 ( 27 by  31) XO=16  YO=28
+LOADED         CROGER15 ( 24 by  29) XO=12  YO=26
+LOADED         CROGER16 ( 34 by  27) XO=32  YO=18
+LOADED           STOUD0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [STOUD0].           STOUD1 ( 25 by  31) XO=12  YO=29
+LOADED           STOUD2 ( 26 by  33) XO=12  YO=29
+LOADED           STOUD3 ( 28 by  34) XO=9  YO=28
+LOADED           STOUD4 ( 25 by  35) XO=10  YO=30
+LOADED           STOUD5 ( 24 by  36) XO=11  YO=32
+LOADED           STOUD6 ( 28 by  28) XO=21  YO=25
+LOADED           STOUD7 ( 30 by  32) XO=5  YO=26
+LOADED           STOUD8 ( 31 by  32) XO=4  YO=24
+LOADED           STOUD9 ( 25 by  34) XO=4  YO=27
+LOADED          STOUD10 ( 22 by  34) XO=10  YO=30
+LOADED          STOUD11 ( 23 by  26) XO=11  YO=15
+LOADED          STOUD12 ( 32 by  31) XO=18  YO=29
+LOADED          STOUD13 ( 32 by  31) XO=22  YO=27
+LOADED          STOUD14 ( 27 by  31) XO=16  YO=28
+LOADED          STOUD15 ( 24 by  30) XO=12  YO=28
+LOADED          STOUD16 ( 34 by  28) XO=32  YO=20
+LOADED          ANTHON0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [ANTHON0].          ANTHON1 ( 26 by  31) XO=12  YO=29
+LOADED          ANTHON2 ( 25 by  33) XO=12  YO=30
+LOADED          ANTHON3 ( 28 by  32) XO=8  YO=29
+LOADED          ANTHON4 ( 26 by  33) XO=8  YO=29
+LOADED          ANTHON5 ( 25 by  34) XO=12  YO=32
+LOADED          ANTHON6 ( 30 by  29) XO=21  YO=26
+LOADED          ANTHON7 ( 25 by  32) XO=3  YO=26
+LOADED          ANTHON8 ( 31 by  35) XO=4  YO=24
+LOADED          ANTHON9 ( 26 by  33) XO=4  YO=26
+LOADED         ANTHON10 ( 25 by  32) XO=11  YO=28
+LOADED         ANTHON11 ( 24 by  26) XO=11  YO=15
+LOADED         ANTHON12 ( 30 by  27) XO=15  YO=26
+LOADED         ANTHON13 ( 35 by  31) XO=23  YO=27
+LOADED         ANTHON14 ( 26 by  27) XO=14  YO=26
+LOADED         ANTHON15 ( 25 by  32) XO=12  YO=29
+LOADED         ANTHON16 ( 32 by  28) XO=31  YO=19
+LOADED            JHOW0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [JHOW0].            JHOW1 ( 24 by  31) XO=11  YO=29
+LOADED            JHOW2 ( 24 by  32) XO=12  YO=29
+LOADED            JHOW3 ( 26 by  32) XO=7  YO=28
+LOADED            JHOW4 ( 24 by  32) XO=8  YO=28
+LOADED            JHOW5 ( 24 by  32) XO=11  YO=30
+LOADED            JHOW6 ( 28 by  29) XO=21  YO=25
+LOADED            JHOW7 ( 30 by  32) XO=5  YO=27
+LOADED            JHOW8 ( 31 by  32) XO=4  YO=23
+LOADED            JHOW9 ( 25 by  35) XO=4  YO=27
+LOADED           JHOW10 ( 22 by  36) XO=10  YO=30
+LOADED           JHOW11 ( 24 by  25) XO=11  YO=17
+LOADED           JHOW12 ( 33 by  31) XO=18  YO=29
+LOADED           JHOW13 ( 32 by  31) XO=21  YO=27
+LOADED           JHOW14 ( 27 by  31) XO=16  YO=29
+LOADED           JHOW15 ( 24 by  29) XO=11  YO=27
+LOADED           JHOW16 ( 32 by  26) XO=31  YO=17
+LOADED
+Opening img lib [C:\hds24.img]             FOX0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [FOX0].             FOX1 ( 24 by  31) XO=11  YO=28
+LOADED             FOX2 ( 29 by  33) XO=12  YO=28
+LOADED             FOX3 ( 30 by  33) XO=8  YO=28
+LOADED             FOX4 ( 25 by  34) XO=7  YO=28
+LOADED             FOX5 ( 26 by  34) XO=12  YO=30
+LOADED             FOX6 ( 28 by  28) XO=20  YO=26
+LOADED             FOX7 ( 30 by  32) XO=5  YO=27
+LOADED             FOX8 ( 31 by  34) XO=2  YO=23
+LOADED             FOX9 ( 25 by  34) XO=4  YO=27
+LOADED            FOX10 ( 22 by  34) XO=10  YO=29
+LOADED            FOX11 ( 24 by  24) XO=11  YO=14
+LOADED            FOX12 ( 32 by  31) XO=17  YO=28
+LOADED            FOX13 ( 34 by  31) XO=22  YO=28
+LOADED            FOX14 ( 27 by  32) XO=15  YO=29
+LOADED            FOX15 ( 24 by  30) XO=12  YO=28
+LOADED            FOX16 ( 32 by  28) XO=29  YO=20
+LOADED            LONG0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [LONG0].            LONG1 ( 24 by  34) XO=11  YO=32
+LOADED            LONG2 ( 28 by  35) XO=12  YO=30
+LOADED            LONG3 ( 30 by  35) XO=9  YO=30
+LOADED            LONG4 ( 27 by  34) XO=9  YO=29
+LOADED            LONG5 ( 26 by  37) XO=12  YO=33
+LOADED            LONG6 ( 31 by  31) XO=23  YO=27
+LOADED            LONG7 ( 32 by  32) XO=5  YO=27
+LOADED            LONG8 ( 37 by  35) XO=4  YO=26
+LOADED            LONG9 ( 29 by  34) XO=7  YO=26
+LOADED           LONG10 ( 24 by  34) XO=11  YO=30
+LOADED           LONG11 ( 24 by  26) XO=11  YO=17
+LOADED           LONG12 ( 32 by  32) XO=18  YO=29
+LOADED           LONG13 ( 35 by  36) XO=25  YO=32
+LOADED           LONG14 ( 29 by  34) XO=16  YO=30
+LOADED           LONG15 ( 26 by  32) XO=13  YO=30
+LOADED           LONG16 ( 36 by  30) XO=32  YO=21
+LOADED           BRAND0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [BRAND0].           BRAND1 ( 24 by  31) XO=11  YO=29
+LOADED           BRAND2 ( 26 by  32) XO=12  YO=28
+LOADED           BRAND3 ( 29 by  34) XO=7  YO=30
+LOADED           BRAND4 ( 24 by  34) XO=7  YO=30
+LOADED           BRAND5 ( 24 by  35) XO=12  YO=32
+LOADED           BRAND6 ( 30 by  30) XO=21  YO=27
+LOADED           BRAND7 ( 30 by  32) XO=5  YO=26
+LOADED           BRAND8 ( 30 by  34) XO=2  YO=25
+LOADED           BRAND9 ( 25 by  34) XO=4  YO=26
+LOADED          BRAND10 ( 22 by  34) XO=10  YO=29
+LOADED          BRAND11 ( 23 by  26) XO=12  YO=17
+LOADED          BRAND12 ( 32 by  31) XO=18  YO=29
+LOADED          BRAND13 ( 34 by  31) XO=23  YO=28
+LOADED          BRAND14 ( 28 by  31) XO=16  YO=28
+LOADED          BRAND15 ( 24 by  30) XO=11  YO=28
+LOADED          BRAND16 ( 34 by  29) XO=31  YO=21
+LOADED           FERRY0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [FERRY0].           FERRY1 ( 23 by  31) XO=11  YO=29
+LOADED           FERRY2 ( 27 by  32) XO=13  YO=28
+LOADED           FERRY3 ( 27 by  33) XO=7  YO=29
+LOADED           FERRY4 ( 23 by  33) XO=8  YO=29
+LOADED           FERRY5 ( 23 by  33) XO=11  YO=29
+LOADED           FERRY6 ( 28 by  28) XO=20  YO=26
+LOADED           FERRY7 ( 30 by  32) XO=5  YO=27
+LOADED           FERRY8 ( 30 by  32) XO=1  YO=24
+LOADED           FERRY9 ( 26 by  33) XO=5  YO=25
+LOADED          FERRY10 ( 22 by  34) XO=10  YO=29
+LOADED          FERRY11 ( 24 by  25) XO=11  YO=16
+LOADED          FERRY12 ( 32 by  31) XO=18  YO=28
+LOADED          FERRY13 ( 33 by  30) XO=24  YO=27
+LOADED          FERRY14 ( 27 by  31) XO=16  YO=29
+LOADED          FERRY15 ( 24 by  30) XO=11  YO=27
+LOADED          FERRY16 ( 33 by  26) XO=30  YO=19
+LOADED          MCCLOU0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MCCLOU0].          MCCLOU1 ( 24 by  29) XO=11  YO=27
+LOADED          MCCLOU2 ( 23 by  31) XO=12  YO=27
+LOADED          MCCLOU3 ( 29 by  32) XO=6  YO=29
+LOADED          MCCLOU4 ( 24 by  33) XO=8  YO=29
+LOADED          MCCLOU5 ( 22 by  33) XO=11  YO=30
+LOADED          MCCLOU6 ( 28 by  27) XO=21  YO=24
+LOADED          MCCLOU7 ( 25 by  32) XO=3  YO=25
+LOADED          MCCLOU8 ( 32 by  34) XO=4  YO=24
+LOADED          MCCLOU9 ( 26 by  33) XO=5  YO=25
+LOADED         MCCLOU10 ( 23 by  30) XO=10  YO=26
+LOADED         MCCLOU11 ( 23 by  24) XO=11  YO=16
+LOADED         MCCLOU12 ( 30 by  27) XO=15  YO=26
+LOADED         MCCLOU13 ( 34 by  31) XO=21  YO=28
+LOADED         MCCLOU14 ( 26 by  27) XO=15  YO=26
+LOADED         MCCLOU15 ( 24 by  32) XO=11  YO=29
+LOADED         MCCLOU16 ( 32 by  29) XO=29  YO=23
+LOADED            ROSE0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [ROSE0].            ROSE1 ( 25 by  32) XO=12  YO=29
+LOADED            ROSE2 ( 27 by  33) XO=12  YO=29
+LOADED            ROSE3 ( 28 by  33) XO=7  YO=30
+LOADED            ROSE4 ( 24 by  33) XO=8  YO=29
+LOADED            ROSE5 ( 24 by  33) XO=11  YO=29
+LOADED            ROSE6 ( 29 by  29) XO=22  YO=26
+LOADED            ROSE7 ( 25 by  32) XO=3  YO=25
+LOADED            ROSE8 ( 31 by  34) XO=3  YO=24
+LOADED            ROSE9 ( 26 by  33) XO=4  YO=25
+LOADED           ROSE10 ( 25 by  33) XO=12  YO=28
+LOADED           ROSE11 ( 23 by  24) XO=11  YO=15
+LOADED           ROSE12 ( 30 by  27) XO=16  YO=26
+LOADED           ROSE13 ( 34 by  31) XO=23  YO=27
+LOADED           ROSE14 ( 26 by  27) XO=14  YO=26
+LOADED           ROSE15 ( 25 by  32) XO=11  YO=29
+LOADED           ROSE16 ( 33 by  28) XO=30  YO=22
+LOADED          DELLIS0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [DELLIS0].          DELLIS1 ( 24 by  32) XO=11  YO=30
+LOADED          DELLIS2 ( 27 by  32) XO=12  YO=28
+LOADED          DELLIS3 ( 27 by  34) XO=6  YO=30
+LOADED          DELLIS4 ( 24 by  34) XO=8  YO=30
+LOADED          DELLIS5 ( 22 by  35) XO=10  YO=31
+LOADED          DELLIS6 ( 30 by  30) XO=22  YO=26
+LOADED          DELLIS7 ( 30 by  32) XO=5  YO=26
+LOADED          DELLIS8 ( 33 by  34) XO=2  YO=24
+LOADED          DELLIS9 ( 25 by  34) XO=4  YO=27
+LOADED         DELLIS10 ( 22 by  34) XO=10  YO=30
+LOADED         DELLIS11 ( 21 by  23) XO=10  YO=14
+LOADED         DELLIS12 ( 32 by  31) XO=18  YO=29
+LOADED         DELLIS13 ( 34 by  33) XO=24  YO=30
+LOADED         DELLIS14 ( 27 by  31) XO=16  YO=29
+LOADED         DELLIS15 ( 24 by  30) XO=12  YO=28
+LOADED         DELLIS16 ( 34 by  27) XO=30  YO=21
+LOADED          HOUSTO0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [HOUSTO0].          HOUSTO1 ( 25 by  31) XO=11  YO=29
+LOADED          HOUSTO2 ( 28 by  31) XO=13  YO=27
+LOADED          HOUSTO3 ( 28 by  32) XO=8  YO=28
+LOADED          HOUSTO4 ( 25 by  33) XO=7  YO=29
+LOADED          HOUSTO5 ( 24 by  33) XO=11  YO=29
+LOADED          HOUSTO6 ( 29 by  29) XO=21  YO=26
+LOADED          HOUSTO7 ( 25 by  32) XO=3  YO=25
+LOADED          HOUSTO8 ( 30 by  33) XO=2  YO=24
+LOADED          HOUSTO9 ( 26 by  33) XO=5  YO=25
+LOADED         HOUSTO10 ( 25 by  33) XO=11  YO=29
+LOADED         HOUSTO11 ( 23 by  26) XO=11  YO=17
+LOADED         HOUSTO12 ( 30 by  28) XO=16  YO=28
+LOADED         HOUSTO13 ( 34 by  31) XO=22  YO=27
+LOADED         HOUSTO14 ( 26 by  28) XO=14  YO=27
+LOADED         HOUSTO15 ( 25 by  32) XO=12  YO=29
+LOADED         HOUSTO16 ( 32 by  28) XO=28  YO=20
+LOADED          MJACKS0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MJACKS0].          MJACKS1 ( 25 by  29) XO=12  YO=27
+LOADED          MJACKS2 ( 25 by  31) XO=11  YO=27
+LOADED          MJACKS3 ( 28 by  32) XO=5  YO=28
+LOADED          MJACKS4 ( 26 by  33) XO=8  YO=29
+LOADED          MJACKS5 ( 25 by  33) XO=11  YO=30
+LOADED          MJACKS6 ( 27 by  27) XO=19  YO=24
+LOADED          MJACKS7 ( 27 by  32) XO=4  YO=25
+LOADED          MJACKS8 ( 30 by  32) XO=2  YO=23
+LOADED          MJACKS9 ( 26 by  33) XO=5  YO=25
+LOADED         MJACKS10 ( 23 by  33) XO=10  YO=28
+LOADED         MJACKS11 ( 22 by  24) XO=10  YO=15
+LOADED         MJACKS12 ( 32 by  27) XO=17  YO=27
+LOADED         MJACKS13 ( 33 by  31) XO=23  YO=27
+LOADED         MJACKS14 ( 27 by  28) XO=15  YO=27
+LOADED         MJACKS15 ( 24 by  30) XO=12  YO=28
+LOADED         MJACKS16 ( 32 by  28) XO=28  YO=23
+LOADED          DANILO0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [DANILO0].          DANILO1 ( 21 by  32) XO=11  YO=30
+LOADED          DANILO2 ( 27 by  34) XO=12  YO=29
+LOADED          DANILO3 ( 28 by  35) XO=7  YO=31
+LOADED          DANILO4 ( 24 by  34) XO=8  YO=29
+LOADED          DANILO5 ( 23 by  34) XO=11  YO=31
+LOADED          DANILO6 ( 30 by  29) XO=22  YO=27
+LOADED          DANILO7 ( 26 by  33) XO=3  YO=27
+LOADED          DANILO8 ( 33 by  33) XO=2  YO=23
+LOADED          DANILO9 ( 29 by  34) XO=7  YO=28
+LOADED         DANILO10 ( 22 by  34) XO=10  YO=29
+LOADED         DANILO11 ( 23 by  27) XO=11  YO=17
+LOADED         DANILO12 ( 35 by  30) XO=18  YO=29
+LOADED         DANILO13 ( 33 by  33) XO=22  YO=30
+LOADED         DANILO14 ( 27 by  29) XO=15  YO=28
+LOADED         DANILO15 ( 23 by  30) XO=11  YO=28
+LOADED         DANILO16 ( 35 by  28) XO=31  YO=21
+LOADED          DOUGLA0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [DOUGLA0].          DOUGLA1 ( 25 by  30) XO=11  YO=26
+LOADED          DOUGLA2 ( 24 by  32) XO=12  YO=26
+LOADED          DOUGLA3 ( 30 by  33) XO=9  YO=29
+LOADED          DOUGLA4 ( 24 by  33) XO=8  YO=29
+LOADED          DOUGLA5 ( 25 by  34) XO=11  YO=29
+LOADED          DOUGLA6 ( 29 by  28) XO=20  YO=25
+LOADED          DOUGLA7 ( 25 by  32) XO=3  YO=25
+LOADED          DOUGLA8 ( 31 by  34) XO=3  YO=22
+LOADED          DOUGLA9 ( 26 by  33) XO=4  YO=25
+LOADED         DOUGLA10 ( 25 by  32) XO=11  YO=26
+LOADED         DOUGLA11 ( 23 by  25) XO=10  YO=14
+LOADED         DOUGLA12 ( 30 by  27) XO=16  YO=27
+LOADED         DOUGLA13 ( 35 by  32) XO=24  YO=27
+LOADED         DOUGLA14 ( 26 by  27) XO=14  YO=27
+LOADED         DOUGLA15 ( 25 by  32) XO=11  YO=29
+LOADED         DOUGLA16 ( 33 by  30) XO=32  YO=17
+LOADED
+Opening img lib [C:\hds25.img]          KEDWAR0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [KEDWAR0].          KEDWAR1 ( 24 by  32) XO=10  YO=28
+LOADED          KEDWAR2 ( 25 by  34) XO=12  YO=28
+LOADED          KEDWAR3 ( 28 by  35) XO=7  YO=30
+LOADED          KEDWAR4 ( 27 by  36) XO=7  YO=31
+LOADED          KEDWAR5 ( 25 by  37) XO=11  YO=32
+LOADED          KEDWAR6 ( 29 by  29) XO=20  YO=26
+LOADED          KEDWAR7 ( 30 by  32) XO=5  YO=26
+LOADED          KEDWAR8 ( 33 by  36) XO=4  YO=27
+LOADED          KEDWAR9 ( 25 by  34) XO=4  YO=27
+LOADED         KEDWAR10 ( 22 by  34) XO=10  YO=29
+LOADED         KEDWAR11 ( 23 by  25) XO=10  YO=15
+LOADED         KEDWAR12 ( 32 by  31) XO=18  YO=29
+LOADED         KEDWAR13 ( 36 by  33) XO=22  YO=28
+LOADED         KEDWAR14 ( 28 by  31) XO=17  YO=28
+LOADED         KEDWAR15 ( 24 by  30) XO=11  YO=27
+LOADED         KEDWAR16 ( 35 by  28) XO=33  YO=18
+LOADED          KONCAK0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [KONCAK0].          KONCAK1 ( 22 by  36) XO=10  YO=33
+LOADED          KONCAK2 ( 28 by  35) XO=13  YO=31
+LOADED          KONCAK3 ( 28 by  36) XO=9  YO=31
+LOADED          KONCAK4 ( 26 by  36) XO=8  YO=32
+LOADED          KONCAK5 ( 24 by  37) XO=11  YO=35
+LOADED          KONCAK6 ( 33 by  33) XO=24  YO=30
+LOADED          KONCAK7 ( 32 by  32) XO=5  YO=27
+LOADED          KONCAK8 ( 34 by  37) XO=2  YO=27
+LOADED          KONCAK9 ( 29 by  34) XO=7  YO=27
+LOADED         KONCAK10 ( 24 by  34) XO=11  YO=30
+LOADED         KONCAK11 ( 22 by  24) XO=10  YO=13
+LOADED         KONCAK12 ( 32 by  32) XO=18  YO=29
+LOADED         KONCAK13 ( 37 by  34) XO=26  YO=31
+LOADED         KONCAK14 ( 29 by  35) XO=16  YO=31
+LOADED         KONCAK15 ( 26 by  32) XO=13  YO=30
+LOADED         KONCAK16 ( 36 by  28) XO=31  YO=18
+LOADED            VMAX0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [VMAX0].            VMAX1 ( 27 by  34) XO=13  YO=31
+LOADED            VMAX2 ( 27 by  33) XO=13  YO=30
+LOADED            VMAX3 ( 27 by  32) XO=8  YO=28
+LOADED            VMAX4 ( 24 by  32) XO=6  YO=28
+LOADED            VMAX5 ( 25 by  33) XO=12  YO=30
+LOADED            VMAX6 ( 31 by  30) XO=22  YO=27
+LOADED            VMAX7 ( 25 by  32) XO=4  YO=26
+LOADED            VMAX8 ( 30 by  35) XO=1  YO=25
+LOADED            VMAX9 ( 26 by  33) XO=5  YO=26
+LOADED           VMAX10 ( 25 by  32) XO=11  YO=27
+LOADED           VMAX11 ( 24 by  27) XO=11  YO=15
+LOADED           VMAX12 ( 30 by  27) XO=15  YO=26
+LOADED           VMAX13 ( 35 by  30) XO=23  YO=28
+LOADED           VMAX14 ( 26 by  27) XO=14  YO=26
+LOADED           VMAX15 ( 25 by  32) XO=12  YO=30
+LOADED           VMAX16 ( 32 by  27) XO=30  YO=18
+LOADED           EDNEY0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [EDNEY0].           EDNEY1 ( 26 by  30) XO=12  YO=27
+LOADED           EDNEY2 ( 25 by  33) XO=12  YO=29
+LOADED           EDNEY3 ( 30 by  33) XO=9  YO=29
+LOADED           EDNEY4 ( 25 by  34) XO=8  YO=30
+LOADED           EDNEY5 ( 24 by  34) XO=11  YO=31
+LOADED           EDNEY6 ( 30 by  29) XO=20  YO=26
+LOADED           EDNEY7 ( 30 by  32) XO=5  YO=27
+LOADED           EDNEY8 ( 33 by  35) XO=5  YO=25
+LOADED           EDNEY9 ( 25 by  34) XO=4  YO=27
+LOADED          EDNEY10 ( 22 by  34) XO=10  YO=30
+LOADED          EDNEY11 ( 24 by  23) XO=11  YO=15
+LOADED          EDNEY12 ( 32 by  31) XO=18  YO=28
+LOADED          EDNEY13 ( 35 by  33) XO=21  YO=28
+LOADED          EDNEY14 ( 28 by  31) XO=17  YO=28
+LOADED          EDNEY15 ( 24 by  30) XO=11  YO=28
+LOADED          EDNEY16 ( 33 by  30) XO=31  YO=20
+LOADED          DELNEG0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [DELNEG0].          DELNEG1 ( 22 by  36) XO=10  YO=33
+LOADED          DELNEG2 ( 28 by  35) XO=13  YO=31
+LOADED          DELNEG3 ( 31 by  34) XO=10  YO=29
+LOADED          DELNEG4 ( 24 by  36) XO=8  YO=32
+LOADED          DELNEG5 ( 25 by  37) XO=12  YO=34
+LOADED          DELNEG6 ( 33 by  33) XO=25  YO=30
+LOADED          DELNEG7 ( 32 by  32) XO=5  YO=27
+LOADED          DELNEG8 ( 37 by  35) XO=4  YO=26
+LOADED          DELNEG9 ( 29 by  34) XO=7  YO=27
+LOADED         DELNEG10 ( 24 by  34) XO=11  YO=30
+LOADED         DELNEG11 ( 24 by  26) XO=11  YO=16
+LOADED         DELNEG12 ( 33 by  32) XO=18  YO=28
+LOADED         DELNEG13 ( 35 by  37) XO=23  YO=32
+LOADED         DELNEG14 ( 29 by  34) XO=16  YO=30
+LOADED         DELNEG15 ( 26 by  32) XO=12  YO=30
+LOADED         DELNEG16 ( 34 by  31) XO=30  YO=19
+LOADED         WANDERS0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [WANDERS0].         WANDERS1 ( 27 by  31) XO=13  YO=28
+LOADED         WANDERS2 ( 26 by  34) XO=12  YO=28
+LOADED         WANDERS3 ( 27 by  35) XO=7  YO=30
+LOADED         WANDERS4 ( 24 by  34) XO=8  YO=30
+LOADED         WANDERS5 ( 26 by  34) XO=12  YO=31
+LOADED         WANDERS6 ( 30 by  29) XO=19  YO=26
+LOADED         WANDERS7 ( 27 by  32) XO=4  YO=27
+LOADED         WANDERS8 ( 32 by  34) XO=4  YO=25
+LOADED         WANDERS9 ( 25 by  33) XO=4  YO=26
+LOADED        WANDERS10 ( 22 by  34) XO=10  YO=29
+LOADED        WANDERS11 ( 24 by  26) XO=11  YO=17
+LOADED        WANDERS12 ( 32 by  30) XO=18  YO=28
+LOADED        WANDERS13 ( 34 by  31) XO=22  YO=27
+LOADED        WANDERS14 ( 25 by  31) XO=14  YO=29
+LOADED        WANDERS15 ( 24 by  28) XO=12  YO=26
+LOADED        WANDERS16 ( 35 by  27) XO=33  YO=18
+LOADED         OMILLER0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [OMILLER0].         OMILLER1 ( 26 by  30) XO=12  YO=27
+LOADED         OMILLER2 ( 25 by  33) XO=12  YO=30
+LOADED         OMILLER3 ( 30 by  33) XO=9  YO=29
+LOADED         OMILLER4 ( 25 by  34) XO=8  YO=30
+LOADED         OMILLER5 ( 24 by  34) XO=11  YO=32
+LOADED         OMILLER6 ( 30 by  29) XO=20  YO=26
+LOADED         OMILLER7 ( 30 by  32) XO=5  YO=27
+LOADED         OMILLER8 ( 34 by  35) XO=5  YO=26
+LOADED         OMILLER9 ( 25 by  34) XO=4  YO=27
+LOADED        OMILLER10 ( 22 by  34) XO=10  YO=29
+LOADED        OMILLER11 ( 24 by  25) XO=11  YO=15
+LOADED        OMILLER12 ( 32 by  31) XO=18  YO=28
+LOADED        OMILLER13 ( 35 by  34) XO=22  YO=29
+LOADED        OMILLER14 ( 27 by  31) XO=16  YO=29
+LOADED        OMILLER15 ( 24 by  30) XO=12  YO=27
+LOADED        OMILLER16 ( 33 by  30) XO=31  YO=21
+LOADED          MURRAY0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MURRAY0].          MURRAY1 ( 25 by  30) XO=12  YO=27
+LOADED          MURRAY2 ( 25 by  33) XO=12  YO=30
+LOADED          MURRAY3 ( 30 by  33) XO=8  YO=29
+LOADED          MURRAY4 ( 25 by  34) XO=8  YO=30
+LOADED          MURRAY5 ( 24 by  35) XO=11  YO=33
+LOADED          MURRAY6 ( 30 by  30) XO=21  YO=27
+LOADED          MURRAY7 ( 30 by  32) XO=5  YO=27
+LOADED          MURRAY8 ( 34 by  36) XO=7  YO=25
+LOADED          MURRAY9 ( 25 by  35) XO=4  YO=27
+LOADED         MURRAY10 ( 22 by  36) XO=10  YO=31
+LOADED         MURRAY11 ( 24 by  23) XO=11  YO=15
+LOADED         MURRAY12 ( 33 by  31) XO=18  YO=29
+LOADED         MURRAY13 ( 36 by  34) XO=22  YO=29
+LOADED         MURRAY14 ( 27 by  31) XO=15  YO=28
+LOADED         MURRAY15 ( 24 by  29) XO=12  YO=27
+LOADED         MURRAY16 ( 33 by  30) XO=31  YO=20
+LOADED          MURESA0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MURESA0].          MURESA1 ( 22 by  36) XO=10  YO=32
+LOADED          MURESA2 ( 28 by  36) XO=13  YO=31
+LOADED          MURESA3 ( 30 by  37) XO=9  YO=33
+LOADED          MURESA4 ( 24 by  37) XO=8  YO=33
+LOADED          MURESA5 ( 25 by  37) XO=12  YO=34
+LOADED          MURESA6 ( 33 by  32) XO=24  YO=29
+LOADED          MURESA7 ( 30 by  32) XO=5  YO=27
+LOADED          MURESA8 ( 36 by  38) XO=5  YO=28
+LOADED          MURESA9 ( 25 by  34) XO=4  YO=27
+LOADED         MURESA10 ( 22 by  35) XO=10  YO=30
+LOADED         MURESA11 ( 22 by  27) XO=10  YO=15
+LOADED         MURESA12 ( 32 by  31) XO=18  YO=28
+LOADED         MURESA13 ( 38 by  36) XO=25  YO=32
+LOADED         MURESA14 ( 27 by  31) XO=16  YO=29
+LOADED         MURESA15 ( 24 by  30) XO=12  YO=27
+LOADED         MURESA16 ( 37 by  30) XO=35  YO=19
+LOADED           BREEV0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [BREEV0].           BREEV1 ( 24 by  31) XO=11  YO=28
+LOADED           BREEV2 ( 25 by  32) XO=13  YO=28
+LOADED           BREEV3 ( 28 by  33) XO=9  YO=28
+LOADED           BREEV4 ( 26 by  33) XO=9  YO=29
+LOADED           BREEV5 ( 23 by  33) XO=11  YO=30
+LOADED           BREEV6 ( 30 by  30) XO=22  YO=27
+LOADED           BREEV7 ( 30 by  34) XO=5  YO=28
+LOADED           BREEV8 ( 32 by  34) XO=3  YO=24
+LOADED           BREEV9 ( 25 by  34) XO=4  YO=27
+LOADED          BREEV10 ( 22 by  34) XO=10  YO=30
+LOADED          BREEV11 ( 24 by  26) XO=11  YO=17
+LOADED          BREEV12 ( 32 by  31) XO=18  YO=29
+LOADED          BREEV13 ( 34 by  32) XO=22  YO=29
+LOADED          BREEV14 ( 27 by  32) XO=16  YO=29
+LOADED          BREEV15 ( 24 by  30) XO=11  YO=28
+LOADED          BREEV16 ( 33 by  28) XO=30  YO=19
+LOADED           DHARP0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [DHARP0].           DHARP1 ( 27 by  32) XO=13  YO=29
+LOADED           DHARP2 ( 25 by  33) XO=12  YO=29
+LOADED           DHARP3 ( 29 by  34) XO=8  YO=29
+LOADED           DHARP4 ( 26 by  35) XO=9  YO=31
+LOADED           DHARP5 ( 25 by  35) XO=12  YO=32
+LOADED           DHARP6 ( 31 by  30) XO=22  YO=27
+LOADED           DHARP7 ( 25 by  32) XO=3  YO=25
+LOADED           DHARP8 ( 34 by  33) XO=5  YO=24
+LOADED           DHARP9 ( 26 by  33) XO=4  YO=26
+LOADED          DHARP10 ( 25 by  32) XO=11  YO=28
+LOADED          DHARP11 ( 26 by  29) XO=12  YO=19
+LOADED          DHARP12 ( 30 by  27) XO=16  YO=27
+LOADED          DHARP13 ( 33 by  34) XO=21  YO=28
+LOADED          DHARP14 ( 26 by  27) XO=15  YO=26
+LOADED          DHARP15 ( 25 by  32) XO=12  YO=29
+LOADED          DHARP16 ( 34 by  29) XO=32  YO=20
+LOADED
+Opening img lib [C:\hds26.img]        Robertsn0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [Robertsn0].        Robertsn1 ( 27 by  32) XO=13  YO=29
+LOADED        Robertsn2 ( 25 by  33) XO=10  YO=29
+LOADED        Robertsn3 ( 29 by  34) XO=8  YO=30
+LOADED        Robertsn4 ( 26 by  35) XO=8  YO=30
+LOADED        Robertsn5 ( 27 by  36) XO=12  YO=33
+LOADED        Robertsn6 ( 31 by  30) XO=22  YO=26
+LOADED        Robertsn7 ( 25 by  32) XO=3  YO=26
+LOADED        Robertsn8 ( 34 by  34) XO=4  YO=22
+LOADED        Robertsn9 ( 26 by  33) XO=4  YO=25
+LOADED       Robertsn10 ( 25 by  32) XO=12  YO=28
+LOADED       Robertsn11 ( 26 by  29) XO=13  YO=19
+LOADED       Robertsn12 ( 30 by  27) XO=16  YO=25
+LOADED       Robertsn13 ( 34 by  34) XO=24  YO=28
+LOADED       Robertsn14 ( 26 by  28) XO=11  YO=26
+LOADED       Robertsn15 ( 25 by  32) XO=11  YO=30
+LOADED       Robertsn16 ( 34 by  29) XO=29  YO=18
+LOADED         Chapman0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [Chapman0].         Chapman1 ( 22 by  36) XO=10  YO=31
+LOADED         Chapman2 ( 28 by  36) XO=12  YO=29
+LOADED         Chapman3 ( 29 by  36) XO=7  YO=29
+LOADED         Chapman4 ( 25 by  35) XO=8  YO=29
+LOADED         Chapman5 ( 28 by  35) XO=11  YO=32
+LOADED         Chapman6 ( 33 by  32) XO=20  YO=28
+LOADED         Chapman7 ( 30 by  32) XO=12  YO=29
+LOADED         Chapman8 ( 34 by  37) XO=4  YO=29
+LOADED         Chapman9 ( 25 by  34) XO=7  YO=31
+LOADED        Chapman10 ( 22 by  35) XO=12  YO=29
+LOADED        Chapman11 ( 22 by  27) XO=10  YO=16
+LOADED        Chapman12 ( 32 by  31) XO=13  YO=29
+LOADED        Chapman13 ( 37 by  34) XO=17  YO=28
+LOADED        Chapman14 ( 27 by  31) XO=14  YO=27
+LOADED        Chapman15 ( 24 by  30) XO=10  YO=31
+LOADED        Chapman16 ( 36 by  29) XO=29  YO=18
+LOADED            Lang0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [Lang0].            Lang1 ( 26 by  30) XO=10  YO=31
+LOADED            Lang2 ( 27 by  33) XO=12  YO=29
+LOADED            Lang3 ( 30 by  33) XO=7  YO=29
+LOADED            Lang4 ( 26 by  33) XO=8  YO=29
+LOADED            Lang5 ( 27 by  32) XO=11  YO=32
+LOADED            Lang6 ( 30 by  29) XO=20  YO=28
+LOADED            Lang7 ( 30 by  32) XO=12  YO=29
+LOADED            Lang8 ( 33 by  35) XO=4  YO=29
+LOADED            Lang9 ( 25 by  33) XO=7  YO=31
+LOADED           Lang10 ( 25 by  32) XO=12  YO=29
+LOADED           Lang11 ( 24 by  23) XO=10  YO=16
+LOADED           Lang12 ( 32 by  31) XO=13  YO=29
+LOADED           Lang13 ( 35 by  33) XO=17  YO=28
+LOADED           Lang14 ( 28 by  31) XO=14  YO=27
+LOADED           Lang15 ( 27 by  30) XO=10  YO=31
+LOADED           Lang16 ( 33 by  30) XO=29  YO=18
+LOADED           Scott0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [Scott0].           Scott1 ( 24 by  33) XO=10  YO=31
+LOADED           Scott2 ( 26 by  35) XO=12  YO=29
+LOADED           Scott3 ( 29 by  34) XO=7  YO=29
+LOADED           Scott4 ( 24 by  34) XO=8  YO=29
+LOADED           Scott5 ( 27 by  35) XO=11  YO=32
+LOADED           Scott6 ( 32 by  32) XO=20  YO=28
+LOADED           Scott7 ( 26 by  32) XO=12  YO=29
+LOADED           Scott8 ( 32 by  36) XO=4  YO=29
+LOADED           Scott9 ( 26 by  33) XO=7  YO=31
+LOADED          Scott10 ( 26 by  34) XO=12  YO=29
+LOADED          Scott11 ( 24 by  26) XO=10  YO=16
+LOADED          Scott12 ( 30 by  28) XO=13  YO=29
+LOADED          Scott13 ( 36 by  32) XO=17  YO=28
+LOADED          Scott14 ( 32 by  30) XO=14  YO=27
+LOADED          Scott15 ( 26 by  30) XO=10  YO=31
+LOADED          Scott16 ( 35 by  29) XO=29  YO=18
+LOADED            Webb0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [Webb0].            Webb1 ( 23 by  28) XO=11  YO=25
+LOADED            Webb2 ( 24 by  29) XO=9  YO=27
+LOADED            Webb3 ( 29 by  32) XO=9  YO=29
+LOADED            Webb4 ( 25 by  32) XO=8  YO=30
+LOADED            Webb5 ( 24 by  33) XO=11  YO=29
+LOADED            Webb6 ( 28 by  27) XO=20  YO=24
+LOADED            Webb7 ( 24 by  29) XO=2  YO=24
+LOADED            Webb8 ( 32 by  34) XO=3  YO=22
+LOADED            Webb9 ( 25 by  31) XO=3  YO=25
+LOADED           Webb10 ( 22 by  31) XO=11  YO=26
+LOADED           Webb11 ( 21 by  19) XO=10  YO=13
+LOADED           Webb12 ( 28 by  27) XO=16  YO=25
+LOADED           Webb13 ( 34 by  32) XO=25  YO=28
+LOADED           Webb14 ( 28 by  27) XO=13  YO=25
+LOADED           Webb15 ( 23 by  29) XO=10  YO=27
+LOADED           Webb16 ( 32 by  29) XO=29  YO=18
+LOADED          Ruffin0 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [Ruffin0].          Ruffin1 ( 27 by  32) XO=10  YO=31
+LOADED          Ruffin2 ( 25 by  33) XO=12  YO=29
+LOADED          Ruffin3 ( 29 by  34) XO=7  YO=29
+LOADED          Ruffin4 ( 26 by  35) XO=8  YO=29
+LOADED          Ruffin5 ( 25 by  35) XO=11  YO=32
+LOADED          Ruffin6 ( 31 by  30) XO=20  YO=28
+LOADED          Ruffin7 ( 25 by  32) XO=12  YO=29
+LOADED          Ruffin8 ( 34 by  33) XO=4  YO=29
+LOADED          Ruffin9 ( 26 by  33) XO=7  YO=31
+LOADED         Ruffin10 ( 25 by  32) XO=12  YO=29
+LOADED         Ruffin11 ( 26 by  29) XO=10  YO=16
+LOADED         Ruffin12 ( 30 by  27) XO=13  YO=29
+LOADED         Ruffin13 ( 33 by  34) XO=17  YO=28
+LOADED         Ruffin14 ( 26 by  27) XO=14  YO=27
+LOADED         Ruffin15 ( 25 by  32) XO=10  YO=31
+LOADED         Ruffin16 ( 34 by  29) XO=29  YO=18
+LOADED
+Opening img lib [C:\hdsmsc1.img]           ANG_00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [ANG_00].           ANG_01 ( 27 by  34) XO=13  YO=31
+LOADED           ANG_02 ( 27 by  34) XO=12  YO=31
+LOADED           ANG_03 ( 33 by  35) XO=11  YO=31
+LOADED           ANG_04 ( 30 by  37) XO=12  YO=32
+LOADED           ANG_05 ( 27 by  38) XO=13  YO=33
+LOADED           ANG_06 ( 33 by  32) XO=25  YO=29
+LOADED           ANG_07 ( 29 by  33) XO=4  YO=28
+LOADED           ANG_08 ( 32 by  35) XO=4  YO=31
+LOADED           ANG_09 ( 33 by  36) XO=6  YO=31
+LOADED           ANG_10 ( 27 by  37) XO=13  YO=31
+LOADED           ANG_11 ( 25 by  29) XO=12  YO=16
+LOADED           ANG_12 ( 28 by  33) XO=16  YO=31
+LOADED           ANG_13 ( 36 by  35) XO=23  YO=31
+LOADED           ANG_14 ( 35 by  35) XO=20  YO=31
+LOADED           ANG_15 ( 27 by  35) XO=12  YO=31
+LOADED           ANG_16 ( 37 by  32) XO=32  YO=17
+LOADED           JOE_00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [JOE_00].           JOE_01 ( 29 by  35) XO=14  YO=33
+LOADED           JOE_02 ( 31 by  35) XO=16  YO=33
+LOADED           JOE_03 ( 37 by  35) XO=16  YO=33
+LOADED           JOE_04 ( 32 by  36) XO=15  YO=33
+LOADED           JOE_05 ( 29 by  39) XO=15  YO=34
+LOADED           JOE_06 ( 35 by  33) XO=26  YO=28
+LOADED           JOE_07 ( 31 by  28) XO=7  YO=27
+LOADED           JOE_08 ( 39 by  37) XO=3  YO=30
+LOADED           JOE_09 ( 39 by  38) XO=6  YO=31
+LOADED           JOE_10 ( 30 by  38) XO=13  YO=31
+LOADED           JOE_11 ( 31 by  35) XO=15  YO=22
+LOADED           JOE_12 ( 32 by  37) XO=19  YO=33
+LOADED           JOE_13 ( 43 by  38) XO=28  YO=33
+LOADED           JOE_14 ( 35 by  38) XO=22  YO=34
+LOADED           JOE_15 ( 29 by  39) XO=15  YO=33
+LOADED           JOE_16 ( 35 by  37) XO=31  YO=19
+LOADED           LIS_00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [LIS_00].           LIS_01 ( 48 by  43) XO=21  YO=32
+LOADED           LIS_02 ( 47 by  43) XO=23  YO=32
+LOADED           LIS_03 ( 42 by  42) XO=21  YO=32
+LOADED           LIS_04 ( 49 by  40) XO=23  YO=32
+LOADED           LIS_05 ( 48 by  38) XO=24  YO=33
+LOADED           LIS_06 ( 47 by  44) XO=24  YO=28
+LOADED           LIS_07 ( 48 by  39) XO=22  YO=27
+LOADED           LIS_08 ( 49 by  44) XO=23  YO=26
+LOADED           LIS_09 ( 47 by  43) XO=23  YO=29
+LOADED           LIS_10 ( 49 by  42) XO=23  YO=30
+LOADED           LIS_11 ( 50 by  51) XO=24  YO=23
+LOADED           LIS_12 ( 51 by  50) XO=30  YO=30
+LOADED           LIS_13 ( 43 by  48) XO=30  YO=30
+LOADED           LIS_14 ( 50 by  47) XO=30  YO=29
+LOADED           LIS_15 ( 50 by  38) XO=24  YO=31
+LOADED           LIS_16 ( 42 by  42) XO=33  YO=19
+LOADED           MEL_00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MEL_00].           MEL_01 ( 38 by  34) XO=19  YO=27
+LOADED           MEL_02 ( 36 by  35) XO=20  YO=29
+LOADED           MEL_03 ( 41 by  38) XO=18  YO=30
+LOADED           MEL_04 ( 39 by  38) XO=20  YO=31
+LOADED           MEL_05 ( 39 by  40) XO=18  YO=33
+LOADED           MEL_06 ( 38 by  39) XO=20  YO=27
+LOADED           MEL_07 ( 38 by  36) XO=16  YO=26
+LOADED           MEL_08 ( 42 by  36) XO=13  YO=27
+LOADED           MEL_09 ( 40 by  38) XO=15  YO=27
+LOADED           MEL_10 ( 37 by  38) XO=19  YO=28
+LOADED           MEL_11 ( 41 by  44) XO=21  YO=18
+LOADED           MEL_12 ( 40 by  45) XO=23  YO=30
+LOADED           MEL_13 ( 42 by  47) XO=30  YO=29
+LOADED           MEL_14 ( 38 by  41) XO=23  YO=28
+LOADED           MEL_15 ( 41 by  38) XO=19  YO=29
+LOADED           MEL_16 ( 38 by  41) XO=31  YO=22
+LOADED           MIK_00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MIK_00].           MIK_01 ( 29 by  34) XO=14  YO=31
+LOADED           MIK_02 ( 33 by  34) XO=16  YO=31
+LOADED           MIK_03 ( 36 by  35) XO=16  YO=31
+LOADED           MIK_04 ( 33 by  35) XO=15  YO=31
+LOADED           MIK_05 ( 28 by  37) XO=13  YO=33
+LOADED           MIK_06 ( 33 by  31) XO=22  YO=29
+LOADED           MIK_07 ( 30 by  33) XO=7  YO=28
+LOADED           MIK_08 ( 32 by  36) XO=4  YO=28
+LOADED           MIK_09 ( 30 by  36) XO=6  YO=29
+LOADED           MIK_10 ( 29 by  34) XO=14  YO=29
+LOADED           MIK_11 ( 30 by  32) XO=14  YO=15
+LOADED           MIK_12 ( 36 by  32) XO=21  YO=29
+LOADED           MIK_13 ( 41 by  32) XO=26  YO=30
+LOADED           MIK_14 ( 36 by  33) XO=22  YO=30
+LOADED           MIK_15 ( 29 by  33) XO=14  YO=30
+LOADED           MIK_16 ( 35 by  36) XO=32  YO=19
+LOADED          ALIEN00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [ALIEN00].          ALIEN01 ( 31 by  29) XO=14  YO=27
+LOADED          ALIEN02 ( 27 by  30) XO=12  YO=28
+LOADED          ALIEN03 ( 31 by  29) XO=9  YO=28
+LOADED          ALIEN04 ( 31 by  32) XO=8  YO=28
+LOADED          ALIEN05 ( 28 by  32) XO=12  YO=28
+LOADED          ALIEN06 ( 34 by  33) XO=24  YO=30
+LOADED          ALIEN07 ( 32 by  29) XO=2  YO=22
+LOADED          ALIEN08 ( 36 by  33) XO=3  YO=23
+LOADED          ALIEN09 ( 37 by  33) XO=6  YO=23
+LOADED          ALIEN10 ( 28 by  34) XO=13  YO=25
+LOADED          ALIEN11 ( 28 by  25) XO=13  YO=16
+LOADED          ALIEN12 ( 31 by  31) XO=17  YO=31
+LOADED          ALIEN13 ( 38 by  33) XO=23  YO=31
+LOADED          ALIEN14 ( 32 by  33) XO=16  YO=31
+LOADED          ALIEN15 ( 29 by  36) XO=13  YO=32
+LOADED          ALIEN16 ( 29 by  31) XO=30  YO=21
+LOADED            COW00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [COW00].            COW01 ( 47 by  26) XO=23  YO=25
+LOADED            COW02 ( 36 by  32) XO=17  YO=28
+LOADED            COW03 ( 36 by  33) XO=9  YO=29
+LOADED            COW04 ( 36 by  35) XO=10  YO=31
+LOADED            COW05 ( 48 by  38) XO=23  YO=30
+LOADED            COW06 ( 38 by  38) XO=27  YO=32
+LOADED            COW07 ( 36 by  37) XO=7  YO=24
+LOADED            COW08 ( 30 by  37) XO=3  YO=23
+LOADED            COW09 ( 39 by  39) XO=8  YO=24
+LOADED            COW10 ( 50 by  40) XO=23  YO=25
+LOADED            COW11 ( 52 by  35) XO=25  YO=17
+LOADED            COW12 ( 41 by  32) XO=23  YO=28
+LOADED            COW13 ( 44 by  32) XO=24  YO=29
+LOADED            COW14 ( 41 by  30) XO=21  YO=29
+LOADED            COW15 ( 46 by  28) XO=21  YO=26
+LOADED            COW16 ( 33 by  36) XO=31  YO=25
+LOADED          GUIDO00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [GUIDO00].          GUIDO01 ( 36 by  33) XO=18  YO=28
+LOADED          GUIDO02 ( 33 by  33) XO=18  YO=28
+LOADED          GUIDO03 ( 39 by  32) XO=18  YO=28
+LOADED          GUIDO04 ( 35 by  33) XO=18  YO=28
+LOADED          GUIDO05 ( 34 by  32) XO=16  YO=28
+LOADED          GUIDO06 ( 39 by  32) XO=20  YO=27
+LOADED          GUIDO07 ( 37 by  24) XO=14  YO=24
+LOADED          GUIDO08 ( 36 by  34) XO=10  YO=25
+LOADED          GUIDO09 ( 37 by  36) XO=14  YO=25
+LOADED          GUIDO10 ( 35 by  35) XO=19  YO=25
+LOADED          GUIDO11 ( 41 by  36) XO=20  YO=17
+LOADED          GUIDO12 ( 35 by  35) XO=18  YO=28
+LOADED          GUIDO13 ( 38 by  33) XO=22  YO=28
+LOADED          GUIDO14 ( 37 by  27) XO=22  YO=26
+LOADED          GUIDO15 ( 36 by  28) XO=18  YO=26
+LOADED          GUIDO16 ( 32 by  39) XO=30  YO=19
+LOADED
+Opening img lib [C:\hdsmsc2.img]            BER00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [BER00].            BER01 ( 43 by  36) XO=22  YO=33
+LOADED            BER02 ( 46 by  37) XO=26  YO=33
+LOADED            BER03 ( 45 by  38) XO=22  YO=34
+LOADED            BER04 ( 43 by  40) XO=23  YO=35
+LOADED            BER05 ( 41 by  41) XO=20  YO=36
+LOADED            BER06 ( 38 by  38) XO=28  YO=31
+LOADED            BER07 ( 46 by  31) XO=16  YO=27
+LOADED            BER08 ( 46 by  36) XO=15  YO=29
+LOADED            BER09 ( 49 by  38) XO=18  YO=30
+LOADED            BER10 ( 43 by  37) XO=21  YO=31
+LOADED            BER11 ( 44 by  35) XO=22  YO=21
+LOADED            BER12 ( 47 by  34) XO=28  YO=32
+LOADED            BER13 ( 52 by  32) XO=36  YO=30
+LOADED            BER14 ( 47 by  32) XO=32  YO=30
+LOADED            BER15 ( 42 by  35) XO=20  YO=31
+LOADED            BER16 ( 40 by  40) XO=37  YO=19
+LOADED            CHK00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [CHK00].            CHK01 ( 48 by  40) XO=23  YO=34
+LOADED            CHK02 ( 45 by  42) XO=21  YO=35
+LOADED            CHK03 ( 54 by  41) XO=14  YO=35
+LOADED            CHK04 ( 47 by  43) XO=19  YO=36
+LOADED            CHK05 ( 50 by  45) XO=23  YO=37
+LOADED            CHK06 ( 46 by  45) XO=22  YO=30
+LOADED            CHK07 ( 49 by  34) XO=24  YO=19
+LOADED            CHK08 ( 67 by  36) XO=18  YO=25
+LOADED            CHK09 ( 60 by  38) XO=18  YO=27
+LOADED            CHK10 ( 48 by  36) XO=20  YO=29
+LOADED            CHK11 ( 47 by  39) XO=24  YO=23
+LOADED            CHK12 ( 50 by  42) XO=25  YO=36
+LOADED            CHK13 ( 52 by  41) XO=31  YO=34
+LOADED            CHK14 ( 53 by  40) XO=26  YO=35
+LOADED            CHK15 ( 55 by  43) XO=25  YO=37
+LOADED            CHK16 ( 49 by  50) XO=41  YO=32
+LOADED            FAT00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [FAT00].            FAT01 ( 42 by  35) XO=20  YO=31
+LOADED            FAT02 ( 50 by  34) XO=19  YO=30
+LOADED            FAT03 ( 48 by  34) XO=17  YO=30
+LOADED            FAT04 ( 50 by  36) XO=17  YO=31
+LOADED            FAT05 ( 45 by  38) XO=22  YO=32
+LOADED            FAT06 ( 38 by  38) XO=26  YO=29
+LOADED            FAT07 ( 39 by  35) XO=12  YO=25
+LOADED            FAT08 ( 42 by  37) XO=9  YO=28
+LOADED            FAT09 ( 41 by  40) XO=10  YO=31
+LOADED            FAT10 ( 44 by  40) XO=20  YO=32
+LOADED            FAT11 ( 44 by  28) XO=21  YO=16
+LOADED            FAT12 ( 50 by  37) XO=22  YO=33
+LOADED            FAT13 ( 52 by  32) XO=29  YO=30
+LOADED            FAT14 ( 52 by  32) XO=24  YO=30
+LOADED            FAT15 ( 42 by  33) XO=21  YO=30
+LOADED            FAT16 ( 42 by  39) XO=38  YO=24
+LOADED            FRA00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [FRA00].            FRA01 ( 28 by  35) XO=14  YO=32
+LOADED            FRA02 ( 34 by  38) XO=14  YO=33
+LOADED            FRA03 ( 38 by  35) XO=12  YO=32
+LOADED            FRA04 ( 35 by  36) XO=12  YO=34
+LOADED            FRA05 ( 37 by  40) XO=19  YO=36
+LOADED            FRA06 ( 33 by  32) XO=25  YO=28
+LOADED            FRA07 ( 39 by  39) XO=4  YO=29
+LOADED            FRA08 ( 43 by  38) XO=4  YO=29
+LOADED            FRA09 ( 40 by  39) XO=7  YO=30
+LOADED            FRA10 ( 39 by  40) XO=18  YO=30
+LOADED            FRA11 ( 34 by  27) XO=16  YO=18
+LOADED            FRA12 ( 49 by  30) XO=21  YO=27
+LOADED            FRA13 ( 57 by  29) XO=26  YO=26
+LOADED            FRA14 ( 39 by  29) XO=22  YO=26
+LOADED            FRA15 ( 34 by  32) XO=15  YO=28
+LOADED            FRA16 ( 37 by  34) XO=34  YO=23
+LOADED            GOR00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [GOR00].            GOR01 ( 56 by  37) XO=27  YO=31
+LOADED            GOR02 ( 56 by  36) XO=27  YO=29
+LOADED            GOR03 ( 59 by  43) XO=27  YO=34
+LOADED            GOR04 ( 52 by  42) XO=21  YO=34
+LOADED            GOR05 ( 56 by  41) XO=27  YO=32
+LOADED            GOR06 ( 44 by  45) XO=30  YO=32
+LOADED            GOR07 ( 55 by  33) XO=25  YO=23
+LOADED            GOR08 ( 59 by  46) XO=20  YO=33
+LOADED            GOR09 ( 55 by  46) XO=19  YO=34
+LOADED            GOR10 ( 57 by  45) XO=29  YO=34
+LOADED            GOR11 ( 58 by  39) XO=28  YO=21
+LOADED            GOR12 ( 56 by  40) XO=28  YO=32
+LOADED            GOR13 ( 64 by  41) XO=38  YO=31
+LOADED            GOR14 ( 58 by  33) XO=32  YO=31
+LOADED            GOR15 ( 55 by  33) XO=29  YO=30
+LOADED            GOR16 ( 48 by  54) XO=41  YO=25
+LOADED            GRE00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [GRE00].            GRE01 ( 41 by  29) XO=20  YO=27
+LOADED            GRE02 ( 45 by  34) XO=18  YO=31
+LOADED            GRE03 ( 48 by  35) XO=11  YO=31
+LOADED            GRE04 ( 48 by  33) XO=15  YO=29
+LOADED            GRE05 ( 41 by  37) XO=21  YO=31
+LOADED            GRE06 ( 40 by  40) XO=31  YO=35
+LOADED            GRE07 ( 39 by  33) XO=8  YO=26
+LOADED            GRE08 ( 45 by  37) XO=4  YO=27
+LOADED            GRE09 ( 43 by  38) XO=9  YO=28
+LOADED            GRE10 ( 40 by  38) XO=17  YO=29
+LOADED            GRE11 ( 43 by  30) XO=21  YO=19
+LOADED            GRE12 ( 53 by  33) XO=25  YO=30
+LOADED            GRE13 ( 53 by  32) XO=26  YO=28
+LOADED            GRE14 ( 54 by  31) XO=28  YO=29
+LOADED            GRE15 ( 48 by  37) XO=23  YO=35
+LOADED            GRE16 ( 41 by  42) XO=38  YO=32
+LOADED            OLD00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [OLD00].            OLD01 ( 54 by  31) XO=27  YO=28
+LOADED            OLD02 ( 54 by  35) XO=25  YO=29
+LOADED            OLD03 ( 52 by  38) XO=23  YO=29
+LOADED            OLD04 ( 53 by  39) XO=29  YO=30
+LOADED            OLD05 ( 55 by  41) XO=26  YO=30
+LOADED            OLD06 ( 47 by  47) XO=30  YO=35
+LOADED            OLD07 ( 53 by  35) XO=23  YO=25
+LOADED            OLD08 ( 49 by  47) XO=14  YO=29
+LOADED            OLD09 ( 49 by  47) XO=17  YO=30
+LOADED            OLD10 ( 59 by  45) XO=27  YO=31
+LOADED            OLD11 ( 53 by  36) XO=25  YO=17
+LOADED            OLD12 ( 62 by  34) XO=30  YO=27
+LOADED            OLD13 ( 64 by  33) XO=36  YO=29
+LOADED            OLD14 ( 64 by  34) XO=36  YO=29
+LOADED            OLD15 ( 53 by  38) XO=26  YO=30
+LOADED            OLD16 ( 46 by  43) XO=35  YO=24
+LOADED            PIG00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [PIG00].            PIG01 ( 37 by  37) XO=19  YO=34
+LOADED            PIG02 ( 41 by  36) XO=20  YO=34
+LOADED            PIG03 ( 49 by  40) XO=15  YO=36
+LOADED            PIG04 ( 41 by  42) XO=14  YO=37
+LOADED            PIG05 ( 38 by  45) XO=18  YO=38
+LOADED            PIG06 ( 43 by  38) XO=31  YO=33
+LOADED            PIG07 ( 43 by  31) XO=9  YO=24
+LOADED            PIG08 ( 42 by  33) XO=5  YO=25
+LOADED            PIG09 ( 44 by  35) XO=6  YO=27
+LOADED            PIG10 ( 39 by  34) XO=17  YO=28
+LOADED            PIG11 ( 38 by  33) XO=19  YO=20
+LOADED            PIG12 ( 42 by  39) XO=20  YO=35
+LOADED            PIG13 ( 50 by  39) XO=28  YO=35
+LOADED            PIG14 ( 47 by  38) XO=23  YO=35
+LOADED            PIG15 ( 37 by  42) XO=18  YO=36
+LOADED            PIG16 ( 49 by  40) XO=45  YO=28
+LOADED            WIZ00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [WIZ00].            WIZ01 ( 43 by  55) XO=21  YO=52
+LOADED            WIZ02 ( 48 by  58) XO=20  YO=53
+LOADED            WIZ03 ( 60 by  63) XO=27  YO=49
+LOADED            WIZ04 ( 59 by  63) XO=27  YO=48
+LOADED            WIZ05 ( 42 by  57) XO=20  YO=44
+LOADED            WIZ06 ( 51 by  55) XO=33  YO=42
+LOADED            WIZ07 ( 43 by  48) XO=11  YO=40
+LOADED            WIZ08 ( 47 by  64) XO=7  YO=49
+LOADED            WIZ09 ( 48 by  67) XO=9  YO=52
+LOADED            WIZ10 ( 41 by  69) XO=19  YO=56
+LOADED            WIZ11 ( 40 by  33) XO=16  YO=20
+LOADED            WIZ12 ( 60 by  45) XO=37  YO=42
+LOADED            WIZ13 ( 79 by  48) XO=56  YO=39
+LOADED            WIZ14 ( 70 by  44) XO=43  YO=36
+LOADED            WIZ15 ( 41 by  44) XO=20  YO=35
+LOADED            WIZ16 ( 69 by  53) XO=57  YO=26
+LOADED
+Opening img lib [C:\hdsmsc3.img]            ERI00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [ERI00].            ERI01 ( 30 by  33) XO=14  YO=31
+LOADED            ERI02 ( 34 by  35) XO=14  YO=31
+LOADED            ERI03 ( 35 by  36) XO=12  YO=31
+LOADED            ERI04 ( 31 by  38) XO=11  YO=32
+LOADED            ERI05 ( 29 by  38) XO=14  YO=33
+LOADED            ERI06 ( 35 by  30) XO=26  YO=27
+LOADED            ERI07 ( 32 by  31) XO=8  YO=25
+LOADED            ERI08 ( 34 by  37) XO=7  YO=27
+LOADED            ERI09 ( 31 by  36) XO=6  YO=29
+LOADED            ERI10 ( 30 by  39) XO=14  YO=32
+LOADED            ERI11 ( 26 by  28) XO=12  YO=17
+LOADED            ERI12 ( 35 by  32) XO=20  YO=30
+LOADED            ERI13 ( 40 by  33) XO=20  YO=31
+LOADED            ERI14 ( 35 by  33) XO=17  YO=30
+LOADED            ERI15 ( 29 by  33) XO=14  YO=30
+LOADED            ERI16 ( 36 by  35) XO=32  YO=21
+LOADED            KIM00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [KIM00].            KIM01 ( 50 by  63) XO=25  YO=35
+LOADED            KIM02 ( 56 by  66) XO=30  YO=35
+LOADED            KIM03 ( 52 by  59) XO=30  YO=36
+LOADED            KIM04 ( 53 by  55) XO=29  YO=36
+LOADED            KIM05 ( 44 by  52) XO=20  YO=37
+LOADED            KIM06 ( 56 by  60) XO=25  YO=30
+LOADED            KIM07 ( 64 by  51) XO=38  YO=31
+LOADED            KIM08 ( 60 by  55) XO=28  YO=33
+LOADED            KIM09 ( 60 by  56) XO=28  YO=34
+LOADED            KIM10 ( 51 by  58) XO=23  YO=37
+LOADED            KIM11 ( 58 by  65) XO=28  YO=25
+LOADED            KIM12 ( 59 by  66) XO=29  YO=35
+LOADED            KIM13 ( 44 by  63) XO=26  YO=34
+LOADED            KIM14 ( 52 by  55) XO=26  YO=36
+LOADED            KIM15 ( 49 by  54) XO=22  YO=35
+LOADED            KIM16 ( 68 by  48) XO=37  YO=18
+LOADED            MAR00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MAR00].            MAR01 ( 36 by  57) XO=18  YO=33
+LOADED            MAR02 ( 42 by  57) XO=22  YO=33
+LOADED            MAR03 ( 41 by  57) XO=19  YO=33
+LOADED            MAR04 ( 39 by  56) XO=19  YO=34
+LOADED            MAR05 ( 36 by  55) XO=19  YO=35
+LOADED            MAR06 ( 44 by  58) XO=22  YO=32
+LOADED            MAR07 ( 46 by  58) XO=22  YO=32
+LOADED            MAR08 ( 56 by  57) XO=25  YO=32
+LOADED            MAR09 ( 44 by  57) XO=20  YO=34
+LOADED            MAR10 ( 38 by  57) XO=19  YO=34
+LOADED            MAR11 ( 36 by  63) XO=17  YO=31
+LOADED            MAR12 ( 43 by  63) XO=21  YO=31
+LOADED            MAR13 ( 48 by  63) XO=28  YO=30
+LOADED            MAR14 ( 52 by  58) XO=23  YO=31
+LOADED            MAR15 ( 45 by  54) XO=21  YO=31
+LOADED            MAR16 ( 57 by  41) XO=34  YO=22
+LOADED            ROH00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [ROH00].            ROH01 ( 28 by  34) XO=13  YO=32
+LOADED            ROH02 ( 32 by  36) XO=17  YO=33
+LOADED            ROH03 ( 37 by  38) XO=15  YO=33
+LOADED            ROH04 ( 33 by  40) XO=15  YO=33
+LOADED            ROH05 ( 28 by  40) XO=13  YO=34
+LOADED            ROH06 ( 33 by  33) XO=24  YO=30
+LOADED            ROH07 ( 34 by  35) XO=8  YO=29
+LOADED            ROH08 ( 40 by  38) XO=8  YO=32
+LOADED            ROH09 ( 35 by  41) XO=10  YO=35
+LOADED            ROH10 ( 29 by  41) XO=14  YO=35
+LOADED            ROH11 ( 30 by  36) XO=14  YO=22
+LOADED            ROH12 ( 34 by  37) XO=18  YO=34
+LOADED            ROH13 ( 40 by  37) XO=21  YO=34
+LOADED            ROH14 ( 34 by  40) XO=17  YO=36
+LOADED            ROH15 ( 28 by  40) XO=13  YO=35
+LOADED            ROH16 ( 38 by  37) XO=33  YO=22
+LOADED            SEA00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [SEA00].            SEA01 ( 28 by  34) XO=13  YO=32
+LOADED            SEA02 ( 30 by  34) XO=15  YO=32
+LOADED            SEA03 ( 33 by  36) XO=13  YO=32
+LOADED            SEA04 ( 29 by  37) XO=11  YO=31
+LOADED            SEA05 ( 28 by  39) XO=13  YO=32
+LOADED            SEA06 ( 34 by  29) XO=25  YO=26
+LOADED            SEA07 ( 29 by  32) XO=7  YO=25
+LOADED            SEA08 ( 36 by  37) XO=4  YO=28
+LOADED            SEA09 ( 32 by  38) XO=5  YO=29
+LOADED            SEA10 ( 29 by  37) XO=14  YO=30
+LOADED            SEA11 ( 27 by  29) XO=12  YO=20
+LOADED            SEA12 ( 35 by  31) XO=20  YO=29
+LOADED            SEA13 ( 39 by  33) XO=22  YO=30
+LOADED            SEA14 ( 33 by  35) XO=17  YO=30
+LOADED            SEA15 ( 28 by  35) XO=13  YO=30
+LOADED            SEA16 ( 36 by  33) XO=33  YO=19
+LOADED
+Opening img lib [C:\hdsmsc4.img]         CHEECH00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [CHEECH00].         CHEECH01 ( 30 by  35) XO=15  YO=33
+LOADED         CHEECH02 ( 35 by  37) XO=10  YO=33
+LOADED         CHEECH03 ( 37 by  37) XO=7  YO=33
+LOADED         CHEECH04 ( 33 by  38) XO=6  YO=34
+LOADED         CHEECH05 ( 29 by  40) XO=14  YO=36
+LOADED         CHEECH06 ( 37 by  34) XO=25  YO=30
+LOADED         CHEECH07 ( 38 by  36) XO=7  YO=22
+LOADED         CHEECH08 ( 41 by  37) XO=2  YO=24
+LOADED         CHEECH09 ( 34 by  39) XO=3  YO=28
+LOADED         CHEECH10 ( 24 by  40) XO=12  YO=34
+LOADED         CHEECH11 ( 25 by  35) XO=11  YO=27
+LOADED         CHEECH12 ( 37 by  39) XO=17  YO=36
+LOADED         CHEECH13 ( 45 by  37) XO=26  YO=35
+LOADED         CHEECH14 ( 38 by  36) XO=17  YO=35
+LOADED         CHEECH15 ( 30 by  37) XO=13  YO=34
+LOADED         CHEECH16 ( 37 by  37) XO=35  YO=29
+LOADED          CLOWN00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [CLOWN00].          CLOWN01 ( 44 by  36) XO=21  YO=33
+LOADED          CLOWN02 ( 35 by  35) XO=15  YO=32
+LOADED          CLOWN03 ( 42 by  37) XO=14  YO=33
+LOADED          CLOWN04 ( 38 by  39) XO=15  YO=35
+LOADED          CLOWN05 ( 42 by  40) XO=20  YO=37
+LOADED          CLOWN06 ( 38 by  32) XO=30  YO=28
+LOADED          CLOWN07 ( 38 by  36) XO=7  YO=20
+LOADED          CLOWN08 ( 36 by  41) XO=3  YO=28
+LOADED          CLOWN09 ( 37 by  41) XO=3  YO=31
+LOADED          CLOWN10 ( 43 by  40) XO=20  YO=31
+LOADED          CLOWN11 ( 42 by  37) XO=20  YO=27
+LOADED          CLOWN12 ( 40 by  33) XO=22  YO=32
+LOADED          CLOWN13 ( 42 by  36) XO=26  YO=31
+LOADED          CLOWN14 ( 39 by  34) XO=20  YO=32
+LOADED          CLOWN15 ( 44 by  37) XO=19  YO=34
+LOADED          CLOWN16 ( 37 by  42) XO=35  YO=29
+LOADED         MADBAL00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MADBAL00].         MADBAL01 ( 40 by  40) XO=19  YO=37
+LOADED         MADBAL02 ( 43 by  40) XO=19  YO=36
+LOADED         MADBAL03 ( 43 by  40) XO=17  YO=36
+LOADED         MADBAL04 ( 41 by  39) XO=14  YO=35
+LOADED         MADBAL05 ( 38 by  38) XO=19  YO=34
+LOADED         MADBAL06 ( 38 by  37) XO=27  YO=32
+LOADED         MADBAL07 ( 45 by  39) XO=8  YO=32
+LOADED         MADBAL08 ( 43 by  38) XO=3  YO=26
+LOADED         MADBAL09 ( 41 by  39) XO=7  YO=27
+LOADED         MADBAL10 ( 38 by  40) XO=18  YO=34
+LOADED         MADBAL11 ( 41 by  42) XO=20  YO=33
+LOADED         MADBAL12 ( 41 by  44) XO=18  YO=42
+LOADED         MADBAL13 ( 42 by  45) XO=25  YO=41
+LOADED         MADBAL14 ( 42 by  44) XO=21  YO=41
+LOADED         MADBAL15 ( 40 by  44) XO=18  YO=40
+LOADED         MADBAL16 ( 40 by  43) XO=38  YO=26
+LOADED         VIKAPE00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [VIKAPE00].         VIKAPE01 ( 47 by  49) XO=23  YO=41
+LOADED         VIKAPE02 ( 34 by  49) XO=18  YO=42
+LOADED         VIKAPE03 ( 43 by  56) XO=21  YO=44
+LOADED         VIKAPE04 ( 41 by  53) XO=21  YO=42
+LOADED         VIKAPE05 ( 47 by  59) XO=24  YO=45
+LOADED         VIKAPE06 ( 62 by  55) XO=51  YO=41
+LOADED         VIKAPE07 ( 51 by  44) XO=15  YO=32
+LOADED         VIKAPE08 ( 45 by  54) XO=13  YO=38
+LOADED         VIKAPE09 ( 51 by  53) XO=11  YO=38
+LOADED         VIKAPE10 ( 48 by  56) XO=23  YO=40
+LOADED         VIKAPE11 ( 50 by  33) XO=26  YO=22
+LOADED         VIKAPE12 ( 55 by  42) XO=37  YO=33
+LOADED         VIKAPE13 ( 54 by  41) XO=34  YO=31
+LOADED         VIKAPE14 ( 56 by  42) XO=34  YO=32
+LOADED         VIKAPE15 ( 46 by  47) XO=23  YO=34
+LOADED         VIKAPE16 ( 61 by  38) XO=53  YO=21
+LOADED          BEAST00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [BEAST00].          BEAST01 ( 25 by  36) XO=11  YO=34
+LOADED          BEAST02 ( 29 by  37) XO=16  YO=31
+LOADED          BEAST03 ( 35 by  39) XO=13  YO=35
+LOADED          BEAST04 ( 28 by  40) XO=12  YO=35
+LOADED          BEAST05 ( 26 by  40) XO=12  YO=37
+LOADED          BEAST16 ( 39 by  35) XO=37  YO=21
+LOADED          JABAL00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [JABAL00].          JABAL01 ( 28 by  33) XO=14  YO=31
+LOADED          JABAL02 ( 40 by  36) XO=17  YO=31
+LOADED          JABAL03 ( 44 by  37) XO=16  YO=33
+LOADED          JABAL04 ( 38 by  36) XO=12  YO=32
+LOADED          JABAL05 ( 30 by  38) XO=14  YO=35
+LOADED          JABAL16 ( 37 by  44) XO=35  YO=30
+LOADED           MDOC00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MDOC00].           MDOC01 ( 28 by  32) XO=14  YO=30
+LOADED           MDOC02 ( 28 by  33) XO=15  YO=30
+LOADED           MDOC03 ( 33 by  35) XO=13  YO=32
+LOADED           MDOC04 ( 29 by  36) XO=11  YO=32
+LOADED           MDOC05 ( 28 by  36) XO=14  YO=33
+LOADED           MDOC06 ( 34 by  33) XO=24  YO=27
+LOADED           MDOC07 ( 31 by  36) XO=5  YO=27
+LOADED           MDOC08 ( 36 by  37) XO=7  YO=29
+LOADED           MDOC09 ( 33 by  38) XO=4  YO=31
+LOADED           MDOC10 ( 27 by  40) XO=12  YO=33
+LOADED           MDOC11 ( 30 by  30) XO=14  YO=21
+LOADED           MDOC12 ( 39 by  32) XO=22  YO=30
+LOADED           MDOC13 ( 43 by  31) XO=22  YO=29
+LOADED           MDOC14 ( 38 by  30) XO=19  YO=29
+LOADED           MDOC15 ( 31 by  32) XO=16  YO=30
+LOADED           MDOC16 ( 34 by  33) XO=32  YO=19
+LOADED
+Opening img lib [C:\hdsmsc5.img]         AMRICH00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [AMRICH00].         AMRICH01 ( 37 by  63) XO=16  YO=61
+LOADED         AMRICH02 ( 37 by  65) XO=17  YO=62
+LOADED         AMRICH03 ( 37 by  63) XO=16  YO=60
+LOADED         AMRICH04 ( 36 by  59) XO=16  YO=56
+LOADED         AMRICH05 ( 33 by  59) XO=18  YO=56
+LOADED         AMRICH06 ( 58 by  61) XO=51  YO=56
+LOADED         AMRICH07 ( 41 by  54) XO=9  YO=49
+LOADED         AMRICH08 ( 43 by  51) XO=7  YO=45
+LOADED         AMRICH09 ( 45 by  53) XO=7  YO=46
+LOADED         AMRICH10 ( 38 by  56) XO=20  YO=50
+LOADED         AMRICH11 ( 38 by  50) XO=20  YO=36
+LOADED         AMRICH12 ( 46 by  54) XO=29  YO=48
+LOADED         AMRICH13 ( 47 by  53) XO=30  YO=46
+LOADED         AMRICH14 ( 44 by  47) XO=29  YO=43
+LOADED         AMRICH15 ( 31 by  46) XO=15  YO=41
+LOADED         AMRICH16 ( 63 by  37) XO=59  YO=21
+LOADED           BARD00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [BARD00].           BARD01 ( 28 by  35) XO=13  YO=32
+LOADED           BARD02 ( 31 by  36) XO=14  YO=32
+LOADED           BARD03 ( 36 by  36) XO=14  YO=32
+LOADED           BARD04 ( 30 by  38) XO=9  YO=34
+LOADED           BARD05 ( 28 by  38) XO=14  YO=33
+LOADED           BARD06 ( 35 by  33) XO=27  YO=28
+LOADED           BARD07 ( 31 by  29) XO=8  YO=22
+LOADED           BARD08 ( 41 by  34) XO=4  YO=24
+LOADED           BARD09 ( 36 by  36) XO=3  YO=27
+LOADED           BARD10 ( 27 by  39) XO=13  YO=32
+LOADED           BARD11 ( 26 by  31) XO=12  YO=19
+LOADED           BARD12 ( 34 by  34) XO=19  YO=31
+LOADED           BARD13 ( 43 by  34) XO=25  YO=31
+LOADED           BARD14 ( 35 by  33) XO=16  YO=31
+LOADED           BARD15 ( 26 by  35) XO=12  YO=31
+LOADED           BARD16 ( 39 by  32) XO=36  YO=19
+LOADED            DIM00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [DIM00].            DIM01 ( 27 by  32) XO=13  YO=30
+LOADED            DIM02 ( 31 by  32) XO=15  YO=30
+LOADED            DIM03 ( 37 by  33) XO=14  YO=30
+LOADED            DIM04 ( 32 by  35) XO=12  YO=32
+LOADED            DIM05 ( 27 by  36) XO=13  YO=33
+LOADED            DIM16 ( 37 by  33) XO=34  YO=20
+LOADED         JACKJR00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [JACKJR00].         JACKJR01 ( 29 by  33) XO=14  YO=30
+LOADED         JACKJR02 ( 29 by  33) XO=14  YO=30
+LOADED         JACKJR03 ( 37 by  32) XO=19  YO=29
+LOADED         JACKJR04 ( 37 by  33) XO=15  YO=31
+LOADED         JACKJR05 ( 30 by  36) XO=15  YO=34
+LOADED         JACKJR06 ( 37 by  29) XO=26  YO=24
+LOADED         JACKJR07 ( 30 by  33) XO=9  YO=28
+LOADED         JACKJR08 ( 41 by  33) XO=13  YO=29
+LOADED         JACKJR09 ( 37 by  35) XO=12  YO=29
+LOADED         JACKJR10 ( 29 by  36) XO=14  YO=30
+LOADED         JACKJR11 ( 28 by  36) XO=13  YO=21
+LOADED         JACKJR12 ( 35 by  35) XO=22  YO=27
+LOADED         JACKJR13 ( 38 by  36) XO=22  YO=29
+LOADED         JACKJR14 ( 35 by  34) XO=18  YO=29
+LOADED         JACKJR15 ( 31 by  32) XO=15  YO=29
+LOADED         JACKJR16 ( 35 by  34) XO=32  YO=16
+LOADED         JIGGET00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [JIGGET00].         JIGGET01 ( 23 by  36) XO=11  YO=33
+LOADED         JIGGET02 ( 27 by  37) XO=11  YO=33
+LOADED         JIGGET03 ( 34 by  38) XO=11  YO=33
+LOADED         JIGGET04 ( 27 by  37) XO=8  YO=33
+LOADED         JIGGET05 ( 26 by  40) XO=12  YO=34
+LOADED         JIGGET16 ( 38 by  33) XO=32  YO=21
+LOADED            JON00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [JON00].            JON01 ( 28 by  32) XO=14  YO=30
+LOADED            JON02 ( 33 by  35) XO=16  YO=31
+LOADED            JON03 ( 39 by  37) XO=17  YO=32
+LOADED            JON04 ( 31 by  38) XO=15  YO=33
+LOADED            JON05 ( 30 by  39) XO=15  YO=34
+LOADED            JON06 ( 33 by  32) XO=24  YO=26
+LOADED            JON07 ( 33 by  32) XO=9  YO=24
+LOADED            JON08 ( 40 by  39) XO=5  YO=27
+LOADED            JON09 ( 36 by  40) XO=6  YO=29
+LOADED            JON10 ( 30 by  40) XO=14  YO=31
+LOADED            JON11 ( 29 by  33) XO=14  YO=20
+LOADED            JON12 ( 36 by  35) XO=20  YO=33
+LOADED            JON13 ( 43 by  35) XO=22  YO=32
+LOADED            JON14 ( 36 by  38) XO=17  YO=33
+LOADED            JON15 ( 29 by  37) XO=14  YO=33
+LOADED            JON16 ( 41 by  37) XO=37  YO=21
+LOADED           MIKE00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MIKE00].           MIKE01 ( 28 by  31) XO=13  YO=29
+LOADED           MIKE02 ( 29 by  31) XO=14  YO=29
+LOADED           MIKE03 ( 33 by  34) XO=13  YO=31
+LOADED           MIKE04 ( 29 by  35) XO=11  YO=31
+LOADED           MIKE05 ( 28 by  37) XO=14  YO=32
+LOADED           MIKE06 ( 32 by  29) XO=25  YO=26
+LOADED           MIKE07 ( 29 by  30) XO=6  YO=24
+LOADED           MIKE08 ( 35 by  35) XO=3  YO=28
+LOADED           MIKE09 ( 32 by  35) XO=4  YO=28
+LOADED           MIKE10 ( 27 by  37) XO=13  YO=31
+LOADED           MIKE11 ( 26 by  27) XO=12  YO=17
+LOADED           MIKE12 ( 32 by  31) XO=17  YO=29
+LOADED           MIKE13 ( 40 by  31) XO=21  YO=29
+LOADED           MIKE14 ( 32 by  33) XO=16  YO=30
+LOADED           MIKE15 ( 28 by  32) XO=13  YO=29
+LOADED           MIKE16 ( 36 by  31) XO=34  YO=17
+LOADED            MIN00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MIN00].            MIN01 ( 27 by  33) XO=13  YO=30
+LOADED            MIN02 ( 29 by  34) XO=13  YO=30
+LOADED            MIN03 ( 36 by  35) XO=14  YO=31
+LOADED            MIN04 ( 28 by  37) XO=10  YO=33
+LOADED            MIN05 ( 28 by  37) XO=13  YO=32
+LOADED            MIN06 ( 32 by  31) XO=25  YO=25
+LOADED            MIN07 ( 26 by  33) XO=5  YO=28
+LOADED            MIN08 ( 34 by  36) XO=6  YO=30
+LOADED            MIN09 ( 29 by  37) XO=5  YO=30
+LOADED            MIN10 ( 28 by  38) XO=13  YO=31
+LOADED            MIN11 ( 28 by  30) XO=13  YO=17
+LOADED            MIN12 ( 32 by  34) XO=17  YO=31
+LOADED            MIN13 ( 38 by  36) XO=19  YO=31
+LOADED            MIN14 ( 30 by  35) XO=14  YO=31
+LOADED            MIN15 ( 27 by  36) XO=13  YO=31
+LOADED            MIN16 ( 37 by  33) XO=34  YO=21
+LOADED           MUND00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MUND00].           MUND01 ( 28 by  49) XO=11  YO=47
+LOADED           MUND02 ( 34 by  50) XO=17  YO=48
+LOADED           MUND03 ( 41 by  51) XO=20  YO=49
+LOADED           MUND04 ( 42 by  56) XO=24  YO=53
+LOADED           MUND05 ( 26 by  51) XO=12  YO=48
+LOADED           MUND06 ( 48 by  48) XO=42  YO=45
+LOADED           MUND07 ( 35 by  55) XO=10  YO=52
+LOADED           MUND08 ( 33 by  55) XO=4  YO=47
+LOADED           MUND09 ( 29 by  59) XO=4  YO=52
+LOADED           MUND10 ( 29 by  55) XO=14  YO=49
+LOADED           MUND11 ( 27 by  29) XO=13  YO=22
+LOADED           MUND12 ( 47 by  46) XO=29  YO=45
+LOADED           MUND13 ( 56 by  32) XO=39  YO=27
+LOADED           MUND14 ( 43 by  36) XO=27  YO=34
+LOADED           MUND15 ( 27 by  47) XO=13  YO=43
+LOADED           MUND16 ( 51 by  41) XO=48  YO=22
+LOADED            MXV00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [MXV00].            MXV01 ( 27 by  33) XO=13  YO=30
+LOADED            MXV02 ( 31 by  34) XO=15  YO=31
+LOADED            MXV03 ( 37 by  36) XO=14  YO=31
+LOADED            MXV04 ( 33 by  36) XO=13  YO=31
+LOADED            MXV05 ( 27 by  37) XO=13  YO=33
+LOADED            MXV06 ( 34 by  31) XO=25  YO=28
+LOADED            MXV07 ( 34 by  35) XO=5  YO=27
+LOADED            MXV08 ( 40 by  37) XO=4  YO=30
+LOADED            MXV09 ( 40 by  38) XO=4  YO=31
+LOADED            MXV10 ( 27 by  39) XO=12  YO=33
+LOADED            MXV11 ( 30 by  33) XO=14  YO=20
+LOADED            MXV12 ( 38 by  35) XO=21  YO=33
+LOADED            MXV13 ( 41 by  35) XO=20  YO=32
+LOADED            MXV14 ( 35 by  36) XO=17  YO=33
+LOADED            MXV15 ( 28 by  36) XO=13  YO=33
+LOADED            MXV16 ( 40 by  34) XO=37  YO=20
+LOADED          NORTH00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [NORTH00].          NORTH01 ( 24 by  33) XO=12  YO=30
+LOADED          NORTH02 ( 32 by  35) XO=16  YO=32
+LOADED          NORTH03 ( 33 by  38) XO=14  YO=33
+LOADED          NORTH04 ( 26 by  37) XO=9  YO=33
+LOADED          NORTH05 ( 25 by  39) XO=11  YO=32
+LOADED          NORTH16 ( 38 by  33) XO=34  YO=19
+LOADED            WIL00 (  3 by   2) XO=0  YO=0
+block cksum match w:4, h:3, dma2:6000 add:2000000
+Checksum match on image [WIL00].            WIL01 ( 30 by  34) XO=15  YO=30
+LOADED            WIL02 ( 33 by  34) XO=15  YO=30
+LOADED            WIL03 ( 37 by  35) XO=15  YO=31
+LOADED            WIL04 ( 29 by  36) XO=12  YO=32
+LOADED            WIL05 ( 29 by  37) XO=13  YO=32
+LOADED            WIL06 ( 32 by  32) XO=24  YO=27
+LOADED            WIL07 ( 29 by  34) XO=7  YO=29
+LOADED            WIL08 ( 37 by  38) XO=10  YO=30
+LOADED            WIL09 ( 32 by  40) XO=8  YO=32
+LOADED            WIL10 ( 31 by  41) XO=15  YO=33
+LOADED            WIL11 ( 27 by  28) XO=13  YO=18
+LOADED            WIL12 ( 32 by  32) XO=17  YO=29
+LOADED            WIL13 ( 43 by  33) XO=24  YO=29
+LOADED            WIL14 ( 32 by  33) XO=17  YO=29
+LOADED            WIL15 ( 29 by  34) XO=14  YO=30
+LOADED            WIL16 ( 39 by  33) XO=36  YO=18
+LOADED
+
+Bytes Loaded...
+	IMAGE RAM              2115780 dec	  2048C4 hex
+
+	TOTAL LOAD             2115780 dec	  2048C4 hex
+
+Bytes Written to Raw File...
+	In IMAGE RAM records      2115780 dec	  2048C4 hex
+
+	TOTAL bytes written       2115780 dec	  2048C4 hex, in 2 records.
+
+Bytes Represented in Tables ... 2115780 dec 2048C4 hex
+
+Skipped 13623 duplicate bytes in 173 foreground checksum matches.
+
