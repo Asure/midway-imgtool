@@ -2,7 +2,7 @@
 
 Williams/Midway arcade image loader replacement for the MS-DOS LOAD2/LOADW tool (Williams Electronics Games Inc., 1995). Reads `.lod` script files and `.img` container files, outputs `.tbl`/`.asm`/`.glo`/`.irw` files for TMS34020 GSP hardware.
 
-All LOD test files (MK2MIL through MK8MIL) are from **Mortal Kombat 2** arcade data. The naming convention (MK4MIL = MK2 revision 4, etc.) reflects different game ROM revisions, not different game titles.
+All LOD test files (MK2MIL through MK8MIL) are from **Mortal Kombat 2** arcade data. The naming convention (MK4MIL = MK2 ROM bank 4, etc.) reflects the EPROM bank that the IRW data targets, not different game revisions.
 
 ---
 
@@ -606,7 +606,7 @@ matches LOAD2 (separate lines), which is the correct target.
 
 ### Test Results (current dataset)
 
-All LOD files are from **Mortal Kombat 2** arcade data. Naming: MK2MIL = MK2 revision 2, MK4MIL = revision 4, etc.
+All LOD files are from **Mortal Kombat 2** arcade data. Naming: MK2MIL = MK2 ROM bank 2, MK4MIL = bank 4, etc.
 BB* LODs are from **NBA Jam / Hangtime** arcade data.
 
 | Test | Mode | TBLs | Result | Notes |
