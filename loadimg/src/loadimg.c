@@ -393,14 +393,10 @@ static void irw_ensure(size_t need_bytes) {
  *
  * Matches LOADW's Borland C 16-bit int addition.
  * sum wraps at 65536, matching LOADW's `int sum` on 16-bit x86.
- * max_val tracks the maximum byte value across all bytes (both lo and hi
- * of each 16-bit word).
  *
- * Dedup key (FUN_1854_37dd) checks 3 fields: {sum, max_val, ctrl}.
- * Unlike sprite dedup, background dedup does NOT check sizx/sizy —
- * LOADW's 40-byte struct stride means different image sizes with same
- * pixel data can match. The dedup table persists across the ENTIRE LOD
- * (not reset per IMG — confirmed by cross-IMG dedup in V5 logs).
+ * The dedup key is {sum, max_val, sizx, sizy, ctrl}. For sprites,
+ * checksum covers stride-padded pixel data (matching FUN_1854_35fc).
+ * For backgrounds, checksum covers raw w*h bytes only.
  */
 static uint16_t loadw_checksum(uint8_t *pix, int stride, int w, int h, uint16_t *out_max) {
     uint16_t sum = 0, max_val = 0;
