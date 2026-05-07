@@ -1243,14 +1243,13 @@ static void write_image_tbl(FILE *fp, ImageEntry *ie) {
                 fprintf(fp, "\r\n");
                 n_words = 0;
             }
-            if (f == IHDR_SAG) {
-                uint32_t base = g.base_addr;
-                if (g.dual_bank) {
-                    /* Dual-bank: bank = (base - 0x2000000) / 0x4000000 */
-                    int dbank = g.base_addr >= 0x2000000 ? (int)((g.base_addr - 0x2000000) / 0x4000000) : 0;
-                    base += (uint32_t)dbank * 0x2000000;
-                }
-                fprintf(fp, "\t.long   0%xH\r\n", base + ie->sag);
+             if (f == IHDR_SAG) {
+                 uint32_t base = g.base_addr;
+                 if (g.dual_bank) {
+                     int dbank = g.base_addr >= 0x2000000 ? (int)((g.base_addr - 0x2000000) / 0x4000000) : 0;
+                     base += (uint32_t)dbank * 0x2000000;
+                 }
+                 fprintf(fp, "\t.long   0%xH\r\n", base + ie->sag);
             } else if (f == IHDR_PAL) {
                 if (have_pal)
                     fprintf(fp, "\t.long   %s\r\n", ie->pal_name);
@@ -1721,12 +1720,12 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
                 fprintf(stderr, "DEDUP_HIT %s: matched table[%d] sag=0x%x\n", name, dedup_idx, dedup_table[dedup_idx].sag);
         }
 
-        if (dedup_idx >= 0) {
-            ie->sag = dedup_table[dedup_idx].sag;
-            if (g.verbose)
-                printf("  Checksum match on image [%s].\n", name);
-        } else {
-            ie->sag = encode_image(cur->imgfile, rec, &cp, bpp & 0xff);
+         if (dedup_idx >= 0) {
+             ie->sag = dedup_table[dedup_idx].sag;
+             if (g.verbose)
+                 printf("  Checksum match on image [%s].\n", name);
+         } else {
+             ie->sag = encode_image(cur->imgfile, rec, &cp, bpp & 0xff);
              if (g.dedup && n_dedup < MAX_DEDUP) {
                 uint8_t *pix_data = img_pixels(cur->imgfile, rec);
                 int pstride = IMG_STRIDE(rec->w);
@@ -2630,6 +2629,7 @@ else if (!strncmp(upper, "MON>", 4)) { }
             upcase(fname);
             if (cur.imgfile) { free(cur.imgfile->norm_images); free(cur.imgfile->data); free(cur.imgfile); }
             cur.imgfile = img_load_try(g.imgdir, fname);
+            n_dedup = 0;  /* LOADW resets dedup table per IMG library */
             if (!cur.imgfile)
                 fprintf(stderr, "WARNING: cannot load IMG file: %s\n", fname);
             else {
