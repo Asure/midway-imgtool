@@ -415,7 +415,13 @@ static uint16_t loadw_checksum(uint8_t *pix, int stride, int w, int h, uint16_t 
 }
 
 #define MAX_DEDUP 4096
-typedef struct { uint16_t sum, max_val; int sizx, sizy; uint16_t ctrl; uint32_t sag; int sag_idx; } DedupEntry;
+typedef struct {
+    uint16_t sum, max_val, sum2;  /* sum2 = second hash for collision disambiguation */
+    int sizx, sizy;
+    uint16_t ctrl;
+    uint32_t sag;
+    int sag_idx;
+} DedupEntry;
 static DedupEntry dedup_table[MAX_DEDUP];
 static int n_dedup = 0;
 
@@ -667,7 +673,7 @@ static int img_max_pixel(ImgFile *img, IMG_REC *rec) {
     int stride = IMG_STRIDE(rec->w);
     int max_val = 0;
     for (int y = 0; y < rec->h; y++) {
-        for (int x = 0; x < rec->w; x++) {
+        for (int x = 0; x < stride; x++) {
             int v = pix[y * stride + x];
             if (v > max_val) max_val = v;
         }
@@ -1463,13 +1469,13 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
               * bpp overflow check above applies. */
             if (bpp_overflow) bpp |= 0x100;  /* flag for ctrl_zero */
         } else {
-              /* Auto pixel packing: select bpp per image */
+               /* Auto pixel packing: select bpp per image */
               uint8_t *pix = img_pixels(cur->imgfile, rec);
               if (pix) {
                  int pstride = IMG_STRIDE(rec->w);
                   uint32_t maxpx = 0;
                   for (int y = 0; y < rec->h; y++)
-                      for (int x = 0; x < rec->w; x++) {
+                      for (int x = 0; x < pstride; x++) {
                           uint8_t px = pix[y * pstride + x];
                           if (px > maxpx) maxpx = px;
                       }
@@ -1707,26 +1713,29 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
             }
         }
 
-         /* CON> dedup: check if identical image already encoded */
+          /* CON> dedup: check if identical image already encoded */
         int dedup_idx = -1;
          if (g.dedup) {
              uint8_t *pix_data = img_pixels(cur->imgfile, rec);
              int pstride = IMG_STRIDE(rec->w);
+             int pix_bytes = pstride * rec->h;
              uint16_t max_val;
              uint16_t ck = loadw_checksum(pix_data, pstride, rec->w, rec->h, &max_val);
-            if (g.verbose && (strcmp(name, "smfirebone3") == 0 || strcmp(name, "smfirebone6") == 0 ||
-                              rec->w == 8 || rec->h == 21))
-                fprintf(stderr, "DEDUP_CHK %s: ck=%u max=%u sizx=%d sizy=%d ctrl=0x%04x\n",
-                        name, ck, max_val, cp.sizx, cp.sizy, cp.ctrl);
+             /* Compute byte-sum hash to disambiguate 16-bit word-sum collisions.
+              * Two images with the same word-sum but different byte-sums are
+              * guaranteed to be different (e.g. odd-length buffers where the
+              * last byte is excluded from word-sum). */
+             uint16_t ck2 = 0;
+             for (int i = 0; i < pix_bytes; i++)
+                 ck2 = (uint16_t)(ck2 + pix_data[i]);
             for (int di = 0; di < n_dedup; di++) {
                 if (dedup_table[di].sum == ck && dedup_table[di].max_val == max_val &&
                     dedup_table[di].sizx == cp.sizx && dedup_table[di].sizy == cp.sizy &&
-                    dedup_table[di].ctrl == cp.ctrl) {
+                    dedup_table[di].ctrl == cp.ctrl &&
+                    dedup_table[di].sum2 == ck2) {
                     dedup_idx = di; break;
                 }
             }
-            if (g.verbose && dedup_idx >= 0 && (strcmp(name, "smfirebone3") == 0 || strcmp(name, "smfirebone6") == 0))
-                fprintf(stderr, "DEDUP_HIT %s: matched table[%d] sag=0x%x\n", name, dedup_idx, dedup_table[dedup_idx].sag);
         }
 
          if (dedup_idx >= 0) {
@@ -1738,17 +1747,24 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
              if (g.dedup && n_dedup < MAX_DEDUP) {
                 uint8_t *pix_data = img_pixels(cur->imgfile, rec);
                 int pstride = IMG_STRIDE(rec->w);
+                int pix_bytes = pstride * rec->h;
                 uint16_t max_val;
                 dedup_table[n_dedup].sum = loadw_checksum(pix_data, pstride, rec->w, rec->h, &max_val);
                 dedup_table[n_dedup].max_val = max_val;
+                /* Compute byte-sum hash to match the lookup check */
+                uint16_t ck2 = 0;
+                for (int i = 0; i < pix_bytes; i++)
+                    ck2 = (uint16_t)(ck2 + pix_data[i]);
+                dedup_table[n_dedup].sum2 = ck2;
                 dedup_table[n_dedup].sizx = cp.sizx;
                 dedup_table[n_dedup].sizy = cp.sizy;
                 dedup_table[n_dedup].ctrl = cp.ctrl;
                 dedup_table[n_dedup].sag = ie->sag;
                 dedup_table[n_dedup].sag_idx = -1;
                 if (g.verbose && n_dedup == 1020)
-                    printf("  DEDUP_ADD[1020] %s: ck=%u max=%u sizx=%d sizy=%d ctrl=0x%04x sag=%u\n",
-                           name, dedup_table[n_dedup].sum, dedup_table[n_dedup].max_val,
+                    printf("  DEDUP_ADD[1020] %s: ck=%u ck2=%u max=%u sizx=%d sizy=%d ctrl=0x%04x sag=%u\n",
+                           name, dedup_table[n_dedup].sum, dedup_table[n_dedup].sum2,
+                           dedup_table[n_dedup].max_val,
                            dedup_table[n_dedup].sizx, dedup_table[n_dedup].sizy,
                            dedup_table[n_dedup].ctrl, dedup_table[n_dedup].sag);
                 n_dedup++;
@@ -2360,7 +2376,7 @@ static void process_lod(const char *lod_path) {
                           img_bpp[di] = per_bpp; img_cmp[di] = do_cmp;
                           img_lm[di] = best_lm; img_tm[di] = best_tm;
 
-                         /* Dedup check before encoding */
+                          /* Dedup check before encoding */
                           if (g.dedup && pix && w > 0 && h > 0) {
                               uint16_t max_val;
                               uint16_t ck = loadw_checksum(pix, w, w, h, &max_val);
@@ -2442,7 +2458,7 @@ static void process_lod(const char *lod_path) {
                     }
                      }
                      }
-                     /* Add to dedup table */
+                      /* Add to dedup table */
                       if (g.dedup && bg_dedup_idx < 0 && n_dedup < MAX_DEDUP) {
                           uint16_t max_val;
                           uint16_t ck = loadw_checksum(pix, w, w, h, &max_val);
