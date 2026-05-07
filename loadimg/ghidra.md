@@ -98,6 +98,20 @@ JAVA_HOME=/snap/ghidra/35/usr/lib/jvm/java-21-openjdk-amd64 \
 Known symbols found in Ghidra: `_packbits @ 1000:5b64`, `_do_zcom @ 1c9a:3102`.
 COFF debug info in the binary also contains `_do_sclpad`, `_do_pad`, `_dataword`, `_do_table`, `_ctrl_word`, `_zero_pad`, `_do_align0`, `_do_cksum` and others, but Ghidra may not import all of them automatically.
 
+### Headless Decompilation (Script in Home Dir)
+
+If the script fails to load from `/tmp/` (OSGi class loading issue), copy it to `~/ghidra_scripts/`:
+
+```bash
+cp /tmp/ghidra_scripts2/DecompileBBB.java ~/ghidra_scripts/
+JAVA_HOME=/snap/ghidra/35/usr/lib/jvm/java-21-openjdk-amd64 \
+  /snap/ghidra/35/ghidra_12.0_PUBLIC/support/analyzeHeadless \
+  /tmp/ghidra_proj3 LOADW -process LOADW.EXE \
+  -scriptPath ~/ghidra_scripts -postScript DecompileBBB.java
+```
+
+The script's `println()` output goes to Ghidra's `INFO` log (stdout). Decompilation of large functions (like FUN_1854_1a49 at 1854:1a49, ~2100 lines) works but the decompiler may struggle with 16-bit far pointers and segmented memory.
+
 ### Script Template
 
 Minimal working Java script for decompiling functions:
@@ -150,7 +164,7 @@ Python scripts (Jython) also work when placed in the script path, but Ghidra mus
 | `1000:757c` | `FUN_1000_757c` | Lead computation helper |
 | `1000:7727` | `FUN_1000_7727` | Row dispatch |
 | `1c9a:3102` | `_do_zcom` | Zero-compression routine |
-| `1854:1a49` | `FUN_1854_1a49` | BDD/BDB background processor (references SIZX/SIZY/PWRD format strings) |
+| `1854:1a49` | `FUN_1854_1a49` | BDD/BDB background processor (~3070 lines, decompiles to ~2100 lines). Handles object-module matching with inclusive extents (`x+w-1`, `y+h-1`), generates BGNDTBL.ASM output. Decomp verified: `-2` Y-offset formula, `mod_ye = ii` (4th BDB field is end Y). See `/tmp/ghidra_bbb_decomp.txt`. |
 
 ## Internal Table Layout
 
@@ -194,6 +208,7 @@ FUN_1000_6f20 uses a per-row table at `param_3 + 0x234`:
 - Decompiler may strip loop bodies when it can't track loop variable bounds
 - Cross-segment string references (format strings in `45e8` segment, code in `1000`/`1854`/`1c9a`) are not resolved, so literal content search won't find them
 - COFF debug symbols from the Borland C++ 4.5 toolchain (e.g. `_do_sclpad`, `_do_pad`, `_dataword`, `_do_table`) exist in the binary but Ghidra may not import them all. Only `_packbits` (1000:5b64) and `_do_zcom` (1c9a:3102) are auto-imported.
+- BBB COFF symbols found at file offsets: `_bgnd_mod` (0x3bcc9), `_bgnd_block` (0x3bd40), `_bgnd_cksum_match` (0x3bdb7), `_bgnd_cksum_bits` (0x3be9e), `_do_rawbgndj` (0x3bfec), `_bgndtbl` (0x3c11a). These are in the COFF debug symbol table but Ghidra may not auto-import them.
 
 ## Files
 
@@ -205,3 +220,6 @@ FUN_1000_6f20 uses a per-row table at `param_3 + 0x234`:
 - `/tmp/decomp_checksum_lead.txt` — FUN_1000_6f20 (earlier analysis)
 - `/tmp/ghidra_con_dedup.txt` — Checksum functions
 - `/tmp/ghidra_7505.txt` — FUN_1000_7505 (per-row encoder)
+- `/tmp/ghidra_bbb_decomp.txt` — FUN_1854_1a49 BBB handler decompilation (2125 lines)
+- `/tmp/bbb_label_analysis.txt` — BBB string cross-reference analysis
+- `/tmp/bbb_compression_analysis.txt` — BBB compression path analysis
