@@ -1608,14 +1608,26 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
           * LOADW allows shared entries even when the own entry is out of bounds
           * (e.g. PTTBL count doesn't include trailing entries past file limit). */
           if (cur->imgfile->pttbls) {
+              /* Allow entry if at least the header fields (16 bytes) are within the file.
+               * LOADW reads 40-byte structs at 40-byte stride from 12-byte dense data;
+               * the tail of the struct (box/cbox at bytes 16-39) may extend past the file
+               * but the PT fields (x1/x2/X/Y/Z at bytes 0-15) must be valid. */
+              size_t file_size = cur->imgfile->size;
+              #define PTTBL_HDR_SIZE 16
               if (rec->pttblnum >= 0 && rec->pttblnum < cur->imgfile->n_pttbls) {
-                  ie->pttbl = &cur->imgfile->pttbls[rec->pttblnum];
+                  size_t entry_off = (uint8_t*)&cur->imgfile->pttbls[rec->pttblnum] - cur->imgfile->data;
+                  if (entry_off + PTTBL_HDR_SIZE <= file_size)
+                      ie->pttbl = &cur->imgfile->pttbls[rec->pttblnum];
               }
               if (rec->pttblnum >= 2 && rec->pttblnum - 2 < cur->imgfile->n_pttbls) {
-                  ie->pttbl_shared = &cur->imgfile->pttbls[rec->pttblnum - 2];
+                  size_t entry_off = (uint8_t*)&cur->imgfile->pttbls[rec->pttblnum - 2] - cur->imgfile->data;
+                  if (entry_off + PTTBL_HDR_SIZE <= file_size)
+                      ie->pttbl_shared = &cur->imgfile->pttbls[rec->pttblnum - 2];
               }
               if (rec->pttblnum >= 3 && rec->pttblnum - 3 < cur->imgfile->n_pttbls) {
-                  ie->pttbl_pt0x = &cur->imgfile->pttbls[rec->pttblnum - 3];
+                  size_t entry_off = (uint8_t*)&cur->imgfile->pttbls[rec->pttblnum - 3] - cur->imgfile->data;
+                  if (entry_off + PTTBL_HDR_SIZE <= file_size)
+                      ie->pttbl_pt0x = &cur->imgfile->pttbls[rec->pttblnum - 3];
               }
               if (!ie->pttbl_pt0x) ie->pttbl_pt0x = ie->pttbl_shared ? ie->pttbl_shared : ie->pttbl;
           }
@@ -2629,7 +2641,6 @@ else if (!strncmp(upper, "MON>", 4)) { }
             upcase(fname);
             if (cur.imgfile) { free(cur.imgfile->norm_images); free(cur.imgfile->data); free(cur.imgfile); }
             cur.imgfile = img_load_try(g.imgdir, fname);
-            n_dedup = 0;  /* LOADW resets dedup table per IMG library */
             if (!cur.imgfile)
                 fprintf(stderr, "WARNING: cannot load IMG file: %s\n", fname);
             else {
