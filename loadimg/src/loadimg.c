@@ -1713,11 +1713,11 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
 
          /* CON> dedup: check if identical image already encoded */
         int dedup_idx = -1;
-        if (g.dedup) {
-            uint8_t *pix_data = img_pixels(cur->imgfile, rec);
-            int pstride = (rec->w + 3) & ~3;
-            uint16_t max_val;
-            uint16_t ck = loadw_checksum(pix_data, pstride, rec->w, rec->h, &max_val);
+         if (g.dedup) {
+             uint8_t *pix_data = img_pixels(cur->imgfile, rec);
+             int pstride = IMG_STRIDE(rec->w);
+             uint16_t max_val;
+             uint16_t ck = loadw_checksum(pix_data, pstride, rec->w, rec->h, &max_val);
             if (g.verbose && (strcmp(name, "smfirebone3") == 0 || strcmp(name, "smfirebone6") == 0 ||
                               rec->w == 8 || rec->h == 21))
                 fprintf(stderr, "DEDUP_CHK %s: ck=%u max=%u sizx=%d sizy=%d ctrl=0x%04x\n",
@@ -1750,6 +1750,11 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
                 dedup_table[n_dedup].ctrl = cp.ctrl;
                 dedup_table[n_dedup].sag = ie->sag;
                 dedup_table[n_dedup].sag_idx = -1;
+                if (g.verbose && n_dedup == 1020)
+                    printf("  DEDUP_ADD[1020] %s: ck=%u max=%u sizx=%d sizy=%d ctrl=0x%04x sag=%u\n",
+                           name, dedup_table[n_dedup].sum, dedup_table[n_dedup].max_val,
+                           dedup_table[n_dedup].sizx, dedup_table[n_dedup].sizy,
+                           dedup_table[n_dedup].ctrl, dedup_table[n_dedup].sag);
                 n_dedup++;
             }
         }
