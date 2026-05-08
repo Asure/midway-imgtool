@@ -625,13 +625,12 @@ static ImgFile* img_load(const char *path) {
      * PT field computation (PT2X/PT2Y and PT0X respectively).
      */
     uint32_t pttbl_ofs = pal_ofs + (uint32_t)img->n_palettes * sizeof(PAL_REC) + 6;
-    /* SEQSCR entries between palettes and PTTBL */
+    /* SEQSCR entries between palettes and PTTBL (pre-v0x654 layout).
+     * v0x654+ stores PTTBL before SEQ/SCR entries; older versions store after. */
     int n_seqscr = (int)img->hdr.seqcnt + (int)img->hdr.scrcnt;
-    if (n_seqscr > 0) {
-        /* SEQSCR struct (pack 2): name[16] + flags(2) + num(2) + entry_t[16](dd=4*16) + startx(2) + starty(2) + dam[6] + spare1(2) + spare2(2) = 98 */
+    if (n_seqscr > 0 && img->hdr.version < 0x654) {
         pttbl_ofs += (uint32_t)n_seqscr * 98;
     }
-
 
     /* Compute max PTTBL index */
     int max_pttbl = -1;

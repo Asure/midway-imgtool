@@ -431,6 +431,15 @@ entry 0 (!STAND2) is accessed via `pttbls0 = pal_end + 6` (always actual PTTBL s
 - **`g.tbldir` must be set from `/T=` flag** before `process_lod` runs, so that `ASM>` directives inside the LOD redirect to the correct output directory.
 - **`write_palette` guards `g.pal_fp`:** if no palette file is open (e.g. `/T` not specified), write_palette returns early rather than crashing.
 
+### Debugging SAG Cascades
+
+When a TBL diff shows a mismatching SAG, the compressed size of the **image before it** (in the IRW stream, i.e. the preceding image in the LOD's processing order) differs. To find the root cause:
+
+1. Find the first line in the TBL where SAG or CTRL differs — this is the first image whose encoding diverges.
+2. Look backward in the LOD file for the `---->` line containing this image's name. Check its compression mode (`ZON>`/`ZOF>`), `PPP>` bpp override, and any toggles (`XON>`, etc.).
+3. If the SAG is wrong but the CTRL matches, the preceding image's compressed size differs (same LM/TM but different pixel data output — checked the per-row lead/trail encoding).
+4. If the CTRL itself differs, the LM/TM selection (FUN_1000_6f20) or bpp computation diverged for this image. Check `PPP>` / auto bpp, and compare `lead_err`/`trail_err` accumulator values against LOADW's verbose output (`/V5` under DOSBox).
+
 ---
 
 ## SEQSCR / Sequence Structures (IMG)

@@ -4,46 +4,46 @@
 
 timeHDRS:
 	.word	76,123	;x size, y size
-	.long	03C98BF6H	;address
+	.long	03CCEEB6H	;address
 	.word	00H	;dma ctrl
 	.word	76,133
-	.long	03CAB016H
+	.long	03CE12D6H
 	.word	00H
 	.word	76,133
-	.long	03CBEBF6H
+	.long	03CF4EB6H
 	.word	00H
 	.word	76,123
-	.long	03CD27D6H
+	.long	03D08A96H
 	.word	00H
 	.word	76,133
-	.long	03CE4BF6H
+	.long	03D1AEB6H
 	.word	00H
 	.word	76,123
-	.long	03CF87D6H
+	.long	03D2EA96H
 	.word	00H
 	.word	80,133
-	.long	03D0ABF6H
+	.long	03D40EB6H
 	.word	00H
 	.word	76,123
-	.long	03D1F876H
+	.long	03D55B36H
 	.word	00H
 	.word	100,133
-	.long	03D31C96H
+	.long	03D67F56H
 	.word	00H
 	.word	100,123
-	.long	03D4BC36H
+	.long	03D81EF6H
 	.word	00H
 	.word	68,58
-	.long	03D63C96H
+	.long	03D99F56H
 	.word	06000H
 	.word	72,58
-	.long	03D69906H
+	.long	03D9FBC6H
 	.word	06000H
 	.word	88,58
-	.long	03D6FAE6H
+	.long	03DA5DA6H
 	.word	06000H
 	.word	84,58
-	.long	03D77286H
+	.long	03DAD546H
 	.word	06000H
 maximBLKS:
 	.word	0A45H	;flags
@@ -85,22 +85,22 @@ hangtimeBMOD:
 	.long	hangtimeBLKS, timeHDRS, timePALS
 RHDRS:
 	.word	204,23
-	.long	03D7E4B6H
+	.long	03DB4776H
 	.word	00H
 	.word	200,21
-	.long	03D87756H
+	.long	03DBDA16H
 	.word	07000H
 	.word	44,54
-	.long	03D8EA2EH
+	.long	03DC4CEEH
 	.word	05000H
 	.word	44,54
-	.long	03D91896H
+	.long	03DC7B56H
 	.word	05000H
 	.word	200,21
-	.long	03D946FEH
+	.long	03DCA9BEH
 	.word	07000H
 	.word	196,23
-	.long	03D9B9D6H
+	.long	03DD1C96H
 	.word	00H
 VSSCRBLKS:
 	.word	04142H	;flags
@@ -117,100 +117,100 @@ VSSCRBMOD:
 	.long	VSSCRBLKS, RHDRS, RPALS
 statHDRS:
 	.word	204,23
-	.long	03D7E4B6H
+	.long	03DB4776H
 	.word	00H
 	.word	200,70
-	.long	03DA46B6H
+	.long	03DDA976H
 	.word	05000H
 	.word	200,71
-	.long	03DB5826H
+	.long	03DEBAE6H
 	.word	06000H
 	.word	200,68
-	.long	03DCA4F6H
+	.long	03E007B6H
 	.word	05000H
 	.word	200,51
-	.long	03DDAE96H
+	.long	03E11156H
 	.word	06000H
 	.word	192,86
-	.long	03DE9DA6H
+	.long	03E20066H
 	.word	06000H
 	.word	96,46
-	.long	03E020A6H
+	.long	03E38366H
 	.word	06000H
 	.word	84,12
-	.long	03E08826H
+	.long	03E3EAE6H
 	.word	07000H
 	.word	88,64
-	.long	03E0A3B6H
+	.long	03E40676H
 	.word	00H
 	.word	36,46
-	.long	03E153B6H
+	.long	03E4B676H
 	.word	06000H
 	.word	212,9
-	.long	03E17A86H
+	.long	03E4DD46H
 	.word	03000H
 	.word	200,65
-	.long	03E190E2H
+	.long	03E4F3A2H
 	.word	05000H
 	.word	200,72
-	.long	03E28ECAH
+	.long	03E5F18AH
 	.word	05000H
 	.word	200,68
-	.long	03E3A80AH
+	.long	03E70ACAH
 	.word	06000H
 	.word	200,54
-	.long	03E4E6CAH
+	.long	03E8498AH
 	.word	06000H
 	.word	196,23
-	.long	03D9B9D6H
+	.long	03DD1C96H
 	.word	00H
 	.word	64,9
-	.long	03E5E3EAH
+	.long	03E946AAH
 	.word	03000H
 	.word	56,46
-	.long	03E5EAAAH
+	.long	03E94D6AH
 	.word	06000H
 	.word	92,138
-	.long	03E6270AH
+	.long	03E989CAH
 	.word	06000H
 	.word	176,24
-	.long	03E7509AH
+	.long	03EAB35AH
 	.word	00H
 	.word	148,11
-	.long	03E7D49AH
+	.long	03EB375AH
 	.word	00H
 	.word	84,9
-	.long	03E8077AH
+	.long	03EB6A3AH
 	.word	03000H
 	.word	92,138
-	.long	03E81056H
+	.long	03EB7316H
 	.word	06000H
 	.word	100,110
-	.long	03E939E6H
+	.long	03EC9CA6H
 	.word	00H
 	.word	64,8
-	.long	03EA91A6H
+	.long	03EDF466H
 	.word	02000H
 	.word	56,8
-	.long	03EA95A6H
+	.long	03EDF866H
 	.word	02000H
 	.word	40,9
-	.long	03EA9926H
+	.long	03EDFBE6H
 	.word	03000H
 	.word	40,107
-	.long	03EA9D5EH
+	.long	03EE001EH
 	.word	04000H
 	.word	168,24
-	.long	03EAE03EH
+	.long	03EE42FEH
 	.word	00H
 	.word	148,11
-	.long	03EB5E3EH
+	.long	03EEC0FEH
 	.word	00H
 	.word	92,138
-	.long	03EB911EH
+	.long	03EEF3DEH
 	.word	07000H
 	.word	92,138
-	.long	03ECEC46H
+	.long	03F04F06H
 	.word	07000H
 teamstatBLKS:
 	.word	054CH	;flags
