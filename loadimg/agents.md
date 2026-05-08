@@ -610,8 +610,9 @@ matches LOAD2 (separate lines), which is the correct target.
 
 | Issue | LODs | Root Cause |
 |-------|------|------------|
-| CMP=1 encoder cascade | BB5, BB6, BB7 | LM/TM/bpp selection differs from LOADW for compressed images |
+| CMP=1 encoder cascade | BB5, BB6 | LM/TM/bpp selection differs from LOADW for compressed images |
 | PLYRDSQ2 PT fields | BB6 | PTTBL 40-byte stride aliasing reads pixel data for x1, preventing geometry-based PT pair computation |
+| OUTDOOR 20-byte SAG shift | BB7 | Pre-existing FRM/LEAF ZOF alignment difference |
 
 ### Test Results (current dataset)
 
@@ -633,7 +634,7 @@ BB* LODs are from **NBA Jam / Hangtime** arcade data.
 | **BB4** | ZOF+XON | 1/1 | **PASS** | |
 | **BB5** | Mixed | 3/7 | FAIL | CMP=1 encoder cascade |
 | **BB6** | Mixed | 5/6 | FAIL | CMP=1 cascade + PLYRDSQ2 PT fields |
-| **BB7** | Mixed | 8/16 | FAIL | CMP=1 encoder cascade |
+| **BB7** | Mixed | 15/16 | PASS except OUTDOOR (pre-existing 20-byte FRM alignment) |
 | **BB8** | XON | 3/3 | **PASS** | |
 | **BBMUG** | ZOF+XON | 2/2 | **PASS** | Dual-hash dedup (byte-sum disambiguation) |
 | **BBVDA** | VDA | 1/1 | **PASS** | |
@@ -767,6 +768,8 @@ Each row is encoded as 1 header byte + stored pixels bit-packed at `bpp` bits ea
 31. **Dedup byte-sum hash** — Added `sum2` field (byte-sum of pixel data) to `DedupEntry` to disambiguate 16-bit word-sum collisions. The word-sum (`loadw_checksum`) misses the last byte of odd-length buffers; the byte-sum covers all bytes. Together they form a ~32-bit effective hash, fixing BBMUG (1/2 → 2/2).
 32. **Stride-width bpp scanning** — Changed `img_max_pixel()` and per-image auto bpp scan to iterate over stride pixels per row (not `rec->w`). Matches LOADW's `_compute_bpp`. Fixes BB6 CHEER images where stride padding held artifact pixel 96 (bpp: 4→7). BB6: 3/6 → 5/6.
 33. **Remove debug dedup prints** — Removed `smfirebone3`/`smfirebone6`/`w==8`/`h==21` debug-specific verbose conditions from dedup lookup.
+34. **PTTBL offset for v0x654+ IMGs** — SEQ/SCR entries are not between PAL_REC and PTTBL for version >= 0x654 files (e.g. NBBD8.IMG). Version-gated the seq/scr skip to < 0x654.
+35. **Minimum SIZX threshold** — PTTBL-based SIZX < 10 falls back to `rec->w`. Matches the "Need 10 non-zero pixels minimum" rule; also avoids using STAND2 special entry (pttblnum=0) box[0].w values as compression width.
 
 ### COF and CON Directives
 

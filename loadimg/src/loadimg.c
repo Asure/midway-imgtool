@@ -820,27 +820,30 @@ static CompParams analyze_image(ImgFile *img, IMG_REC *rec, int bpp, int pttbl_s
     int la_window = rows < 4 ? rows : 4;
     int sizx = p.sizx;
 
-    for (int y = 0; y < rows; y++) {
-        uint8_t *row = (y < rec->h) ? pix + y * stride : NULL;
-        int lead = 0, trail = 0, lead_done = 0;
+        for (int y = 0; y < rows; y++) {
+            uint8_t *row = (y < rec->h) ? pix + y * stride : NULL;
+            int lead = 0, trail = 0, lead_done = 0;
 
-        for (int x = 0; x < sizx; x++) {
-            uint8_t px = (row && x < stride) ? row[x] : 0;
-            if (!lead_done) {
-                if (lead == 120) {
-                    lead_done = 1;
-                } else if (px == 0) {
-                    lead++;
-                } else {
-                    lead_done = 1;
+            for (int x = 0; x < sizx; x++) {
+                uint8_t px = (row && x < stride) ? row[x] : 0;
+                if (!lead_done) {
+                    if (lead == 120) {
+                        lead_done = 1;
+                    } else if (px == 0) {
+                        lead++;
+                    } else {
+                        lead_done = 1;
+                    }
+                } else if (sizx - 120 < x) {
+                    if (px == 0) trail++;
+                    else trail = 0;
                 }
-            } else if (sizx - 120 < x) {
-                if (px == 0) trail++;
-                else trail = 0;
             }
-        }
 
-        for (int m = 0; m < 4; m++) {
+            if (rec && strcmp(rec->name, "nback9") == 0 && y < 5)
+                fprintf(stderr, "  nback9 row%3d: lead=%4d trail=%4d sizx=%d\n", y, lead, trail, sizx);
+
+            for (int m = 0; m < 4; m++) {
             int mult = 1 << m;
             int ln = lead / mult;
             if (ln > 15) ln = 15;
@@ -1439,9 +1442,12 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
         if (rec->pttblnum >= 0 && cur->imgfile->pttbls) {
             if (rec->pttblnum >= 0 && rec->pttblnum < cur->imgfile->n_pttbls) {
                 PTTBL *pt = &cur->imgfile->pttbls[rec->pttblnum];
-                /* LOADW uses BOX[1].W (= box[0].w) as compression width */
+                /* LOADW uses BOX[1].W (= box[0].w) as compression width.
+                 * Minimum 10 pixels: narrower widths disable compression anyway,
+                 * and small values from STAND2 special entries (pttblnum=0)
+                 * are not meaningful compression windows. */
                 int bw = pt->box[0].w;
-                if (bw > 0 && bw < rec->w)
+                if (bw >= 10 && bw < rec->w)
                     pttbl_sizx = bw;
             }
         }
@@ -1520,7 +1526,7 @@ static void parse_imglist(const char *line, CurrentImg *cur, int n_scales_overri
         if (ie->sizx < 1) ie->sizx = 1;
         if (ie->sizy < 1) ie->sizy = 1;
         ie->ctrl = cp.ctrl;
-        if (g.verbose && (strcmp(name, "smfirebone3") == 0 || strcmp(name, "smfirebone6") == 0)) {
+        if (g.verbose && (strcmp(name, "smfirebone3") == 0 || strcmp(name, "smfirebone6") == 0 || strcmp(name, "nback9") == 0)) {
             uint8_t *dpix = img_pixels(cur->imgfile, rec);
             int dstride = IMG_STRIDE(rec->w);
             int dsizx = cp.sizx;
