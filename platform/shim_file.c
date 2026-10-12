@@ -457,7 +457,10 @@ void shim_i21_getcwd_impl(void)
     { int i; for (i = 0; p[i]; i++) if (p[i] == '/') p[i] = '\\'; }
     { int len = (int)strlen(p); if (len > 0 && p[len-1] == '\\') p[len-1] = '\0'; }
 #endif
-    strcpy(dest, p);
+    /* NB: do not call strcpy()/strcmp() here - the asm links its own
+       register-based strcpy/strcmp globals, which would shadow libc for
+       this translation unit. Use non-colliding libc calls instead. */
+    memcpy(dest, p, strlen(p) + 1);
     shim_carry = 0;
 }
 
@@ -584,8 +587,8 @@ static int find_next_match(void)
 {
     struct dirent *ent;
     while ((ent = readdir(s_find_dir)) != NULL) {
-        /* Always skip "." */
-        if (strcmp(ent->d_name, ".") == 0) continue;
+        /* Always skip "." (avoid strcmp: the asm defines its own strcmp) */
+        if (ent->d_name[0] == '.' && ent->d_name[1] == '\0') continue;
 
         if (find_entry_is_dir(ent->d_name)) {
             /* Include directories only when the attr mask has bit 4 set */

@@ -54,6 +54,7 @@ SLGAME	equ	0
 	externdef	boxh_drawclip:near
 	externdef	line_draw:near
 	externdef	mem_alloc:near
+	externdef	mem_alloc0:near
 	externdef	mem_free:near
 	externdef	mem_copy:near
 	externdef	mem_duplicate:near
@@ -5342,7 +5343,7 @@ _aim_0125:
 	add	ax,3
 	and	al,0fch
 	imul	eax,edx
-	call	mem_alloc
+	call	mem_alloc0		;Zero-fill so stride padding bytes are clean
 	jz	error
 	mov	[esi].IMG.DATA_p,eax
 

@@ -1,43 +1,52 @@
 @echo off
 setlocal EnableDelayedExpansion
 
-set VCVARSALL=C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvarsall.bat
-set SOURCE=\\wsl.localhost\Ubuntu\home\alex\midway-imgtool
-set BUILDROOT=%LOCALAPPDATA%\imgtool-build
-set BUILDDIR=%BUILDROOT%\build
-set DEPSDIR=%BUILDROOT%\deps
-set SDL2VER=2.30.2
-set SDL2DIR=%DEPSDIR%\SDL2-%SDL2VER%
-set SDL2CMAKE=%SDL2DIR%\cmake
-set CMAKEVER=3.29.3
-set CMAKEDIR=%DEPSDIR%\cmake-%CMAKEVER%-windows-i386
-set CMAKE=%CMAKEDIR%\bin\cmake.exe
+set "SOURCE=\\wsl.localhost\Ubuntu\home\alex\midway-imgtool"
+set "BUILDROOT=%LOCALAPPDATA%\imgtool-build"
+set "BUILDDIR=%BUILDROOT%\build"
+set "DEPSDIR=%BUILDROOT%\deps"
+set "SDL2VER=2.30.2"
+set "SDL2DIR=%DEPSDIR%\SDL2-%SDL2VER%"
+set "SDL2CMAKE=%SDL2DIR%\cmake"
 
-echo [1/4] Setting up VS 2022 x86 environment...
+echo [1/4] Locating Visual Studio (via vswhere)...
+set "VSWHERE=%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe"
+set "VSROOT="
+set "VSMAJOR="
+if exist "%VSWHERE%" (
+    for /f "usebackq tokens=*" %%i in (`"%VSWHERE%" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do set "VSROOT=%%i"
+    for /f "usebackq tokens=1 delims=." %%i in (`"%VSWHERE%" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationVersion`) do set "VSMAJOR=%%i"
+)
+if not defined VSROOT (
+    echo ERROR: Visual Studio with C++ tools ^(x86^) not found
+    goto :fail
+)
+set "VCVARSALL=%VSROOT%\VC\Auxiliary\Build\vcvarsall.bat"
+set "CMAKE=%VSROOT%\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe"
+set "GENYEAR="
+if "%VSMAJOR%"=="17" set "GENYEAR=2022"
+if "%VSMAJOR%"=="18" set "GENYEAR=2026"
+if not defined GENYEAR (
+    echo ERROR: Unsupported Visual Studio version "%VSMAJOR%"
+    goto :fail
+)
+set "GENERATOR=Visual Studio %VSMAJOR% %GENYEAR%"
+echo        VS:        %VSROOT%
+echo        generator: %GENERATOR%
+
+echo [2/4] Setting up VS x86 environment...
 call "%VCVARSALL%" x86
 if errorlevel 1 (echo ERROR: vcvarsall failed & goto :fail)
 
-echo [2/4] Creating build dirs...
-if not exist "%DEPSDIR%" mkdir "%DEPSDIR%"
-if not exist "%BUILDDIR%" mkdir "%BUILDDIR%"
-
-echo [3/4] Getting cmake %CMAKEVER% + SDL2 %SDL2VER%...
 if not exist "%CMAKE%" (
-    powershell -NoProfile -Command ^
-        "[Net.ServicePointManager]::SecurityProtocol='Tls12';" ^
-        "(New-Object Net.WebClient).DownloadFile(" ^
-        "'https://github.com/Kitware/CMake/releases/download/v%CMAKEVER%/cmake-%CMAKEVER%-windows-i386.zip'," ^
-        "'%DEPSDIR%\cmake.zip')"
-    if errorlevel 1 (echo ERROR: cmake download failed & goto :fail)
-    powershell -NoProfile -Command ^
-        "Expand-Archive -Path '%DEPSDIR%\cmake.zip' -DestinationPath '%DEPSDIR%' -Force"
-    if errorlevel 1 (echo ERROR: cmake extract failed & goto :fail)
-    del "%DEPSDIR%\cmake.zip"
-) else (
-    echo        cmake already present.
+    echo ERROR: cmake not found at %CMAKE%
+    goto :fail
 )
 
-echo        Getting SDL2 %SDL2VER%...
+echo [3/4] Creating build dirs ^& fetching SDL2 %SDL2VER%...
+if not exist "%BUILDROOT%" mkdir "%BUILDROOT%"
+if not exist "%BUILDDIR%" mkdir "%BUILDDIR%"
+if not exist "%DEPSDIR%"   mkdir "%DEPSDIR%"
 if not exist "%SDL2DIR%" (
     powershell -NoProfile -Command ^
         "[Net.ServicePointManager]::SecurityProtocol='Tls12';" ^
@@ -50,11 +59,11 @@ if not exist "%SDL2DIR%" (
     if errorlevel 1 (echo ERROR: SDL2 extract failed & goto :fail)
     del "%DEPSDIR%\sdl2.zip"
 ) else (
-    echo        Already present.
+    echo        SDL2 already present.
 )
 
 echo [4/4] CMake configure + build...
-"%CMAKE%" -B "%BUILDDIR%" -G "Visual Studio 17 2022" -A Win32 ^
+"%CMAKE%" -B "%BUILDDIR%" -G "%GENERATOR%" -A Win32 ^
     -DSDL2_DIR="%SDL2CMAKE%" ^
     "%SOURCE%"
 if errorlevel 1 (echo ERROR: cmake configure failed & goto :fail)

@@ -1,4 +1,4 @@
-# build.ps1 — Build midway-imgtool (Windows/SDL2 port) using VS 2022
+# build.ps1 — Build midway-imgtool (Windows/SDL2 port) using Visual Studio
 # Run from a regular Windows PowerShell window:
 #   powershell -ExecutionPolicy Bypass -File build.ps1
 #
@@ -16,22 +16,51 @@ $ErrorActionPreference = "Stop"
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
 # -----------------------------------------------------------------------
-# 1. Locate VS 2022
+# 1. Locate Visual Studio (2019/2022/2026, any edition) via vswhere
 # -----------------------------------------------------------------------
-$vsRoots = @(
-    "C:\Program Files\Microsoft Visual Studio\2022\Community",
-    "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools",
-    "C:\Program Files\Microsoft Visual Studio\2022\Professional",
-    "C:\Program Files\Microsoft Visual Studio\2022\Enterprise"
-)
-$vsRoot = $vsRoots | Where-Object { Test-Path "$_\VC\Auxiliary\Build\vcvarsall.bat" } | Select-Object -First 1
-if (-not $vsRoot) { Write-Error "VS 2022 not found"; exit 1 }
+$vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
+$vsRoot = ""
+$vsVersion = ""
+if (Test-Path $vswhere) {
+    $vsRoot    = (& $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath) -join ""
+    $vsVersion = (& $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationVersion) -join ""
+    $vsRoot    = $vsRoot.Trim()
+    $vsVersion = $vsVersion.Trim()
+}
+if (-not $vsRoot -or -not (Test-Path "$vsRoot\VC\Auxiliary\Build\vcvarsall.bat")) {
+    $vsRoots = @(
+        "C:\Program Files\Microsoft Visual Studio\18\Community",
+        "C:\Program Files\Microsoft Visual Studio\18\Professional",
+        "C:\Program Files\Microsoft Visual Studio\18\Enterprise",
+        "C:\Program Files (x86)\Microsoft Visual Studio\18\BuildTools",
+        "C:\Program Files\Microsoft Visual Studio\2022\Community",
+        "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools",
+        "C:\Program Files\Microsoft Visual Studio\2022\Professional",
+        "C:\Program Files\Microsoft Visual Studio\2022\Enterprise"
+    )
+    $vsRoot = $vsRoots | Where-Object { Test-Path "$_\VC\Auxiliary\Build\vcvarsall.bat" } | Select-Object -First 1
+}
+if (-not $vsRoot) { Write-Error "Visual Studio with C++ tools (x86) not found"; exit 1 }
+
+# Major version -> CMake generator year
+$vsMajor = 0
+if ($vsVersion -match '^(\d+)') { $vsMajor = [int]$Matches[1] }
+if (-not $vsMajor) {
+    if     ($vsRoot -match 'Visual Studio\\18\\')   { $vsMajor = 18 }
+    elseif ($vsRoot -match 'Visual Studio\\2022\\') { $vsMajor = 17 }
+    elseif ($vsRoot -match 'Visual Studio\\2019\\') { $vsMajor = 16 }
+}
+$genYear   = switch ($vsMajor) { 16 { "2019" } 17 { "2022" } 18 { "2026" } default { "" } }
+$generator = if ($genYear) { "Visual Studio $vsMajor $genYear" } else { "" }
+$genArg    = if ($generator) { "-G `"$generator`"" } else { "" }
+
 $vcvarsall = "$vsRoot\VC\Auxiliary\Build\vcvarsall.bat"
 $cmakeRel  = "Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe"
-$vsCmake   = ($vsRoots | ForEach-Object { "$_\$cmakeRel" } | Where-Object { Test-Path $_ } | Select-Object -First 1)
-if ($vsCmake) { $vsCmake = Split-Path $vsCmake } else { $vsCmake = "" }
-Write-Host "[1/4] Found VS 2022 at $vsRoot" -ForegroundColor Cyan
-if ($vsCmake) { Write-Host "      cmake: $vsCmake" -ForegroundColor Cyan } else { Write-Host "      cmake not found in VS installs, relying on PATH" -ForegroundColor Yellow }
+$vsCmake   = "$vsRoot\$cmakeRel"
+if (Test-Path $vsCmake) { $vsCmake = Split-Path $vsCmake } else { $vsCmake = "" }
+Write-Host "[1/4] Found VS v$vsMajor at $vsRoot" -ForegroundColor Cyan
+if ($generator) { Write-Host "      generator: $generator" -ForegroundColor Cyan } else { Write-Host "      unknown VS version; cmake will pick a default generator" -ForegroundColor Yellow }
+if ($vsCmake) { Write-Host "      cmake: $vsCmake" -ForegroundColor Cyan } else { Write-Host "      cmake not found in VS install, relying on PATH" -ForegroundColor Yellow }
 
 # -----------------------------------------------------------------------
 # 2. Resolve SDL2 version
@@ -89,7 +118,7 @@ $lines = @(
     "call `"$vcvarsall`" x86",
     "if errorlevel 1 exit /b 1",
     "set PATH=$vsCmake;%PATH%",
-    "cmake -B `"$buildDir`" -G `"Visual Studio 17 2022`" -A Win32 -DSDL2_DIR=`"$sdl2Cmake`" `"$SourceDir`"",
+    "cmake -B `"$buildDir`" $genArg -A Win32 -DSDL2_DIR=`"$sdl2Cmake`" `"$SourceDir`"",
     "if errorlevel 1 exit /b 1",
     "cmake --build `"$buildDir`" --config Release",
     "if errorlevel 1 exit /b 1"

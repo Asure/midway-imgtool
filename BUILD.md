@@ -110,9 +110,14 @@ your `.img` files, or navigate to them using the built-in file browser.
 
 | Tool | Notes |
 |---|---|
-| Visual Studio 2022 | Community edition is fine. Install the **Desktop development with C++** workload, which includes MASM. |
+| Visual Studio 2022 or 2026 | Community edition is fine (e.g. installed at `C:\Program Files\Microsoft Visual Studio\18\Community`). Install the **Desktop development with C++** workload, which includes MASM. |
 | PowerShell | Included with Windows. |
 | Internet access | The build script downloads SDL2 automatically. |
+
+The scripts auto-detect the newest VS install with the x86 C++ tools via
+`vswhere.exe` and pick the matching CMake generator (`Visual Studio 18 2026`
+for VS 2026, `Visual Studio 17 2022` for VS 2022). CMake comes from the VS
+install (4.3.x in VS 2026), so no separate CMake download is needed.
 
 The project source is expected to live in WSL at
 `\\wsl.localhost\Ubuntu\home\<user>\midway-imgtool`.  If your path differs,
@@ -137,7 +142,7 @@ build.bat
 
 Both scripts:
 
-1. Initialize the VS 2022 x86 build environment via `vcvarsall.bat`
+1. Initialize the VS x86 build environment via `vcvarsall.bat`
 2. Download the SDL2 VC developer package from GitHub (cached in `%LOCALAPPDATA%\imgtool-build\deps`)
 3. Configure and build with CMake targeting Win32
 
